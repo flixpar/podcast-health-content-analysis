@@ -518,7 +518,7 @@ class ParakeetTranscriber:
             result = model.transcribe(
                 [chunk['path']],
                 batch_size=1,
-                return_hypotheses=False,
+                return_hypotheses=True,
                 num_workers=0
             )
             
