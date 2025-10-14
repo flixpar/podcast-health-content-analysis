@@ -20,16 +20,17 @@ class PodcastFetcher:
     def __init__(self, config: Dict):
         """
         Initialize the Podchaser API client
-        
+
         Args:
             config: Configuration dictionary with client_id and client_secret
         """
         self.api_url = config.get('api_url', 'https://api.podchaser.com/graphql')
         self.client_id = config.get('client_id')
         self.client_secret = config.get('client_secret')
+        self.filter_health_only = config.get('filter_health_only', True)
         self.access_token = None
         self.token_expires_at = None
-        
+
         # Setup session with retry strategy
         self.session = requests.Session()
         retry_strategy = Retry(
@@ -39,7 +40,7 @@ class PodcastFetcher:
         )
         adapter = HTTPAdapter(max_retries=retry_strategy)
         self.session.mount("https://", adapter)
-        
+
         # Authenticate on initialization
         if self.client_id and self.client_secret:
             self.authenticate()
@@ -146,16 +147,17 @@ class PodcastFetcher:
     
     def get_top_health_podcasts(self, limit: int = 100, country: str = "US") -> List[Dict]:
         """
-        Fetch top health podcasts from Podchaser charts
-        
+        Fetch top podcasts from Podchaser charts (optionally filtered to health-related)
+
         Args:
             limit: Number of podcasts to fetch
             country: Country code for charts (default: US)
-            
+
         Returns:
             List of podcast metadata dictionaries
         """
-        logger.info(f"Fetching top {limit} health podcasts from Podchaser")
+        filter_msg = "health podcasts" if self.filter_health_only else "podcasts"
+        logger.info(f"Fetching top {limit} {filter_msg} from Podchaser")
         
         # GraphQL query for health category charts
         query = """
@@ -197,50 +199,82 @@ class PodcastFetcher:
             }
         """
         
-        # Alternative query if charts doesn't work - search for health podcasts
-        search_query = """
-            query SearchHealthPodcasts($limit: Int!, $cursor: String) {
-                podcasts(
-                    searchTerm: "health",
-                    filters: {
-                        categories: ["Health & Fitness", "Medicine", "Mental Health", "Nutrition"]
-                    },
-                    sort: {
-                        sortBy: FOLLOWER_COUNT,
-                        direction: DESCENDING
-                    },
-                    first: $limit,
-                    cursor: $cursor
-                ) {
-                    data {
-                        id
-                        title
-                        description
-                        webUrl
-                        rssUrl
-                        applePodcastsId
-                        spotifyId
-                        latestEpisodeDate
-                        categories {
+        # Alternative query if charts doesn't work - search for podcasts (optionally filtered to health)
+        if self.filter_health_only:
+            search_query = """
+                query SearchHealthPodcasts($limit: Int!, $cursor: String) {
+                    podcasts(
+                        searchTerm: "health",
+                        filters: {
+                            categories: ["Health & Fitness", "Medicine", "Mental Health", "Nutrition"]
+                        },
+                        sort: {
+                            sortBy: FOLLOWER_COUNT,
+                            direction: DESCENDING
+                        },
+                        first: $limit,
+                        cursor: $cursor
+                    ) {
+                        data {
+                            id
                             title
+                            description
+                            webUrl
+                            rssUrl
+                            applePodcastsId
+                            spotifyId
+                            latestEpisodeDate
+                            categories {
+                                title
+                            }
+                        }
+                        cursorInfo {
+                            total
+                            nextCursor
                         }
                     }
-                    cursorInfo {
-                        total
-                        nextCursor
+                }
+            """
+        else:
+            search_query = """
+                query SearchAllPodcasts($limit: Int!, $cursor: String) {
+                    podcasts(
+                        sort: {
+                            sortBy: FOLLOWER_COUNT,
+                            direction: DESCENDING
+                        },
+                        first: $limit,
+                        cursor: $cursor
+                    ) {
+                        data {
+                            id
+                            title
+                            description
+                            webUrl
+                            rssUrl
+                            applePodcastsId
+                            spotifyId
+                            latestEpisodeDate
+                            categories {
+                                title
+                            }
+                        }
+                        cursorInfo {
+                            total
+                            nextCursor
+                        }
                     }
                 }
-            }
-        """
+            """
         
         podcasts = []
         
         try:
-            # Try charts endpoint first
+            # Try charts endpoint first (only for health filter mode, as charts require specific categories)
             variables = {
                 'limit': min(limit, 20),
                 'country': country,
-                'category': 'Health & Fitness',
+                'category': 'Health & Fitness' if self.filter_health_only else 'All',
                 'platform': 'APPLE_PODCASTS',
                 'day': (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
             }
@@ -279,7 +313,8 @@ class PodcastFetcher:
             
             # If we didn't get enough from charts, use search
             if len(podcasts) < limit:
-                logger.info(f"Using search to find additional health podcasts")
+                search_type = "health podcasts" if self.filter_health_only else "podcasts"
+                logger.info(f"Using search to find additional {search_type}")
                 
                 variables = {'limit': min(limit - len(podcasts), 50)}
                 cursor = None
@@ -309,7 +344,8 @@ class PodcastFetcher:
                     # Rate limiting
                     time.sleep(0.5)
             
-            logger.info(f"Successfully fetched {len(podcasts)} health podcasts")
+            filter_msg = "health podcasts" if self.filter_health_only else "podcasts"
+            logger.info(f"Successfully fetched {len(podcasts)} {filter_msg}")
             return podcasts[:limit]
             
         except Exception as e:

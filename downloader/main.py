@@ -61,7 +61,9 @@ class PodcastPipeline:
             logger.info("Using Apple RSS API for podcast fetching")
         else:
             from podcast_fetcher import PodcastFetcher
-            self.fetcher = PodcastFetcher(self.config.get('podchaser', {}))
+            # Merge fetcher config with podchaser config to include filter_health_only
+            podchaser_config = {**self.config.get('podchaser', {}), **self.config.get('fetcher', {})}
+            self.fetcher = PodcastFetcher(podchaser_config)
             logger.info("Using Podchaser API for podcast fetching")
         self.rss_parser = RSSParser()
         self.downloader = AudioDownloader(
@@ -89,7 +91,9 @@ class PodcastPipeline:
         """Return default configuration"""
         return {
             "fetcher": {
-                "type": "apple"  # Changed default to Apple RSS API (can be 'apple' or 'podchaser')
+                "type": "apple",  # Changed default to Apple RSS API (can be 'apple' or 'podchaser')
+                "filter_health_only": True,  # Set to False to fetch all podcasts instead of just health-related
+                "default_limit": 100  # Default number of podcasts to fetch if --limit not specified
             },
             "podchaser": {
                 "client_id": os.getenv("PODCHASER_CLIENT_ID", ""),
@@ -668,18 +672,24 @@ def main():
     parser = argparse.ArgumentParser(description='Podcast Transcription Pipeline')
     parser.add_argument('--phase', choices=['1', '2', '3', 'all'], default='all',
                        help='Which phase to run (1=fetch, 2=download, 3=transcribe, all=complete pipeline)')
-    parser.add_argument('--limit', type=int, default=100,
-                       help='Number of top podcasts to fetch')
-    parser.add_argument('--max-episodes', type=int, default=5,
-                       help='Maximum episodes per podcast to download')
+    parser.add_argument('--limit', type=int, default=None,
+                       help='Number of top podcasts to fetch (overrides config default_limit)')
+    parser.add_argument('--max-episodes', type=int, default=None,
+                       help='Maximum episodes per podcast to download (overrides config max_episodes_per_podcast)')
     parser.add_argument('--config', type=str, help='Path to configuration file')
     parser.add_argument('--stats', action='store_true', help='Show current statistics')
-    
+
     args = parser.parse_args()
-    
+
     # Initialize pipeline
     config_path = Path(args.config) if args.config else None
     pipeline = PodcastPipeline(config_path=config_path)
+
+    # Use config defaults if command line arguments not specified
+    if args.limit is None:
+        args.limit = pipeline.config.get('fetcher', {}).get('default_limit', 100)
+    if args.max_episodes is None:
+        args.max_episodes = pipeline.config.get('download', {}).get('max_episodes_per_podcast', 5)
     
     try:
         if args.stats:

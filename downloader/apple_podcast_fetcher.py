@@ -20,12 +20,13 @@ class ApplePodcastFetcher:
     def __init__(self, config: Dict):
         """
         Initialize the Apple RSS API client
-        
+
         Args:
-            config: Configuration dictionary (not needed for Apple RSS API but kept for compatibility)
+            config: Configuration dictionary
         """
         self.base_url = 'https://rss.marketingtools.apple.com/api/v2'
-        
+        self.filter_health_only = config.get('filter_health_only', True)
+
         # Setup session with retry strategy
         self.session = requests.Session()
         retry_strategy = Retry(
@@ -35,8 +36,9 @@ class ApplePodcastFetcher:
         )
         adapter = HTTPAdapter(max_retries=retry_strategy)
         self.session.mount("https://", adapter)
-        
-        logger.info("Apple RSS API client initialized")
+
+        filter_mode = "health-related only" if self.filter_health_only else "all podcasts"
+        logger.info(f"Apple RSS API client initialized (filter mode: {filter_mode})")
     
     def get_top_health_podcasts(self, limit: int = 100, country: str = "US") -> List[Dict]:
         """
@@ -83,27 +85,31 @@ class ApplePodcastFetcher:
             
             all_podcasts = data['feed']['results']
             logger.info(f"Retrieved {len(all_podcasts)} podcasts from Apple RSS API")
-            
-            # Filter for health-related podcasts
-            health_podcasts_found = 0
+
+            # Filter for health-related podcasts if enabled
+            podcasts_found = 0
             for podcast in all_podcasts:
-                if self._is_health_related(podcast, health_genres, health_keywords):
-                    health_podcasts_found += 1
-                    logger.info(f"Processing health podcast {health_podcasts_found}: {podcast.get('name', 'Unknown')}")
-                    
-                    # Fetch additional details from iTunes API
-                    apple_id = podcast.get('id')
-                    itunes_details = None
-                    if apple_id:
-                        itunes_details = self.get_podcast_details(apple_id)
-                        # Add small delay between API calls to avoid rate limiting
-                        time.sleep(0.1)
-                    
-                    formatted = self._format_podcast_data(podcast, itunes_details)
-                    podcasts.append(formatted)
-                    
-                    if len(podcasts) >= limit:
-                        break
+                # Apply health filter only if enabled
+                if self.filter_health_only and not self._is_health_related(podcast, health_genres, health_keywords):
+                    continue
+
+                podcasts_found += 1
+                podcast_type = "health podcast" if self.filter_health_only else "podcast"
+                logger.info(f"Processing {podcast_type} {podcasts_found}: {podcast.get('name', 'Unknown')}")
+
+                # Fetch additional details from iTunes API
+                apple_id = podcast.get('id')
+                itunes_details = None
+                if apple_id:
+                    itunes_details = self.get_podcast_details(apple_id)
+                    # Add small delay between API calls to avoid rate limiting
+                    time.sleep(0.1)
+
+                formatted = self._format_podcast_data(podcast, itunes_details)
+                podcasts.append(formatted)
+
+                if len(podcasts) >= limit:
+                    break
             
             # # If we don't have enough health podcasts, try to get more by checking different categories
             # if len(podcasts) < limit:
@@ -128,7 +134,8 @@ class ApplePodcastFetcher:
             #                 formatted = self._format_podcast_data(podcast, itunes_details)
             #                 podcasts.append(formatted)
             
-            logger.info(f"Successfully filtered {len(podcasts)} health-related podcasts")
+            filter_msg = "health-related podcasts" if self.filter_health_only else "podcasts"
+            logger.info(f"Successfully fetched {len(podcasts)} {filter_msg}")
             return podcasts[:limit]
             
         except Exception as e:
