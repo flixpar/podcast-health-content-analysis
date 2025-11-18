@@ -7,6 +7,7 @@ import os
 import logging
 import hashlib
 import time
+import subprocess
 from pathlib import Path
 from typing import Optional, Dict, List
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -23,17 +24,27 @@ logger = logging.getLogger(__name__)
 class AudioDownloader:
     """Handles downloading podcast audio files with parallelization and resume support"""
     
-    def __init__(self, output_dir: Path, max_workers: int = 4):
+    def __init__(self, output_dir: Path, max_workers: int = 4,
+                 reencode_opus: bool = False, opus_bitrate: int = 24,
+                 opus_sample_rate: int = 16000, keep_original: bool = False):
         """
         Initialize the audio downloader
-        
+
         Args:
             output_dir: Directory to save audio files
             max_workers: Maximum number of parallel downloads
+            reencode_opus: Whether to re-encode downloaded audio to opus format
+            opus_bitrate: Opus bitrate in kbps (good for voice: 16-32)
+            opus_sample_rate: Sample rate in Hz (16kHz is standard for speech)
+            keep_original: Keep original file after re-encoding
         """
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.max_workers = max_workers
+        self.reencode_opus = reencode_opus
+        self.opus_bitrate = opus_bitrate
+        self.opus_sample_rate = opus_sample_rate
+        self.keep_original = keep_original
         
         # Setup session with retry strategy
         self.session = requests.Session()
@@ -94,11 +105,16 @@ class AudioDownloader:
             filename = f"{episode_id}_{guid_hash}.mp3"
         else:
             filename = f"{episode_id}.mp3"
-        
+
         file_path = podcast_dir / filename
-        
-        # Check if already downloaded
-        if file_path.exists() and file_path.stat().st_size > 0:
+        opus_path = file_path.with_suffix('.opus')
+
+        # Check if already downloaded (check opus first if re-encoding is enabled)
+        if self.reencode_opus and opus_path.exists() and opus_path.stat().st_size > 0:
+            logger.debug(f"Opus file already exists: {opus_path}")
+            self.stats['skipped'] += 1
+            return opus_path
+        elif file_path.exists() and file_path.stat().st_size > 0:
             logger.debug(f"File already exists: {file_path}")
             self.stats['skipped'] += 1
             return file_path
@@ -108,11 +124,24 @@ class AudioDownloader:
             
             # Download with resume support
             downloaded = self._download_with_resume(audio_url, file_path)
-            
+
             if downloaded:
-                self.stats['successful'] += 1
-                logger.info(f"Successfully downloaded: {file_path}")
-                return file_path
+                # Re-encode to opus if enabled
+                if self.reencode_opus:
+                    opus_path = self._reencode_to_opus(file_path)
+                    if opus_path:
+                        self.stats['successful'] += 1
+                        logger.info(f"Successfully downloaded and re-encoded: {opus_path}")
+                        return opus_path
+                    else:
+                        # Re-encoding failed, but we have the original file
+                        logger.warning(f"Re-encoding failed, keeping original: {file_path}")
+                        self.stats['successful'] += 1
+                        return file_path
+                else:
+                    self.stats['successful'] += 1
+                    logger.info(f"Successfully downloaded: {file_path}")
+                    return file_path
             else:
                 self.stats['failed'] += 1
                 return None
@@ -277,6 +306,104 @@ class AudioDownloader:
             logger.error(f"File I/O error: {str(e)}")
             return False
     
+    def _reencode_to_opus(self, input_path: Path) -> Optional[Path]:
+        """
+        Re-encode audio file to opus format using ffmpeg
+
+        Args:
+            input_path: Path to input audio file
+
+        Returns:
+            Path to opus file or None if failed
+        """
+        # Create output path with .opus extension
+        output_path = input_path.with_suffix('.opus')
+
+        # If opus file already exists, skip
+        if output_path.exists() and output_path.stat().st_size > 0:
+            logger.debug(f"Opus file already exists: {output_path}")
+            if not self.keep_original and input_path.exists():
+                input_path.unlink()
+                logger.debug(f"Removed original file: {input_path}")
+            return output_path
+
+        # Check if ffmpeg is available
+        try:
+            subprocess.run(['ffmpeg', '-version'], stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE, timeout=5, check=True)
+        except (subprocess.CalledProcessError, FileNotFoundError, subprocess.TimeoutExpired):
+            logger.error("ffmpeg is not available. Please install ffmpeg to use opus re-encoding.")
+            return None
+
+        logger.info(f"Re-encoding to opus: {input_path.name}")
+
+        try:
+            # Build ffmpeg command for efficient opus encoding
+            # -vn: no video
+            # -ac 1: mono audio (single channel)
+            # -ar: sample rate
+            # -b:a: audio bitrate
+            # -c:a libopus: use opus codec
+            # -application voip: optimize for voice (alternative: audio, lowdelay)
+            # -vbr on: variable bitrate (more efficient)
+            # -compression_level 10: maximum compression (0-10, 10 is slowest but best)
+            cmd = [
+                'ffmpeg',
+                '-i', str(input_path),
+                '-vn',  # No video
+                '-ac', '1',  # Mono
+                '-ar', str(self.opus_sample_rate),  # Sample rate
+                '-b:a', f'{self.opus_bitrate}k',  # Bitrate
+                '-c:a', 'libopus',  # Opus codec
+                '-application', 'voip',  # Optimize for voice
+                '-vbr', 'on',  # Variable bitrate
+                '-compression_level', '10',  # Maximum compression
+                '-y',  # Overwrite output file if exists
+                str(output_path)
+            ]
+
+            # Run ffmpeg with suppressed output unless there's an error
+            result = subprocess.run(
+                cmd,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                timeout=300,  # 5 minute timeout
+                check=False
+            )
+
+            if result.returncode != 0:
+                logger.error(f"ffmpeg failed with return code {result.returncode}")
+                logger.error(f"stderr: {result.stderr.decode('utf-8', errors='ignore')}")
+                return None
+
+            # Verify output file exists and has reasonable size
+            if not output_path.exists() or output_path.stat().st_size < 1024:
+                logger.error(f"Re-encoded file is missing or too small: {output_path}")
+                return None
+
+            # Calculate size reduction
+            original_size = input_path.stat().st_size
+            opus_size = output_path.stat().st_size
+            reduction = ((original_size - opus_size) / original_size) * 100
+
+            logger.info(f"Re-encoding complete: {input_path.name} -> {output_path.name} "
+                       f"({original_size / (1024**2):.1f}MB -> {opus_size / (1024**2):.1f}MB, "
+                       f"{reduction:.1f}% reduction)")
+
+            # Remove original file if requested
+            if not self.keep_original:
+                input_path.unlink()
+                logger.debug(f"Removed original file: {input_path}")
+
+            return output_path
+
+        except subprocess.TimeoutExpired:
+            logger.error(f"ffmpeg timeout while processing {input_path}")
+            return None
+        except Exception as e:
+            logger.error(f"Re-encoding failed for {input_path}: {str(e)}")
+            return None
+
     def _sanitize_filename(self, filename: str, max_length: int = 100) -> str:
         """
         Sanitize filename for safe file system usage
@@ -312,15 +439,17 @@ class AudioDownloader:
     def clean_incomplete_downloads(self):
         """Remove incomplete download files"""
         logger.info("Cleaning up incomplete downloads")
-        
+
         cleaned = 0
-        for file_path in self.output_dir.rglob('*.mp3'):
-            # Check for very small files (likely incomplete)
-            if file_path.stat().st_size < 1000:
-                logger.debug(f"Removing incomplete file: {file_path}")
-                file_path.unlink()
-                cleaned += 1
-        
+        # Check both mp3 and opus files
+        for pattern in ['*.mp3', '*.opus']:
+            for file_path in self.output_dir.rglob(pattern):
+                # Check for very small files (likely incomplete)
+                if file_path.stat().st_size < 1000:
+                    logger.debug(f"Removing incomplete file: {file_path}")
+                    file_path.unlink()
+                    cleaned += 1
+
         logger.info(f"Cleaned {cleaned} incomplete files")
     
     def get_download_stats(self) -> Dict:
@@ -378,7 +507,12 @@ class AudioDownloader:
                 # Check for FLAC
                 if header[:4] == b'fLaC':
                     return True
-                
+
+                # Check for Opus (OggS with Opus header)
+                if header[:4] == b'OggS':
+                    # Already checked above for OGG
+                    return True
+
             # If no recognized header, might still be valid
             return True
             

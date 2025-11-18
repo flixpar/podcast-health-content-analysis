@@ -66,9 +66,14 @@ class PodcastPipeline:
             self.fetcher = PodcastFetcher(podchaser_config)
             logger.info("Using Podchaser API for podcast fetching")
         self.rss_parser = RSSParser()
+        download_config = self.config.get('download', {})
         self.downloader = AudioDownloader(
             output_dir=AUDIO_DIR,
-            max_workers=self.config.get('download', {}).get('max_workers', 4)
+            max_workers=download_config.get('max_workers', 4),
+            reencode_opus=download_config.get('reencode_opus', False),
+            opus_bitrate=download_config.get('opus_bitrate', 24),
+            opus_sample_rate=download_config.get('opus_sample_rate', 16000),
+            keep_original=download_config.get('keep_original', False)
         )
         self.transcript_processor = TranscriptProcessor(
             transcript_dir=TRANSCRIPT_DIR,
@@ -104,7 +109,11 @@ class PodcastPipeline:
                 "max_workers": 4,
                 "chunk_size": 8192,
                 "timeout": 300,
-                "max_episodes_per_podcast": 5
+                "max_episodes_per_podcast": 5,
+                "reencode_opus": False,  # Re-encode downloaded audio to opus format
+                "opus_bitrate": 24,  # Opus bitrate in kbps (good for voice transcription: 16-32)
+                "opus_sample_rate": 16000,  # Sample rate in Hz (16kHz is standard for speech)
+                "keep_original": False  # Keep original file after re-encoding
             },
             "transcription": {
                 "batch_size": 8,
