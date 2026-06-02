@@ -7,8 +7,9 @@ import os
 import logging
 import hashlib
 import time
+import subprocess
 from pathlib import Path
-from typing import Optional, Dict, List
+from typing import Optional, Dict, List, Tuple
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import urlparse, unquote
 import requests
@@ -23,17 +24,19 @@ logger = logging.getLogger(__name__)
 class AudioDownloader:
     """Handles downloading podcast audio files with parallelization and resume support"""
     
-    def __init__(self, output_dir: Path, max_workers: int = 4):
+    def __init__(self, output_dir: Path, max_workers: int = 4, compression_config: Optional[Dict] = None):
         """
         Initialize the audio downloader
-        
+
         Args:
             output_dir: Directory to save audio files
             max_workers: Maximum number of parallel downloads
+            compression_config: Optional compression configuration dict
         """
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.max_workers = max_workers
+        self.compression_config = compression_config or {}
         
         # Setup session with retry strategy
         self.session = requests.Session()
@@ -62,22 +65,24 @@ class AudioDownloader:
             'failed': 0,
             'skipped': 0,
             'total_bytes': 0,
-            'total_time': 0
+            'total_time': 0,
+            'compressed': 0,
+            'compression_saved_bytes': 0
         }
     
-    def download_episode(self, audio_url: str, podcast_title: str, 
-                        episode_title: str, episode_guid: Optional[str] = None) -> Optional[Path]:
+    def download_episode(self, audio_url: str, podcast_title: str,
+                        episode_title: str, episode_guid: Optional[str] = None) -> Optional[Dict]:
         """
-        Download a single episode
-        
+        Download a single episode with optional compression
+
         Args:
             audio_url: URL of the audio file
             podcast_title: Title of the podcast
             episode_title: Title of the episode
             episode_guid: Optional unique identifier for the episode
-            
+
         Returns:
-            Path to downloaded file or None if failed
+            Dict with file_path and compression info, or None if failed
         """
         # Create normalized IDs for folder and filename base
         podcast_id = normalize_id(podcast_title)
@@ -87,32 +92,82 @@ class AudioDownloader:
         podcast_dir = self.output_dir / podcast_id
         podcast_dir.mkdir(exist_ok=True)
         
+        # Determine file extension based on compression config
+        compression_enabled = self.compression_config.get('enabled', False)
+        file_ext = '.ogg' if compression_enabled else '.mp3'
+
         # Generate filename
         if episode_guid:
             # Use hash of GUID for uniqueness
             guid_hash = hashlib.md5(episode_guid.encode()).hexdigest()[:8]
-            filename = f"{episode_id}_{guid_hash}.mp3"
+            filename = f"{episode_id}_{guid_hash}{file_ext}"
         else:
-            filename = f"{episode_id}.mp3"
-        
+            filename = f"{episode_id}{file_ext}"
+
         file_path = podcast_dir / filename
-        
-        # Check if already downloaded
+
+        # Check if already downloaded (check both .mp3 and .ogg)
         if file_path.exists() and file_path.stat().st_size > 0:
             logger.debug(f"File already exists: {file_path}")
             self.stats['skipped'] += 1
-            return file_path
+            file_size_mb = file_path.stat().st_size / (1024 ** 2)
+            return {
+                'file_path': file_path,
+                'original_size_mb': file_size_mb,
+                'compressed_size_mb': file_size_mb,
+                'compression_ratio': 1.0,
+                'is_compressed': file_path.suffix == '.ogg'
+            }
         
         try:
             logger.info(f"Downloading: {episode_title} from {podcast_title}")
             
-            # Download with resume support
-            downloaded = self._download_with_resume(audio_url, file_path)
-            
+            # Download with resume support (always download as original format first)
+            temp_file_path = file_path.with_suffix('.mp3') if file_ext == '.ogg' else file_path
+            downloaded = self._download_with_resume(audio_url, temp_file_path)
+
             if downloaded:
+                original_size_mb = temp_file_path.stat().st_size / (1024 ** 2)
+                compressed_size_mb = original_size_mb
+                compression_ratio = 1.0
+                is_compressed = False
+                final_path = temp_file_path
+
+                # Check if re-encoding is needed
+                if compression_enabled:
+                    size_threshold_mb = self.compression_config.get('size_threshold_mb', 50)
+                    if original_size_mb > size_threshold_mb:
+                        logger.info(f"File size {original_size_mb:.1f}MB exceeds threshold, re-encoding...")
+                        compression_result = self._reencode_audio(temp_file_path, file_path)
+
+                        if compression_result:
+                            compressed_size_mb = compression_result['compressed_size_mb']
+                            compression_ratio = original_size_mb / compressed_size_mb if compressed_size_mb > 0 else 1.0
+                            is_compressed = True
+                            final_path = file_path
+
+                            # Update stats
+                            self.stats['compressed'] += 1
+                            self.stats['compression_saved_bytes'] += (original_size_mb - compressed_size_mb) * (1024 ** 2)
+
+                            # Remove original if configured
+                            if not self.compression_config.get('keep_original', False):
+                                temp_file_path.unlink()
+                                logger.debug(f"Removed original file: {temp_file_path}")
+                        else:
+                            logger.warning(f"Re-encoding failed, keeping original file")
+                            final_path = temp_file_path
+
                 self.stats['successful'] += 1
-                logger.info(f"Successfully downloaded: {file_path}")
-                return file_path
+                logger.info(f"Successfully processed: {final_path}")
+
+                return {
+                    'file_path': final_path,
+                    'original_size_mb': original_size_mb,
+                    'compressed_size_mb': compressed_size_mb,
+                    'compression_ratio': compression_ratio,
+                    'is_compressed': is_compressed
+                }
             else:
                 self.stats['failed'] += 1
                 return None
@@ -121,12 +176,94 @@ class AudioDownloader:
             logger.error(f"Failed to download {episode_title}: {str(e)}")
             self.stats['failed'] += 1
             
-            # Clean up partial file
+            # Clean up partial files
             if file_path.exists():
                 file_path.unlink()
-            
+            temp_mp3 = file_path.with_suffix('.mp3')
+            if temp_mp3.exists() and temp_mp3 != file_path:
+                temp_mp3.unlink()
+
             return None
-    
+
+    def _reencode_audio(self, input_path: Path, output_path: Path) -> Optional[Dict]:
+        """
+        Re-encode audio file to Opus in OGG container
+
+        Args:
+            input_path: Path to input audio file
+            output_path: Path to output compressed file
+
+        Returns:
+            Dict with compression info, or None if failed
+        """
+        try:
+            # Get configuration
+            bitrate = self.compression_config.get('bitrate', '24k')
+            audio_format = self.compression_config.get('format', 'opus')
+            container = self.compression_config.get('container', 'ogg')
+
+            # Build ffmpeg command
+            # -i: input file
+            # -c:a libopus: use opus codec
+            # -b:a 24k: bitrate
+            # -vbr on: variable bitrate
+            # -ac 1: mono (1 channel)
+            # -y: overwrite output file
+            cmd = [
+                'ffmpeg',
+                '-i', str(input_path),
+                '-c:a', f'lib{audio_format}',
+                '-b:a', bitrate,
+                '-vbr', 'on',
+                '-ac', '1',
+                '-y',
+                str(output_path)
+            ]
+
+            logger.debug(f"Running ffmpeg: {' '.join(cmd)}")
+
+            # Run ffmpeg
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=600  # 10 minute timeout
+            )
+
+            if result.returncode != 0:
+                logger.error(f"ffmpeg failed with return code {result.returncode}")
+                logger.error(f"stderr: {result.stderr}")
+                return None
+
+            # Check output file exists and has reasonable size
+            if not output_path.exists():
+                logger.error(f"Output file not created: {output_path}")
+                return None
+
+            compressed_size_mb = output_path.stat().st_size / (1024 ** 2)
+
+            if compressed_size_mb < 0.1:  # Less than 100KB is suspicious
+                logger.error(f"Output file suspiciously small: {compressed_size_mb:.2f}MB")
+                output_path.unlink()
+                return None
+
+            logger.info(f"Re-encoded to {compressed_size_mb:.1f}MB")
+
+            return {
+                'compressed_size_mb': compressed_size_mb,
+                'output_path': output_path
+            }
+
+        except subprocess.TimeoutExpired:
+            logger.error(f"ffmpeg timeout after 600 seconds")
+            return None
+        except FileNotFoundError:
+            logger.error("ffmpeg not found. Please install ffmpeg.")
+            return None
+        except Exception as e:
+            logger.error(f"Re-encoding error: {str(e)}")
+            return None
+
     def download_episodes_batch(self, episodes: List[Dict]) -> List[Dict]:
         """
         Download multiple episodes in parallel

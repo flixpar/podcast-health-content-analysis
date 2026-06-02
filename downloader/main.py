@@ -68,7 +68,8 @@ class PodcastPipeline:
         self.rss_parser = RSSParser()
         self.downloader = AudioDownloader(
             output_dir=AUDIO_DIR,
-            max_workers=self.config.get('download', {}).get('max_workers', 4)
+            max_workers=self.config.get('download', {}).get('max_workers', 4),
+            compression_config=self.config.get('audio_compression', {})
         )
         self.transcript_processor = TranscriptProcessor(
             transcript_dir=TRANSCRIPT_DIR,
@@ -165,9 +166,35 @@ class PodcastPipeline:
                 status TEXT DEFAULT 'pending',
                 error_message TEXT,
                 metadata TEXT,
+                original_file_size_mb REAL,
+                compressed_file_size_mb REAL,
+                compression_ratio REAL,
+                is_compressed BOOLEAN DEFAULT 0,
                 FOREIGN KEY (podcast_id) REFERENCES podcasts(id)
             )
         """)
+
+        # Add compression tracking columns to existing databases
+        # (These will fail silently if columns already exist)
+        try:
+            cursor.execute("ALTER TABLE episodes ADD COLUMN original_file_size_mb REAL")
+        except sqlite3.OperationalError:
+            pass  # Column already exists
+
+        try:
+            cursor.execute("ALTER TABLE episodes ADD COLUMN compressed_file_size_mb REAL")
+        except sqlite3.OperationalError:
+            pass  # Column already exists
+
+        try:
+            cursor.execute("ALTER TABLE episodes ADD COLUMN compression_ratio REAL")
+        except sqlite3.OperationalError:
+            pass  # Column already exists
+
+        try:
+            cursor.execute("ALTER TABLE episodes ADD COLUMN is_compressed BOOLEAN DEFAULT 0")
+        except sqlite3.OperationalError:
+            pass  # Column already exists
         
         # Create transcripts table for storing transcript metadata
         cursor.execute("""
@@ -363,19 +390,32 @@ class PodcastPipeline:
                 # Download audio if no transcript exists
                 if not has_transcript and episode.get('audio_url'):
                     try:
-                        file_path = self.downloader.download_episode(
+                        download_result = self.downloader.download_episode(
                             episode['audio_url'],
                             podcast_title=title,
                             episode_title=episode.get('title', 'unknown')
                         )
-                        
-                        cursor.execute("""
-                            UPDATE episodes 
-                            SET audio_file_path = ?, status = 'downloaded'
-                            WHERE episode_guid = ?
-                        """, (str(file_path), episode['guid']))
-                        
-                        result['downloaded'] += 1
+
+                        if download_result:
+                            cursor.execute("""
+                                UPDATE episodes
+                                SET audio_file_path = ?,
+                                    status = 'downloaded',
+                                    original_file_size_mb = ?,
+                                    compressed_file_size_mb = ?,
+                                    compression_ratio = ?,
+                                    is_compressed = ?
+                                WHERE episode_guid = ?
+                            """, (
+                                str(download_result['file_path']),
+                                download_result.get('original_size_mb'),
+                                download_result.get('compressed_size_mb'),
+                                download_result.get('compression_ratio'),
+                                download_result.get('is_compressed', False),
+                                episode['guid']
+                            ))
+
+                            result['downloaded'] += 1
                         
                     except Exception as e:
                         logger.error(f"Failed to download episode: {str(e)}")
