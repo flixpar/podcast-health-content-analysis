@@ -1,3 +1,4 @@
+import os
 import shutil
 import subprocess
 
@@ -51,3 +52,40 @@ def test_decode_pcm(noise_mp3):
     samples = decode_pcm(noise_mp3, 16000)
     assert samples.dtype.name == "float32"
     assert len(samples) == pytest.approx(90 * 16000, rel=0.01)
+
+
+def _stub_tool(directory, name, exit_code):
+    """A fake ffmpeg/ffprobe that writes undecodable bytes to stderr."""
+    directory.mkdir(exist_ok=True)
+    tool = directory / name
+    # 0xe2 starts a 3-byte sequence; '(' is not a valid continuation byte.
+    tool.write_bytes(b"#!/bin/sh\nprintf 'title: \\342( oops' >&2\nexit %d\n" % exit_code)
+    tool.chmod(0o755)
+    return tool
+
+
+def test_encode_reports_non_utf8_stderr(tmp_path, monkeypatch):
+    """ffmpeg echoes ID3 tags verbatim, so its stderr is not always UTF-8.
+
+    Decoding it strictly turned a plain encode failure into a UnicodeDecodeError
+    that escaped the EncodeError handling and failed the episode outright.
+    """
+    fake_bin = tmp_path / "bin"
+    _stub_tool(fake_bin, "ffmpeg", exit_code=1)
+    monkeypatch.setenv("PATH", f"{fake_bin}{os.pathsep}{os.environ['PATH']}")
+
+    source = tmp_path / "in.mp3"
+    source.write_bytes(b"nope")
+    target = tmp_path / "out.ogg"
+
+    with pytest.raises(EncodeError, match=r"ffmpeg failed \(1\)"):
+        encode_opus(source, target)
+    assert not target.exists()
+
+
+def test_probe_duration_survives_non_utf8_stderr(tmp_path, monkeypatch):
+    fake_bin = tmp_path / "bin"
+    _stub_tool(fake_bin, "ffprobe", exit_code=1)
+    monkeypatch.setenv("PATH", f"{fake_bin}{os.pathsep}{os.environ['PATH']}")
+
+    assert probe_duration(tmp_path / "in.mp3") is None

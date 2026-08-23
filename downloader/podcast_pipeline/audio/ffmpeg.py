@@ -27,7 +27,7 @@ def probe_duration(path: Path) -> float | None:
     out = subprocess.run(
         ["ffprobe", "-v", "error", "-show_entries", "format=duration",
          "-of", "default=noprint_wrappers=1:nokey=1", str(path)],
-        capture_output=True, text=True, timeout=120,
+        capture_output=True, text=True, errors="replace", timeout=120,
     )
     if out.returncode != 0:
         return None
@@ -69,7 +69,8 @@ def encode_opus(source: Path, target: Path, bitrate: str = "24k", timeout: int =
            "-c:a", "libopus", "-b:a", bitrate, "-vbr", "on", "-ac", "1",
            "-y", str(target)]
     try:
-        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+        proc = subprocess.run(cmd, capture_output=True, text=True,
+                              errors="replace", timeout=timeout)
     except subprocess.TimeoutExpired:
         target.unlink(missing_ok=True)
         raise EncodeError(f"ffmpeg timed out after {timeout}s on {source}")
