@@ -1,0 +1,41 @@
+{
+    "data_dir": "data",
+    "fetcher": {
+        "type": "apple",
+        "filter_health_only": false,
+        "default_limit": 100
+    },
+    "podchaser": {
+        "client_id": "YOUR_PODCHASER_CLIENT_ID",
+        "client_secret": "YOUR_PODCHASER_CLIENT_SECRET",
+        "api_url": "https://api.podchaser.com/graphql"
+    },
+    "discovery": {
+        "max_episodes_per_podcast": 5000,
+        "max_parallel_feeds": 8,
+        "feed_timeout_seconds": 60
+    },
+    "download": {
+        "max_workers": 8,
+        "timeout_seconds": 600,
+        "min_free_gb": 100
+    },
+    "audio_compression": {
+        "enabled": true,
+        "size_threshold_mb": 50,
+        "bitrate": "24k",
+        "keep_original": false
+    },
+    "transcription": {
+        "model_name": "nvidia/parakeet-tdt-0.6b-v2",
+        "gpu_ids": [
+            0
+        ],
+        "batch_size": 1,
+        "chunk_duration_seconds": 300,
+        "overlap_seconds": 30
+    },
+    "storage": {
+        "transcript_compression_level": 3
+    }
+}

@@ -4,226 +4,116 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a high-performance podcast transcription pipeline designed to fetch, download, and transcribe health podcasts at scale using NVIDIA NeMo ASR models with multi-GPU support. The system stores transcripts in compressed JSONL format (zstd) for efficient storage.
+A podcast transcription pipeline: fetch top podcasts, record episodes from RSS,
+download audio (archived as 24 kbps Opus), ingest publisher transcripts where
+feeds offer them, and transcribe the rest with NVIDIA Parakeet (NeMo). State
+lives in SQLite; transcripts are zstd-compressed JSONL. The output feeds the
+misinformation analysis in `../fact-check`.
 
 ## Key Instructions
 
-- Ensure the Python virtual environment in `.venv/` is activated.
-- This is a research project, so do not be afraid to make breaking changes to the code. Don'y worry about backwards compatibility.
-- The code does not have to be production-ready, so ensure the code fails loudly and with a clear error message. Don't try to catch errors or suppress them.
+- Use the virtual environment at `../.venv` (managed by `uv` from the repository
+  root's `pyproject.toml`). Run commands from this directory.
+- This is a research project, so do not be afraid to make breaking changes to
+  the code. Don't worry about backwards compatibility -- except for the data:
+  the database and archive are large and must keep working.
+- The code does not have to be production-ready, so ensure the code fails loudly
+  and with a clear error message. Don't try to catch errors or suppress them.
+  Per-item failures (one bad feed, one failed download) are recorded on the row
+  and the run continues; anything else should propagate.
 - Please ask questions if you are unsure about what to do.
 
-## Setup and Installation
+## Running
 
 ```bash
-# Initial setup (requires uv package manager)
-./setup.sh
-
-# Activate environment
-source .venv/bin/activate
+python -m podcast_pipeline --help
+python -m podcast_pipeline stats
+python -m podcast_pipeline fetch-podcasts --limit 100
+python -m podcast_pipeline discover
+python -m podcast_pipeline fetch-rss-transcripts
+python -m podcast_pipeline download            # resumable; re-run after an interruption
+python -m podcast_pipeline transcribe
+python -m podcast_pipeline convert-audio --dry-run
+python -m podcast_pipeline audit --fix
+pytest tests
 ```
 
-## Running the Pipeline
+Every command prints a JSON summary and logs to `logs/pipeline.log`.
 
-The pipeline operates in three distinct phases that can be run independently or together:
+## Layout
+
+- `podcast_pipeline/cli.py` -- argparse subcommands; dispatches to `pipeline/*.run(config, conn, ...)`.
+- `podcast_pipeline/config.py` -- dataclass config. **Every default lives here and
+  nowhere else.** `Config.load` rejects unknown keys. `config.example.json` must
+  be kept in sync when keys change.
+- `podcast_pipeline/db.py` -- schema and the write helpers stages share
+  (`upsert_podcast`, `insert_episode`, `record_download`, `record_transcript`, ...).
+  Helpers never commit; the caller owns the transaction.
+- `podcast_pipeline/models.py` -- `PodcastRecord`, `FeedEpisode`, `Segment`.
+- `podcast_pipeline/rss.py`, `sources/` -- network readers that return models.
+- `podcast_pipeline/audio/` -- `download.py` (resume via `.part` files),
+  `naming.py` (slug + GUID hash), `ffmpeg.py` (the only module that shells out
+  to ffmpeg/ffprobe), `disk.py` (`DiskSpaceError`).
+- `podcast_pipeline/transcripts/` -- `store.py` is the single writer/reader of
+  the transcript format; `parsers.py` handles publisher formats.
+- `podcast_pipeline/asr/` -- `chunking.py` is pure and unit-tested;
+  `parakeet.py` imports torch/NeMo and is only imported inside `transcribe`.
+- `podcast_pipeline/pipeline/` -- one module per command. Workers (threads) do
+  network/GPU/ffmpeg work and return results; **all database writes happen on
+  the main thread** as results arrive.
+- `tests/` -- pytest; fakes are injected at module boundaries (`monkeypatch.setattr(discover, "fetch_feed", ...)`).
+- `tools/ab_format_test.py` -- the MP3-vs-Opus measurement behind the storage policy.
+
+## Rules That Exist Because Something Broke
+
+- **Never share a `sqlite3.Connection` between threads.** The stages avoid the
+  question entirely: worker threads return results, the main thread writes.
+  Sharing one connection produced "cannot start a transaction within a
+  transaction" and "API misuse" errors in the 2025-10-14 run.
+- **`DiskSpaceError` is fatal on purpose.** `download` and `convert-audio` set a
+  stop flag and wind down. A full disk previously produced thousands of
+  zero-byte files and a corrupted SQLite session. Do not catch and continue.
+- **Never delete an original on the strength of an unverified conversion.**
+  `ffmpeg.encode_opus` probes the output and compares its duration to the
+  source; `convert-audio` commits the DB row *before* unlinking the MP3, so an
+  interruption can only leave a converted file that is still recorded.
+- **Never compare audio windows obtained by seeking** (`ffmpeg`/`librosa`
+  offsets are frame-approximate on MP3, sample-accurate on Opus). `decode_pcm`
+  decodes from sample zero; slice identical sample ranges and cross-correlate.
+  A seek-based comparison once reported 24% WER from misalignment alone.
+- **Audio naming checks both schemes.** New files are
+  `{title-slug}_{md5(guid)[:8]}.{ext}`; most of the archive is `{title-slug}.{ext}`.
+  `naming.find_existing_audio` checks both stems and both `.ogg`/`.mp3` before
+  declaring an episode missing. Checking only the configured extension would
+  re-download the entire MP3 archive.
+- **Podcast upserts key on the source id and fall back to the Apple id.** The
+  old pipeline wrote `podchaser_id = NULL` and used `INSERT OR REPLACE`, which
+  would have orphaned every episode on a re-run. Keep podcast ids stable.
+- **Re-run `tools/ab_format_test.py` before changing the Opus bitrate.** Current
+  result: 1.26% WER / 0.85% CER divergence vs MP3 for an 82.7% size saving.
+
+## Transcription
+
+- Long audio is chunked (`chunk_duration_seconds`, `overlap_seconds`) and merged
+  on word timestamps at each overlap's midpoint (`asr/chunking.py`). The model
+  must return word timestamps (`timestamps=True`); it is an error if it does not.
+- The GPU is a 12 GB card shared with other services (~6 GB usable). 300 s chunks
+  need `batch_size: 1` (5 GB peak; batch 2 OOMs). RTF is ~0.004, so the GPU is
+  not the bottleneck.
+- NeMo accepts numpy arrays directly; audio is decoded with ffmpeg to memory and
+  never cached on disk.
+
+## Database
+
+`data/podcast_metadata.db` (`data` is a symlink to the big volume; disk space is
+the binding constraint).
+
+- `podcasts.status`: `pending` -> `discovered` | `error` (feed errors are retried next `discover`).
+- `episodes.status`: `pending` -> `downloaded` -> `transcribed`, or `error`. An
+  `error` row *with* `audio_file_path` failed transcription; *without* it, download.
+  `has_rss_transcript = 1` rows are never downloaded.
+- `transcripts.metadata.source`: `asr` or `rss`.
 
 ```bash
-# Show current statistics
-python main.py --stats
-
-# Phase 1: Fetch podcast metadata (using Apple RSS or Podchaser API)
-python main.py --phase 1 --limit 100
-
-# Phase 2: Parse RSS feeds and download audio files
-python main.py --phase 2 --max-episodes 5
-
-# Phase 2 (discovery only): record new episode metadata, download nothing
-python main.py --phase 2 --discover-only
-
-# Phase 2b: download episodes already in the DB (the resumable path)
-python main.py --phase 2b
-
-# Phase 3: Transcribe downloaded audio files
-python main.py --phase 3
-
-# Run complete pipeline (will prompt before transcription)
-python main.py --phase all --limit 100 --max-episodes 5
-```
-
-To resume a partial download, use `--phase 2b`, not `--phase 2`. Phase 2
-re-parses every feed; Phase 2b works straight off `episodes.status`.
-
-## Maintenance Tools
-
-```bash
-python tools/audit_audio.py --fix          # reconcile DB against disk, re-queue broken rows
-python tools/fetch_rss_transcripts.py      # ingest transcripts publishers already provide
-python tools/ab_format_test.py             # measure MP3 vs Opus transcription divergence
-python convert_existing_audio.py --reconcile-only   # record conversions an interrupted run left
-```
-
-## Testing
-
-```bash
-# Run test suite
-python test_suite.py
-```
-
-## Configuration
-
-Edit `config.json` to configure:
-- **Fetcher type**: `"apple"` (default, no auth) or `"podchaser"` (requires API credentials)
-- **Download settings**: parallel workers, episode limits, timeouts
-- **GPU configuration**: `num_gpus`, `gpu_ids` array, `batch_size`
-- **Transcription parameters**: chunk duration, overlap for long audio files
-- **Storage options**: compression level, whether to keep processed audio
-
-## Architecture Overview
-
-### Three-Phase Pipeline Architecture
-
-The system is built around a phased execution model in `main.py`:
-
-1. **Phase 1 (Metadata Collection)**: Fetch top podcasts from either Apple RSS API or Podchaser GraphQL API, store metadata in SQLite
-2. **Phase 2 (Download)**: Parse RSS feeds, detect existing transcripts, download audio files (only if no RSS transcript exists)
-3. **Phase 3 (Transcription)**: Multi-GPU batch transcription with automatic chunking for long audio
-
-Each phase updates the SQLite database with status tracking, enabling resume capability.
-
-### Concurrency Rules (important)
-
-- **Never share a `sqlite3.Connection` between threads.** Phase 2 runs one
-  worker per podcast; each calls `self._thread_conn()` for a connection of its
-  own. The database is opened in WAL mode with a 60s busy timeout.
-- **Commit per episode, not per feed.** A feed can hold thousands of episodes;
-  one long-lived transaction meant a single failure discarded all of it.
-- **`DiskSpaceError` is fatal on purpose.** It sets `self._stop_requested`, and
-  every worker winds down. Do not catch and continue -- a full disk previously
-  produced thousands of zero-byte files and a corrupted SQLite session.
-
-### Storage Format
-
-Audio is archived as 24kbps mono Opus/OGG. This was validated with
-`tools/ab_format_test.py` before adopting it: transcribing the same audio from MP3
-and from its Opus re-encode diverges by 1.26% WER / 0.85% CER, against an 82.7%
-size saving. That is well under Parakeet's own ~6% benchmark WER, so re-encoding
-is treated as ASR-transparent. Re-run the tool before changing `bitrate` in
-`config.json`.
-
-Two rules follow from how that measurement went wrong the first time:
-
-- Never compare windows obtained by **seeking** into both formats -- librosa's
-  `offset=` is frame-approximate on MP3 and sample-accurate on Opus, which made an
-  early run report 24% WER from pure misalignment. Decode fully, slice identical
-  sample ranges, and cross-correlate to confirm.
-- Never delete an original on the strength of an **unverified** conversion. Always
-  compare the encoded duration against the source first.
-
-### Audio File Naming
-
-New downloads are named `{normalized-title}_{md5(guid)[:8]}.{ext}`. Most of the
-existing archive predates the GUID hash and uses `{normalized-title}.{ext}`, so
-`AudioDownloader._find_existing()` checks both schemes and both extensions
-before deciding an episode needs downloading. Checking only the configured
-output extension would treat the whole existing MP3 archive as missing.
-
-### Database Schema
-
-SQLite database at `data/podcast_metadata.db` with 4 tables:
-
-- **podcasts**: Podcast metadata with status tracking (`pending`, `downloaded`, `error`)
-- **episodes**: Episode details, audio paths, transcript paths, status per episode
-- **transcripts**: Transcript metadata (word count, confidence, duration, format)
-- **processing_logs**: Historical processing events (not heavily used currently)
-
-Key relationships:
-- `episodes.podcast_id` → `podcasts.id`
-- `transcripts.episode_id` → `episodes.id` (one-to-one)
-
-### Module Responsibilities
-
-**Core Pipeline (`main.py` - 711 lines)**
-- Orchestrates all three phases
-- Manages SQLite database initialization and schema
-- Implements `PodcastPipeline` class with methods: `phase1_fetch_metadata()`, `phase2_download_audio()`, `phase3_transcribe()`
-- Handles compressed transcript saving via `_save_transcript()`
-
-**Podcast Fetching**
-- `apple_podcast_fetcher.py`: Uses Apple RSS API (free, no auth), filters for health podcasts by keywords/categories
-- `podcast_fetcher.py`: Podchaser GraphQL API client (requires auth), supports pagination
-
-**RSS Parsing (`rss_parser.py`)**
-- Uses `feedparser` to extract episode metadata
-- Detects existing transcripts in RSS feeds (Podcast 2.0 namespace support)
-- Extracts audio URLs, durations, publication dates
-
-**Audio Download (`audio_downloader.py`)**
-- Parallel download with ThreadPoolExecutor
-- Resume support (checks existing files)
-- Retry strategy with exponential backoff
-- Creates directory structure: `data/audio/{podcast_id}/{episode_id}.mp3`
-- Uses `utils.normalize_id()` to create filesystem-safe IDs
-
-**Transcription (`transcriber.py` - 694 lines)**
-- **Multi-GPU support**: Distributes batches across GPUs using ThreadPoolExecutor, load-balanced by audio duration
-- **Long audio handling**: Automatically chunks audio longer than `chunk_duration_seconds` (default 1200s/20min) with overlap
-- **Audio preprocessing**: Converts to 16kHz mono WAV (required by Parakeet) using librosa/pydub
-- **Output normalization**: `_normalize_transcription_output()` handles various NeMo return formats (strings, Hypothesis objects, dicts)
-- **Known issue**: For long audio chunks, NeMo may return Hypothesis objects even when `return_hypotheses=False`, causing TypeError when joining text
-- **Preprocessing cache**: `/tmp/processed_audio/` is keyed by filename stem *plus a hash of the full path*. The stem alone collides between identically titled episodes in different podcasts, and between an episode's `.mp3` and `.ogg`.
-
-**Transcript Storage (`transcript_processor.py`)**
-- JSONL format with zstd compression (level 3 by default)
-- Structure: metadata line → summary line (full text) → segment lines (with timestamps)
-- Each file: `data/transcripts/episode_{id}.jsonl.zst`
-
-**Additional Components**
-- `api_server.py`: Flask REST API for transcript access (rate limiting, caching, JWT auth)
-- `monitoring_dashboard.py`: Real-time monitoring with GPU metrics, Flask + SocketIO
-- `utils.py`: String normalization for filesystem-safe IDs
-
-### Data Flow
-
-```
-Podcast API → SQLite (podcasts table)
-    ↓
-RSS Feed → SQLite (episodes table) → Audio Download
-    ↓
-Audio Files → Transcription (multi-GPU) → Compressed JSONL
-    ↓
-SQLite (episodes + transcripts tables)
-```
-
-## Debugging
-
-### Audio Preprocessing
-
-Audio files are preprocessed to `/tmp/processed_audio/` as 16kHz mono WAV files. These are temporary and can accumulate if transcription fails. The transcriber uses both librosa and pydub as fallbacks.
-
-### Episode Status Tracking
-
-Episodes have status values: `pending`, `downloaded`, `transcribed`, `error`. To inspect:
-
-```bash
-# View status distribution
 sqlite3 data/podcast_metadata.db "SELECT status, COUNT(*) FROM episodes GROUP BY status;"
-
-# View errors
-sqlite3 data/podcast_metadata.db "SELECT title, error_message FROM episodes WHERE status='error';"
 ```
-
-## Storage
-
-**Storage locations**:
-- Audio: `data/audio/` (organized by podcast subdirectories)
-- Transcripts: `data/transcripts/` (flat structure)
-- Database: `data/podcast_metadata.db`
-- Logs: `podcast_pipeline.log`
-
-## Development Notes
-
-- SQLite connection uses `check_same_thread=False` for multi-threaded access
-- The `fetcher.type` config determines which API to use (`"apple"` or `"podchaser"`)
-- RSS feeds that already contain transcripts are detected and those episodes are not downloaded/transcribed
-- Database uses AUTOINCREMENT for all primary keys and proper foreign key constraints
-- Normalized text output in transcriber requires defensive handling due to NeMo's inconsistent return types
