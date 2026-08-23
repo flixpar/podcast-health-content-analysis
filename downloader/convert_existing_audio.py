@@ -9,11 +9,14 @@ import sys
 import json
 import logging
 import argparse
+import shutil
 import sqlite3
 import subprocess
+import threading
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
-from multiprocessing import Pool, cpu_count
+from concurrent.futures import ThreadPoolExecutor
+from multiprocessing import cpu_count
 from tqdm import tqdm
 
 # Setup logging
@@ -29,6 +32,33 @@ DATA_DIR = PROJECT_ROOT / "data"
 DB_PATH = DATA_DIR / "podcast_metadata.db"
 CONFIG_FILE = PROJECT_ROOT / "config.json"
 
+# Stop converting rather than filling the volume; a full disk is what stranded
+# the previous run halfway through.
+MIN_FREE_GB = 20.0
+
+# A conversion must retain at least this fraction of the source duration.
+DURATION_TOLERANCE = 0.98
+
+
+class DiskFull(RuntimeError):
+    """Raised when the audio volume is too full to keep converting."""
+
+
+def probe_duration(path: Path) -> Optional[float]:
+    """Decoded duration in seconds, or None if ffprobe cannot read the file."""
+    try:
+        out = subprocess.run(
+            ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+             "-of", "default=noprint_wrappers=1:nokey=1", str(path)],
+            capture_output=True, text=True, timeout=120,
+        )
+        if out.returncode != 0:
+            return None
+        value = out.stdout.strip()
+        return float(value) if value and value != "N/A" else None
+    except (subprocess.TimeoutExpired, ValueError):
+        return None
+
 
 class AudioConverter:
     """Handles retroactive conversion of existing audio files"""
@@ -40,9 +70,11 @@ class AudioConverter:
         self.db_path = DB_PATH
 
         # Stats
+        self._local = threading.local()
         self.stats = {
             'total_files': 0,
             'converted': 0,
+            'reused': 0,
             'skipped': 0,
             'failed': 0,
             'total_saved_mb': 0,
@@ -59,12 +91,16 @@ class AudioConverter:
         with open(config_path, 'r') as f:
             return json.load(f)
 
-    def get_files_to_convert(self, min_size_mb: Optional[float] = None) -> List[Dict]:
+    def get_files_to_convert(self, min_size_mb: Optional[float] = None,
+                             reconcile_only: bool = False) -> List[Dict]:
         """
         Query database for audio files that need conversion
 
         Args:
             min_size_mb: Minimum file size threshold (overrides config)
+            reconcile_only: Only return files that have already been converted
+                but never recorded -- the leftovers of an interrupted run.
+                Nothing is re-encoded in this mode.
 
         Returns:
             List of file info dicts
@@ -101,8 +137,12 @@ class AudioConverter:
             # Get actual file size
             file_size_mb = file_path.stat().st_size / (1024 ** 2)
 
-            # Skip if below threshold
-            if file_size_mb < min_size_mb:
+            if reconcile_only:
+                # Only pick up work a previous run already did but never recorded
+                converted = file_path.with_suffix('.ogg')
+                if not (converted.exists() and converted.stat().st_size > 0):
+                    continue
+            elif file_size_mb < min_size_mb:
                 logger.debug(f"Skipping file below threshold: {file_path} ({file_size_mb:.1f}MB)")
                 continue
 
@@ -145,6 +185,36 @@ class AudioConverter:
         }
 
         try:
+            # A previous interrupted run may have produced the .ogg already but
+            # never recorded it. Verify and reuse it instead of re-encoding.
+            if output_path.exists():
+                existing_mb = output_path.stat().st_size / (1024 ** 2)
+                existing_duration = probe_duration(output_path)
+                source_duration = probe_duration(input_path)
+                # An interrupted run converted some files while their source was
+                # still downloading, leaving an .ogg far shorter than the .mp3.
+                # Reusing one of those would discard most of the episode, so the
+                # durations must agree before we trust it.
+                if (existing_mb >= 0.1 and existing_duration is not None
+                        and source_duration
+                        and existing_duration >= source_duration * DURATION_TOLERANCE):
+                    logger.debug(f"Reusing existing conversion: {output_path}")
+                    result['compressed_size_mb'] = existing_mb
+                    result['compression_ratio'] = (original_size_mb / existing_mb
+                                                   if existing_mb > 0 else 1.0)
+                    result['saved_mb'] = original_size_mb - existing_mb
+                    result['reused'] = True
+                    result['success'] = True
+                    return result
+                if existing_duration is not None and source_duration:
+                    logger.warning(f"Discarding short conversion {output_path.name}: "
+                                   f"{existing_duration:.0f}s vs source {source_duration:.0f}s")
+                output_path.unlink()
+
+            free_gb = shutil.disk_usage(output_path.parent).free / (1024 ** 3)
+            if free_gb < MIN_FREE_GB:
+                raise DiskFull(f"Only {free_gb:.1f}GB free, need {MIN_FREE_GB}GB")
+
             # Build ffmpeg command
             bitrate = self.compression_config.get('bitrate', '24k')
             cmd = [
@@ -168,6 +238,11 @@ class AudioConverter:
 
             if process.returncode != 0:
                 result['error'] = f"ffmpeg failed: {process.stderr[:200]}"
+                # ffmpeg creates the output before encoding, so a failed run
+                # leaves an empty file that later passes mistake for a success.
+                output_path.unlink(missing_ok=True)
+                if 'No space left on device' in process.stderr:
+                    raise DiskFull(f"Disk full while converting {input_path}")
                 return result
 
             # Verify output file
@@ -182,6 +257,21 @@ class AudioConverter:
                 output_path.unlink()
                 return result
 
+            # Never delete an original on the strength of a file we have not
+            # decoded. Compare durations so a truncated encode is caught here.
+            encoded_duration = probe_duration(output_path)
+            if encoded_duration is None:
+                result['error'] = "Converted file is not decodable"
+                output_path.unlink(missing_ok=True)
+                return result
+
+            source_duration = probe_duration(input_path)
+            if source_duration and encoded_duration < source_duration * DURATION_TOLERANCE:
+                result['error'] = (f"Converted file is short: {encoded_duration:.0f}s "
+                                   f"vs source {source_duration:.0f}s")
+                output_path.unlink(missing_ok=True)
+                return result
+
             result['compressed_size_mb'] = compressed_size_mb
             result['compression_ratio'] = original_size_mb / compressed_size_mb if compressed_size_mb > 0 else 1.0
             result['saved_mb'] = original_size_mb - compressed_size_mb
@@ -191,67 +281,72 @@ class AudioConverter:
 
         except subprocess.TimeoutExpired:
             result['error'] = "ffmpeg timeout (600s)"
+            output_path.unlink(missing_ok=True)
             return result
+        except DiskFull:
+            raise
         except Exception as e:
             result['error'] = str(e)
+            output_path.unlink(missing_ok=True)
             return result
 
-    def update_database(self, result: Dict, keep_original: bool = False):
-        """
-        Update database with conversion results
+    def _thread_conn(self) -> sqlite3.Connection:
+        """One SQLite connection per worker thread; sharing one is not safe."""
+        conn = getattr(self._local, 'conn', None)
+        if conn is None:
+            conn = sqlite3.connect(str(self.db_path), timeout=60.0)
+            conn.execute("PRAGMA journal_mode=WAL")
+            conn.execute("PRAGMA busy_timeout=60000")
+            self._local.conn = conn
+        return conn
 
-        Args:
-            result: Conversion result dict
-            keep_original: If False, delete original file
+    def commit_conversion(self, result: Dict, keep_original: bool = False) -> bool:
         """
-        if not result['success']:
-            return
+        Record one conversion and then delete its original.
 
-        conn = sqlite3.connect(str(self.db_path))
+        Order matters: the database is committed before the MP3 is unlinked, so
+        an interruption can only ever leave a converted file that is still
+        recorded correctly -- never a deleted original with no record of where
+        its replacement went. The previous version converted every file first
+        and updated the database at the very end, so being killed midway lost
+        the bookkeeping for thousands of already-converted files.
+        """
+        conn = self._thread_conn()
         cursor = conn.cursor()
+        cursor.execute("""
+            UPDATE episodes
+            SET audio_file_path = ?,
+                original_file_size_mb = ?,
+                compressed_file_size_mb = ?,
+                compression_ratio = ?,
+                is_compressed = 1
+            WHERE id = ?
+        """, (
+            str(result['output_path']),
+            result['original_size_mb'],
+            result['compressed_size_mb'],
+            result['compression_ratio'],
+            result['episode_id'],
+        ))
+        conn.commit()
 
-        try:
-            # Update episode record
-            cursor.execute("""
-                UPDATE episodes
-                SET audio_file_path = ?,
-                    original_file_size_mb = ?,
-                    compressed_file_size_mb = ?,
-                    compression_ratio = ?,
-                    is_compressed = 1
-                WHERE id = ?
-            """, (
-                str(result['output_path']),
-                result['original_size_mb'],
-                result['compressed_size_mb'],
-                result['compression_ratio'],
-                result['episode_id']
-            ))
-
-            conn.commit()
-
-            # Delete original if configured
-            if not keep_original:
-                try:
-                    result['input_path'].unlink()
-                    logger.debug(f"Deleted original: {result['input_path']}")
-                except Exception as e:
-                    logger.warning(f"Failed to delete original: {e}")
-
-        except Exception as e:
-            logger.error(f"Database update failed for episode {result['episode_id']}: {e}")
-            conn.rollback()
-        finally:
-            conn.close()
+        if not keep_original:
+            try:
+                result['input_path'].unlink()
+            except FileNotFoundError:
+                pass
+            except OSError as e:
+                logger.warning(f"Failed to delete original {result['input_path']}: {e}")
+        return True
 
     def convert_all(self, files: List[Dict], workers: int = None,
                     dry_run: bool = False, keep_original: bool = False):
         """
-        Convert all files in parallel
+        Convert files, committing each one as it finishes.
 
         Args:
             files: List of file info dicts
-            workers: Number of parallel workers (default: CPU count)
+            workers: Number of parallel workers (default: min(cpu_count, 8))
             dry_run: If True, don't actually convert or update database
             keep_original: If True, keep original files after conversion
         """
@@ -262,37 +357,53 @@ class AudioConverter:
         if workers is None:
             workers = min(cpu_count(), 8)  # Cap at 8 to avoid overwhelming the system
 
-        logger.info(f"Converting {len(files)} files using {workers} workers...")
-
         if dry_run:
             logger.info("DRY RUN MODE - No files will be modified")
-            for file_info in files:
+            total_mb = sum(f['file_size_mb'] for f in files)
+            for file_info in files[:20]:
                 logger.info(f"Would convert: {file_info['input_path']} ({file_info['file_size_mb']:.1f}MB)")
+            if len(files) > 20:
+                logger.info(f"... and {len(files) - 20} more")
+            logger.info(f"Would process {len(files)} files totalling {total_mb / 1024:.1f}GB")
             return
 
-        # Convert files in parallel
-        with Pool(processes=workers) as pool:
-            results = list(tqdm(
-                pool.imap(self.convert_file, files),
-                total=len(files),
-                desc="Converting files",
-                unit="file"
-            ))
+        logger.info(f"Converting {len(files)} files using {workers} workers...")
+        stop = threading.Event()
+        lock = threading.Lock()
 
-        # Update database and collect stats
-        logger.info("Updating database...")
-        for result in tqdm(results, desc="Updating DB", unit="file"):
-            if result['success']:
-                self.update_database(result, keep_original)
+        def handle(file_info: Dict):
+            if stop.is_set():
+                return
+            try:
+                result = self.convert_file(file_info)
+            except DiskFull as e:
+                logger.error(f"Halting: {e}")
+                stop.set()
+                return
+
+            if not result['success']:
+                with lock:
+                    self.stats['failed'] += 1
+                logger.error(f"Conversion failed for episode {result['episode_id']}: "
+                             f"{result.get('error', 'Unknown error')}")
+                return
+
+            self.commit_conversion(result, keep_original)
+            with lock:
                 self.stats['converted'] += 1
+                self.stats['reused'] += int(result.get('reused', False))
                 self.stats['total_saved_mb'] += result['saved_mb']
                 self.stats['total_original_mb'] += result['original_size_mb']
                 self.stats['total_compressed_mb'] += result['compressed_size_mb']
-            else:
-                self.stats['failed'] += 1
-                logger.error(f"Conversion failed for episode {result['episode_id']}: {result.get('error', 'Unknown error')}")
 
-        # Print summary
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            list(tqdm(pool.map(handle, files), total=len(files),
+                      desc="Converting", unit="file"))
+
+        if stop.is_set():
+            logger.error("Stopped early on low disk space -- free space and re-run; "
+                         "already-converted files will be picked up where they left off")
+
         self.print_summary()
 
     def print_summary(self):
@@ -301,7 +412,8 @@ class AudioConverter:
         print("CONVERSION SUMMARY")
         print("=" * 60)
         print(f"Total files:         {self.stats['total_files']}")
-        print(f"Converted:           {self.stats['converted']}")
+        print(f"Converted:           {self.stats['converted']}"
+              f"  (of which reused from an earlier run: {self.stats['reused']})")
         print(f"Failed:              {self.stats['failed']}")
         print(f"Skipped:             {self.stats['skipped']}")
         print(f"-" * 60)
@@ -318,6 +430,12 @@ def main():
     """Main entry point"""
     parser = argparse.ArgumentParser(
         description='Convert existing podcast audio files to compressed Opus/OGG format'
+    )
+    parser.add_argument(
+        '--reconcile-only',
+        action='store_true',
+        help='Only record conversions a previous interrupted run already produced, '
+             'and delete their originals. Never re-encodes anything.'
     )
     parser.add_argument(
         '--threshold',
@@ -361,7 +479,8 @@ def main():
     converter = AudioConverter()
 
     # Get files to convert
-    files = converter.get_files_to_convert(min_size_mb=args.threshold)
+    files = converter.get_files_to_convert(min_size_mb=args.threshold,
+                                           reconcile_only=args.reconcile_only)
 
     if not files:
         logger.info("No files need conversion")

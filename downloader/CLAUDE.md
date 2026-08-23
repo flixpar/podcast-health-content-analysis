@@ -37,11 +37,29 @@ python main.py --phase 1 --limit 100
 # Phase 2: Parse RSS feeds and download audio files
 python main.py --phase 2 --max-episodes 5
 
+# Phase 2 (discovery only): record new episode metadata, download nothing
+python main.py --phase 2 --discover-only
+
+# Phase 2b: download episodes already in the DB (the resumable path)
+python main.py --phase 2b
+
 # Phase 3: Transcribe downloaded audio files
 python main.py --phase 3
 
 # Run complete pipeline (will prompt before transcription)
 python main.py --phase all --limit 100 --max-episodes 5
+```
+
+To resume a partial download, use `--phase 2b`, not `--phase 2`. Phase 2
+re-parses every feed; Phase 2b works straight off `episodes.status`.
+
+## Maintenance Tools
+
+```bash
+python tools/audit_audio.py --fix          # reconcile DB against disk, re-queue broken rows
+python tools/fetch_rss_transcripts.py      # ingest transcripts publishers already provide
+python tools/ab_format_test.py             # measure MP3 vs Opus transcription divergence
+python convert_existing_audio.py --reconcile-only   # record conversions an interrupted run left
 ```
 
 ## Testing
@@ -71,6 +89,43 @@ The system is built around a phased execution model in `main.py`:
 3. **Phase 3 (Transcription)**: Multi-GPU batch transcription with automatic chunking for long audio
 
 Each phase updates the SQLite database with status tracking, enabling resume capability.
+
+### Concurrency Rules (important)
+
+- **Never share a `sqlite3.Connection` between threads.** Phase 2 runs one
+  worker per podcast; each calls `self._thread_conn()` for a connection of its
+  own. The database is opened in WAL mode with a 60s busy timeout.
+- **Commit per episode, not per feed.** A feed can hold thousands of episodes;
+  one long-lived transaction meant a single failure discarded all of it.
+- **`DiskSpaceError` is fatal on purpose.** It sets `self._stop_requested`, and
+  every worker winds down. Do not catch and continue -- a full disk previously
+  produced thousands of zero-byte files and a corrupted SQLite session.
+
+### Storage Format
+
+Audio is archived as 24kbps mono Opus/OGG. This was validated with
+`tools/ab_format_test.py` before adopting it: transcribing the same audio from MP3
+and from its Opus re-encode diverges by 1.26% WER / 0.85% CER, against an 82.7%
+size saving. That is well under Parakeet's own ~6% benchmark WER, so re-encoding
+is treated as ASR-transparent. Re-run the tool before changing `bitrate` in
+`config.json`.
+
+Two rules follow from how that measurement went wrong the first time:
+
+- Never compare windows obtained by **seeking** into both formats -- librosa's
+  `offset=` is frame-approximate on MP3 and sample-accurate on Opus, which made an
+  early run report 24% WER from pure misalignment. Decode fully, slice identical
+  sample ranges, and cross-correlate to confirm.
+- Never delete an original on the strength of an **unverified** conversion. Always
+  compare the encoded duration against the source first.
+
+### Audio File Naming
+
+New downloads are named `{normalized-title}_{md5(guid)[:8]}.{ext}`. Most of the
+existing archive predates the GUID hash and uses `{normalized-title}.{ext}`, so
+`AudioDownloader._find_existing()` checks both schemes and both extensions
+before deciding an episode needs downloading. Checking only the configured
+output extension would treat the whole existing MP3 archive as missing.
 
 ### Database Schema
 
@@ -115,6 +170,7 @@ Key relationships:
 - **Audio preprocessing**: Converts to 16kHz mono WAV (required by Parakeet) using librosa/pydub
 - **Output normalization**: `_normalize_transcription_output()` handles various NeMo return formats (strings, Hypothesis objects, dicts)
 - **Known issue**: For long audio chunks, NeMo may return Hypothesis objects even when `return_hypotheses=False`, causing TypeError when joining text
+- **Preprocessing cache**: `/tmp/processed_audio/` is keyed by filename stem *plus a hash of the full path*. The stem alone collides between identically titled episodes in different podcasts, and between an episode's `.mp3` and `.ogg`.
 
 **Transcript Storage (`transcript_processor.py`)**
 - JSONL format with zstd compression (level 3 by default)

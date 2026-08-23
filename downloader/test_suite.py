@@ -19,8 +19,23 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from podcast_fetcher import PodcastFetcher
 from rss_parser import RSSParser
-from audio_downloader import AudioDownloader
+from audio_downloader import AudioDownloader, DiskSpaceError, MIN_AUDIO_BYTES
 from transcript_processor import TranscriptProcessor
+from utils import normalize_id
+
+
+class FeedDict(dict):
+    """Stand-in for feedparser's result objects, which allow both dict and
+    attribute access. Plain Mock objects have neither .get() nor real keys."""
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+    def __getattr__(self, name):
+        try:
+            return self[name]
+        except KeyError as e:
+            raise AttributeError(name) from e
 
 
 class TestPodcastFetcher(unittest.TestCase):
@@ -60,23 +75,25 @@ class TestPodcastFetcher(unittest.TestCase):
     @patch('podcast_fetcher.PodcastFetcher.execute_query')
     def test_get_top_health_podcasts(self, mock_execute):
         """Test fetching top health podcasts"""
-        # Mock GraphQL response
+        # Mock GraphQL response in the shape the charts query actually returns
         mock_execute.return_value = {
             'data': {
-                'podcasts': {
-                    'edges': [
+                'charts': {
+                    'data': [
                         {
-                            'node': {
+                            'podcast': {
                                 'id': '123',
                                 'title': 'Test Health Podcast',
                                 'description': 'A test podcast about health',
-                                'rssUrl': 'https://example.com/feed.xml'
-                            }
+                                'rssUrl': 'https://example.com/feed.xml',
+                                'categories': [{'title': 'Health & Fitness'}]
+                            },
+                            'position': 1
                         }
                     ],
-                    'pageInfo': {
-                        'hasNextPage': False,
-                        'endCursor': None
+                    'paginatorInfo': {
+                        'hasMorePages': False,
+                        'currentPage': 1
                     }
                 }
             }
@@ -119,15 +136,17 @@ class TestRSSParser(unittest.TestCase):
     def test_parse_feed(self, mock_parse):
         """Test RSS feed parsing"""
         # Mock feedparser response
+        # feedparser returns dict-like objects supporting both .get() and
+        # attribute access, so the fixtures have to behave the same way.
         mock_feed = Mock()
         mock_feed.bozo = False
-        mock_feed.feed = Mock(
+        mock_feed.feed = FeedDict(
             title='Test Podcast',
             description='Test Description',
             language='en'
         )
         mock_feed.entries = [
-            Mock(
+            FeedDict(
                 title='Episode 1',
                 description='Episode Description',
                 enclosures=[{
@@ -184,17 +203,52 @@ class TestAudioDownloader(unittest.TestCase):
     @patch('audio_downloader.AudioDownloader._download_with_resume')
     def test_download_episode(self, mock_download):
         """Test episode downloading"""
-        mock_download.return_value = True
-        
+        def fake_download(url, file_path, **kwargs):
+            file_path.write_bytes(b'\x00' * (MIN_AUDIO_BYTES + 1))
+            return True
+
+        mock_download.side_effect = fake_download
+
         result = self.downloader.download_episode(
             'https://example.com/episode.mp3',
             'Test Podcast',
             'Episode 1',
             'guid-123'
         )
-        
+
         self.assertIsNotNone(result)
-        self.assertTrue(Path(result).parent.exists())
+        self.assertTrue(result['file_path'].exists())
+        self.assertFalse(result['is_compressed'])
+
+    def test_download_episode_skips_existing_mp3_when_compressing(self):
+        """An existing .mp3 counts as downloaded even when output is .ogg.
+
+        Checking only for the configured output extension would treat the whole
+        existing MP3 archive as missing and re-download it.
+        """
+        downloader = AudioDownloader(Path(self.temp_dir), max_workers=1,
+                                     compression_config={'enabled': True})
+        podcast_dir = Path(self.temp_dir) / normalize_id('Test Podcast')
+        podcast_dir.mkdir(parents=True, exist_ok=True)
+        legacy = podcast_dir / f"{normalize_id('Episode 1')}.mp3"
+        legacy.write_bytes(b'\x00' * (MIN_AUDIO_BYTES + 1))
+
+        with patch.object(AudioDownloader, '_download_with_resume') as mock_download:
+            result = downloader.download_episode(
+                'https://example.com/episode.mp3', 'Test Podcast', 'Episode 1', 'guid-123'
+            )
+
+        mock_download.assert_not_called()
+        self.assertEqual(result['file_path'], legacy)
+
+    def test_download_halts_when_disk_is_full(self):
+        """Downloads stop loudly rather than filling the volume."""
+        downloader = AudioDownloader(Path(self.temp_dir), max_workers=1,
+                                     min_free_gb=10 ** 9)
+        with self.assertRaises(DiskSpaceError):
+            downloader.download_episode(
+                'https://example.com/episode.mp3', 'Test Podcast', 'Episode 2', 'guid-456'
+            )
     
     def test_verify_audio_file(self):
         """Test audio file verification"""
@@ -333,8 +387,8 @@ class TestIntegration(unittest.TestCase):
     
     def setUp(self):
         """Set up test environment"""
-        self.temp_dir = tempfile.mkdtemp()
-        self.data_dir = Path(self.temp_dir) / 'data'
+        self.temp_dir = Path(tempfile.mkdtemp())
+        self.data_dir = self.temp_dir / 'data'
         self.data_dir.mkdir()
         
         # Create subdirectories
@@ -373,10 +427,16 @@ class TestIntegration(unittest.TestCase):
         }
         
         # Mock download response
-        mock_download.return_value = self.data_dir / 'audio' / 'test.mp3'
+        mock_download.return_value = {
+            'file_path': self.data_dir / 'audio' / 'test.mp3',
+            'original_size_mb': 10.0,
+            'compressed_size_mb': 10.0,
+            'compression_ratio': 1.0,
+            'is_compressed': False,
+        }
         
         # Import main pipeline
-        from podcast_transcription_main import PodcastPipeline
+        from main import PodcastPipeline
         
         # Create config
         config = {
@@ -402,18 +462,22 @@ class TestIntegration(unittest.TestCase):
         with open(config_path, 'w') as f:
             json.dump(config, f)
         
-        # Initialize pipeline with test config
-        with patch('podcast_transcription_main.DATA_DIR', self.data_dir):
-            with patch('podcast_transcription_main.DB_PATH', self.data_dir / 'test.db'):
-                pipeline = PodcastPipeline(config_path)
-                
+        # Initialize pipeline with test config, pointed at the temp data dir
+        with patch('main.DATA_DIR', self.data_dir), \
+                patch('main.AUDIO_DIR', self.data_dir / 'audio'), \
+                patch('main.TRANSCRIPT_DIR', self.data_dir / 'transcripts'), \
+                patch('main.DB_PATH', self.data_dir / 'test.db'):
+            pipeline = PodcastPipeline(config_path)
+            try:
                 # Run phase 1
                 podcasts = pipeline.phase1_fetch_metadata(limit=1)
                 self.assertEqual(len(podcasts), 1)
-                
+
                 # Run phase 2
                 stats = pipeline.phase2_download_audio(max_episodes_per_podcast=1)
                 self.assertIn('total_episodes', stats)
+            finally:
+                pipeline.cleanup()
 
 
 class TestPerformance(unittest.TestCase):
@@ -492,7 +556,13 @@ class TestPerformance(unittest.TestCase):
             
             # Mock download function
             with patch.object(downloader, 'download_episode') as mock_download:
-                mock_download.return_value = Path(temp_dir) / 'test.mp3'
+                mock_download.return_value = {
+                    'file_path': Path(temp_dir) / 'test.mp3',
+                    'original_size_mb': 10.0,
+                    'compressed_size_mb': 10.0,
+                    'compression_ratio': 1.0,
+                    'is_compressed': False,
+                }
                 
                 # Test batch download
                 start_time = time.time()

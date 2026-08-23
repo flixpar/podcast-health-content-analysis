@@ -4,8 +4,10 @@ Handles parallel downloading of podcast audio files with resume support
 """
 
 import os
+import errno
 import logging
 import hashlib
+import shutil
 import time
 import subprocess
 from pathlib import Path
@@ -20,11 +22,50 @@ from utils import normalize_id
 
 logger = logging.getLogger(__name__)
 
+# Audio formats we may already have on disk for an episode, in preference order.
+AUDIO_EXTENSIONS = ('.ogg', '.mp3')
+
+# A real podcast episode is never this small; anything under it is a failed download.
+MIN_AUDIO_BYTES = 100 * 1024
+
+# Downloads land here first and are renamed on success, so a partial file can
+# never be mistaken for a complete one.
+PARTIAL_SUFFIX = '.part'
+
+# A re-encode must retain at least this fraction of the source duration before
+# we are willing to delete the original.
+DURATION_TOLERANCE = 0.98
+
+
+def probe_duration(path: Path) -> Optional[float]:
+    """Decoded duration in seconds, or None if ffprobe cannot read the file."""
+    try:
+        out = subprocess.run(
+            ['ffprobe', '-v', 'error', '-show_entries', 'format=duration',
+             '-of', 'default=noprint_wrappers=1:nokey=1', str(path)],
+            capture_output=True, text=True, timeout=120,
+        )
+        if out.returncode != 0:
+            return None
+        value = out.stdout.strip()
+        return float(value) if value and value != 'N/A' else None
+    except (subprocess.TimeoutExpired, ValueError):
+        return None
+
+
+class DiskSpaceError(RuntimeError):
+    """Raised when free space drops below the configured floor.
+
+    A previous run filled the disk and then wrote thousands of zero-byte files
+    while every write failed. Halting loudly is far cheaper to recover from.
+    """
+
 
 class AudioDownloader:
     """Handles downloading podcast audio files with parallelization and resume support"""
     
-    def __init__(self, output_dir: Path, max_workers: int = 4, compression_config: Optional[Dict] = None):
+    def __init__(self, output_dir: Path, max_workers: int = 4, compression_config: Optional[Dict] = None,
+                 min_free_gb: float = 50.0):
         """
         Initialize the audio downloader
 
@@ -32,12 +73,15 @@ class AudioDownloader:
             output_dir: Directory to save audio files
             max_workers: Maximum number of parallel downloads
             compression_config: Optional compression configuration dict
+            min_free_gb: Halt downloading when free space on the audio volume
+                falls below this many GB
         """
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.max_workers = max_workers
         self.compression_config = compression_config or {}
-        
+        self.min_free_gb = min_free_gb
+
         # Setup session with retry strategy
         self.session = requests.Session()
         retry_strategy = Retry(
@@ -87,43 +131,39 @@ class AudioDownloader:
         # Create normalized IDs for folder and filename base
         podcast_id = normalize_id(podcast_title)
         episode_id = normalize_id(episode_title)
-        
+
         # Create podcast directory
         podcast_dir = self.output_dir / podcast_id
-        podcast_dir.mkdir(exist_ok=True)
-        
-        # Determine file extension based on compression config
+        podcast_dir.mkdir(parents=True, exist_ok=True)
+
         compression_enabled = self.compression_config.get('enabled', False)
-        file_ext = '.ogg' if compression_enabled else '.mp3'
 
-        # Generate filename
-        if episode_guid:
-            # Use hash of GUID for uniqueness
-            guid_hash = hashlib.md5(episode_guid.encode()).hexdigest()[:8]
-            filename = f"{episode_id}_{guid_hash}{file_ext}"
-        else:
-            filename = f"{episode_id}{file_ext}"
-
-        file_path = podcast_dir / filename
-
-        # Check if already downloaded (check both .mp3 and .ogg)
-        if file_path.exists() and file_path.stat().st_size > 0:
-            logger.debug(f"File already exists: {file_path}")
+        existing = self._find_existing(podcast_dir, episode_id, episode_guid)
+        if existing:
+            logger.debug(f"File already exists: {existing}")
             self.stats['skipped'] += 1
-            file_size_mb = file_path.stat().st_size / (1024 ** 2)
+            file_size_mb = existing.stat().st_size / (1024 ** 2)
             return {
-                'file_path': file_path,
+                'file_path': existing,
                 'original_size_mb': file_size_mb,
                 'compressed_size_mb': file_size_mb,
                 'compression_ratio': 1.0,
-                'is_compressed': file_path.suffix == '.ogg'
+                'is_compressed': existing.suffix == '.ogg'
             }
-        
+
+        self._check_disk_space()
+
+        # New downloads always carry the GUID hash, which keeps episodes with
+        # identical titles from overwriting each other.
+        base = self._filename_base(episode_id, episode_guid)
+        mp3_path = podcast_dir / f"{base}.mp3"
+        file_path = podcast_dir / f"{base}{'.ogg' if compression_enabled else '.mp3'}"
+
         try:
             logger.info(f"Downloading: {episode_title} from {podcast_title}")
-            
-            # Download with resume support (always download as original format first)
-            temp_file_path = file_path.with_suffix('.mp3') if file_ext == '.ogg' else file_path
+
+            # Always fetch the original format first; re-encoding happens after.
+            temp_file_path = mp3_path
             downloaded = self._download_with_resume(audio_url, temp_file_path)
 
             if downloaded:
@@ -172,18 +212,53 @@ class AudioDownloader:
                 self.stats['failed'] += 1
                 return None
                 
+        except DiskSpaceError:
+            raise
+
         except Exception as e:
             logger.error(f"Failed to download {episode_title}: {str(e)}")
             self.stats['failed'] += 1
-            
-            # Clean up partial files
-            if file_path.exists():
-                file_path.unlink()
-            temp_mp3 = file_path.with_suffix('.mp3')
-            if temp_mp3.exists() and temp_mp3 != file_path:
-                temp_mp3.unlink()
+
+            # Clean up anything incomplete this attempt left behind
+            for leftover in (file_path, mp3_path, mp3_path.with_suffix('.mp3' + PARTIAL_SUFFIX)):
+                if leftover.exists() and leftover.stat().st_size < MIN_AUDIO_BYTES:
+                    leftover.unlink()
 
             return None
+
+    def _filename_base(self, episode_id: str, episode_guid: Optional[str]) -> str:
+        """Filename stem for an episode, GUID-hashed when a GUID is available."""
+        if episode_guid:
+            guid_hash = hashlib.md5(episode_guid.encode()).hexdigest()[:8]
+            return f"{episode_id}_{guid_hash}"
+        return episode_id
+
+    def _find_existing(self, podcast_dir: Path, episode_id: str,
+                       episode_guid: Optional[str]) -> Optional[Path]:
+        """
+        Return an already-downloaded file for this episode, if there is one.
+
+        Checks both the GUID-hashed name used for new downloads and the legacy
+        title-only name most of the archive was written under, in both formats.
+        Checking .mp3 as well as .ogg matters: with compression enabled, looking
+        only for .ogg would treat the entire existing MP3 archive as missing and
+        re-download it.
+        """
+        for base in dict.fromkeys([self._filename_base(episode_id, episode_guid), episode_id]):
+            for ext in AUDIO_EXTENSIONS:
+                candidate = podcast_dir / f"{base}{ext}"
+                if candidate.exists() and candidate.stat().st_size >= MIN_AUDIO_BYTES:
+                    return candidate
+        return None
+
+    def _check_disk_space(self):
+        """Halt before writing when the audio volume is nearly full."""
+        free_gb = shutil.disk_usage(self.output_dir).free / (1024 ** 3)
+        if free_gb < self.min_free_gb:
+            raise DiskSpaceError(
+                f"Only {free_gb:.1f}GB free on {self.output_dir} "
+                f"(floor is {self.min_free_gb}GB). Stopping before the disk fills."
+            )
 
     def _reencode_audio(self, input_path: Path, output_path: Path) -> Optional[Dict]:
         """
@@ -232,7 +307,13 @@ class AudioDownloader:
 
             if result.returncode != 0:
                 logger.error(f"ffmpeg failed with return code {result.returncode}")
-                logger.error(f"stderr: {result.stderr}")
+                logger.error(f"stderr: {result.stderr.strip()[-500:]}")
+                # ffmpeg creates the output file before it encodes anything, so a
+                # failed run leaves an empty file behind. Left in place, that file
+                # looks like a successful conversion to every later pass.
+                output_path.unlink(missing_ok=True)
+                if 'No space left on device' in result.stderr:
+                    raise DiskSpaceError(f"Disk full while re-encoding {input_path}")
                 return None
 
             # Check output file exists and has reasonable size
@@ -247,6 +328,21 @@ class AudioDownloader:
                 output_path.unlink()
                 return None
 
+            # The original gets deleted on the strength of this file, so make
+            # sure it actually decodes and holds the whole episode first.
+            encoded_duration = probe_duration(output_path)
+            if encoded_duration is None:
+                logger.error(f"Re-encoded file is not decodable: {output_path}")
+                output_path.unlink(missing_ok=True)
+                return None
+
+            source_duration = probe_duration(input_path)
+            if source_duration and encoded_duration < source_duration * DURATION_TOLERANCE:
+                logger.error(f"Re-encoded file is short: {encoded_duration:.0f}s vs "
+                             f"source {source_duration:.0f}s")
+                output_path.unlink(missing_ok=True)
+                return None
+
             logger.info(f"Re-encoded to {compressed_size_mb:.1f}MB")
 
             return {
@@ -256,12 +352,16 @@ class AudioDownloader:
 
         except subprocess.TimeoutExpired:
             logger.error(f"ffmpeg timeout after 600 seconds")
+            output_path.unlink(missing_ok=True)
             return None
         except FileNotFoundError:
             logger.error("ffmpeg not found. Please install ffmpeg.")
             return None
+        except DiskSpaceError:
+            raise
         except Exception as e:
             logger.error(f"Re-encoding error: {str(e)}")
+            output_path.unlink(missing_ok=True)
             return None
 
     def download_episodes_batch(self, episodes: List[Dict]) -> List[Dict]:
@@ -306,11 +406,12 @@ class AudioDownloader:
                     episode = future_to_episode[future]
                     
                     try:
-                        file_path = future.result(timeout=300)
+                        download = future.result()
                         results.append({
                             'episode': episode,
-                            'file_path': file_path,
-                            'success': file_path is not None
+                            'file_path': download['file_path'] if download else None,
+                            'download': download,
+                            'success': download is not None
                         })
                     except Exception as e:
                         logger.error(f"Download failed for {episode['episode_title']}: {str(e)}")
@@ -346,17 +447,21 @@ class AudioDownloader:
         Returns:
             True if successful, False otherwise
         """
-        # Check if partial download exists
+        # Download into a sidecar file and only rename on success. A complete
+        # file at the final path is therefore never appended to or overwritten.
+        final_path = file_path
+        partial_path = file_path.with_suffix(file_path.suffix + PARTIAL_SUFFIX)
+
         resume_header = {}
         mode = 'wb'
         resume_pos = 0
-        
-        if file_path.exists():
-            resume_pos = file_path.stat().st_size
+
+        if partial_path.exists():
+            resume_pos = partial_path.stat().st_size
             resume_header = {'Range': f'bytes={resume_pos}-'}
             mode = 'ab'
             logger.debug(f"Resuming download from byte {resume_pos}")
-        
+
         try:
             # Make request
             response = self.session.get(
@@ -374,6 +479,14 @@ class AudioDownloader:
                     logger.warning("Server doesn't support resume, restarting download")
                     mode = 'wb'
                     resume_pos = 0
+                elif response.status_code == 416:
+                    # Requested range past end of file: the partial file is
+                    # already the whole thing, or the remote file shrank.
+                    logger.warning("Server rejected resume range, restarting download")
+                    mode = 'wb'
+                    resume_pos = 0
+                    response = self.session.get(url, stream=True, timeout=timeout)
+                    response.raise_for_status()
                 else:
                     response.raise_for_status()
             else:
@@ -388,10 +501,10 @@ class AudioDownloader:
                     total_size = int(content_range.split('/')[-1])
             
             # Download with progress bar
-            with open(file_path, mode) as f:
-                with tqdm(total=total_size, initial=resume_pos, 
+            with open(partial_path, mode) as f:
+                with tqdm(total=total_size, initial=resume_pos,
                          unit='B', unit_scale=True, unit_divisor=1024,
-                         desc=file_path.name[:30]) as pbar:
+                         desc=final_path.name[:30]) as pbar:
                     
                     for chunk in response.iter_content(chunk_size=chunk_size):
                         if chunk:
@@ -399,18 +512,27 @@ class AudioDownloader:
                             pbar.update(len(chunk))
                             self.stats['total_bytes'] += len(chunk)
             
-            # Verify download
-            final_size = file_path.stat().st_size
+            # Verify download before promoting the partial file
+            final_size = partial_path.stat().st_size
             if total_size > 0 and final_size < total_size * 0.95:
-                logger.warning(f"Downloaded file may be incomplete: {final_size}/{total_size} bytes")
+                logger.warning(f"Downloaded file is incomplete: {final_size}/{total_size} bytes")
                 return False
-            
+            if final_size < MIN_AUDIO_BYTES:
+                logger.warning(f"Downloaded file is implausibly small: {final_size} bytes")
+                partial_path.unlink()
+                return False
+
+            partial_path.replace(final_path)
             return True
-            
+
         except requests.exceptions.RequestException as e:
             logger.error(f"Request failed: {str(e)}")
             return False
         except IOError as e:
+            # ENOSPC lands here. Surface it instead of logging thousands of
+            # identical failures while writing empty files.
+            if getattr(e, 'errno', None) == errno.ENOSPC:
+                raise DiskSpaceError(f"Disk full while writing {final_path}") from e
             logger.error(f"File I/O error: {str(e)}")
             return False
     

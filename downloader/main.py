@@ -10,12 +10,15 @@ import json
 import logging
 import argparse
 import sqlite3
+import threading
 import zstandard as zstd
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 import multiprocessing as mp
+
+from audio_downloader import DiskSpaceError
 
 # Setup logging
 logging.basicConfig(
@@ -46,6 +49,17 @@ class PodcastPipeline:
     def __init__(self, config_path: Optional[Path] = None):
         """Initialize the pipeline with configuration"""
         self.config = self._load_config(config_path or CONFIG_FILE)
+
+        # SQLite connections are not safe to share between threads. Phase 2 runs
+        # one worker per podcast, so each thread gets its own connection via
+        # _thread_conn(); self.db_conn belongs to the thread that built the
+        # pipeline. Sharing one connection is what produced the "cannot start a
+        # transaction within a transaction" and "API misuse" errors in the
+        # 2025-10-14 run.
+        self._local = threading.local()
+        # Set when a worker hits an unrecoverable condition (disk full); every
+        # other worker checks it and winds down instead of piling on failures.
+        self._stop_requested = threading.Event()
         self.db_conn = self._init_database()
         
         # Initialize components (imported from separate modules)
@@ -69,7 +83,8 @@ class PodcastPipeline:
         self.downloader = AudioDownloader(
             output_dir=AUDIO_DIR,
             max_workers=self.config.get('download', {}).get('max_workers', 4),
-            compression_config=self.config.get('audio_compression', {})
+            compression_config=self.config.get('audio_compression', {}),
+            min_free_gb=self.config.get('download', {}).get('min_free_gb', 50)
         )
         self.transcript_processor = TranscriptProcessor(
             transcript_dir=TRANSCRIPT_DIR,
@@ -121,9 +136,29 @@ class PodcastPipeline:
             }
         }
     
+    def _connect(self) -> sqlite3.Connection:
+        """Open a connection configured for concurrent phase-2 workers.
+
+        WAL lets readers and one writer proceed without blocking each other, and
+        busy_timeout makes a contended write wait rather than fail outright.
+        """
+        conn = sqlite3.connect(str(DB_PATH), timeout=60.0)
+        conn.execute("PRAGMA journal_mode=WAL")
+        conn.execute("PRAGMA synchronous=NORMAL")
+        conn.execute("PRAGMA busy_timeout=60000")
+        return conn
+
+    def _thread_conn(self) -> sqlite3.Connection:
+        """Connection private to the calling thread, created on first use."""
+        conn = getattr(self._local, 'conn', None)
+        if conn is None:
+            conn = self._connect()
+            self._local.conn = conn
+        return conn
+
     def _init_database(self) -> sqlite3.Connection:
         """Initialize SQLite database with required tables"""
-        conn = sqlite3.connect(str(DB_PATH), check_same_thread=False)
+        conn = self._connect()
         cursor = conn.cursor()
         
         # Create podcasts table
@@ -289,17 +324,24 @@ class PodcastPipeline:
             logger.error(f"Error in Phase 1: {str(e)}")
             raise
     
-    def phase2_download_audio(self, max_episodes_per_podcast: Optional[int] = None) -> Dict:
+    def phase2_download_audio(self, max_episodes_per_podcast: Optional[int] = None,
+                              discover_only: bool = False) -> Dict:
         """
         Phase 2: Parse RSS feeds and download audio files
         
         Args:
             max_episodes_per_podcast: Maximum episodes to download per podcast
-            
+            discover_only: Record episode metadata but download nothing. Feed
+                discovery is fast and cheap; downloading is neither. Splitting
+                them means a refresh can catalogue every new episode in minutes,
+                and `download_pending` then works through the backlog with full
+                resume support.
+
         Returns:
             Dictionary with download statistics
         """
-        logger.info("Starting Phase 2: Parsing RSS and downloading audio")
+        mode = "cataloguing episodes" if discover_only else "parsing RSS and downloading audio"
+        logger.info(f"Starting Phase 2: {mode}")
         
         if max_episodes_per_podcast is None:
             max_episodes_per_podcast = self.config['download']['max_episodes_per_podcast']
@@ -316,57 +358,146 @@ class PodcastPipeline:
         stats = {
             'total_podcasts': len(podcasts),
             'total_episodes': 0,
+            'new_episodes': 0,
             'downloaded': 0,
             'has_transcript': 0,
             'errors': 0
         }
+        self._stop_requested.clear()
         
         with ThreadPoolExecutor(max_workers=self.config['processing']['max_parallel_podcasts']) as executor:
             futures = []
             for podcast_id, podchaser_id, title, rss_url in podcasts:
                 future = executor.submit(
                     self._process_podcast_rss,
-                    podcast_id, title, rss_url, max_episodes_per_podcast
+                    podcast_id, title, rss_url, max_episodes_per_podcast,
+                    discover_only
                 )
                 futures.append(future)
             
             for future in futures:
                 try:
-                    result = future.result(timeout=600)
+                    result = future.result()
                     stats['total_episodes'] += result['total_episodes']
+                    stats['new_episodes'] += result['new_episodes']
                     stats['downloaded'] += result['downloaded']
                     stats['has_transcript'] += result['has_transcript']
                 except Exception as e:
                     logger.error(f"Error processing podcast: {str(e)}")
                     stats['errors'] += 1
-        
+
+        if self._stop_requested.is_set():
+            logger.error("Phase 2 stopped early -- free disk space and re-run")
         logger.info(f"Phase 2 complete. Stats: {stats}")
         return stats
     
+    def download_pending(self, limit: Optional[int] = None, include_errors: bool = True,
+                         max_workers: Optional[int] = None) -> Dict:
+        """
+        Download episodes already recorded in the database but not yet fetched.
+
+        Phase 2 discovers episodes by re-parsing every RSS feed, which is slow
+        and only reaches what the feed still lists. Once an episode row exists,
+        this is the direct way to finish the job: it works straight off
+        `status`, so an interrupted run resumes exactly where it stopped.
+        """
+        statuses = ['pending'] + (['error'] if include_errors else [])
+        placeholders = ','.join('?' * len(statuses))
+
+        cursor = self.db_conn.cursor()
+        cursor.execute(f"""
+            SELECT e.id, e.episode_guid, e.title, e.audio_url, p.id, p.title
+            FROM episodes e
+            JOIN podcasts p ON p.id = e.podcast_id
+            WHERE e.status IN ({placeholders})
+              AND e.has_rss_transcript = 0
+              AND e.audio_url IS NOT NULL AND e.audio_url != ''
+            ORDER BY e.id
+            {'LIMIT ?' if limit else ''}
+        """, statuses + ([limit] if limit else []))
+        pending = cursor.fetchall()
+
+        logger.info(f"Downloading {len(pending)} pending episodes")
+        stats = {'total': len(pending), 'downloaded': 0, 'failed': 0, 'skipped_disk_full': 0}
+        if not pending:
+            return stats
+
+        self._stop_requested.clear()
+        workers = max_workers or self.config.get('download', {}).get('max_workers', 4)
+
+        def fetch(row) -> str:
+            episode_id, guid, ep_title, audio_url, podcast_id, podcast_title = row
+            if self._stop_requested.is_set():
+                return 'skipped'
+
+            conn = self._thread_conn()
+            cur = conn.cursor()
+            try:
+                download_result = self.downloader.download_episode(
+                    audio_url, podcast_title=podcast_title,
+                    episode_title=ep_title or 'unknown', episode_guid=guid
+                )
+            except DiskSpaceError as e:
+                logger.error(f"Halting: {e}")
+                self._stop_requested.set()
+                return 'skipped'
+
+            if download_result:
+                self._record_download(cur, podcast_id, guid, download_result)
+                conn.commit()
+                return 'downloaded'
+
+            cur.execute("""
+                UPDATE episodes SET status = 'error', error_message = 'download failed'
+                WHERE id = ?
+            """, (episode_id,))
+            conn.commit()
+            return 'failed'
+
+        with ThreadPoolExecutor(max_workers=workers) as executor:
+            for outcome in executor.map(fetch, pending):
+                if outcome == 'downloaded':
+                    stats['downloaded'] += 1
+                elif outcome == 'failed':
+                    stats['failed'] += 1
+                else:
+                    stats['skipped_disk_full'] += 1
+
+        if self._stop_requested.is_set():
+            logger.error("Stopped early on low disk space -- free space and re-run")
+        logger.info(f"Pending download complete. Stats: {stats}")
+        return stats
+
     def _process_podcast_rss(self, podcast_id: int, title: str, rss_url: str, 
-                            max_episodes: int) -> Dict:
+                            max_episodes: int, discover_only: bool = False) -> Dict:
         """Process a single podcast's RSS feed"""
         logger.info(f"Processing RSS for podcast: {title}")
-        
+
         result = {
             'total_episodes': 0,
             'downloaded': 0,
-            'has_transcript': 0
+            'has_transcript': 0,
+            'new_episodes': 0,
         }
-        
+
+        conn = self._thread_conn()
+        cursor = conn.cursor()
+
         try:
             # Parse RSS feed
             feed_data = self.rss_parser.parse_feed(rss_url)
             episodes = feed_data.get('episodes', [])[:max_episodes]
             result['total_episodes'] = len(episodes)
-            
-            cursor = self.db_conn.cursor()
-            
+
             for episode in episodes:
+                if self._stop_requested.is_set():
+                    logger.warning(f"Stopping RSS processing for {title}")
+                    break
+
                 # Check if episode has transcript in RSS
                 has_transcript = bool(episode.get('transcript_url'))
                 result['has_transcript'] += int(has_transcript)
-                
+
                 # Store episode in database
                 cursor.execute("""
                     INSERT OR IGNORE INTO episodes
@@ -386,65 +517,100 @@ class PodcastPipeline:
                     has_transcript,
                     json.dumps(episode)
                 ))
-                
+                result['new_episodes'] += cursor.rowcount
+
+                # Commit the episode row before the slow part, so a crash mid
+                # download never loses the feed metadata we just parsed.
+                conn.commit()
+
                 # Download audio if no transcript exists
+                if discover_only:
+                    continue
                 if not has_transcript and episode.get('audio_url'):
                     try:
                         download_result = self.downloader.download_episode(
                             episode['audio_url'],
                             podcast_title=title,
-                            episode_title=episode.get('title', 'unknown')
+                            episode_title=episode.get('title', 'unknown'),
+                            episode_guid=episode.get('guid')
                         )
 
                         if download_result:
+                            self._record_download(cursor, podcast_id, episode['guid'],
+                                                  download_result)
+                            result['downloaded'] += 1
+                        else:
                             cursor.execute("""
                                 UPDATE episodes
-                                SET audio_file_path = ?,
-                                    status = 'downloaded',
-                                    original_file_size_mb = ?,
-                                    compressed_file_size_mb = ?,
-                                    compression_ratio = ?,
-                                    is_compressed = ?
-                                WHERE episode_guid = ?
-                            """, (
-                                str(download_result['file_path']),
-                                download_result.get('original_size_mb'),
-                                download_result.get('compressed_size_mb'),
-                                download_result.get('compression_ratio'),
-                                download_result.get('is_compressed', False),
-                                episode['guid']
-                            ))
+                                SET status = 'error', error_message = 'download failed'
+                                WHERE podcast_id = ? AND episode_guid = ?
+                            """, (podcast_id, episode['guid']))
 
-                            result['downloaded'] += 1
-                        
+                    except DiskSpaceError:
+                        raise
                     except Exception as e:
                         logger.error(f"Failed to download episode: {str(e)}")
                         cursor.execute("""
                             UPDATE episodes 
                             SET status = 'error', error_message = ?
-                            WHERE episode_guid = ?
-                        """, (str(e), episode['guid']))
-            
-            # Update podcast status
+                            WHERE podcast_id = ? AND episode_guid = ?
+                        """, (str(e), podcast_id, episode['guid']))
+
+                    # One transaction per episode. The previous code held a
+                    # single transaction open for a whole feed (up to 5000
+                    # episodes), so any failure discarded all of it.
+                    conn.commit()
+
+            # Update podcast status. In discover mode the feed was read but no
+            # audio was fetched, so the podcast is not 'downloaded' yet.
             cursor.execute("""
                 UPDATE podcasts 
-                SET status = 'downloaded', processed_at = CURRENT_TIMESTAMP
+                SET status = ?, processed_at = CURRENT_TIMESTAMP
                 WHERE id = ?
-            """, (podcast_id,))
-            
-            self.db_conn.commit()
-            
+            """, ('pending' if discover_only else 'downloaded', podcast_id))
+
+            conn.commit()
+
+        except DiskSpaceError as e:
+            # Nothing downstream can succeed until space is freed; stop everything.
+            logger.error(f"Halting: {e}")
+            self._stop_requested.set()
+            conn.rollback()
+
         except Exception as e:
             logger.error(f"Error processing RSS for {title}: {str(e)}")
-            cursor = self.db_conn.cursor()
+            conn.rollback()
             cursor.execute("""
                 UPDATE podcasts 
                 SET status = 'error', processed_at = CURRENT_TIMESTAMP
                 WHERE id = ?
             """, (podcast_id,))
-            self.db_conn.commit()
-        
+            conn.commit()
+
         return result
+
+    @staticmethod
+    def _record_download(cursor, podcast_id: int, episode_guid: str, download_result: Dict):
+        """Write a successful download's path and size metadata onto the episode row."""
+        cursor.execute("""
+            UPDATE episodes
+            SET audio_file_path = ?,
+                status = 'downloaded',
+                error_message = NULL,
+                original_file_size_mb = ?,
+                compressed_file_size_mb = ?,
+                compression_ratio = ?,
+                is_compressed = ?
+            WHERE podcast_id = ? AND episode_guid = ?
+        """, (
+            str(download_result['file_path']),
+            download_result.get('original_size_mb'),
+            download_result.get('compressed_size_mb'),
+            download_result.get('compression_ratio'),
+            download_result.get('is_compressed', False),
+            podcast_id,
+            episode_guid,
+        ))
     
     def phase3_transcribe(self, batch_size: Optional[int] = None, 
                          use_gpu_ids: Optional[List[int]] = None) -> Dict:
@@ -710,14 +876,23 @@ class PodcastPipeline:
 def main():
     """Main entry point for the script"""
     parser = argparse.ArgumentParser(description='Podcast Transcription Pipeline')
-    parser.add_argument('--phase', choices=['1', '2', '3', 'all'], default='all',
-                       help='Which phase to run (1=fetch, 2=download, 3=transcribe, all=complete pipeline)')
+    parser.add_argument('--phase', choices=['1', '2', '2b', '3', 'all'], default='all',
+                       help='Which phase to run (1=fetch metadata, 2=parse RSS and download, '
+                            '2b=download episodes already in the DB, 3=transcribe, '
+                            'all=complete pipeline)')
     parser.add_argument('--limit', type=int, default=None,
                        help='Number of top podcasts to fetch (overrides config default_limit)')
     parser.add_argument('--max-episodes', type=int, default=None,
                        help='Maximum episodes per podcast to download (overrides config max_episodes_per_podcast)')
     parser.add_argument('--config', type=str, help='Path to configuration file')
     parser.add_argument('--stats', action='store_true', help='Show current statistics')
+    parser.add_argument('--pending-limit', type=int, default=None,
+                       help='Phase 2b: stop after this many episodes')
+    parser.add_argument('--skip-errors', action='store_true',
+                       help="Phase 2b: only retry 'pending' episodes, not previously failed ones")
+    parser.add_argument('--discover-only', action='store_true',
+                       help='Phase 2: record new episode metadata from RSS without downloading '
+                            'audio. Follow with --phase 2b to fetch it.')
 
     args = parser.parse_args()
 
@@ -743,8 +918,16 @@ def main():
             
         elif args.phase == '2':
             # Run Phase 2 only
-            pipeline.phase2_download_audio(max_episodes_per_podcast=args.max_episodes)
+            stats = pipeline.phase2_download_audio(max_episodes_per_podcast=args.max_episodes,
+                                                   discover_only=args.discover_only)
+            print(json.dumps(stats, indent=2))
             
+        elif args.phase == '2b':
+            # Download episodes already known to the database
+            stats = pipeline.download_pending(limit=args.pending_limit,
+                                              include_errors=not args.skip_errors)
+            print(json.dumps(stats, indent=2))
+
         elif args.phase == '3':
             # Run Phase 3 only
             pipeline.phase3_transcribe()

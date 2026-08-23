@@ -4,6 +4,7 @@ NVIDIA Parakeet TDT 0.6B V2 integration with multi-GPU support
 """
 
 import os
+import hashlib
 import logging
 import time
 import torch
@@ -163,8 +164,12 @@ class ParakeetTranscriber:
         temp_dir = Path('/tmp/processed_audio')
         temp_dir.mkdir(exist_ok=True)
         
-        # Output path for processed audio
-        processed_path = temp_dir / f"{audio_path.stem}_16khz.wav"
+        # Output path for processed audio.
+        # The stem alone is not unique: two podcasts can have identically titled
+        # episodes, and an episode's .mp3 and .ogg share a stem. Mixing a hash of
+        # the full path in keeps those from reading each other's cached audio.
+        path_key = hashlib.md5(str(audio_path.resolve()).encode()).hexdigest()[:10]
+        processed_path = temp_dir / f"{audio_path.stem}_{path_key}_16khz.wav"
         
         # Check if already processed
         if processed_path.exists():
