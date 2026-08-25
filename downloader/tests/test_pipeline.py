@@ -23,6 +23,8 @@ REAL_AUDIO = b"\0" * (MIN_AUDIO_BYTES + 1)
 
 
 class FakeSource:
+    chart_name = "fake_chart"
+
     def __init__(self, records):
         self.records = records
 
@@ -57,6 +59,34 @@ def test_fetch_and_discover(seeded):
     statuses = dict(conn.execute("SELECT title, status FROM podcasts").fetchall())
     assert statuses == {"Show One": "discovered", "Show Two": "discovered", "No Feed": "pending"}
     assert conn.execute("SELECT has_rss_transcript FROM episodes WHERE episode_guid='g3'").fetchone()[0] == 1
+
+
+def test_fetch_records_chart_membership(seeded):
+    _, conn = seeded
+    rows = conn.execute("""
+        SELECT p.title, c.chart, c.rank FROM podcast_charts c
+        JOIN podcasts p ON p.id = c.podcast_id ORDER BY c.rank
+    """).fetchall()
+    assert [tuple(r) for r in rows] == [("Show One", "fake_chart", 1),
+                                        ("Show Two", "fake_chart", 2),
+                                        ("No Feed", "fake_chart", 3)]
+
+
+def test_refetching_a_chart_updates_rank_without_duplicating(seeded, config, monkeypatch):
+    """A chart re-fetched later must not add a second podcast row: the whole
+    collection is assembled by repeated additive fetches."""
+    _, conn = seeded
+    reordered = [PodcastRecord("apple_2", "Show Two", rss_url="https://x/two", apple_podcasts_id="2"),
+                 PodcastRecord("apple_1", "Show One", rss_url="https://x/one", apple_podcasts_id="1")]
+    monkeypatch.setattr(fetch_podcasts, "make_source", lambda cfg, session: FakeSource(reordered))
+    result = fetch_podcasts.run(config, conn)
+
+    assert result["new"] == 0 and result["updated"] == 2
+    assert conn.execute("SELECT COUNT(*) FROM podcasts").fetchone()[0] == 3
+    ranks = dict(conn.execute("""
+        SELECT p.title, c.rank FROM podcast_charts c JOIN podcasts p ON p.id = c.podcast_id
+    """).fetchall())
+    assert ranks == {"Show Two": 1, "Show One": 2, "No Feed": 3}
 
 
 def test_discover_is_idempotent_and_marks_feed_errors(seeded, monkeypatch):

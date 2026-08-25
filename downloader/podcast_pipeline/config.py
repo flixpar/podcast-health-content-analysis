@@ -25,9 +25,11 @@ class ConfigError(ValueError):
 
 @dataclass
 class FetcherConfig:
-    type: str = "apple"               # "apple" (no auth) or "podchaser"
+    type: str = "apple"               # "apple" (no auth), "spotify" (no auth), or "podchaser"
     filter_health_only: bool = False  # keep only health-related podcasts from the charts
     default_limit: int = 100          # podcasts to fetch when --limit is not given
+    country: str = "us"               # storefront / chart region
+    genre: str | None = None          # Apple genre id (e.g. "1512" = Health & Fitness); None = overall chart
 
 
 @dataclass
@@ -35,6 +37,19 @@ class PodchaserConfig:
     client_id: str = ""
     client_secret: str = ""
     api_url: str = "https://api.podchaser.com/graphql"
+
+
+@dataclass
+class SpotifyConfig:
+    """Spotify's public podcast chart (podcastcharts.byspotify.com).
+
+    The chart carries no RSS URLs, so each show is resolved to its Apple
+    listing by title to obtain a feed; ``match_candidates`` is how many iTunes
+    search results are considered before giving up on a show.
+    """
+
+    chart_url: str = "https://podcastcharts.byspotify.com/api/charts/top-podcasts"
+    match_candidates: int = 10
 
 
 @dataclass
@@ -90,6 +105,7 @@ class Config:
     data_dir: str = "data"            # relative paths resolve against the project root
     fetcher: FetcherConfig = field(default_factory=FetcherConfig)
     podchaser: PodchaserConfig = field(default_factory=PodchaserConfig)
+    spotify: SpotifyConfig = field(default_factory=SpotifyConfig)
     discovery: DiscoveryConfig = field(default_factory=DiscoveryConfig)
     download: DownloadConfig = field(default_factory=DownloadConfig)
     audio_compression: CompressionConfig = field(default_factory=CompressionConfig)

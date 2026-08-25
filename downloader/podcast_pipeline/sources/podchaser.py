@@ -77,6 +77,11 @@ class PodchaserSource:
         self.access_token: str | None = None
         self.token_expires_at = datetime.min
 
+    @property
+    def chart_name(self) -> str:
+        """Identifier recorded in ``podcast_charts.chart``."""
+        return f"podchaser_{self.country.lower()}_top"
+
     # --- auth / transport ---------------------------------------------------
 
     def _authenticate(self) -> None:

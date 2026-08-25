@@ -1,7 +1,17 @@
-"""Top podcasts from Apple's public charts feed, enriched via the iTunes lookup API.
+"""Top podcasts from Apple's public charts, enriched via the iTunes lookup API.
 
-No authentication needed. The charts endpoint only exposes the top 100, and
-the RSS URL for each podcast comes from a second request to the lookup API.
+No authentication needed. Two charts are exposed, because Apple publishes them
+at different endpoints:
+
+* the overall chart, from the Apple Marketing Tools feed. It only ever returns
+  the top 100 and takes no genre.
+* a per-genre chart, from the older iTunes ``toppodcasts`` RSS feed, which is
+  the only public endpoint that filters by genre. Its ordering was checked
+  against the Health & Fitness chart on podcasts.apple.com and matches
+  position for position.
+
+Neither chart carries the RSS URL, so every entry costs a second request to
+the lookup API.
 """
 
 from __future__ import annotations
@@ -17,8 +27,10 @@ from podcast_pipeline.models import PodcastRecord
 logger = logging.getLogger(__name__)
 
 CHARTS_URL = "https://rss.marketingtools.apple.com/api/v2/{country}/podcasts/top/100/podcasts.json"
+GENRE_CHARTS_URL = "https://itunes.apple.com/{country}/rss/toppodcasts/limit={limit}/genre={genre}/json"
 LOOKUP_URL = "https://itunes.apple.com/lookup?id={apple_id}&entity=podcast"
 CHART_LIMIT = 100
+GENRE_CHART_LIMIT = 200
 
 # Apple genre ids that count as health-related: Health & Fitness, Alternative
 # Health, Medicine, Mental Health, Science, Self-Improvement, Personal
@@ -35,23 +47,25 @@ HEALTH_KEYWORDS = (
 
 class AppleChartsSource:
     def __init__(self, session: requests.Session, filter_health_only: bool = False,
-                 country: str = "us", lookup_delay: float = 0.1):
+                 country: str = "us", genre: str | None = None, lookup_delay: float = 0.1):
         self.session = session
         self.filter_health_only = filter_health_only
         self.country = country
+        self.genre = genre
         self.lookup_delay = lookup_delay
 
+    @property
+    def chart_name(self) -> str:
+        """Identifier recorded in ``podcast_charts.chart``."""
+        if self.genre:
+            return f"apple_{self.country}_genre_{self.genre}"
+        return f"apple_{self.country}_top"
+
     def top_podcasts(self, limit: int) -> list[PodcastRecord]:
-        if limit > CHART_LIMIT:
-            logger.warning(f"Apple charts expose at most {CHART_LIMIT} podcasts; --limit {limit} capped")
-        url = CHARTS_URL.format(country=self.country)
-        logger.info(f"Fetching Apple top podcasts from {url}")
-        response = self.session.get(url, timeout=30)
-        response.raise_for_status()
-        results = response.json()["feed"]["results"]
+        entries = self._genre_entries(limit) if self.genre else self._overall_entries(limit)
 
         records = []
-        for entry in results:
+        for entry in entries:
             if self.filter_health_only and not _is_health_related(entry):
                 continue
             details = self.lookup(entry["id"])
@@ -60,8 +74,36 @@ class AppleChartsSource:
             logger.info(f"  {len(records):3d}. {records[-1].title}")
             if len(records) >= limit:
                 break
-        logger.info(f"Fetched {len(records)} podcasts from Apple charts")
+        logger.info(f"Fetched {len(records)} podcasts from Apple chart {self.chart_name}")
         return records
+
+    def _overall_entries(self, limit: int) -> list[dict]:
+        if limit > CHART_LIMIT:
+            logger.warning(f"Apple's overall chart exposes at most {CHART_LIMIT} podcasts; "
+                           f"--limit {limit} capped")
+        url = CHARTS_URL.format(country=self.country)
+        logger.info(f"Fetching Apple top podcasts from {url}")
+        response = self.session.get(url, timeout=30)
+        response.raise_for_status()
+        return response.json()["feed"]["results"]
+
+    def _genre_entries(self, limit: int) -> list[dict]:
+        """The genre chart, normalised to the shape ``_overall_entries`` returns.
+
+        The feed is asked for more entries than requested only when a health
+        filter may drop some; asking beyond ``GENRE_CHART_LIMIT`` returns the
+        maximum silently, so the cap is applied here instead.
+        """
+        wanted = min(limit if not self.filter_health_only else limit * 2, GENRE_CHART_LIMIT)
+        url = GENRE_CHARTS_URL.format(country=self.country, limit=wanted, genre=self.genre)
+        logger.info(f"Fetching Apple genre {self.genre} chart from {url}")
+        response = self.session.get(url, timeout=30)
+        response.raise_for_status()
+        feed = response.json()["feed"]
+        entries = feed.get("entry") or []
+        if isinstance(entries, dict):       # the feed unwraps a single result
+            entries = [entries]
+        return [_normalise_genre_entry(e) for e in entries]
 
     def lookup(self, apple_id: str, attempts: int = 3) -> dict | None:
         """iTunes lookup record for a podcast (carries feedUrl), or None if unavailable."""
@@ -85,6 +127,24 @@ class AppleChartsSource:
                 time.sleep(2 ** attempt)
         logger.error(f"Giving up on iTunes lookup for {apple_id}")
         return None
+
+
+def _normalise_genre_entry(entry: dict) -> dict:
+    """One ``toppodcasts`` RSS entry in the shape the Marketing Tools feed uses."""
+    def label(node, default=""):
+        return (node or {}).get("label", default)
+
+    images = entry.get("im:image") or []
+    category = (entry.get("category") or {}).get("attributes") or {}
+    return {
+        "id": entry["id"]["attributes"]["im:id"],
+        "name": label(entry.get("im:name")),
+        "artistName": label(entry.get("im:artist")),
+        "url": label(entry.get("id")),
+        "artworkUrl100": label(images[-1]) if images else None,
+        "genres": [{"genreId": category.get("im:id", ""), "name": category.get("term", "")}],
+        "contentAdvisoryRating": (entry.get("im:contentType") or {}).get("attributes", {}).get("term"),
+    }
 
 
 def _is_health_related(entry: dict) -> bool:

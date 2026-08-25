@@ -3,12 +3,18 @@
     "fetcher": {
         "type": "apple",
         "filter_health_only": false,
-        "default_limit": 100
+        "default_limit": 100,
+        "country": "us",
+        "genre": null
     },
     "podchaser": {
         "client_id": "YOUR_PODCHASER_CLIENT_ID",
         "client_secret": "YOUR_PODCHASER_CLIENT_SECRET",
         "api_url": "https://api.podchaser.com/graphql"
+    },
+    "spotify": {
+        "chart_url": "https://podcastcharts.byspotify.com/api/charts/top-podcasts",
+        "match_candidates": 10
     },
     "discovery": {
         "max_episodes_per_podcast": 5000,

@@ -24,8 +24,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--log-level", default="INFO", choices=["DEBUG", "INFO", "WARNING", "ERROR"])
     sub = parser.add_subparsers(dest="command", required=True, metavar="COMMAND")
 
-    p = sub.add_parser("fetch-podcasts", help="record the top podcasts from the configured chart source")
+    p = sub.add_parser("fetch-podcasts", help="record the top podcasts from a chart source")
     p.add_argument("--limit", type=int, help="number of podcasts (default: fetcher.default_limit)")
+    p.add_argument("--source", choices=["apple", "spotify", "podchaser"],
+                   help="chart source for this run (default: fetcher.type)")
+    p.add_argument("--genre", help="Apple genre id, e.g. 1512 for Health & Fitness "
+                                   "(default: fetcher.genre; Apple source only)")
+    p.add_argument("--country", help="storefront / chart region (default: fetcher.country)")
 
     p = sub.add_parser("discover", help="read every podcast feed and record its episodes (no downloads)")
     p.add_argument("--max-episodes", type=int,
@@ -98,6 +103,14 @@ def dispatch(args: argparse.Namespace, config: Config, conn) -> dict:
                                            stats, transcribe)
     match args.command:
         case "fetch-podcasts":
+            # Chart selection is per-run: one collection is assembled from
+            # several charts, so overriding beats editing config.json each time.
+            if args.source:
+                config.fetcher.type = args.source
+            if args.genre:
+                config.fetcher.genre = args.genre
+            if args.country:
+                config.fetcher.country = args.country
             return fetch_podcasts.run(config, conn, limit=args.limit)
         case "discover":
             return discover.run(config, conn, max_episodes=args.max_episodes)

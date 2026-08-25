@@ -90,7 +90,22 @@ CREATE TABLE IF NOT EXISTS transcripts (
     FOREIGN KEY (episode_id) REFERENCES episodes(id)
 );
 
+-- Which chart each podcast came from. The collection is assembled from
+-- several charts (Apple overall, Apple by genre, Spotify) fetched on
+-- different days; this table is what lets a later analysis select a subset
+-- ("everything that was in the Apple health top 50") without re-fetching.
+CREATE TABLE IF NOT EXISTS podcast_charts (
+    podcast_id INTEGER NOT NULL,
+    chart TEXT NOT NULL,                 -- e.g. "apple_us_top" or "apple_us_genre_1512"
+    rank INTEGER,                        -- 1-based position in that chart
+    first_seen_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_seen_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (podcast_id, chart),
+    FOREIGN KEY (podcast_id) REFERENCES podcasts(id)
+);
+
 CREATE INDEX IF NOT EXISTS idx_podcasts_status ON podcasts(status);
+CREATE INDEX IF NOT EXISTS idx_podcast_charts_chart ON podcast_charts(chart);
 CREATE INDEX IF NOT EXISTS idx_episodes_status ON episodes(status);
 CREATE INDEX IF NOT EXISTS idx_episodes_podcast ON episodes(podcast_id);
 CREATE INDEX IF NOT EXISTS idx_transcripts_episode ON transcripts(episode_id);
@@ -150,6 +165,19 @@ def upsert_podcast(conn: sqlite3.Connection, podcast: PodcastRecord) -> int:
         WHERE id = ?
     """, values + (row["id"],))
     return row["id"]
+
+
+def record_chart_entry(conn: sqlite3.Connection, podcast_id: int, chart: str, rank: int) -> None:
+    """Note that ``podcast_id`` appeared at ``rank`` in ``chart``.
+
+    ``first_seen_at`` is kept from the earliest run so the history of a
+    re-fetched chart is not lost; the rank is refreshed to the latest.
+    """
+    conn.execute("""
+        INSERT INTO podcast_charts (podcast_id, chart, rank) VALUES (?, ?, ?)
+        ON CONFLICT (podcast_id, chart) DO UPDATE
+        SET rank = excluded.rank, last_seen_at = CURRENT_TIMESTAMP
+    """, (podcast_id, chart, rank))
 
 
 def set_podcast_status(conn: sqlite3.Connection, podcast_id: int, status: str) -> None:
