@@ -48,6 +48,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--workers", type=int, help="parallel downloads (default: download.max_workers)")
     p.add_argument("--skip-errors", action="store_true",
                    help="only attempt 'pending' episodes, not previously failed ones")
+    p.add_argument("--charts", type=_str_list, default=[],
+                   help="only podcasts in these charts, comma-separated "
+                        "(e.g. apple_us_genre_1512); see the podcast_charts table")
 
     p = sub.add_parser("transcribe", help="transcribe downloaded audio with Parakeet")
     p.add_argument("--limit", type=int)
@@ -85,6 +88,10 @@ def _int_list(value: str) -> list[int]:
     return [int(v) for v in value.split(",") if v.strip()]
 
 
+def _str_list(value: str) -> list[str]:
+    return [v.strip() for v in value.split(",") if v.strip()]
+
+
 def main(argv: list[str] | None = None) -> None:
     args = build_parser().parse_args(argv)
     configure_logging(LOG_DIR / "pipeline.log", args.log_level)
@@ -119,7 +126,7 @@ def dispatch(args: argparse.Namespace, config: Config, conn) -> dict:
                                        timeout=args.timeout, min_words=args.min_words)
         case "download":
             return download.run(config, conn, limit=args.limit, retry_errors=not args.skip_errors,
-                                workers=args.workers)
+                                workers=args.workers, charts=args.charts)
         case "transcribe":
             return transcribe.run(config, conn, limit=args.limit, retry_errors=args.retry_errors)
         case "convert-audio":

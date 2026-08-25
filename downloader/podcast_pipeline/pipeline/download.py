@@ -22,8 +22,24 @@ from podcast_pipeline.config import Config
 logger = logging.getLogger(__name__)
 
 
-def pending_episodes(conn: sqlite3.Connection, retry_errors: bool, limit: int | None) -> list[sqlite3.Row]:
+def pending_episodes(conn: sqlite3.Connection, retry_errors: bool, limit: int | None,
+                     charts: list[str] | None = None) -> list[sqlite3.Row]:
+    """Episodes still needing audio, oldest row first.
+
+    ``charts`` restricts the run to podcasts that appear in those charts (see
+    ``podcast_charts``). The whole queue takes days, so downloading one chart
+    ahead of the rest is how a subset gets prioritised: run with the filter,
+    then run again without it to pick up everything else.
+    """
     statuses = [db.EpisodeStatus.PENDING] + ([db.EpisodeStatus.ERROR] if retry_errors else [])
+    params = list(statuses)
+    chart_filter = ""
+    if charts:
+        chart_filter = (f"AND e.podcast_id IN (SELECT podcast_id FROM podcast_charts "
+                        f"WHERE chart IN ({','.join('?' * len(charts))}))")
+        params += charts
+    if limit:
+        params.append(limit)
     # An error row with audio on disk failed at transcription, not download.
     return conn.execute(f"""
         SELECT e.id, e.episode_guid, e.title, e.audio_url, p.title AS podcast_title
@@ -32,17 +48,22 @@ def pending_episodes(conn: sqlite3.Connection, retry_errors: bool, limit: int | 
           AND e.audio_file_path IS NULL
           AND e.has_rss_transcript = 0
           AND e.audio_url IS NOT NULL AND e.audio_url != ''
+          {chart_filter}
         ORDER BY e.id
         {"LIMIT ?" if limit else ""}
-    """, statuses + ([limit] if limit else [])).fetchall()
+    """, params).fetchall()
 
 
 def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
-        retry_errors: bool = True, workers: int | None = None) -> dict:
-    episodes = pending_episodes(conn, retry_errors, limit)
+        retry_errors: bool = True, workers: int | None = None,
+        charts: list[str] | None = None) -> dict:
+    episodes = pending_episodes(conn, retry_errors, limit, charts)
     workers = workers or config.download.max_workers
-    logger.info(f"Downloading {len(episodes)} episodes with {workers} workers")
+    logger.info(f"Downloading {len(episodes)} episodes with {workers} workers"
+                + (f" (charts: {', '.join(charts)})" if charts else ""))
     stats = {"total": len(episodes), "downloaded": 0, "reused": 0, "failed": 0, "not_attempted": 0}
+    if charts:
+        stats["charts"] = charts
     if not episodes:
         return stats
 

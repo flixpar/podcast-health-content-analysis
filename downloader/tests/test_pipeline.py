@@ -261,3 +261,24 @@ def test_stats(seeded):
     assert result["episodes"] == {"pending": 3}
     assert result["episodes_with_rss_transcript"] == 1
     assert result["transcripts"]["total"] == 0
+
+
+def test_download_charts_filter_restricts_to_that_chart(seeded, monkeypatch):
+    """The queue takes days, so a chart is prioritised by downloading it first."""
+    config, conn = seeded
+    one = conn.execute("SELECT id FROM podcasts WHERE title='Show One'").fetchone()["id"]
+    conn.execute("INSERT INTO podcast_charts (podcast_id, chart, rank) VALUES (?, 'health', 1)", (one,))
+    conn.commit()
+
+    all_pending = download.pending_episodes(conn, retry_errors=True, limit=None)
+    health_only = download.pending_episodes(conn, retry_errors=True, limit=None, charts=["health"])
+
+    assert {r["title"] for r in all_pending} == {"Ep One", "Ep Two"}
+    assert {r["title"] for r in health_only} == {"Ep One", "Ep Two"}
+
+    two = conn.execute("SELECT id FROM podcasts WHERE title='Show Two'").fetchone()["id"]
+    conn.execute("UPDATE episodes SET has_rss_transcript = 0 WHERE podcast_id = ?", (two,))
+    conn.commit()
+    assert len(download.pending_episodes(conn, retry_errors=True, limit=None)) == 3
+    assert len(download.pending_episodes(conn, retry_errors=True, limit=None, charts=["health"])) == 2
+    assert download.pending_episodes(conn, retry_errors=True, limit=None, charts=["absent"]) == []
