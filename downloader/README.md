@@ -17,7 +17,7 @@ downloader/
 │   ├── models.py            PodcastRecord / FeedEpisode / Segment dataclasses
 │   ├── http.py, log.py      retrying requests session; logging setup
 │   ├── rss.py               feed -> FeedEpisode list
-│   ├── sources/             apple.py (charts + iTunes lookup), podchaser.py (GraphQL)
+│   ├── sources/             apple.py (overall + genre charts), spotify.py (chart + title match), podchaser.py (GraphQL)
 │   ├── audio/               download.py, naming.py, ffmpeg.py (probe/encode/decode), disk.py
 │   ├── transcripts/         store.py (JSONL+zstd format), parsers.py (SRT/VTT/JSON/HTML)
 │   ├── asr/                 chunking.py (pure), parakeet.py (NeMo model on one GPU)
@@ -53,7 +53,7 @@ print a JSON summary when done. `--config PATH` and `--log-level` are global.
 
 | Command | What it does |
 |---|---|
-| `fetch-podcasts [--limit N]` | Record the top podcasts from Apple charts (or Podchaser). Re-running refreshes metadata without changing ids. |
+| `fetch-podcasts [--limit N] [--source apple\|spotify\|podchaser] [--genre ID] [--country CC]` | Record the top podcasts from one chart. Additive: re-running refreshes metadata without changing ids, and records the podcast's rank in `podcast_charts`. |
 | `discover [--max-episodes N]` | Read every podcast feed and record its episodes. Downloads nothing. |
 | `fetch-rss-transcripts [--limit N]` | Fetch transcripts publishers attach to their feeds (SRT/VTT/JSON/timestamped text/HTML). No GPU. |
 | `download [--limit N] [--workers N] [--skip-errors]` | Download audio for every pending episode. Resumable; re-run after an interruption. |
@@ -77,12 +77,41 @@ python -m podcast_pipeline transcribe
 Fetching publisher transcripts before downloading matters: an episode whose
 feed carries a transcript never needs its audio fetched or transcribed.
 
+### Charts
+
+The collection is not a single chart. `fetch-podcasts` reads one chart per run
+and the runs accumulate:
+
+```bash
+python -m podcast_pipeline fetch-podcasts --limit 100              # Apple US overall
+python -m podcast_pipeline fetch-podcasts --genre 1512 --limit 50  # Apple US Health & Fitness
+python -m podcast_pipeline fetch-podcasts --source spotify --limit 100
+```
+
+Apple's overall chart comes from the Marketing Tools feed, which takes no
+genre and never returns more than 100; per-genre charts come from the older
+iTunes `toppodcasts` RSS feed, the only public endpoint that filters by genre.
+
+Spotify's chart publishes no RSS URL, so each show is matched to its Apple
+listing by title to recover a feed. That search API throttles at roughly 20
+requests a minute, hence `spotify.search_delay_seconds`; a show it genuinely
+has no listing for is recorded with a NULL `rss_url` and skipped by
+`discover`.
+
+Chart membership is recorded per run:
+
+```bash
+sqlite3 data/podcast_metadata.db \
+  "SELECT chart, COUNT(*) FROM podcast_charts GROUP BY chart;"
+```
+
 ## Configuration (`config.json`)
 
 | Section | Keys |
 |---|---|
 | top level | `data_dir` (default `data`, relative to this directory) |
-| `fetcher` | `type` (`apple` or `podchaser`), `filter_health_only`, `default_limit` |
+| `fetcher` | `type` (`apple`, `spotify`, or `podchaser`), `filter_health_only`, `default_limit`, `country`, `genre` (Apple genre id) |
+| `spotify` | `chart_url`, `match_candidates`, `search_delay_seconds`, `search_attempts` |
 | `podchaser` | `client_id`, `client_secret`, `api_url` (or `PODCHASER_CLIENT_ID`/`_SECRET` env vars) |
 | `discovery` | `max_episodes_per_podcast`, `max_parallel_feeds`, `feed_timeout_seconds` |
 | `download` | `max_workers`, `timeout_seconds`, `min_free_gb` (downloads halt below this much free space) |
@@ -97,7 +126,10 @@ Unknown keys are rejected at startup, so a typo cannot silently fall back to a d
 **Database** (`data/podcast_metadata.db`, SQLite in WAL mode):
 
 - `podcasts` — status `pending` → `discovered` | `error`; `podchaser_id` holds the
-  source id (`apple_<id>` or the Podchaser id) and is the upsert key.
+  source id (`apple_<id>`, `spotify_<id>`, or the Podchaser id) and is the upsert key.
+- `podcast_charts` — which chart each podcast came from and at what rank. The
+  collection is assembled from several charts fetched on different days, so
+  this is what lets an analysis select a subset later.
 - `episodes` — status `pending` → `downloaded` → `transcribed`, or `error`
   (an error row with `audio_file_path` set failed at transcription, one without
   failed at download). `has_rss_transcript = 1` rows are never downloaded.

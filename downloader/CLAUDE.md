@@ -28,7 +28,9 @@ misinformation analysis in `../fact-check`.
 ```bash
 python -m podcast_pipeline --help
 python -m podcast_pipeline stats
-python -m podcast_pipeline fetch-podcasts --limit 100
+python -m podcast_pipeline fetch-podcasts --limit 100              # Apple US overall
+python -m podcast_pipeline fetch-podcasts --genre 1512 --limit 50  # Apple US Health & Fitness
+python -m podcast_pipeline fetch-podcasts --source spotify --limit 100
 python -m podcast_pipeline discover
 python -m podcast_pipeline fetch-rss-transcripts
 python -m podcast_pipeline download            # resumable; re-run after an interruption
@@ -51,6 +53,9 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
   Helpers never commit; the caller owns the transaction.
 - `podcast_pipeline/models.py` -- `PodcastRecord`, `FeedEpisode`, `Segment`.
 - `podcast_pipeline/rss.py`, `sources/` -- network readers that return models.
+  One `fetch-podcasts` run reads one chart; the collection is the union of
+  several runs, and `podcast_charts` records which chart each podcast came
+  from so a subset can be selected later.
 - `podcast_pipeline/audio/` -- `download.py` (resume via `.part` files),
   `naming.py` (slug + GUID hash), `ffmpeg.py` (the only module that shells out
   to ffmpeg/ffprobe), `disk.py` (`DiskSpaceError`).
@@ -89,6 +94,18 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
 - **Podcast upserts key on the source id and fall back to the Apple id.** The
   old pipeline wrote `podchaser_id = NULL` and used `INSERT OR REPLACE`, which
   would have orphaned every episode on a re-run. Keep podcast ids stable.
+- **A throttled iTunes search is not a podcast without a feed.** The search
+  API (used to give Spotify's chart, which carries no RSS URLs, a feed) answers
+  403 after ~20 requests a minute and stays throttled for many minutes. The
+  first Spotify run burned the quota in under 30 seconds and recorded 41
+  charting shows -- The Ezra Klein Show, This American Life -- as feedless.
+  Searches are paced by `spotify.search_delay_seconds`; a throttle that
+  outlasts the retries raises `SpotifyResolveError` and stops the run.
+- **Apple's per-genre charts need the old endpoint.** The Marketing Tools feed
+  (`rss.marketingtools.apple.com`) takes no genre and caps at 100. Genre charts
+  come from `itunes.apple.com/{cc}/rss/toppodcasts/limit=N/genre=G/json`, whose
+  ordering was verified position-for-position against the Health & Fitness
+  chart on podcasts.apple.com.
 - **Re-run `tools/ab_format_test.py` before changing the Opus bitrate.** Current
   result: 1.26% WER / 0.85% CER divergence vs MP3 for an 82.7% size saving.
 
@@ -109,6 +126,9 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
 the binding constraint).
 
 - `podcasts.status`: `pending` -> `discovered` | `error` (feed errors are retried next `discover`).
+- `podcast_charts`: (podcast_id, chart, rank). Charts recorded so far:
+  `apple_us_top_20251013` (the original 100), `apple_us_top`,
+  `apple_us_genre_1512` (health), `spotify_us_top`.
 - `episodes.status`: `pending` -> `downloaded` -> `transcribed`, or `error`. An
   `error` row *with* `audio_file_path` failed transcription; *without* it, download.
   `has_rss_transcript = 1` rows are never downloaded.
