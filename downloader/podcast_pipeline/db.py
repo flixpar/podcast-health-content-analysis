@@ -112,19 +112,28 @@ CREATE INDEX IF NOT EXISTS idx_transcripts_episode ON transcripts(episode_id);
 """
 
 
+#: How long a contended write waits before giving up. Long enough that a
+#: multi-day ``download`` survives another command's write burst.
+BUSY_TIMEOUT_SECONDS = 300.0
+
+
 def connect(db_path: Path) -> sqlite3.Connection:
     """Open the database, creating the schema if needed.
 
     WAL lets readers proceed alongside a writer (a second command, or the
     monitoring queries in ``stats``), and the busy timeout makes a contended
     write wait instead of failing.
+
+    The timeout is generous because ``download`` runs for days: a 60 s wait was
+    not enough to outlast a concurrent ``discover`` + ``fetch-rss-transcripts``
+    pass, and the download died with "database is locked" after an hour of work.
     """
     db_path.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(str(db_path), timeout=60.0)
+    conn = sqlite3.connect(str(db_path), timeout=BUSY_TIMEOUT_SECONDS)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA synchronous=NORMAL")
-    conn.execute("PRAGMA busy_timeout=60000")
+    conn.execute(f"PRAGMA busy_timeout={int(BUSY_TIMEOUT_SECONDS * 1000)}")
     conn.executescript(SCHEMA)
     return conn
 

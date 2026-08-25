@@ -94,6 +94,12 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
 - **Podcast upserts key on the source id and fall back to the Apple id.** The
   old pipeline wrote `podchaser_id = NULL` and used `INSERT OR REPLACE`, which
   would have orphaned every episode on a re-run. Keep podcast ids stable.
+- **Do not run a writing stage while `download` is running.** `download` takes
+  days. A concurrent `discover` + `fetch-rss-transcripts` pass held the write
+  lock past the old 60 s busy timeout and killed it with "database is locked"
+  after an hour. `db.BUSY_TIMEOUT_SECONDS` is now 300 s, which absorbs a burst,
+  but the rule stands: queue write stages between download runs, not during one.
+  Read-only `stats` is always safe.
 - **A throttled iTunes search is not a podcast without a feed.** The search
   API (used to give Spotify's chart, which carries no RSS URLs, a feed) answers
   403 after ~20 requests a minute and stays throttled for many minutes. The
