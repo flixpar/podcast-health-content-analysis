@@ -10,6 +10,14 @@ A show that cannot be matched is still recorded, with no feed and
 ``extra["rss_lookup"] == "unmatched"``. Spotify exclusives genuinely have no
 public feed, and a silently shorter list would look like a fetch that worked.
 Such rows are skipped by ``discover`` because their ``rss_url`` is NULL.
+
+The search API throttles hard: it answers 403 after roughly 20 requests in a
+minute and stays that way for many minutes. A throttled search is *not* a show
+without a feed, and recording it as one would quietly poison the collection --
+the first run of this code marked 41 shows as feedless, among them The Ezra
+Klein Show and This American Life. So searches are paced by
+``spotify.search_delay_seconds``, and a throttle that outlasts the retries
+aborts the run instead of being recorded.
 """
 
 from __future__ import annotations
@@ -28,6 +36,15 @@ from podcast_pipeline.sources.apple import _to_record as _apple_record
 logger = logging.getLogger(__name__)
 
 SEARCH_URL = "https://itunes.apple.com/search"
+THROTTLE_STATUSES = (403, 429)
+
+
+class SpotifyResolveError(RuntimeError):
+    """The iTunes search API stayed unavailable across every retry.
+
+    Fatal on purpose: it means no show can be resolved, and continuing would
+    record a chart's worth of podcasts as having no feed.
+    """
 
 
 class SpotifyChartsSource:
@@ -39,6 +56,7 @@ class SpotifyChartsSource:
         self.filter_health_only = filter_health_only
         self.country = country
         self.lookup_delay = lookup_delay
+        self._last_search_at = 0.0
 
     @property
     def chart_name(self) -> str:
@@ -73,7 +91,6 @@ class SpotifyChartsSource:
     def _resolve(self, show: dict) -> PodcastRecord:
         """Find the show's Apple listing so it has a feed the pipeline can read."""
         details = self._search_apple(show["showName"], show.get("showPublisher"))
-        time.sleep(self.lookup_delay)
         spotify_id = show["showUri"].rsplit(":", 1)[-1]
 
         if details is None:
@@ -100,16 +117,12 @@ class SpotifyChartsSource:
         return record
 
     def _search_apple(self, name: str, publisher: str | None) -> dict | None:
-        params = {"term": name, "entity": "podcast", "country": self.country,
-                  "limit": self.config.match_candidates}
-        try:
-            response = self.session.get(SEARCH_URL, params=params, timeout=20)
-            response.raise_for_status()
-            results = response.json().get("results") or []
-        except requests.RequestException as e:
-            logger.warning(f"iTunes search for {name!r} failed: {e}")
-            return None
+        """The best iTunes match for a show title, or None if there is none.
 
+        Raises ``SpotifyResolveError`` if the API could not be asked at all;
+        None means it was asked and nothing matched.
+        """
+        results = self._search(name)
         wanted = _normalise(name)
         exact = [r for r in results if _normalise(r.get("collectionName", "")) == wanted]
         if not exact:
@@ -119,8 +132,42 @@ class SpotifyChartsSource:
                             if _normalise(r.get("artistName", "")) == _normalise(publisher)]
             if by_publisher:
                 exact = by_publisher
-        # Ties are broken by the chart order iTunes already returned them in.
+        # Ties are broken by the relevance order iTunes already returned.
         return exact[0]
+
+    def _search(self, term: str) -> list[dict]:
+        params = {"term": term, "entity": "podcast", "country": self.country,
+                  "limit": self.config.match_candidates}
+        for attempt in range(self.config.search_attempts):
+            self._pace()
+            try:
+                response = self.session.get(SEARCH_URL, params=params, timeout=20)
+            except requests.RequestException as e:
+                logger.warning(f"iTunes search for {term!r} failed "
+                               f"(attempt {attempt + 1}): {e}")
+                time.sleep(self.config.search_delay_seconds * 2 ** attempt)
+                continue
+            if response.status_code in THROTTLE_STATUSES:
+                wait = float(response.headers.get("Retry-After",
+                                                  self.config.search_delay_seconds * 5 * 2 ** attempt))
+                logger.warning(f"iTunes search throttled ({response.status_code}); "
+                               f"waiting {wait:.0f}s before retrying {term!r}")
+                time.sleep(wait)
+                continue
+            response.raise_for_status()
+            return response.json().get("results") or []
+        raise SpotifyResolveError(
+            f"iTunes search unavailable after {self.config.search_attempts} attempts "
+            f"(last term {term!r}). Every remaining show would be recorded as having "
+            f"no feed, so the run is stopping; retry later or raise "
+            f"spotify.search_delay_seconds.")
+
+    def _pace(self) -> None:
+        """Keep at least ``search_delay_seconds`` between searches."""
+        elapsed = time.monotonic() - self._last_search_at
+        if elapsed < self.config.search_delay_seconds:
+            time.sleep(self.config.search_delay_seconds - elapsed)
+        self._last_search_at = time.monotonic()
 
 
 def _normalise(text: str) -> str:

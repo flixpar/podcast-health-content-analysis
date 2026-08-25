@@ -50,6 +50,11 @@ class SpotifyConfig:
 
     chart_url: str = "https://podcastcharts.byspotify.com/api/charts/top-podcasts"
     match_candidates: int = 10
+    # The iTunes search API throttles with 403 at roughly 20 requests/minute
+    # and stays throttled for far longer than it took to trip it, so searches
+    # are paced rather than retried out of trouble.
+    search_delay_seconds: float = 6.0
+    search_attempts: int = 5
 
 
 @dataclass

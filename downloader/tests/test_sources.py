@@ -12,7 +12,10 @@ import requests
 from podcast_pipeline.config import Config, SpotifyConfig
 from podcast_pipeline.sources import make_source
 from podcast_pipeline.sources.apple import AppleChartsSource
-from podcast_pipeline.sources.spotify import SpotifyChartsSource
+from podcast_pipeline.sources.spotify import SpotifyChartsSource, SpotifyResolveError
+
+#: No pacing between searches; the real delay is there to dodge throttling.
+FAST = SpotifyConfig(search_delay_seconds=0, search_attempts=3)
 
 GENRE_FEED = {"feed": {"entry": [
     {"im:name": {"label": "Huberman Lab"},
@@ -135,7 +138,7 @@ def _spotify_session(search_results):
 
 def test_spotify_show_is_matched_to_its_apple_feed():
     session = _spotify_session(lambda term: [LOOKUPS["1545953110"]] if "Huberman" in term else [])
-    source = SpotifyChartsSource(session, SpotifyConfig(), lookup_delay=0)
+    source = SpotifyChartsSource(session, FAST, lookup_delay=0)
 
     records = source.top_podcasts(100)
 
@@ -149,7 +152,7 @@ def test_spotify_show_is_matched_to_its_apple_feed():
 
 def test_spotify_exclusive_is_recorded_without_a_feed():
     session = _spotify_session(lambda term: [LOOKUPS["1545953110"]] if "Huberman" in term else [])
-    records = SpotifyChartsSource(session, SpotifyConfig(), lookup_delay=0).top_podcasts(100)
+    records = SpotifyChartsSource(session, FAST, lookup_delay=0).top_podcasts(100)
 
     unmatched = records[1]
     assert unmatched.source_id == "spotify_BBB"
@@ -162,7 +165,7 @@ def test_spotify_rejects_a_search_hit_with_a_different_title():
     """iTunes search is fuzzy; a near-miss must not silently attach the wrong feed."""
     other = dict(LOOKUPS["1487513861"], collectionName="Huberman Lab Essentials")
     session = _spotify_session(lambda term: [other])
-    records = SpotifyChartsSource(session, SpotifyConfig(), lookup_delay=0).top_podcasts(100)
+    records = SpotifyChartsSource(session, FAST, lookup_delay=0).top_podcasts(100)
     assert records[0].rss_url is None
 
 
@@ -173,7 +176,7 @@ def test_spotify_title_match_ignores_punctuation_and_accents():
               "showPublisher": "The Wall Street Journal"}]
     session = FakeSession({"podcastcharts.byspotify.com": chart,
                            "itunes.apple.com/search": {"results": [journal]}})
-    records = SpotifyChartsSource(session, SpotifyConfig(), lookup_delay=0).top_podcasts(100)
+    records = SpotifyChartsSource(session, FAST, lookup_delay=0).top_podcasts(100)
     assert records[0].rss_url == "https://feeds/journal"
 
 
@@ -188,7 +191,7 @@ def test_spotify_prefers_the_candidate_whose_publisher_matches():
               "showPublisher": "The New York Times"}]
     session = FakeSession({"podcastcharts.byspotify.com": chart,
                            "itunes.apple.com/search": {"results": same_name}})
-    records = SpotifyChartsSource(session, SpotifyConfig(), lookup_delay=0).top_podcasts(100)
+    records = SpotifyChartsSource(session, FAST, lookup_delay=0).top_podcasts(100)
     assert records[0].rss_url == "https://feeds/nyt"
 
 
@@ -205,3 +208,37 @@ def test_make_source_honours_type_and_genre():
 
     with pytest.raises(ValueError, match="Unknown fetcher.type"):
         make_source(Config.from_dict({"fetcher": {"type": "nope"}}), session=None)
+
+
+def test_a_throttled_search_aborts_instead_of_recording_shows_as_feedless():
+    """403 means "ask again later", not "this show has no feed". Recording it
+    as the latter once marked 41 charting shows, The Ezra Klein Show among
+    them, as having no RSS feed."""
+    class Throttling(FakeSession):
+        def get(self, url, params=None, **kwargs):
+            self.urls.append((url, params or {}))
+            if "search" in url:
+                return FakeResponse({}, status=403)
+            return FakeResponse(SPOTIFY_CHART)
+
+    session = Throttling({})
+    with pytest.raises(SpotifyResolveError, match="iTunes search unavailable"):
+        SpotifyChartsSource(session, FAST, lookup_delay=0).top_podcasts(100)
+    assert sum(1 for url, _ in session.urls if "search" in url) == FAST.search_attempts
+
+
+def test_a_search_that_recovers_after_a_throttle_is_retried():
+    calls = {"n": 0}
+
+    class Flaky(FakeSession):
+        def get(self, url, params=None, **kwargs):
+            self.urls.append((url, params or {}))
+            if "search" not in url:
+                return FakeResponse(SPOTIFY_CHART[:1])
+            calls["n"] += 1
+            if calls["n"] == 1:
+                return FakeResponse({}, status=429)
+            return FakeResponse({"results": [LOOKUPS["1545953110"]]})
+
+    records = SpotifyChartsSource(Flaky({}), FAST, lookup_delay=0).top_podcasts(100)
+    assert records[0].rss_url == "https://feeds/huberman"
