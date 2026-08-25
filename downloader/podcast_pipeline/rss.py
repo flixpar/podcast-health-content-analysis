@@ -29,11 +29,28 @@ def fetch_feed(rss_url: str, session: requests.Session, timeout: int = 60) -> li
     because feedparser applies no timeout of its own.
     """
     try:
-        response = session.get(rss_url, timeout=timeout)
-        response.raise_for_status()
+        response = _get(session, rss_url, timeout)
     except requests.RequestException as e:
         raise FeedError(f"fetch failed: {e}") from e
     return parse_feed(response.content, source=rss_url)
+
+
+def _get(session: requests.Session, rss_url: str, timeout: int) -> requests.Response:
+    """GET a feed, retrying uncompressed if the server's gzip body is corrupt.
+
+    Megaphone serves some feeds (observed on Vox's ``Today, Explained``) with
+    ``Content-Encoding: gzip`` and a body that fails to inflate, while the same
+    URL returns a perfectly good document when compression is not negotiated.
+    Without this retry the show looks like a dead feed and contributes nothing.
+    """
+    try:
+        response = session.get(rss_url, timeout=timeout)
+    except requests.exceptions.ContentDecodingError:
+        logger.warning(f"{rss_url} sent an undecodable compressed body; retrying uncompressed")
+        response = session.get(rss_url, timeout=timeout,
+                               headers={"Accept-Encoding": "identity"})
+    response.raise_for_status()
+    return response
 
 
 def parse_feed(content: bytes | str, source: str = "<bytes>") -> list[FeedEpisode]:

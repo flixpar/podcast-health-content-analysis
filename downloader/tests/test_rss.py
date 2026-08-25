@@ -80,3 +80,24 @@ def test_fetch_feed_parses_response_body():
     session.get.return_value = Mock(content=FEED, raise_for_status=Mock())
     assert len(fetch_feed("https://x/feed", session, timeout=5)) == 2
     session.get.assert_called_once_with("https://x/feed", timeout=5)
+
+
+def test_fetch_feed_retries_uncompressed_when_gzip_is_corrupt():
+    """Megaphone serves some feeds with a gzip body that will not inflate but
+    a perfectly good identity body; without the retry the show looks dead."""
+    session = Mock()
+    good = Mock(content=FEED, raise_for_status=Mock())
+    session.get.side_effect = [requests.exceptions.ContentDecodingError("bad gzip"), good]
+
+    assert len(fetch_feed("https://x/feed", session, timeout=5)) == 2
+
+    assert session.get.call_count == 2
+    assert session.get.call_args_list[1].kwargs["headers"] == {"Accept-Encoding": "identity"}
+
+
+def test_fetch_feed_gives_up_if_the_uncompressed_retry_also_fails():
+    session = Mock()
+    session.get.side_effect = [requests.exceptions.ContentDecodingError("bad gzip"),
+                              requests.ConnectionError("boom")]
+    with pytest.raises(FeedError, match="fetch failed"):
+        fetch_feed("https://x/feed", session)
