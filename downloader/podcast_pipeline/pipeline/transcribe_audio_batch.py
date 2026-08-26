@@ -51,15 +51,46 @@ def _load_failures(path: Path) -> set[int]:
     failed: set[int] = set()
     if not path.exists():
         return failed
-    with path.open(encoding="utf-8") as stream:
-        for line_number, line in enumerate(stream, 1):
+    with path.open("r+b") as stream:
+        fcntl.flock(stream, fcntl.LOCK_EX)
+        payload = stream.read()
+        terminated = payload.endswith(b"\n")
+        lines = payload.split(b"\n")
+        if terminated:
+            lines.pop()
+        for index, line in enumerate(lines):
+            line_number = index + 1
             try:
                 record = json.loads(line)
                 failed.add(int(record["episode_id"]))
             except (ValueError, KeyError) as exc:
+                if index == len(lines) - 1 and not terminated:
+                    # A killed append can leave only the final JSON object
+                    # fragment. Remove that fragment while holding the same
+                    # advisory lock used by appenders, so the next failure
+                    # record starts at a clean JSONL boundary.
+                    tail_start = len(payload) - len(line)
+                    stream.seek(tail_start)
+                    stream.truncate()
+                    stream.flush()
+                    os.fsync(stream.fileno())
+                    logger.warning(
+                        "Discarded truncated final failure-log record at %s line %d",
+                        path, line_number,
+                    )
+                    break
                 raise AudioBatchTranscriptionError(
                     f"Invalid failure log {path} at line {line_number}: {exc}"
                 ) from exc
+        else:
+            # A complete JSON object can survive while its trailing newline
+            # does not. Normalize it before a future append to avoid joining
+            # two otherwise valid objects on one line.
+            if lines and not terminated:
+                stream.seek(0, os.SEEK_END)
+                stream.write(b"\n")
+                stream.flush()
+                os.fsync(stream.fileno())
     return failed
 
 
@@ -71,8 +102,10 @@ def _append_failure(path: Path, job: Job, error: Exception) -> None:
         "error_type": type(error).__name__,
         "error": str(error)[:2000],
     }
-    with path.open("a", encoding="utf-8") as stream:
-        stream.write(json.dumps(record, ensure_ascii=False, separators=(",", ":")) + "\n")
+    payload = (json.dumps(record, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
+    with path.open("a+b") as stream:
+        fcntl.flock(stream, fcntl.LOCK_EX)
+        stream.write(payload)
         stream.flush()
         os.fsync(stream.fileno())
 
