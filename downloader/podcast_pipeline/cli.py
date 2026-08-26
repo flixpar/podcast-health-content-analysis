@@ -80,6 +80,51 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--keep-files", action="store_true")
     p.add_argument("--dry-run", action="store_true")
 
+    p = sub.add_parser("export-audio-batch",
+                       help="package downloaded, transcript-free audio for transfer")
+    p.add_argument("output_dir", type=Path,
+                   help="destination directory, normally a mounted transfer disk")
+    p.add_argument("--target-gb", type=float,
+                   help="target audio payload in decimal GB (default: batch_export.target_size_gb)")
+    p.add_argument("--include-exported", action="store_true",
+                   help="allow episodes recorded in an earlier completed batch")
+    p.add_argument("--dry-run", action="store_true",
+                   help="select and report a batch without writing files")
+
+    p = sub.add_parser("ingest-audio-batch",
+                       help="verify and prepare a transferred audio batch on a remote server")
+    p.add_argument("archive", type=Path)
+    p.add_argument("workspace_dir", type=Path,
+                   help="directory that will receive the verified batch directory")
+    p.add_argument("--checksum", type=Path, help="checksum sidecar (default: ARCHIVE.sha256)")
+    p.add_argument("--skip-archive-checksum", action="store_true",
+                   help="permit a missing sidecar; member hashes are still verified")
+
+    p = sub.add_parser("transcribe-audio-batch",
+                       help="resumably transcribe a prepared batch without the source database")
+    p.add_argument("batch_dir", type=Path)
+    p.add_argument("--limit", type=int)
+    p.add_argument("--retry-errors", action="store_true")
+    p.add_argument("--verify-audio-hashes", action="store_true",
+                   help="rehash all audio before starting (ingest already verifies it)")
+
+    p = sub.add_parser("export-transcript-batch",
+                       help="package remote transcripts for return transfer")
+    p.add_argument("batch_dir", type=Path)
+    p.add_argument("output_dir", type=Path)
+    p.add_argument("--allow-partial", action="store_true",
+                   help="export completed transcripts even though some episodes are unfinished")
+    p.add_argument("--dry-run", action="store_true")
+
+    p = sub.add_parser("import-transcript-batch",
+                       help="verify returned transcripts and register them in the source dataset")
+    p.add_argument("archive", type=Path)
+    p.add_argument("--checksum", type=Path, help="checksum sidecar (default: ARCHIVE.sha256)")
+    p.add_argument("--skip-archive-checksum", action="store_true",
+                   help="permit a missing sidecar; member hashes are still verified")
+    p.add_argument("--dry-run", action="store_true",
+                   help="fully validate without copying transcripts or writing SQLite")
+
     sub.add_parser("stats", help="show database and storage counts")
     return parser
 
@@ -95,19 +140,29 @@ def _str_list(value: str) -> list[str]:
 def main(argv: list[str] | None = None) -> None:
     args = build_parser().parse_args(argv)
     configure_logging(LOG_DIR / "pipeline.log", args.log_level)
-    config = Config.load(args.config)
-    conn = db.connect(config.db_path)
+    database_free = {
+        "ingest-audio-batch", "transcribe-audio-batch", "export-transcript-batch",
+    }
+    if args.command in database_free and args.config == DEFAULT_CONFIG_PATH and not args.config.exists():
+        config = Config()
+    else:
+        config = Config.load(args.config)
+    conn = None if args.command in database_free else db.connect(config.db_path)
     try:
         result = dispatch(args, config, conn)
     finally:
-        conn.close()
+        if conn is not None:
+            conn.close()
     print(json.dumps(result, indent=2))
 
 
 def dispatch(args: argparse.Namespace, config: Config, conn) -> dict:
     from podcast_pipeline.pipeline import (audit, convert_audio, discover, download,
-                                           fetch_podcasts, reset_transcripts, rss_transcripts,
-                                           stats, transcribe)
+                                           export_audio_batch, export_transcript_batch,
+                                           fetch_podcasts, import_transcript_batch,
+                                           ingest_audio_batch, reset_transcripts,
+                                           rss_transcripts, stats, transcribe,
+                                           transcribe_audio_batch)
     match args.command:
         case "fetch-podcasts":
             # Chart selection is per-run: one collection is assembled from
@@ -141,6 +196,31 @@ def dispatch(args: argparse.Namespace, config: Config, conn) -> dict:
             return reset_transcripts.run(config, conn, episode_ids=args.episode_ids,
                                          podcast_ids=args.podcast_ids, everything=args.all,
                                          keep_files=args.keep_files, dry_run=args.dry_run)
+        case "export-audio-batch":
+            return export_audio_batch.run(
+                config, conn, output_dir=args.output_dir, target_gb=args.target_gb,
+                include_exported=args.include_exported, dry_run=args.dry_run,
+            )
+        case "ingest-audio-batch":
+            return ingest_audio_batch.run(
+                args.archive, args.workspace_dir, checksum_path=args.checksum,
+                skip_archive_checksum=args.skip_archive_checksum,
+            )
+        case "transcribe-audio-batch":
+            return transcribe_audio_batch.run(
+                config, args.batch_dir, limit=args.limit, retry_errors=args.retry_errors,
+                verify_audio_hashes=args.verify_audio_hashes,
+            )
+        case "export-transcript-batch":
+            return export_transcript_batch.run(
+                args.batch_dir, args.output_dir, allow_partial=args.allow_partial,
+                dry_run=args.dry_run,
+            )
+        case "import-transcript-batch":
+            return import_transcript_batch.run(
+                config, conn, args.archive, checksum_path=args.checksum,
+                skip_archive_checksum=args.skip_archive_checksum, dry_run=args.dry_run,
+            )
         case "stats":
             return stats.run(config, conn)
     raise ValueError(f"unhandled command {args.command}")

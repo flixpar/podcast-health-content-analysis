@@ -106,6 +106,13 @@ class StorageConfig:
 
 
 @dataclass
+class BatchExportConfig:
+    # Decimal GB matches transfer-disk and archive-size conventions. The tar is
+    # uncompressed because the MP3/Opus payload is already compressed.
+    target_size_gb: float = 250.0
+
+
+@dataclass
 class Config:
     data_dir: str = "data"            # relative paths resolve against the project root
     fetcher: FetcherConfig = field(default_factory=FetcherConfig)
@@ -116,6 +123,7 @@ class Config:
     audio_compression: CompressionConfig = field(default_factory=CompressionConfig)
     transcription: TranscriptionConfig = field(default_factory=TranscriptionConfig)
     storage: StorageConfig = field(default_factory=StorageConfig)
+    batch_export: BatchExportConfig = field(default_factory=BatchExportConfig)
 
     # --- derived paths -----------------------------------------------------
 
@@ -135,6 +143,11 @@ class Config:
     @property
     def db_path(self) -> Path:
         return self.data_path / "podcast_metadata.db"
+
+    @property
+    def batch_export_dir(self) -> Path:
+        """Small, persistent receipts used to avoid exporting an episode twice."""
+        return self.data_path / "audio_batches"
 
     # --- loading -------------------------------------------------------------
 

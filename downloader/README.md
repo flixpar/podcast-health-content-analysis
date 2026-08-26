@@ -23,7 +23,7 @@ downloader/
 │   ├── asr/                 chunking.py (pure), parakeet.py (NeMo model on one GPU)
 │   └── pipeline/            one module per command: fetch_podcasts, discover, download,
 │                            rss_transcripts, transcribe, convert_audio, audit,
-│                            reset_transcripts, stats
+│                            reset_transcripts, export_audio_batch, stats
 ├── tests/                   pytest suite (no network, no GPU; ffmpeg tests skip if absent)
 ├── tools/ab_format_test.py  MP3-vs-Opus ASR divergence measurement
 ├── config.json              local settings (gitignored); config.example.json is the template
@@ -61,6 +61,11 @@ print a JSON summary when done. `--config PATH` and `--log-level` are global.
 | `convert-audio [--dry-run] [--reconcile-only] [--threshold MB] [--limit N]` | Re-encode existing MP3s to Opus/OGG, verifying each before deleting the original. |
 | `audit [--fix] [--skip-probe] [--newer-than 'YYYY-MM-DD HH:MM']` | Reconcile the database against files on disk; `--fix` re-queues broken rows. |
 | `reset-transcripts (--all \| --episode-ids 1,2 \| --podcast-ids 3) [--dry-run]` | Delete ASR transcripts so `transcribe` runs again. Never touches publisher transcripts. |
+| `export-audio-batch OUTPUT_DIR [--target-gb GB] [--dry-run]` | Create a checksummed tar of completed audio that has no transcript and has not been exported before. |
+| `ingest-audio-batch ARCHIVE WORKSPACE` | On the remote server, checksum, safely extract, and verify every audio member. |
+| `transcribe-audio-batch BATCH_DIR [--retry-errors]` | Resumably transcribe a prepared batch without needing the source SQLite database. |
+| `export-transcript-batch BATCH_DIR OUTPUT_DIR` | Create a checksummed return tar; refuses an incomplete batch unless explicitly allowed. |
+| `import-transcript-batch ARCHIVE [--dry-run]` | Verify returned provenance and transcripts, then idempotently register them in the source dataset. |
 | `stats` | Counts by status, transcript totals, storage used. |
 
 Recommended refresh cycle:
@@ -76,6 +81,62 @@ python -m podcast_pipeline transcribe
 
 Fetching publisher transcripts before downloading matters: an episode whose
 feed carries a transcript never needs its audio fetched or transcribed.
+
+### Transfer batches for transcription
+
+Point the exporter at a mounted transfer disk. Previewing is cheap and writes
+nothing:
+
+```bash
+python -m podcast_pipeline export-audio-batch /media/$USER/transfer --dry-run
+python -m podcast_pipeline export-audio-batch /media/$USER/transfer
+```
+
+The default target is 250 decimal GB of audio payload. Override it for a smaller
+disk or test run with `--target-gb 50`. The resulting uncompressed tar is only
+slightly larger than the selected payload; MP3 and Opus are already compressed,
+so gzip/zstd would mostly add time. The command also writes a standard
+`<archive>.sha256` sidecar. After copying both files, verify and extract them:
+
+```bash
+sha256sum -c audio-batch-*.tar.sha256
+tar -xf audio-batch-*.tar
+```
+
+Each archive extracts into its own batch directory. `manifest.jsonl` contains a
+batch header followed by one record per audio file, including the source
+database `episode_id`, podcast/episode metadata, byte size, archive path, and
+SHA-256. That manifest is the job list for the transcription computer.
+
+Selection requires all of the following at the snapshot taken by the command:
+
+- episode status is `downloaded`, or `error` with completed audio (a prior
+  transcription failure);
+- `audio_file_path` points to a regular file of plausible size;
+- neither the episode nor `transcripts` table records a transcript; and
+- the episode ID is absent from every completed batch manifest.
+
+The exporter is safe while `download` continues: unfinished audio remains a
+`.part` file and is not marked downloaded. It never writes SQLite. Completed
+receipts are kept under `data/audio_batches/manifests/`, so the next invocation
+selects the next backlog rather than duplicating the last batch. Keep this small
+directory with the source dataset. `--include-exported` intentionally bypasses
+that ledger when a replacement copy is needed.
+
+Only one exporter may run at once. It checks destination free space before
+starting, computes each audio checksum while writing, detects source files that
+change mid-export, writes through a hidden `.partial` archive, and exposes the
+final tar only after a successful close. If the output is on the audio
+filesystem, it additionally preserves `download.min_free_gb` for the ongoing
+download job.
+
+The complete remote round trip is documented in
+[`docs/remote-batch-transcription.md`](docs/remote-batch-transcription.md). In
+short: transfer the audio `.tar` and `.tar.sha256`, ingest and transcribe it on
+the remote server, export and transfer the transcript `.tar` and sidecar, then
+run a source-side import dry-run before the real import. Unlike audio export,
+transcript import writes SQLite and must wait until the long-running downloader
+is paused.
 
 ### Charts
 
@@ -118,6 +179,7 @@ sqlite3 data/podcast_metadata.db \
 | `audio_compression` | `enabled`, `size_threshold_mb`, `bitrate`, `keep_original` |
 | `transcription` | `model_name`, `gpu_ids`, `batch_size`, `chunk_duration_seconds`, `overlap_seconds` |
 | `storage` | `transcript_compression_level` (zstd) |
+| `batch_export` | `target_size_gb` (default 250 decimal GB of audio payload) |
 
 Unknown keys are rejected at startup, so a typo cannot silently fall back to a default.
 
