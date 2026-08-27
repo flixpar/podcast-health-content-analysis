@@ -1,29 +1,17 @@
 [project]
 name = "podcast-misinfo"
 version = "0.1.0"
-description = "Add your description here"
+description = "Podcast collection, transcription, and misinformation analysis"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13,<3.14"
 dependencies = [
     "beautifulsoup4>=4.13.4",
     "feedparser>=6.0.11",
-    "ffmpeg-python>=0.2.0",
-    "flask>=3.1.1",
-    "flask-caching>=2.3.1",
-    "flask-cors>=6.0.1",
-    "flask-limiter>=3.12",
-    "flask-socketio>=5.5.1",
-    "librosa>=0.11.0",
-    "nemo-toolkit[asr]>=2.4.0",
-    "numpy>=1.26.4",
-    "pandas>=2.3.1",
-    "plotly>=6.2.0",
-    "pydub>=0.25.1",
-    "pyjwt>=2.10.1",
+    "nemo-toolkit[asr]>=3.0,<3.1",
+    "numpy>=2.0",
     "requests>=2.32.4",
-    "soundfile>=0.13.1",
-    "torch>=2.8.0",
-    "torchaudio>=2.8.0",
+    "sentencepiece>=0.2.1",
+    "torch==2.12.1",
     "tqdm>=4.67.1",
     "zstandard>=0.23.0",
 ]
@@ -32,3 +20,19 @@ dependencies = [
 dev = [
     "pytest>=8",
 ]
+
+[tool.uv]
+environments = [
+    "sys_platform == 'linux' and platform_machine == 'x86_64'",
+]
+required-environments = [
+    "sys_platform == 'linux' and platform_machine == 'x86_64'",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }
