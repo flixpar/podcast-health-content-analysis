@@ -4,7 +4,14 @@ import subprocess
 
 import pytest
 
-from podcast_pipeline.audio.ffmpeg import EncodeError, check_conversion, decode_pcm, encode_opus, probe_duration
+from podcast_pipeline.audio.ffmpeg import (
+    EncodeError,
+    check_conversion,
+    decode_pcm,
+    encode_opus,
+    probe_duration,
+    probe_stream_types,
+)
 
 pytestmark = pytest.mark.skipif(shutil.which("ffmpeg") is None, reason="ffmpeg not installed")
 
@@ -30,6 +37,22 @@ def test_encode_opus_roundtrip(noise_mp3, tmp_path):
     assert target.exists()
     assert check_conversion(noise_mp3, target) is None
     assert probe_duration(target) == pytest.approx(90, abs=0.5)
+
+
+def test_encode_opus_strips_one_frame_cover_art(one_frame_cover_art_ogg, tmp_path):
+    assert probe_stream_types(one_frame_cover_art_ogg) == ("video", "audio")
+    target = tmp_path / "audio-only.ogg"
+
+    encode_opus(one_frame_cover_art_ogg, target)
+
+    assert probe_stream_types(target) == ("audio",)
+    assert check_conversion(one_frame_cover_art_ogg, target) is None
+
+
+def test_conversion_rejects_extra_streams(one_frame_cover_art_ogg):
+    assert "exactly one audio stream" in check_conversion(
+        one_frame_cover_art_ogg, one_frame_cover_art_ogg,
+    )
 
 
 def test_truncated_encode_is_rejected(noise_mp3, tmp_path):

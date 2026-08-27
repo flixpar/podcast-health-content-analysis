@@ -38,6 +38,18 @@ def probe_duration(path: Path) -> float | None:
         return None
 
 
+def probe_stream_types(path: Path) -> tuple[str, ...] | None:
+    """Return container stream types in index order, or None on probe failure."""
+    out = subprocess.run(
+        ["ffprobe", "-v", "error", "-show_entries", "stream=codec_type",
+         "-of", "csv=p=0", str(path)],
+        capture_output=True, text=True, errors="replace", timeout=120,
+    )
+    if out.returncode != 0:
+        return None
+    return tuple(line.strip() for line in out.stdout.splitlines() if line.strip())
+
+
 def check_conversion(source: Path, encoded: Path) -> str | None:
     """Return None if ``encoded`` is a complete re-encode of ``source``, else the reason.
 
@@ -50,6 +62,12 @@ def check_conversion(source: Path, encoded: Path) -> str | None:
         return "output file not created"
     if encoded.stat().st_size < MIN_AUDIO_BYTES:
         return f"output implausibly small ({encoded.stat().st_size} bytes)"
+    stream_types = probe_stream_types(encoded)
+    if stream_types is None:
+        return "output stream layout is not readable"
+    if stream_types != ("audio",):
+        layout = ", ".join(stream_types) if stream_types else "no streams"
+        return f"output must contain exactly one audio stream (found: {layout})"
     encoded_duration = probe_duration(encoded)
     if encoded_duration is None:
         return "output is not decodable"
@@ -66,6 +84,7 @@ def encode_opus(source: Path, target: Path, bitrate: str = "24k", timeout: int =
     holds the whole source, and DiskSpaceError if the volume filled mid-encode.
     """
     cmd = ["ffmpeg", "-v", "error", "-i", str(source),
+           "-map", "0:a:0", "-vn", "-sn", "-dn", "-map_metadata", "-1",
            "-c:a", "libopus", "-b:a", bitrate, "-vbr", "on", "-ac", "1",
            "-y", str(target)]
     try:
