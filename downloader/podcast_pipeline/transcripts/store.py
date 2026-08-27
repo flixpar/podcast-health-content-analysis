@@ -16,6 +16,7 @@ from pathlib import Path
 
 import zstandard as zstd
 
+from podcast_pipeline.batches import atomic_write
 from podcast_pipeline.models import Segment
 
 FORMAT_VERSION = "1.0"
@@ -65,7 +66,8 @@ class TranscriptStore:
         payload = "\n".join(json.dumps(line, ensure_ascii=False, separators=(",", ":"))
                             for line in lines)
         path = self.path_for(episode_id)
-        path.write_bytes(zstd.ZstdCompressor(level=self.compression_level).compress(payload.encode("utf-8")))
+        compressed = zstd.ZstdCompressor(level=self.compression_level).compress(payload.encode("utf-8"))
+        atomic_write(path, compressed)
 
         ends = [s.end for s in segments if s.end is not None]
         return SavedTranscript(

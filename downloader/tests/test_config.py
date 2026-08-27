@@ -9,8 +9,10 @@ def test_defaults_and_derived_paths():
     config = Config()
     assert config.download.max_workers == 8
     assert config.transcription.gpu_ids == [0]
+    assert config.batch_export.target_size_gb == 250.0
     assert config.db_path == PROJECT_ROOT / "data" / "podcast_metadata.db"
     assert config.audio_dir == PROJECT_ROOT / "data" / "audio"
+    assert config.batch_export_dir == PROJECT_ROOT / "data" / "audio_batches"
 
 
 def test_nested_override_keeps_other_defaults():

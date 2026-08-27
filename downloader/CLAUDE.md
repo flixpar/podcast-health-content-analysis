@@ -37,6 +37,11 @@ python -m podcast_pipeline download            # resumable; re-run after an inte
 python -m podcast_pipeline transcribe
 python -m podcast_pipeline convert-audio --dry-run
 python -m podcast_pipeline audit --fix
+python -m podcast_pipeline export-audio-batch /path/to/transfer-disk --dry-run
+python -m podcast_pipeline ingest-audio-batch /path/to/audio-batch.tar /remote/work
+python -m podcast_pipeline transcribe-audio-batch /remote/work/audio-batch-ID
+python -m podcast_pipeline export-transcript-batch /remote/work/audio-batch-ID /path/to/return
+python -m podcast_pipeline import-transcript-batch /path/to/transcript-batch.tar --dry-run
 pytest tests
 ```
 
@@ -66,6 +71,13 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
 - `podcast_pipeline/pipeline/` -- one module per command. Workers (threads) do
   network/GPU/ffmpeg work and return results; **all database writes happen on
   the main thread** as results arrive.
+- `pipeline/export_audio_batch.py` -- read-only SQLite snapshot to an
+  uncompressed, checksummed transfer tar. Completed receipts under
+  `data/audio_batches/manifests` prevent duplicate batches.
+- `batches.py`, `pipeline/{ingest_audio_batch,transcribe_audio_batch,
+  export_transcript_batch,import_transcript_batch}.py` -- the verified remote
+  transcription round trip. The audio manifest is the immutable identity
+  contract; the remote machine never receives or constructs the source DB.
 - `tests/` -- pytest; fakes are injected at module boundaries (`monkeypatch.setattr(discover, "fetch_feed", ...)`).
 - `tools/ab_format_test.py` -- the MP3-vs-Opus measurement behind the storage policy.
 
@@ -100,6 +112,13 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
   after an hour. `db.BUSY_TIMEOUT_SECONDS` is now 300 s, which absorbs a burst,
   but the rule stands: queue write stages between download runs, not during one.
   Read-only `stats` is always safe.
+- **Batch export is intentionally not database state.** It can run alongside
+  `download`; only rows with a finalized audio path are selected. Do not move
+  its completed-manifest ledger into SQLite or select `.part` files.
+- **Transcript batch import is a writing stage.** Pause `download` before it.
+  Never accept a return batch unless it matches the retained source audio
+  manifest, per-episode audio hashes, database episode GUID/podcast identity,
+  transcript metadata, and both archive/member checksums.
 - **A throttled iTunes search is not a podcast without a feed.** The search
   API (used to give Spotify's chart, which carries no RSS URLs, a feed) answers
   403 after ~20 requests a minute and stays throttled for many minutes. The
