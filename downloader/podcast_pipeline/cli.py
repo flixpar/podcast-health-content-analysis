@@ -52,7 +52,7 @@ def build_parser() -> argparse.ArgumentParser:
                    help="only podcasts in these charts, comma-separated "
                         "(e.g. apple_us_genre_1512); see the podcast_charts table")
 
-    p = sub.add_parser("transcribe", help="transcribe downloaded audio with Parakeet")
+    p = sub.add_parser("transcribe", help="transcribe downloaded audio")
     p.add_argument("--limit", type=int)
     p.add_argument("--retry-errors", action="store_true",
                    help="also retry episodes whose previous transcription failed")

@@ -56,6 +56,12 @@ global option:
 Keep the model name, chunk duration, overlap, and batch size stable within a
 batch. The exact model is recorded in every transcript.
 
+For Qwen3-ASR, `vllm_audio_remux_cache_dir` can point at disposable local
+storage. Inputs with cover art or any other extra stream are then losslessly
+normalized to one audio stream before chunk seeking. Without a cache, the
+pipeline automatically uses slower output-side seeking for those inputs so
+correctness does not depend on deployment-specific configuration.
+
 ## 3. Ingest and verify the audio batch remotely
 
 Put the tar and checksum sidecar together, then run:

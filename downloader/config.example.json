@@ -35,13 +35,26 @@
         "keep_original": false
     },
     "transcription": {
+        "backend": "parakeet",
         "model_name": "nvidia/parakeet-tdt-0.6b-v2",
         "gpu_ids": [
             0
         ],
         "batch_size": 1,
         "chunk_duration_seconds": 300,
-        "overlap_seconds": 30
+        "overlap_seconds": 30,
+        "use_cuda_graphs": true,
+        "isolated_gpu_workers": false,
+        "decode_workers": 0,
+        "decode_prefetch": 8,
+        "vllm_urls": [
+            "http://127.0.0.1:8100"
+        ],
+        "vllm_request_concurrency": 32,
+        "vllm_language": "en",
+        "vllm_timeout_seconds": 1800,
+        "vllm_max_completion_tokens": null,
+        "vllm_audio_remux_cache_dir": null
     },
     "storage": {
         "transcript_compression_level": 3

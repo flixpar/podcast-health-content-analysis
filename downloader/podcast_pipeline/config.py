@@ -90,6 +90,7 @@ class CompressionConfig:
 
 @dataclass
 class TranscriptionConfig:
+    backend: str = "parakeet"        # "parakeet" or "qwen_vllm"
     model_name: str = "nvidia/parakeet-tdt-0.6b-v2"
     gpu_ids: list[int] = field(default_factory=lambda: [0])
     # Audio chunks per forward pass. Attention memory grows with chunk length
@@ -98,6 +99,30 @@ class TranscriptionConfig:
     batch_size: int = 1
     chunk_duration_seconds: int = 300 # long audio is split into chunks of this length...
     overlap_seconds: int = 30         # ...overlapping by this much, then merged on word timestamps
+    use_cuda_graphs: bool = True
+    # NeMo model instances are not safe to drive concurrently from Python
+    # threads on multiple GPUs. Process isolation gives each GPU its own CUDA
+    # runtime state and is recommended for multi-GPU batch jobs.
+    isolated_gpu_workers: bool = False
+    # Batch transcription can decode upcoming episodes concurrently so GPU
+    # workers do not sit idle waiting for ffmpeg. Zero keeps the simple
+    # per-GPU decode path used by the local/database pipeline.
+    decode_workers: int = 0
+    decode_prefetch: int = 8
+    # Qwen3-ASR is served out of process. More than one URL is supported for
+    # independent replicas, while native vLLM data parallel uses one URL.
+    vllm_urls: list[str] = field(default_factory=lambda: ["http://127.0.0.1:8100"])
+    vllm_request_concurrency: int = 32
+    vllm_language: str = "en"
+    vllm_timeout_seconds: int = 1800
+    # Bounds pathological decoder loops without constraining normal speech.
+    # Set per deployment because the safe value depends on chunk duration.
+    vllm_max_completion_tokens: int | None = None
+    # Some podcast OGGs contain a one-frame Theora cover-art stream. FFmpeg's
+    # fast input seeking then seeks against that stream and silently returns
+    # audio from time zero for every later chunk. When set, Qwen losslessly
+    # remuxes such inputs to an audio-only cache once before chunking them.
+    vllm_audio_remux_cache_dir: str | None = None
 
 
 @dataclass

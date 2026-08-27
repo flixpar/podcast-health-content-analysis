@@ -119,6 +119,51 @@ def test_complete_remote_roundtrip_is_verified_resumable_and_idempotent(
     assert repeated["imported"] == 0 and repeated["already_imported"] == 2
 
 
+def test_batch_transcription_can_prefetch_decoded_audio(
+        config, conn, tmp_path, monkeypatch):
+    _, outbound = _source_batch(config, conn, tmp_path, count=3)
+    ingested = ingest_audio_batch.run(
+        Path(outbound["archive"]), tmp_path / "workspace",
+        checksum_path=Path(outbound["checksum"]),
+    )
+    batch_dir = Path(ingested["batch_dir"])
+    decoded_paths = []
+
+    def fake_decode(path, sample_rate):
+        decoded_paths.append(path)
+        assert sample_rate == 16_000
+        return [0.0] * sample_rate
+
+    monkeypatch.setattr("podcast_pipeline.audio.ffmpeg.decode_pcm", fake_decode)
+
+    class Result:
+        segments = [Segment("Prefetched words.", 0.0, 1.0)]
+        duration_seconds = 1.0
+        chunk_count = 1
+        rtf = 0.01
+
+    class FakeTranscriber:
+        def __init__(self, cfg, gpu_id):
+            pass
+
+        def transcribe_audio(self, audio):
+            assert len(audio) == 16_000
+            return Result()
+
+    fake_module = types.ModuleType("podcast_pipeline.asr.parakeet")
+    fake_module.ParakeetTranscriber = FakeTranscriber
+    fake_module.TranscriptionError = RuntimeError
+    monkeypatch.setitem(sys.modules, "podcast_pipeline.asr.parakeet", fake_module)
+    config.transcription.gpu_ids = [0]
+    config.transcription.decode_workers = 2
+    config.transcription.decode_prefetch = 1
+
+    result = transcribe_audio_batch.run(config, batch_dir)
+
+    assert result["transcribed"] == 3
+    assert len(decoded_paths) == 3
+
+
 def test_ingest_rejects_bad_outer_checksum(config, conn, tmp_path):
     _, outbound = _source_batch(config, conn, tmp_path, count=1)
     bad_checksum = tmp_path / "bad.sha256"

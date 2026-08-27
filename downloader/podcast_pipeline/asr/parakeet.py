@@ -11,6 +11,7 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 
+import numpy as np
 import torch
 from nemo.collections.asr.models import ASRModel
 
@@ -61,11 +62,22 @@ class ParakeetTranscriber:
         self.model = ASRModel.from_pretrained(model_name=config.model_name,
                                               map_location=str(self.device))
         self.model.eval()
+        if not config.use_cuda_graphs:
+            self.model.disable_cuda_graphs()
         logger.info(f"GPU {gpu_id}: model ready "
                     f"({torch.cuda.memory_allocated(self.device) / 1e9:.1f} GB allocated)")
 
     def transcribe_file(self, path: Path) -> TranscriptionResult:
         audio = decode_pcm(path, SAMPLE_RATE)
+
+        return self.transcribe_audio(audio)
+
+    def transcribe_audio(self, audio: np.ndarray) -> TranscriptionResult:
+        """Transcribe already-decoded 16 kHz mono PCM.
+
+        Batch workflows use this entry point to overlap CPU decoding of future
+        episodes with inference on the current episode.
+        """
         duration = len(audio) / SAMPLE_RATE
         if duration < MIN_AUDIO_SECONDS:
             raise TranscriptionError(f"audio is only {duration:.2f}s long")
