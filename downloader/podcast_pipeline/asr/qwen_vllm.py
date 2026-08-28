@@ -39,6 +39,7 @@ MAX_DUPLICATE_NGRAM_FRACTION = 0.50
 MAX_LOW_SIGNAL_MEAN_VOLUME_DB = -50.0
 FALLBACK_CHUNK_SECONDS = 120
 MIN_FALLBACK_CHUNK_SECONDS = 30
+FALLBACK_DURATION_EPSILON_SECONDS = 1e-6
 _NORMALIZE_WORD = re.compile(r"[^\w']+", re.UNICODE)
 _FAILURE_MARKER_WORD = re.compile(
     r"^\[UNTRANSCRIBED_AUDIO_[0-9.]+-[0-9.]+s_(?:ASR_FAILURE|LOW_SIGNAL)\]$"
@@ -60,6 +61,7 @@ class TranscriptionResult:
     omitted_audio_spans: tuple[tuple[float, float], ...] = ()
     input_preprocessing: str | None = None
     detected_speech_spans: tuple[tuple[float, float], ...] = ()
+    vad_provenance: dict | None = None
 
     @property
     def text(self) -> str:
@@ -90,6 +92,7 @@ class TranscriptionPlan:
     seek_after_input: bool = False
     input_preprocessing: str | None = None
     detected_speech_spans: tuple[tuple[float, float], ...] = ()
+    vad_provenance: dict | None = None
 
 
 @dataclass(frozen=True)
@@ -315,7 +318,13 @@ class QwenVLLMTranscriber:
         self._url_counter = itertools.count()
         self._url_lock = threading.Lock()
         self._local = threading.local()
-        self._vad = SileroVoiceActivityDetector(config) if config.vad_enabled else None
+        self._vad_plan = None
+        self._vad = None
+        if config.vad_enabled and config.vad_plan_path:
+            from podcast_pipeline.asr.vad_plan import PrecomputedVADPlan
+            self._vad_plan = PrecomputedVADPlan.load(config.vad_plan_path)
+        elif config.vad_enabled:
+            self._vad = SileroVoiceActivityDetector(config)
         self._vad_lock = threading.Lock()
 
     def _session(self) -> requests.Session:
@@ -386,7 +395,17 @@ class QwenVLLMTranscriber:
             )
             seek_after_input = False
             preprocessing = "lossless_audio_stream_remux"
-        if self._vad is None:
+        vad_provenance = None
+        if self._vad_plan is not None:
+            detection = self._vad_plan.detect(path, duration)
+            detected_speech_spans = detection.spans
+            spans = speech_chunk_spans(
+                detection.spans,
+                self.config.chunk_duration_seconds,
+                self.config.overlap_seconds,
+            )
+            vad_provenance = self._vad_plan.transcript_metadata()
+        elif self._vad is None:
             detected_speech_spans = ((0.0, duration),)
             spans = chunk_spans(
                 duration,
@@ -408,7 +427,7 @@ class QwenVLLMTranscriber:
             )
         return TranscriptionPlan(
             transcription_path, duration, spans, seek_after_input, preprocessing,
-            detected_speech_spans,
+            detected_speech_spans, vad_provenance,
         )
 
     def transcribe_chunk(self, plan: TranscriptionPlan, index: int) -> ChunkResult:
@@ -450,7 +469,13 @@ class QwenVLLMTranscriber:
         text = self._request(encoded.data, label, max_tokens)
         if text and not is_implausible_transcript(text, duration):
             return SpanResult(text)
-        if duration <= MIN_FALLBACK_CHUNK_SECONDS:
+        # ``chunk_spans`` adds decimal offsets repeatedly, so a nominal 30s
+        # terminal span can be a few ulps greater than 30. Without a tolerance
+        # that span is split into itself forever when the model repeats the
+        # same implausible output.
+        if duration <= (
+            MIN_FALLBACK_CHUNK_SECONDS + FALLBACK_DURATION_EPSILON_SECONDS
+        ):
             logger.warning(
                 "Omitting %.1fs span %s after Qwen remained implausible at minimum size",
                 duration, label,
@@ -545,6 +570,7 @@ class QwenVLLMTranscriber:
             ),
             input_preprocessing=plan.input_preprocessing,
             detected_speech_spans=plan.detected_speech_spans,
+            vad_provenance=getattr(plan, "vad_provenance", None),
         )
 
     def transcribe_file(self, path: Path) -> TranscriptionResult:

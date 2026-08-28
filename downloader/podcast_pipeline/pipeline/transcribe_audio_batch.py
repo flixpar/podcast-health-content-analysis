@@ -211,6 +211,15 @@ def run(config: Config, batch_dir: Path, limit: int | None = None,
             raise AudioBatchTranscriptionError(
                 "transcription.vllm_max_completion_tokens must be positive or null"
             )
+    if config.transcription.vad_plan_path:
+        if not config.transcription.vad_enabled:
+            raise AudioBatchTranscriptionError(
+                "transcription.vad_plan_path requires transcription.vad_enabled"
+            )
+        if backend != "qwen_vllm":
+            raise AudioBatchTranscriptionError(
+                "precomputed VAD plans are supported only by qwen_vllm batches"
+            )
     if config.transcription.isolated_gpu_workers:
         gpu_count = len(config.transcription.gpu_ids)
         if not gpu_count:
@@ -245,6 +254,14 @@ def run(config: Config, batch_dir: Path, limit: int | None = None,
         jobs.append(Job(episode, audio_path))
     if limit is not None:
         jobs = jobs[:limit]
+
+    if config.transcription.vad_plan_path and jobs:
+        from podcast_pipeline.asr.vad_plan import PrecomputedVADPlan, VADPlanError
+        try:
+            plan = PrecomputedVADPlan.load(config.transcription.vad_plan_path)
+            plan.validate_batch(manifest, {job.episode.episode_id for job in jobs})
+        except VADPlanError as exc:
+            raise AudioBatchTranscriptionError(f"Invalid precomputed VAD plan: {exc}") from exc
 
     result = {
         "batch_id": manifest.batch_id,
@@ -416,7 +433,7 @@ def _run_qwen_vllm(config: Config, jobs: list[Job], store: TranscriptStore,
     audio_seconds = 0.0
     omitted_audio_seconds = 0.0
 
-    if config.transcription.vad_enabled:
+    if config.transcription.vad_enabled and not config.transcription.vad_plan_path:
         _run_qwen_vad_jobs(
             config, jobs, store, manifest, failures_path, result, transcriber, started,
         )

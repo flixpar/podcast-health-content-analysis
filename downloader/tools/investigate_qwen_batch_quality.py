@@ -185,7 +185,9 @@ def main() -> None:
         if abs(row["omitted_audio_seconds"] - (
             row["marker_seconds"] if row["omission_accounting"] == "interval_union"
             else row["marker_seconds_raw"]
-        )) > 0.11
+        # Marker labels round both endpoints to tenths. Allow that bounded
+        # display loss per marker while keeping exact accounting in metadata.
+        )) > 0.11 * max(1, row["marker_count"])
     ]
     high_wpm = [row for row in rows if row["wpm"] > 300]
     repetitive_tail = [row for row in rows if row["tail_dominance"] >= 0.60]

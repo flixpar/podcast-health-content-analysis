@@ -69,6 +69,7 @@ def test_vad_metadata_records_detection_provenance():
 
     assert vad_metadata(config, result) == {
         "vad_enabled": True,
+        "vad_backend": "inline",
         "vad_model": "silero-vad",
         "vad_threshold": 0.5,
         "vad_min_speech_duration_ms": 250,

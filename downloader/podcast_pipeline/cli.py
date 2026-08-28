@@ -57,8 +57,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--retry-errors", action="store_true",
                    help="also retry episodes whose previous transcription failed")
     p.add_argument("--vad", action=argparse.BooleanOptionalAction, default=None,
-                   help="use Silero VAD to transcribe only detected speech "
-                        "(default: transcription.vad_enabled)")
+                   help="experimental/targeted use only: run CPU-bound Silero VAD "
+                        "before ASR (default: transcription.vad_enabled)")
 
     p = sub.add_parser("convert-audio", help="re-encode existing MP3s to Opus/OGG")
     p.add_argument("--threshold", type=float, help="minimum file size in MB (default: from config)")
@@ -111,8 +111,11 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--verify-audio-hashes", action="store_true",
                    help="rehash all audio before starting (ingest already verifies it)")
     p.add_argument("--vad", action=argparse.BooleanOptionalAction, default=None,
-                   help="use Silero VAD to transcribe only detected speech "
-                        "(default: transcription.vad_enabled)")
+                   help="experimental/targeted use only: run CPU-bound Silero VAD "
+                        "before ASR (default: transcription.vad_enabled)")
+    p.add_argument("--vad-plan", type=Path,
+                   help="validated precomputed VAD plan for this batch; enables VAD and "
+                        "avoids inline Silero detection")
 
     p = sub.add_parser("export-transcript-batch",
                        help="package remote transcripts for return transfer")
@@ -215,8 +218,13 @@ def dispatch(args: argparse.Namespace, config: Config, conn) -> dict:
                 skip_archive_checksum=args.skip_archive_checksum,
             )
         case "transcribe-audio-batch":
+            if args.vad_plan is not None and args.vad is False:
+                raise ValueError("--vad-plan cannot be combined with --no-vad")
             if args.vad is not None:
                 config.transcription.vad_enabled = args.vad
+            if args.vad_plan is not None:
+                config.transcription.vad_enabled = True
+                config.transcription.vad_plan_path = str(args.vad_plan)
             return transcribe_audio_batch.run(
                 config, args.batch_dir, limit=args.limit, retry_errors=args.retry_errors,
                 verify_audio_hashes=args.verify_audio_hashes,

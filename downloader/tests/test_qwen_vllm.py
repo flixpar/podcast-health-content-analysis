@@ -95,6 +95,31 @@ def test_runaway_transcript_detection():
     assert not is_implausible_transcript(ordinary, 600)
 
 
+def test_fallback_stops_at_nominal_30_second_span_with_float_drift(monkeypatch):
+    transcriber = QwenVLLMTranscriber(TranscriptionConfig())
+    requests = []
+
+    monkeypatch.setattr(
+        "podcast_pipeline.asr.qwen_vllm._encode_flac_chunk",
+        lambda *args: types.SimpleNamespace(data=b"audio", mean_volume_db=-20.0),
+    )
+
+    def repeated_output(audio, label, max_tokens):
+        requests.append(label)
+        return "the same five word phrase " * 30
+
+    monkeypatch.setattr(transcriber, "_request", repeated_output)
+
+    result = transcriber._transcribe_span(
+        Path("episode.ogg"), 0.0, 30.000000000000114, "clip"
+    )
+
+    assert requests == ["clip"]
+    assert result.text == "[UNTRANSCRIBED_AUDIO_0.0-30.0s_ASR_FAILURE]"
+    assert result.fallback_retries == 1
+    assert result.omitted_audio_spans == ((0.0, 30.000000000000114),)
+
+
 def test_omitted_span_accounting_deduplicates_overlap():
     assert _span_union_seconds(((535.0, 565.0), (560.0, 580.0))) == 45.0
 

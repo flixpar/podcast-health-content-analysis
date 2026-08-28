@@ -62,6 +62,11 @@ normalized to one audio stream before chunk seeking. Without a cache, the
 pipeline automatically uses slower output-side seeking for those inputs so
 correctness does not depend on deployment-specific configuration.
 
+The vLLM serving environment must include its audio decoder dependencies. At a
+minimum, verify that `soundfile` and `resampy` import successfully before a long
+run; a server missing both rejects every non-empty upload as an unsupported
+audio file.
+
 ## 3. Ingest and verify the audio batch remotely
 
 Put the tar and checksum sidecar together, then run:
@@ -123,10 +128,57 @@ Useful controls:
 - `--verify-audio-hashes` rehashes all audio before loading the model. Ingest
   already did this once, so it is normally only needed after suspected disk
   corruption.
-- `--vad` enables Silero voice activity detection for this run so only detected
-  speech regions are sent to ASR; `--no-vad` overrides an enabled config.
+- `--vad` enables experimental CPU-bound Silero voice activity detection so
+  only detected speech regions are sent to ASR; `--no-vad` overrides an enabled
+  config. Use inline VAD for targeted quality reruns only. The current serial
+  planning path is not suitable for a full production batch.
+- `--vad-plan PLAN.jsonl` enables VAD from a validated precomputed plan. This
+  path is supported for Qwen remote batches and keeps the globally concurrent
+  ASR scheduler; it does not invoke inline Silero.
 - A model/GPU worker crash fails loudly and reports how many jobs were not
   attempted. Transcripts completed before the crash remain resumable.
+
+### Fast GPU VAD planning for Qwen batches
+
+Keep pyannote isolated from the production environment because its PyTorch
+dependency pins may conflict with the ASR stack. The tested environment on
+`gpu313` used Python 3.12, `torch==2.5.1+cu124`,
+`torchaudio==2.5.1+cu124`, `pyannote-audio==3.4.0`, and
+`huggingface-hub==0.27.1`.
+
+The segmentation model is gated. Point both Hugging Face variables at a cache
+and token available on the worker, then plan across the available GPUs:
+
+```bash
+HF_HOME=/tmp/huggingface2 \
+HF_TOKEN_PATH=/home/fparker9/.config/huggingface/token \
+/tmp/fparker9/podcasts/pyannote-vad-venv/bin/python \
+  tools/plan_pyannote_vad.py \
+  /srv/podcast-work/audio-batch-<ID> \
+  /srv/podcast-work/audio-batch-<ID>.pyannote-vad.jsonl \
+  --gpu-ids 0,1,2,3 --workers 16 --batch-size 512 \
+  --min-duration-on 0.25 --min-duration-off 10
+```
+
+Then start or verify the Qwen vLLM service and transcribe normally:
+
+```bash
+../.venv/bin/python -m podcast_pipeline --config remote-config.json \
+  transcribe-audio-batch /srv/podcast-work/audio-batch-<ID> \
+  --vad-plan /srv/podcast-work/audio-batch-<ID>.pyannote-vad.jsonl
+```
+
+Plan files are checksum-bound to the exact manifest and source audio. They are
+written atomically and are safe to retain as provenance. Do not use
+`--overwrite` unless intentionally replacing an existing plan.
+
+Measured on `gpu313`, 16 planners over four H100s processed a 50-episode,
+79.23-hour sample in 81.5 seconds (3,500x real time), including model startup
+and audio decoding. A 23-episode, 39.10-hour quality sample planned in 50.6
+seconds (2,783x), and its Qwen ASR pass took 57.5 seconds (2,447x). Combined
+throughput was 1,302x. In that quality sample, pyannote removed the known
+repetitive tails but produced more ASR fallback omissions than inline Silero,
+so this path remains opt-in pending a broader quality evaluation.
 
 ## 5. Export the transcript return batch
 

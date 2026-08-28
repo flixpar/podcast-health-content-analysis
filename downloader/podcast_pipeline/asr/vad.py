@@ -74,12 +74,19 @@ def vad_metadata(config: TranscriptionConfig, result) -> dict:
     metadata = {"vad_enabled": config.vad_enabled}
     if not config.vad_enabled:
         return metadata
+    provenance = getattr(result, "vad_provenance", None)
+    if provenance:
+        metadata.update(provenance)
+    else:
+        metadata.update({
+            "vad_backend": "inline",
+            "vad_model": "silero-vad",
+            "vad_threshold": config.vad_threshold,
+            "vad_min_speech_duration_ms": config.vad_min_speech_duration_ms,
+            "vad_min_silence_duration_ms": config.vad_min_silence_duration_ms,
+            "vad_speech_pad_ms": config.vad_speech_pad_ms,
+        })
     metadata.update({
-        "vad_model": "silero-vad",
-        "vad_threshold": config.vad_threshold,
-        "vad_min_speech_duration_ms": config.vad_min_speech_duration_ms,
-        "vad_min_silence_duration_ms": config.vad_min_silence_duration_ms,
-        "vad_speech_pad_ms": config.vad_speech_pad_ms,
         "detected_speech_seconds": round(result.detected_speech_seconds, 3),
         "detected_speech_spans": len(result.detected_speech_spans),
     })

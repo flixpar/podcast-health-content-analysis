@@ -254,6 +254,26 @@ Two rules learned while measuring this are now enforced in code:
   and edge padding are configurable with the adjacent `vad_*` settings in
   `config.example.json`. Transcripts record the settings and detected speech
   duration in their metadata.
+- **Inline Silero VAD is intended only for targeted quality recovery.** It
+  detects episodes serially on CPU. On `gpu313`, a 50-episode stress sample ran
+  at 2,288x real time without VAD, while Silero planning sustained only 122x
+  with one worker. A parallel CPU prototype reached 705x with 32 workers.
+- **Remote Qwen batches can instead use a precomputed pyannote plan.** Run
+  `tools/plan_pyannote_vad.py` in its own GPU environment, then pass the result
+  to `transcribe-audio-batch --vad-plan PLAN.jsonl`. The batch transcriber
+  verifies the plan's batch ID, manifest digest, episode membership, audio
+  SHA-256 values, durations, and spans before sending anything to ASR. Every
+  transcript records the model, settings, and plan SHA-256.
+- The `pyannote/segmentation-3.0` planner processed 50 episodes (79.23 hours)
+  on four H100s in 81.5 seconds, including model startup and audio decode:
+  3,500x real time. A difficult 23-episode A/B removed all 14 pre-VAD
+  repetitive-tail failures. Pyannote planning plus Qwen ASR completed the 39.10
+  hours in 108.1 seconds (1,302x real time). It was much faster than inline
+  Silero, but two Qwen runs produced 33--34 fallback retries and 529--551
+  seconds of explicit omissions versus Silero's 16 retries and 381 seconds.
+  Pyannote is therefore a fast opt-in batch path, not the default; retain
+  Silero for small quality-recovery sets where the extra planning time is
+  acceptable.
 
 ## Troubleshooting
 

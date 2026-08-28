@@ -11,6 +11,7 @@ def test_defaults_and_derived_paths():
     assert config.transcription.gpu_ids == [0]
     assert not config.transcription.vad_enabled
     assert config.transcription.vad_threshold == 0.5
+    assert config.transcription.vad_plan_path is None
     assert config.batch_export.target_size_gb == 250.0
     assert config.db_path == PROJECT_ROOT / "data" / "podcast_metadata.db"
     assert config.audio_dir == PROJECT_ROOT / "data" / "audio"

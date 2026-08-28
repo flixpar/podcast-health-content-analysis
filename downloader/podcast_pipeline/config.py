@@ -108,6 +108,11 @@ class TranscriptionConfig:
     vad_min_speech_duration_ms: int = 250
     vad_min_silence_duration_ms: int = 2000
     vad_speech_pad_ms: int = 30
+    # Optional output from tools/plan_pyannote_vad.py. The planner runs in an
+    # isolated environment because its legacy PyTorch stack conflicts with the
+    # ASR environment. Precomputed plans are currently supported by the remote
+    # Qwen batch workflow only.
+    vad_plan_path: str | None = None
     use_cuda_graphs: bool = True
     # NeMo model instances are not safe to drive concurrently from Python
     # threads on multiple GPUs. Process isolation gives each GPU its own CUDA
