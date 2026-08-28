@@ -123,6 +123,8 @@ Useful controls:
 - `--verify-audio-hashes` rehashes all audio before loading the model. Ingest
   already did this once, so it is normally only needed after suspected disk
   corruption.
+- `--vad` enables Silero voice activity detection for this run so only detected
+  speech regions are sent to ASR; `--no-vad` overrides an enabled config.
 - A model/GPU worker crash fails loudly and reports how many jobs were not
   attempted. Transcripts completed before the crash remain resumable.
 

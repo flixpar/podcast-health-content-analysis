@@ -9,6 +9,8 @@ def test_defaults_and_derived_paths():
     config = Config()
     assert config.download.max_workers == 8
     assert config.transcription.gpu_ids == [0]
+    assert not config.transcription.vad_enabled
+    assert config.transcription.vad_threshold == 0.5
     assert config.batch_export.target_size_gb == 250.0
     assert config.db_path == PROJECT_ROOT / "data" / "podcast_metadata.db"
     assert config.audio_dir == PROJECT_ROOT / "data" / "audio"
@@ -20,6 +22,17 @@ def test_nested_override_keeps_other_defaults():
     assert config.download.max_workers == 2
     assert config.download.min_free_gb == 100.0
     assert config.transcription.gpu_ids == [0, 1]
+
+
+def test_vad_settings_can_be_overridden():
+    config = Config.from_dict({"transcription": {
+        "vad_enabled": True,
+        "vad_threshold": 0.65,
+        "vad_min_silence_duration_ms": 500,
+    }})
+    assert config.transcription.vad_enabled
+    assert config.transcription.vad_threshold == 0.65
+    assert config.transcription.vad_min_silence_duration_ms == 500
 
 
 def test_unknown_key_is_rejected():

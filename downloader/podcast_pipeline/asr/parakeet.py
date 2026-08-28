@@ -17,6 +17,7 @@ from nemo.collections.asr.models import ASRModel
 
 from podcast_pipeline.asr import SAMPLE_RATE
 from podcast_pipeline.asr.chunking import Word, chunk_spans, merge_chunk_words, words_to_segments
+from podcast_pipeline.asr.vad import SileroVoiceActivityDetector, speech_chunk_spans
 from podcast_pipeline.audio.ffmpeg import decode_pcm
 from podcast_pipeline.config import TranscriptionConfig
 from podcast_pipeline.models import Segment
@@ -37,6 +38,7 @@ class TranscriptionResult:
     duration_seconds: float
     chunk_count: int
     transcription_seconds: float
+    detected_speech_spans: tuple[tuple[float, float], ...] = ()
 
     @property
     def text(self) -> str:
@@ -51,11 +53,16 @@ class TranscriptionResult:
         """Real-time factor: seconds of compute per second of audio."""
         return self.transcription_seconds / self.duration_seconds
 
+    @property
+    def detected_speech_seconds(self) -> float:
+        return sum(end - start for start, end in self.detected_speech_spans)
+
 
 class ParakeetTranscriber:
     def __init__(self, config: TranscriptionConfig, gpu_id: int):
         self.config = config
         self.gpu_id = gpu_id
+        self.vad = SileroVoiceActivityDetector(config) if config.vad_enabled else None
         self.device = torch.device(f"cuda:{gpu_id}")
         torch.cuda.set_device(self.device)
         logger.info(f"Loading {config.model_name} on GPU {gpu_id}")
@@ -82,15 +89,29 @@ class ParakeetTranscriber:
         if duration < MIN_AUDIO_SECONDS:
             raise TranscriptionError(f"audio is only {duration:.2f}s long")
 
-        spans = chunk_spans(duration, self.config.chunk_duration_seconds, self.config.overlap_seconds)
+        if self.vad is None:
+            detected_speech_spans = ((0.0, duration),)
+            spans = chunk_spans(
+                duration, self.config.chunk_duration_seconds, self.config.overlap_seconds,
+            )
+        else:
+            detection = self.vad.detect(audio)
+            detected_speech_spans = detection.spans
+            spans = speech_chunk_spans(
+                detection.spans,
+                self.config.chunk_duration_seconds,
+                self.config.overlap_seconds,
+            )
         clips = [audio[int(s * SAMPLE_RATE):int(e * SAMPLE_RATE)] for s, e in spans]
 
         started = time.time()
-        torch.cuda.set_device(self.device)
-        with torch.inference_mode(), torch.autocast("cuda", dtype=torch.bfloat16):
-            hypotheses = self.model.transcribe(clips, batch_size=self.config.batch_size,
-                                               timestamps=True, return_hypotheses=True,
-                                               verbose=False)
+        hypotheses = []
+        if clips:
+            torch.cuda.set_device(self.device)
+            with torch.inference_mode(), torch.autocast("cuda", dtype=torch.bfloat16):
+                hypotheses = self.model.transcribe(clips, batch_size=self.config.batch_size,
+                                                   timestamps=True, return_hypotheses=True,
+                                                   verbose=False)
         elapsed = time.time() - started
 
         chunks = []
@@ -104,4 +125,5 @@ class ParakeetTranscriber:
 
         segments = words_to_segments(merge_chunk_words(chunks))
         return TranscriptionResult(segments=segments, duration_seconds=duration,
-                                   chunk_count=len(spans), transcription_seconds=elapsed)
+                                   chunk_count=len(spans), transcription_seconds=elapsed,
+                                   detected_speech_spans=detected_speech_spans)

@@ -57,13 +57,13 @@ print a JSON summary when done. `--config PATH` and `--log-level` are global.
 | `discover [--max-episodes N]` | Read every podcast feed and record its episodes. Downloads nothing. |
 | `fetch-rss-transcripts [--limit N]` | Fetch transcripts publishers attach to their feeds (SRT/VTT/JSON/timestamped text/HTML). No GPU. |
 | `download [--limit N] [--workers N] [--skip-errors]` | Download audio for every pending episode. Resumable; re-run after an interruption. |
-| `transcribe [--limit N] [--retry-errors]` | Transcribe downloaded audio with Parakeet, one worker per configured GPU. |
+| `transcribe [--limit N] [--retry-errors] [--vad\|--no-vad]` | Transcribe downloaded audio with Parakeet, one worker per configured GPU. |
 | `convert-audio [--dry-run] [--reconcile-only] [--threshold MB] [--limit N]` | Re-encode existing MP3s to Opus/OGG, verifying each before deleting the original. |
 | `audit [--fix] [--skip-probe] [--newer-than 'YYYY-MM-DD HH:MM']` | Reconcile the database against files on disk; `--fix` re-queues broken rows. |
 | `reset-transcripts (--all \| --episode-ids 1,2 \| --podcast-ids 3) [--dry-run]` | Delete ASR transcripts so `transcribe` runs again. Never touches publisher transcripts. |
 | `export-audio-batch OUTPUT_DIR [--target-gb GB] [--dry-run]` | Create a checksummed tar of completed audio that has no transcript and has not been exported before. |
 | `ingest-audio-batch ARCHIVE WORKSPACE` | On the remote server, checksum, safely extract, and verify every audio member. |
-| `transcribe-audio-batch BATCH_DIR [--retry-errors]` | Resumably transcribe a prepared batch without needing the source SQLite database. |
+| `transcribe-audio-batch BATCH_DIR [--retry-errors] [--vad\|--no-vad]` | Resumably transcribe a prepared batch without needing the source SQLite database. |
 | `export-transcript-batch BATCH_DIR OUTPUT_DIR` | Create a checksummed return tar; refuses an incomplete batch unless explicitly allowed. |
 | `import-transcript-batch ARCHIVE [--dry-run]` | Verify returned provenance and transcripts, then idempotently register them in the source dataset. |
 | `stats` | Counts by status, transcript totals, storage used. |
@@ -246,6 +246,14 @@ Two rules learned while measuring this are now enforced in code:
   only at `batch_size: 1` (~5 GB peak). That still transcribes an hour of audio
   in about 15 s; the GPU is not the bottleneck.
 - Audio is decoded straight to memory with ffmpeg; there is no preprocessing cache.
+- Set `transcription.vad_enabled` to `true` (or pass `--vad` to either
+  transcription command) to run Silero VAD on the decoded
+  16 kHz audio and send only detected speech regions to ASR. VAD regions keep
+  their original episode timestamps; long regions still use the configured
+  chunk duration and overlap. The threshold, minimum speech/silence durations,
+  and edge padding are configurable with the adjacent `vad_*` settings in
+  `config.example.json`. Transcripts record the settings and detected speech
+  duration in their metadata.
 
 ## Troubleshooting
 

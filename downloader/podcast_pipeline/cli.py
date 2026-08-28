@@ -56,6 +56,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--limit", type=int)
     p.add_argument("--retry-errors", action="store_true",
                    help="also retry episodes whose previous transcription failed")
+    p.add_argument("--vad", action=argparse.BooleanOptionalAction, default=None,
+                   help="use Silero VAD to transcribe only detected speech "
+                        "(default: transcription.vad_enabled)")
 
     p = sub.add_parser("convert-audio", help="re-encode existing MP3s to Opus/OGG")
     p.add_argument("--threshold", type=float, help="minimum file size in MB (default: from config)")
@@ -107,6 +110,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--retry-errors", action="store_true")
     p.add_argument("--verify-audio-hashes", action="store_true",
                    help="rehash all audio before starting (ingest already verifies it)")
+    p.add_argument("--vad", action=argparse.BooleanOptionalAction, default=None,
+                   help="use Silero VAD to transcribe only detected speech "
+                        "(default: transcription.vad_enabled)")
 
     p = sub.add_parser("export-transcript-batch",
                        help="package remote transcripts for return transfer")
@@ -183,6 +189,8 @@ def dispatch(args: argparse.Namespace, config: Config, conn) -> dict:
             return download.run(config, conn, limit=args.limit, retry_errors=not args.skip_errors,
                                 workers=args.workers, charts=args.charts)
         case "transcribe":
+            if args.vad is not None:
+                config.transcription.vad_enabled = args.vad
             return transcribe.run(config, conn, limit=args.limit, retry_errors=args.retry_errors)
         case "convert-audio":
             return convert_audio.run(config, conn, threshold_mb=args.threshold,
@@ -207,6 +215,8 @@ def dispatch(args: argparse.Namespace, config: Config, conn) -> dict:
                 skip_archive_checksum=args.skip_archive_checksum,
             )
         case "transcribe-audio-batch":
+            if args.vad is not None:
+                config.transcription.vad_enabled = args.vad
             return transcribe_audio_batch.run(
                 config, args.batch_dir, limit=args.limit, retry_errors=args.retry_errors,
                 verify_audio_hashes=args.verify_audio_hashes,

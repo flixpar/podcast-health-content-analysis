@@ -1,7 +1,10 @@
 import hashlib
 import sys
 import types
+from concurrent.futures import Future
 from pathlib import Path
+
+import pytest
 
 from podcast_pipeline.asr.qwen_vllm import (
     QwenVLLMTranscriber,
@@ -10,6 +13,7 @@ from podcast_pipeline.asr.qwen_vllm import (
     is_implausible_transcript,
     trim_repeated_prefix,
 )
+from podcast_pipeline.asr.vad import SpeechDetection
 from podcast_pipeline.config import TranscriptionConfig
 from podcast_pipeline.audio.ffmpeg import probe_stream_types
 from podcast_pipeline.models import Segment
@@ -95,6 +99,60 @@ def test_omitted_span_accounting_deduplicates_overlap():
     assert _span_union_seconds(((535.0, 565.0), (560.0, 580.0))) == 45.0
 
 
+def test_bounded_futures_never_retains_more_than_limit(monkeypatch):
+    pending_sizes = []
+
+    class ImmediateExecutor:
+        def submit(self, function, item):
+            future = Future()
+            future.set_result(function(item))
+            return future
+
+    def observe_wait(pending, return_when=None):
+        pending_sizes.append(len(pending))
+        return {next(iter(pending))}, set()
+
+    monkeypatch.setattr(transcribe_audio_batch, "wait", observe_wait)
+
+    completed = list(transcribe_audio_batch._bounded_futures(
+        ImmediateExecutor(), range(20), lambda value: value * 2, max_pending=3,
+    ))
+
+    assert [future.result() for future, _ in completed] == [value * 2 for _, value in completed]
+    assert len(completed) == 20
+    assert max(pending_sizes) == 3
+
+
+def test_bounded_futures_cancels_abandoned_window(monkeypatch):
+    futures = []
+
+    class WindowExecutor:
+        def submit(self, function, item):
+            future = Future()
+            if item == 0:
+                future.set_exception(RuntimeError("chunk failed"))
+            futures.append(future)
+            return future
+
+    def choose_failed_future(pending, return_when=None):
+        failed = next((future for future in pending if future.done()), None)
+        if failed is not None:
+            return {failed}, set(pending) - {failed}
+        return set(pending), set()
+
+    monkeypatch.setattr(transcribe_audio_batch, "wait", choose_failed_future)
+    completed = transcribe_audio_batch._bounded_futures(
+        WindowExecutor(), range(3), lambda value: value, max_pending=3,
+    )
+    failed, _ = next(completed)
+
+    with pytest.raises(RuntimeError, match="chunk failed"):
+        failed.result()
+    completed.close()
+
+    assert all(future.cancelled() for future in futures[1:])
+
+
 def test_cover_art_input_is_remuxed_before_chunk_seeking(
     one_frame_cover_art_ogg, tmp_path,
 ):
@@ -130,6 +188,69 @@ def test_cover_art_input_uses_safe_seek_without_remux_cache(one_frame_cover_art_
     assert plan.path == one_frame_cover_art_ogg
     assert plan.seek_after_input
     assert plan.input_preprocessing == "safe_output_seek_for_extra_streams"
+
+
+def test_qwen_vad_only_plans_detected_speech(tmp_path, monkeypatch):
+    audio_path = tmp_path / "episode.ogg"
+    audio_path.write_bytes(b"audio")
+    decoded = object()
+
+    class FakeVad:
+        def __init__(self, config):
+            assert config.vad_enabled
+
+        def detect(self, audio):
+            assert audio is decoded
+            return SpeechDetection(((2.0, 10.0), (20.0, 24.0)))
+
+    monkeypatch.setattr("podcast_pipeline.asr.qwen_vllm.SileroVoiceActivityDetector", FakeVad)
+    monkeypatch.setattr("podcast_pipeline.asr.qwen_vllm.probe_duration", lambda path: 30.0)
+    monkeypatch.setattr("podcast_pipeline.asr.qwen_vllm.probe_stream_types", lambda path: ("audio",))
+    monkeypatch.setattr("podcast_pipeline.asr.qwen_vllm.decode_pcm", lambda path, rate: decoded)
+    config = TranscriptionConfig(
+        backend="qwen_vllm", vad_enabled=True,
+        chunk_duration_seconds=6, overlap_seconds=1,
+    )
+
+    plan = QwenVLLMTranscriber(config).plan_file(audio_path)
+
+    assert plan.detected_speech_spans == ((2.0, 10.0), (20.0, 24.0))
+    assert plan.spans == [(2.0, 8.0), (7.0, 10.0), (20.0, 24.0)]
+
+
+def test_qwen_vad_can_return_empty_transcript_without_asr_requests():
+    plan = types.SimpleNamespace(
+        path=Path("silent.ogg"), duration_seconds=60.0, spans=[],
+        input_preprocessing=None, detected_speech_spans=(),
+    )
+
+    result = QwenVLLMTranscriber(TranscriptionConfig()).assemble(plan, [])
+
+    assert result.segments == []
+    assert result.chunk_count == 0
+    assert result.detected_speech_seconds == 0
+
+
+def test_qwen_vad_does_not_deduplicate_across_skipped_silence():
+    plan = types.SimpleNamespace(
+        path=Path("episode.ogg"), duration_seconds=30.0,
+        spans=[(0.0, 5.0), (20.0, 25.0)], input_preprocessing=None,
+        detected_speech_spans=((0.0, 5.0), (20.0, 25.0)),
+    )
+    chunks = [
+        types.SimpleNamespace(
+            text="The same phrase here", start=0.0, end=5.0,
+            transcription_seconds=0.1, fallback_retries=0, omitted_audio_spans=(),
+        ),
+        types.SimpleNamespace(
+            text="The same phrase here", start=20.0, end=25.0,
+            transcription_seconds=0.1, fallback_retries=0, omitted_audio_spans=(),
+        ),
+    ]
+
+    result = QwenVLLMTranscriber(TranscriptionConfig()).assemble(plan, chunks)
+
+    assert result.text == "The same phrase here The same phrase here"
 
 
 def test_audio_batch_uses_concurrent_qwen_vllm_backend(

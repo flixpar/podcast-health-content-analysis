@@ -19,7 +19,9 @@ import requests
 
 from podcast_pipeline.asr import SAMPLE_RATE
 from podcast_pipeline.asr.chunking import chunk_spans
-from podcast_pipeline.audio.ffmpeg import EncodeError, probe_duration, probe_stream_types
+from podcast_pipeline.asr.vad import SileroVoiceActivityDetector, speech_chunk_spans
+from podcast_pipeline.audio.ffmpeg import (EncodeError, decode_pcm, probe_duration,
+                                           probe_stream_types)
 from podcast_pipeline.config import TranscriptionConfig
 from podcast_pipeline.models import Segment
 
@@ -57,6 +59,7 @@ class TranscriptionResult:
     fallback_retries: int = 0
     omitted_audio_spans: tuple[tuple[float, float], ...] = ()
     input_preprocessing: str | None = None
+    detected_speech_spans: tuple[tuple[float, float], ...] = ()
 
     @property
     def text(self) -> str:
@@ -74,6 +77,10 @@ class TranscriptionResult:
     def omitted_audio_seconds(self) -> float:
         return _span_union_seconds(self.omitted_audio_spans)
 
+    @property
+    def detected_speech_seconds(self) -> float:
+        return _span_union_seconds(self.detected_speech_spans)
+
 
 @dataclass(frozen=True)
 class TranscriptionPlan:
@@ -82,6 +89,7 @@ class TranscriptionPlan:
     spans: list[tuple[float, float]]
     seek_after_input: bool = False
     input_preprocessing: str | None = None
+    detected_speech_spans: tuple[tuple[float, float], ...] = ()
 
 
 @dataclass(frozen=True)
@@ -307,6 +315,8 @@ class QwenVLLMTranscriber:
         self._url_counter = itertools.count()
         self._url_lock = threading.Lock()
         self._local = threading.local()
+        self._vad = SileroVoiceActivityDetector(config) if config.vad_enabled else None
+        self._vad_lock = threading.Lock()
 
     def _session(self) -> requests.Session:
         session = getattr(self._local, "session", None)
@@ -376,13 +386,29 @@ class QwenVLLMTranscriber:
             )
             seek_after_input = False
             preprocessing = "lossless_audio_stream_remux"
-        spans = chunk_spans(
-            duration,
-            self.config.chunk_duration_seconds,
-            self.config.overlap_seconds,
-        )
+        if self._vad is None:
+            detected_speech_spans = ((0.0, duration),)
+            spans = chunk_spans(
+                duration,
+                self.config.chunk_duration_seconds,
+                self.config.overlap_seconds,
+            )
+        else:
+            # Silero keeps recurrent state during one file. Decode and detect
+            # under one lock so concurrent batch planning cannot retain many
+            # full podcast waveforms in RAM while waiting for the shared model.
+            with self._vad_lock:
+                audio = decode_pcm(transcription_path, SAMPLE_RATE)
+                detection = self._vad.detect(audio)
+            detected_speech_spans = detection.spans
+            spans = speech_chunk_spans(
+                detection.spans,
+                self.config.chunk_duration_seconds,
+                self.config.overlap_seconds,
+            )
         return TranscriptionPlan(
             transcription_path, duration, spans, seek_after_input, preprocessing,
+            detected_speech_spans,
         )
 
     def transcribe_chunk(self, plan: TranscriptionPlan, index: int) -> ChunkResult:
@@ -493,15 +519,21 @@ class QwenVLLMTranscriber:
             )
         segments: list[Segment] = []
         previous_text = ""
+        previous_end: float | None = None
         for chunk in chunks:
             text = chunk.text
-            if previous_text:
+            overlaps_previous = previous_end is not None and chunk.start < previous_end
+            if previous_text and overlaps_previous:
                 text = trim_repeated_prefix(previous_text, text)
             if text:
                 segments.append(Segment(text=text, start=chunk.start, end=chunk.end))
-            previous_text = text if not previous_text else f"{previous_text} {text}"
+            if overlaps_previous:
+                previous_text = f"{previous_text} {text}"
+            else:
+                previous_text = text
             # Only the suffix can participate in the next overlap.
             previous_text = " ".join(previous_text.split()[-OVERLAP_WORD_WINDOW:])
+            previous_end = chunk.end
         return TranscriptionResult(
             segments=segments,
             duration_seconds=plan.duration_seconds,
@@ -512,6 +544,7 @@ class QwenVLLMTranscriber:
                 span for chunk in chunks for span in chunk.omitted_audio_spans
             ),
             input_preprocessing=plan.input_preprocessing,
+            detected_speech_spans=plan.detected_speech_spans,
         )
 
     def transcribe_file(self, path: Path) -> TranscriptionResult:

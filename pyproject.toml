@@ -11,7 +11,9 @@ dependencies = [
     "numpy>=2.0",
     "requests>=2.32.4",
     "sentencepiece>=0.2.1",
+    "silero-vad==5.1.2",
     "torch==2.12.1",
+    "torchaudio==2.11.0+cu126",
     "tqdm>=4.67.1",
     "zstandard>=0.23.0",
 ]
@@ -36,3 +38,4 @@ explicit = true
 
 [tool.uv.sources]
 torch = { index = "pytorch-cu126" }
+torchaudio = { index = "pytorch-cu126" }

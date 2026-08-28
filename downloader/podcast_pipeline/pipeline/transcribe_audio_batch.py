@@ -10,7 +10,7 @@ import os
 import queue
 import threading
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
@@ -19,6 +19,7 @@ from tqdm import tqdm
 
 from podcast_pipeline.batches import (AudioEpisode, BatchFormatError,
                                       validate_audio_batch_directory)
+from podcast_pipeline.asr.vad import vad_metadata
 from podcast_pipeline.config import Config
 from podcast_pipeline.transcripts.store import TranscriptStore
 
@@ -63,6 +64,37 @@ class QwenEpisodeState:
     chunks: list[object | None]
     remaining: int
     error: Exception | None = None
+
+
+def _bounded_futures(executor, items, submit, max_pending: int):
+    """Yield completed futures while retaining at most ``max_pending`` tasks."""
+    iterator = iter(items)
+    pending = {}
+
+    def fill() -> None:
+        while len(pending) < max_pending:
+            try:
+                item = next(iterator)
+            except StopIteration:
+                return
+            pending[executor.submit(submit, item)] = item
+
+    fill()
+    try:
+        while pending:
+            completed, _ = wait(pending, return_when=FIRST_COMPLETED)
+            for future in completed:
+                item = pending.pop(future)
+                yield future, item
+                fill()
+    finally:
+        # A consumer may stop after one future raises. Cancel work that has not
+        # started and drain running calls before its per-episode state changes.
+        abandoned = tuple(pending)
+        for future in abandoned:
+            future.cancel()
+        if abandoned:
+            wait(abandoned)
 
 
 def _load_failures(path: Path) -> set[int]:
@@ -351,6 +383,7 @@ def run(config: Config, batch_dir: Path, limit: int | None = None,
                     "chunks": model_result.chunk_count,
                     "rtf": round(model_result.rtf, 4),
                     "episode_title": outcome.job.episode.episode_title,
+                    **vad_metadata(config.transcription, model_result),
                 })
                 result["transcribed"] += 1
 
@@ -383,17 +416,25 @@ def _run_qwen_vllm(config: Config, jobs: list[Job], store: TranscriptStore,
     audio_seconds = 0.0
     omitted_audio_seconds = 0.0
 
+    if config.transcription.vad_enabled:
+        _run_qwen_vad_jobs(
+            config, jobs, store, manifest, failures_path, result, transcriber, started,
+        )
+        return
+
     with ThreadPoolExecutor(
         max_workers=config.transcription.vllm_request_concurrency,
         thread_name_prefix="qwen-vllm",
     ) as executor:
-        plan_futures = {
-            executor.submit(transcriber.plan_file, job.audio_path): job for job in jobs
-        }
         states: dict[int, QwenEpisodeState] = {}
         with tqdm(total=len(jobs), desc="Transcribing batch", unit="ep") as progress:
-            for future in as_completed(plan_futures):
-                job = plan_futures.pop(future)
+            plan_futures = _bounded_futures(
+                executor,
+                jobs,
+                lambda job: transcriber.plan_file(job.audio_path),
+                config.transcription.vllm_request_concurrency,
+            )
+            for future, job in plan_futures:
                 try:
                     plan = future.result()
                 except (TranscriptionError, EncodeError) as exc:
@@ -405,6 +446,16 @@ def _run_qwen_vllm(config: Config, jobs: list[Job], store: TranscriptStore,
                     result["failed"] += 1
                     progress.update(1)
                     continue
+                if not plan.spans:
+                    model_result = transcriber.assemble(plan, [])
+                    _save_qwen_transcript(
+                        config, store, manifest, job, model_result,
+                    )
+                    audio_seconds += model_result.duration_seconds
+                    omitted_audio_seconds += model_result.omitted_audio_seconds
+                    result["transcribed"] += 1
+                    progress.update(1)
+                    continue
                 states[job.episode.episode_id] = QwenEpisodeState(
                     job=job,
                     plan=plan,
@@ -412,14 +463,18 @@ def _run_qwen_vllm(config: Config, jobs: list[Job], store: TranscriptStore,
                     remaining=len(plan.spans),
                 )
 
-            chunk_futures = {}
-            for state in states.values():
-                for index in range(len(state.chunks)):
-                    future = executor.submit(transcriber.transcribe_chunk, state.plan, index)
-                    chunk_futures[future] = (state, index)
-
-            for future in as_completed(chunk_futures):
-                state, index = chunk_futures.pop(future)
+            chunk_tasks = (
+                (state, index)
+                for state in list(states.values())
+                for index in range(len(state.chunks))
+            )
+            chunk_futures = _bounded_futures(
+                executor,
+                chunk_tasks,
+                lambda task: transcriber.transcribe_chunk(task[0].plan, task[1]),
+                config.transcription.vllm_request_concurrency,
+            )
+            for future, (state, index) in chunk_futures:
                 try:
                     state.chunks[index] = future.result()
                 except (TranscriptionError, EncodeError) as exc:
@@ -442,32 +497,9 @@ def _run_qwen_vllm(config: Config, jobs: list[Job], store: TranscriptStore,
                     state.plan,
                     [chunk for chunk in state.chunks if chunk is not None],
                 )
-                store.save(state.job.episode.episode_id, model_result.segments, {
-                    "source": "asr",
-                    "backend": "qwen_vllm",
-                    "model": config.transcription.model_name,
-                    "chunk_duration_seconds": config.transcription.chunk_duration_seconds,
-                    "overlap_seconds": config.transcription.overlap_seconds,
-                    "language": config.transcription.vllm_language,
-                    "vllm_request_concurrency": config.transcription.vllm_request_concurrency,
-                    "vllm_max_completion_tokens": (
-                        config.transcription.vllm_max_completion_tokens
-                    ),
-                    "source_audio_batch_id": manifest.batch_id,
-                    "source_audio_manifest_sha256": manifest.sha256,
-                    "source_audio_sha256": state.job.episode.sha256,
-                    "duration": model_result.duration_seconds,
-                    "chunks": model_result.chunk_count,
-                    "fallback_retries": model_result.fallback_retries,
-                    "omitted_audio_seconds": round(model_result.omitted_audio_seconds, 3),
-                    "omitted_audio_spans": [
-                        [round(start, 3), round(end, 3)]
-                        for start, end in model_result.omitted_audio_spans
-                    ],
-                    "input_preprocessing": model_result.input_preprocessing,
-                    "rtf": round(model_result.rtf, 4),
-                    "episode_title": state.job.episode.episode_title,
-                })
+                _save_qwen_transcript(
+                    config, store, manifest, state.job, model_result,
+                )
                 audio_seconds += model_result.duration_seconds
                 omitted_audio_seconds += model_result.omitted_audio_seconds
                 result["transcribed"] += 1
@@ -478,6 +510,93 @@ def _run_qwen_vllm(config: Config, jobs: list[Job], store: TranscriptStore,
     result["wall_seconds"] = round(wall_seconds, 3)
     result["rtfx"] = round(audio_seconds / wall_seconds, 2) if wall_seconds else None
     result["omitted_audio_seconds"] = round(omitted_audio_seconds, 3)
+
+
+def _run_qwen_vad_jobs(config: Config, jobs: list[Job], store: TranscriptStore,
+                       manifest, failures_path: Path, result: dict,
+                       transcriber, started: float) -> None:
+    """Bound VAD state and futures to one episode and configured concurrency."""
+    from podcast_pipeline.asr.qwen_vllm import TranscriptionError
+    from podcast_pipeline.audio.ffmpeg import EncodeError
+
+    audio_seconds = 0.0
+    omitted_audio_seconds = 0.0
+    with ThreadPoolExecutor(
+        max_workers=config.transcription.vllm_request_concurrency,
+        thread_name_prefix="qwen-vllm",
+    ) as executor, tqdm(
+        total=len(jobs), desc="Transcribing batch", unit="ep",
+    ) as progress:
+        for job in jobs:
+            try:
+                plan = transcriber.plan_file(job.audio_path)
+                chunks: list[object | None] = [None] * len(plan.spans)
+                chunk_futures = _bounded_futures(
+                    executor,
+                    range(len(plan.spans)),
+                    lambda index, episode_plan=plan: (
+                        transcriber.transcribe_chunk(episode_plan, index)
+                    ),
+                    config.transcription.vllm_request_concurrency,
+                )
+                try:
+                    for future, index in chunk_futures:
+                        chunks[index] = future.result()
+                except Exception:
+                    chunk_futures.close()
+                    raise
+                model_result = transcriber.assemble(
+                    plan, [chunk for chunk in chunks if chunk is not None],
+                )
+            except (TranscriptionError, EncodeError) as exc:
+                logger.error(
+                    "Batch transcription failed for %r: %s",
+                    job.episode.episode_title, exc,
+                )
+                _append_failure(failures_path, job, exc)
+                result["failed"] += 1
+                progress.update(1)
+                continue
+            _save_qwen_transcript(config, store, manifest, job, model_result)
+            audio_seconds += model_result.duration_seconds
+            omitted_audio_seconds += model_result.omitted_audio_seconds
+            result["transcribed"] += 1
+            progress.update(1)
+
+    wall_seconds = time.monotonic() - started
+    result["audio_seconds"] = round(audio_seconds, 3)
+    result["wall_seconds"] = round(wall_seconds, 3)
+    result["rtfx"] = round(audio_seconds / wall_seconds, 2) if wall_seconds else None
+    result["omitted_audio_seconds"] = round(omitted_audio_seconds, 3)
+
+
+def _save_qwen_transcript(config: Config, store: TranscriptStore, manifest,
+                          job: Job, model_result) -> None:
+    store.save(job.episode.episode_id, model_result.segments, {
+        "source": "asr",
+        "backend": "qwen_vllm",
+        "model": config.transcription.model_name,
+        "chunk_duration_seconds": config.transcription.chunk_duration_seconds,
+        "overlap_seconds": config.transcription.overlap_seconds,
+        "language": config.transcription.vllm_language,
+        "vllm_request_concurrency": config.transcription.vllm_request_concurrency,
+        "vllm_max_completion_tokens": config.transcription.vllm_max_completion_tokens,
+        "source_audio_batch_id": manifest.batch_id,
+        "source_audio_manifest_sha256": manifest.sha256,
+        "source_audio_sha256": job.episode.sha256,
+        "duration": model_result.duration_seconds,
+        "chunks": model_result.chunk_count,
+        "fallback_retries": model_result.fallback_retries,
+        "omitted_audio_seconds": round(model_result.omitted_audio_seconds, 3),
+        "omitted_audio_spans": [
+            [round(start, 3), round(end, 3)]
+            for start, end in model_result.omitted_audio_spans
+        ],
+        "input_preprocessing": model_result.input_preprocessing,
+        "rtf": round(model_result.rtf, 4),
+        "episode_title": job.episode.episode_title,
+        **vad_metadata(config.transcription, model_result),
+    })
 
 
 def _gpu_worker(config: Config, gpu_id: int, work: queue.Queue, outcomes: queue.Queue) -> None:

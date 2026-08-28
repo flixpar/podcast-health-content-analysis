@@ -144,6 +144,10 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
   not the bottleneck.
 - NeMo accepts numpy arrays directly; audio is decoded with ffmpeg to memory and
   never cached on disk.
+- Optional Silero VAD runs on that same decoded 16 kHz audio and produces
+  absolute-time speech spans. Each speech span is chunked independently so
+  skipped silence is not reintroduced and transcript timestamps remain on the
+  original episode timeline.
 
 ## Database
 

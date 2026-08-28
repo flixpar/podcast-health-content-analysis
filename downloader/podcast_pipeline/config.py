@@ -99,6 +99,15 @@ class TranscriptionConfig:
     batch_size: int = 1
     chunk_duration_seconds: int = 300 # long audio is split into chunks of this length...
     overlap_seconds: int = 30         # ...overlapping by this much, then merged on word timestamps
+    # When enabled, Silero VAD finds speech on decoded 16 kHz audio and only
+    # those absolute-time spans are sent to ASR. Two seconds of silence closes
+    # a region so ordinary conversational pauses retain useful ASR context and
+    # do not become hundreds of tiny inference requests.
+    vad_enabled: bool = False
+    vad_threshold: float = 0.5
+    vad_min_speech_duration_ms: int = 250
+    vad_min_silence_duration_ms: int = 2000
+    vad_speech_pad_ms: int = 30
     use_cuda_graphs: bool = True
     # NeMo model instances are not safe to drive concurrently from Python
     # threads on multiple GPUs. Process isolation gives each GPU its own CUDA

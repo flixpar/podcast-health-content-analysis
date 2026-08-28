@@ -198,6 +198,34 @@ def test_transcribe_with_fake_model(seeded, monkeypatch):
     assert conn.execute("SELECT status FROM episodes WHERE id = ?", (ids["g1"],)).fetchone()[0] == "downloaded"
 
 
+def test_transcribe_propagates_worker_initialization_failure(seeded, monkeypatch):
+    config, conn = seeded
+    audio = config.audio_dir / "show-one" / "ep-one.mp3"
+    audio.parent.mkdir(parents=True)
+    audio.write_bytes(REAL_AUDIO)
+    episode_id = conn.execute(
+        "SELECT id FROM episodes WHERE episode_guid='g1'"
+    ).fetchone()[0]
+    db.record_download(conn, episode_id, audio, 1.0, 1.0, False)
+    conn.commit()
+
+    class BrokenTranscriber:
+        def __init__(self, cfg, gpu_id):
+            raise ValueError("invalid VAD configuration")
+
+    fake_module = types.ModuleType("podcast_pipeline.asr.parakeet")
+    fake_module.ParakeetTranscriber = BrokenTranscriber
+    fake_module.TranscriptionError = RuntimeError
+    monkeypatch.setitem(sys.modules, "podcast_pipeline.asr.parakeet", fake_module)
+
+    with pytest.raises(RuntimeError, match="1 episodes were not attempted.*invalid VAD"):
+        transcribe.run(config, conn)
+
+    assert conn.execute(
+        "SELECT status FROM episodes WHERE id = ?", (episode_id,)
+    ).fetchone()[0] == "downloaded"
+
+
 def test_convert_audio_commits_before_deleting(seeded, monkeypatch):
     config, conn = seeded
     big = config.audio_dir / "show-one" / "ep-one.mp3"

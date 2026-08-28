@@ -15,6 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from podcast_pipeline import db
+from podcast_pipeline.asr.vad import vad_metadata
 from podcast_pipeline.config import Config
 from podcast_pipeline.models import Segment
 from podcast_pipeline.transcripts.store import TranscriptStore
@@ -33,6 +34,12 @@ class Job:
 class Outcome:
     job: Job
     result: object = None        # TranscriptionResult
+    error: Exception | None = None
+
+
+@dataclass
+class WorkerFinished:
+    gpu_id: int
     error: Exception | None = None
 
 
@@ -84,10 +91,13 @@ def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
 
     finished_workers = 0
     handled = 0
+    worker_errors: list[str] = []
     while finished_workers < len(threads):
         item = results.get()
-        if item is _DONE:
+        if isinstance(item, WorkerFinished):
             finished_workers += 1
+            if item.error is not None:
+                worker_errors.append(f"GPU {item.gpu_id}: {item.error}")
             continue
         handled += 1
         outcome: Outcome = item
@@ -99,14 +109,18 @@ def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
             continue
 
         result = outcome.result
+        detection_metadata = vad_metadata(config.transcription, result)
         saved = store.save(outcome.job.episode_id, result.segments, {
             "source": "asr", "model": config.transcription.model_name,
             "duration": result.duration_seconds, "chunks": result.chunk_count,
             "rtf": round(result.rtf, 4), "episode_title": outcome.job.title,
+            **detection_metadata,
         })
         db.record_transcript(conn, outcome.job.episode_id, saved.path, saved.word_count,
-                             saved.duration_seconds, has_timestamps=True, has_speakers=False,
-                             metadata={"source": "asr", "model": config.transcription.model_name})
+                             saved.duration_seconds, has_timestamps=saved.has_timestamps,
+                             has_speakers=False,
+                             metadata={"source": "asr", "model": config.transcription.model_name,
+                                       **detection_metadata})
         conn.commit()
         stats["transcribed"] += 1
         logger.info(f"[{handled}/{queued}] {outcome.job.title!r}: {saved.word_count} words, "
@@ -114,6 +128,13 @@ def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
 
     for thread in threads:
         thread.join()
+    not_attempted = queued - handled
+    if not_attempted:
+        details = "; ".join(worker_errors) or "all workers exited early"
+        raise RuntimeError(
+            f"{not_attempted} episodes were not attempted because transcription workers "
+            f"ended: {details}"
+        )
     logger.info(f"Transcription complete: {stats}")
     return stats
 
@@ -127,6 +148,7 @@ def _gpu_worker(config: Config, gpu_id: int, work: queue.Queue, results: queue.Q
     """
     from podcast_pipeline.asr.parakeet import ParakeetTranscriber, TranscriptionError
 
+    fatal: Exception | None = None
     try:
         transcriber = ParakeetTranscriber(config.transcription, gpu_id)
         while True:
@@ -137,7 +159,8 @@ def _gpu_worker(config: Config, gpu_id: int, work: queue.Queue, results: queue.Q
                 results.put(Outcome(job, result=transcriber.transcribe_file(job.audio_path)))
             except TranscriptionError as e:
                 results.put(Outcome(job, error=e))
-    except Exception:
+    except Exception as exc:
+        fatal = exc
         logger.exception(f"GPU {gpu_id} worker died")
     finally:
-        results.put(_DONE)
+        results.put(WorkerFinished(gpu_id, fatal))
