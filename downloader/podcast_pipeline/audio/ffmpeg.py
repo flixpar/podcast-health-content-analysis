@@ -50,6 +50,19 @@ def probe_stream_types(path: Path) -> tuple[str, ...] | None:
     return tuple(line.strip() for line in out.stdout.splitlines() if line.strip())
 
 
+def probe_audio_codec(path: Path) -> str | None:
+    """Codec name of the first audio stream, or None on probe failure."""
+    out = subprocess.run(
+        ["ffprobe", "-v", "error", "-select_streams", "a:0",
+         "-show_entries", "stream=codec_name", "-of", "csv=p=0", str(path)],
+        capture_output=True, text=True, errors="replace", timeout=120,
+    )
+    if out.returncode != 0:
+        return None
+    codec = out.stdout.strip().splitlines()
+    return codec[0].strip() if codec and codec[0].strip() else None
+
+
 def check_conversion(source: Path, encoded: Path) -> str | None:
     """Return None if ``encoded`` is a complete re-encode of ``source``, else the reason.
 

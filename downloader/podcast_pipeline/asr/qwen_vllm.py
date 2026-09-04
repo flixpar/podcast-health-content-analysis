@@ -20,8 +20,8 @@ import requests
 from podcast_pipeline.asr import SAMPLE_RATE
 from podcast_pipeline.asr.chunking import chunk_spans
 from podcast_pipeline.asr.vad import SileroVoiceActivityDetector, speech_chunk_spans
-from podcast_pipeline.audio.ffmpeg import (EncodeError, decode_pcm, probe_duration,
-                                           probe_stream_types)
+from podcast_pipeline.audio.ffmpeg import (EncodeError, decode_pcm, probe_audio_codec,
+                                           probe_duration, probe_stream_types)
 from podcast_pipeline.config import TranscriptionConfig
 from podcast_pipeline.models import Segment
 
@@ -40,6 +40,7 @@ MAX_LOW_SIGNAL_MEAN_VOLUME_DB = -50.0
 FALLBACK_CHUNK_SECONDS = 120
 MIN_FALLBACK_CHUNK_SECONDS = 30
 FALLBACK_DURATION_EPSILON_SECONDS = 1e-6
+_OGG_AUDIO_CODECS = frozenset({"opus", "vorbis", "flac", "speex"})
 _NORMALIZE_WORD = re.compile(r"[^\w']+", re.UNICODE)
 _FAILURE_MARKER_WORD = re.compile(
     r"^\[UNTRANSCRIBED_AUDIO_[0-9.]+-[0-9.]+s_(?:ASR_FAILURE|LOW_SIGNAL)\]$"
@@ -221,12 +222,29 @@ def _stream_types_or_raise(path: Path) -> tuple[str, ...]:
     return stream_types
 
 
+def _audio_only_container(path: Path) -> tuple[str, str]:
+    """Pick a muxer that can carry this file's audio codec without re-encoding.
+
+    Ogg accepts only a handful of codecs. Remuxing an MP3 into it fails with
+    "Unsupported codec id in stream 0", which discarded every cover-art MP3
+    before the container was chosen from the codec. Matroska carries anything.
+    """
+    codec = probe_audio_codec(path)
+    if codec is None:
+        raise EncodeError(f"ffprobe could not read the audio codec in {path}")
+    if codec in _OGG_AUDIO_CODECS:
+        return "ogg", "ogg"
+    return "matroska", "mka"
+
+
 def _audio_only_remux(path: Path, cache_dir: Path, duration: float) -> Path:
     """Losslessly cache the first audio stream, atomically and resumably."""
     source_stat = path.stat()
     cache_dir.mkdir(parents=True, exist_ok=True)
+    muxer, suffix = _audio_only_container(path)
     target = cache_dir / (
-        f"{path.stem}-{source_stat.st_size}-{source_stat.st_mtime_ns}.audio-only.ogg"
+        f"{path.stem}-{source_stat.st_size}-{source_stat.st_mtime_ns}"
+        f".audio-only.{suffix}"
     )
     if target.exists():
         cached_duration = probe_duration(target)
@@ -241,7 +259,7 @@ def _audio_only_remux(path: Path, cache_dir: Path, duration: float) -> Path:
         proc = subprocess.run(
             ["ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error",
              "-i", str(path), "-map", "0:a:0", "-vn", "-sn", "-dn",
-             "-map_metadata", "-1", "-c:a", "copy", "-f", "ogg", "-y",
+             "-map_metadata", "-1", "-c:a", "copy", "-f", muxer, "-y",
              str(temporary)],
             capture_output=True, timeout=max(120, int(duration)),
         )

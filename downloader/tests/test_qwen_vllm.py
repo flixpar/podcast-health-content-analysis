@@ -215,6 +215,45 @@ def test_cover_art_input_uses_safe_seek_without_remux_cache(one_frame_cover_art_
     assert plan.input_preprocessing == "safe_output_seek_for_extra_streams"
 
 
+def test_cover_art_mp3_remuxes_into_a_container_that_holds_mp3(
+    cover_art_mp3, tmp_path,
+):
+    # Ogg cannot carry an MP3 stream, so remuxing one used to fail with
+    # "Unsupported codec id in stream 0" and discard the whole episode.
+    config = TranscriptionConfig(
+        backend="qwen_vllm",
+        model_name="Qwen/Qwen3-ASR-1.7B",
+        chunk_duration_seconds=10,
+        overlap_seconds=0,
+        vllm_audio_remux_cache_dir=str(tmp_path / "remux-cache"),
+    )
+    plan = QwenVLLMTranscriber(config).plan_file(cover_art_mp3)
+
+    assert plan.path != cover_art_mp3
+    assert plan.path.suffix == ".mka"
+    assert plan.input_preprocessing == "lossless_audio_stream_remux"
+    assert not plan.seek_after_input
+    assert probe_stream_types(plan.path) == ("audio",)
+    chunk_hashes = {
+        hashlib.sha256(_encode_flac_chunk(plan.path, start, end).data).hexdigest()
+        for start, end in plan.spans
+    }
+    assert len(chunk_hashes) == len(plan.spans)
+
+
+def test_ogg_native_input_still_remuxes_to_ogg(one_frame_cover_art_ogg, tmp_path):
+    config = TranscriptionConfig(
+        backend="qwen_vllm",
+        model_name="Qwen/Qwen3-ASR-1.7B",
+        chunk_duration_seconds=10,
+        overlap_seconds=0,
+        vllm_audio_remux_cache_dir=str(tmp_path / "remux-cache"),
+    )
+    plan = QwenVLLMTranscriber(config).plan_file(one_frame_cover_art_ogg)
+
+    assert plan.path.suffix == ".ogg"
+
+
 def test_qwen_vad_only_plans_detected_speech(tmp_path, monkeypatch):
     audio_path = tmp_path / "episode.ogg"
     audio_path.write_bytes(b"audio")

@@ -53,3 +53,36 @@ def one_frame_cover_art_ogg(tmp_path):
     except subprocess.CalledProcessError:
         pytest.skip("ffmpeg lacks the libtheora or libopus encoder")
     return target
+
+
+@pytest.fixture
+def cover_art_mp3(tmp_path):
+    """An MP3 carrying attached PNG cover art, which Ogg cannot hold."""
+    if shutil.which("ffmpeg") is None or shutil.which("ffprobe") is None:
+        pytest.skip("ffmpeg/ffprobe not installed")
+    cover = tmp_path / "mp3-cover.png"
+    target = tmp_path / "cover-art.mp3"
+    subprocess.run(
+        [
+            "ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error",
+            "-f", "lavfi", "-i", "color=c=black:s=64x64",
+            "-frames:v", "1", "-y", str(cover),
+        ],
+        check=True,
+    )
+    try:
+        subprocess.run(
+            [
+                "ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error",
+                "-f", "lavfi", "-i", "anoisesrc=d=40:c=pink:r=44100:s=123",
+                "-i", str(cover),
+                "-map", "0:a:0", "-map", "1:v:0",
+                "-c:a", "libmp3lame", "-c:v", "copy", "-id3v2_version", "3",
+                "-metadata:s:v", "comment=Cover (front)",
+                "-y", str(target),
+            ],
+            check=True,
+        )
+    except subprocess.CalledProcessError:
+        pytest.skip("ffmpeg lacks the libmp3lame encoder")
+    return target

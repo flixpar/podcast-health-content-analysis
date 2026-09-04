@@ -133,6 +133,10 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
   chart on podcasts.apple.com.
 - **Re-run `tools/ab_format_test.py` before changing the Opus bitrate.** Current
   result: 1.26% WER / 0.85% CER divergence vs MP3 for an 82.7% size saving.
+- **Pick the remux container from the codec, never a fixed one.** Ogg carries
+  only Opus/Vorbis/FLAC/Speex. `_audio_only_remux` hardcoded `-f ogg`, so every
+  cover-art MP3 died on "Unsupported codec id in stream 0" and lost the whole
+  episode. It now falls back to Matroska (`.mka`), which holds anything.
 
 ## Transcription
 
