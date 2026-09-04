@@ -42,6 +42,7 @@ MIN_FALLBACK_CHUNK_SECONDS = 30
 FALLBACK_DURATION_EPSILON_SECONDS = 1e-6
 _OGG_AUDIO_CODECS = frozenset({"opus", "vorbis", "flac", "speex"})
 _NORMALIZE_WORD = re.compile(r"[^\w']+", re.UNICODE)
+_TRANSCRIPT_WORD = re.compile(r"[^\W_]+(?:['’][^\W_]+)?", re.UNICODE)
 _FAILURE_MARKER_WORD = re.compile(
     r"^\[UNTRANSCRIBED_AUDIO_[0-9.]+-[0-9.]+s_(?:ASR_FAILURE|LOW_SIGNAL|NO_AUDIO)\]$"
 )
@@ -194,7 +195,13 @@ def trim_repeated_prefix(previous_text: str, current_text: str) -> str:
 
 def is_implausible_transcript(text: str, duration_seconds: float) -> bool:
     """Detect impossible density and degenerate decoder repetition."""
-    words = text.split()
+    # Split on punctuation as well as whitespace. Qwen occasionally emits
+    # runaway CJK tokens separated only by Chinese punctuation; ``str.split``
+    # treated the entire run as one word and let those hallucinations through.
+    words = [
+        match.group(0).replace("’", "'")
+        for match in _TRANSCRIPT_WORD.finditer(text)
+    ]
     plausible_limit = max(
         50,
         math.ceil(duration_seconds / 60 * MAX_PLAUSIBLE_WORDS_PER_MINUTE),

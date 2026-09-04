@@ -93,6 +93,8 @@ def test_runaway_transcript_detection():
     assert is_implausible_transcript("word " * 3001, 600)
     assert is_implausible_transcript("the same five word phrase " * 80, 600)
     assert is_implausible_transcript("the same five word phrase " * 6, 120)
+    assert is_implausible_transcript("啊！" * 200, 600)
+    assert is_implausible_transcript("敬爱你，" * 200, 600)
     ordinary = " ".join(f"ordinary{index}" for index in range(1600))
     assert not is_implausible_transcript(ordinary, 600)
 
