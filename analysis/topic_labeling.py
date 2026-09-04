@@ -47,9 +47,9 @@ from typing import Any, Iterable, Iterator, Sequence
 import zstandard
 
 
-SCHEMA_VERSION = "topic-labeling-v3"
-PROMPT_VERSION = "topic-clips-and-claims-v3"
-VERIFICATION_PROMPT_VERSION = "evidence-corpus-verification-v1"
+SCHEMA_VERSION = "topic-labeling-v4"
+PROMPT_VERSION = "topic-clips-claims-products-v4"
+VERIFICATION_PROMPT_VERSION = "evidence-corpus-verification-v2"
 EVIDENCE_CORPUS_MANIFEST_VERSION = "evidence-corpus-validation-v1"
 DEFAULT_TOPICS = Path("topics.md")
 DEFAULT_TRANSCRIPTS = Path("downloader/data/transcripts")
@@ -74,6 +74,30 @@ ALLOWED_CLAIM_TYPES = (
     "mechanism",
     "institutional_or_conspiracy",
     "other_factual",
+)
+# How firmly the speaker states a claim. Ordered from most to least firm; this
+# is the speaker's stance, never the coder's confidence in the coding.
+ALLOWED_EXPRESSED_CERTAINTY = ("absolute", "unhedged", "hedged", "speculative")
+MAX_CERTAINTY_MARKERS = 6
+ALLOWED_PRODUCT_TYPES = (
+    "supplement",
+    "medication",
+    "food_or_beverage",
+    "device_or_wearable",
+    "test_or_diagnostic",
+    "app_or_digital_service",
+    "clinic_or_practitioner_service",
+    "program_or_course",
+    "book_or_media",
+    "personal_care_or_cosmetic",
+    "other_product",
+)
+ALLOWED_MENTION_ROLES = (
+    "advertised",
+    "own_product",
+    "recommended",
+    "neutral",
+    "criticized",
 )
 ALLOWED_VERDICTS = (
     "supported",
@@ -109,10 +133,10 @@ something out because a neighbouring window might cover it.
 # Contract
 
 Return exactly one result object for every window in the input, matched by
-window_id. A window with no health content returns empty arrays for both
-detections and verification_candidates. Empty is a valid and common answer.
-At most 40 detections and 30 candidates per window; if a window would exceed
-that, keep the most substantive.
+window_id. A window with no health content returns empty arrays for
+detections, verification_candidates and product_mentions. Empty is a valid and
+common answer. At most 40 detections, 30 candidates and 30 product mentions per
+window; if a window would exceed that, keep the most substantive.
 
 # Task 1 -- detections
 
@@ -151,10 +175,10 @@ On a topic detection this describes how the subject matter is being handled: use
 asserted_or_endorsed for ordinary discussion, and the other values only when the
 passage is specifically reporting, doubting or rebutting.
 
-confidence -- how sure you are of this coding, not of the truth of anything. Use
-0.9+ when the coding is unambiguous, 0.7 when it is right but took judgement,
-0.5 when another coder could reasonably differ. Below 0.5, prefer to omit the
-detection.
+confidence -- how sure you are of this coding, not of the truth of anything and
+not of how firmly the speaker spoke. Use 0.9+ when the coding is unambiguous,
+0.7 when it is right but took judgement, 0.5 when another coder could
+reasonably differ. Below 0.5, prefer to omit the detection.
 
 summary -- one short sentence in your own words naming what is in the span.
 
@@ -184,15 +208,62 @@ claim_text -- one neutral, self-contained sentence stating the proposition, with
 pronouns resolved and hedges preserved. Never sharpen a hedged claim into a firm
 one, and never add specifics the speaker did not give.
 claim_type -- the kind of proposition being asserted.
+expressed_certainty -- how firmly the proposition is stated. This is the
+speaker's stance, coded from the words used; it is not your confidence:
+  absolute    -- boosted or universal: "definitely", "always", "every single",
+                 "there is no doubt", "proven", "100%", "guaranteed"
+  unhedged    -- a plain declarative with neither booster nor hedge
+  hedged      -- softened but still asserted: "probably", "likely", "I think",
+                 "tends to", "in most people", "generally"
+  speculative -- offered as a possibility or open question: "might", "could",
+                 "maybe", "I wonder if", "some people say", "I'm not sure but"
+For a quoted, questioned or rebutted claim, code how the original statement is
+rendered, not the speaker's attitude towards it; that is discourse_role.
+certainty_markers -- the verbatim words or phrases inside the span that justify
+the coding, at most 6, copied under the quoting rules below. Required for
+absolute, hedged and speculative; must be an empty array for unhedged.
 rationale -- one short sentence on why it needs evidence checking.
+
+# Task 3 -- product mentions
+
+Record every specific product named in health content. A specific product is a
+named brand, proprietary product, service or offering that a listener could
+identify and buy, sign up for or seek out: a supplement brand, a brand-name
+drug, a device, an app, a test, a clinic, a programme, a book, or a speaker's
+own offering. Generic substances, categories and practices are not products --
+"magnesium", "semaglutide", "a probiotic", "red light therapy", "cold plunges"
+-- and a company named only as an actor ("Pfizer lied") is not a product
+mention, though its named product ("the Pfizer vaccine") is.
+
+Record a product when it is itself a health, wellness, nutrition, fitness,
+beauty or medical offering, and record any product of any kind that is named
+inside a stretch of health content, including inside advertising reads. Skip
+unrelated products in unrelated content. One continuous stretch is one mention:
+a name repeated three times in one sponsor read is one mention whose span
+covers the read, but the same product raised again after unrelated material is
+a new mention.
+
+product_name -- the product as a listener would name it, with spelling repaired
+where the transcript has plainly garbled it ("A G one" -> "AG1"). Do not add
+the maker or a description.
+product_type -- the kind of offering; use other_product only when no listed
+kind fits.
+mention_role -- what the speakers do with the product:
+  advertised  -- a paid or sponsor read, discount code or affiliate offer
+  own_product -- a host's or guest's own product, clinic, programme or book
+  recommended -- endorsed or suggested without any sign of payment
+  neutral     -- named without a stance, as an example or in passing
+  criticized  -- named to warn against, mock or dispute
+evidence_quote -- a verbatim fragment of the span that contains the name as it
+was transcribed.
 
 # Quoting
 
-evidence_quote must be copied verbatim from inside the span, including
-transcription errors, false starts and missing punctuation. Whitespace may be
-normalised; nothing else may be tidied, corrected or paraphrased. Keep it under
-30 words and choose the fragment that most directly carries the labeled
-material.
+evidence_quote and certainty_markers must be copied verbatim from inside the
+span, including transcription errors, false starts and missing punctuation.
+Whitespace may be normalised; nothing else may be tidied, corrected or
+paraphrased. Keep a quote under 30 words and choose the fragment that most
+directly carries the labeled material.
 
 # When two labels compete
 
@@ -806,6 +877,15 @@ def response_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
             },
             "claim_type": {"type": "string", "enum": list(ALLOWED_CLAIM_TYPES)},
             "claim_text": {"type": "string"},
+            "expressed_certainty": {
+                "type": "string",
+                "enum": list(ALLOWED_EXPRESSED_CERTAINTY),
+            },
+            "certainty_markers": {
+                "type": "array",
+                "items": {"type": "string"},
+                "maxItems": MAX_CERTAINTY_MARKERS,
+            },
             "evidence_quote": {"type": "string"},
             "confidence": {"type": "number", "minimum": 0, "maximum": 1},
             "rationale": {"type": "string"},
@@ -819,9 +899,33 @@ def response_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
             "discourse_role",
             "claim_type",
             "claim_text",
+            "expressed_certainty",
+            "certainty_markers",
             "evidence_quote",
             "confidence",
             "rationale",
+        ],
+        "additionalProperties": False,
+    }
+    product_mention = {
+        "type": "object",
+        "properties": {
+            "start_unit_id": {"type": "string", "pattern": "^u[0-9]{6}$"},
+            "end_unit_id": {"type": "string", "pattern": "^u[0-9]{6}$"},
+            "product_name": {"type": "string"},
+            "product_type": {"type": "string", "enum": list(ALLOWED_PRODUCT_TYPES)},
+            "mention_role": {"type": "string", "enum": list(ALLOWED_MENTION_ROLES)},
+            "evidence_quote": {"type": "string"},
+            "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        },
+        "required": [
+            "start_unit_id",
+            "end_unit_id",
+            "product_name",
+            "product_type",
+            "mention_role",
+            "evidence_quote",
+            "confidence",
         ],
         "additionalProperties": False,
     }
@@ -835,8 +939,18 @@ def response_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
                 "items": verification_candidate,
                 "maxItems": 30,
             },
+            "product_mentions": {
+                "type": "array",
+                "items": product_mention,
+                "maxItems": 30,
+            },
         },
-        "required": ["window_id", "detections", "verification_candidates"],
+        "required": [
+            "window_id",
+            "detections",
+            "verification_candidates",
+            "product_mentions",
+        ],
         "additionalProperties": False,
     }
     return {
@@ -886,6 +1000,12 @@ def _normalized_quote(value: str) -> str:
     return re.sub(r"\s+", " ", value).strip().casefold()
 
 
+def _product_key(name: str) -> str:
+    """Case- and punctuation-insensitive key so "AG-1" and "ag1" count as one product."""
+    key = re.sub(r"[^a-z0-9]+", "", name.casefold())
+    return key or _normalized_quote(name)
+
+
 def _unit_number(unit_id: str) -> int:
     if not re.fullmatch(r"u\d{6}", unit_id):
         raise TopicLabelingError(f"invalid unit ID: {unit_id!r}")
@@ -910,6 +1030,11 @@ def validate_window_result(
         raise TopicLabelingError(
             f"invalid verification candidates for {window['window_id']}",
             kind="schema_shape",
+        )
+    products = result.get("product_mentions")
+    if not isinstance(products, list) or len(products) > 30:
+        raise TopicLabelingError(
+            f"invalid product mentions for {window['window_id']}", kind="schema_shape"
         )
     unit_order = {unit["unit_id"]: index for index, unit in enumerate(window["units"])}
 
@@ -951,6 +1076,46 @@ def validate_window_result(
                 kind="non_verbatim_quote",
             )
         return re.sub(r"\s+", " ", quote).strip()
+
+    def validate_certainty(certainty: Any, markers: Any, text: str) -> list[str]:
+        if certainty not in ALLOWED_EXPRESSED_CERTAINTY:
+            raise TopicLabelingError(
+                f"invalid expressed certainty in {window['window_id']}",
+                kind="invalid_field",
+            )
+        if (
+            not isinstance(markers, list)
+            or len(markers) > MAX_CERTAINTY_MARKERS
+            or any(
+                not isinstance(marker, str) or not marker.strip() for marker in markers
+            )
+        ):
+            raise TopicLabelingError(
+                f"invalid certainty markers in {window['window_id']}",
+                kind="invalid_field",
+            )
+        cleaned = [re.sub(r"\s+", " ", marker).strip() for marker in markers]
+        if len({_normalized_quote(marker) for marker in cleaned}) != len(cleaned):
+            raise TopicLabelingError(
+                f"duplicate certainty markers in {window['window_id']}",
+                kind="invalid_field",
+            )
+        if any(
+            _normalized_quote(marker) not in _normalized_quote(text)
+            for marker in cleaned
+        ):
+            raise TopicLabelingError(
+                f"certainty marker is not verbatim inside {window['window_id']} range",
+                kind="non_verbatim_quote",
+            )
+        # The coding must be grounded: a hedge or booster the model cannot point
+        # to is not a hedge or booster, and an unhedged claim has none.
+        if (certainty == "unhedged") != (not cleaned):
+            raise TopicLabelingError(
+                f"certainty markers do not agree with expressed certainty in {window['window_id']}",
+                kind="certainty_markers_mismatch",
+            )
+        return cleaned
 
     normalized: list[dict[str, Any]] = []
     seen: set[tuple[Any, ...]] = set()
@@ -1042,6 +1207,8 @@ def validate_window_result(
         "discourse_role",
         "claim_type",
         "claim_text",
+        "expressed_certainty",
+        "certainty_markers",
         "evidence_quote",
         "confidence",
         "rationale",
@@ -1109,6 +1276,8 @@ def validate_window_result(
             )
         confidence = validate_confidence(claim.get("confidence"))
         quote = validate_quote(claim.get("evidence_quote"), text)
+        certainty = claim.get("expressed_certainty")
+        markers = validate_certainty(certainty, claim.get("certainty_markers"), text)
         normalized_text = re.sub(r"\s+", " ", claim_text).strip()
         key = (start_id, end_id, normalized_text.casefold(), discourse_role)
         if key in seen_claims:
@@ -1127,15 +1296,76 @@ def validate_window_result(
                 "discourse_role": discourse_role,
                 "claim_type": claim_type,
                 "claim_text": normalized_text,
+                "expressed_certainty": certainty,
+                "certainty_markers": markers,
                 "evidence_quote": quote,
                 "confidence": confidence,
                 "rationale": re.sub(r"\s+", " ", rationale).strip(),
+            }
+        )
+
+    normalized_products: list[dict[str, Any]] = []
+    seen_products: set[tuple[Any, ...]] = set()
+    product_fields = {
+        "start_unit_id",
+        "end_unit_id",
+        "product_name",
+        "product_type",
+        "mention_role",
+        "evidence_quote",
+        "confidence",
+    }
+    for product in products:
+        if not isinstance(product, dict) or set(product) != product_fields:
+            raise TopicLabelingError(
+                f"unexpected product-mention fields in {window['window_id']}",
+                kind="schema_shape",
+            )
+        start_id = product.get("start_unit_id")
+        end_id = product.get("end_unit_id")
+        text = selected_text(start_id, end_id)
+        name = product.get("product_name")
+        product_type = product.get("product_type")
+        mention_role = product.get("mention_role")
+        if not isinstance(name, str) or not name.strip():
+            raise TopicLabelingError(
+                f"empty product name in {window['window_id']}", kind="invalid_field"
+            )
+        if product_type not in ALLOWED_PRODUCT_TYPES:
+            raise TopicLabelingError(
+                f"invalid product type in {window['window_id']}", kind="invalid_field"
+            )
+        if mention_role not in ALLOWED_MENTION_ROLES:
+            raise TopicLabelingError(
+                f"invalid product mention role in {window['window_id']}",
+                kind="invalid_field",
+            )
+        confidence = validate_confidence(product.get("confidence"))
+        quote = validate_quote(product.get("evidence_quote"), text)
+        clean_name = re.sub(r"\s+", " ", name).strip()
+        key = (start_id, end_id, _product_key(clean_name), mention_role)
+        if key in seen_products:
+            raise TopicLabelingError(
+                f"duplicate product mention in {window['window_id']}",
+                kind="duplicate_annotation",
+            )
+        seen_products.add(key)
+        normalized_products.append(
+            {
+                "start_unit_id": start_id,
+                "end_unit_id": end_id,
+                "product_name": clean_name,
+                "product_type": product_type,
+                "mention_role": mention_role,
+                "evidence_quote": quote,
+                "confidence": confidence,
             }
         )
     return {
         "window_id": window["window_id"],
         "detections": normalized,
         "verification_candidates": normalized_claims,
+        "product_mentions": normalized_products,
     }
 
 
@@ -1165,9 +1395,10 @@ def validate_response(
             "window_id",
             "detections",
             "verification_candidates",
+            "product_mentions",
         }:
             raise TopicLabelingError(
-                "each result must contain window_id, detections, and verification_candidates",
+                "each result must contain window_id, detections, verification_candidates, and product_mentions",
                 kind="schema_shape",
             )
         window_id = result.get("window_id")
@@ -1219,7 +1450,11 @@ Verdicts:
 Cite only passage_id values from that candidate's packet. Keep the rationale
 concise and explain evidence limitations. The podcast discourse role does not
 change the factual verdict; it is preserved separately to distinguish
-endorsement, reporting, questioning, and rebuttal downstream.
+endorsement, reporting, questioning, and rebuttal downstream. Judge the claim
+as stated: expressed_certainty and certainty_markers record how firmly it was
+put, so a hedged claim is not contradicted merely because the firm version
+would be, and an absolute claim is not supported by evidence for a qualified
+one.
 """
 
 
@@ -1272,6 +1507,8 @@ def verification_batch_input(pairs: Sequence[dict[str, Any]]) -> str:
                     "context_text",
                     "discourse_role",
                     "claim_type",
+                    "expressed_certainty",
+                    "certainty_markers",
                     "topic_ids",
                     "frame_ids",
                     "evidence_signal_ids",
@@ -1345,6 +1582,8 @@ def validate_verification_candidate(candidate: dict[str, Any]) -> dict[str, Any]
         "context_text",
         "discourse_role",
         "claim_type",
+        "expressed_certainty",
+        "certainty_markers",
         "topic_ids",
         "frame_ids",
         "evidence_signal_ids",
@@ -1378,6 +1617,17 @@ def validate_verification_candidate(candidate: dict[str, Any]) -> dict[str, Any]
         raise TopicLabelingError(f"candidate {candidate_id} has invalid discourse_role")
     if candidate["claim_type"] not in ALLOWED_CLAIM_TYPES:
         raise TopicLabelingError(f"candidate {candidate_id} has invalid claim_type")
+    if candidate["expressed_certainty"] not in ALLOWED_EXPRESSED_CERTAINTY:
+        raise TopicLabelingError(
+            f"candidate {candidate_id} has invalid expressed_certainty"
+        )
+    markers = candidate["certainty_markers"]
+    if not isinstance(markers, list) or any(
+        not isinstance(marker, str) or not marker for marker in markers
+    ):
+        raise TopicLabelingError(
+            f"candidate {candidate_id} has invalid certainty_markers"
+        )
     for key in ("topic_ids", "frame_ids", "evidence_signal_ids"):
         values = candidate[key]
         if (
@@ -2356,6 +2606,130 @@ def merge_claim_candidates(
     return sorted(groups, key=lambda row: (row["start_order"], row["end_order"]))
 
 
+def merge_product_mentions(
+    candidates: Sequence[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Merge overlapping/adjacent mentions of the same product across windows.
+
+    Like claims, merging only joins overlapping spans: the same product named
+    again after unrelated material stays a separate mention, and ``product_key``
+    lets downstream analysis count distinct products instead.
+    """
+    groups: list[dict[str, Any]] = []
+    for candidate in sorted(
+        candidates, key=lambda row: (row["start_order"], row["end_order"])
+    ):
+        key = _product_key(candidate["product_name"])
+        matching = [
+            index
+            for index, group in enumerate(groups)
+            if candidate["start_order"] <= group["end_order"] + 1
+            and group["product_key"] == key
+        ]
+        if not matching:
+            groups.append(
+                {
+                    "start_order": candidate["start_order"],
+                    "end_order": candidate["end_order"],
+                    "product_key": key,
+                    "best": candidate,
+                    "mentions": [candidate],
+                }
+            )
+            continue
+        primary = groups[matching[0]]
+        primary["start_order"] = min(primary["start_order"], candidate["start_order"])
+        primary["end_order"] = max(primary["end_order"], candidate["end_order"])
+        primary["mentions"].append(candidate)
+        if candidate["confidence"] > primary["best"]["confidence"]:
+            primary["best"] = candidate
+        for index in reversed(matching[1:]):
+            other = groups.pop(index)
+            primary["start_order"] = min(primary["start_order"], other["start_order"])
+            primary["end_order"] = max(primary["end_order"], other["end_order"])
+            primary["mentions"].extend(other["mentions"])
+            if other["best"]["confidence"] > primary["best"]["confidence"]:
+                primary["best"] = other["best"]
+    return sorted(groups, key=lambda row: (row["start_order"], row["end_order"]))
+
+
+def _make_product_mentions(
+    groups: Sequence[dict[str, Any]],
+    units: dict[int, dict[str, Any]],
+    exemplar: dict[str, Any],
+    taxonomy: dict[str, Any],
+    run_manifest: dict[str, Any],
+) -> list[dict[str, Any]]:
+    output: list[dict[str, Any]] = []
+    for index, group in enumerate(groups, 1):
+        supports = group["mentions"]
+        best = group["best"]
+        selected = _selected_units(units, group["start_order"], group["end_order"])
+        context_start = max(min(units), group["start_order"] - 2)
+        context_end = min(max(units), group["end_order"] + 2)
+        context_units = _selected_units(units, context_start, context_end)
+        output.append(
+            {
+                "schema_version": SCHEMA_VERSION,
+                "mention_id": f"episode_{exemplar['episode_id']}_product_{index:04d}",
+                "episode_id": exemplar["episode_id"],
+                "podcast_id": exemplar.get("podcast_id"),
+                "podcast_title": exemplar.get("podcast_title"),
+                "episode_title": exemplar.get("episode_title"),
+                "published_date": exemplar.get("published_date"),
+                "source_transcript": exemplar.get("source_transcript"),
+                "source_transcript_sha256": exemplar.get("source_transcript_sha256"),
+                "start_unit_id": f"u{group['start_order']:06d}",
+                "end_unit_id": f"u{group['end_order']:06d}",
+                "start_unit_index": group["start_order"],
+                "end_unit_index": group["end_order"],
+                "start_seconds": _window_time(selected, "start_seconds"),
+                "end_seconds": _window_time(selected, "end_seconds", reverse=True),
+                "timing_quality": _window_timing_quality(selected),
+                "product_name": best["product_name"],
+                "product_key": group["product_key"],
+                "product_type": best["product_type"],
+                "mention_role": best["mention_role"],
+                "mention_roles": sorted({row["mention_role"] for row in supports}),
+                "confidence": max(row["confidence"] for row in supports),
+                "evidence_quote": best["evidence_quote"],
+                "text": " ".join(unit["text"] for unit in selected),
+                "context_start_unit_id": f"u{context_start:06d}",
+                "context_end_unit_id": f"u{context_end:06d}",
+                "context_text": " ".join(unit["text"] for unit in context_units),
+                "supporting_extraction_count": len(supports),
+                "supporting_window_ids": sorted({row["window_id"] for row in supports}),
+                "taxonomy_sha256": taxonomy["taxonomy_sha256"],
+                "labeling_run_fingerprint": run_manifest["run_fingerprint"],
+                "labeling_model": run_manifest["model"],
+            }
+        )
+    return output
+
+
+def _products_in_range(
+    products: Sequence[dict[str, Any]], start_order: int, end_order: int
+) -> list[dict[str, Any]]:
+    return [
+        row
+        for row in products
+        if row["start_unit_index"] <= end_order and row["end_unit_index"] >= start_order
+    ]
+
+
+def _product_links(products: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "mentions_specific_product": bool(products),
+        "product_mention_ids": [row["mention_id"] for row in products],
+        "product_names": sorted({row["product_name"] for row in products}),
+    }
+
+
+def _certainty_counts(claims: Sequence[dict[str, Any]]) -> dict[str, int]:
+    counts = Counter(row["expressed_certainty"] for row in claims)
+    return {value: counts[value] for value in ALLOWED_EXPRESSED_CERTAINTY}
+
+
 def _make_label_annotations(
     detections: Sequence[dict[str, Any]],
     units: dict[int, dict[str, Any]],
@@ -2455,6 +2829,7 @@ def _make_verification_candidates(
     exemplar: dict[str, Any],
     taxonomy: dict[str, Any],
     run_manifest: dict[str, Any],
+    products: Sequence[dict[str, Any]] = (),
 ) -> list[dict[str, Any]]:
     taxonomy_by_id = {label["label_id"]: label for label in taxonomy["labels"]}
     output: list[dict[str, Any]] = []
@@ -2465,6 +2840,11 @@ def _make_verification_candidates(
         context_start = max(min(units), group["start_order"] - 2)
         context_end = min(max(units), group["end_order"] + 2)
         context_units = _selected_units(units, context_start, context_end)
+        # A claim is "about a product" when one is named within its context
+        # window, not only inside the claim's own one-or-two-unit span: "AG1
+        # has everything you need. It covers all your micronutrients" names the
+        # product one sentence before the checkable proposition.
+        linked_products = _products_in_range(products, context_start, context_end)
         topic_ids = sorted({label for row in supports for label in row["topic_ids"]})
         frame_ids = sorted({label for row in supports for label in row["frame_ids"]})
         evidence_ids = sorted(
@@ -2493,7 +2873,10 @@ def _make_verification_candidates(
                 "discourse_role": group["discourse_role"],
                 "claim_type": best["claim_type"],
                 "claim_text": best["claim_text"],
+                "expressed_certainty": best["expressed_certainty"],
+                "certainty_markers": best["certainty_markers"],
                 "evidence_quote": best["evidence_quote"],
+                **_product_links(linked_products),
                 # Keys for counting repeats. Merging only joins overlapping
                 # spans, so the same claim made twice in an episode -- or a
                 # sponsor read repeated across a show -- is several candidates.
@@ -2566,12 +2949,14 @@ def _episode_artifacts(
     list[dict[str, Any]],
     list[dict[str, Any]],
     list[dict[str, Any]],
+    list[dict[str, Any]],
     int,
     dict[str, Any],
 ]:
     units: dict[int, dict[str, Any]] = {}
     detections: list[dict[str, Any]] = []
     raw_claims: list[dict[str, Any]] = []
+    raw_products: list[dict[str, Any]] = []
     missing = 0
     label_axes = {label["label_id"]: label["axis"] for label in taxonomy["labels"]}
     for window in windows:
@@ -2594,16 +2979,33 @@ def _episode_artifacts(
             }
             for row in result["verification_candidates"]
         )
+        raw_products.extend(
+            {
+                **row,
+                "start_order": _unit_number(row["start_unit_id"]),
+                "end_order": _unit_number(row["end_unit_id"]),
+                "window_id": window["window_id"],
+            }
+            for row in result["product_mentions"]
+        )
     exposure = _episode_exposure(windows, units, len(windows) - missing)
     if not windows:
-        return [], [], [], missing, exposure
+        return [], [], [], [], missing, exposure
     exemplar = windows[0]
     taxonomy_by_id = {label["label_id"]: label for label in taxonomy["labels"]}
     annotations = _make_label_annotations(
         detections, units, exemplar, taxonomy, run_manifest
     )
+    products = _make_product_mentions(
+        merge_product_mentions(raw_products), units, exemplar, taxonomy, run_manifest
+    )
     claims = _make_verification_candidates(
-        merge_claim_candidates(raw_claims), units, exemplar, taxonomy, run_manifest
+        merge_claim_candidates(raw_claims),
+        units,
+        exemplar,
+        taxonomy,
+        run_manifest,
+        products,
     )
 
     topic_groups = merge_detection_candidates(
@@ -2695,6 +3097,12 @@ def _episode_artifacts(
                 "verification_candidate_ids": [
                     row["candidate_id"] for row in overlapping_claims
                 ],
+                "claim_certainty_counts": _certainty_counts(overlapping_claims),
+                **_product_links(
+                    _products_in_range(
+                        products, group["start_order"], group["end_order"]
+                    )
+                ),
                 "summary": best["summary"],
                 "evidence_quote": best["evidence_quote"],
                 "text": " ".join(unit["text"] for unit in selected),
@@ -2704,7 +3112,7 @@ def _episode_artifacts(
                 "labeling_model": run_manifest["model"],
             }
         )
-    return clips, annotations, claims, missing, exposure
+    return clips, annotations, claims, products, missing, exposure
 
 
 def _atomic_csv(
@@ -2734,10 +3142,12 @@ def run_merge(args: argparse.Namespace) -> dict[str, Any]:
     clips_path = output_dir / "clips.jsonl"
     annotations_path = output_dir / "label_annotations.jsonl"
     candidates_path = output_dir / "verification_candidates.jsonl"
+    products_path = output_dir / "product_mentions.jsonl"
     review_path = output_dir / "review_queue.csv"
     clip_tmp = clips_path.with_name(f".{clips_path.name}.tmp")
     annotation_tmp = annotations_path.with_name(f".{annotations_path.name}.tmp")
     candidate_tmp = candidates_path.with_name(f".{candidates_path.name}.tmp")
+    product_tmp = products_path.with_name(f".{products_path.name}.tmp")
     review_tmp = review_path.with_name(f".{review_path.name}.tmp")
     review_fields = [
         "clip_id",
@@ -2756,17 +3166,21 @@ def run_merge(args: argparse.Namespace) -> dict[str, Any]:
         "evidence_signal_ids",
         "possible_misinformation",
         "verification_candidate_ids",
+        "mentions_specific_product",
+        "product_names",
         "summary",
         "evidence_quote",
         "text",
     ]
     episode_rows: list[dict[str, Any]] = []
-    total_clips = total_annotations = total_candidates = missing = episodes = 0
+    total_clips = total_annotations = total_candidates = total_products = 0
+    missing = episodes = 0
     try:
         with (
             clip_tmp.open("w", encoding="utf-8") as clip_handle,
             annotation_tmp.open("w", encoding="utf-8") as annotation_handle,
             candidate_tmp.open("w", encoding="utf-8") as candidate_handle,
+            product_tmp.open("w", encoding="utf-8") as product_handle,
             review_tmp.open("w", newline="", encoding="utf-8") as review_handle,
         ):
             review_writer = csv.DictWriter(review_handle, fieldnames=review_fields)
@@ -2777,7 +3191,7 @@ def run_merge(args: argparse.Namespace) -> dict[str, Any]:
             for episode_id, group_iter in grouped:
                 windows = list(group_iter)
                 labels = store.labels_for_episode(int(episode_id))
-                clips, annotations, candidates, episode_missing, exposure = (
+                clips, annotations, candidates, products, episode_missing, exposure = (
                     _episode_artifacts(windows, labels, taxonomy, label_manifest)
                 )
                 missing += episode_missing
@@ -2792,6 +3206,8 @@ def run_merge(args: argparse.Namespace) -> dict[str, Any]:
                     )
                 for candidate in candidates:
                     candidate_handle.write(canonical_json(candidate) + "\n")
+                for product in products:
+                    product_handle.write(canonical_json(product) + "\n")
                 for clip in clips:
                     clip_handle.write(canonical_json(clip) + "\n")
                     topic_ids = [label["label_id"] for label in clip["topics"]]
@@ -2830,6 +3246,10 @@ def run_merge(args: argparse.Namespace) -> dict[str, Any]:
                             "verification_candidate_ids": ";".join(
                                 clip["verification_candidate_ids"]
                             ),
+                            "mentions_specific_product": clip[
+                                "mentions_specific_product"
+                            ],
+                            "product_names": ";".join(clip["product_names"]),
                             "summary": clip["summary"],
                             "evidence_quote": clip["evidence_quote"],
                             "text": clip["text"][:2000],
@@ -2852,6 +3272,12 @@ def run_merge(args: argparse.Namespace) -> dict[str, Any]:
                             {row["claim_key"] for row in candidates}
                         ),
                         "possible_misinformation": bool(candidates),
+                        "claim_certainty_counts": _certainty_counts(candidates),
+                        "product_mention_count": len(products),
+                        "distinct_product_key_count": len(
+                            {row["product_key"] for row in products}
+                        ),
+                        "mentions_specific_product": bool(products),
                         "label_annotation_counts": dict(sorted(label_counts.items())),
                         "label_max_confidence": dict(sorted(max_confidence.items())),
                         "taxonomy_sha256": taxonomy["taxonomy_sha256"],
@@ -2861,14 +3287,16 @@ def run_merge(args: argparse.Namespace) -> dict[str, Any]:
                 total_clips += len(clips)
                 total_annotations += len(annotations)
                 total_candidates += len(candidates)
-            clip_handle.flush()
-            annotation_handle.flush()
-            candidate_handle.flush()
-            review_handle.flush()
-            os.fsync(clip_handle.fileno())
-            os.fsync(annotation_handle.fileno())
-            os.fsync(candidate_handle.fileno())
-            os.fsync(review_handle.fileno())
+                total_products += len(products)
+            for handle in (
+                clip_handle,
+                annotation_handle,
+                candidate_handle,
+                product_handle,
+                review_handle,
+            ):
+                handle.flush()
+                os.fsync(handle.fileno())
         if missing and not args.allow_incomplete:
             raise TopicLabelingError(
                 f"{missing} windows have no successful label; rerun label or pass --allow-incomplete"
@@ -2876,6 +3304,7 @@ def run_merge(args: argparse.Namespace) -> dict[str, Any]:
         clip_tmp.replace(clips_path)
         annotation_tmp.replace(annotations_path)
         candidate_tmp.replace(candidates_path)
+        product_tmp.replace(products_path)
         review_tmp.replace(review_path)
         write_jsonl_atomic(output_dir / "episodes.jsonl", episode_rows)
         summary = {
@@ -2885,6 +3314,7 @@ def run_merge(args: argparse.Namespace) -> dict[str, Any]:
             "topic_clips": total_clips,
             "label_annotations": total_annotations,
             "verification_candidates": total_candidates,
+            "product_mentions": total_products,
             "missing_window_labels": missing,
             "complete": missing == 0,
             "taxonomy_sha256": taxonomy["taxonomy_sha256"],
@@ -2892,6 +3322,7 @@ def run_merge(args: argparse.Namespace) -> dict[str, Any]:
             "clips_sha256": sha256_file(clips_path),
             "label_annotations_sha256": sha256_file(annotations_path),
             "verification_candidates_sha256": sha256_file(candidates_path),
+            "product_mentions_sha256": sha256_file(products_path),
         }
         write_json(output_dir / "merge_summary.json", summary)
         print(json.dumps(summary, indent=2))
@@ -2900,6 +3331,7 @@ def run_merge(args: argparse.Namespace) -> dict[str, Any]:
         clip_tmp.unlink(missing_ok=True)
         annotation_tmp.unlink(missing_ok=True)
         candidate_tmp.unlink(missing_ok=True)
+        product_tmp.unlink(missing_ok=True)
         review_tmp.unlink(missing_ok=True)
         raise
     finally:
@@ -3088,6 +3520,7 @@ def run_sample(args: argparse.Namespace) -> dict[str, Any]:
     _atomic_csv(output_dir / "validation_sample_blinded.csv", blind_fields, blind_rows)
     _atomic_csv(output_dir / "validation_sample_key.csv", key_fields, key_rows)
     claim_summary = _sample_claims(args, output_dir)
+    product_summary = _sample_products(args, output_dir)
     summary = {
         "schema_version": SCHEMA_VERSION,
         "created_at": utc_now(),
@@ -3095,6 +3528,7 @@ def run_sample(args: argparse.Namespace) -> dict[str, Any]:
         "requested_per_label": args.per_label,
         "requested_random_windows": args.random_windows,
         "claim_sample": claim_summary,
+        "product_sample": product_summary,
         "sample_units": len(ordered),
         "positive_labels_represented": len(positive_heaps),
         "model_positive_clip_population_by_label": dict(
@@ -3123,7 +3557,9 @@ def _sample_claims(args: argparse.Namespace, output_dir: Path) -> dict[str, Any]
     said -- a rewrite that drops a hedge or widens a population turns a true
     statement into a false one, and every verdict downstream inherits the error.
     The coder must see ``claim_text`` to judge faithfulness, so this sheet is
-    blind only to claim type, discourse role and confidence.
+    blind only to claim type, discourse role, expressed certainty and
+    confidence. The coder's own certainty rating measures whether the model's
+    hedge/booster reading can be reproduced from the words alone.
     """
     candidates_path = Path(args.candidates)
     if args.per_claim_type < 1 or not candidates_path.exists():
@@ -3160,6 +3596,7 @@ def _sample_claims(args: argparse.Namespace, output_dir: Path) -> dict[str, Any]
         "human_is_material_claim",
         "human_claim_faithful_to_quote",
         "human_discourse_role",
+        "human_expressed_certainty",
         "human_notes",
     ]
     key_fields = [
@@ -3167,8 +3604,11 @@ def _sample_claims(args: argparse.Namespace, output_dir: Path) -> dict[str, Any]
         "candidate_id",
         "claim_type",
         "model_discourse_role",
+        "model_expressed_certainty",
+        "model_certainty_markers",
         "model_confidence",
         "topic_ids",
+        "product_mention_ids",
     ]
     blind_rows = []
     key_rows = []
@@ -3190,6 +3630,7 @@ def _sample_claims(args: argparse.Namespace, output_dir: Path) -> dict[str, Any]
                 "human_is_material_claim": "",
                 "human_claim_faithful_to_quote": "",
                 "human_discourse_role": "",
+                "human_expressed_certainty": "",
                 "human_notes": "",
             }
         )
@@ -3199,8 +3640,11 @@ def _sample_claims(args: argparse.Namespace, output_dir: Path) -> dict[str, Any]
                 "candidate_id": row["candidate_id"],
                 "claim_type": row["claim_type"],
                 "model_discourse_role": row["discourse_role"],
+                "model_expressed_certainty": row["expressed_certainty"],
+                "model_certainty_markers": ";".join(row.get("certainty_markers", [])),
                 "model_confidence": row.get("candidate_confidence"),
                 "topic_ids": ";".join(row.get("topic_ids", [])),
+                "product_mention_ids": ";".join(row.get("product_mention_ids", [])),
             }
         )
     _atomic_csv(output_dir / "claim_sample_blinded.csv", blind_fields, blind_rows)
@@ -3212,6 +3656,109 @@ def _sample_claims(args: argparse.Namespace, output_dir: Path) -> dict[str, Any]
         "population_by_claim_type": dict(sorted(population.items())),
         "sample_by_claim_type": {
             claim_type: len(heap) for claim_type, heap in sorted(heaps.items())
+        },
+    }
+
+
+def _sample_products(args: argparse.Namespace, output_dir: Path) -> dict[str, Any]:
+    """Coding sheet for product mentions, stratified by product type.
+
+    The questions are whether the span names a specific product at all (rather
+    than a generic substance or a company as an actor), whether
+    ``product_name`` is the name a listener would recognise, and whether the
+    type and mention role are right. The coder sees ``product_name`` for the
+    same reason the claim sheet shows ``claim_text``; the sheet is blind to
+    type, role and confidence.
+    """
+    products_path = Path(args.product_mentions)
+    if args.per_product_type < 1 or not products_path.exists():
+        return {"sampled": 0, "reason": "no product file or per-product-type < 1"}
+    heaps: dict[str, list[tuple[int, str, dict[str, Any]]]] = defaultdict(list)
+    population: Counter[str] = Counter()
+    for mention in iter_jsonl(products_path):
+        product_type = mention["product_type"]
+        population[product_type] += 1
+        _keep_smallest(
+            heaps[product_type],
+            args.per_product_type,
+            _sample_score(args.seed, "product", product_type, mention["mention_id"]),
+            mention["mention_id"],
+            mention,
+        )
+    selected = [row for heap in heaps.values() for _, _, row in heap]
+    ordered = sorted(
+        selected,
+        key=lambda row: _sample_score(args.seed, "product_order", row["mention_id"]),
+    )
+    blind_fields = [
+        "review_id",
+        "episode_id",
+        "podcast_title",
+        "episode_title",
+        "published_date",
+        "start_seconds",
+        "end_seconds",
+        "timing_quality",
+        "context_text",
+        "evidence_quote",
+        "product_name",
+        "human_is_specific_product",
+        "human_product_name",
+        "human_product_type",
+        "human_mention_role",
+        "human_notes",
+    ]
+    key_fields = [
+        "review_id",
+        "mention_id",
+        "product_key",
+        "model_product_type",
+        "model_mention_role",
+        "model_confidence",
+    ]
+    blind_rows = []
+    key_rows = []
+    for index, row in enumerate(ordered, 1):
+        review_id = f"product_review_{index:06d}"
+        blind_rows.append(
+            {
+                "review_id": review_id,
+                "episode_id": row["episode_id"],
+                "podcast_title": row.get("podcast_title"),
+                "episode_title": row.get("episode_title"),
+                "published_date": row.get("published_date"),
+                "start_seconds": row.get("start_seconds"),
+                "end_seconds": row.get("end_seconds"),
+                "timing_quality": row.get("timing_quality"),
+                "context_text": row.get("context_text"),
+                "evidence_quote": row["evidence_quote"],
+                "product_name": row["product_name"],
+                "human_is_specific_product": "",
+                "human_product_name": "",
+                "human_product_type": "",
+                "human_mention_role": "",
+                "human_notes": "",
+            }
+        )
+        key_rows.append(
+            {
+                "review_id": review_id,
+                "mention_id": row["mention_id"],
+                "product_key": row["product_key"],
+                "model_product_type": row["product_type"],
+                "model_mention_role": row["mention_role"],
+                "model_confidence": row.get("confidence"),
+            }
+        )
+    _atomic_csv(output_dir / "product_sample_blinded.csv", blind_fields, blind_rows)
+    _atomic_csv(output_dir / "product_sample_key.csv", key_fields, key_rows)
+    return {
+        "requested_per_product_type": args.per_product_type,
+        "sampled": len(ordered),
+        "mention_population": sum(population.values()),
+        "population_by_product_type": dict(sorted(population.items())),
+        "sample_by_product_type": {
+            product_type: len(heap) for product_type, heap in sorted(heaps.items())
         },
     }
 
@@ -3478,6 +4025,11 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=DEFAULT_OUTPUT / "verification_candidates.jsonl",
     )
+    sample.add_argument(
+        "--product-mentions",
+        type=Path,
+        default=DEFAULT_OUTPUT / "product_mentions.jsonl",
+    )
     sample.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
     sample.add_argument("--per-label", type=int, default=20)
     sample.add_argument(
@@ -3485,6 +4037,12 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=40,
         help="Claims sampled per claim type for extraction and faithfulness coding",
+    )
+    sample.add_argument(
+        "--per-product-type",
+        type=int,
+        default=20,
+        help="Product mentions sampled per product type for name/type/role coding",
     )
     sample.add_argument(
         "--random-windows",

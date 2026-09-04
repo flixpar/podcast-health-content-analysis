@@ -14,6 +14,8 @@ no label's axis is inferred from its name. The dimensions are independent:
 | Frame | 27 cross-cutting labels | How it is framed, including conspiracy, correction, MAHA, and commercialization |
 | Evidence signal | 7 cross-cutting labels | How evidence or authority is invoked, including academic studies, mechanisms, extrapolation, experience, and credentials |
 | Claim review | Atomic factual claims | High-recall candidates for later evidence verification |
+| Expressed certainty | `absolute`, `unhedged`, `hedged`, `speculative` on every claim | How firmly the speaker put the claim, grounded in verbatim marker words |
+| Product mentions | Named products with a type and a mention role | Which specific products are named, and whether as an ad, the speaker's own, a recommendation, a neutral mention or a criticism |
 
 Every label and claim also records `discourse_role` as
 `asserted_or_endorsed`, `questioned`, `reported_or_quoted`, `rebutted`, or
@@ -23,7 +25,12 @@ risk/safety, mechanism, or institutional/conspiracy.
 
 These are deliberately separate. A conspiracy frame is not necessarily a false
 claim. Citing academic research does not make a claim true. Reporting or
-rebutting a questionable claim is not endorsement.
+rebutting a questionable claim is not endorsement. Expressed certainty is the
+speaker's stance, coded from their words, and is distinct from the model's
+`confidence`, which is only how sure the model is of its own coding. A product
+mention is a fact about what was named, not a judgement that the passage is
+commercial: the Commercialization frame and `relevance=advertisement` still
+carry that, and the three can be cross-tabulated.
 
 `possible_misinformation=true` means only that a material, externally checkable
 claim was selected for evidence review. The first model does not predict truth.
@@ -63,11 +70,40 @@ claims being quoted, questioned, or rebutted, retaining their discourse role so
 later analysis can distinguish exposure from endorsement. Pure opinions, jokes,
 and vague suspicions are excluded unless they contain a testable factual claim.
 
+Each claim carries `expressed_certainty`, a four-level ordinal of how firmly the
+proposition was put: `absolute` for boosted or universal statements
+("definitely", "always", "proven", "every single"), `unhedged` for a plain
+declarative, `hedged` for softened assertions ("probably", "I think", "tends
+to"), and `speculative` for possibilities and open questions ("might",
+"maybe", "some people say"). It lives on claims rather than on topic spans
+because certainty is a property of a proposition; a twenty-unit topic span
+mixes many. The coding must be grounded: `certainty_markers` lists the verbatim
+words that justify it, the client rejects any marker that is not inside the
+span, and it rejects `hedged`, `speculative` or `absolute` with no markers and
+`unhedged` with any. The verifier is shown both fields so a hedged claim is not
+contradicted merely because its firm version would be.
+
+The same response also lists `product_mentions`: every specific product named
+in health content, meaning a brand, proprietary product, service or offering a
+listener could identify and buy or seek out. Generic substances and practices
+("magnesium", "semaglutide", "cold plunges") are not products, and a company
+named only as an actor is not a product mention while its named product is.
+Each mention records a listener-recognisable `product_name`, a `product_type`
+(supplement, medication, food or beverage, device or wearable, test, app or
+digital service, clinic or practitioner service, programme or course, book or
+media, personal care, other) and a `mention_role` (`advertised`,
+`own_product`, `recommended`, `neutral`, `criticized`), with a verbatim quote
+containing the name as transcribed. One continuous stretch naming a product is
+one mention, so a sponsor read is one row however often it repeats the name.
+
 The client rejects omitted windows, unknown or mixed-axis labels, reversed or
 out-of-window spans, duplicate annotations, non-verbatim quotes, incomplete
 Responses, and malformed JSON. Every rejection carries a `kind`, and
 `label_manifest.json` reports `unresolved_windows_by_kind` so a pilot can tell a
-prompt problem from a transport problem without reading a thousand messages.
+prompt problem from a transport problem without reading a thousand messages. A
+pilot should watch `certainty_markers_mismatch` in particular: it is the one
+rejection that measures whether the model can ground the certainty coding
+rather than assert it.
 
 Validation rejects a whole response, so a batch that fails is retried one window
 at a time. Without that, a single unlabelable window would keep the rest of its
@@ -83,6 +119,18 @@ one-label canonical annotations for topic, frame, and evidence axes, preserving
 each dimension's exact span and discourse role. Topic clips attach overlapping
 frame/evidence annotations and claim IDs for convenience, while the independent
 annotation file remains authoritative.
+
+Product mentions merge when their spans overlap or touch and their
+`product_key` matches, a case- and punctuation-insensitive form of the name so
+"AG-1" and "ag1" are one product. The higher-confidence extraction supplies the
+canonical name, type and role; every role seen is kept in `mention_roles`.
+Clips record `mentions_specific_product`, `product_mention_ids` and
+`product_names` for the mentions inside their span. Claims record the same for
+mentions inside their two-unit context window, because "AG1 has everything you
+need. It covers all your micronutrients" names the product one sentence before
+the checkable proposition. Clips and episodes also carry
+`claim_certainty_counts` so the certainty mix of a topic or a show can be read
+without a join.
 
 Similar atomic claims are merged when their spans overlap and their verbatim
 quotes match or their normalized claim texts are sufficiently similar. Merging
@@ -105,8 +153,14 @@ questions a label sample cannot: is the extracted item a material, checkable
 factual claim, and is `claim_text` faithful to the quote? A rewrite that drops a
 hedge or widens a population turns a true statement into a false one, and every
 verdict downstream inherits that error. The coder must see `claim_text` to judge
-faithfulness, so that sheet is blind only to claim type, discourse role and
-confidence.
+faithfulness, so that sheet is blind only to claim type, discourse role,
+expressed certainty and confidence; the coder's own certainty rating tests
+whether the hedge/booster reading can be reproduced from the words alone.
+
+`product_sample_blinded.csv` is stratified by product type. It asks whether the
+span names a specific product at all, what a listener would call it, and which
+type and mention role apply; it shows `product_name` for the same reason the
+claim sheet shows `claim_text`, and is blind to type, role and confidence.
 
 At 20 per label the precision interval is roughly +/-0.1 to 0.2, and 500 uniform
 windows contain almost no positives for a rare label, so rare-label recall
@@ -279,7 +333,7 @@ verified negatives.
 
 | Artifact | Contract |
 | --- | --- |
-| `taxonomy.json` | Frozen 83-label taxonomy with topic/frame/evidence axes and source hashes |
+| `taxonomy.json` | Frozen 84-label taxonomy with topic/frame/evidence axes and source hashes |
 | `prepare_manifest.json` | Input paths, windowing settings, counts, and windows SHA-256 |
 | `windows.jsonl.zst` | All line-addressable transcript windows with source provenance |
 | `labels.sqlite` | Crash-safe raw-label response checkpoints keyed by window ID |
@@ -287,13 +341,16 @@ verified negatives.
 | `window_labels.jsonl.zst` | Validated raw window decisions |
 | `label_annotations.jsonl` | Canonical one-label spans across all three taxonomy axes |
 | `clips.jsonl` | Topic clips with overlapping frame/evidence annotations and claim IDs |
-| `verification_candidates.jsonl` | Atomic unverified possible-misinformation review candidates |
+| `verification_candidates.jsonl` | Atomic unverified possible-misinformation review candidates with expressed certainty and linked product mentions |
+| `product_mentions.jsonl` | Canonical product mentions with name, `product_key`, type, mention roles and span |
 | `episodes.jsonl` | Episode rollups including zero-clip denominators, window/unit/word counts and duration for per-hour rates |
 | `review_queue.csv` | Human-readable topic clip queue |
 | `validation_sample_blinded.csv` | Model-blinded human label/span coding sheet |
 | `validation_sample_key.csv` | Held-back model decisions and sample strata |
 | `claim_sample_blinded.csv` | Claim materiality and `claim_text` faithfulness coding sheet |
-| `claim_sample_key.csv` | Held-back claim type, discourse role and confidence |
+| `claim_sample_key.csv` | Held-back claim type, discourse role, expressed certainty, markers and confidence |
+| `product_sample_blinded.csv` | Product specificity, name, type and mention-role coding sheet |
+| `product_sample_key.csv` | Held-back product type, mention role and confidence |
 | `evidence_corpus_validation_manifest.json` | Human/process assertion that the frozen corpus passed validation |
 | `evidence_packets.jsonl.zst` | Candidate-specific retrieved evidence with immutable corpus provenance |
 | `verification/verification.sqlite` | Crash-safe verification response checkpoints |
@@ -329,7 +386,9 @@ Before publication or downstream prevalence analysis:
    discourse role, and span acceptability. Audit uniform windows for misses.
 4. Separately sample material factual claims to measure candidate-extraction
    recall; candidate precision is less important because verification is the
-   deliberate second stage.
+   deliberate second stage. Report agreement on expressed certainty as an
+   ordinal (weighted kappa), and treat a product sample that disagrees on
+   specificity as a codebook problem before a model problem.
 5. Double-review a stratified sample of all six verification verdicts, including
    evidence sufficiency and whether every citation actually supports the stated
    rationale.
@@ -344,6 +403,9 @@ Before publication or downstream prevalence analysis:
    packets, failed requests, or `not_verifiable` as confirmed misinformation.
 9. Express rates per hour of speech or per thousand words using the counts in
    `episodes.jsonl`, not per episode: episodes range from minutes to hours.
+   Count products by `product_key` for distinct products and by mention for
+   exposure, and say which; a sponsor read repeated across a show is many
+   mentions of one product.
 10. Retain zero-clip episodes in denominators, follow the live-window/panel rules
    in `docs/corpus-issues.md`, and propagate measured label/retrieval/verdict
    error into uncertainty estimates.

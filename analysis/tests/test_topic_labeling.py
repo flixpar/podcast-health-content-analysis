@@ -214,6 +214,7 @@ def test_responses_client_uses_strict_responses_schema_and_validates_quotes():
                     },
                 ],
                 "verification_candidates": [],
+                "product_mentions": [],
             }
         ]
     }
@@ -271,6 +272,7 @@ def test_response_validation_rejects_non_verbatim_evidence():
             }
         ],
         "verification_candidates": [],
+        "product_mentions": [],
     }
     try:
         labeling.validate_window_result(
@@ -280,6 +282,179 @@ def test_response_validation_rejects_non_verbatim_evidence():
         assert "not verbatim" in str(exc)
     else:
         raise AssertionError("non-verbatim evidence was accepted")
+
+
+def _window_with(text):
+    return {
+        "window_id": "episode_1_window_0001",
+        "units": [{"unit_id": "u000001", "text": text}],
+    }
+
+
+def _claim(**overrides):
+    base = {
+        "start_unit_id": "u000001",
+        "end_unit_id": "u000001",
+        "topic_ids": ["topic:sleep"],
+        "frame_ids": [],
+        "evidence_signal_ids": [],
+        "discourse_role": "asserted_or_endorsed",
+        "claim_type": "causal",
+        "claim_text": "Magnesium probably improves deep sleep.",
+        "expressed_certainty": "hedged",
+        "certainty_markers": ["probably"],
+        "evidence_quote": "magnesium probably improves deep sleep",
+        "confidence": 0.8,
+        "rationale": "Checkable treatment effect.",
+    }
+    return {**base, **overrides}
+
+
+def _validate(result_fields):
+    taxonomy = small_taxonomy()
+    window = _window_with("I think magnesium probably improves deep sleep.")
+    result = {
+        "window_id": window["window_id"],
+        "detections": [],
+        "verification_candidates": [],
+        "product_mentions": [],
+        **result_fields,
+    }
+    return labeling.validate_window_result(
+        result, window, {row["label_id"]: row["axis"] for row in taxonomy["labels"]}
+    )
+
+
+def _rejection_kind(result_fields):
+    try:
+        _validate(result_fields)
+    except labeling.TopicLabelingError as exc:
+        return exc.kind
+    raise AssertionError("invalid result was accepted")
+
+
+def test_expressed_certainty_must_be_grounded_in_verbatim_markers():
+    accepted = _validate({"verification_candidates": [_claim()]})
+    claim = accepted["verification_candidates"][0]
+    assert claim["expressed_certainty"] == "hedged"
+    assert claim["certainty_markers"] == ["probably"]
+    # An unhedged claim carries no markers; a hedge the model cannot point to
+    # is not a hedge; a marker must be verbatim inside the span.
+    assert (
+        _rejection_kind(
+            {
+                "verification_candidates": [
+                    _claim(
+                        expressed_certainty="unhedged", certainty_markers=["probably"]
+                    )
+                ]
+            }
+        )
+        == "certainty_markers_mismatch"
+    )
+    assert (
+        _rejection_kind({"verification_candidates": [_claim(certainty_markers=[])]})
+        == "certainty_markers_mismatch"
+    )
+    assert (
+        _rejection_kind(
+            {"verification_candidates": [_claim(certainty_markers=["perhaps"])]}
+        )
+        == "non_verbatim_quote"
+    )
+    assert (
+        _rejection_kind(
+            {"verification_candidates": [_claim(expressed_certainty="certain")]}
+        )
+        == "invalid_field"
+    )
+    unhedged = _claim(expressed_certainty="unhedged", certainty_markers=[])
+    assert (
+        _validate({"verification_candidates": [unhedged]})["verification_candidates"][
+            0
+        ]["certainty_markers"]
+        == []
+    )
+
+
+def test_product_mentions_are_validated_like_other_annotations():
+    mention = {
+        "start_unit_id": "u000001",
+        "end_unit_id": "u000001",
+        "product_name": "Magnesium Breakthrough",
+        "product_type": "supplement",
+        "mention_role": "advertised",
+        "evidence_quote": "magnesium probably",
+        "confidence": 0.9,
+    }
+    accepted = _validate({"product_mentions": [mention]})
+    assert accepted["product_mentions"][0]["product_name"] == "Magnesium Breakthrough"
+    assert (
+        _rejection_kind(
+            {
+                "product_mentions": [
+                    {**mention, "evidence_quote": "Magnesium Breakthrough"}
+                ]
+            }
+        )
+        == "non_verbatim_quote"
+    )
+    assert (
+        _rejection_kind({"product_mentions": [{**mention, "product_type": "gadget"}]})
+        == "invalid_field"
+    )
+    assert (
+        _rejection_kind({"product_mentions": [{**mention, "product_name": "  "}]})
+        == "invalid_field"
+    )
+    assert (
+        _rejection_kind(
+            {
+                "product_mentions": [
+                    mention,
+                    {**mention, "product_name": "magnesium-breakthrough"},
+                ]
+            }
+        )
+        == "duplicate_annotation"
+    )
+    missing_field = {
+        key: value for key, value in mention.items() if key != "mention_role"
+    }
+    assert _rejection_kind({"product_mentions": [missing_field]}) == "schema_shape"
+
+
+def test_product_mentions_merge_only_when_spans_touch_and_names_match():
+    def mention(start, end, name, confidence, window_id):
+        return {
+            "start_order": start,
+            "end_order": end,
+            "product_name": name,
+            "product_type": "supplement",
+            "mention_role": "advertised",
+            "evidence_quote": name,
+            "confidence": confidence,
+            "window_id": window_id,
+        }
+
+    groups = labeling.merge_product_mentions(
+        [
+            mention(2, 3, "AG-1", 0.7, "w1"),
+            mention(3, 4, "ag1", 0.9, "w2"),
+            mention(3, 3, "LMNT", 0.8, "w2"),
+            mention(20, 20, "AG1", 0.9, "w3"),
+        ]
+    )
+    assert [
+        (group["product_key"], group["start_order"], group["end_order"])
+        for group in groups
+    ] == [
+        ("ag1", 2, 4),
+        ("lmnt", 3, 3),
+        ("ag1", 20, 20),
+    ]
+    assert groups[0]["best"]["product_name"] == "ag1"
+    assert len(groups[0]["mentions"]) == 2
 
 
 def test_overlap_detections_merge_and_keep_label_union():
@@ -345,7 +520,7 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
         for index, text in enumerate(
             [
                 "Intro only.",
-                "Sleep is important.",
+                "Sleep is important, and the Oura ring tracks it.",
                 "A clinical trial proves everyone needs exactly eight hours of sleep.",
                 "Outro.",
             ],
@@ -402,9 +577,22 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
                         "discourse_role": "asserted_or_endorsed",
                         "claim_type": "risk_or_safety",
                         "claim_text": "Every person needs exactly eight hours of sleep.",
+                        "expressed_certainty": "absolute",
+                        "certainty_markers": ["everyone", "exactly"],
                         "evidence_quote": "everyone needs exactly eight hours of sleep",
                         "confidence": 0.8,
                         "rationale": "The universal sleep-duration claim is externally checkable.",
+                    }
+                ],
+                "product_mentions": [
+                    {
+                        "start_unit_id": "u000002",
+                        "end_unit_id": "u000002",
+                        "product_name": "Oura Ring",
+                        "product_type": "device_or_wearable",
+                        "mention_role": "recommended",
+                        "evidence_quote": "Oura ring tracks it",
+                        "confidence": 0.9,
                     }
                 ],
             },
@@ -444,9 +632,22 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
                         "discourse_role": "asserted_or_endorsed",
                         "claim_type": "risk_or_safety",
                         "claim_text": "Everyone requires exactly eight hours of sleep.",
+                        "expressed_certainty": "absolute",
+                        "certainty_markers": ["everyone"],
                         "evidence_quote": "everyone needs exactly eight hours of sleep",
                         "confidence": 0.9,
                         "rationale": "This universal sleep claim can be checked.",
+                    }
+                ],
+                "product_mentions": [
+                    {
+                        "start_unit_id": "u000002",
+                        "end_unit_id": "u000002",
+                        "product_name": "oura-ring",
+                        "product_type": "device_or_wearable",
+                        "mention_role": "neutral",
+                        "evidence_quote": "the Oura ring",
+                        "confidence": 0.7,
                     }
                 ],
             },
@@ -467,10 +668,27 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
     )
     clips = list(labeling.iter_jsonl(tmp_path / "clips.jsonl"))
     claims = list(labeling.iter_jsonl(tmp_path / "verification_candidates.jsonl"))
+    products = list(labeling.iter_jsonl(tmp_path / "product_mentions.jsonl"))
     assert summary["complete"] is True
     assert summary["topic_clips"] == 1
     assert summary["label_annotations"] == 2
     assert summary["verification_candidates"] == 1
+    assert summary["product_mentions"] == 1
+    # The two spellings merge into one mention; the higher-confidence name wins.
+    assert products[0]["product_name"] == "Oura Ring"
+    assert products[0]["product_key"] == "ouraring"
+    assert products[0]["mention_role"] == "recommended"
+    assert products[0]["mention_roles"] == ["neutral", "recommended"]
+    assert products[0]["supporting_extraction_count"] == 2
+    assert clips[0]["mentions_specific_product"] is True
+    assert clips[0]["product_mention_ids"] == [products[0]["mention_id"]]
+    assert clips[0]["product_names"] == ["Oura Ring"]
+    assert clips[0]["claim_certainty_counts"]["absolute"] == 1
+    assert claims[0]["expressed_certainty"] == "absolute"
+    assert claims[0]["certainty_markers"] == ["everyone"]
+    # The product is named one unit before the claim, inside its context window.
+    assert claims[0]["mentions_specific_product"] is True
+    assert claims[0]["product_names"] == ["Oura Ring"]
     assert {row["label_id"] for row in clips[0]["topics"]} == {"topic:sleep"}
     assert clips[0]["possible_misinformation"] is True
     assert clips[0]["supporting_window_ids"] == [
@@ -487,21 +705,36 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
             windows=windows_path,
             annotations=tmp_path / "label_annotations.jsonl",
             candidates=tmp_path / "verification_candidates.jsonl",
+            product_mentions=tmp_path / "product_mentions.jsonl",
             label_manifest=label_manifest_path,
             per_label=1,
             per_claim_type=5,
+            per_product_type=5,
             random_windows=1,
             seed=123,
         )
     )
     assert sample_summary["sample_units"] == 3
     assert sample_summary["claim_sample"]["sampled"] == 1
+    assert sample_summary["product_sample"]["sampled"] == 1
+    product_rows = list(
+        csv.DictReader((tmp_path / "product_sample_blinded.csv").open())
+    )
+    product_key_rows = list(
+        csv.DictReader((tmp_path / "product_sample_key.csv").open())
+    )
+    assert product_rows[0]["product_name"] == "Oura Ring"
+    assert "model_product_type" not in product_rows[0]
+    assert product_key_rows[0]["model_product_type"] == "device_or_wearable"
     claim_rows = list(csv.DictReader((tmp_path / "claim_sample_blinded.csv").open()))
     claim_key_rows = list(csv.DictReader((tmp_path / "claim_sample_key.csv").open()))
     assert claim_rows[0]["claim_text"] and claim_rows[0]["evidence_quote"]
     assert claim_rows[0]["human_claim_faithful_to_quote"] == ""
     assert "claim_type" not in claim_rows[0]
+    assert "expressed_certainty" not in claim_rows[0]
+    assert claim_rows[0]["human_expressed_certainty"] == ""
     assert claim_key_rows[0]["claim_type"] == "risk_or_safety"
+    assert claim_key_rows[0]["model_expressed_certainty"] == "absolute"
 
     episodes = list(labeling.iter_jsonl(tmp_path / "episodes.jsonl"))
     assert episodes[0]["window_count"] == 2
@@ -510,6 +743,14 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
     assert episodes[0]["unit_count"] == 4
     assert episodes[0]["word_count"] == sum(len(unit["text"].split()) for unit in units)
     assert episodes[0]["distinct_claim_key_count"] == 1
+    assert episodes[0]["product_mention_count"] == 1
+    assert episodes[0]["distinct_product_key_count"] == 1
+    assert episodes[0]["claim_certainty_counts"] == {
+        "absolute": 1,
+        "unhedged": 0,
+        "hedged": 0,
+        "speculative": 0,
+    }
     assert claims[0]["claim_key"] and claims[0]["quote_key"]
     assert claims[0]["supporting_extraction_count"] == 2
     blind_rows = list(
@@ -560,6 +801,7 @@ def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
                 "window_id": window_id,
                 "detections": [],
                 "verification_candidates": [],
+                "product_mentions": [],
             }
             for window_id in ids
         ]
@@ -605,6 +847,8 @@ def test_verify_uses_only_validated_evidence_packets_and_checkpoints_results(
         "context_text": "A guest says everyone needs exactly eight hours of sleep.",
         "discourse_role": "asserted_or_endorsed",
         "claim_type": "risk_or_safety",
+        "expressed_certainty": "absolute",
+        "certainty_markers": ["everyone", "exactly"],
         "topic_ids": ["topic:sleep"],
         "frame_ids": [],
         "evidence_signal_ids": ["cross_cutting:scientific_study"],
