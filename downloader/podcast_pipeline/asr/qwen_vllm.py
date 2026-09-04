@@ -43,9 +43,10 @@ FALLBACK_DURATION_EPSILON_SECONDS = 1e-6
 _OGG_AUDIO_CODECS = frozenset({"opus", "vorbis", "flac", "speex"})
 _NORMALIZE_WORD = re.compile(r"[^\w']+", re.UNICODE)
 _FAILURE_MARKER_WORD = re.compile(
-    r"^\[UNTRANSCRIBED_AUDIO_[0-9.]+-[0-9.]+s_(?:ASR_FAILURE|LOW_SIGNAL)\]$"
+    r"^\[UNTRANSCRIBED_AUDIO_[0-9.]+-[0-9.]+s_(?:ASR_FAILURE|LOW_SIGNAL|NO_AUDIO)\]$"
 )
 _MEAN_VOLUME = re.compile(rb"mean_volume:\s+(-?inf|[-0-9.]+) dB")
+_N_SAMPLES = re.compile(rb"n_samples:\s+(\d+)")
 
 
 class TranscriptionError(RuntimeError):
@@ -125,6 +126,9 @@ class SpanResult:
 class EncodedAudio:
     data: bytes
     mean_volume_db: float | None
+    # Samples ffmpeg actually read for this span. Zero means the span lies past
+    # the source's real audio; see ``_encode_flac_chunk``.
+    sample_count: int | None = None
 
 
 def _normalized(words: list[str]) -> list[str]:
@@ -322,7 +326,15 @@ def _encode_flac_chunk(path: Path, start: float, end: float,
         if match:
             value = match.group(1).decode("ascii")
             mean_volume_db = -math.inf if value == "-inf" else float(value)
-        return EncodedAudio(audio, mean_volume_db)
+        # A span past the source's real audio -- routine when an MP3 header
+        # overstates its duration -- still exits 0 and writes a header-only
+        # FLAC. FLAC stores "unknown" as a zero sample count, which libsndfile
+        # reports to vLLM as 2**63 samples and vLLM rejects as a 5.8e14 second
+        # clip, discarding the whole episode over an empty tail. volumedetect
+        # counts what ffmpeg actually read; it also logs a zero at filter
+        # init, so only the largest count describes the span.
+        counts = [int(found.group(1)) for found in _N_SAMPLES.finditer(proc.stderr)]
+        return EncodedAudio(audio, mean_volume_db, max(counts) if counts else None)
 
 
 class QwenVLLMTranscriber:
@@ -468,6 +480,16 @@ class QwenVLLMTranscriber:
                          label: str, seek_after_input: bool = False) -> SpanResult:
         duration = end - start
         encoded = _encode_flac_chunk(path, start, end, seek_after_input)
+        if encoded.sample_count == 0:
+            # Distinct from LOW_SIGNAL: silent audio was present and measured,
+            # whereas here the container simply has nothing at this offset.
+            logger.warning(
+                "Omitting %.1fs span %s: the source holds no audio there "
+                "(its declared duration overstates its decodable audio)",
+                duration, label,
+            )
+            marker = f"[UNTRANSCRIBED_AUDIO_{start:.1f}-{end:.1f}s_NO_AUDIO]"
+            return SpanResult(marker, omitted_audio_spans=((start, end),))
         if (encoded.mean_volume_db is not None
                 and encoded.mean_volume_db <= MAX_LOW_SIGNAL_MEAN_VOLUME_DB):
             logger.warning(

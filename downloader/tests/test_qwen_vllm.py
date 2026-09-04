@@ -1,4 +1,6 @@
 import hashlib
+import shutil
+import subprocess
 import sys
 import types
 from concurrent.futures import Future
@@ -101,7 +103,9 @@ def test_fallback_stops_at_nominal_30_second_span_with_float_drift(monkeypatch):
 
     monkeypatch.setattr(
         "podcast_pipeline.asr.qwen_vllm._encode_flac_chunk",
-        lambda *args: types.SimpleNamespace(data=b"audio", mean_volume_db=-20.0),
+        lambda *args: types.SimpleNamespace(
+            data=b"audio", mean_volume_db=-20.0, sample_count=480000,
+        ),
     )
 
     def repeated_output(audio, label, max_tokens):
@@ -252,6 +256,48 @@ def test_ogg_native_input_still_remuxes_to_ogg(one_frame_cover_art_ogg, tmp_path
     plan = QwenVLLMTranscriber(config).plan_file(one_frame_cover_art_ogg)
 
     assert plan.path.suffix == ".ogg"
+
+
+def test_span_past_real_audio_reports_zero_samples(tmp_path):
+    if shutil.which("ffmpeg") is None:
+        pytest.skip("ffmpeg not installed")
+    source = tmp_path / "short.flac"
+    subprocess.run(
+        ["ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error",
+         "-f", "lavfi", "-i", "anoisesrc=d=5:c=pink:r=16000:s=7",
+         "-y", str(source)],
+        check=True,
+    )
+
+    present = _encode_flac_chunk(source, 0.0, 5.0)
+    past_end = _encode_flac_chunk(source, 100.0, 110.0)
+
+    # ffmpeg exits 0 and writes a header-only FLAC whose "unknown" sample count
+    # libsndfile reports as 2**63 samples, so the bytes alone look valid.
+    assert present.sample_count > 0
+    assert past_end.sample_count == 0
+    assert past_end.data
+
+
+def test_span_with_no_audio_is_omitted_without_an_asr_request(monkeypatch):
+    transcriber = QwenVLLMTranscriber(TranscriptionConfig())
+    monkeypatch.setattr(
+        "podcast_pipeline.asr.qwen_vllm._encode_flac_chunk",
+        lambda *args: types.SimpleNamespace(
+            data=b"flac-header-only", mean_volume_db=None, sample_count=0,
+        ),
+    )
+
+    def unexpected_request(audio, label, max_tokens):
+        raise AssertionError("an empty span must never reach vLLM")
+
+    monkeypatch.setattr(transcriber, "_request", unexpected_request)
+
+    result = transcriber._transcribe_span(Path("episode.mp3"), 2380.0, 2515.5, "clip")
+
+    assert result.text == "[UNTRANSCRIBED_AUDIO_2380.0-2515.5s_NO_AUDIO]"
+    assert result.omitted_audio_spans == ((2380.0, 2515.5),)
+    assert result.fallback_retries == 0
 
 
 def test_qwen_vad_only_plans_detected_speech(tmp_path, monkeypatch):

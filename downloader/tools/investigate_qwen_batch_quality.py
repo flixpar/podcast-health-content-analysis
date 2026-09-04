@@ -16,7 +16,7 @@ import zstandard
 
 
 MARKER = re.compile(
-    r"\[UNTRANSCRIBED_AUDIO_([0-9.]+)-([0-9.]+)s_(?:ASR_FAILURE|LOW_SIGNAL)\]"
+    r"\[UNTRANSCRIBED_AUDIO_([0-9.]+)-([0-9.]+)s_(?:ASR_FAILURE|LOW_SIGNAL|NO_AUDIO)\]"
 )
 WORD = re.compile(r"[^\W_]+(?:['’][^\W_]+)?", re.UNICODE)
 

@@ -137,6 +137,14 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
   only Opus/Vorbis/FLAC/Speex. `_audio_only_remux` hardcoded `-f ogg`, so every
   cover-art MP3 died on "Unsupported codec id in stream 0" and lost the whole
   episode. It now falls back to Matroska (`.mka`), which holds anything.
+- **A declared duration is not decodable audio.** A truncated MP3 can advertise
+  more than it holds (episode 205562: 2,515.5 s declared, 2,337.9 s real). The
+  planned tail span then encodes to a header-only FLAC, and FLAC spells
+  "unknown length" as a zero sample count, which libsndfile hands vLLM as 2**63
+  samples and vLLM rejects as a 5.8e14 second clip -- discarding an otherwise
+  complete episode over an empty tail. `_encode_flac_chunk` reads volumedetect's
+  `n_samples` (taking the max; it also logs a zero at filter init) and an empty
+  span becomes a `NO_AUDIO` omission instead of an ASR request.
 
 ## Transcription
 
@@ -148,6 +156,12 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
   not the bottleneck.
 - NeMo accepts numpy arrays directly; audio is decoded with ffmpeg to memory and
   never cached on disk.
+- Audio Qwen cannot honestly transcribe is left as a single-token marker,
+  `[UNTRANSCRIBED_AUDIO_<start>-<end>s_<REASON>]`, and the same interval is
+  recorded in `omitted_audio_spans`. Downstream consumers should treat these as
+  gaps, not speech. The reasons are `ASR_FAILURE` (output stayed implausible at
+  the minimum span size), `LOW_SIGNAL` (measured at or below -50 dB), and
+  `NO_AUDIO` (the container declares the span but holds no samples there).
 - Optional Silero VAD runs on that same decoded 16 kHz audio and produces
   absolute-time speech spans. Each speech span is chunked independently so
   skipped silence is not reintroduced and transcript timestamps remain on the
