@@ -211,6 +211,15 @@ def run(config: Config, batch_dir: Path, limit: int | None = None,
             raise AudioBatchTranscriptionError(
                 "transcription.vllm_max_completion_tokens must be positive or null"
             )
+        gain_db = config.transcription.vllm_audio_gain_db
+        if (
+            isinstance(gain_db, bool)
+            or not isinstance(gain_db, (int, float))
+            or not 0 <= gain_db <= 60
+        ):
+            raise AudioBatchTranscriptionError(
+                "transcription.vllm_audio_gain_db must be between 0 and 60"
+            )
     if config.transcription.vad_plan_path:
         if not config.transcription.vad_enabled:
             raise AudioBatchTranscriptionError(
@@ -598,6 +607,7 @@ def _save_qwen_transcript(config: Config, store: TranscriptStore, manifest,
         "language": config.transcription.vllm_language,
         "vllm_request_concurrency": config.transcription.vllm_request_concurrency,
         "vllm_max_completion_tokens": config.transcription.vllm_max_completion_tokens,
+        "vllm_audio_gain_db": config.transcription.vllm_audio_gain_db,
         "source_audio_batch_id": manifest.batch_id,
         "source_audio_manifest_sha256": manifest.sha256,
         "source_audio_sha256": job.episode.sha256,

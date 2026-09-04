@@ -137,6 +137,10 @@ class TranscriptionConfig:
     # audio from time zero for every later chunk. When set, Qwen losslessly
     # remuxes such inputs to an audio-only cache once before chunking them.
     vllm_audio_remux_cache_dir: str | None = None
+    # Targeted recovery control for abnormally quiet source media. The gain is
+    # applied only while preparing the lossless FLAC request and is recorded in
+    # transcript provenance. Keep zero for ordinary production batches.
+    vllm_audio_gain_db: float = 0.0
 
 
 @dataclass

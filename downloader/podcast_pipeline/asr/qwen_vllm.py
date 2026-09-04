@@ -293,7 +293,8 @@ def _audio_only_remux(path: Path, cache_dir: Path, duration: float) -> Path:
 
 
 def _encode_flac_chunk(path: Path, start: float, end: float,
-                       seek_after_input: bool = False) -> EncodedAudio:
+                       seek_after_input: bool = False,
+                       gain_db: float = 0.0) -> EncodedAudio:
     duration = end - start
     # FLAC's STREAMINFO stores the total sample count. When ffmpeg writes to a
     # pipe it cannot seek back to fill that field, and vLLM/libsndfile treats
@@ -305,13 +306,21 @@ def _encode_flac_chunk(path: Path, start: float, end: float,
             input_args = ["-i", str(path), "-ss", f"{start:.6f}"] if seek_after_input else [
                 "-ss", f"{start:.6f}", "-i", str(path)
             ]
+            audio_filter = "volumedetect"
+            if gain_db:
+                # The limiter keeps rare peaks from clipping after recovery
+                # gain is applied to unusually quiet speech.
+                audio_filter = (
+                    f"volume={gain_db:.3f}dB,"
+                    "alimiter=limit=0.95:attack=5:release=50,volumedetect"
+                )
             proc = subprocess.run(
                 [
                     "ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "info",
                     *input_args, "-t", f"{duration:.6f}",
                     "-map", "0:a:0", "-vn", "-sn", "-dn", "-map_metadata", "-1",
                     "-ac", "1", "-ar", str(SAMPLE_RATE), "-sample_fmt", "s16",
-                    "-af", "volumedetect", "-c:a", "flac", "-y", str(target),
+                    "-af", audio_filter, "-c:a", "flac", "-y", str(target),
                 ],
                 capture_output=True,
                 timeout=max(120, int(duration * 2)),
@@ -351,6 +360,13 @@ class QwenVLLMTranscriber:
         if not config.vllm_urls:
             raise TranscriptionError("transcription.vllm_urls cannot be empty")
         self.config = config
+        if (
+            isinstance(config.vllm_audio_gain_db, bool)
+            or not isinstance(config.vllm_audio_gain_db, (int, float))
+            or not math.isfinite(config.vllm_audio_gain_db)
+            or not 0 <= config.vllm_audio_gain_db <= 60
+        ):
+            raise TranscriptionError("vllm_audio_gain_db must be between 0 and 60")
         self.urls = [url.rstrip("/") for url in config.vllm_urls]
         self._url_counter = itertools.count()
         self._url_lock = threading.Lock()
@@ -462,6 +478,11 @@ class QwenVLLMTranscriber:
                 self.config.chunk_duration_seconds,
                 self.config.overlap_seconds,
             )
+        if self.config.vllm_audio_gain_db:
+            gain_label = f"volume_gain_{self.config.vllm_audio_gain_db:g}db"
+            preprocessing = (
+                f"{preprocessing}+{gain_label}" if preprocessing else gain_label
+            )
         return TranscriptionPlan(
             transcription_path, duration, spans, seek_after_input, preprocessing,
             detected_speech_spans, vad_provenance,
@@ -486,7 +507,9 @@ class QwenVLLMTranscriber:
     def _transcribe_span(self, path: Path, start: float, end: float,
                          label: str, seek_after_input: bool = False) -> SpanResult:
         duration = end - start
-        encoded = _encode_flac_chunk(path, start, end, seek_after_input)
+        encoded = _encode_flac_chunk(
+            path, start, end, seek_after_input, self.config.vllm_audio_gain_db,
+        )
         if encoded.sample_count == 0:
             # Distinct from LOW_SIGNAL: silent audio was present and measured,
             # whereas here the container simply has nothing at this offset.

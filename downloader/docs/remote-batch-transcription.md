@@ -62,6 +62,12 @@ normalized to one audio stream before chunk seeking. Without a cache, the
 pipeline automatically uses slower output-side seeking for those inputs so
 correctness does not depend on deployment-specific configuration.
 
+`vllm_audio_gain_db` (0-60 dB, default 0) amplifies audio while the request is
+prepared, for the rare episode recorded far too quietly to transcribe. Leave it
+at zero for ordinary batches: it applies to every span in the run, and the
+amplified level is what the low-signal check measures. The value is stored in
+each transcript's provenance, so a recovery run is distinguishable afterwards.
+
 The vLLM serving environment must include its audio decoder dependencies. At a
 minimum, verify that `soundfile` and `resampy` import successfully before a long
 run; a server missing both rejects every non-empty upload as an unsupported

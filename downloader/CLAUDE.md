@@ -162,6 +162,13 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
   gaps, not speech. The reasons are `ASR_FAILURE` (output stayed implausible at
   the minimum span size), `LOW_SIGNAL` (measured at or below -50 dB), and
   `NO_AUDIO` (the container declares the span but holds no samples there).
+- `vllm_audio_gain_db` (0-60, default 0) is a targeted recovery knob for
+  abnormally quiet source media, not a production default. It amplifies only the
+  FLAC prepared for the request -- the stored audio is untouched -- and is
+  recorded in transcript provenance and in the plan's `input_preprocessing`.
+  Because the gain precedes `volumedetect`, mean volume is measured after
+  amplification, so a boosted span is no longer flagged `LOW_SIGNAL`; an
+  `alimiter` keeps recovered peaks from clipping.
 - Optional Silero VAD runs on that same decoded 16 kHz audio and produces
   absolute-time speech spans. Each speech span is chunked independently so
   skipped silence is not reintroduced and transcript timestamps remain on the

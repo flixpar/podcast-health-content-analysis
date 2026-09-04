@@ -88,6 +88,40 @@ def test_qwen_request_sends_completion_ceiling(monkeypatch):
     assert captured["data"]["max_completion_tokens"] == "4096"
 
 
+def test_qwen_rejects_invalid_audio_gain():
+    with pytest.raises(Exception, match="vllm_audio_gain_db"):
+        QwenVLLMTranscriber(TranscriptionConfig(vllm_audio_gain_db=61))
+
+
+def test_audio_gain_amplifies_the_encoded_span(quiet_flac):
+    plain = _encode_flac_chunk(quiet_flac, 0.0, 5.0)
+    amplified = _encode_flac_chunk(quiet_flac, 0.0, 5.0, gain_db=20.0)
+
+    # The limiter only touches peaks, so mean volume tracks the requested gain.
+    assert amplified.mean_volume_db == pytest.approx(
+        plain.mean_volume_db + 20.0, abs=1.0
+    )
+    # Gain must not drop or duplicate audio: the span is the same length.
+    assert amplified.sample_count == plain.sample_count
+
+
+def test_audio_gain_is_recorded_in_plan_provenance(quiet_flac):
+    config = TranscriptionConfig(
+        backend="qwen_vllm",
+        model_name="Qwen/Qwen3-ASR-1.7B",
+        chunk_duration_seconds=10,
+        overlap_seconds=0,
+        vllm_audio_gain_db=12.5,
+    )
+    plan = QwenVLLMTranscriber(config).plan_file(quiet_flac)
+
+    assert plan.input_preprocessing == "volume_gain_12.5db"
+    assert QwenVLLMTranscriber(
+        TranscriptionConfig(backend="qwen_vllm", chunk_duration_seconds=10,
+                            overlap_seconds=0)
+    ).plan_file(quiet_flac).input_preprocessing is None
+
+
 def test_runaway_transcript_detection():
     assert is_implausible_transcript("oh " * 500, 600)
     assert is_implausible_transcript("word " * 3001, 600)

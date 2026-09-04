@@ -86,3 +86,20 @@ def cover_art_mp3(tmp_path):
     except subprocess.CalledProcessError:
         pytest.skip("ffmpeg lacks the libmp3lame encoder")
     return target
+
+
+@pytest.fixture
+def quiet_flac(tmp_path):
+    """Five seconds of noise attenuated to roughly -44 dB mean volume."""
+    if shutil.which("ffmpeg") is None:
+        pytest.skip("ffmpeg not installed")
+    target = tmp_path / "quiet.flac"
+    subprocess.run(
+        [
+            "ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error",
+            "-f", "lavfi", "-i", "anoisesrc=d=5:c=pink:r=16000:s=7",
+            "-filter:a", "volume=-30dB", "-y", str(target),
+        ],
+        check=True,
+    )
+    return target
