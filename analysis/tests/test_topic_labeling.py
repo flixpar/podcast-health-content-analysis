@@ -16,7 +16,7 @@ def small_taxonomy():
             "kind": "topic",
             "axis": "topic",
             "name": "Sleep",
-            "description": "sleep; circadian rhythm",
+            "definition": "Sleep quality, duration and disorders.",
             "concepts": ["sleep", "circadian rhythm"],
         },
         {
@@ -24,7 +24,7 @@ def small_taxonomy():
             "kind": "cross_cutting",
             "axis": "evidence",
             "name": "Scientific study",
-            "description": "study shows; clinical trial",
+            "definition": "A study or trial is invoked as support.",
             "concepts": ["study shows", "clinical trial"],
         },
     ]
@@ -41,14 +41,59 @@ def small_taxonomy():
 
 def test_compiles_only_canonical_topics_tables():
     taxonomy = labeling.compile_taxonomy(ROOT / "topics.md")
-    assert len(taxonomy["labels"]) == 83
+    assert len(taxonomy["labels"]) == 84
     assert {row["kind"] for row in taxonomy["labels"]} == {"topic", "cross_cutting"}
     assert {row["axis"] for row in taxonomy["labels"]} == {"topic", "frame", "evidence"}
     ids = {row["label_id"] for row in taxonomy["labels"]}
     assert "topic:vaccines_immunization" in ids
     assert "topic:sleep" in ids
+    assert "topic:other_health_topic" in ids
     assert "cross_cutting:misinformation_correction_debunking" in ids
     assert len(ids) == len(taxonomy["labels"])
+    assert all(row["definition"].strip() for row in taxonomy["labels"])
+
+
+def test_axis_comes_from_the_table_not_from_the_label_name(tmp_path):
+    """Renaming a row must not silently move it between axes."""
+    source = tmp_path / "topics.md"
+    source.write_text(
+        "## GPT Enhanced Table:\n\n"
+        "| Parent topic | Definition | Concepts |\n| :---- | :---- | :---- |\n"
+        "| Sleep | Sleep and its disorders. | sleep; snoring |\n\n"
+        "## GPT Derived Table 2 - Other Goals:\n\n"
+        "| Cross-cutting label | Axis | Definition | Terms |\n"
+        "| :---- | :---- | :---- | :---- |\n"
+        "| Renamed study signal | evidence | A study is invoked. | study shows |\n"
+        "| Toxin framing | frame | Toxins as a general cause. | toxins |\n",
+        encoding="utf-8",
+    )
+    taxonomy = labeling.compile_taxonomy(source)
+    axes = {row["name"]: row["axis"] for row in taxonomy["labels"]}
+    assert axes == {
+        "Sleep": "topic",
+        "Renamed study signal": "evidence",
+        "Toxin framing": "frame",
+    }
+
+
+def test_compile_rejects_an_unknown_cross_cutting_axis(tmp_path):
+    source = tmp_path / "topics.md"
+    source.write_text(
+        "## GPT Enhanced Table:\n\n"
+        "| Parent topic | Definition | Concepts |\n| :---- | :---- | :---- |\n"
+        "| Sleep | Sleep and its disorders. | sleep |\n\n"
+        "## GPT Derived Table 2 - Other Goals:\n\n"
+        "| Cross-cutting label | Axis | Definition | Terms |\n"
+        "| :---- | :---- | :---- | :---- |\n"
+        "| Toxin framing | rhetoric | Toxins as a general cause. | toxins |\n",
+        encoding="utf-8",
+    )
+    try:
+        labeling.compile_taxonomy(source)
+    except labeling.TopicLabelingError as exc:
+        assert "expected one of" in str(exc)
+    else:
+        raise AssertionError("an unknown axis was accepted")
 
 
 def test_sentence_units_retain_offsets_and_bound_runons():
@@ -441,19 +486,112 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
             taxonomy=taxonomy_path,
             windows=windows_path,
             annotations=tmp_path / "label_annotations.jsonl",
+            candidates=tmp_path / "verification_candidates.jsonl",
             label_manifest=label_manifest_path,
             per_label=1,
+            per_claim_type=5,
             random_windows=1,
             seed=123,
         )
     )
     assert sample_summary["sample_units"] == 3
+    assert sample_summary["claim_sample"]["sampled"] == 1
+    claim_rows = list(csv.DictReader((tmp_path / "claim_sample_blinded.csv").open()))
+    claim_key_rows = list(csv.DictReader((tmp_path / "claim_sample_key.csv").open()))
+    assert claim_rows[0]["claim_text"] and claim_rows[0]["evidence_quote"]
+    assert claim_rows[0]["human_claim_faithful_to_quote"] == ""
+    assert "claim_type" not in claim_rows[0]
+    assert claim_key_rows[0]["claim_type"] == "risk_or_safety"
+
+    episodes = list(labeling.iter_jsonl(tmp_path / "episodes.jsonl"))
+    assert episodes[0]["window_count"] == 2
+    assert episodes[0]["labeled_window_count"] == 2
+    assert episodes[0]["unresolved_window_count"] == 0
+    assert episodes[0]["unit_count"] == 4
+    assert episodes[0]["word_count"] == sum(len(unit["text"].split()) for unit in units)
+    assert episodes[0]["distinct_claim_key_count"] == 1
+    assert claims[0]["claim_key"] and claims[0]["quote_key"]
+    assert claims[0]["supporting_extraction_count"] == 2
     blind_rows = list(
         csv.DictReader((tmp_path / "validation_sample_blinded.csv").open())
     )
     key_rows = list(csv.DictReader((tmp_path / "validation_sample_key.csv").open()))
     assert len(blind_rows) == len(key_rows) == 3
     assert all("model_label_ids" not in row for row in blind_rows)
+
+
+def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
+    """A batch that fails as a whole is retried window by window."""
+    taxonomy = small_taxonomy()
+    taxonomy_path = tmp_path / "taxonomy.json"
+    labeling.write_json(taxonomy_path, taxonomy)
+    windows = [
+        {
+            "window_id": f"episode_1_window_{index:04d}",
+            "episode_id": 1,
+            "window_index": index,
+            "units": [{"unit_id": "u000001", "text": "The guest discusses sleep."}],
+        }
+        for index in (1, 2, 3)
+    ]
+    windows_path = tmp_path / "windows.jsonl.zst"
+    _, windows_sha256 = labeling.write_jsonl_atomic(windows_path, windows)
+    prepare_manifest_path = tmp_path / "prepare_manifest.json"
+    labeling.write_json(
+        prepare_manifest_path,
+        {
+            "windows_sha256": windows_sha256,
+            "taxonomy_sha256": taxonomy["taxonomy_sha256"],
+        },
+    )
+
+    poison = "episode_1_window_0002"
+    calls: list[list[str]] = []
+
+    def fake_classify(self, batch, taxonomy_arg, model, *rest):
+        ids = [window["window_id"] for window in batch]
+        calls.append(ids)
+        if poison in ids:
+            raise labeling.TopicLabelingError(
+                "evidence quote is not verbatim", kind="non_verbatim_quote"
+            )
+        results = [
+            {
+                "window_id": window_id,
+                "detections": [],
+                "verification_candidates": [],
+            }
+            for window_id in ids
+        ]
+        return results, {"response_id": "r", "response_model": model, "usage": None}
+
+    monkeypatch.setattr(labeling.ResponsesClient, "classify", fake_classify)
+    summary = labeling.run_label(
+        argparse.Namespace(
+            output_dir=tmp_path,
+            taxonomy=taxonomy_path,
+            windows=windows_path,
+            prepare_manifest=prepare_manifest_path,
+            api_base="http://127.0.0.1:8000/v1",
+            model="local-model",
+            api_key_env=None,
+            batch_size=3,
+            concurrency=1,
+            max_output_tokens=100,
+            timeout=10,
+            attempts=1,
+            reasoning_effort=None,
+            temperature=None,
+        )
+    )
+    # First the whole batch, then each window alone.
+    assert calls[0] == [window["window_id"] for window in windows]
+    assert sorted(calls[1:]) == [[window["window_id"]] for window in windows]
+    assert summary["windows_labeled"] == 2
+    assert summary["unresolved_windows"] == 1
+    assert summary["unresolved_windows_by_kind"] == {"non_verbatim_quote": 1}
+    assert summary["batches_isolated_this_invocation"] == 1
+    assert summary["windows_recovered_by_isolation"] == 2
 
 
 def test_verify_uses_only_validated_evidence_packets_and_checkpoints_results(

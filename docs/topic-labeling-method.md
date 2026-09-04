@@ -3,12 +3,14 @@
 ## What the pipeline measures
 
 `analysis/topic_labeling.py` exhaustively labels timestamped transcript spans
-using the 83 labels in the two final tables of `topics.md`. It keeps the
-following dimensions independent:
+using the 84 labels in the two final tables of `topics.md`. Each table row
+carries a written **definition** that governs the label; the keyword column is
+examples only. The cross-cutting table carries an explicit **axis** column, so
+no label's axis is inferred from its name. The dimensions are independent:
 
 | Dimension | Values | Interpretation |
 | --- | --- | --- |
-| Topic | 49 parent health topics | What the span discusses |
+| Topic | 49 parent health topics, plus `other_health_topic` | What the span discusses |
 | Frame | 27 cross-cutting labels | How it is framed, including conspiracy, correction, MAHA, and commercialization |
 | Evidence signal | 7 cross-cutting labels | How evidence or authority is invoked, including academic studies, mechanisms, extrapolation, experience, and credentials |
 | Claim review | Atomic factual claims | High-recall candidates for later evidence verification |
@@ -35,7 +37,9 @@ human review.
 ### 1. Prepare every transcript window
 
 `prepare` compiles only the two canonical tables in `topics.md` and freezes
-their SHA-256. It sends every transcript through the same segmentation path;
+their SHA-256. Compilation fails closed on a row with a missing definition, a
+cross-cutting row whose axis is not `frame` or `evidence`, or an axis with no
+labels at all. It sends every transcript through the same segmentation path;
 there is no keyword or embedding retrieval gate that could silently cap topic
 or claim recall.
 
@@ -61,7 +65,15 @@ and vague suspicions are excluded unless they contain a testable factual claim.
 
 The client rejects omitted windows, unknown or mixed-axis labels, reversed or
 out-of-window spans, duplicate annotations, non-verbatim quotes, incomplete
-Responses, and malformed JSON. Failed batches are durable and retryable; they
+Responses, and malformed JSON. Every rejection carries a `kind`, and
+`label_manifest.json` reports `unresolved_windows_by_kind` so a pilot can tell a
+prompt problem from a transport problem without reading a thousand messages.
+
+Validation rejects a whole response, so a batch that fails is retried one window
+at a time. Without that, a single unlabelable window would keep the rest of its
+batch permanently unresolved and the next run would re-batch them together and
+fail identically. The manifest reports `batches_isolated_this_invocation` and
+`windows_recovered_by_isolation`. Failed batches are durable and retryable; they
 never become implicit negatives.
 
 ### 3. Merge overlap duplicates without collapsing axes
@@ -73,7 +85,11 @@ frame/evidence annotations and claim IDs for convenience, while the independent
 annotation file remains authoritative.
 
 Similar atomic claims are merged when their spans overlap and their verbatim
-quotes match or their normalized claim texts are sufficiently similar. Each
+quotes match or their normalized claim texts are sufficiently similar. Merging
+joins overlapping spans only, so a claim repeated later in an episode, or a
+sponsor read repeated across a show, stays several candidates: `claim_key` and
+`quote_key` let downstream analysis choose between counting claim instances and
+counting distinct claims, and it must choose explicitly. Each
 candidate retains transcript context, unit/time bounds, claim type, discourse
 role, taxonomy labels, model provenance, and all supporting window IDs.
 
@@ -82,8 +98,22 @@ role, taxonomy labels, model provenance, and all supporting window IDs.
 `sample` creates a deterministic blinded sample with model-positive annotations
 from all three label axes plus an independent uniform sample of successfully
 labeled windows. The former estimates precision and span quality; the latter is
-needed to audit false negatives. Candidate extraction and evidence-verification
-verdicts should receive their own held-out human samples.
+needed to audit false negatives.
+
+It also writes `claim_sample_blinded.csv`, stratified by claim type, asking two
+questions a label sample cannot: is the extracted item a material, checkable
+factual claim, and is `claim_text` faithful to the quote? A rewrite that drops a
+hedge or widens a population turns a true statement into a false one, and every
+verdict downstream inherits that error. The coder must see `claim_text` to judge
+faithfulness, so that sheet is blind only to claim type, discourse role and
+confidence.
+
+At 20 per label the precision interval is roughly +/-0.1 to 0.2, and 500 uniform
+windows contain almost no positives for a rare label, so rare-label recall
+cannot be estimated from them. Draw a supplementary keyword-retrieved audit
+sample for those: legitimate because it measures misses rather than producing
+the dataset, and its bias is known and reportable. Evidence-verification
+verdicts still need their own held-out sample.
 
 ### 5. Verify against one frozen evidence corpus
 
@@ -258,10 +288,12 @@ verified negatives.
 | `label_annotations.jsonl` | Canonical one-label spans across all three taxonomy axes |
 | `clips.jsonl` | Topic clips with overlapping frame/evidence annotations and claim IDs |
 | `verification_candidates.jsonl` | Atomic unverified possible-misinformation review candidates |
-| `episodes.jsonl` | Episode rollups including zero-clip denominators |
+| `episodes.jsonl` | Episode rollups including zero-clip denominators, window/unit/word counts and duration for per-hour rates |
 | `review_queue.csv` | Human-readable topic clip queue |
 | `validation_sample_blinded.csv` | Model-blinded human label/span coding sheet |
 | `validation_sample_key.csv` | Held-back model decisions and sample strata |
+| `claim_sample_blinded.csv` | Claim materiality and `claim_text` faithfulness coding sheet |
+| `claim_sample_key.csv` | Held-back claim type, discourse role and confidence |
 | `evidence_corpus_validation_manifest.json` | Human/process assertion that the frozen corpus passed validation |
 | `evidence_packets.jsonl.zst` | Candidate-specific retrieved evidence with immutable corpus provenance |
 | `verification/verification.sqlite` | Crash-safe verification response checkpoints |
@@ -277,7 +309,9 @@ word. At aggregate 5,000 tokens/second, transcript prefill alone is about 100
 hours. This is a planning estimate: tokenizer behavior, decoding, batching,
 prefix-cache hits, and the server's throughput definition all affect runtime.
 
-The repeated taxonomy/instruction prefix is about 6,600 tokens. Confirm prefix
+The repeated taxonomy/instruction prefix is about 11,500 tokens -- it grew when
+the keyword-list definitions were replaced with written ones, which makes prefix
+cache hits matter more, not less. Confirm prefix
 cache hits in server metrics before scaling. A several-hundred-episode pilot
 should measure input/output tokens, windows/hour, latency, retries, malformed or
 omitted results, GPU utilization, label prevalence, and candidate yield.
@@ -288,24 +322,29 @@ Before publication or downstream prevalence analysis:
 
 1. Freeze the taxonomy, prompts, models, corpus version, retrieval method, and
    release gates before evaluating held-out data.
-2. Double-code the blinded label sample across topic, frame, evidence, relevance,
+2. Decide before the run whether the unit of analysis is claim instances or
+   distinct claims, and whether advertisement-relevance spans are in or out.
+   Both change every headline number, and neither has a neutral default.
+3. Double-code the blinded label sample across topic, frame, evidence, relevance,
    discourse role, and span acceptability. Audit uniform windows for misses.
-3. Separately sample material factual claims to measure candidate-extraction
+4. Separately sample material factual claims to measure candidate-extraction
    recall; candidate precision is less important because verification is the
    deliberate second stage.
-4. Double-review a stratified sample of all six verification verdicts, including
+5. Double-review a stratified sample of all six verification verdicts, including
    evidence sufficiency and whether every citation actually supports the stated
    rationale.
-5. Report errors by topic, discourse role, ASR source, show, date, claim type,
+6. Report errors by topic, discourse role, ASR source, show, date, claim type,
    and evidence-signal/frame combinations. Model confidence is not a calibrated
    probability.
-6. Count `contradicted` or `misleading_or_missing_context` as potential factual
+7. Count `contradicted` or `misleading_or_missing_context` as potential factual
    misinformation only under a preregistered rule and with discourse role kept
    separate. Do not count quoted, questioned, or rebutted exposure as host
    endorsement.
-7. Never treat `possible_misinformation`, `insufficient_evidence`, missing
+8. Never treat `possible_misinformation`, `insufficient_evidence`, missing
    packets, failed requests, or `not_verifiable` as confirmed misinformation.
-8. Retain zero-clip episodes in denominators, follow the live-window/panel rules
+9. Express rates per hour of speech or per thousand words using the counts in
+   `episodes.jsonl`, not per episode: episodes range from minutes to hours.
+10. Retain zero-clip episodes in denominators, follow the live-window/panel rules
    in `docs/corpus-issues.md`, and propagate measured label/retrieval/verdict
    error into uncertainty estimates.
 
