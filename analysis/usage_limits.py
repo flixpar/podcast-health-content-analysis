@@ -447,7 +447,13 @@ def load_config(path: Path) -> LimitsConfig:
         raise UsageLimitError(f"{path}: unknown [settings] key(s) {unknown}")
     # Relative to the working directory, as every other path in this
     # repository's config files is; the commands are all run from the root.
-    database = Path(settings.get("database", DEFAULT_DATABASE))
+    location = settings.get("database", DEFAULT_DATABASE)
+    if not isinstance(location, (str, Path)):
+        raise UsageLimitError(
+            f"{path}: [settings] database must be a path, not "
+            f"{type(location).__name__}"
+        )
+    database = Path(location)
 
     providers: dict[str, dict[str, float]] = {}
     for name, table in parsed.get("provider", {}).items():

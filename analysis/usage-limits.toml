@@ -31,9 +31,11 @@
 # One ledger for the machine. Limits only mean anything if every run counts
 # against the same totals, so do not give each run its own database.
 database = "analysis/output/usage-limits.sqlite"
-# How long a concurrency slot survives a process that dies mid-request. Set it
-# above the run's --timeout: too short and a slow request's slot is handed out
-# twice, too long and a crashed run keeps its slots until it expires.
+# How long a concurrency slot survives a process that dies mid-request, for a
+# caller that does not set its own: too short and a slow request's slot is
+# handed out twice, too long and a crashed run keeps its slots until it
+# expires. topic_labeling.py does set its own, sizing each lease from the run's
+# --timeout, so this value only covers other callers.
 lease_seconds = 2400
 # How long a request will wait for a rate limit before giving up on itself.
 max_wait_seconds = 900

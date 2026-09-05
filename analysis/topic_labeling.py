@@ -2012,11 +2012,21 @@ def raise_for_response_status(response: dict[str, Any]) -> None:
 
 
 def _payload_characters(payload: dict[str, Any]) -> int:
-    """Characters the server will read, for a pre-request token estimate."""
+    """Characters the server will read, for a pre-request token estimate.
+
+    The structured-output schema counts: it is sent with every request and
+    billed as prompt tokens, and for a large taxonomy it is not small. Leaving
+    it out would under-reserve every request by the same amount, which is the
+    direction a spend guard must not err in.
+    """
     total = len(payload.get("instructions") or "")
     for message in payload.get("input") or []:
         for part in message.get("content") or []:
             total += len(part.get("text") or "")
+    text = payload.get("text")
+    schema = text.get("format", {}).get("schema") if isinstance(text, dict) else None
+    if schema is not None:
+        total += len(canonical_json(schema))
     return total
 
 
@@ -2566,7 +2576,17 @@ def build_limiter(args: argparse.Namespace) -> UsageLimiter:
         raise TopicLabelingError(
             "--usage-limits needs --provider, so the run says whose limits it spends"
         )
-    return UsageLimiter.from_config(args.usage_limits, args.experiment)
+    limiter = UsageLimiter.from_config(args.usage_limits, args.experiment)
+    # Checked here rather than on the first request: a request refused by the
+    # limiter is recorded as one more failed batch and the run carries on, so a
+    # typo in --provider would otherwise mark every window unresolved instead
+    # of stopping before anything was submitted.
+    if limiter.config is not None and args.provider not in limiter.config.providers:
+        raise TopicLabelingError(
+            f"{args.usage_limits}: provider {args.provider!r} is not declared; add a "
+            f"[provider.{args.provider}] table (an empty one means no limits)"
+        )
+    return limiter
 
 
 def _batched(
@@ -2697,11 +2717,19 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
                 tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]
             ] = []
             failures: list[tuple[list[dict[str, Any]], Exception]] = []
-            for window in batch:
+            for index, window in enumerate(batch):
                 single = [window]
                 try:
                     results, meta = classify(single)
                     successes.append((single, results, meta))
+                except UsageLimitError as inner:
+                    # Same reason as above, and it has to be caught here too:
+                    # a limit reached partway through an isolation pass would
+                    # otherwise be waited out or re-refused once per remaining
+                    # window. Stop isolating and hand the rest back unlabelled,
+                    # keeping the windows already paid for.
+                    failures.extend(([other], inner) for other in batch[index:])
+                    break
                 except Exception as inner:
                     failures.append((single, inner))
             counters["windows_recovered_by_isolation"] += len(successes)
@@ -2742,6 +2770,11 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
                             "effective_sampling", {}
                         )
                     for window_group, error in failures:
+                        # A budget reached inside an isolation pass comes back
+                        # here rather than out of future.result(), so the stop
+                        # is recognised in both places.
+                        if isinstance(error, BudgetExceeded):
+                            budget_stop = budget_stop or error
                         failed_requests += 1
                         store.record_failure(window_group, error)
                     completed_requests += 1
