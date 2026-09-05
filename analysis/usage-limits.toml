@@ -1,0 +1,127 @@
+# Spending limits for paid model APIs, enforced client-side by
+# analysis/usage_limits.py. Nothing reads this file unless a run asks for it:
+#
+#   .venv/bin/python analysis/topic_labeling.py label \
+#       --usage-limits analysis/usage-limits.toml \
+#       --provider fireworks --experiment topic-pilot-a
+#
+# or, more usefully, the [usage] table in analysis/topic-labeling.toml. Local
+# vLLM runs bill nothing and are left alone.
+#
+# Every request is charged to its provider, to its model, and to the experiment
+# that named it. Those three are scopes, and a scope carries limits:
+#
+#   max_concurrent              in-flight requests
+#   <meter>_per_minute          rate; hitting it makes the run wait
+#   <meter>_per_day             budget for one UTC day; hitting it stops the run
+#   <meter>_total               lifetime budget; hitting it stops the run
+#
+# with <meter> one of requests, input_tokens, uncached_input_tokens,
+# output_tokens, tokens (input + output) or cost (US dollars).
+#
+# Rates make a run wait, budgets make it stop -- waiting until midnight is not a
+# useful thing for a run to do, and every command here checkpoints, so a stopped
+# run resumes tomorrow where it left off.
+#
+# Inspect with:
+#   .venv/bin/python analysis/usage_limits.py status
+#   .venv/bin/python analysis/usage_limits.py report --experiment topic-pilot-a --by model
+
+[settings]
+# One ledger for the machine. Limits only mean anything if every run counts
+# against the same totals, so do not give each run its own database.
+database = "analysis/output/usage-limits.sqlite"
+# How long a concurrency slot survives a process that dies mid-request. Set it
+# above the run's --timeout: too short and a slow request's slot is handed out
+# twice, too long and a crashed run keeps its slots until it expires.
+lease_seconds = 2400
+# How long a request will wait for a rate limit before giving up on itself.
+max_wait_seconds = 900
+poll_seconds = 0.25
+
+# ---------------------------------------------------------------------------
+# Providers. A provider must be declared before a run may name it -- an empty
+# table means "tracked, but unlimited". This is deliberate: a typo in
+# --provider must not be the thing that buys an unmetered run.
+# ---------------------------------------------------------------------------
+
+# https://docs.fireworks.ai/serverless/rate-limits publishes three serverless
+# limits per account and model, and they map one-to-one onto three meters here.
+# The numbers below are the <400B-parameter tier's *ceilings* -- an account's
+# real limits scale with its spending tier and sit below them, and the response
+# headers (X-Ratelimit-Limit-Tokens-Prompt and friends) report the current ones
+# in tokens per *second*, so multiply by 60 before using them here. Fireworks
+# also sheds load with 503s inside these limits, which is the client's retry
+# problem, not this file's.
+[provider.fireworks]
+max_concurrent = 32
+input_tokens_per_minute = 64_800_000            # their "total prompt TPM"
+uncached_input_tokens_per_minute = 16_200_000   # their "uncached prompt TPM"
+output_tokens_per_minute = 648_000              # their "generated TPM"
+tokens_per_day = 400_000_000
+cost_per_day = 50.0
+
+[provider.anthropic]
+max_concurrent = 8
+tokens_per_day = 20_000_000
+cost_per_day = 50.0
+
+# ---------------------------------------------------------------------------
+# Models. Declared per provider, because the same model name is served by more
+# than one of them at more than one price. A model needs an entry only to carry
+# its own limits or its price; anything else is charged to its provider alone.
+#
+# Prices are US dollars per million tokens and are never built into the code:
+# a stale hardcoded price would silently mis-state every cost limit in this
+# file. Copy them from the provider's pricing page and re-check them when a
+# cost report looks wrong. cached_input_per_mtok is optional; without it cached
+# prompt tokens are billed at the full input rate, which over-states cost.
+#
+# A cost limit that applies to a model with no price is an error rather than an
+# unpriced free-for-all, and the run refuses to start.
+# ---------------------------------------------------------------------------
+
+# PLACEHOLDER PRICE -- copy the real one from the Fireworks pricing page before
+# trusting any cost limit or cost report that involves this model.
+[model.fireworks."accounts/fireworks/models/deepseek-v3p1"]
+input_per_mtok = 1.00
+output_per_mtok = 1.00
+max_concurrent = 24
+tokens_per_day = 200_000_000
+
+# Anthropic's published first-party rates as of 2026-06; re-check before a run
+# whose budget depends on them.
+[model.anthropic."claude-sonnet-5"]
+input_per_mtok = 2.00
+output_per_mtok = 10.00
+cached_input_per_mtok = 0.20
+
+[model.anthropic."claude-opus-5"]
+input_per_mtok = 5.00
+output_per_mtok = 25.00
+cached_input_per_mtok = 0.50
+# Reasoning tokens come out of the output budget, so an Opus pilot spends far
+# more per window than its input size suggests. Keep it on a short leash.
+max_concurrent = 4
+cost_per_day = 20.0
+
+# ---------------------------------------------------------------------------
+# Experiments. An allocation, and a name to attribute spending to. A run that
+# names an experiment not declared here is an error, so a mistyped
+# --experiment cannot quietly spend against no budget at all.
+#
+# A run with no --experiment still obeys its provider and model limits and is
+# still recorded, under "(unattributed)" in the ledger.
+# ---------------------------------------------------------------------------
+
+# Does thinking-high earn its cost on a paid endpoint? One pass over a few
+# hundred windows answers that; $25 is what the answer is worth.
+[experiment.topic-pilot-a]
+cost_total = 25.0
+cost_per_day = 10.0
+tokens_total = 50_000_000
+
+# The blinded validation sample: small, bounded, and worth spending on a
+# stronger model than the production pass uses.
+[experiment.validation-sample]
+cost_total = 40.0

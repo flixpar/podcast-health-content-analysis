@@ -68,6 +68,16 @@ top_p = 0.95
 # for a comparison run, not for a production pass.
 # seed = 20260830
 
+# Spending guards, for a run pointed at a paid endpoint instead of the local
+# servers above. Shared by `label` and `verify`, and off while commented out --
+# the vLLM nodes bill nothing. The limits themselves, and the prices the cost
+# ones are computed from, live in analysis/usage-limits.toml.
+#
+# [usage]
+# usage_limits = "analysis/usage-limits.toml"
+# provider = "fireworks"
+# experiment = "topic-pilot-a"
+
 [label]
 # Concurrency: both servers pin num_requests_running at 64 (their max_num_seqs)
 # and queue beyond it, so 128 client-side keeps both fully subscribed. Measured

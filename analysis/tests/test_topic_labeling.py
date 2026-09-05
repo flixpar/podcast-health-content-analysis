@@ -1060,6 +1060,9 @@ def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
             temperature=None,
             top_p=None,
             seed=None,
+            usage_limits=None,
+            provider=None,
+            experiment=None,
             config=tmp_path / "no-config.toml",
         )
     )
@@ -1138,9 +1141,10 @@ def test_verify_uses_only_validated_evidence_packets_and_checkpoints_results(
     labeling.write_jsonl_atomic(packets_path, [packet])
 
     class FakeVerificationClient:
-        def __init__(self, api_base, api_key, timeout, attempts):
+        def __init__(self, api_base, api_key, timeout, attempts, **kwargs):
             assert api_key is None
             assert api_base == ["http://localhost:8000/v1"]
+            assert not kwargs["limiter"].enabled
 
         def served_models(self):
             return {"http://localhost:8000/v1": "local-model"}
@@ -1185,6 +1189,9 @@ def test_verify_uses_only_validated_evidence_packets_and_checkpoints_results(
             temperature=None,
             top_p=None,
             seed=None,
+            usage_limits=None,
+            provider=None,
+            experiment=None,
             config=tmp_path / "no-config.toml",
         )
     )

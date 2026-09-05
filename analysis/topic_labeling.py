@@ -47,6 +47,23 @@ from typing import Any, Iterable, Iterator, Sequence
 
 import zstandard
 
+# Imported as ``analysis.topic_labeling`` by the tests and run as a script from
+# the repository root, which puts ``analysis`` rather than the root on sys.path.
+if __package__:
+    from .usage_limits import (
+        CHARS_PER_TOKEN,
+        BudgetExceeded,
+        UsageLimiter,
+        UsageLimitError,
+    )
+else:
+    from usage_limits import (  # type: ignore[no-redef]
+        CHARS_PER_TOKEN,
+        BudgetExceeded,
+        UsageLimiter,
+        UsageLimitError,
+    )
+
 
 SCHEMA_VERSION = "topic-labeling-v4"
 PROMPT_VERSION = "topic-clips-claims-products-v5"
@@ -63,6 +80,9 @@ COMMANDS = ("taxonomy", "prepare", "label", "merge", "sample", "verify")
 # commands drift apart. Every other table configures the command it names.
 CONFIG_MODEL_SECTION = "model"
 CONFIG_MODEL_COMMANDS = ("label", "verify")
+# ``[usage]`` names the provider, the experiment and the spending limits the
+# billable commands run under; it is shared for the same reason ``[model]`` is.
+CONFIG_USAGE_SECTION = "usage"
 CONFIG_PATHS_SECTION = "paths"
 # A shared table lists the commands it may reach. ``[paths]`` reaches all of
 # them but only supplies the flags a given command actually has, so one
@@ -71,6 +91,7 @@ CONFIG_PATHS_SECTION = "paths"
 # ``--seed`` is the sampler on `label` and the sample draw on `sample`.
 CONFIG_SHARED_SECTIONS = {
     CONFIG_MODEL_SECTION: CONFIG_MODEL_COMMANDS,
+    CONFIG_USAGE_SECTION: CONFIG_MODEL_COMMANDS,
     CONFIG_PATHS_SECTION: COMMANDS,
 }
 CONFIG_SECTIONS = (*CONFIG_SHARED_SECTIONS, *COMMANDS)
@@ -1990,6 +2011,15 @@ def raise_for_response_status(response: dict[str, Any]) -> None:
     )
 
 
+def _payload_characters(payload: dict[str, Any]) -> int:
+    """Characters the server will read, for a pre-request token estimate."""
+    total = len(payload.get("instructions") or "")
+    for message in payload.get("input") or []:
+        for part in message.get("content") or []:
+            total += len(part.get("text") or "")
+    return total
+
+
 class ResponsesClient:
     def __init__(
         self,
@@ -1997,6 +2027,8 @@ class ResponsesClient:
         api_key: str | None = None,
         timeout: int = 600,
         attempts: int = 3,
+        limiter: UsageLimiter | None = None,
+        provider: str | None = None,
     ) -> None:
         bases = [api_base] if isinstance(api_base, str) else list(api_base)
         if not bases:
@@ -2007,6 +2039,10 @@ class ResponsesClient:
         self.attempts = attempts
         self.opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
         self._turn = itertools.count()
+        # A limiter built without a config is inert, which is what keeps a free
+        # local endpoint free of all of this.
+        self.limiter = limiter if limiter is not None else UsageLimiter(None)
+        self.provider = provider or ""
 
     @property
     def roots(self) -> list[str]:
@@ -2092,6 +2128,27 @@ class ResponsesClient:
             )
         return unique.pop()
 
+    def _send(self, payload: dict[str, Any], model: str) -> dict[str, Any]:
+        """One billable request, held against the run's usage limits.
+
+        The reservation has to be taken from an estimate, because the token
+        counts only exist once the request is over; ``record`` then replaces it
+        with what the server reports. A request that reports no usage keeps its
+        estimate, since one that failed after generating was still billed.
+        """
+        with self.limiter.reserve(
+            provider=self.provider,
+            model=model,
+            input_tokens=_payload_characters(payload) / CHARS_PER_TOKEN,
+            output_tokens=payload.get("max_output_tokens", 0),
+            # Outlive the request itself, so a crashed run's concurrency slots
+            # come back on their own rather than staying retired.
+            ttl=self.timeout + 60,
+        ) as lease:
+            response = self._request(self._endpoint() + "/responses", payload)
+            lease.record(response.get("usage"))
+        return response
+
     def classify(
         self,
         windows: Sequence[dict[str, Any]],
@@ -2122,7 +2179,7 @@ class ResponsesClient:
         last_error: Exception | None = None
         for attempt in range(self.attempts):
             try:
-                response = self._request(self._endpoint() + "/responses", payload)
+                response = self._send(payload, model)
                 raise_for_response_status(response)
                 parsed = json.loads(extract_output_text(response))
                 results = validate_response(parsed, windows, label_axes)
@@ -2174,7 +2231,7 @@ class ResponsesClient:
         last_error: Exception | None = None
         for attempt in range(self.attempts):
             try:
-                response = self._request(self._endpoint() + "/responses", payload)
+                response = self._send(payload, model)
                 raise_for_response_status(response)
                 parsed = json.loads(extract_output_text(response))
                 results = validate_verification_response(parsed, pairs)
@@ -2486,6 +2543,32 @@ class VerificationStore:
         return write_jsonl_atomic(path, rows())
 
 
+def build_limiter(args: argparse.Namespace) -> UsageLimiter:
+    """The spend guard a billable run is required to carry.
+
+    Off by default: a local server bills nothing and needs none of this. Once
+    ``--usage-limits`` is named, though, the run has to say whose limits it is
+    spending, because a request charged to no provider is a request no limit in
+    the file applies to.
+    """
+    if args.usage_limits is None:
+        if args.experiment:
+            raise TopicLabelingError(
+                "--experiment names an allocation, so it needs --usage-limits "
+                "to declare one"
+            )
+        if args.provider:
+            raise TopicLabelingError(
+                "--provider has nothing to do without --usage-limits"
+            )
+        return UsageLimiter(None)
+    if not args.provider:
+        raise TopicLabelingError(
+            "--usage-limits needs --provider, so the run says whose limits it spends"
+        )
+    return UsageLimiter.from_config(args.usage_limits, args.experiment)
+
+
 def _batched(
     rows: Iterable[dict[str, Any]], size: int
 ) -> Iterator[list[dict[str, Any]]]:
@@ -2524,7 +2607,15 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
                 f"environment variable {args.api_key_env} is empty or unset"
             )
     api_bases = args.api_base or [DEFAULT_API_BASE]
-    client = ResponsesClient(api_bases, api_key, args.timeout, args.attempts)
+    limiter = build_limiter(args)
+    client = ResponsesClient(
+        api_bases,
+        api_key,
+        args.timeout,
+        args.attempts,
+        limiter=limiter,
+        provider=args.provider,
+    )
     served = client.served_models()
     model = args.model or client.discover_model()
     settings = ModelSettings.from_args(args)
@@ -2548,6 +2639,9 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
         "created_at": utc_now(),
         "no_auth": args.api_key_env is None,
         "endpoints": served,
+        "provider": args.provider,
+        "experiment": args.experiment,
+        "usage_limits": str(args.usage_limits) if args.usage_limits else None,
         # Provenance only: the settings it supplied are already fingerprinted,
         # and editing a comment in it must not orphan an existing store.
         "config": str(args.config) if args.config.exists() else None,
@@ -2588,6 +2682,12 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
         try:
             results, meta = classify(batch)
             return [(batch, results, meta)], []
+        except UsageLimitError:
+            # Isolating retries the batch window by window, which is the answer
+            # to one unlabelable window and never the answer to a limit: it
+            # would spend the same exhausted budget, or wait out the same rate,
+            # once per window instead of once.
+            raise
         except Exception as exc:
             if len(batch) == 1:
                 return [], [(batch, exc)]
@@ -2607,6 +2707,10 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
             counters["windows_recovered_by_isolation"] += len(successes)
             return successes, failures
 
+    # Set when a usage budget runs out. Nothing after it is submitted, but the
+    # requests already in flight finish and checkpoint, so the run resumes from
+    # where the money stopped rather than from where the last batch started.
+    budget_stop: BudgetExceeded | None = None
     submitted = completed_requests = failed_requests = 0
     iterator = iter(_batched(pending(), args.batch_size))
     futures: dict[Future[Any], list[dict[str, Any]]] = {}
@@ -2625,6 +2729,9 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
                     batch = futures.pop(future)
                     try:
                         successes, failures = future.result()
+                    except BudgetExceeded as exc:
+                        budget_stop = budget_stop or exc
+                        successes, failures = [], [(batch, exc)]
                     except Exception as exc:
                         # classify_isolating handles model errors itself, so
                         # reaching here means the worker itself broke.
@@ -2638,10 +2745,12 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
                         failed_requests += 1
                         store.record_failure(window_group, error)
                     completed_requests += 1
-                    try:
-                        next_batch = next(iterator)
-                    except StopIteration:
-                        next_batch = None
+                    next_batch = None
+                    if budget_stop is None:
+                        try:
+                            next_batch = next(iterator)
+                        except StopIteration:
+                            next_batch = None
                     if next_batch:
                         futures[executor.submit(classify_isolating, next_batch)] = (
                             next_batch
@@ -2663,6 +2772,7 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
             "completed_at": utc_now(),
             "requests_completed_this_invocation": completed_requests,
             "requests_failed_this_invocation": failed_requests,
+            "stopped_by_usage_limit": str(budget_stop) if budget_stop else None,
             "batches_isolated_this_invocation": counters["batches_isolated"],
             "windows_isolated_this_invocation": counters["windows_isolated"],
             "windows_recovered_by_isolation": counters[
@@ -2675,11 +2785,14 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
             "exported_window_labels": exported,
             "window_labels_sha256": export_sha256,
         }
+        if budget_stop is not None:
+            print(f"stopped by a usage limit: {budget_stop}", file=sys.stderr)
         write_json(output_dir / "label_manifest.json", summary)
         print(json.dumps(summary, indent=2))
         return summary
     finally:
         store.close()
+        limiter.close()
 
 
 def _candidate_from_detection(
@@ -4032,7 +4145,15 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
                 f"environment variable {args.api_key_env} is empty or unset"
             )
     api_bases = args.api_base or [DEFAULT_API_BASE]
-    client = ResponsesClient(api_bases, api_key, args.timeout, args.attempts)
+    limiter = build_limiter(args)
+    client = ResponsesClient(
+        api_bases,
+        api_key,
+        args.timeout,
+        args.attempts,
+        limiter=limiter,
+        provider=args.provider,
+    )
     served = client.served_models()
     model = args.model or client.discover_model()
     settings = ModelSettings.from_args(args)
@@ -4056,6 +4177,9 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
         "corpus_validation_manifest": str(corpus_validation_path),
         "no_auth": args.api_key_env is None,
         "endpoints": served,
+        "provider": args.provider,
+        "experiment": args.experiment,
+        "usage_limits": str(args.usage_limits) if args.usage_limits else None,
         "config": str(args.config) if args.config.exists() else None,
     }
     output_dir = Path(args.verification_dir)
@@ -4077,6 +4201,10 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
 
     # See run_label: the only record of settings resolved server-side.
     observed_sampling: dict[str, Any] = {}
+    # Set when a usage budget runs out. Nothing after it is submitted, but the
+    # requests already in flight finish and checkpoint, so the run resumes from
+    # where the money stopped rather than from where the last batch started.
+    budget_stop: BudgetExceeded | None = None
     submitted = completed_requests = failed_requests = 0
     iterator = iter(_batched(pending(), args.batch_size))
     futures: dict[
@@ -4101,14 +4229,20 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
                         observed_sampling = observed_sampling or meta.get(
                             "effective_sampling", {}
                         )
+                    except BudgetExceeded as exc:
+                        budget_stop = budget_stop or exc
+                        failed_requests += 1
+                        store.record_failure(batch, exc)
                     except Exception as exc:
                         failed_requests += 1
                         store.record_failure(batch, exc)
                     completed_requests += 1
-                    try:
-                        next_batch = next(iterator)
-                    except StopIteration:
-                        next_batch = None
+                    next_batch = None
+                    if budget_stop is None:
+                        try:
+                            next_batch = next(iterator)
+                        except StopIteration:
+                            next_batch = None
                     if next_batch:
                         futures[executor.submit(verify_batch, next_batch)] = next_batch
                         submitted += 1
@@ -4132,6 +4266,7 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
             "missing_evidence_candidate_ids": missing_packets,
             "requests_completed_this_invocation": completed_requests,
             "requests_failed_this_invocation": failed_requests,
+            "stopped_by_usage_limit": str(budget_stop) if budget_stop else None,
             "effective_sampling": observed_sampling or None,
             "candidates_verified": complete,
             "failed_candidates": failed,
@@ -4139,11 +4274,14 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
             "exported_verification_results": exported,
             "verification_results_sha256": export_sha256,
         }
+        if budget_stop is not None:
+            print(f"stopped by a usage limit: {budget_stop}", file=sys.stderr)
         write_json(output_dir / "verification_manifest.json", summary)
         print(json.dumps(summary, indent=2))
         return summary
     finally:
         store.close()
+        limiter.close()
 
 
 def load_config(path: Path) -> dict[str, dict[str, Any]]:
@@ -4494,6 +4632,26 @@ def build_parser() -> argparse.ArgumentParser:
     )
     verify.add_argument("--seed", type=int, help="Per-request sampling seed")
 
+    # Spending guards, on the two commands that can spend. They default to off,
+    # so a local server keeps costing nothing and needing nothing.
+    for subparser in (label, verify):
+        subparser.add_argument(
+            "--usage-limits",
+            type=Path,
+            help=(
+                "TOML spending limits (see analysis/usage-limits.toml); "
+                "unmetered when omitted"
+            ),
+        )
+        subparser.add_argument(
+            "--provider",
+            help="Whose limits in --usage-limits this endpoint spends",
+        )
+        subparser.add_argument(
+            "--experiment",
+            help="Allocation to charge this run to; must be declared in --usage-limits",
+        )
+
     for subparser in subparsers.choices.values():
         subparser.add_argument(
             "--config",
@@ -4533,7 +4691,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             if summary["unresolved_candidates"]:
                 return 2
         return 0
-    except (TopicLabelingError, OSError, ValueError, sqlite3.Error) as exc:
+    except (
+        TopicLabelingError,
+        UsageLimitError,
+        OSError,
+        ValueError,
+        sqlite3.Error,
+    ) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
 
