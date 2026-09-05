@@ -3,6 +3,8 @@ import csv
 import json
 from pathlib import Path
 
+import pytest
+
 from analysis import topic_labeling as labeling
 
 
@@ -193,7 +195,6 @@ def test_responses_client_uses_strict_responses_schema_and_validates_quotes():
                     {
                         "start_unit_id": "u000001",
                         "end_unit_id": "u000002",
-                        "axis": "topic",
                         "label_ids": ["topic:sleep"],
                         "relevance": "substantive",
                         "discourse_role": "asserted_or_endorsed",
@@ -204,7 +205,6 @@ def test_responses_client_uses_strict_responses_schema_and_validates_quotes():
                     {
                         "start_unit_id": "u000002",
                         "end_unit_id": "u000002",
-                        "axis": "evidence",
                         "label_ids": ["cross_cutting:scientific_study"],
                         "relevance": "substantive",
                         "discourse_role": "reported_or_quoted",
@@ -240,14 +240,247 @@ def test_responses_client_uses_strict_responses_schema_and_validates_quotes():
 
     client = FakeClient("http://localhost:8000/v1", attempts=1)
     results, meta = client.classify(
-        [window], taxonomy, "local-model", 1000, reasoning_effort=None, temperature=None
+        [window],
+        taxonomy,
+        "local-model",
+        labeling.ModelSettings(max_output_tokens=1000, reasoning_effort="none"),
     )
     assert client.seen_url == "http://localhost:8000/v1/responses"
     assert client.seen_payload["text"]["format"]["type"] == "json_schema"
     assert client.seen_payload["text"]["format"]["strict"] is True
     assert client.seen_payload["input"][0]["content"][0]["type"] == "input_text"
+    assert client.seen_payload["max_output_tokens"] == 1000
+    # Always explicit: on a thinking model an absent effort means "think".
+    assert client.seen_payload["reasoning"] == {"effort": "none"}
+    assert "include_reasoning" not in client.seen_payload
     assert results[0]["detections"][0]["confidence"] == 0.9
     assert meta["response_id"] == "resp_test"
+
+
+def write_config(tmp_path):
+    config = tmp_path / "topic-labeling.toml"
+    config.write_text(
+        "\n".join(
+            [
+                "[model]",
+                'api_base = "http://127.0.0.1:8000/v1"',
+                'model = "deepseek-ai/DeepSeek-V4-Flash-0731"',
+                'reasoning_effort = "high"',
+                "top_p = 0.95",
+                "",
+                "[label]",
+                "batch_size = 3",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return config
+
+
+def test_config_supplies_shared_model_settings_to_label_and_verify(tmp_path):
+    config = write_config(tmp_path)
+    parser = labeling.build_parser()
+
+    label = parser.parse_args(
+        labeling.expand_config_args(["label", "--config", str(config)])
+    )
+    assert label.model == "deepseek-ai/DeepSeek-V4-Flash-0731"
+    assert label.reasoning_effort == "high"
+    assert label.top_p == 0.95
+    assert label.batch_size == 3
+
+    verify = parser.parse_args(
+        labeling.expand_config_args(["verify", "--config", str(config)])
+    )
+    assert verify.model == "deepseek-ai/DeepSeek-V4-Flash-0731"
+    assert verify.top_p == 0.95
+    # [label] is not [verify]: its batch size must not leak across.
+    assert verify.batch_size == 4
+
+    # A command that takes no model settings is left alone.
+    assert labeling.expand_config_args(["prepare", "--config", str(config)]) == [
+        "prepare",
+        "--config",
+        str(config),
+    ]
+
+
+def test_typed_flags_override_the_config(tmp_path):
+    config = write_config(tmp_path)
+    args = labeling.build_parser().parse_args(
+        labeling.expand_config_args(
+            ["label", "--config", str(config), "--reasoning-effort", "none"]
+        )
+    )
+    assert args.reasoning_effort == "none"
+    assert args.model == "deepseek-ai/DeepSeek-V4-Flash-0731"
+
+
+def test_config_fails_loudly_on_bad_input(tmp_path):
+    missing = tmp_path / "absent.toml"
+    with pytest.raises(labeling.TopicLabelingError, match="does not exist"):
+        labeling.expand_config_args(["label", "--config", str(missing)])
+
+    unknown = tmp_path / "unknown.toml"
+    unknown.write_text("[labl]\nbatch_size = 2\n", encoding="utf-8")
+    with pytest.raises(labeling.TopicLabelingError, match="unknown table"):
+        labeling.expand_config_args(["label", "--config", str(unknown)])
+
+    loose = tmp_path / "loose.toml"
+    loose.write_text('model = "x"\n', encoding="utf-8")
+    with pytest.raises(labeling.TopicLabelingError, match="inside a table"):
+        labeling.expand_config_args(["label", "--config", str(loose)])
+
+    # An unusable setting is an unrecognized flag, reported by argparse itself.
+    stray = tmp_path / "stray.toml"
+    stray.write_text("[label]\nnot_a_flag = 1\n", encoding="utf-8")
+    with pytest.raises(SystemExit):
+        labeling.build_parser().parse_args(
+            labeling.expand_config_args(["label", "--config", str(stray)])
+        )
+
+
+def test_thinking_settings_reach_the_payload_and_reasoning_output_is_ignored():
+    taxonomy = small_taxonomy()
+    window = {
+        "window_id": "episode_1_window_0001",
+        "units": [{"unit_id": "u000001", "text": "The guest discusses sleep."}],
+    }
+    model_result = {
+        "results": [
+            {
+                "window_id": window["window_id"],
+                "detections": [],
+                "verification_candidates": [],
+                "product_mentions": [],
+            }
+        ]
+    }
+
+    class FakeClient(labeling.ResponsesClient):
+        def _request(self, url, payload=None):
+            self.seen_payload = payload
+            return {
+                "id": "resp_test",
+                "status": "completed",
+                "model": "local-model",
+                "output": [
+                    # A thinking model emits its reasoning as its own item; the
+                    # JSON contract lives only in the message that follows.
+                    {
+                        "type": "reasoning",
+                        "content": [
+                            {"type": "reasoning_text", "text": "not the answer"}
+                        ],
+                    },
+                    {
+                        "type": "message",
+                        "content": [
+                            {"type": "output_text", "text": json.dumps(model_result)}
+                        ],
+                    },
+                ],
+            }
+
+    client = FakeClient("http://localhost:8000/v1", attempts=1)
+    settings = labeling.ModelSettings(
+        max_output_tokens=200000,
+        reasoning_effort="max",
+        temperature=1.0,
+        top_p=0.95,
+        seed=7,
+    )
+    results, _ = client.classify([window], taxonomy, "local-model", settings)
+    assert client.seen_payload["reasoning"] == {"effort": "max"}
+    assert client.seen_payload["include_reasoning"] is False
+    assert client.seen_payload["temperature"] == 1.0
+    assert client.seen_payload["top_p"] == 0.95
+    assert client.seen_payload["seed"] == 7
+    assert settings.fingerprint()["reasoning_effort"] == "max"
+    assert results[0]["window_id"] == window["window_id"]
+
+
+def test_truncation_is_distinguishable_from_other_incomplete_responses():
+    truncated = {
+        "status": "incomplete",
+        "incomplete_details": {"reason": "max_output_tokens"},
+    }
+    with pytest.raises(labeling.TopicLabelingError) as truncation:
+        labeling.raise_for_response_status(truncated)
+    assert truncation.value.kind == "output_truncated"
+
+    with pytest.raises(labeling.TopicLabelingError) as other:
+        labeling.raise_for_response_status({"status": "failed"})
+    assert other.value.kind == "api_incomplete"
+
+    labeling.raise_for_response_status({"status": "completed"})
+
+
+def test_manifest_without_episode_rows_fails_loudly(tmp_path):
+    # A transcript-batch manifest keys on record_type=transcript; loading it as
+    # episode metadata used to yield an empty dict and no complaint.
+    manifest = tmp_path / "manifest.jsonl"
+    labeling.write_jsonl_atomic(
+        manifest,
+        [
+            {"record_type": "transcript_batch", "transcript_count": 2},
+            {"record_type": "transcript", "episode_id": 191687, "word_count": 14700},
+        ],
+    )
+    with pytest.raises(labeling.TopicLabelingError, match="record_type=episode"):
+        labeling.load_manifest_metadata(manifest)
+
+    assert labeling.load_manifest_metadata(None) == {}
+
+
+def test_detection_axis_is_derived_from_the_labels(tmp_path):
+    taxonomy = small_taxonomy()
+    label_axes = {row["label_id"]: row["axis"] for row in taxonomy["labels"]}
+    window = {
+        "window_id": "episode_1_window_0001",
+        "units": [{"unit_id": "u000001", "text": "A clinical trial studied sleep."}],
+    }
+
+    def detection(label_ids):
+        return {
+            "start_unit_id": "u000001",
+            "end_unit_id": "u000001",
+            "label_ids": label_ids,
+            "relevance": "substantive",
+            "discourse_role": "asserted_or_endorsed",
+            "confidence": 0.9,
+            "summary": "Sleep research is discussed.",
+            "evidence_quote": "A clinical trial studied sleep",
+        }
+
+    # The model never states an axis, so it can never contradict its own labels.
+    assert (
+        "axis"
+        not in labeling.response_schema(taxonomy)["properties"]["results"]["items"][
+            "properties"
+        ]["detections"]["items"]["properties"]
+    )
+
+    result = {
+        "window_id": window["window_id"],
+        "detections": [detection(["cross_cutting:scientific_study"])],
+        "verification_candidates": [],
+        "product_mentions": [],
+    }
+    validated = labeling.validate_window_result(result, window, label_axes)
+    assert validated["detections"][0]["axis"] == "evidence"
+
+    # A label set straddling two axes is still the error that matters.
+    mixed = {
+        "window_id": window["window_id"],
+        "detections": [detection(["topic:sleep", "cross_cutting:scientific_study"])],
+        "verification_candidates": [],
+        "product_mentions": [],
+    }
+    with pytest.raises(labeling.TopicLabelingError) as exc:
+        labeling.validate_window_result(mixed, window, label_axes)
+    assert exc.value.kind == "mixed_or_unknown_labels"
 
 
 def test_response_validation_rejects_non_verbatim_evidence():
@@ -262,7 +495,6 @@ def test_response_validation_rejects_non_verbatim_evidence():
             {
                 "start_unit_id": "u000001",
                 "end_unit_id": "u000001",
-                "axis": "topic",
                 "label_ids": ["topic:sleep"],
                 "relevance": "substantive",
                 "discourse_role": "asserted_or_endorsed",
@@ -558,7 +790,6 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
                     {
                         "start_unit_id": "u000002",
                         "end_unit_id": "u000003",
-                        "axis": "topic",
                         "label_ids": ["topic:sleep"],
                         "relevance": "substantive",
                         "discourse_role": "asserted_or_endorsed",
@@ -602,7 +833,6 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
                     {
                         "start_unit_id": "u000002",
                         "end_unit_id": "u000003",
-                        "axis": "topic",
                         "label_ids": ["topic:sleep"],
                         "relevance": "substantive",
                         "discourse_role": "asserted_or_endorsed",
@@ -613,7 +843,6 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
                     {
                         "start_unit_id": "u000003",
                         "end_unit_id": "u000003",
-                        "axis": "evidence",
                         "label_ids": ["cross_cutting:scientific_study"],
                         "relevance": "substantive",
                         "discourse_role": "asserted_or_endorsed",
@@ -808,13 +1037,18 @@ def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
         return results, {"response_id": "r", "response_model": model, "usage": None}
 
     monkeypatch.setattr(labeling.ResponsesClient, "classify", fake_classify)
+    monkeypatch.setattr(
+        labeling.ResponsesClient,
+        "served_models",
+        lambda self: {root: "local-model" for root in self.roots},
+    )
     summary = labeling.run_label(
         argparse.Namespace(
             output_dir=tmp_path,
             taxonomy=taxonomy_path,
             windows=windows_path,
             prepare_manifest=prepare_manifest_path,
-            api_base="http://127.0.0.1:8000/v1",
+            api_base=["http://127.0.0.1:8000/v1"],
             model="local-model",
             api_key_env=None,
             batch_size=3,
@@ -822,8 +1056,11 @@ def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
             max_output_tokens=100,
             timeout=10,
             attempts=1,
-            reasoning_effort=None,
+            reasoning_effort="none",
             temperature=None,
+            top_p=None,
+            seed=None,
+            config=tmp_path / "no-config.toml",
         )
     )
     # First the whole batch, then each window alone.
@@ -903,15 +1140,12 @@ def test_verify_uses_only_validated_evidence_packets_and_checkpoints_results(
     class FakeVerificationClient:
         def __init__(self, api_base, api_key, timeout, attempts):
             assert api_key is None
+            assert api_base == ["http://localhost:8000/v1"]
 
-        def verify(
-            self,
-            pairs,
-            model,
-            max_output_tokens,
-            reasoning_effort,
-            temperature,
-        ):
+        def served_models(self):
+            return {"http://localhost:8000/v1": "local-model"}
+
+        def verify(self, pairs, model, settings):
             assert pairs == [{"candidate": candidate, "evidence_packet": packet}]
             assert model == "local-model"
             return [
@@ -937,8 +1171,9 @@ def test_verify_uses_only_validated_evidence_packets_and_checkpoints_results(
             candidates=candidates_path,
             evidence_packets=packets_path,
             corpus_validation_manifest=corpus_validation_path,
-            output_dir=output_dir,
-            api_base="http://localhost:8000/v1",
+            output_dir=tmp_path,
+            verification_dir=output_dir,
+            api_base=["http://localhost:8000/v1"],
             model="local-model",
             api_key_env=None,
             batch_size=4,
@@ -946,8 +1181,11 @@ def test_verify_uses_only_validated_evidence_packets_and_checkpoints_results(
             max_output_tokens=6000,
             timeout=60,
             attempts=1,
-            reasoning_effort=None,
+            reasoning_effort="none",
             temperature=None,
+            top_p=None,
+            seed=None,
+            config=tmp_path / "no-config.toml",
         )
     )
     results = list(labeling.iter_jsonl(output_dir / "verification_results.jsonl.zst"))

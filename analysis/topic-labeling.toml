@@ -1,0 +1,95 @@
+# Settings for the DeepSeek-V4-Flash-0731 labeling pilot. Read by default from
+# the repository root, so the commands in the runbook need no endpoint flags:
+#
+#   .venv/bin/python analysis/topic_labeling.py label
+#
+# Values become ordinary flags, so anything typed on the command line wins:
+#
+#   .venv/bin/python analysis/topic_labeling.py label --reasoning-effort high
+#
+# Pass --config to use a different file. Every setting below is part of the run
+# fingerprint, so changing one means a fresh output directory. The reasoning
+# they are set this way is in docs/topic-labeling-method.md.
+
+# Where the run reads and writes. Every command takes what applies to it, and
+# every artifact inside the run directory follows output_dir, so moving a run
+# means changing one line here rather than five flags per command.
+[paths]
+transcripts = "downloader/data/transcripts"
+output_dir = "analysis/output/topic-labeling"
+# metadata_db = "downloader/data/podcast_metadata.db"
+
+# Shared by `label` and `verify`; a [label] or [verify] key below overrides it.
+[model]
+# One entry per identical vLLM server; requests round-robin across them and a
+# retry lands on a different one. They must all serve the same model: the run
+# refuses to start otherwise, because a run split across two checkpoints cannot
+# be attributed afterwards. Endpoints are capacity, so they stay out of the run
+# fingerprint and a node can be added or lost without orphaning a run.
+api_base = ["http://127.0.0.1:8222/v1", "http://gpu312:8222/v1"]
+# Drop this line to discover the served model from /v1/models instead.
+model = "deepseek-ai/DeepSeek-V4-Flash-0731"
+
+# Thinking on. Measured on DeepSeek-V4-Flash-0731 against one 637-word window,
+# 6-10 samples per setting: `none` rejected 13.2% of individual annotations and
+# ~80% of whole responses, because one bad annotation rejects the response it
+# arrived in. `high` cut that to 2.5% and 5/6 whole responses. The bill is about
+# 25k reasoning tokens and ~294s per request against ~1.5k and ~81s, so this is
+# a cost decision, not a settled one -- set "none" here to take it back.
+#
+# Reasoning is drawn from max_output_tokens: `high` produced 26k-31k total
+# output tokens, and a 32000 budget truncated one request in six.
+#
+# The ceiling is the server's context. A real 900-word window measures about
+# 2,275 input tokens, so a batch of four plus the ~11.5k-token instruction prefix
+# is ~20.5k, and at max_model_len 65536 the budget must stay under ~45k. Batches
+# of eight do not leave enough room for thinking at all. Observed output at
+# batch 4 is ~13k per request, so 40000 is generous headroom.
+# `low` (thinking without the high-effort preamble) is 1.7x faster, never
+# truncates and is accepted more often -- but on a health-dense window it
+# returns 9.3 detections against high's 13.5, at the same claim yield. Its
+# cleaner acceptance is substantially an artifact of emitting fewer annotations.
+# Under-detection biases topic prevalence downward and is the error this
+# exhaustive design exists to avoid, so the run pays for `high`. Whether high's
+# extra detections are recall or false positives is a question for the blinded
+# validation sample, not for the throughput numbers.
+reasoning_effort = "high"
+max_output_tokens = 44000
+timeout = 1800
+attempts = 3
+
+# DeepSeek's recommended sampling for this checkpoint.
+temperature = 1.0
+top_p = 0.95
+
+# A seed pins the sampler, but it also makes the `attempts` retries resend an
+# identical payload, so a window rejected for its content tends to be rejected
+# the same way every time rather than recovered by a different sample. Prefer it
+# for a comparison run, not for a production pass.
+# seed = 20260830
+
+[label]
+# Concurrency: both servers pin num_requests_running at 64 (their max_num_seqs)
+# and queue beyond it, so 128 client-side keeps both fully subscribed. Measured
+# accepted throughput at batch 4, effort high, across both nodes:
+#   c=16  7.7 windows/min    c=64   25.0 windows/min
+#   c=32 13.3 windows/min    c=128  36.3 windows/min  (waiting 24-36/node)
+#
+# Measured on real corpus windows, both nodes, one attempt each:
+#
+#   setting                accepted   output tokens per window
+#   no-think, batch 8       3/12                  89
+#   no-think, batch 1      10/12                 202
+#   think-high, batch 1    12/12                7005
+#   think-high, batch 4     7/8                 3236
+#
+# Batch 8 fails mostly through omitted_windows and span_out_of_window -- the
+# model losing track across windows, which cannot happen at batch 1 and is rare
+# at 4. Batch 4 halves the per-window cost of thinking, because reasoning is
+# charged per request, without inviting that failure mode back.
+batch_size = 4
+concurrency = 128
+
+[verify]
+batch_size = 4
+concurrency = 8

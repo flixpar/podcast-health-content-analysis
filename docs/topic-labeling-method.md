@@ -64,6 +64,12 @@ label detection must contain one axis only and use the narrowest accurate span,
 so a brief “a study shows” phrase does not inherit the boundaries of a long
 sleep discussion.
 
+The model does not state a detection's axis. Every label in the taxonomy already
+carries one, so asking for the axis as well only creates a way for a detection
+to contradict itself -- and a model asked for it will sometimes take it. The
+axis is derived from the labels during validation, which still rejects a label
+set that straddles two axes, the rule that carries the meaning.
+
 The same response extracts atomic claims whose falsity, exaggeration, or missing
 context would materially affect health understanding or behavior. It includes
 claims being quoted, questioned, or rebutted, retaining their discourse role so
@@ -97,8 +103,8 @@ containing the name as transcribed. One continuous stretch naming a product is
 one mention, so a sponsor read is one row however often it repeats the name.
 
 The client rejects omitted windows, unknown or mixed-axis labels, reversed or
-out-of-window spans, duplicate annotations, non-verbatim quotes, incomplete
-Responses, and malformed JSON. Every rejection carries a `kind`, and
+out-of-window spans, duplicate annotations, non-verbatim quotes, empty required
+strings, truncated or incomplete Responses, and malformed JSON. Every rejection carries a `kind`, and
 `label_manifest.json` reports `unresolved_windows_by_kind` so a pilot can tell a
 prompt problem from a transport problem without reading a thousand messages. A
 pilot should watch `certainty_markers_mismatch` in particular: it is the one
@@ -197,36 +203,221 @@ The verifier returns one of:
 corpus does not guarantee that retrieval found passages capable of resolving a
 particular claim.
 
+## Serving the labeling model
+
+`label` and `verify` talk to a local vLLM server over the OpenAI Responses API.
+The pilot model is
+[`deepseek-ai/DeepSeek-V4-Flash-0731`](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731),
+a 1M-context mixture-of-experts reasoning model.
+
+```bash
+vllm serve deepseek-ai/DeepSeek-V4-Flash-0731 \
+  --tokenizer-mode deepseek_v4 \
+  --reasoning-parser deepseek_v4 \
+  --max-model-len 65536 \
+  --tensor-parallel-size 4 \
+  --kv-cache-dtype fp8
+```
+
+The first three flags are what this pipeline depends on; the rest are sizing.
+
+### Several servers
+
+`--api-base` repeats, and `[model] api_base` in the config takes a list, so a
+run can be spread over identical servers:
+
+```toml
+api_base = ["http://127.0.0.1:8222/v1", "http://gpu312:8222/v1"]
+```
+
+Requests round-robin across them and each retry draws again, so losing a node
+slows a run down rather than ending it. Before any work is submitted the client
+reads `/v1/models` on every endpoint and refuses to start if they disagree about
+the model: endpoints are pooled, so a run split across two checkpoints could not
+be attributed afterwards.
+
+The endpoints are deliberately **not** in the run fingerprint -- they are
+capacity, not a determinant of the output, and adding or losing a node must not
+orphan a half-finished `labels.sqlite`. The model they serve is fingerprinted,
+and `label_manifest.json` records the endpoint list under `endpoints`.
+
+- `--tokenizer-mode deepseek_v4` selects the model's own prompt encoding, which
+  is a dedicated renderer rather than a Jinja chat template. Without it the
+  Responses endpoint does not build V4 prompts correctly.
+- `--reasoning-parser deepseek_v4` is what lets thinking and strict JSON Schema
+  coexist. vLLM starts applying the schema grammar only once that parser sees
+  the end of the reasoning block; with no parser configured the grammar binds
+  from the first token and the JSON can be emitted as reasoning content instead
+  of as the message.
+- Structured outputs need no extra flags. The response schema uses `enum`,
+  `pattern`, `minItems`/`maxItems` and numeric bounds, all of which the default
+  `xgrammar` backend compiles.
+- `--max-model-len` has to cover one whole request, and this is the constraint
+  that decides the batch size. A real 900-word window measures about 2,275 input
+  tokens, so a batch of eight plus the ~11,500-token instruction prefix is
+  roughly 29,700 tokens. At `--max-model-len 65536` that leaves under 36,000 for
+  output, which thinking alone can exhaust; the server then rejects the request
+  with HTTP 400 rather than truncating. Raising the context is what buys back
+  batch size, and batch size is what amortises the per-request reasoning cost.
+  Leave automatic prefix caching on so the instruction prefix is not recomputed
+  for every batch, and confirm the hit rate in the server metrics before scaling.
+- Tool calling is unused, so `--tool-call-parser` and `--enable-auto-tool-choice`
+  are unnecessary.
+- Throughput flags -- tensor parallelism, fp8 KV cache, and the speculative
+  decoding config -- depend on the checkpoint variant and the GPUs. Take them
+  from the model card and the vLLM recipe rather than from this example; the
+  card and the recipe currently name different draft methods (`dspark` and
+  `mtp`), so check which one your checkpoint ships with.
+
+### Thinking is an explicit setting, not an omission
+
+`--reasoning-effort` is sent on every request and is part of the run
+fingerprint. Leaving it out of the request body is not neutral on this model:
+the V4 renderer reads a missing value as "think, at high effort", so silence
+would select the most expensive mode rather than the cheapest. The pipeline
+therefore always sends a value, defaulting to `none`.
+
+| `--reasoning-effort` | Effect on DeepSeek-V4 |
+| --- | --- |
+| `none` (default) | Thinking off |
+| `minimal`, `low`, `medium` | Thinks, with no effort preamble |
+| `high`, `xhigh` | Thinks, with the high-effort preamble |
+| `max` | Thinks, with the maximum-effort preamble; needs `--max-model-len 393216` |
+
+Reasoning tokens come out of the same `--max-output-tokens` budget as the JSON,
+and the `high` and `max` preambles instruct the model to write its whole
+deliberation out. Raise that budget well above its 12,000 default before turning
+thinking on, and watch `output_truncated` in `unresolved_windows_by_kind`: that
+kind means the budget ran out before the answer began, and it is reported
+separately from `api_incomplete` precisely because a too-small budget fails on
+nearly every window while a transport fault does not. A thinking request also
+takes far longer to return, so raise `--timeout` from its 600-second default at
+the same time. Reasoning text itself is never returned
+(`include_reasoning: false`); nothing downstream reads it.
+
+Whether thinking earns its cost is a cost question, but not an open one about
+quality. Measured on DeepSeek-V4-Flash-0731 against a single 637-word window,
+6-10 samples per setting, one attempt each:
+
+| | `none` | `high` |
+| --- | --- | --- |
+| Annotations rejected | 13.2% (18 of 136) | 2.5% (3 of 119) |
+| Whole responses accepted | ~2 in 10 | 5 in 6 |
+| Reasoning tokens | 0 | ~25,000 |
+| Total output tokens | ~1,500 | ~28,000 |
+| Median latency | 81s | 294s |
+
+The two rows disagree because validation is all-or-nothing: at 17 annotations
+per response, a 13% per-annotation error compounds to roughly a 9% chance that
+a whole response survives. Cutting per-item error to 2.5% is what turns the
+response-level number around. That is one window and one prompt version, so
+treat the magnitudes as indicative and re-measure on the pilot -- but the sign
+is not in doubt, and it is why the shipped config sets `high`.
+
+Read label prevalence, span quality and candidate yield too, not only the
+rejection counts: a setting can be accepted more often and still code worse.
+
+DeepSeek recommends `--temperature 1.0` with `--top-p 1.0`, or `--top-p 0.95`
+for the 0731 checkpoint. Every one of these settings is in the fingerprint, so
+changing any of them requires a fresh output directory.
+
+`--seed` pins the sampler, at a cost worth knowing: `--attempts` retries resend
+the identical payload, so with a fixed seed a window rejected for its content
+tends to be rejected the same way on every attempt instead of being recovered by
+a different sample. Prefer a seed for a comparison run, not for a production
+pass.
+
+### Configuration
+
+`label` and `verify` take the same endpoint and decoding flags, and a long pilot
+invites the two to drift apart. `analysis/topic-labeling.toml` states them once
+and is read by default from the repository root, so the runbook commands below
+carry no endpoint flags at all:
+
+```toml
+# Where the run reads and writes; every command takes what applies to it.
+[paths]
+transcripts = "downloader/data/transcripts"
+output_dir = "analysis/output/topic-labeling"
+
+# Shared by `label` and `verify`.
+[model]
+api_base = "http://127.0.0.1:8000/v1"
+model = "deepseek-ai/DeepSeek-V4-Flash-0731"
+reasoning_effort = "none"
+max_output_tokens = 12000
+
+[label]
+batch_size = 8
+
+[verify]
+batch_size = 4
+```
+
+`[paths]` and `[model]` are shared; a `[label]` or `[verify]` key overrides them
+for that command, and any command may have a table of its own. Keys are the flag
+names with underscores, so `top_p` is `--top-p`. A shared table only supplies
+the flags a command actually has, so `transcripts` reaches `prepare` and is
+silently irrelevant to `label`; a key in a command's *own* table that it does not
+accept is still an error.
+
+Every artifact that lives inside the run directory -- `taxonomy.json`,
+`windows.jsonl.zst`, each manifest, the candidate and product files -- follows
+`--output-dir`. Moving a run somewhere else is one flag, not five:
+
+```bash
+.venv/bin/python analysis/topic_labeling.py label --output-dir /tmp/pilot
+```
+
+`verify` takes the same `--output-dir` as the run directory it reads from and
+writes its own results to `<output-dir>/verification`, overridable with
+`--verification-dir`.
+
+Config values become ordinary flags before parsing. Three things follow. A flag
+typed on the command line lands after them and therefore wins, so a one-off
+experiment stays one-off:
+
+```bash
+.venv/bin/python analysis/topic_labeling.py label \
+  --output-dir /tmp/topic-labeling-thinking --reasoning-effort high
+```
+
+Argparse validates the file, so a mistyped key is an unrecognized flag and a
+mistyped number is a type error, rather than a setting that silently does
+nothing. And the settings reach `label_manifest.json` and the run fingerprint
+exactly as typed flags do.
+
+A setting left out of the config is left out of the request body; the client
+substitutes nothing. vLLM then resolves it from the model's `generation_config.json`
+(temperature 1.0 and top_p 1.0 for this checkpoint) and falls back to its own
+neutral defaults only if the model specifies none. Omitting them is therefore the
+way to get the model's preferred sampling -- and because the fingerprint would
+then record only a null, `label_manifest.json` and `verification_manifest.json`
+carry `effective_sampling`, the temperature, top_p and output budget the server
+reports it actually decoded with.
+
+Pass `--config` for a different file; an explicit path that does not exist is an
+error, while a missing default is simply no config. The manifest records which
+file a run used, in `config`. That field is deliberately outside the fingerprint:
+the settings it supplied are already in there, and editing a comment must not
+orphan an existing `labels.sqlite`.
+
 ## Runbook
 
 No authentication header is sent unless `--api-key-env` is explicitly given.
 Start with a separate smoke directory:
 
 ```bash
+SMOKE=/tmp/topic-labeling-smoke
+
 .venv/bin/python analysis/topic_labeling.py prepare \
-  --transcripts downloader/data/transcripts \
   --metadata-db downloader/data/podcast_metadata.db \
-  --output-dir /tmp/topic-labeling-smoke \
-  --limit 100
+  --output-dir $SMOKE --limit 100
 
-.venv/bin/python analysis/topic_labeling.py label \
-  --output-dir /tmp/topic-labeling-smoke \
-  --taxonomy /tmp/topic-labeling-smoke/taxonomy.json \
-  --windows /tmp/topic-labeling-smoke/windows.jsonl.zst \
-  --prepare-manifest /tmp/topic-labeling-smoke/prepare_manifest.json \
-  --api-base http://127.0.0.1:8000/v1 \
-  --model YOUR_LOCAL_MODEL_ID
-
-.venv/bin/python analysis/topic_labeling.py merge \
-  --output-dir /tmp/topic-labeling-smoke \
-  --taxonomy /tmp/topic-labeling-smoke/taxonomy.json \
-  --windows /tmp/topic-labeling-smoke/windows.jsonl.zst \
-  --label-manifest /tmp/topic-labeling-smoke/label_manifest.json
-
-.venv/bin/python analysis/topic_labeling.py sample \
-  --output-dir /tmp/topic-labeling-smoke \
-  --per-label 20 \
-  --random-windows 500
+.venv/bin/python analysis/topic_labeling.py label  --output-dir $SMOKE
+.venv/bin/python analysis/topic_labeling.py merge  --output-dir $SMOKE
+.venv/bin/python analysis/topic_labeling.py sample --output-dir $SMOKE \
+  --per-label 20 --random-windows 500
 ```
 
 Inspect omission/error rates, label frequency, span boundaries, claim-screening
@@ -240,9 +431,7 @@ For the full corpus, the shorter default-path form is:
 .venv/bin/python analysis/topic_labeling.py prepare \
   --metadata-db downloader/data/podcast_metadata.db
 
-.venv/bin/python analysis/topic_labeling.py label \
-  --api-base http://127.0.0.1:8000/v1 \
-  --model YOUR_LOCAL_MODEL_ID
+.venv/bin/python analysis/topic_labeling.py label
 
 .venv/bin/python analysis/topic_labeling.py merge
 .venv/bin/python analysis/topic_labeling.py sample
@@ -315,13 +504,7 @@ Run verification after generating and auditing the packets:
 
 ```bash
 .venv/bin/python analysis/topic_labeling.py verify \
-  --candidates analysis/output/topic-labeling/verification_candidates.jsonl \
-  --evidence-packets analysis/output/topic-labeling/evidence_packets.jsonl.zst \
-  --corpus-validation-manifest \
-    analysis/output/topic-labeling/evidence_corpus_validation_manifest.json \
-  --output-dir analysis/output/topic-labeling/verification \
-  --api-base http://127.0.0.1:8000/v1 \
-  --model YOUR_LOCAL_MODEL_ID
+  --output-dir analysis/output/topic-labeling
 ```
 
 `verify` is independently fingerprinted and resumable through
@@ -337,7 +520,7 @@ verified negatives.
 | `prepare_manifest.json` | Input paths, windowing settings, counts, and windows SHA-256 |
 | `windows.jsonl.zst` | All line-addressable transcript windows with source provenance |
 | `labels.sqlite` | Crash-safe raw-label response checkpoints keyed by window ID |
-| `label_manifest.json` | Model, endpoint, prompt/settings fingerprint, and completion counts |
+| `label_manifest.json` | Model, endpoint, prompt/settings fingerprint, server-reported effective sampling, and completion counts |
 | `window_labels.jsonl.zst` | Validated raw window decisions |
 | `label_annotations.jsonl` | Canonical one-label spans across all three taxonomy axes |
 | `clips.jsonl` | Topic clips with overlapping frame/evidence annotations and claim IDs |
@@ -365,6 +548,10 @@ raw transcript input is roughly 1.8 billion model tokens using 1.33 tokens per
 word. At aggregate 5,000 tokens/second, transcript prefill alone is about 100
 hours. This is a planning estimate: tokenizer behavior, decoding, batching,
 prefix-cache hits, and the server's throughput definition all affect runtime.
+
+That estimate covers transcript prefill with thinking off. Any reasoning
+effort above `none` adds output tokens per request that no transcript-size
+calculation predicts, so measure them in the pilot before extrapolating.
 
 The repeated taxonomy/instruction prefix is about 11,500 tokens -- it grew when
 the keyword-list definitions were replaced with written ones, which makes prefix

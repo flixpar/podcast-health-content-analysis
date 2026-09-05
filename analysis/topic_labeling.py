@@ -33,13 +33,14 @@ import re
 import sqlite3
 import sys
 import time
+import tomllib
 import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
 from collections import Counter, defaultdict
 from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Iterable, Iterator, Sequence
@@ -48,13 +49,46 @@ import zstandard
 
 
 SCHEMA_VERSION = "topic-labeling-v4"
-PROMPT_VERSION = "topic-clips-claims-products-v4"
+PROMPT_VERSION = "topic-clips-claims-products-v5"
 VERIFICATION_PROMPT_VERSION = "evidence-corpus-verification-v2"
 EVIDENCE_CORPUS_MANIFEST_VERSION = "evidence-corpus-validation-v1"
 DEFAULT_TOPICS = Path("topics.md")
 DEFAULT_TRANSCRIPTS = Path("downloader/data/transcripts")
 DEFAULT_OUTPUT = Path("analysis/output/topic-labeling")
 DEFAULT_API_BASE = "http://127.0.0.1:8000/v1"
+DEFAULT_CONFIG = Path("analysis/topic-labeling.toml")
+COMMANDS = ("taxonomy", "prepare", "label", "merge", "sample", "verify")
+# ``[model]`` carries the endpoint and decoding settings that ``label`` and
+# ``verify`` share, so a pilot states them once instead of letting the two
+# commands drift apart. Every other table configures the command it names.
+CONFIG_MODEL_SECTION = "model"
+CONFIG_MODEL_COMMANDS = ("label", "verify")
+CONFIG_PATHS_SECTION = "paths"
+# A shared table lists the commands it may reach. ``[paths]`` reaches all of
+# them but only supplies the flags a given command actually has, so one
+# ``output_dir`` serves the whole run. The lists are explicit rather than
+# inferred from flag names because the same flag can mean different things:
+# ``--seed`` is the sampler on `label` and the sample draw on `sample`.
+CONFIG_SHARED_SECTIONS = {
+    CONFIG_MODEL_SECTION: CONFIG_MODEL_COMMANDS,
+    CONFIG_PATHS_SECTION: COMMANDS,
+}
+CONFIG_SECTIONS = (*CONFIG_SHARED_SECTIONS, *COMMANDS)
+# Artifacts that live inside the run directory. Their flags default to None so
+# an unset one follows --output-dir instead of the directory that happened to be
+# the default when the parser was built.
+OUTPUT_DIR_ARTIFACTS = {
+    "taxonomy": "taxonomy.json",
+    "windows": "windows.jsonl.zst",
+    "prepare_manifest": "prepare_manifest.json",
+    "label_manifest": "label_manifest.json",
+    "annotations": "label_annotations.jsonl",
+    "candidates": "verification_candidates.jsonl",
+    "product_mentions": "product_mentions.jsonl",
+    "evidence_packets": "evidence_packets.jsonl.zst",
+    "corpus_validation_manifest": "evidence_corpus_validation_manifest.json",
+    "verification_dir": "verification",
+}
 TRANSCRIPT_RE = re.compile(r"episode_(\d+)\.jsonl(?:\.zst)?$")
 ALLOWED_RELEVANCE = ("substantive", "passing", "advertisement")
 ALLOWED_AXES = ("topic", "frame", "evidence")
@@ -107,6 +141,21 @@ ALLOWED_VERDICTS = (
     "insufficient_evidence",
     "not_verifiable",
 )
+# The Responses API forwards ``reasoning.effort`` to the server's chat renderer
+# verbatim, and a thinking model reads it as a thinking control rather than as a
+# hint. DeepSeek-V4 maps "none" to no thinking at all, "high"/"xhigh" and "max"
+# to increasingly emphatic effort preambles, and the remaining values to
+# thinking with no preamble. Sending nothing is not neutral there -- the
+# renderer then thinks at "high" -- so every request carries an explicit value.
+ALLOWED_REASONING_EFFORTS = (
+    "none",
+    "minimal",
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max",
+)
 
 
 SYSTEM_RUBRIC = """\
@@ -142,8 +191,9 @@ window; if a window would exceed that, keep the most substantive.
 
 A detection applies one or more labels from a single axis to a single span.
 
-AXIS. Every label in the taxonomy carries its own axis. Use the axis given
-there. Never put labels from two axes in one detection.
+AXIS. Every label in the taxonomy carries its own axis. Never put labels from
+two axes in one detection: split them into one detection per axis, each with its
+own span. You do not state the axis; it follows from the labels you choose.
 
 SPAN. start_unit_id and end_unit_id must be unit IDs present in this window, in
 order. Use the narrowest range that contains the labeled material and nothing
@@ -182,6 +232,10 @@ reasonably differ. Below 0.5, prefer to omit the detection.
 
 summary -- one short sentence in your own words naming what is in the span.
 
+evidence_quote -- a verbatim fragment of the span that carries the labeled
+material, copied under the quoting rules below. Never empty: if you cannot quote
+anything that carries the label, the detection does not belong.
+
 # Task 2 -- verification candidates
 
 Extract atomic factual claims that could be checked against outside evidence and
@@ -209,10 +263,16 @@ pronouns resolved and hedges preserved. Never sharpen a hedged claim into a firm
 one, and never add specifics the speaker did not give.
 claim_type -- the kind of proposition being asserted.
 expressed_certainty -- how firmly the proposition is stated. This is the
-speaker's stance, coded from the words used; it is not your confidence:
+speaker's stance, coded from the words used; it is not your confidence. Find the
+marker words first, then read the level off them: if the span contains no word
+that boosts or softens the claim, the level is unhedged and certainty_markers
+must be an empty array. Only the other three levels take markers.
   absolute    -- boosted or universal: "definitely", "always", "every single",
                  "there is no doubt", "proven", "100%", "guaranteed"
-  unhedged    -- a plain declarative with neither booster nor hedge
+  unhedged    -- a plain declarative with neither booster nor hedge, so
+                 certainty_markers is empty. A word that merely reports or
+                 attributes ("found", "showed", "according to") is not a
+                 booster, and neither is a number the speaker simply states
   hedged      -- softened but still asserted: "probably", "likely", "I think",
                  "tends to", "in most people", "generally"
   speculative -- offered as a possibility or open question: "might", "could",
@@ -264,6 +324,11 @@ span, including transcription errors, false starts and missing punctuation.
 Whitespace may be normalised; nothing else may be tidied, corrected or
 paraphrased. Keep a quote under 30 words and choose the fragment that most
 directly carries the labeled material.
+
+Every quote is one unbroken run of the transcript, start to finish. Never join
+two separated fragments, with an ellipsis or in any other way: "AG1 ... covers
+all your micronutrients" is not a quote. If no single run under 30 words carries
+the material, quote the shortest run that does and let it run long.
 
 # When two labels compete
 
@@ -652,9 +717,19 @@ def load_manifest_metadata(path: Path | None) -> dict[int, dict[str, Any]]:
     if path is None:
         return {}
     rows: dict[int, dict[str, Any]] = {}
+    kinds: Counter[str] = Counter()
     for record in iter_jsonl(path):
+        kinds[str(record.get("record_type"))] += 1
         if record.get("record_type") == "episode":
             rows[int(record["episode_id"])] = record
+    if not rows:
+        # A transcript-batch manifest is a different shape and would otherwise
+        # load as silence: every episode keeps its defaults and nothing says so.
+        raise TopicLabelingError(
+            f"{path} holds no record_type=episode rows (found {dict(kinds)}); "
+            "point --manifest at an episode manifest or omit it",
+            kind="invalid_field",
+        )
     return rows
 
 
@@ -825,7 +900,9 @@ def response_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
         "properties": {
             "start_unit_id": {"type": "string", "pattern": "^u[0-9]{6}$"},
             "end_unit_id": {"type": "string", "pattern": "^u[0-9]{6}$"},
-            "axis": {"type": "string", "enum": list(ALLOWED_AXES)},
+            # No axis field: the taxonomy already assigns one to every label, so
+            # asking for it invites a detection whose axis contradicts its own
+            # labels. It is derived during validation instead.
             "label_ids": {
                 "type": "array",
                 "minItems": 1,
@@ -837,13 +914,12 @@ def response_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
                 "enum": list(ALLOWED_DISCOURSE_ROLES),
             },
             "confidence": {"type": "number", "minimum": 0, "maximum": 1},
-            "summary": {"type": "string"},
-            "evidence_quote": {"type": "string"},
+            "summary": {"type": "string", "minLength": 1},
+            "evidence_quote": {"type": "string", "minLength": 1},
         },
         "required": [
             "start_unit_id",
             "end_unit_id",
-            "axis",
             "label_ids",
             "relevance",
             "discourse_role",
@@ -876,19 +952,19 @@ def response_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
                 "enum": list(ALLOWED_DISCOURSE_ROLES),
             },
             "claim_type": {"type": "string", "enum": list(ALLOWED_CLAIM_TYPES)},
-            "claim_text": {"type": "string"},
+            "claim_text": {"type": "string", "minLength": 1},
             "expressed_certainty": {
                 "type": "string",
                 "enum": list(ALLOWED_EXPRESSED_CERTAINTY),
             },
             "certainty_markers": {
                 "type": "array",
-                "items": {"type": "string"},
+                "items": {"type": "string", "minLength": 1},
                 "maxItems": MAX_CERTAINTY_MARKERS,
             },
-            "evidence_quote": {"type": "string"},
+            "evidence_quote": {"type": "string", "minLength": 1},
             "confidence": {"type": "number", "minimum": 0, "maximum": 1},
-            "rationale": {"type": "string"},
+            "rationale": {"type": "string", "minLength": 1},
         },
         "required": [
             "start_unit_id",
@@ -912,10 +988,10 @@ def response_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
         "properties": {
             "start_unit_id": {"type": "string", "pattern": "^u[0-9]{6}$"},
             "end_unit_id": {"type": "string", "pattern": "^u[0-9]{6}$"},
-            "product_name": {"type": "string"},
+            "product_name": {"type": "string", "minLength": 1},
             "product_type": {"type": "string", "enum": list(ALLOWED_PRODUCT_TYPES)},
             "mention_role": {"type": "string", "enum": list(ALLOWED_MENTION_ROLES)},
-            "evidence_quote": {"type": "string"},
+            "evidence_quote": {"type": "string", "minLength": 1},
             "confidence": {"type": "number", "minimum": 0, "maximum": 1},
         },
         "required": [
@@ -1125,7 +1201,6 @@ def validate_window_result(
         expected_fields = {
             "start_unit_id",
             "end_unit_id",
-            "axis",
             "label_ids",
             "relevance",
             "discourse_role",
@@ -1141,23 +1216,26 @@ def validate_window_result(
         start_id = detection.get("start_unit_id")
         end_id = detection.get("end_unit_id")
         text = selected_text(start_id, end_id)
-        axis = detection.get("axis")
-        if axis not in ALLOWED_AXES:
-            raise TopicLabelingError(
-                f"invalid annotation axis in {window['window_id']}",
-                kind="invalid_field",
-            )
         labels = detection.get("label_ids")
         if (
             not isinstance(labels, list)
             or not labels
             or len(labels) != len(set(labels))
-            or any(label_axes.get(label) != axis for label in labels)
         ):
             raise TopicLabelingError(
-                f"unknown, mixed-axis, empty, or duplicate labels in {window['window_id']}",
+                f"empty or duplicate labels in {window['window_id']}",
                 kind="mixed_or_unknown_labels",
             )
+        # The axis comes from the taxonomy, so a detection cannot disagree with
+        # itself about which axis it is on; a label set spanning two axes still
+        # fails, which is the rule that actually matters.
+        axes = {label_axes.get(label) for label in labels}
+        if len(axes) != 1 or not axes.issubset(ALLOWED_AXES):
+            raise TopicLabelingError(
+                f"unknown or mixed-axis labels in {window['window_id']}",
+                kind="mixed_or_unknown_labels",
+            )
+        axis = axes.pop()
         relevance = detection.get("relevance")
         discourse_role = detection.get("discourse_role")
         summary = detection.get("summary")
@@ -1814,23 +1892,135 @@ def validate_verification_response(
     return [by_id[pair["candidate"]["candidate_id"]] for pair in pairs]
 
 
+@dataclass(frozen=True)
+class ModelSettings:
+    """Decoding settings sent with every request and frozen into the fingerprint.
+
+    ``reasoning_effort`` is always sent. On a thinking model, leaving it out
+    hands the choice to the server's chat template, which makes the run neither
+    reproducible nor cheap by accident.
+    """
+
+    max_output_tokens: int
+    reasoning_effort: str
+    temperature: float | None = None
+    top_p: float | None = None
+    seed: int | None = None
+
+    @classmethod
+    def from_args(cls, args: argparse.Namespace) -> ModelSettings:
+        if args.reasoning_effort not in ALLOWED_REASONING_EFFORTS:
+            raise TopicLabelingError(
+                f"unknown reasoning effort {args.reasoning_effort!r}"
+            )
+        return cls(
+            max_output_tokens=args.max_output_tokens,
+            reasoning_effort=args.reasoning_effort,
+            temperature=args.temperature,
+            top_p=args.top_p,
+            seed=args.seed,
+        )
+
+    @property
+    def thinking(self) -> bool:
+        return self.reasoning_effort != "none"
+
+    def payload(self) -> dict[str, Any]:
+        """The request fields that control decoding."""
+        payload: dict[str, Any] = {
+            "max_output_tokens": self.max_output_tokens,
+            "reasoning": {"effort": self.reasoning_effort},
+        }
+        if self.thinking:
+            # A vLLM extension: the reasoning tokens are still generated, they
+            # are just left out of the response body. Nothing downstream reads
+            # them, and a thinking model can emit a great many per response.
+            payload["include_reasoning"] = False
+        if self.temperature is not None:
+            payload["temperature"] = self.temperature
+        if self.top_p is not None:
+            payload["top_p"] = self.top_p
+        if self.seed is not None:
+            payload["seed"] = self.seed
+        return payload
+
+    def fingerprint(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+def effective_sampling(response: dict[str, Any]) -> dict[str, Any]:
+    """The decoding settings the server reports it actually used.
+
+    Settings the client leaves out are filled in by the server from the model's
+    own generation config, so without reading them back the manifest would
+    record a null where a real value decided the output.
+    """
+    echoed: dict[str, Any] = {}
+    for key in ("temperature", "top_p", "max_output_tokens"):
+        value = response.get(key)
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            echoed[key] = value
+    return echoed
+
+
+def raise_for_response_status(response: dict[str, Any]) -> None:
+    """Reject a response the server did not finish generating.
+
+    Truncation gets its own kind because on a thinking model the reasoning
+    tokens come out of the same ``max_output_tokens`` budget as the JSON, so a
+    budget too small for the chosen reasoning effort fails this way on nearly
+    every window -- which reads nothing like a transport fault.
+    """
+    if response.get("error"):
+        raise TopicLabelingError(
+            "Responses API returned an error object", kind="api_error"
+        )
+    status = response.get("status")
+    if status not in {"failed", "cancelled", "incomplete"}:
+        return
+    details = response.get("incomplete_details")
+    reason = details.get("reason") if isinstance(details, dict) else None
+    if status == "incomplete" and reason == "max_output_tokens":
+        raise TopicLabelingError(
+            "Responses API truncated the response at max_output_tokens",
+            kind="output_truncated",
+        )
+    raise TopicLabelingError(
+        f"Responses API returned status={status}", kind="api_incomplete"
+    )
+
+
 class ResponsesClient:
     def __init__(
         self,
-        api_base: str,
+        api_base: str | Sequence[str],
         api_key: str | None = None,
         timeout: int = 600,
         attempts: int = 3,
     ) -> None:
-        self.api_base = api_base.rstrip("/")
+        bases = [api_base] if isinstance(api_base, str) else list(api_base)
+        if not bases:
+            raise TopicLabelingError("at least one --api-base is required")
+        self.api_bases = [str(base).rstrip("/") for base in bases]
         self.api_key = api_key
         self.timeout = timeout
         self.attempts = attempts
         self.opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+        self._turn = itertools.count()
 
     @property
-    def root(self) -> str:
-        return self.api_base.removesuffix("/responses")
+    def roots(self) -> list[str]:
+        return [base.removesuffix("/responses") for base in self.api_bases]
+
+    def _endpoint(self) -> str:
+        """The next server to send to.
+
+        Round-robin across identical servers. Each attempt draws again, so a
+        retry lands elsewhere -- which is what makes one node going down a
+        slowdown rather than a run-ending failure.
+        """
+        roots = self.roots
+        return roots[next(self._turn) % len(roots)]
 
     def _request(
         self, url: str, payload: dict[str, Any] | None = None
@@ -1847,8 +2037,16 @@ class ResponsesClient:
                 parsed = json.load(response)
         except urllib.error.HTTPError as exc:
             retryable = exc.code == 429 or exc.code >= 500
+            # The body carries the only actionable part -- which limit was hit,
+            # and by how much. Without it a context-budget misconfiguration is
+            # indistinguishable from any other 400 across a whole run.
+            try:
+                detail = exc.read().decode("utf-8", "replace")[:500].strip()
+            except Exception:
+                detail = ""
+            message = f"{url} returned HTTP {exc.code}"
             error = TopicLabelingError(
-                f"Responses endpoint returned HTTP {exc.code}", kind="http_error"
+                f"{message}: {detail}" if detail else message, kind="http_error"
             )
             setattr(error, "retryable", retryable)
             raise error from exc
@@ -1866,21 +2064,40 @@ class ResponsesClient:
             )
         return parsed
 
+    def served_models(self) -> dict[str, str]:
+        """The model each endpoint reports, keyed by endpoint."""
+        served: dict[str, str] = {}
+        for root in self.roots:
+            response = self._request(root + "/models")
+            try:
+                served[root] = str(response["data"][0]["id"])
+            except (KeyError, IndexError, TypeError) as exc:
+                raise TopicLabelingError(
+                    f"could not discover a model from {root}/models"
+                ) from exc
+        return served
+
     def discover_model(self) -> str:
-        response = self._request(self.root + "/models")
-        try:
-            return str(response["data"][0]["id"])
-        except (KeyError, IndexError, TypeError) as exc:
-            raise TopicLabelingError("could not discover a model from /models") from exc
+        """The model every endpoint serves.
+
+        Endpoints are pooled, so a run silently spread across two different
+        checkpoints would be unattributable afterwards. Disagreement is an
+        error, not a preference.
+        """
+        served = self.served_models()
+        unique = set(served.values())
+        if len(unique) != 1:
+            raise TopicLabelingError(
+                f"endpoints serve different models: {served}", kind="api_error"
+            )
+        return unique.pop()
 
     def classify(
         self,
         windows: Sequence[dict[str, Any]],
         taxonomy: dict[str, Any],
         model: str,
-        max_output_tokens: int,
-        reasoning_effort: str | None,
-        temperature: float | None,
+        settings: ModelSettings,
     ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         label_axes = {label["label_id"]: label["axis"] for label in taxonomy["labels"]}
         payload: dict[str, Any] = {
@@ -1892,7 +2109,6 @@ class ResponsesClient:
                     "content": [{"type": "input_text", "text": batch_input(windows)}],
                 }
             ],
-            "max_output_tokens": max_output_tokens,
             "text": {
                 "format": {
                     "type": "json_schema",
@@ -1901,30 +2117,20 @@ class ResponsesClient:
                     "schema": response_schema(taxonomy),
                 }
             },
+            **settings.payload(),
         }
-        if reasoning_effort:
-            payload["reasoning"] = {"effort": reasoning_effort}
-        if temperature is not None:
-            payload["temperature"] = temperature
         last_error: Exception | None = None
         for attempt in range(self.attempts):
             try:
-                response = self._request(self.root + "/responses", payload)
-                if response.get("error"):
-                    raise TopicLabelingError(
-                        "Responses API returned an error object", kind="api_error"
-                    )
-                if response.get("status") in {"failed", "cancelled", "incomplete"}:
-                    raise TopicLabelingError(
-                        f"Responses API returned status={response.get('status')}",
-                        kind="api_incomplete",
-                    )
+                response = self._request(self._endpoint() + "/responses", payload)
+                raise_for_response_status(response)
                 parsed = json.loads(extract_output_text(response))
                 results = validate_response(parsed, windows, label_axes)
                 meta = {
                     "response_id": response.get("id"),
                     "usage": response.get("usage"),
                     "response_model": response.get("model"),
+                    "effective_sampling": effective_sampling(response),
                 }
                 return results, meta
             except (TopicLabelingError, json.JSONDecodeError) as exc:
@@ -1942,9 +2148,7 @@ class ResponsesClient:
         self,
         pairs: Sequence[dict[str, Any]],
         model: str,
-        max_output_tokens: int,
-        reasoning_effort: str | None,
-        temperature: float | None,
+        settings: ModelSettings,
     ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         payload: dict[str, Any] = {
             "model": model,
@@ -1957,7 +2161,6 @@ class ResponsesClient:
                     ],
                 }
             ],
-            "max_output_tokens": max_output_tokens,
             "text": {
                 "format": {
                     "type": "json_schema",
@@ -1966,27 +2169,20 @@ class ResponsesClient:
                     "schema": verification_response_schema(),
                 }
             },
+            **settings.payload(),
         }
-        if reasoning_effort:
-            payload["reasoning"] = {"effort": reasoning_effort}
-        if temperature is not None:
-            payload["temperature"] = temperature
         last_error: Exception | None = None
         for attempt in range(self.attempts):
             try:
-                response = self._request(self.root + "/responses", payload)
-                if response.get("error"):
-                    raise TopicLabelingError("Responses API returned an error object")
-                if response.get("status") in {"failed", "cancelled", "incomplete"}:
-                    raise TopicLabelingError(
-                        f"Responses API returned status={response.get('status')}"
-                    )
+                response = self._request(self._endpoint() + "/responses", payload)
+                raise_for_response_status(response)
                 parsed = json.loads(extract_output_text(response))
                 results = validate_verification_response(parsed, pairs)
                 return results, {
                     "response_id": response.get("id"),
                     "usage": response.get("usage"),
                     "response_model": response.get("model"),
+                    "effective_sampling": effective_sampling(response),
                 }
             except (TopicLabelingError, json.JSONDecodeError) as exc:
                 last_error = exc
@@ -2327,19 +2523,23 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
             raise TopicLabelingError(
                 f"environment variable {args.api_key_env} is empty or unset"
             )
-    client = ResponsesClient(args.api_base, api_key, args.timeout, args.attempts)
+    api_bases = args.api_base or [DEFAULT_API_BASE]
+    client = ResponsesClient(api_bases, api_key, args.timeout, args.attempts)
+    served = client.served_models()
     model = args.model or client.discover_model()
+    settings = ModelSettings.from_args(args)
+    # The endpoints are pooled capacity, not part of what determines the output,
+    # so they stay out of the fingerprint: adding or losing a node must not
+    # orphan a half-finished run. The model they serve is fingerprinted, and
+    # discover_model refuses to pool endpoints that disagree about it.
     fingerprint_inputs = {
         "schema_version": SCHEMA_VERSION,
         "prompt_version": PROMPT_VERSION,
         "taxonomy_sha256": taxonomy["taxonomy_sha256"],
         "windows_sha256": prepare_manifest["windows_sha256"],
-        "api_base": args.api_base.rstrip("/"),
         "model": model,
         "batch_size": args.batch_size,
-        "max_output_tokens": args.max_output_tokens,
-        "reasoning_effort": args.reasoning_effort,
-        "temperature": args.temperature,
+        **settings.fingerprint(),
     }
     run_fingerprint = sha256_bytes(canonical_json(fingerprint_inputs).encode("utf-8"))
     run_manifest = {
@@ -2347,6 +2547,10 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
         "run_fingerprint": run_fingerprint,
         "created_at": utc_now(),
         "no_auth": args.api_key_env is None,
+        "endpoints": served,
+        # Provenance only: the settings it supplied are already fingerprinted,
+        # and editing a comment in it must not orphan an existing store.
+        "config": str(args.config) if args.config.exists() else None,
     }
     output_dir.mkdir(parents=True, exist_ok=True)
     store = LabelStore(output_dir / "labels.sqlite", run_manifest)
@@ -2360,16 +2564,13 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
     def classify(
         batch: list[dict[str, Any]],
     ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-        return client.classify(
-            batch,
-            taxonomy,
-            model,
-            args.max_output_tokens,
-            args.reasoning_effort,
-            args.temperature,
-        )
+        return client.classify(batch, taxonomy, model, settings)
 
     counters: Counter[str] = Counter()
+    # What the server says it decoded with. Settings omitted from the request
+    # are resolved server-side from the model's generation config, so this is
+    # the only record of them.
+    observed_sampling: dict[str, Any] = {}
 
     def classify_isolating(
         batch: list[dict[str, Any]],
@@ -2430,6 +2631,9 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
                         successes, failures = [], [(batch, exc)]
                     for window_group, results, meta in successes:
                         store.record_success(window_group, results, meta)
+                        observed_sampling = observed_sampling or meta.get(
+                            "effective_sampling", {}
+                        )
                     for window_group, error in failures:
                         failed_requests += 1
                         store.record_failure(window_group, error)
@@ -2464,6 +2668,7 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
             "windows_recovered_by_isolation": counters[
                 "windows_recovered_by_isolation"
             ],
+            "effective_sampling": observed_sampling or None,
             "windows_labeled": complete,
             "unresolved_windows": failed,
             "unresolved_windows_by_kind": store.failure_kinds(),
@@ -3826,8 +4031,12 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
             raise TopicLabelingError(
                 f"environment variable {args.api_key_env} is empty or unset"
             )
-    client = ResponsesClient(args.api_base, api_key, args.timeout, args.attempts)
+    api_bases = args.api_base or [DEFAULT_API_BASE]
+    client = ResponsesClient(api_bases, api_key, args.timeout, args.attempts)
+    served = client.served_models()
     model = args.model or client.discover_model()
+    settings = ModelSettings.from_args(args)
+    # See run_label: endpoints are capacity, the model they serve is provenance.
     fingerprint_inputs = {
         "schema_version": SCHEMA_VERSION,
         "prompt_version": VERIFICATION_PROMPT_VERSION,
@@ -3835,12 +4044,9 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
         "evidence_packets_sha256": sha256_file(evidence_path),
         "corpus": corpus_descriptor,
         "corpus_validation_manifest_sha256": corpus_validation_sha256,
-        "api_base": args.api_base.rstrip("/"),
         "model": model,
         "batch_size": args.batch_size,
-        "max_output_tokens": args.max_output_tokens,
-        "reasoning_effort": args.reasoning_effort,
-        "temperature": args.temperature,
+        **settings.fingerprint(),
     }
     run_fingerprint = sha256_bytes(canonical_json(fingerprint_inputs).encode("utf-8"))
     run_manifest = {
@@ -3849,8 +4055,10 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
         "created_at": utc_now(),
         "corpus_validation_manifest": str(corpus_validation_path),
         "no_auth": args.api_key_env is None,
+        "endpoints": served,
+        "config": str(args.config) if args.config.exists() else None,
     }
-    output_dir = Path(args.output_dir)
+    output_dir = Path(args.verification_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     store = VerificationStore(output_dir / "verification.sqlite", run_manifest)
     done = store.done_ids()
@@ -3865,14 +4073,10 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
     def verify_batch(
         batch: list[dict[str, Any]],
     ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-        return client.verify(
-            batch,
-            model,
-            args.max_output_tokens,
-            args.reasoning_effort,
-            args.temperature,
-        )
+        return client.verify(batch, model, settings)
 
+    # See run_label: the only record of settings resolved server-side.
+    observed_sampling: dict[str, Any] = {}
     submitted = completed_requests = failed_requests = 0
     iterator = iter(_batched(pending(), args.batch_size))
     futures: dict[
@@ -3894,6 +4098,9 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
                     try:
                         results, meta = future.result()
                         store.record_success(batch, results, meta)
+                        observed_sampling = observed_sampling or meta.get(
+                            "effective_sampling", {}
+                        )
                     except Exception as exc:
                         failed_requests += 1
                         store.record_failure(batch, exc)
@@ -3925,6 +4132,7 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
             "missing_evidence_candidate_ids": missing_packets,
             "requests_completed_this_invocation": completed_requests,
             "requests_failed_this_invocation": failed_requests,
+            "effective_sampling": observed_sampling or None,
             "candidates_verified": complete,
             "failed_candidates": failed,
             "unresolved_candidates": failed + len(missing_packets),
@@ -3936,6 +4144,141 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
         return summary
     finally:
         store.close()
+
+
+def load_config(path: Path) -> dict[str, dict[str, Any]]:
+    """Read a TOML settings file into one flag table per section."""
+    try:
+        with Path(path).open("rb") as handle:
+            parsed = tomllib.load(handle)
+    except tomllib.TOMLDecodeError as exc:
+        raise TopicLabelingError(f"{path} is not valid TOML: {exc}") from exc
+    loose = sorted(key for key, value in parsed.items() if not isinstance(value, dict))
+    if loose:
+        raise TopicLabelingError(
+            f"{path}: {loose} must live inside a table, so every setting says "
+            f"which command it configures; expected one of {list(CONFIG_SECTIONS)}"
+        )
+    unknown = sorted(set(parsed) - set(CONFIG_SECTIONS))
+    if unknown:
+        raise TopicLabelingError(
+            f"{path}: unknown table(s) {unknown}; expected one of {list(CONFIG_SECTIONS)}"
+        )
+    return parsed
+
+
+def accepted_flags(parser: argparse.ArgumentParser) -> set[str]:
+    """Every ``--flag`` a parser accepts.
+
+    An Action publishes its option strings, but argparse offers no public way to
+    list a parser's actions, hence the one private attribute.
+    """
+    return {
+        option
+        for action in parser._actions
+        for option in action.option_strings
+        if option.startswith("--")
+    }
+
+
+def config_flags(
+    sections: dict[str, dict[str, Any]], command: str, accepted: set[str]
+) -> list[str]:
+    """Turn the tables that apply to ``command`` into command-line tokens.
+
+    Emitting flags rather than patching defaults means argparse validates the
+    file for us -- an unknown key is an unrecognized flag, a mistyped number is a
+    type error -- and keeps precedence a matter of position: these tokens go
+    before the ones the user typed, so a typed flag always wins.
+    """
+    tables: list[tuple[str, dict[str, Any]]] = [
+        (name, sections[name])
+        for name, commands in CONFIG_SHARED_SECTIONS.items()
+        if command in commands and name in sections
+    ]
+    if command in sections:
+        # Read last, so a command's own table overrides the shared ones.
+        tables.append((command, sections[command]))
+    tokens: list[str] = []
+    for name, table in tables:
+        for key, value in table.items():
+            flag = "--" + key.replace("_", "-")
+            if flag not in accepted:
+                if name == command:
+                    # Its own table named it, so let argparse report the typo.
+                    tokens.append(flag)
+                    if not isinstance(value, bool):
+                        tokens.append(str(value))
+                # A shared table simply has nothing to say to this command.
+                continue
+            if isinstance(value, bool):
+                if value:
+                    tokens.append(flag)
+            elif isinstance(value, (str, int, float)):
+                tokens.extend((flag, str(value)))
+            elif isinstance(value, list):
+                # A repeatable flag, such as one --api-base per server.
+                for item in value:
+                    if isinstance(item, (str, int, float)) and not isinstance(
+                        item, bool
+                    ):
+                        tokens.extend((flag, str(item)))
+                    else:
+                        raise TopicLabelingError(
+                            f"config setting {key!r} may only list strings or "
+                            f"numbers, not {type(item).__name__}"
+                        )
+            else:
+                raise TopicLabelingError(
+                    f"config setting {key!r} must be a string, number, boolean or "
+                    f"list, not {type(value).__name__}"
+                )
+    return tokens
+
+
+def resolve_output_paths(args: argparse.Namespace) -> argparse.Namespace:
+    """Point every unset run artifact at ``--output-dir``.
+
+    Their flags default to None so that setting the output directory alone moves
+    the whole run, instead of leaving each artifact behind in the directory that
+    was the default when the parser was built.
+    """
+    output_dir = getattr(args, "output_dir", None)
+    if output_dir is None:
+        return args
+    for dest, name in OUTPUT_DIR_ARTIFACTS.items():
+        if hasattr(args, dest) and getattr(args, dest) is None:
+            setattr(args, dest, Path(output_dir) / name)
+    return args
+
+
+def expand_config_args(argv: Sequence[str]) -> list[str]:
+    """Insert the config's flags ahead of the ones typed on the command line."""
+    argv = list(argv)
+    if not argv or argv[0].startswith("-"):
+        # ``--help``, or an empty invocation argparse should report itself.
+        return argv
+    command, rest = argv[0], argv[1:]
+    finder = argparse.ArgumentParser(add_help=False, allow_abbrev=False)
+    finder.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
+    path = finder.parse_known_args(rest)[0].config
+    if not path.exists():
+        explicit = any(
+            token == "--config" or token.startswith("--config=") for token in rest
+        )
+        if explicit:
+            raise TopicLabelingError(f"config file {path} does not exist")
+        return argv
+    parser = build_parser()
+    subcommands = next(
+        action.choices
+        for action in parser._actions
+        if isinstance(action, argparse._SubParsersAction)
+    )
+    if command not in subcommands:
+        return argv  # argparse reports the unknown command itself
+    accepted = accepted_flags(subcommands[command])
+    return [command, *config_flags(load_config(path), command, accepted), *rest]
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -3963,18 +4306,29 @@ def build_parser() -> argparse.ArgumentParser:
         "label", help="Label windows through the Responses API"
     )
     label.add_argument(
-        "--taxonomy", type=Path, default=DEFAULT_OUTPUT / "taxonomy.json"
+        "--taxonomy",
+        type=Path,
+        default=None,
     )
     label.add_argument(
-        "--windows", type=Path, default=DEFAULT_OUTPUT / "windows.jsonl.zst"
+        "--windows",
+        type=Path,
+        default=None,
     )
     label.add_argument(
         "--prepare-manifest",
         type=Path,
-        default=DEFAULT_OUTPUT / "prepare_manifest.json",
+        default=None,
     )
     label.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
-    label.add_argument("--api-base", default=DEFAULT_API_BASE)
+    label.add_argument(
+        "--api-base",
+        action="append",
+        help=(
+            "Responses endpoint; repeat to pool several identical servers "
+            f"(default: {DEFAULT_API_BASE})"
+        ),
+    )
     label.add_argument("--model", help="Model ID; discover from /models when omitted")
     label.add_argument(
         "--api-key-env",
@@ -3986,19 +4340,38 @@ def build_parser() -> argparse.ArgumentParser:
     label.add_argument("--timeout", type=int, default=600)
     label.add_argument("--attempts", type=int, default=3)
     label.add_argument(
-        "--reasoning-effort", choices=("minimal", "low", "medium", "high")
+        "--reasoning-effort",
+        choices=ALLOWED_REASONING_EFFORTS,
+        default="none",
+        help=(
+            "Thinking control forwarded to the server's chat template. "
+            "'none' turns thinking off; on DeepSeek-V4 'high'/'xhigh' and 'max' "
+            "add an effort preamble and the rest think without one"
+        ),
     )
     label.add_argument("--temperature", type=float)
+    label.add_argument(
+        "--top-p",
+        type=float,
+        help="DeepSeek-V4 recommends 1.0, or 0.95 for the 0731 checkpoint",
+    )
+    label.add_argument("--seed", type=int, help="Per-request sampling seed")
 
     merge = subparsers.add_parser("merge", help="Merge overlap detections into clips")
     merge.add_argument(
-        "--taxonomy", type=Path, default=DEFAULT_OUTPUT / "taxonomy.json"
+        "--taxonomy",
+        type=Path,
+        default=None,
     )
     merge.add_argument(
-        "--windows", type=Path, default=DEFAULT_OUTPUT / "windows.jsonl.zst"
+        "--windows",
+        type=Path,
+        default=None,
     )
     merge.add_argument(
-        "--label-manifest", type=Path, default=DEFAULT_OUTPUT / "label_manifest.json"
+        "--label-manifest",
+        type=Path,
+        default=None,
     )
     merge.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
     merge.add_argument("--allow-incomplete", action="store_true")
@@ -4007,28 +4380,34 @@ def build_parser() -> argparse.ArgumentParser:
         "sample", help="Create a blinded human-validation sample"
     )
     sample.add_argument(
-        "--taxonomy", type=Path, default=DEFAULT_OUTPUT / "taxonomy.json"
+        "--taxonomy",
+        type=Path,
+        default=None,
     )
     sample.add_argument(
-        "--windows", type=Path, default=DEFAULT_OUTPUT / "windows.jsonl.zst"
+        "--windows",
+        type=Path,
+        default=None,
     )
     sample.add_argument(
         "--annotations",
         type=Path,
-        default=DEFAULT_OUTPUT / "label_annotations.jsonl",
+        default=None,
     )
     sample.add_argument(
-        "--label-manifest", type=Path, default=DEFAULT_OUTPUT / "label_manifest.json"
+        "--label-manifest",
+        type=Path,
+        default=None,
     )
     sample.add_argument(
         "--candidates",
         type=Path,
-        default=DEFAULT_OUTPUT / "verification_candidates.jsonl",
+        default=None,
     )
     sample.add_argument(
         "--product-mentions",
         type=Path,
-        default=DEFAULT_OUTPUT / "product_mentions.jsonl",
+        default=None,
     )
     sample.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
     sample.add_argument("--per-label", type=int, default=20)
@@ -4059,23 +4438,34 @@ def build_parser() -> argparse.ArgumentParser:
     verify.add_argument(
         "--candidates",
         type=Path,
-        default=DEFAULT_OUTPUT / "verification_candidates.jsonl",
+        default=None,
     )
     verify.add_argument(
         "--evidence-packets",
         type=Path,
-        default=DEFAULT_OUTPUT / "evidence_packets.jsonl.zst",
+        default=None,
     )
     verify.add_argument(
         "--corpus-validation-manifest",
         type=Path,
-        default=DEFAULT_OUTPUT / "evidence_corpus_validation_manifest.json",
+        default=None,
         help="Signed-off provenance manifest for the pre-validated evidence corpus",
     )
+    verify.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
     verify.add_argument(
-        "--output-dir", type=Path, default=DEFAULT_OUTPUT / "verification"
+        "--verification-dir",
+        type=Path,
+        default=None,
+        help="Where verification results go (default: <output-dir>/verification)",
     )
-    verify.add_argument("--api-base", default=DEFAULT_API_BASE)
+    verify.add_argument(
+        "--api-base",
+        action="append",
+        help=(
+            "Responses endpoint; repeat to pool several identical servers "
+            f"(default: {DEFAULT_API_BASE})"
+        ),
+    )
     verify.add_argument("--model", help="Model ID; discover from /models when omitted")
     verify.add_argument(
         "--api-key-env",
@@ -4087,15 +4477,42 @@ def build_parser() -> argparse.ArgumentParser:
     verify.add_argument("--timeout", type=int, default=600)
     verify.add_argument("--attempts", type=int, default=3)
     verify.add_argument(
-        "--reasoning-effort", choices=("minimal", "low", "medium", "high")
+        "--reasoning-effort",
+        choices=ALLOWED_REASONING_EFFORTS,
+        default="none",
+        help=(
+            "Thinking control forwarded to the server's chat template. "
+            "'none' turns thinking off; on DeepSeek-V4 'high'/'xhigh' and 'max' "
+            "add an effort preamble and the rest think without one"
+        ),
     )
     verify.add_argument("--temperature", type=float)
+    verify.add_argument(
+        "--top-p",
+        type=float,
+        help="DeepSeek-V4 recommends 1.0, or 0.95 for the 0731 checkpoint",
+    )
+    verify.add_argument("--seed", type=int, help="Per-request sampling seed")
+
+    for subparser in subparsers.choices.values():
+        subparser.add_argument(
+            "--config",
+            type=Path,
+            default=DEFAULT_CONFIG,
+            help=(
+                f"TOML settings file (default: {DEFAULT_CONFIG}, ignored when "
+                "absent); flags typed on the command line override it"
+            ),
+        )
     return parser
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    args = build_parser().parse_args(argv)
+    tokens = list(sys.argv[1:] if argv is None else argv)
     try:
+        args = resolve_output_paths(
+            build_parser().parse_args(expand_config_args(tokens))
+        )
         if args.command == "taxonomy":
             value = compile_taxonomy(args.topics)
             if args.output:
