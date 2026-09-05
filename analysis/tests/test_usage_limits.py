@@ -454,6 +454,7 @@ def _label_args(tmp_path, config, **overrides):
         api_base=["http://127.0.0.1:8000/v1"],
         model=None,
         api_key_env=None,
+        env_file=None,
         batch_size=1,
         concurrency=1,
         max_output_tokens=100,

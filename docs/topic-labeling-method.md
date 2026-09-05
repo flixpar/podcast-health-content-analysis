@@ -402,9 +402,43 @@ file a run used, in `config`. That field is deliberately outside the fingerprint
 the settings it supplied are already in there, and editing a comment must not
 orphan an existing `labels.sqlite`.
 
+### Authentication
+
+No `Authorization` header is sent unless `--api-key-env` is given, which is what
+keeps the local vLLM endpoints free of all of this. It names the *environment
+variable* holding the key, never the key, so a paid-endpoint run is configured
+in the tracked `analysis/topic-labeling.toml` without a secret going anywhere
+near it:
+
+```toml
+[model]
+api_base = ["https://api.fireworks.ai/inference/v1"]
+api_key_env = "FIREWORKS_API_KEY"
+```
+
+The variable is resolved from the process environment first and from `.env` --
+git-ignored, `.env.example` is the template -- when the environment does not set
+it. That order means an exported variable or a CI secret overrides the file
+without editing it, and a one-off key needs no file at all:
+
+```bash
+FIREWORKS_API_KEY=fw-... .venv/bin/python analysis/topic_labeling.py label
+```
+
+`--env-file` points at a different one; an explicit path that does not exist is
+an error, while the default `.env` is used when present and simply absent
+otherwise. Values there are literal -- no interpolation, and an unquoted `#` is
+part of the secret rather than a comment -- because silently truncating a key at
+a `#` would surface an hour later as an unexplained 401. A repeated key is an
+error for the same reason.
+
+The key is resolved before any work starts, so a missing one fails in the first
+second rather than as a wall of 401s mid-run. It is read for exactly one purpose,
+the request header: nothing is exported into the environment, and the manifest
+records only `no_auth`, never the key or where it came from.
+
 ## Runbook
 
-No authentication header is sent unless `--api-key-env` is explicitly given.
 Start with a separate smoke directory:
 
 ```bash

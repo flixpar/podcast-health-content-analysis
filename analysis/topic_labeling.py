@@ -74,6 +74,10 @@ DEFAULT_TRANSCRIPTS = Path("downloader/data/transcripts")
 DEFAULT_OUTPUT = Path("analysis/output/topic-labeling")
 DEFAULT_API_BASE = "http://127.0.0.1:8000/v1"
 DEFAULT_CONFIG = Path("analysis/topic-labeling.toml")
+# Read only for the variable --api-key-env names, and only when that variable is
+# absent from the environment. Git-ignored, so a paid-endpoint run needs no
+# export in every shell and no secret anywhere near a tracked config file.
+DEFAULT_ENV_FILE = Path(".env")
 COMMANDS = ("taxonomy", "prepare", "label", "merge", "sample", "verify")
 # ``[model]`` carries the endpoint and decoding settings that ``label`` and
 # ``verify`` share, so a pilot states them once instead of letting the two
@@ -2609,6 +2613,9 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
         )
     if args.max_output_tokens < 1 or args.timeout < 1:
         raise TopicLabelingError("max-output-tokens and timeout must both be positive")
+    # Before the input checks below: hashing a corpus-sized windows file takes
+    # long enough that an unset key should not be found out at the end of it.
+    api_key = resolve_api_key(args)
     output_dir = Path(args.output_dir)
     taxonomy = load_taxonomy(Path(args.taxonomy))
     prepare_manifest = json.loads(
@@ -2619,13 +2626,6 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
         raise TopicLabelingError("windows file does not match prepare_manifest.json")
     if taxonomy["taxonomy_sha256"] != prepare_manifest.get("taxonomy_sha256"):
         raise TopicLabelingError("taxonomy does not match the prepared run")
-    api_key = None
-    if args.api_key_env:
-        api_key = os.getenv(args.api_key_env)
-        if not api_key:
-            raise TopicLabelingError(
-                f"environment variable {args.api_key_env} is empty or unset"
-            )
     api_bases = args.api_base or [DEFAULT_API_BASE]
     limiter = build_limiter(args)
     client = ResponsesClient(
@@ -4121,6 +4121,9 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
         )
     if args.max_output_tokens < 1 or args.timeout < 1:
         raise TopicLabelingError("max-output-tokens and timeout must both be positive")
+    # Before the input checks below, which read every candidate and evidence
+    # packet: an unset key should not be found out at the end of that.
+    api_key = resolve_api_key(args)
     candidates_path = Path(args.candidates)
     evidence_path = Path(args.evidence_packets)
     corpus_validation_path = Path(args.corpus_validation_manifest)
@@ -4170,13 +4173,6 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
             "evidence packet corpus descriptor does not match the validation manifest"
         )
 
-    api_key = None
-    if args.api_key_env:
-        api_key = os.getenv(args.api_key_env)
-        if not api_key:
-            raise TopicLabelingError(
-                f"environment variable {args.api_key_env} is empty or unset"
-            )
     api_bases = args.api_base or [DEFAULT_API_BASE]
     limiter = build_limiter(args)
     client = ResponsesClient(
@@ -4336,6 +4332,77 @@ def load_config(path: Path) -> dict[str, dict[str, Any]]:
             f"{path}: unknown table(s) {unknown}; expected one of {list(CONFIG_SECTIONS)}"
         )
     return parsed
+
+
+def load_env_file(path: Path) -> dict[str, str]:
+    """Read ``KEY=value`` lines from a dotenv file.
+
+    Deliberately literal: no interpolation, no shell expansion, and nothing is
+    exported into ``os.environ``. A secret read here reaches exactly one place --
+    the Authorization header -- which is what keeps it out of subprocesses,
+    tracebacks and the run manifest.
+
+    A value is the rest of its line, so an unquoted ``#`` is part of the secret
+    rather than the start of a comment; truncating a real key at a ``#`` would
+    fail as a puzzling 401 somewhere downstream. Quote a value to keep leading or
+    trailing spaces. A repeated key is an error, because which of the two a run
+    authenticated with is not a thing to guess at.
+    """
+    values: dict[str, str] = {}
+    for number, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            # Tolerated so one file can be both read here and `source`d.
+            line = line[len("export ") :].lstrip()
+        key, separator, value = line.partition("=")
+        key = key.strip()
+        if not separator or not key.isidentifier():
+            raise TopicLabelingError(
+                f"{path} line {number}: expected KEY=value, not {raw.strip()!r}"
+            )
+        if key in values:
+            raise TopicLabelingError(f"{path} line {number}: {key} is set twice")
+        value = value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+            value = value[1:-1]
+        values[key] = value
+    return values
+
+
+def resolve_api_key(args: argparse.Namespace) -> str | None:
+    """The Bearer token for this run, or None when it runs unauthenticated.
+
+    The process environment wins over the file, so a one-off
+    ``FIREWORKS_API_KEY=... python analysis/topic_labeling.py label`` and a CI
+    secret both override a stale ``.env`` without editing it. Resolved before any
+    work starts: a missing key must be an error in the first second of a run, not
+    a wall of 401s an hour in.
+    """
+    name = args.api_key_env
+    if not name:
+        return None
+    value = os.getenv(name)
+    if value:
+        return value
+    path = args.env_file
+    if path is None:
+        path = DEFAULT_ENV_FILE
+        if not path.exists():
+            raise TopicLabelingError(
+                f"environment variable {name} is empty or unset, and there is no "
+                f"{DEFAULT_ENV_FILE} to read it from"
+            )
+    elif not Path(path).exists():
+        raise TopicLabelingError(f"env file {path} does not exist")
+    value = load_env_file(Path(path)).get(name)
+    if not value:
+        raise TopicLabelingError(
+            f"environment variable {name} is empty or unset, and {path} does not "
+            f"set it either"
+        )
+    return value
 
 
 def accepted_flags(parser: argparse.ArgumentParser) -> set[str]:
@@ -4665,9 +4732,19 @@ def build_parser() -> argparse.ArgumentParser:
     )
     verify.add_argument("--seed", type=int, help="Per-request sampling seed")
 
-    # Spending guards, on the two commands that can spend. They default to off,
-    # so a local server keeps costing nothing and needing nothing.
+    # Auth and spending guards, on the two commands that reach an endpoint. They
+    # all default to off, so a local server keeps costing nothing and needing
+    # nothing.
     for subparser in (label, verify):
+        subparser.add_argument(
+            "--env-file",
+            type=Path,
+            help=(
+                "KEY=value file supplying the variable --api-key-env names "
+                f"(default: {DEFAULT_ENV_FILE}, read when present); the "
+                "environment wins over it"
+            ),
+        )
         subparser.add_argument(
             "--usage-limits",
             type=Path,

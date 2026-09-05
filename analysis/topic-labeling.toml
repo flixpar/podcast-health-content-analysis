@@ -62,6 +62,15 @@ attempts = 3
 temperature = 1.0
 top_p = 0.95
 
+# Bearer auth, for a paid endpoint. This names the environment variable holding
+# the key -- never the key itself, so nothing secret lands in this tracked file.
+# The value is read from the environment, or from .env when the environment does
+# not set it (see .env.example). Omitted, no Authorization header is sent at all,
+# which is what the local vLLM nodes want.
+#
+# api_key_env = "FIREWORKS_API_KEY"
+# env_file = ".env"
+
 # A seed pins the sampler, but it also makes the `attempts` retries resend an
 # identical payload, so a window rejected for its content tends to be rejected
 # the same way every time rather than recovered by a different sample. Prefer it

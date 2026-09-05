@@ -341,6 +341,91 @@ def test_config_fails_loudly_on_bad_input(tmp_path):
         )
 
 
+def env_args(name="FIREWORKS_API_KEY", env_file=None):
+    return argparse.Namespace(api_key_env=name, env_file=env_file)
+
+
+def test_no_api_key_env_means_no_auth_header():
+    assert labeling.resolve_api_key(env_args(name=None)) is None
+
+
+def test_env_file_supplies_the_key(tmp_path, monkeypatch):
+    monkeypatch.delenv("FIREWORKS_API_KEY", raising=False)
+    env_file = tmp_path / ".env"
+    env_file.write_text(
+        '# a comment\n\nexport OTHER=ignored\nFIREWORKS_API_KEY = "fw-secret"\n',
+        encoding="utf-8",
+    )
+    assert labeling.resolve_api_key(env_args(env_file=env_file)) == "fw-secret"
+
+
+def test_environment_wins_over_the_env_file(tmp_path, monkeypatch):
+    env_file = tmp_path / ".env"
+    env_file.write_text("FIREWORKS_API_KEY=from-file\n", encoding="utf-8")
+    monkeypatch.setenv("FIREWORKS_API_KEY", "from-environment")
+    assert labeling.resolve_api_key(env_args(env_file=env_file)) == "from-environment"
+
+
+def test_default_env_file_is_found_in_the_working_directory(tmp_path, monkeypatch):
+    monkeypatch.delenv("FIREWORKS_API_KEY", raising=False)
+    monkeypatch.chdir(tmp_path)
+    (tmp_path / labeling.DEFAULT_ENV_FILE).write_text(
+        "FIREWORKS_API_KEY=fw-default\n", encoding="utf-8"
+    )
+    assert labeling.resolve_api_key(env_args()) == "fw-default"
+
+    (tmp_path / labeling.DEFAULT_ENV_FILE).unlink()
+    with pytest.raises(labeling.TopicLabelingError, match="there is no .env"):
+        labeling.resolve_api_key(env_args())
+
+
+def test_missing_key_is_an_error_before_the_run_starts(tmp_path, monkeypatch):
+    monkeypatch.delenv("FIREWORKS_API_KEY", raising=False)
+    absent = tmp_path / "absent.env"
+    with pytest.raises(labeling.TopicLabelingError, match="does not exist"):
+        labeling.resolve_api_key(env_args(env_file=absent))
+
+    silent = tmp_path / ".env"
+    silent.write_text("SOMETHING_ELSE=x\n", encoding="utf-8")
+    with pytest.raises(labeling.TopicLabelingError, match="does not set it either"):
+        labeling.resolve_api_key(env_args(env_file=silent))
+
+
+def test_env_file_values_are_taken_literally(tmp_path):
+    env_file = tmp_path / ".env"
+    env_file.write_text("HASH_KEY=sk-abc#def\nPADDED=' spaced '\n", encoding="utf-8")
+    values = labeling.load_env_file(env_file)
+    # An unquoted '#' belongs to the secret; quotes preserve whitespace.
+    assert values == {"HASH_KEY": "sk-abc#def", "PADDED": " spaced "}
+
+
+def test_env_file_fails_loudly_on_bad_input(tmp_path):
+    malformed = tmp_path / "malformed.env"
+    malformed.write_text("FIREWORKS_API_KEY\n", encoding="utf-8")
+    with pytest.raises(labeling.TopicLabelingError, match="expected KEY=value"):
+        labeling.load_env_file(malformed)
+
+    repeated = tmp_path / "repeated.env"
+    repeated.write_text("K=one\nK=two\n", encoding="utf-8")
+    with pytest.raises(labeling.TopicLabelingError, match="set twice"):
+        labeling.load_env_file(repeated)
+
+
+def test_env_file_is_configurable_and_reaches_label_and_verify(tmp_path):
+    config = tmp_path / "config.toml"
+    config.write_text(
+        '[model]\napi_key_env = "FIREWORKS_API_KEY"\nenv_file = "secrets/.env"\n',
+        encoding="utf-8",
+    )
+    parser = labeling.build_parser()
+    for command in ("label", "verify"):
+        args = parser.parse_args(
+            labeling.expand_config_args([command, "--config", str(config)])
+        )
+        assert args.api_key_env == "FIREWORKS_API_KEY"
+        assert args.env_file == Path("secrets/.env")
+
+
 def test_thinking_settings_reach_the_payload_and_reasoning_output_is_ignored():
     taxonomy = small_taxonomy()
     window = {
@@ -1051,6 +1136,7 @@ def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
             api_base=["http://127.0.0.1:8000/v1"],
             model="local-model",
             api_key_env=None,
+            env_file=None,
             batch_size=3,
             concurrency=1,
             max_output_tokens=100,
@@ -1180,6 +1266,7 @@ def test_verify_uses_only_validated_evidence_packets_and_checkpoints_results(
             api_base=["http://localhost:8000/v1"],
             model="local-model",
             api_key_env=None,
+            env_file=None,
             batch_size=4,
             concurrency=1,
             max_output_tokens=6000,
