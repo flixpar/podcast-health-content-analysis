@@ -43,7 +43,7 @@ def small_taxonomy():
 
 def test_compiles_only_canonical_topics_tables():
     taxonomy = labeling.compile_taxonomy(ROOT / "topics.md")
-    assert len(taxonomy["labels"]) == 84
+    assert len(taxonomy["labels"]) == 91
     assert {row["kind"] for row in taxonomy["labels"]} == {"topic", "cross_cutting"}
     assert {row["axis"] for row in taxonomy["labels"]} == {"topic", "frame", "evidence"}
     ids = {row["label_id"] for row in taxonomy["labels"]}
@@ -51,6 +51,13 @@ def test_compiles_only_canonical_topics_tables():
     assert "topic:sleep" in ids
     assert "topic:other_health_topic" in ids
     assert "cross_cutting:misinformation_correction_debunking" in ids
+    # The seven categories the pilot's "Other health topic" bucket exposed as
+    # gaps; that bucket exists to make them visible, so it must shrink as they
+    # are added rather than stay the second-largest topic.
+    assert "topic:cancer" in ids
+    assert "topic:neurology_seizures_brain_conditions" in ids
+    assert "topic:injury_wound_care_first_aid" in ids
+    assert "topic:genetics_inheritance" in ids
     assert len(ids) == len(taxonomy["labels"])
     assert all(row["definition"].strip() for row in taxonomy["labels"])
 
@@ -616,6 +623,7 @@ def _claim(**overrides):
         "frame_ids": [],
         "evidence_signal_ids": [],
         "discourse_role": "asserted_or_endorsed",
+        "relevance": "substantive",
         "claim_type": "causal",
         "claim_text": "Magnesium probably improves deep sleep.",
         "expressed_certainty": "hedged",
@@ -891,6 +899,7 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
                         "frame_ids": [],
                         "evidence_signal_ids": ["cross_cutting:scientific_study"],
                         "discourse_role": "asserted_or_endorsed",
+                        "relevance": "substantive",
                         "claim_type": "risk_or_safety",
                         "claim_text": "Every person needs exactly eight hours of sleep.",
                         "expressed_certainty": "absolute",
@@ -944,6 +953,7 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
                         "frame_ids": [],
                         "evidence_signal_ids": ["cross_cutting:scientific_study"],
                         "discourse_role": "asserted_or_endorsed",
+                        "relevance": "substantive",
                         "claim_type": "risk_or_safety",
                         "claim_text": "Everyone requires exactly eight hours of sleep.",
                         "expressed_certainty": "absolute",
@@ -1076,7 +1086,7 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
 
 
 def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
-    """A batch that fails as a whole is retried window by window."""
+    """A rejected window is re-sent alone; its batch-mates are kept."""
     taxonomy = small_taxonomy()
     taxonomy_path = tmp_path / "taxonomy.json"
     labeling.write_json(taxonomy_path, taxonomy)
@@ -1103,6 +1113,14 @@ def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
     poison = "episode_1_window_0002"
     calls: list[list[str]] = []
 
+    def _blank(window_id):
+        return {
+            "window_id": window_id,
+            "detections": [],
+            "verification_candidates": [],
+            "product_mentions": [],
+        }
+
     def fake_classify(self, batch, taxonomy_arg, model, *rest):
         ids = [window["window_id"] for window in batch]
         calls.append(ids)
@@ -1110,18 +1128,33 @@ def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
             raise labeling.TopicLabelingError(
                 "evidence quote is not verbatim", kind="non_verbatim_quote"
             )
-        results = [
-            {
-                "window_id": window_id,
-                "detections": [],
-                "verification_candidates": [],
-                "product_mentions": [],
-            }
-            for window_id in ids
-        ]
-        return results, {"response_id": "r", "response_model": model, "usage": None}
+        return [_blank(window_id) for window_id in ids], {
+            "response_id": "r",
+            "response_model": model,
+            "usage": None,
+        }
+
+    def fake_classify_partial(self, batch, taxonomy_arg, model, *rest):
+        ids = [window["window_id"] for window in batch]
+        calls.append(ids)
+        accepted = {i: _blank(i) for i in ids if i != poison}
+        rejected = {
+            i: labeling.TopicLabelingError(
+                "evidence quote is not verbatim", kind="non_verbatim_quote"
+            )
+            for i in ids
+            if i == poison
+        }
+        return (
+            accepted,
+            rejected,
+            {"response_id": "r", "response_model": model, "usage": None},
+        )
 
     monkeypatch.setattr(labeling.ResponsesClient, "classify", fake_classify)
+    monkeypatch.setattr(
+        labeling.ResponsesClient, "classify_partial", fake_classify_partial
+    )
     monkeypatch.setattr(
         labeling.ResponsesClient,
         "served_models",
@@ -1152,14 +1185,17 @@ def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
             config=tmp_path / "no-config.toml",
         )
     )
-    # First the whole batch, then each window alone.
+    # The batch is sent once; the two windows that validated are kept from that
+    # response, and only the rejected one is re-sent alone. Retrying all three
+    # would pay to generate two good windows a second time.
     assert calls[0] == [window["window_id"] for window in windows]
-    assert sorted(calls[1:]) == [[window["window_id"]] for window in windows]
+    assert calls[1:] == [[poison]]
     assert summary["windows_labeled"] == 2
     assert summary["unresolved_windows"] == 1
     assert summary["unresolved_windows_by_kind"] == {"non_verbatim_quote": 1}
     assert summary["batches_isolated_this_invocation"] == 1
-    assert summary["windows_recovered_by_isolation"] == 2
+    assert summary["windows_isolated_this_invocation"] == 1
+    assert summary["batches_isolated_by_kind"] == {"non_verbatim_quote": 1}
 
 
 def test_verify_uses_only_validated_evidence_packets_and_checkpoints_results(
@@ -1172,6 +1208,7 @@ def test_verify_uses_only_validated_evidence_packets_and_checkpoints_results(
         "evidence_quote": "everyone needs exactly eight hours of sleep",
         "context_text": "A guest says everyone needs exactly eight hours of sleep.",
         "discourse_role": "asserted_or_endorsed",
+        "relevance": "substantive",
         "claim_type": "risk_or_safety",
         "expressed_certainty": "absolute",
         "certainty_markers": ["everyone", "exactly"],
@@ -1314,3 +1351,165 @@ def test_verification_rejects_citations_outside_the_candidate_packet():
         assert "invalid passage citations" in str(exc)
     else:
         raise AssertionError("a citation outside the evidence packet was accepted")
+
+
+def test_claim_relevance_is_required_and_validated():
+    """A claim must say which side of an ad break it came from.
+
+    Sponsor reads make checkable claims too, and in the pilot they were 54% of
+    everything extracted. Without this field on the claim itself there is
+    nothing to filter them by: the commercialization frame was set on only 19%
+    of the claims that sat inside an advertisement.
+    """
+    accepted = _validate({"verification_candidates": [_claim()]})
+    assert accepted["verification_candidates"][0]["relevance"] == "substantive"
+
+    advertised = _validate(
+        {"verification_candidates": [_claim(relevance="advertisement")]}
+    )
+    assert advertised["verification_candidates"][0]["relevance"] == "advertisement"
+
+    assert (
+        _rejection_kind({"verification_candidates": [_claim(relevance="sponsored")]})
+        == "invalid_field"
+    )
+
+    missing = _claim()
+    del missing["relevance"]
+    assert (
+        _rejection_kind({"verification_candidates": [missing]}) == "schema_shape"
+    )
+
+
+def test_quote_matching_tolerates_punctuation_and_stores_source_wording():
+    """Punctuation differences are not different quotes.
+
+    `non_verbatim_quote` was the cause behind every content-rejected batch in
+    the pilot, and a rejected batch cost four more requests to recover. What
+    makes a quote evidence is its word sequence, which still has to appear
+    contiguously and in order.
+    """
+    source = "I'm like, maybe it was traumatic. She doesn't remember the U.S. trip."
+    # A curly apostrophe and a dropped comma still locate.
+    assert labeling.locate_quote("maybe it was traumatic", source) == "maybe it was traumatic"
+    assert labeling.locate_quote("She doesn’t remember", source) == "She doesn't remember"
+    assert (
+        labeling.locate_quote("remember the U.S. trip", source)
+        == "remember the U.S. trip"
+    )
+    # A letter-by-letter abbreviation is a different word sequence, so "US" for
+    # "U.S." is still a miss. Joining those runs would invite false matches.
+    assert labeling.locate_quote("remember the US trip", source) is None
+    # What comes back is the source's wording, not the model's rendering.
+    assert labeling.locate_quote("MAYBE IT WAS TRAUMATIC", source) == "maybe it was traumatic"
+    # Order and contiguity still bind.
+    assert labeling.locate_quote("traumatic maybe", source) is None
+    assert labeling.locate_quote("maybe it was terrible", source) is None
+    assert labeling.locate_quote("!!!", source) is None
+
+
+def test_partial_validation_keeps_the_windows_that_pass():
+    taxonomy = small_taxonomy()
+    label_axes = {row["label_id"]: row["axis"] for row in taxonomy["labels"]}
+    good = _window_with("The guest discusses sleep.")
+    bad = dict(_window_with("The guest discusses sleep."))
+    bad["window_id"] = "episode_1_window_0002"
+
+    def result(window_id, quote):
+        return {
+            "window_id": window_id,
+            "detections": [
+                {
+                    "start_unit_id": "u000001",
+                    "end_unit_id": "u000001",
+                    "label_ids": ["topic:sleep"],
+                    "relevance": "substantive",
+                    "discourse_role": "asserted_or_endorsed",
+                    "confidence": 0.9,
+                    "summary": "Sleep is discussed.",
+                    "evidence_quote": quote,
+                }
+            ],
+            "verification_candidates": [],
+            "product_mentions": [],
+        }
+
+    parsed = {
+        "results": [
+            result(good["window_id"], "discusses sleep"),
+            result(bad["window_id"], "discusses insomnia"),
+        ]
+    }
+    accepted, rejected = labeling.validate_response_partial(
+        parsed, [good, bad], label_axes
+    )
+    assert set(accepted) == {good["window_id"]}
+    assert set(rejected) == {bad["window_id"]}
+    assert rejected[bad["window_id"]].kind == "non_verbatim_quote"
+    # A missing window is an envelope fault and still rejects everything.
+    with pytest.raises(labeling.TopicLabelingError) as caught:
+        labeling.validate_response_partial(
+            {"results": [result(good["window_id"], "discusses sleep")]},
+            [good, bad],
+            label_axes,
+        )
+    assert caught.value.kind == "omitted_windows"
+
+
+def test_a_span_is_repaired_onto_the_evidence_it_cites():
+    """A span that stops short of its own quote is widened, not rejected.
+
+    The model picks the span and the quote separately, and the pilot's
+    surviving quote rejections were almost all the boundary rather than the
+    wording: a sponsor read quoted verbatim from the window, with a span that
+    ended one unit early. Rejecting the window for that discards correct work,
+    and quote rejections are what send batches to isolation.
+    """
+    taxonomy = small_taxonomy()
+    window = {
+        "window_id": "episode_1_window_0001",
+        "units": [
+            {"unit_id": "u000001", "text": "You might be dehydrated."},
+            {"unit_id": "u000002", "text": "Gatorade Zero Powders have been"},
+            {"unit_id": "u000003", "text": "scientifically designed to help you."},
+        ],
+    }
+    result = {
+        "window_id": window["window_id"],
+        "detections": [],
+        "product_mentions": [],
+        "verification_candidates": [
+            _claim(
+                start_unit_id="u000001",
+                end_unit_id="u000002",
+                relevance="advertisement",
+                claim_type="mechanism",
+                claim_text="Gatorade Zero is scientifically designed.",
+                expressed_certainty="unhedged",
+                certainty_markers=[],
+                # Runs one unit past the declared span.
+                evidence_quote="Gatorade Zero Powders have been scientifically designed",
+            )
+        ],
+    }
+    accepted = labeling.validate_window_result(
+        result, window, {row["label_id"]: row["axis"] for row in taxonomy["labels"]}
+    )
+    claim = accepted["verification_candidates"][0]
+    assert claim["end_unit_id"] == "u000003"
+    assert claim["start_unit_id"] == "u000001"
+    assert claim["evidence_quote"] == (
+        "Gatorade Zero Powders have been scientifically designed"
+    )
+
+    # Widening only ever covers evidence that is really in the window. Wording
+    # that appears nowhere in it is still a rejection.
+    missing = json.loads(json.dumps(result))
+    missing["verification_candidates"][0]["evidence_quote"] = "clinically proven to work"
+    with pytest.raises(labeling.TopicLabelingError) as excinfo:
+        labeling.validate_window_result(
+            missing, window, {row["label_id"]: row["axis"] for row in taxonomy["labels"]}
+        )
+    assert excinfo.value.kind == "non_verbatim_quote"
+    # The rejection names the wording, so the cause is tunable from the log.
+    assert "clinically proven to work" in str(excinfo.value)

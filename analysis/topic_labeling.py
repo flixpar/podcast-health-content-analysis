@@ -66,7 +66,7 @@ else:
 
 
 SCHEMA_VERSION = "topic-labeling-v4"
-PROMPT_VERSION = "topic-clips-claims-products-v5"
+PROMPT_VERSION = "topic-clips-claims-products-v6"
 VERIFICATION_PROMPT_VERSION = "evidence-corpus-verification-v2"
 EVIDENCE_CORPUS_MANIFEST_VERSION = "evidence-corpus-validation-v1"
 DEFAULT_TOPICS = Path("topics.md")
@@ -286,7 +286,29 @@ Do not extract:
 claim_text -- one neutral, self-contained sentence stating the proposition, with
 pronouns resolved and hedges preserved. Never sharpen a hedged claim into a firm
 one, and never add specifics the speaker did not give.
-claim_type -- the kind of proposition being asserted.
+relevance -- where the claim sits, coded exactly as it is on a detection. A
+sponsor read makes checkable claims like any other speech ("three times the
+electrolytes of the leading sports drink"), and they must be extracted -- but
+mark them advertisement so a later stage can separate what the show says from
+what its advertisers say.
+claim_type -- the kind of proposition. Choose by what the claim asserts, not by
+the subject it is about:
+  causal                     -- X brings about, worsens or prevents Y
+  treatment_or_prevention    -- doing or taking X helps, cures or protects
+  risk_or_safety             -- X is dangerous, harmful or safe
+  diagnosis_or_prevalence    -- how common a condition is, who has it, how it is
+                                recognised or diagnosed
+  mechanism                  -- how something works in the body, or a stated
+                                composition, quantity or physiological process
+  institutional_or_conspiracy -- about the conduct of institutions: that an
+                                agency, company, profession or government hid,
+                                falsified, suppressed or was paid for something.
+                                It is about actors, not about biology. An
+                                ordinary factual claim is never this value
+                                merely because it is surprising or contested
+  other_factual              -- checkable, but none of the above
+When two fit, take the more specific one; other_factual is the fallback, and
+institutional_or_conspiracy is not.
 expressed_certainty -- how firmly the proposition is stated. This is the
 speaker's stance, coded from the words used; it is not your confidence. Find the
 marker words first, then read the level off them: if the span contains no word
@@ -976,6 +998,12 @@ def response_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
                 "type": "string",
                 "enum": list(ALLOWED_DISCOURSE_ROLES),
             },
+            # Sponsor copy makes checkable claims too ("three times the
+            # electrolytes"), and in the pilot they were 54% of everything
+            # extracted. Without this field there is nothing on a claim that
+            # says which side of an ad break it came from, so verification
+            # cannot be pointed at editorial content alone.
+            "relevance": {"type": "string", "enum": list(ALLOWED_RELEVANCE)},
             "claim_type": {"type": "string", "enum": list(ALLOWED_CLAIM_TYPES)},
             "claim_text": {"type": "string", "minLength": 1},
             "expressed_certainty": {
@@ -998,6 +1026,7 @@ def response_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
             "frame_ids",
             "evidence_signal_ids",
             "discourse_role",
+            "relevance",
             "claim_type",
             "claim_text",
             "expressed_certainty",
@@ -1101,6 +1130,46 @@ def _normalized_quote(value: str) -> str:
     return re.sub(r"\s+", " ", value).strip().casefold()
 
 
+_QUOTE_WORD = re.compile(r"\w+", re.UNICODE)
+
+
+def locate_quote_span(quote: str, text: str) -> tuple[int, int] | None:
+    """Character offsets of ``quote``'s word sequence inside ``text``.
+
+    Separate from :func:`locate_quote` because a caller that needs to know
+    *where* the quote sits -- to widen a span onto it -- cannot recover the
+    offsets from the returned substring: the same wording may occur twice.
+    """
+    quote_words = [m.group(0).casefold() for m in _QUOTE_WORD.finditer(quote)]
+    if not quote_words:
+        return None
+    matches = list(_QUOTE_WORD.finditer(text))
+    text_words = [m.group(0).casefold() for m in matches]
+    span = len(quote_words)
+    for start in range(len(text_words) - span + 1):
+        if text_words[start : start + span] == quote_words:
+            return matches[start].start(), matches[start + span - 1].end()
+    return None
+
+
+def locate_quote(quote: str, text: str) -> str | None:
+    """Find a quote's word sequence in ``text`` and return the source wording.
+
+    Matching on the word sequence rather than the exact characters, because the
+    difference that kept rejecting responses was never a different quote: it was
+    a straight apostrophe for a curly one, or a dropped comma. The word sequence
+    is what makes a quote evidence, and it still has to appear contiguously and
+    in order -- an abbreviation spelled without its stops is a different word
+    sequence and still misses.
+
+    Returns the substring of ``text`` itself, so what gets stored is the
+    transcript's own wording rather than the model's rendering of it -- the
+    stored quote is verbatim by construction rather than by inspection.
+    """
+    found = locate_quote_span(quote, text)
+    return text[found[0] : found[1]] if found else None
+
+
 def _product_key(name: str) -> str:
     """Case- and punctuation-insensitive key so "AG-1" and "ag1" count as one product."""
     key = re.sub(r"[^a-z0-9]+", "", name.casefold())
@@ -1138,6 +1207,12 @@ def validate_window_result(
             f"invalid product mentions for {window['window_id']}", kind="schema_shape"
         )
     unit_order = {unit["unit_id"]: index for index, unit in enumerate(window["units"])}
+    window_text = " ".join(unit["text"] for unit in window["units"])
+    unit_bounds: list[tuple[int, int]] = []
+    _cursor = 0
+    for _unit in window["units"]:
+        unit_bounds.append((_cursor, _cursor + len(_unit["text"])))
+        _cursor += len(_unit["text"]) + 1
 
     def selected_text(start_id: str, end_id: str) -> str:
         if start_id not in unit_order or end_id not in unit_order:
@@ -1166,17 +1241,56 @@ def validate_window_result(
             )
         return float(value)
 
-    def validate_quote(quote: Any, text: str) -> str:
+    def widen_to_quote(
+        quote: str, start_id: str, end_id: str
+    ) -> tuple[str, str, str] | None:
+        """Grow a span onto evidence that sits just outside it.
+
+        The model chooses the span and the quote separately, and the boundary is
+        what it gets wrong: the quote is verbatim in this window, but the
+        declared span stops a unit short of it. Rejecting the window for that
+        discards correct work over an off-by-one -- and quote rejections are
+        what send most batches to isolation. The grounding requirement is
+        untouched: the quote must still appear, contiguous and in order, in this
+        window. Only the boundary moves, and only outward far enough to cover
+        the evidence the annotation itself cites.
+        """
+        found = locate_quote_span(quote, window_text)
+        if found is None:
+            return None
+        lo = min(
+            index for index, (_, stop) in enumerate(unit_bounds) if stop > found[0]
+        )
+        hi = max(
+            index for index, (begin, _) in enumerate(unit_bounds) if begin < found[1]
+        )
+        lo = min(lo, unit_order[start_id])
+        hi = max(hi, unit_order[end_id])
+        units = window["units"]
+        return window_text[found[0] : found[1]], units[lo]["unit_id"], units[hi]["unit_id"]
+
+    def validate_quote(quote: Any, start_id: str, end_id: str) -> tuple[str, str, str]:
         if not isinstance(quote, str) or not quote.strip():
             raise TopicLabelingError(
                 f"empty evidence quote in {window['window_id']}", kind="invalid_field"
             )
-        if _normalized_quote(quote) not in _normalized_quote(text):
+        located = locate_quote(quote, selected_text(start_id, end_id))
+        if located is not None:
+            return re.sub(r"\s+", " ", located).strip(), start_id, end_id
+        widened = widen_to_quote(quote, start_id, end_id)
+        if widened is None:
+            # Carry the quote itself. This is the rejection that sends most
+            # batches to isolation, and isolation is the most expensive thing
+            # the run does -- but "a quote did not match" names nothing to fix.
+            # The wording is what distinguishes a paraphrase the prompt should
+            # forbid from a transcription difference the matcher should absorb.
             raise TopicLabelingError(
-                f"evidence quote is not verbatim inside {window['window_id']} range",
+                f"evidence quote is not verbatim inside {window['window_id']}"
+                f": {quote[:200]!r}",
                 kind="non_verbatim_quote",
             )
-        return re.sub(r"\s+", " ", quote).strip()
+        located, start_id, end_id = widened
+        return re.sub(r"\s+", " ", located).strip(), start_id, end_id
 
     def validate_certainty(certainty: Any, markers: Any, text: str) -> list[str]:
         if certainty not in ALLOWED_EXPRESSED_CERTAINTY:
@@ -1195,19 +1309,21 @@ def validate_window_result(
                 f"invalid certainty markers in {window['window_id']}",
                 kind="invalid_field",
             )
-        cleaned = [re.sub(r"\s+", " ", marker).strip() for marker in markers]
+        located_markers: list[str] = []
+        for marker in markers:
+            found = locate_quote(marker, text)
+            if found is None:
+                raise TopicLabelingError(
+                    f"certainty marker is not verbatim inside {window['window_id']}"
+                    f" range: {marker[:100]!r}",
+                    kind="non_verbatim_quote",
+                )
+            located_markers.append(re.sub(r"\s+", " ", found).strip())
+        cleaned = located_markers
         if len({_normalized_quote(marker) for marker in cleaned}) != len(cleaned):
             raise TopicLabelingError(
                 f"duplicate certainty markers in {window['window_id']}",
                 kind="invalid_field",
-            )
-        if any(
-            _normalized_quote(marker) not in _normalized_quote(text)
-            for marker in cleaned
-        ):
-            raise TopicLabelingError(
-                f"certainty marker is not verbatim inside {window['window_id']} range",
-                kind="non_verbatim_quote",
             )
         # The coding must be grounded: a hedge or booster the model cannot point
         # to is not a hedge or booster, and an unhedged claim has none.
@@ -1240,7 +1356,10 @@ def validate_window_result(
             )
         start_id = detection.get("start_unit_id")
         end_id = detection.get("end_unit_id")
-        text = selected_text(start_id, end_id)
+        # Shape check only: rejects a reversed range or a unit outside the
+        # window before anything is read out of the span. The span's text is
+        # fetched again after the quote settles it, since a repair moves it.
+        selected_text(start_id, end_id)
         labels = detection.get("label_ids")
         if (
             not isinstance(labels, list)
@@ -1277,7 +1396,9 @@ def validate_window_result(
                 f"empty summary in {window['window_id']}", kind="invalid_field"
             )
         confidence = validate_confidence(detection.get("confidence"))
-        quote = validate_quote(detection.get("evidence_quote"), text)
+        quote, start_id, end_id = validate_quote(
+            detection.get("evidence_quote"), start_id, end_id
+        )
         key = (start_id, end_id, axis, tuple(sorted(labels)), relevance, discourse_role)
         if key in seen:
             raise TopicLabelingError(
@@ -1308,6 +1429,7 @@ def validate_window_result(
         "frame_ids",
         "evidence_signal_ids",
         "discourse_role",
+        "relevance",
         "claim_type",
         "claim_text",
         "expressed_certainty",
@@ -1324,7 +1446,10 @@ def validate_window_result(
             )
         start_id = claim.get("start_unit_id")
         end_id = claim.get("end_unit_id")
-        text = selected_text(start_id, end_id)
+        # Shape check only: rejects a reversed range or a unit outside the
+        # window before anything is read out of the span. The span's text is
+        # fetched again after the quote settles it, since a repair moves it.
+        selected_text(start_id, end_id)
         topic_ids = claim.get("topic_ids")
         frame_ids = claim.get("frame_ids")
         evidence_ids = claim.get("evidence_signal_ids")
@@ -1357,12 +1482,18 @@ def validate_window_result(
                 kind="mixed_or_unknown_labels",
             )
         discourse_role = claim.get("discourse_role")
+        claim_relevance = claim.get("relevance")
         claim_type = claim.get("claim_type")
         claim_text = claim.get("claim_text")
         rationale = claim.get("rationale")
         if discourse_role not in ALLOWED_DISCOURSE_ROLES:
             raise TopicLabelingError(
                 f"invalid candidate discourse role in {window['window_id']}",
+                kind="invalid_field",
+            )
+        if claim_relevance not in ALLOWED_RELEVANCE:
+            raise TopicLabelingError(
+                f"invalid candidate relevance in {window['window_id']}",
                 kind="invalid_field",
             )
         if claim_type not in ALLOWED_CLAIM_TYPES:
@@ -1378,9 +1509,14 @@ def validate_window_result(
                 f"empty claim rationale in {window['window_id']}", kind="invalid_field"
             )
         confidence = validate_confidence(claim.get("confidence"))
-        quote = validate_quote(claim.get("evidence_quote"), text)
+        quote, start_id, end_id = validate_quote(
+            claim.get("evidence_quote"), start_id, end_id
+        )
         certainty = claim.get("expressed_certainty")
-        markers = validate_certainty(certainty, claim.get("certainty_markers"), text)
+        # A repaired span is the span the markers have to sit in too.
+        markers = validate_certainty(
+            certainty, claim.get("certainty_markers"), selected_text(start_id, end_id)
+        )
         normalized_text = re.sub(r"\s+", " ", claim_text).strip()
         key = (start_id, end_id, normalized_text.casefold(), discourse_role)
         if key in seen_claims:
@@ -1397,6 +1533,7 @@ def validate_window_result(
                 "frame_ids": sorted(frame_ids),
                 "evidence_signal_ids": sorted(evidence_ids),
                 "discourse_role": discourse_role,
+                "relevance": claim_relevance,
                 "claim_type": claim_type,
                 "claim_text": normalized_text,
                 "expressed_certainty": certainty,
@@ -1426,7 +1563,10 @@ def validate_window_result(
             )
         start_id = product.get("start_unit_id")
         end_id = product.get("end_unit_id")
-        text = selected_text(start_id, end_id)
+        # Shape check only: rejects a reversed range or a unit outside the
+        # window before anything is read out of the span. The span's text is
+        # fetched again after the quote settles it, since a repair moves it.
+        selected_text(start_id, end_id)
         name = product.get("product_name")
         product_type = product.get("product_type")
         mention_role = product.get("mention_role")
@@ -1444,7 +1584,9 @@ def validate_window_result(
                 kind="invalid_field",
             )
         confidence = validate_confidence(product.get("confidence"))
-        quote = validate_quote(product.get("evidence_quote"), text)
+        quote, start_id, end_id = validate_quote(
+            product.get("evidence_quote"), start_id, end_id
+        )
         clean_name = re.sub(r"\s+", " ", name).strip()
         key = (start_id, end_id, _product_key(clean_name), mention_role)
         if key in seen_products:
@@ -1472,11 +1614,22 @@ def validate_window_result(
     }
 
 
-def validate_response(
+def validate_response_partial(
     parsed: dict[str, Any],
     windows: Sequence[dict[str, Any]],
     label_axes: dict[str, str],
-) -> list[dict[str, Any]]:
+) -> tuple[dict[str, dict[str, Any]], dict[str, TopicLabelingError]]:
+    """Validate each window on its own, keeping the ones that pass.
+
+    Rejection is per annotation, but a batch is one response, so rejecting the
+    response for one bad quote throws away three good windows and pays to
+    generate them again. In the pilot that happened to a quarter of all batches
+    and cost 37% of the run's output tokens to recover 25% of its windows.
+
+    Faults in the envelope -- a missing window, a duplicated ID, a malformed
+    results array -- still reject everything, because then there is no
+    trustworthy per-window result to keep.
+    """
     if not isinstance(parsed, dict) or set(parsed) != {"results"}:
         raise TopicLabelingError(
             "response must contain only a results array", kind="schema_shape"
@@ -1492,7 +1645,9 @@ def validate_response(
             f"response returned {len(results)} windows; expected {len(expected)}",
             kind="omitted_windows",
         )
-    by_id: dict[str, dict[str, Any]] = {}
+    accepted: dict[str, dict[str, Any]] = {}
+    rejected: dict[str, TopicLabelingError] = {}
+    seen: set[str] = set()
     for result in results:
         if not isinstance(result, dict) or set(result) != {
             "window_id",
@@ -1505,15 +1660,31 @@ def validate_response(
                 kind="schema_shape",
             )
         window_id = result.get("window_id")
-        if window_id not in expected or window_id in by_id:
+        if window_id not in expected or window_id in seen:
             raise TopicLabelingError(
                 f"unexpected or duplicate response window ID: {window_id!r}",
                 kind="window_id_mismatch",
             )
-        by_id[window_id] = validate_window_result(
-            result, expected[window_id], label_axes
-        )
-    return [by_id[window["window_id"]] for window in windows]
+        seen.add(window_id)
+        try:
+            accepted[window_id] = validate_window_result(
+                result, expected[window_id], label_axes
+            )
+        except TopicLabelingError as exc:
+            rejected[window_id] = exc
+    return accepted, rejected
+
+
+def validate_response(
+    parsed: dict[str, Any],
+    windows: Sequence[dict[str, Any]],
+    label_axes: dict[str, str],
+) -> list[dict[str, Any]]:
+    """All-or-nothing validation: the first bad window rejects the response."""
+    accepted, rejected = validate_response_partial(parsed, windows, label_axes)
+    if rejected:
+        raise next(iter(rejected.values()))
+    return [accepted[window["window_id"]] for window in windows]
 
 
 def extract_output_text(response: dict[str, Any]) -> str:
@@ -2163,6 +2334,76 @@ class ResponsesClient:
             lease.record(response.get("usage"))
         return response
 
+    def classify_partial(
+        self,
+        windows: Sequence[dict[str, Any]],
+        taxonomy: dict[str, Any],
+        model: str,
+        settings: ModelSettings,
+    ) -> tuple[dict[str, dict[str, Any]], dict[str, TopicLabelingError], dict[str, Any]]:
+        """Classify a batch, keeping whichever windows validate.
+
+        Transport faults and a malformed envelope raise as they do for
+        ``classify``: there is nothing partial to keep. A window rejected on its
+        own content comes back in the second element, for the caller to retry
+        alone -- one retry instead of one per window in the batch.
+        """
+        label_axes = {label["label_id"]: label["axis"] for label in taxonomy["labels"]}
+        payload = self._classify_payload(windows, taxonomy, model, settings)
+        last_error: Exception | None = None
+        for attempt in range(self.attempts):
+            try:
+                response = self._send(payload, model)
+                raise_for_response_status(response)
+                parsed = json.loads(extract_output_text(response))
+                accepted, rejected = validate_response_partial(
+                    parsed, windows, label_axes
+                )
+                meta = {
+                    "response_id": response.get("id"),
+                    "usage": response.get("usage"),
+                    "response_model": response.get("model"),
+                    "effective_sampling": effective_sampling(response),
+                }
+                return accepted, rejected, meta
+            except (TopicLabelingError, json.JSONDecodeError) as exc:
+                last_error = exc
+                retryable = getattr(exc, "retryable", True)
+                if not retryable or attempt + 1 >= self.attempts:
+                    break
+                time.sleep(2**attempt)
+        raise TopicLabelingError(
+            f"classification failed after {self.attempts} attempt(s): {last_error}",
+            kind=error_kind(last_error) if last_error else "other",
+        ) from last_error
+
+    def _classify_payload(
+        self,
+        windows: Sequence[dict[str, Any]],
+        taxonomy: dict[str, Any],
+        model: str,
+        settings: ModelSettings,
+    ) -> dict[str, Any]:
+        return {
+            "model": model,
+            "instructions": taxonomy_instructions(taxonomy),
+            "input": [
+                {
+                    "role": "user",
+                    "content": [{"type": "input_text", "text": batch_input(windows)}],
+                }
+            ],
+            "text": {
+                "format": {
+                    "type": "json_schema",
+                    "name": "podcast_topic_clips",
+                    "strict": True,
+                    "schema": response_schema(taxonomy),
+                }
+            },
+            **settings.payload(),
+        }
+
     def classify(
         self,
         windows: Sequence[dict[str, Any]],
@@ -2686,54 +2927,97 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
     # the only record of them.
     observed_sampling: dict[str, Any] = {}
 
+    def classify_partial(
+        batch: list[dict[str, Any]],
+    ) -> tuple[
+        dict[str, dict[str, Any]], dict[str, TopicLabelingError], dict[str, Any]
+    ]:
+        return client.classify_partial(batch, taxonomy, model, settings)
+
+    def _isolate(
+        windows: list[dict[str, Any]],
+    ) -> tuple[
+        list[tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]],
+        list[tuple[list[dict[str, Any]], Exception]],
+    ]:
+        """Re-send each window alone. Sequential, so a usage limit stops it."""
+        successes: list[
+            tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]
+        ] = []
+        failures: list[tuple[list[dict[str, Any]], Exception]] = []
+        for index, window in enumerate(windows):
+            single = [window]
+            try:
+                results, meta = classify(single)
+                successes.append((single, results, meta))
+            except UsageLimitError as inner:
+                # A limit reached partway through would otherwise be waited out
+                # or re-refused once per remaining window. Stop, and hand the
+                # rest back unlabelled, keeping what has already been paid for.
+                failures.extend(([other], inner) for other in windows[index:])
+                break
+            except Exception as inner:
+                failures.append((single, inner))
+        counters["windows_recovered_by_isolation"] += len(successes)
+        return successes, failures
+
     def classify_isolating(
         batch: list[dict[str, Any]],
     ) -> tuple[
         list[tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]],
         list[tuple[list[dict[str, Any]], Exception]],
     ]:
-        """Classify a batch; on failure re-try each window alone.
+        """Classify a batch, keeping the windows that validate.
 
-        Validation rejects a whole response, so without this one unlabelable
-        window would keep every other window in its batch permanently
-        unresolved -- and the next run would re-batch them together and fail the
-        same way.
+        A window rejected on its own content is re-sent alone; the rest of the
+        batch is kept. Only an envelope or transport fault, which leaves nothing
+        trustworthy to keep, sends the whole batch back through isolation.
+
+        Without this, one unlabelable window would keep every other window in
+        its batch unresolved -- and the next run would re-batch them together
+        and fail the same way.
         """
         try:
-            results, meta = classify(batch)
-            return [(batch, results, meta)], []
+            accepted, rejected, meta = classify_partial(batch)
         except UsageLimitError:
-            # Isolating retries the batch window by window, which is the answer
-            # to one unlabelable window and never the answer to a limit: it
-            # would spend the same exhausted budget, or wait out the same rate,
-            # once per window instead of once.
+            # Isolating retries window by window, which is the answer to one
+            # unlabelable window and never the answer to a limit: it would spend
+            # the same exhausted budget, or wait out the same rate, once per
+            # window instead of once.
             raise
         except Exception as exc:
             if len(batch) == 1:
                 return [], [(batch, exc)]
             counters["batches_isolated"] += 1
             counters["windows_isolated"] += len(batch)
-            successes: list[
-                tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]
-            ] = []
-            failures: list[tuple[list[dict[str, Any]], Exception]] = []
-            for index, window in enumerate(batch):
-                single = [window]
-                try:
-                    results, meta = classify(single)
-                    successes.append((single, results, meta))
-                except UsageLimitError as inner:
-                    # Same reason as above, and it has to be caught here too:
-                    # a limit reached partway through an isolation pass would
-                    # otherwise be waited out or re-refused once per remaining
-                    # window. Stop isolating and hand the rest back unlabelled,
-                    # keeping the windows already paid for.
-                    failures.extend(([other], inner) for other in batch[index:])
-                    break
-                except Exception as inner:
-                    failures.append((single, inner))
-            counters["windows_recovered_by_isolation"] += len(successes)
-            return successes, failures
+            # Which rejection sent the batch here. Isolation recovers most of
+            # these windows, so they never reach the failures table and their
+            # kind is otherwise unrecorded -- leaving the most expensive thing
+            # the run does without a cause to tune against.
+            counters[f"isolated_by_{error_kind(exc)}"] += 1
+            return _isolate(batch)
+
+        successes: list[
+            tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]
+        ] = []
+        kept = [w for w in batch if w["window_id"] in accepted]
+        if kept:
+            successes.append((kept, [accepted[w["window_id"]] for w in kept], meta))
+        if not rejected:
+            return successes, []
+
+        bad = [w for w in batch if w["window_id"] in rejected]
+        counters["windows_rejected_in_batch"] += len(bad)
+        counters["windows_kept_from_rejected_batch"] += len(kept)
+        for window in bad:
+            counters[f"isolated_by_{error_kind(rejected[window['window_id']])}"] += 1
+        if len(batch) == 1:
+            return successes, [([w], rejected[w["window_id"]]) for w in bad]
+        counters["batches_isolated"] += 1
+        counters["windows_isolated"] += len(bad)
+        retried, failures = _isolate(bad)
+        successes.extend(retried)
+        return successes, failures
 
     # Set when a usage budget runs out. Nothing after it is submitted, but the
     # requests already in flight finish and checkpoint, so the run resumes from
@@ -2811,6 +3095,11 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
             "windows_recovered_by_isolation": counters[
                 "windows_recovered_by_isolation"
             ],
+            "batches_isolated_by_kind": {
+                key.removeprefix("isolated_by_"): value
+                for key, value in sorted(counters.items())
+                if key.startswith("isolated_by_")
+            },
             "effective_sampling": observed_sampling or None,
             "windows_labeled": complete,
             "unresolved_windows": failed,

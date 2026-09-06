@@ -3,7 +3,7 @@
 ## What the pipeline measures
 
 `analysis/topic_labeling.py` exhaustively labels timestamped transcript spans
-using the 84 labels in the two final tables of `topics.md`. Each table row
+using the 91 labels in the two final tables of `topics.md`. Each table row
 carries a written **definition** that governs the label; the keyword column is
 examples only. The cross-cutting table carries an explicit **axis** column, so
 no label's axis is inferred from its name. The dimensions are independent:
@@ -89,6 +89,13 @@ span, and it rejects `hedged`, `speculative` or `absolute` with no markers and
 `unhedged` with any. The verifier is shown both fields so a hedged claim is not
 contradicted merely because its firm version would be.
 
+Each claim also carries `relevance`, coded exactly as it is on a detection.
+Sponsor copy makes checkable claims like any other speech ("three times the
+electrolytes of the leading sports drink"), and in the pilot such claims were
+54% of everything extracted. They must still be extracted, but without this
+field nothing on a claim says which side of an ad break it came from, and
+verification cannot be pointed at editorial content alone.
+
 The same response also lists `product_mentions`: every specific product named
 in health content, meaning a brand, proprietary product, service or offering a
 listener could identify and buy or seek out. Generic substances and practices
@@ -104,19 +111,33 @@ one mention, so a sponsor read is one row however often it repeats the name.
 
 The client rejects omitted windows, unknown or mixed-axis labels, reversed or
 out-of-window spans, duplicate annotations, non-verbatim quotes, empty required
-strings, truncated or incomplete Responses, and malformed JSON. Every rejection carries a `kind`, and
+strings, truncated or incomplete Responses, and malformed JSON. A quote is
+matched on its word sequence rather than its exact characters, and what gets
+stored is the transcript's own wording: the difference that kept rejecting
+responses was never a different quote but a straight apostrophe for a curly one
+or a dropped comma, while the word sequence still has to appear contiguously and
+in order. The stored quote is therefore verbatim by construction rather than by
+inspection. Every rejection carries a `kind`, and
 `label_manifest.json` reports `unresolved_windows_by_kind` so a pilot can tell a
 prompt problem from a transport problem without reading a thousand messages. A
 pilot should watch `certainty_markers_mismatch` in particular: it is the one
 rejection that measures whether the model can ground the certainty coding
 rather than assert it.
 
-Validation rejects a whole response, so a batch that fails is retried one window
-at a time. Without that, a single unlabelable window would keep the rest of its
-batch permanently unresolved and the next run would re-batch them together and
-fail identically. The manifest reports `batches_isolated_this_invocation` and
-`windows_recovered_by_isolation`. Failed batches are durable and retryable; they
-never become implicit negatives.
+Validation is per window, so one bad window no longer costs its batch. Windows
+that validate are kept from the response that carried them and only the rejected
+ones are re-sent individually. Without any isolation a single unlabelable window
+would keep the rest of its batch permanently unresolved, and the next run would
+re-batch them together and fail identically; without partial acceptance the
+whole batch would be regenerated to recover one window. In the pilot 57% of all
+requests were isolation retries carrying 25% of windows and 37% of output
+tokens, nearly all triggered by `non_verbatim_quote`, so this is the most
+expensive thing the run does. The manifest reports
+`batches_isolated_this_invocation`, `windows_recovered_by_isolation`, and
+`batches_isolated_by_kind`, which names the rejection that sent each batch to
+isolation -- otherwise unrecorded, because isolation recovers most of those
+windows and they never reach the failures table. Failed batches are durable and
+retryable; they never become implicit negatives.
 
 ### 3. Merge overlap duplicates without collapsing axes
 
@@ -550,7 +571,7 @@ verified negatives.
 
 | Artifact | Contract |
 | --- | --- |
-| `taxonomy.json` | Frozen 84-label taxonomy with topic/frame/evidence axes and source hashes |
+| `taxonomy.json` | Frozen 91-label taxonomy with topic/frame/evidence axes and source hashes |
 | `prepare_manifest.json` | Input paths, windowing settings, counts, and windows SHA-256 |
 | `windows.jsonl.zst` | All line-addressable transcript windows with source provenance |
 | `labels.sqlite` | Crash-safe raw-label response checkpoints keyed by window ID |

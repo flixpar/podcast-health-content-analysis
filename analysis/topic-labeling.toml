@@ -42,9 +42,22 @@ model = "deepseek-ai/DeepSeek-V4-Flash-0731"
 #
 # The ceiling is the server's context. A real 900-word window measures about
 # 2,275 input tokens, so a batch of four plus the ~11.5k-token instruction prefix
-# is ~20.5k, and at max_model_len 65536 the budget must stay under ~45k. Batches
-# of eight do not leave enough room for thinking at all. Observed output at
-# batch 4 is ~13k per request, so 40000 is generous headroom.
+# is ~20.5k, and at max_model_len 65536 the budget must stay under ~45k. Observed
+# output at batch 4 is ~13k per request, so 40000 is generous headroom.
+#
+# That 65536 was the server's context when this was measured, and the ceiling
+# moves with it: at the 98304 now served, batch 8 is ~29.7k of input and still
+# leaves ~66k for thinking, so context is no longer what rules batch 8 out. The
+# reason under [label] -- the model losing track across eight windows -- is a
+# claim about the model rather than the server, and it is the one to test before
+# raising the batch size.
+#
+# The budget is not a spending cap but a truncation threshold: a request that
+# runs past it is rejected as output_truncated, which isolates its whole batch
+# sequentially inside one worker. A budget set too tight therefore costs more
+# wall time than the tokens it was meant to save -- at 16000, `low` truncated
+# four batches and ran 79% slower than `medium` at 28000 while emitting 22%
+# fewer tokens.
 # `low` (thinking without the high-effort preamble) is 1.7x faster, never
 # truncates and is accepted more often -- but on a health-dense window it
 # returns 9.3 detections against high's 13.5, at the same claim yield. Its
