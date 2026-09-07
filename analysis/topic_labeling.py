@@ -5,8 +5,9 @@ The pipeline has five explicit stages:
 
 1. ``prepare`` compiles the canonical tables in ``topics.md`` and turns every
    transcript into overlapping, line-addressable windows.
-2. ``label`` sends batches of windows to a local OpenAI Responses-compatible
-   endpoint using strict Structured Outputs.
+2. ``label`` sends batches of windows to an OpenAI-compatible endpoint -- the
+   Responses API or Chat Completions, whichever the server offers -- using
+   strict Structured Outputs.
 3. ``merge`` removes duplicate detections caused by window overlap and emits
    topic clips, independent frame/evidence annotations, and atomic claims that
    are flagged for possible-misinformation review.
@@ -73,6 +74,11 @@ DEFAULT_TOPICS = Path("topics.md")
 DEFAULT_TRANSCRIPTS = Path("downloader/data/transcripts")
 DEFAULT_OUTPUT = Path("analysis/output/topic-labeling")
 DEFAULT_API_BASE = "http://127.0.0.1:8000/v1"
+# Which OpenAI-compatible API the endpoint speaks. The two carry the same
+# request in different shapes; see ApiFlavor for what actually differs. Not a
+# free choice: vLLM serves both from one process, but several hosted providers
+# expose only Chat Completions.
+DEFAULT_API = "responses"
 DEFAULT_CONFIG = Path("analysis/topic-labeling.toml")
 # Read only for the variable --api-key-env names, and only when that variable is
 # absent from the environment. Git-ignored, so a paid-endpoint run needs no
@@ -1950,8 +1956,19 @@ class ModelSettings:
     def thinking(self) -> bool:
         return self.reasoning_effort != "none"
 
-    def payload(self) -> dict[str, Any]:
-        """The request fields that control decoding."""
+    def _sampling(self) -> dict[str, Any]:
+        """The decoding fields both APIs spell the same way."""
+        payload: dict[str, Any] = {}
+        if self.temperature is not None:
+            payload["temperature"] = self.temperature
+        if self.top_p is not None:
+            payload["top_p"] = self.top_p
+        if self.seed is not None:
+            payload["seed"] = self.seed
+        return payload
+
+    def responses_payload(self) -> dict[str, Any]:
+        """The decoding fields, shaped for the Responses API."""
         payload: dict[str, Any] = {
             "max_output_tokens": self.max_output_tokens,
             "reasoning": {"effort": self.reasoning_effort},
@@ -1961,13 +1978,23 @@ class ModelSettings:
             # are just left out of the response body. Nothing downstream reads
             # them, and a thinking model can emit a great many per response.
             payload["include_reasoning"] = False
-        if self.temperature is not None:
-            payload["temperature"] = self.temperature
-        if self.top_p is not None:
-            payload["top_p"] = self.top_p
-        if self.seed is not None:
-            payload["seed"] = self.seed
-        return payload
+        return {**payload, **self._sampling()}
+
+    def chat_payload(self) -> dict[str, Any]:
+        """The decoding fields, shaped for Chat Completions.
+
+        ``max_tokens`` rather than ``max_completion_tokens``: vLLM and Fireworks
+        both document the former, and the latter is an OpenAI-only spelling.
+        ``reasoning_effort`` is top-level here rather than nested, and there is
+        no ``include_reasoning`` counterpart -- vLLM returns the thinking as
+        ``message.reasoning_content``, which costs bandwidth on the way back but
+        not tokens, and nothing downstream reads it.
+        """
+        return {
+            "max_tokens": self.max_output_tokens,
+            "reasoning_effort": self.reasoning_effort,
+            **self._sampling(),
+        }
 
     def fingerprint(self) -> dict[str, Any]:
         return asdict(self)
@@ -2015,26 +2042,242 @@ def raise_for_response_status(response: dict[str, Any]) -> None:
     )
 
 
-def _payload_characters(payload: dict[str, Any]) -> int:
-    """Characters the server will read, for a pre-request token estimate.
+def _schema_characters(schema: Any) -> int:
+    """The structured-output schema's contribution to the prompt estimate.
 
-    The structured-output schema counts: it is sent with every request and
-    billed as prompt tokens, and for a large taxonomy it is not small. Leaving
-    it out would under-reserve every request by the same amount, which is the
-    direction a spend guard must not err in.
+    It counts: the schema is sent with every request and billed as prompt
+    tokens, and for a large taxonomy it is not small. Leaving it out would
+    under-reserve every request by the same amount, which is the direction a
+    spend guard must not err in.
     """
+    return 0 if schema is None else len(canonical_json(schema))
+
+
+def _payload_characters(payload: dict[str, Any]) -> int:
+    """Characters a Responses request asks the server to read."""
     total = len(payload.get("instructions") or "")
     for message in payload.get("input") or []:
         for part in message.get("content") or []:
             total += len(part.get("text") or "")
     text = payload.get("text")
     schema = text.get("format", {}).get("schema") if isinstance(text, dict) else None
-    if schema is not None:
-        total += len(canonical_json(schema))
-    return total
+    return total + _schema_characters(schema)
+
+
+def _chat_payload_characters(payload: dict[str, Any]) -> int:
+    """Characters a Chat Completions request asks the server to read."""
+    total = sum(len(message.get("content") or "") for message in payload["messages"])
+    fmt = payload.get("response_format")
+    schema = fmt.get("json_schema", {}).get("schema") if isinstance(fmt, dict) else None
+    return total + _schema_characters(schema)
+
+
+def extract_chat_output_text(response: dict[str, Any]) -> str:
+    """The assistant message from a Chat Completions response."""
+    choices = response.get("choices")
+    content = None
+    if isinstance(choices, list) and choices and isinstance(choices[0], dict):
+        message = choices[0].get("message")
+        if isinstance(message, dict):
+            content = message.get("content")
+    if not isinstance(content, str) or not content.strip():
+        raise TopicLabelingError(
+            "Chat Completions result contained no message content",
+            kind="empty_output",
+        )
+    return content
+
+
+def raise_for_chat_status(response: dict[str, Any]) -> None:
+    """Reject a Chat Completions response the server did not finish generating.
+
+    Checked before the text is extracted: with a reasoning parser configured, a
+    response truncated mid-thought comes back with a null ``content``, and
+    reporting that as an empty output would hide the one cause worth acting on.
+    See raise_for_response_status for why truncation is its own kind.
+    """
+    if response.get("error"):
+        raise TopicLabelingError(
+            "Chat Completions API returned an error object", kind="api_error"
+        )
+    choices = response.get("choices")
+    if not isinstance(choices, list) or not choices:
+        raise TopicLabelingError(
+            "Chat Completions API returned no choices", kind="empty_output"
+        )
+    reason = choices[0].get("finish_reason") if isinstance(choices[0], dict) else None
+    if reason in {None, "stop"}:
+        return
+    if reason == "length":
+        raise TopicLabelingError(
+            "Chat Completions API truncated the response at max_tokens",
+            kind="output_truncated",
+        )
+    raise TopicLabelingError(
+        f"Chat Completions API returned finish_reason={reason}", kind="api_incomplete"
+    )
+
+
+class ApiFlavor:
+    """One OpenAI-compatible request and response shape.
+
+    The two APIs carry the same request differently: where the instructions go,
+    where the JSON Schema is attached, what the output-token budget is called,
+    how an unfinished generation is reported, and where the text comes back.
+    Confining all of that here is what lets ``classify`` and ``verify`` describe
+    a request once -- rubric, input text, schema -- and stay out of the shape.
+    """
+
+    name: str
+    path: str
+
+    def payload(
+        self,
+        instructions: str,
+        user_text: str,
+        schema_name: str,
+        schema: dict[str, Any],
+        settings: ModelSettings,
+    ) -> dict[str, Any]:
+        raise NotImplementedError
+
+    def payload_characters(self, payload: dict[str, Any]) -> int:
+        raise NotImplementedError
+
+    def reserved_output_tokens(self, payload: dict[str, Any]) -> int:
+        raise NotImplementedError
+
+    def raise_for_status(self, response: dict[str, Any]) -> None:
+        raise NotImplementedError
+
+    def output_text(self, response: dict[str, Any]) -> str:
+        raise NotImplementedError
+
+    def effective_sampling(self, response: dict[str, Any]) -> dict[str, Any]:
+        raise NotImplementedError
+
+
+class ResponsesFlavor(ApiFlavor):
+    name = "responses"
+    path = "/responses"
+
+    def payload(
+        self,
+        instructions: str,
+        user_text: str,
+        schema_name: str,
+        schema: dict[str, Any],
+        settings: ModelSettings,
+    ) -> dict[str, Any]:
+        return {
+            "instructions": instructions,
+            "input": [
+                {
+                    "role": "user",
+                    "content": [{"type": "input_text", "text": user_text}],
+                }
+            ],
+            "text": {
+                "format": {
+                    "type": "json_schema",
+                    "name": schema_name,
+                    "strict": True,
+                    "schema": schema,
+                }
+            },
+            **settings.responses_payload(),
+        }
+
+    def payload_characters(self, payload: dict[str, Any]) -> int:
+        return _payload_characters(payload)
+
+    def reserved_output_tokens(self, payload: dict[str, Any]) -> int:
+        return payload.get("max_output_tokens", 0)
+
+    def raise_for_status(self, response: dict[str, Any]) -> None:
+        raise_for_response_status(response)
+
+    def output_text(self, response: dict[str, Any]) -> str:
+        return extract_output_text(response)
+
+    def effective_sampling(self, response: dict[str, Any]) -> dict[str, Any]:
+        return effective_sampling(response)
+
+
+class ChatCompletionsFlavor(ApiFlavor):
+    name = "chat_completions"
+    path = "/chat/completions"
+
+    def payload(
+        self,
+        instructions: str,
+        user_text: str,
+        schema_name: str,
+        schema: dict[str, Any],
+        settings: ModelSettings,
+    ) -> dict[str, Any]:
+        return {
+            # "system" rather than "developer": vLLM's renderers and the hosted
+            # OpenAI-compatible providers all understand it, and the newer
+            # spelling buys nothing the taxonomy prefix needs.
+            "messages": [
+                {"role": "system", "content": instructions},
+                {"role": "user", "content": user_text},
+            ],
+            "response_format": {
+                "type": "json_schema",
+                "json_schema": {
+                    "name": schema_name,
+                    "strict": True,
+                    "schema": schema,
+                },
+            },
+            **settings.chat_payload(),
+        }
+
+    def payload_characters(self, payload: dict[str, Any]) -> int:
+        return _chat_payload_characters(payload)
+
+    def reserved_output_tokens(self, payload: dict[str, Any]) -> int:
+        return payload.get("max_tokens", 0)
+
+    def raise_for_status(self, response: dict[str, Any]) -> None:
+        raise_for_chat_status(response)
+
+    def output_text(self, response: dict[str, Any]) -> str:
+        return extract_chat_output_text(response)
+
+    def effective_sampling(self, response: dict[str, Any]) -> dict[str, Any]:
+        """Always empty: Chat Completions does not echo the decoding settings.
+
+        The Responses API returns the values it resolved, which is the only
+        record of a setting the client left for the server to fill in. Chat
+        Completions returns none of them, so a run on this flavor has to pin
+        temperature and top_p explicitly to know what produced its labels.
+        """
+        return {}
+
+
+API_FLAVORS: dict[str, ApiFlavor] = {
+    flavor.name: flavor for flavor in (ResponsesFlavor(), ChatCompletionsFlavor())
+}
+ALLOWED_APIS = tuple(API_FLAVORS)
+
+
+def resolve_api_flavor(name: str) -> ApiFlavor:
+    try:
+        return API_FLAVORS[name]
+    except KeyError:
+        raise TopicLabelingError(f"unknown API {name!r}") from None
 
 
 class ResponsesClient:
+    """Pooling, retries and spend accounting for one OpenAI-compatible server.
+
+    ``api`` selects which of the two request shapes it speaks; everything else
+    here -- round-robin, retry, the usage lease -- is the same either way.
+    """
+
     def __init__(
         self,
         api_base: str | Sequence[str],
@@ -2043,6 +2286,7 @@ class ResponsesClient:
         attempts: int = 3,
         limiter: UsageLimiter | None = None,
         provider: str | None = None,
+        api: str = DEFAULT_API,
     ) -> None:
         bases = [api_base] if isinstance(api_base, str) else list(api_base)
         if not bases:
@@ -2057,10 +2301,20 @@ class ResponsesClient:
         # local endpoint free of all of this.
         self.limiter = limiter if limiter is not None else UsageLimiter(None)
         self.provider = provider or ""
+        self.flavor = resolve_api_flavor(api)
 
     @property
     def roots(self) -> list[str]:
-        return [base.removesuffix("/responses") for base in self.api_bases]
+        """The ``/v1`` roots, however the endpoint happened to be written down.
+
+        An --api-base copied from a provider's docs often already names the
+        route; both spellings are stripped so that /models and the request path
+        can be appended to a bare root either way.
+        """
+        return [
+            base.removesuffix("/responses").removesuffix("/chat/completions")
+            for base in self.api_bases
+        ]
 
     def _endpoint(self) -> str:
         """The next server to send to.
@@ -2102,14 +2356,14 @@ class ResponsesClient:
             raise error from exc
         except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
             error = TopicLabelingError(
-                f"Responses endpoint request failed: {type(exc).__name__}",
+                f"endpoint request failed: {type(exc).__name__}",
                 kind="transport",
             )
             setattr(error, "retryable", True)
             raise error from exc
         if not isinstance(parsed, dict):
             raise TopicLabelingError(
-                "Responses endpoint returned a non-object JSON value",
+                "endpoint returned a non-object JSON value",
                 kind="transport",
             )
         return parsed
@@ -2153,13 +2407,13 @@ class ResponsesClient:
         with self.limiter.reserve(
             provider=self.provider,
             model=model,
-            input_tokens=_payload_characters(payload) / CHARS_PER_TOKEN,
-            output_tokens=payload.get("max_output_tokens", 0),
+            input_tokens=self.flavor.payload_characters(payload) / CHARS_PER_TOKEN,
+            output_tokens=self.flavor.reserved_output_tokens(payload),
             # Outlive the request itself, so a crashed run's concurrency slots
             # come back on their own rather than staying retired.
             ttl=self.timeout + 60,
         ) as lease:
-            response = self._request(self._endpoint() + "/responses", payload)
+            response = self._request(self._endpoint() + self.flavor.path, payload)
             lease.record(response.get("usage"))
         return response
 
@@ -2173,35 +2427,26 @@ class ResponsesClient:
         label_axes = {label["label_id"]: label["axis"] for label in taxonomy["labels"]}
         payload: dict[str, Any] = {
             "model": model,
-            "instructions": taxonomy_instructions(taxonomy),
-            "input": [
-                {
-                    "role": "user",
-                    "content": [{"type": "input_text", "text": batch_input(windows)}],
-                }
-            ],
-            "text": {
-                "format": {
-                    "type": "json_schema",
-                    "name": "podcast_topic_clips",
-                    "strict": True,
-                    "schema": response_schema(taxonomy),
-                }
-            },
-            **settings.payload(),
+            **self.flavor.payload(
+                taxonomy_instructions(taxonomy),
+                batch_input(windows),
+                "podcast_topic_clips",
+                response_schema(taxonomy),
+                settings,
+            ),
         }
         last_error: Exception | None = None
         for attempt in range(self.attempts):
             try:
                 response = self._send(payload, model)
-                raise_for_response_status(response)
-                parsed = json.loads(extract_output_text(response))
+                self.flavor.raise_for_status(response)
+                parsed = json.loads(self.flavor.output_text(response))
                 results = validate_response(parsed, windows, label_axes)
                 meta = {
                     "response_id": response.get("id"),
                     "usage": response.get("usage"),
                     "response_model": response.get("model"),
-                    "effective_sampling": effective_sampling(response),
+                    "effective_sampling": self.flavor.effective_sampling(response),
                 }
                 return results, meta
             except (TopicLabelingError, json.JSONDecodeError) as exc:
@@ -2223,37 +2468,26 @@ class ResponsesClient:
     ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         payload: dict[str, Any] = {
             "model": model,
-            "instructions": VERIFICATION_RUBRIC,
-            "input": [
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "input_text", "text": verification_batch_input(pairs)}
-                    ],
-                }
-            ],
-            "text": {
-                "format": {
-                    "type": "json_schema",
-                    "name": "podcast_claim_verification",
-                    "strict": True,
-                    "schema": verification_response_schema(),
-                }
-            },
-            **settings.payload(),
+            **self.flavor.payload(
+                VERIFICATION_RUBRIC,
+                verification_batch_input(pairs),
+                "podcast_claim_verification",
+                verification_response_schema(),
+                settings,
+            ),
         }
         last_error: Exception | None = None
         for attempt in range(self.attempts):
             try:
                 response = self._send(payload, model)
-                raise_for_response_status(response)
-                parsed = json.loads(extract_output_text(response))
+                self.flavor.raise_for_status(response)
+                parsed = json.loads(self.flavor.output_text(response))
                 results = validate_verification_response(parsed, pairs)
                 return results, {
                     "response_id": response.get("id"),
                     "usage": response.get("usage"),
                     "response_model": response.get("model"),
-                    "effective_sampling": effective_sampling(response),
+                    "effective_sampling": self.flavor.effective_sampling(response),
                 }
             except (TopicLabelingError, json.JSONDecodeError) as exc:
                 last_error = exc
@@ -2635,6 +2869,7 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
         args.attempts,
         limiter=limiter,
         provider=args.provider,
+        api=args.api,
     )
     served = client.served_models()
     model = args.model or client.discover_model()
@@ -2649,6 +2884,7 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
         "taxonomy_sha256": taxonomy["taxonomy_sha256"],
         "windows_sha256": prepare_manifest["windows_sha256"],
         "model": model,
+        "api": args.api,
         "batch_size": args.batch_size,
         **settings.fingerprint(),
     }
@@ -2683,7 +2919,9 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
     counters: Counter[str] = Counter()
     # What the server says it decoded with. Settings omitted from the request
     # are resolved server-side from the model's generation config, so this is
-    # the only record of them.
+    # the only record of them. Empty on --api chat_completions, which echoes
+    # nothing back: there, pin temperature and top_p to know what produced the
+    # run rather than reading them out of the manifest afterwards.
     observed_sampling: dict[str, Any] = {}
 
     def classify_isolating(
@@ -4182,6 +4420,7 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
         args.attempts,
         limiter=limiter,
         provider=args.provider,
+        api=args.api,
     )
     served = client.served_models()
     model = args.model or client.discover_model()
@@ -4195,6 +4434,7 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
         "corpus": corpus_descriptor,
         "corpus_validation_manifest_sha256": corpus_validation_sha256,
         "model": model,
+        "api": args.api,
         "batch_size": args.batch_size,
         **settings.fingerprint(),
     }
@@ -4541,7 +4781,7 @@ def build_parser() -> argparse.ArgumentParser:
     prepare.add_argument("--limit", type=int)
 
     label = subparsers.add_parser(
-        "label", help="Label windows through the Responses API"
+        "label", help="Label windows through an OpenAI-compatible API"
     )
     label.add_argument(
         "--taxonomy",
@@ -4563,8 +4803,17 @@ def build_parser() -> argparse.ArgumentParser:
         "--api-base",
         action="append",
         help=(
-            "Responses endpoint; repeat to pool several identical servers "
+            "Endpoint root; repeat to pool several identical servers "
             f"(default: {DEFAULT_API_BASE})"
+        ),
+    )
+    label.add_argument(
+        "--api",
+        choices=ALLOWED_APIS,
+        default=DEFAULT_API,
+        help=(
+            "Which OpenAI-compatible API the endpoint speaks: the Responses API "
+            "or Chat Completions (default: %(default)s)"
         ),
     )
     label.add_argument("--model", help="Model ID; discover from /models when omitted")
@@ -4700,8 +4949,17 @@ def build_parser() -> argparse.ArgumentParser:
         "--api-base",
         action="append",
         help=(
-            "Responses endpoint; repeat to pool several identical servers "
+            "Endpoint root; repeat to pool several identical servers "
             f"(default: {DEFAULT_API_BASE})"
+        ),
+    )
+    verify.add_argument(
+        "--api",
+        choices=ALLOWED_APIS,
+        default=DEFAULT_API,
+        help=(
+            "Which OpenAI-compatible API the endpoint speaks: the Responses API "
+            "or Chat Completions (default: %(default)s)"
         ),
     )
     verify.add_argument("--model", help="Model ID; discover from /models when omitted")

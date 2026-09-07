@@ -58,8 +58,8 @@ receiving invented timestamps.
 
 ### 2. Label independent dimensions and extract claims
 
-`label` submits eight windows per request by default to a local OpenAI
-Responses-compatible endpoint. It requests strict JSON Schema output. Each
+`label` submits eight windows per request by default to an OpenAI-compatible
+endpoint. It requests strict JSON Schema output. Each
 label detection must contain one axis only and use the narrowest accurate span,
 so a brief “a study shows” phrase does not inherit the boundaries of a long
 sleep discussion.
@@ -104,7 +104,7 @@ one mention, so a sponsor read is one row however often it repeats the name.
 
 The client rejects omitted windows, unknown or mixed-axis labels, reversed or
 out-of-window spans, duplicate annotations, non-verbatim quotes, empty required
-strings, truncated or incomplete Responses, and malformed JSON. Every rejection carries a `kind`, and
+strings, truncated or incomplete responses, and malformed JSON. Every rejection carries a `kind`, and
 `label_manifest.json` reports `unresolved_windows_by_kind` so a pilot can tell a
 prompt problem from a transport problem without reading a thousand messages. A
 pilot should watch `certainty_markers_mismatch` in particular: it is the one
@@ -221,6 +221,46 @@ vllm serve deepseek-ai/DeepSeek-V4-Flash-0731 \
 
 The first three flags are what this pipeline depends on; the rest are sizing.
 
+### Responses or Chat Completions
+
+`--api` picks which OpenAI-compatible API the endpoints speak: `responses` (the
+default) or `chat_completions`. Both carry the same request -- the same rubric,
+the same windows, the same strict JSON Schema -- and differ only in shape, so
+which one a run uses is a property of the server rather than of the method. vLLM
+serves both from the same `--reasoning-parser` renderer; several hosted
+providers expose only Chat Completions, which is why the pipeline speaks it.
+
+| | `responses` | `chat_completions` |
+| --- | --- | --- |
+| Route | `/v1/responses` | `/v1/chat/completions` |
+| Rubric | `instructions` | a `system` message |
+| Schema | `text.format` | `response_format.json_schema` |
+| Output budget | `max_output_tokens` | `max_tokens` |
+| Thinking | `reasoning.effort` | `reasoning_effort` |
+| Truncation | `status=incomplete`, `incomplete_details.reason` | `finish_reason="length"` |
+| Reasoning tokens | suppressed by `include_reasoning: false` | returned as `message.reasoning_content` |
+| Sampling echoed back | yes | no |
+
+Prefer `responses` where the server offers a choice, for the last row: it
+returns the decoding settings it actually resolved, which is the only record of
+any setting the client left to the model's generation config. On
+`chat_completions` nothing comes back, `effective_sampling` in the manifest is
+empty, and reproducing the run means having pinned `temperature` and `top_p`
+explicitly. Truncation is reported distinctly on both, so `output_truncated` in
+`unresolved_windows_by_kind` stays meaningful either way.
+
+`--api` is part of the run fingerprint, beside the model. The two routes do not
+necessarily build the same prompt -- the rubric arrives as `instructions` on one
+and as a `system` message on the other, and a renderer is free to lay those out
+differently -- so labels produced under one are not automatically comparable
+with labels produced under the other. Switching therefore means a fresh output
+directory and a re-label, not a resume: the existing `labels.sqlite` refuses the
+new fingerprint rather than mixing the two. Treat the flavor as a property of
+the server chosen once at the start of a run, not as a knob to tune.
+
+`--api-base` may be written as the bare `/v1` root or with either route
+appended; both are accepted.
+
 ### Several servers
 
 `--api-base` repeats, and `[model] api_base` in the config takes a list, so a
@@ -242,8 +282,8 @@ orphan a half-finished `labels.sqlite`. The model they serve is fingerprinted,
 and `label_manifest.json` records the endpoint list under `endpoints`.
 
 - `--tokenizer-mode deepseek_v4` selects the model's own prompt encoding, which
-  is a dedicated renderer rather than a Jinja chat template. Without it the
-  Responses endpoint does not build V4 prompts correctly.
+  is a dedicated renderer rather than a Jinja chat template. Without it neither
+  route builds V4 prompts correctly.
 - `--reasoning-parser deepseek_v4` is what lets thinking and strict JSON Schema
   coexist. vLLM starts applying the schema grammar only once that parser sees
   the end of the reasoning block; with no parser configured the grammar binds

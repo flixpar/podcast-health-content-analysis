@@ -452,6 +452,7 @@ def _label_args(tmp_path, config, **overrides):
         windows=windows_path,
         prepare_manifest=prepare_manifest_path,
         api_base=["http://127.0.0.1:8000/v1"],
+        api=labeling.DEFAULT_API,
         model=None,
         api_key_env=None,
         env_file=None,

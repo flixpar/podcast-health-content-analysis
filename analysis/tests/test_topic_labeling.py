@@ -264,6 +264,7 @@ def write_config(tmp_path):
             [
                 "[model]",
                 'api_base = "http://127.0.0.1:8000/v1"',
+                'api = "chat_completions"',
                 'model = "deepseek-ai/DeepSeek-V4-Flash-0731"',
                 'reasoning_effort = "high"',
                 "top_p = 0.95",
@@ -287,6 +288,7 @@ def test_config_supplies_shared_model_settings_to_label_and_verify(tmp_path):
     )
     assert label.model == "deepseek-ai/DeepSeek-V4-Flash-0731"
     assert label.reasoning_effort == "high"
+    assert label.api == "chat_completions"
     assert label.top_p == 0.95
     assert label.batch_size == 3
 
@@ -294,6 +296,8 @@ def test_config_supplies_shared_model_settings_to_label_and_verify(tmp_path):
         labeling.expand_config_args(["verify", "--config", str(config)])
     )
     assert verify.model == "deepseek-ai/DeepSeek-V4-Flash-0731"
+    # [model] reaches both commands, so the API cannot drift between them.
+    assert verify.api == "chat_completions"
     assert verify.top_p == 0.95
     # [label] is not [verify]: its batch size must not leak across.
     assert verify.batch_size == 4
@@ -484,6 +488,244 @@ def test_thinking_settings_reach_the_payload_and_reasoning_output_is_ignored():
     assert client.seen_payload["seed"] == 7
     assert settings.fingerprint()["reasoning_effort"] == "max"
     assert results[0]["window_id"] == window["window_id"]
+
+
+def test_chat_completions_flavor_sends_the_same_request_in_chat_shape():
+    taxonomy = small_taxonomy()
+    window = {
+        "window_id": "episode_1_window_0001",
+        "units": [
+            {"unit_id": "u000001", "text": "The guest discusses sleep."},
+            {"unit_id": "u000002", "text": "A clinical trial was mentioned."},
+        ],
+    }
+    model_result = {
+        "results": [
+            {
+                "window_id": window["window_id"],
+                "detections": [
+                    {
+                        "start_unit_id": "u000001",
+                        "end_unit_id": "u000002",
+                        "label_ids": ["topic:sleep"],
+                        "relevance": "substantive",
+                        "discourse_role": "asserted_or_endorsed",
+                        "confidence": 0.9,
+                        "summary": "Sleep is discussed with a trial reference.",
+                        "evidence_quote": "clinical trial was mentioned",
+                    }
+                ],
+                "verification_candidates": [],
+                "product_mentions": [],
+            }
+        ]
+    }
+
+    class FakeClient(labeling.ResponsesClient):
+        def _request(self, url, payload=None):
+            self.seen_url = url
+            self.seen_payload = payload
+            return {
+                "id": "chatcmpl_test",
+                "model": "local-model",
+                "choices": [
+                    {
+                        "finish_reason": "stop",
+                        "message": {
+                            # vLLM returns the thinking beside the content; the
+                            # JSON contract lives only in the content.
+                            "reasoning_content": "not the answer",
+                            "content": json.dumps(model_result),
+                        },
+                    }
+                ],
+                "usage": {"prompt_tokens": 100, "completion_tokens": 40},
+            }
+
+    client = FakeClient("http://localhost:8000/v1", attempts=1, api="chat_completions")
+    results, meta = client.classify(
+        [window],
+        taxonomy,
+        "local-model",
+        labeling.ModelSettings(
+            max_output_tokens=1000, reasoning_effort="high", top_p=0.95
+        ),
+    )
+    assert client.seen_url == "http://localhost:8000/v1/chat/completions"
+    payload = client.seen_payload
+    assert payload["messages"][0]["role"] == "system"
+    assert payload["messages"][1]["role"] == "user"
+    assert "window_id" in payload["messages"][1]["content"]
+    assert payload["response_format"]["type"] == "json_schema"
+    json_schema = payload["response_format"]["json_schema"]
+    assert json_schema["strict"] is True
+    assert json_schema["schema"] == labeling.response_schema(taxonomy)
+    # The chat spellings, not the Responses ones.
+    assert payload["max_tokens"] == 1000
+    assert payload["reasoning_effort"] == "high"
+    assert payload["top_p"] == 0.95
+    assert "max_output_tokens" not in payload
+    assert "reasoning" not in payload
+    assert "include_reasoning" not in payload
+    assert results[0]["detections"][0]["confidence"] == 0.9
+    assert meta["response_id"] == "chatcmpl_test"
+    # Chat Completions echoes no decoding settings, so there is nothing to read
+    # back -- a run on this flavor has to pin them to know what produced it.
+    assert meta["effective_sampling"] == {}
+
+
+def test_verify_builds_its_own_request_on_either_api():
+    """`verify` has its own rubric and schema, so it needs its own shape check.
+
+    The run_verify test below stubs the whole client, so nothing else exercises
+    the verification payload -- and a break would only show on one flavor.
+    """
+    candidate = {
+        "candidate_id": "episode_1_claim_0001",
+        "claim_text": "Every person needs exactly eight hours of sleep.",
+        "evidence_quote": "everyone needs exactly eight hours of sleep",
+        "context_text": "A guest says everyone needs exactly eight hours of sleep.",
+        "discourse_role": "asserted_or_endorsed",
+        "claim_type": "risk_or_safety",
+        "expressed_certainty": "absolute",
+        "certainty_markers": ["everyone", "exactly"],
+        "topic_ids": ["topic:sleep"],
+        "frame_ids": [],
+        "evidence_signal_ids": ["cross_cutting:scientific_study"],
+    }
+    packet = {
+        "candidate_id": candidate["candidate_id"],
+        "corpus": {"corpus_id": "validated-health-corpus"},
+        "retrieval": {"method": "hybrid-bm25-embedding"},
+        "passages": [
+            {
+                "passage_id": "sleep-guideline:p12",
+                "text": "Sleep needs vary by age and individual circumstances.",
+            }
+        ],
+    }
+    model_result = {
+        "results": [
+            {
+                "candidate_id": candidate["candidate_id"],
+                "verdict": "contradicted",
+                "confidence": 0.91,
+                "supporting_passage_ids": [],
+                "contradicting_passage_ids": ["sleep-guideline:p12"],
+                "rationale": "The evidence says sleep needs vary.",
+                "limitations": "One retrieved guideline passage.",
+            }
+        ]
+    }
+    bodies = {
+        "responses": {
+            "id": "resp_verify",
+            "status": "completed",
+            "output": [
+                {
+                    "type": "message",
+                    "content": [
+                        {"type": "output_text", "text": json.dumps(model_result)}
+                    ],
+                }
+            ],
+        },
+        "chat_completions": {
+            "id": "chatcmpl_verify",
+            "choices": [
+                {
+                    "finish_reason": "stop",
+                    "message": {"content": json.dumps(model_result)},
+                }
+            ],
+        },
+    }
+
+    class FakeClient(labeling.ResponsesClient):
+        def _request(self, url, payload=None):
+            self.seen_url = url
+            self.seen_payload = payload
+            return bodies[self.flavor.name]
+
+    for api, route, schema_at, rubric_at, input_at in (
+        (
+            "responses",
+            "/responses",
+            lambda p: p["text"]["format"],
+            lambda p: p["instructions"],
+            lambda p: p["input"][0]["content"][0]["text"],
+        ),
+        (
+            "chat_completions",
+            "/chat/completions",
+            lambda p: p["response_format"]["json_schema"],
+            lambda p: p["messages"][0]["content"],
+            lambda p: p["messages"][1]["content"],
+        ),
+    ):
+        client = FakeClient("http://localhost:8000/v1", attempts=1, api=api)
+        results, meta = client.verify(
+            [{"candidate": candidate, "evidence_packet": packet}],
+            "local-model",
+            labeling.ModelSettings(max_output_tokens=6000, reasoning_effort="none"),
+        )
+        assert client.seen_url == "http://localhost:8000/v1" + route
+        # The verification schema, not the labeling one.
+        assert schema_at(client.seen_payload)["name"] == "podcast_claim_verification"
+        assert schema_at(client.seen_payload)["strict"] is True
+        # The verification rubric, not the labeling one, and the candidate
+        # with its packet -- wherever this flavor carries them.
+        assert rubric_at(client.seen_payload) == labeling.VERIFICATION_RUBRIC
+        assert "Verify every candidate" in input_at(client.seen_payload)
+        assert candidate["claim_text"] in input_at(client.seen_payload)
+        assert "sleep-guideline:p12" in input_at(client.seen_payload)
+        assert results[0]["verdict"] == "contradicted"
+        assert meta["response_id"] == bodies[api]["id"]
+
+
+def test_an_endpoint_written_with_its_route_still_resolves(monkeypatch):
+    responses = labeling.ResponsesClient("http://localhost:8000/v1/responses")
+    chat = labeling.ResponsesClient(
+        "http://localhost:8000/v1/chat/completions", api="chat_completions"
+    )
+    assert responses.roots == chat.roots == ["http://localhost:8000/v1"]
+
+
+def test_chat_truncation_is_distinguishable_from_an_empty_message():
+    # With a reasoning parser configured, a response truncated mid-thought comes
+    # back with a null content: the useful kind is the truncation, not the gap.
+    truncated = {"choices": [{"finish_reason": "length", "message": {"content": None}}]}
+    with pytest.raises(labeling.TopicLabelingError) as truncation:
+        labeling.raise_for_chat_status(truncated)
+    assert truncation.value.kind == "output_truncated"
+
+    with pytest.raises(labeling.TopicLabelingError) as filtered:
+        labeling.raise_for_chat_status(
+            {"choices": [{"finish_reason": "content_filter", "message": {}}]}
+        )
+    assert filtered.value.kind == "api_incomplete"
+
+    with pytest.raises(labeling.TopicLabelingError) as empty:
+        labeling.extract_chat_output_text(
+            {"choices": [{"finish_reason": "stop", "message": {"content": ""}}]}
+        )
+    assert empty.value.kind == "empty_output"
+
+    labeling.raise_for_chat_status(
+        {"choices": [{"finish_reason": "stop", "message": {"content": "{}"}}]}
+    )
+
+
+def test_the_spend_reservation_reads_the_budget_under_either_spelling():
+    taxonomy = small_taxonomy()
+    schema = labeling.response_schema(taxonomy)
+    settings = labeling.ModelSettings(max_output_tokens=4321, reasoning_effort="none")
+    for flavor in labeling.API_FLAVORS.values():
+        payload = flavor.payload("rubric", "window text", "name", schema, settings)
+        # A budget read as 0 would under-reserve output on every paid request.
+        assert flavor.reserved_output_tokens(payload) == 4321
+        # The schema is billed as prompt tokens, so the estimate must count it.
+        assert flavor.payload_characters(payload) > len(labeling.canonical_json(schema))
 
 
 def test_truncation_is_distinguishable_from_other_incomplete_responses():
@@ -1134,6 +1376,7 @@ def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
             windows=windows_path,
             prepare_manifest=prepare_manifest_path,
             api_base=["http://127.0.0.1:8000/v1"],
+            api=labeling.DEFAULT_API,
             model="local-model",
             api_key_env=None,
             env_file=None,
@@ -1264,6 +1507,7 @@ def test_verify_uses_only_validated_evidence_packets_and_checkpoints_results(
             output_dir=tmp_path,
             verification_dir=output_dir,
             api_base=["http://localhost:8000/v1"],
+            api=labeling.DEFAULT_API,
             model="local-model",
             api_key_env=None,
             env_file=None,

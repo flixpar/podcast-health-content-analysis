@@ -27,6 +27,13 @@ output_dir = "analysis/output/topic-labeling"
 # be attributed afterwards. Endpoints are capacity, so they stay out of the run
 # fingerprint and a node can be added or lost without orphaning a run.
 api_base = ["http://127.0.0.1:8222/v1", "http://gpu312:8222/v1"]
+# Which OpenAI-compatible API those endpoints speak: "responses" (the default)
+# or "chat_completions". vLLM serves both; some hosted providers only the
+# second. Prefer "responses" where there is a choice -- it reports truncation
+# explicitly and echoes back the sampling settings the server resolved, and on
+# chat_completions `effective_sampling` in the manifest is empty for that
+# reason, so pin temperature and top_p below if you switch.
+# api = "chat_completions"
 # Drop this line to discover the served model from /v1/models instead.
 model = "deepseek-ai/DeepSeek-V4-Flash-0731"
 
