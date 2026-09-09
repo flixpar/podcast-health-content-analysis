@@ -127,3 +127,27 @@ tokens_total = 50_000_000
 # stronger model than the production pass uses.
 [experiment.validation-sample]
 cost_total = 40.0
+
+# DeepSeek's own hosted API (https://api.deepseek.com). Prices below are the
+# *peak* rates from https://api-docs.deepseek.com/quick_start/pricing, read
+# 2026-09-08. Off-peak is exactly half, and peak is only 01:00-04:00 and
+# 06:00-10:00 UTC on weekdays, so charging every request at the peak rate
+# over-states spending by up to 2x -- which is the safe direction for a cap.
+# The published serverless concurrency limit for deepseek-v4-flash is 2500.
+[provider.deepseek]
+max_concurrent = 64
+cost_per_day = 5.0
+
+# deepseek-v4-flash == DeepSeek-V4-Flash-0731, the same checkpoint the local
+# vLLM pilot serves. Cache hits are ~30x cheaper than misses here, and the
+# ~11.5k-token instruction prefix is identical on every request, so the cached
+# rate is what most of the input actually costs once the run is warm.
+[model.deepseek."deepseek-v4-flash"]
+input_per_mtok = 0.44          # cache miss, peak
+cached_input_per_mtok = 0.014  # cache hit, peak
+output_per_mtok = 1.32         # peak
+
+# Does the hosted DeepSeek API reproduce the local vLLM pilot's behaviour, and
+# what does a window cost there? ~290 windows over 24 short episodes answers it.
+[experiment.deepseek-flash-pilot-2026-09-08]
+cost_total = 4.5
