@@ -22,6 +22,13 @@ dependencies = [
 dev = [
     "pytest>=8",
 ]
+# analysis/benchmark reads the lexical scan's parquet and uses Hungarian
+# matching; these were already in the venv but undeclared.
+analysis = [
+    "pyarrow>=17",
+    "scipy>=1.14",
+    "pandas>=2.2",
+]
 
 [tool.uv]
 environments = [

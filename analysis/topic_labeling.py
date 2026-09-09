@@ -44,7 +44,7 @@ from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Iterable, Iterator, Sequence
+from typing import Any, Callable, Iterable, Iterator, Sequence
 
 import zstandard
 
@@ -379,6 +379,42 @@ class TopicLabelingError(RuntimeError):
     def __init__(self, message: str, kind: str = "other") -> None:
         super().__init__(message)
         self.kind = kind
+
+
+_CODE_FENCE = re.compile(r"^\s*```(?:json)?\s*(.*?)\s*```\s*$", re.DOTALL)
+_TRAILING_COMMA = re.compile(r",\s*([}\]])")
+
+
+def parse_json_output(text: str) -> Any:
+    """Parse the model's output text as JSON, tolerating a markdown code fence.
+
+    A hosted provider asked for strict JSON Schema output may still hand back
+    the object wrapped in a ```json fence -- DeepSeek's Responses API does, on
+    every request -- and rejecting that as malformed throws away a correct
+    answer for a formatting habit. The same provider also emits a bare results
+    array and the occasional trailing comma. Only those three slips are
+    absorbed; anything else still fails, and the parsed value is validated as
+    before.
+    """
+    try:
+        parsed = json.loads(text)
+    except json.JSONDecodeError:
+        fenced = _CODE_FENCE.match(text)
+        candidate = fenced.group(1) if fenced else text
+        try:
+            parsed = json.loads(candidate)
+        except json.JSONDecodeError:
+            # A trailing comma before a closing bracket is never valid JSON,
+            # so removing it cannot change the meaning of a document that was
+            # valid -- and this branch only runs when it was not.
+            parsed = json.loads(_TRAILING_COMMA.sub(r"\1", candidate))
+    # Both request schemas wrap the per-item results in {"results": [...]}. A
+    # provider that ignores the schema sometimes returns the bare array; that
+    # is the same answer with the envelope dropped, and every element is still
+    # validated. Anything else is left for validate_response to reject.
+    if isinstance(parsed, list):
+        return {"results": parsed}
+    return parsed
 
 
 def error_kind(exc: BaseException) -> str:
@@ -1107,6 +1143,73 @@ def _normalized_quote(value: str) -> str:
     return re.sub(r"\s+", " ", value).strip().casefold()
 
 
+_QUOTE_WORD = re.compile(r"\w+", re.UNICODE)
+
+
+def locate_quote_span(quote: str, text: str) -> tuple[int, int] | None:
+    """Character offsets of ``quote``'s word sequence inside ``text``.
+
+    Matching on the word sequence rather than the exact characters, because
+    the difference that kept rejecting responses was never a different quote:
+    it was a straight apostrophe for a curly one, or a dropped comma. The
+    word sequence is what makes a quote evidence, and it still has to appear
+    contiguously and in order -- a paraphrase, a joined pair of fragments or
+    an abbreviation spelled without its stops is a different word sequence
+    and still misses.
+    """
+    quote_words = [m.group(0).casefold() for m in _QUOTE_WORD.finditer(quote)]
+    if not quote_words:
+        return None
+    matches = list(_QUOTE_WORD.finditer(text))
+    text_words = [m.group(0).casefold() for m in matches]
+    span = len(quote_words)
+    for start in range(len(text_words) - span + 1):
+        if text_words[start : start + span] == quote_words:
+            return matches[start].start(), matches[start + span - 1].end()
+    # ASR stutters ("healing my healing my body") are routinely tidied by a
+    # model copying the quote. Match against the transcript with immediately
+    # repeated n-grams collapsed, but return the original offsets, so the
+    # stored quote is still the transcript's own (stuttered) wording.
+    collapsed, origin = _collapse_stutters(text_words)
+    for start in range(len(collapsed) - span + 1):
+        if collapsed[start : start + span] == quote_words:
+            first, last = origin[start], origin[start + span - 1]
+            return matches[first].start(), matches[last].end()
+    return None
+
+
+def _collapse_stutters(words: Sequence[str], max_n: int = 4) -> tuple[list[str], list[int]]:
+    """Drop a word n-gram that immediately repeats the preceding one.
+
+    Returns the collapsed words and, for each, its index in the original.
+    """
+    collapsed: list[str] = []
+    origin: list[int] = []
+    index = 0
+    while index < len(words):
+        skipped = False
+        for n in range(max_n, 0, -1):
+            if len(collapsed) >= n and words[index : index + n] == collapsed[-n:]:
+                index += n
+                skipped = True
+                break
+        if not skipped:
+            collapsed.append(words[index])
+            origin.append(index)
+            index += 1
+    return collapsed, origin
+
+
+def locate_quote(quote: str, text: str) -> str | None:
+    """The transcript's own wording for ``quote``, or None if it is not there.
+
+    Returning the substring of ``text`` rather than the model's rendering
+    means what gets stored is verbatim by construction.
+    """
+    found = locate_quote_span(quote, text)
+    return text[found[0] : found[1]] if found else None
+
+
 def _product_key(name: str) -> str:
     """Case- and punctuation-insensitive key so "AG-1" and "ag1" count as one product."""
     key = re.sub(r"[^a-z0-9]+", "", name.casefold())
@@ -1177,12 +1280,15 @@ def validate_window_result(
             raise TopicLabelingError(
                 f"empty evidence quote in {window['window_id']}", kind="invalid_field"
             )
-        if _normalized_quote(quote) not in _normalized_quote(text):
+        located = locate_quote(quote, text)
+        if located is None:
+            # Carry the wording: "a quote did not match" names nothing to fix,
+            # while the text tells a paraphrase from a transcription slip.
             raise TopicLabelingError(
-                f"evidence quote is not verbatim inside {window['window_id']} range",
+                f"evidence quote is not verbatim inside {window['window_id']} range: {quote[:160]!r}",
                 kind="non_verbatim_quote",
             )
-        return re.sub(r"\s+", " ", quote).strip()
+        return re.sub(r"\s+", " ", located).strip()
 
     def validate_certainty(certainty: Any, markers: Any, text: str) -> list[str]:
         if certainty not in ALLOWED_EXPRESSED_CERTAINTY:
@@ -1207,14 +1313,14 @@ def validate_window_result(
                 f"duplicate certainty markers in {window['window_id']}",
                 kind="invalid_field",
             )
-        if any(
-            _normalized_quote(marker) not in _normalized_quote(text)
-            for marker in cleaned
-        ):
+        missing = [marker for marker in cleaned if locate_quote(marker, text) is None]
+        if missing:
             raise TopicLabelingError(
-                f"certainty marker is not verbatim inside {window['window_id']} range",
+                f"certainty marker is not verbatim inside {window['window_id']} range: "
+                f"{missing[:3]!r}",
                 kind="non_verbatim_quote",
             )
+        cleaned = [re.sub(r"\s+", " ", str(locate_quote(marker, text))).strip() for marker in cleaned]
         # The coding must be grounded: a hedge or booster the model cannot point
         # to is not a hedge or booster, and an unhedged claim has none.
         if (certainty == "unhedged") != (not cleaned):
@@ -1262,8 +1368,10 @@ def validate_window_result(
         # fails, which is the rule that actually matters.
         axes = {label_axes.get(label) for label in labels}
         if len(axes) != 1 or not axes.issubset(ALLOWED_AXES):
+            unknown = [label for label in labels if label not in label_axes]
             raise TopicLabelingError(
-                f"unknown or mixed-axis labels in {window['window_id']}",
+                f"unknown or mixed-axis labels in {window['window_id']}: "
+                f"{'unknown ' + repr(unknown[:4]) if unknown else 'mixed axes ' + repr(sorted(labels)[:4])}",
                 kind="mixed_or_unknown_labels",
             )
         axis = axes.pop()
@@ -2423,12 +2531,21 @@ class ResponsesClient:
         taxonomy: dict[str, Any],
         model: str,
         settings: ModelSettings,
+        instructions: str | None = None,
+        on_attempt: Callable[[dict[str, Any]], None] | None = None,
     ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+        """Label one batch of windows.
+
+        ``instructions`` replaces the rubric-plus-codebook prefix, for a caller
+        evaluating a prompt variant; ``on_attempt`` is told about every request,
+        accepted or rejected, which the run manifest's last-state counters
+        cannot show. Both default to the production behaviour.
+        """
         label_axes = {label["label_id"]: label["axis"] for label in taxonomy["labels"]}
         payload: dict[str, Any] = {
             "model": model,
             **self.flavor.payload(
-                taxonomy_instructions(taxonomy),
+                instructions if instructions is not None else taxonomy_instructions(taxonomy),
                 batch_input(windows),
                 "podcast_topic_clips",
                 response_schema(taxonomy),
@@ -2437,10 +2554,14 @@ class ResponsesClient:
         }
         last_error: Exception | None = None
         for attempt in range(self.attempts):
+            response: dict[str, Any] | None = None
+            output_text = ""
+            started = time.monotonic()
             try:
                 response = self._send(payload, model)
                 self.flavor.raise_for_status(response)
-                parsed = json.loads(self.flavor.output_text(response))
+                output_text = self.flavor.output_text(response)
+                parsed = parse_json_output(output_text)
                 results = validate_response(parsed, windows, label_axes)
                 meta = {
                     "response_id": response.get("id"),
@@ -2448,9 +2569,36 @@ class ResponsesClient:
                     "response_model": response.get("model"),
                     "effective_sampling": self.flavor.effective_sampling(response),
                 }
+                if on_attempt is not None:
+                    on_attempt(
+                        {
+                            "attempt": attempt,
+                            "ok": True,
+                            "windows": [window["window_id"] for window in windows],
+                            "seconds": round(time.monotonic() - started, 3),
+                            "response_id": response.get("id"),
+                            "usage": response.get("usage"),
+                        }
+                    )
                 return results, meta
             except (TopicLabelingError, json.JSONDecodeError) as exc:
                 last_error = exc
+                if on_attempt is not None:
+                    on_attempt(
+                        {
+                            "attempt": attempt,
+                            "ok": False,
+                            "windows": [window["window_id"] for window in windows],
+                            "seconds": round(time.monotonic() - started, 3),
+                            "kind": error_kind(exc),
+                            "message": str(exc)[:300],
+                            "response_id": response.get("id") if response else None,
+                            "usage": response.get("usage") if response else None,
+                            # Enough of the text to see what shape came back;
+                            # a rejection kind alone rarely says what to fix.
+                            "output_excerpt": output_text[:1500] if output_text else None,
+                        }
+                    )
                 retryable = getattr(exc, "retryable", True)
                 if not retryable or attempt + 1 >= self.attempts:
                     break
@@ -2481,7 +2629,7 @@ class ResponsesClient:
             try:
                 response = self._send(payload, model)
                 self.flavor.raise_for_status(response)
-                parsed = json.loads(self.flavor.output_text(response))
+                parsed = parse_json_output(self.flavor.output_text(response))
                 results = validate_verification_response(parsed, pairs)
                 return results, {
                     "response_id": response.get("id"),

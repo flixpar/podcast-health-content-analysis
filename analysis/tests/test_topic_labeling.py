@@ -1558,3 +1558,23 @@ def test_verification_rejects_citations_outside_the_candidate_packet():
         assert "invalid passage citations" in str(exc)
     else:
         raise AssertionError("a citation outside the evidence packet was accepted")
+
+
+def test_fenced_json_output_is_parsed_and_other_garbage_is_not():
+    parsed = labeling.parse_json_output('```json\n{"results": []}\n```')
+    assert parsed == {"results": []}
+    assert labeling.parse_json_output('{"results": []}') == {"results": []}
+    assert labeling.parse_json_output('[{"window_id": "w"}]') == {"results": [{"window_id": "w"}]}
+    assert labeling.parse_json_output('{"results": [{"a": 1,},],}') == {"results": [{"a": 1}]}
+    with pytest.raises(json.JSONDecodeError):
+        labeling.parse_json_output('Here you go:\n```json\n{"results": []}\n```')
+
+
+def test_quotes_match_on_word_sequence_not_punctuation():
+    text = "It’s proven, they said, that magnesium helps."
+    assert labeling.locate_quote("it's proven they said", text) == "It’s proven, they said"
+    assert labeling.locate_quote("magnesium helps a lot", text) is None
+    assert labeling.locate_quote("proven ... magnesium", text) is None
+    stutter = "and were healing my healing my body at the same time"
+    assert labeling.locate_quote("were healing my body at the same", stutter) == "were healing my healing my body at the same"
+    assert labeling.locate_quote("healing my healing my body", stutter) == "healing my healing my body"
