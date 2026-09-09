@@ -1,0 +1,530 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c44395w0007",
+  "provenance": {
+    "bundle": "bundle_014",
+    "ingested_at": "2026-09-09T20:27:03.216934+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000413",
+        "evidence_quote": "more than 50,000 babies have been rescued from abortion",
+        "label_ids": [
+          "topic:reproductive_sexual_health",
+          "topic:pregnancy_maternal_postpartum_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000400",
+        "summary": "Sponsor read for Preborn, a charity funding free ultrasounds at pregnancy clinics to reduce abortions."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000413",
+        "evidence_quote": "dial pound 250 and say the keyword",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000400",
+        "summary": "Delimited charity sponsor read with a call-in number and website for donations."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000418",
+        "evidence_quote": "millions of people now eat raw fish weekly",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000414",
+        "summary": "Ad describes the rise of raw fish and sushi consumption as setup for a parasite-risk pitch."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000433",
+        "evidence_quote": "Wellness company offers a hard-to-access RX parasite cleanse: USA compounded ivermectin and memantazol.",
+        "label_ids": [
+          "topic:detox_cleanses_parasites"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000419",
+        "summary": "Sponsor read for a compounded ivermectin/mebendazole parasite-cleanse product marketed as prevention against parasites from raw fish."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000422",
+        "evidence_quote": "there is a hidden risk that most people never think about: parasites",
+        "label_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000419",
+        "summary": "Parasites framed as a hidden, general risk requiring routine preventative cleansing."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000424",
+        "evidence_quote": "Dr. Peter McCullough recommends doing a parasite cleanse at least once a year as a preventative measure.",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000423",
+        "summary": "A named doctor's title is invoked to recommend a yearly parasite cleanse."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000426",
+        "evidence_quote": "Ivermectin paralyzes the parasite's nervous system, while memantazol starves them.",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000426",
+        "summary": "Mechanistic description of how the two compounded drugs act on parasites."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000433",
+        "evidence_quote": "use code Candice at checkout to save fifty-two dollars off plus free shipping",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000425",
+        "summary": "Delimited sponsor read with a discount code for the parasite-cleanse product."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000437",
+        "evidence_quote": "Especially when I am pregnant with a boy, it's deeply upsetting to me.",
+        "label_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000437",
+        "summary": "Speaker mentions being pregnant in passing while airing a personal grievance."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u000413",
+        "evidence_quote": "from my friends over at Preborn",
+        "mention_role": "advertised",
+        "product_name": "Preborn",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000400"
+      },
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000433",
+        "evidence_quote": "Wellness company offers a hard-to-access RX parasite cleanse: USA compounded ivermectin and memantazol.",
+        "mention_role": "advertised",
+        "product_name": "The Wellness Company Parasite Cleanse",
+        "product_type": "medication",
+        "start_unit_id": "u000425"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "More than 50,000 babies have been rescued from abortion this year because of donations to Preborn.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000402",
+        "evidence_quote": "more than 50,000 babies have been rescued from abortion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific statistic about abortions prevented by a charity that could be checked against its reported data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000402",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "It costs $28 to provide one ultrasound and $15,000 to place an ultrasound machine in a pregnancy clinic.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000407",
+        "evidence_quote": "It costs just $28 to provide one life-saving ultrasound, and $15,000 can place an ultrasound machine in a pregnancy clinic",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific cost figures for ultrasound provision that could be checked against the charity's actual pricing.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000407",
+        "topic_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Salmon naturally contains more than 70 parasites.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000420",
+        "evidence_quote": "Salmon is one of the most popular fish worldwide, but it naturally contains more than 70 parasites.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "rationale": "Quantitative claim about parasite content in salmon that could be checked against food-safety research.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000420",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites",
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can hide"
+        ],
+        "claim_text": "Parasites from raw fish can hide in the body for years, laying eggs before any symptoms appear.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000422",
+        "evidence_quote": "parasites can hide for years while frequently laying eggs before any symptoms appear",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "rationale": "Claim about parasite persistence and latency in the body that could be checked against parasitology evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000421",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Dr. Peter McCullough recommends doing a parasite cleanse at least once a year as a preventative measure.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000424",
+        "evidence_quote": "Dr. Peter McCullough recommends doing a parasite cleanse at least once a year as a preventative measure.",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Claim attributing a specific preventive recommendation to a named doctor that could be checked against his public statements.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000423",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ivermectin paralyzes a parasite's nervous system while mebendazole starves it.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000427",
+        "evidence_quote": "Ivermectin paralyzes the parasite's nervous system, while memantazol starves them.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific mechanistic claim about how the two drugs act on parasites that could be checked against pharmacology.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000426",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      }
+    ],
+    "window_id": "episode_44395_window_0007"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000413",
+        "evidence_quote": "more than 50,000 babies have been rescued from abortion",
+        "label_ids": [
+          "topic:pregnancy_maternal_postpartum_health",
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000400",
+        "summary": "Sponsor read for Preborn, a charity funding free ultrasounds at pregnancy clinics to reduce abortions."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000413",
+        "evidence_quote": "dial pound 250 and say the keyword",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000400",
+        "summary": "Delimited charity sponsor read with a call-in number and website for donations."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000418",
+        "evidence_quote": "millions of people now eat raw fish weekly",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000414",
+        "summary": "Ad describes the rise of raw fish and sushi consumption as setup for a parasite-risk pitch."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000433",
+        "evidence_quote": "Wellness company offers a hard-to-access RX parasite cleanse: USA compounded ivermectin and memantazol",
+        "label_ids": [
+          "topic:detox_cleanses_parasites"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000419",
+        "summary": "Sponsor read for a compounded ivermectin/mebendazole parasite-cleanse product marketed as prevention against parasites from raw fish."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000422",
+        "evidence_quote": "there is a hidden risk that most people never think about: parasites",
+        "label_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000419",
+        "summary": "Parasites framed as a hidden, general risk requiring routine preventative cleansing."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000424",
+        "evidence_quote": "Dr. Peter McCullough recommends doing a parasite cleanse at least once a year as a preventative measure",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000423",
+        "summary": "A named doctor's title is invoked to recommend a yearly parasite cleanse."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000426",
+        "evidence_quote": "Ivermectin paralyzes the parasite's nervous system, while memantazol starves them",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000426",
+        "summary": "Mechanistic description of how the two compounded drugs act on parasites."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000433",
+        "evidence_quote": "use code Candice at checkout to save fifty-two dollars off plus free shipping",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000425",
+        "summary": "Delimited sponsor read with a discount code for the parasite-cleanse product."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000437",
+        "evidence_quote": "Especially when I am pregnant with a boy, it's deeply upsetting to me",
+        "label_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000437",
+        "summary": "Speaker mentions being pregnant in passing while airing a personal grievance."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u000413",
+        "evidence_quote": "from my friends over at Preborn",
+        "mention_role": "advertised",
+        "product_name": "Preborn",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000400"
+      },
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000433",
+        "evidence_quote": "Wellness company offers a hard-to-access RX parasite cleanse: USA compounded ivermectin and memantazol",
+        "mention_role": "advertised",
+        "product_name": "The Wellness Company Parasite Cleanse",
+        "product_type": "medication",
+        "start_unit_id": "u000425"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "More than 50,000 babies have been rescued from abortion this year because of donations to Preborn.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000402",
+        "evidence_quote": "more than 50,000 babies have been rescued from abortion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific statistic about abortions prevented by a charity that could be checked against its reported data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000402",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "It costs $28 to provide one ultrasound and $15,000 to place an ultrasound machine in a pregnancy clinic.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000407",
+        "evidence_quote": "It costs just $28 to provide one life-saving ultrasound, and $15,000 can place an ultrasound machine in a pregnancy clinic",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific cost figures for ultrasound provision that could be checked against the charity's actual pricing.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000407",
+        "topic_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Salmon naturally contains more than 70 parasites.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000420",
+        "evidence_quote": "Salmon is one of the most popular fish worldwide, but it naturally contains more than 70 parasites",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "rationale": "Quantitative claim about parasite content in salmon that could be checked against food-safety research.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000420",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites",
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can hide"
+        ],
+        "claim_text": "Parasites from raw fish can hide in the body for years, laying eggs before any symptoms appear.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000422",
+        "evidence_quote": "parasites can hide for years while frequently laying eggs before any symptoms appear",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "rationale": "Claim about parasite persistence and latency in the body that could be checked against parasitology evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000421",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Dr. Peter McCullough recommends doing a parasite cleanse at least once a year as a preventative measure.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000424",
+        "evidence_quote": "Dr. Peter McCullough recommends doing a parasite cleanse at least once a year as a preventative measure",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Claim attributing a specific preventive recommendation to a named doctor that could be checked against his public statements.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000423",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ivermectin paralyzes a parasite's nervous system while mebendazole starves it.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000427",
+        "evidence_quote": "Ivermectin paralyzes the parasite's nervous system, while memantazol starves them",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific mechanistic claim about how the two drugs act on parasites that could be checked against pharmacology.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000426",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      }
+    ],
+    "window_id": "episode_44395_window_0007"
+  },
+  "stored_at": "2026-09-09T20:27:03.216981+00:00"
+}

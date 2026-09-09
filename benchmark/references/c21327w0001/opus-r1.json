@@ -1,0 +1,400 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c21327w0001",
+  "provenance": {
+    "bundle": "bundle_023",
+    "ingested_at": "2026-09-09T18:04:01.526158+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "BetterHelp is fully online, making therapy affordable and convenient.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000004",
+        "summary": "Sponsor read promoting therapy through BetterHelp."
+      },
+      {
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "Visit BetterHelp.com/pmt today to get 10% off your first month.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000004",
+        "summary": "Paid sponsor read with URL and discount offer."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000013",
+        "evidence_quote": "I've personally used therapy in the past as a tool to help me get through some times of loss.",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000009",
+        "summary": "Host offers his own history with therapy as grounds for recommending it."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "access a diverse network of more than 30,000 credentialed therapists with a wide range of specialties",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000016",
+        "summary": "Therapists' credentials invoked to vouch for the service."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "Yeah, a little bit, but I put on some sunscreen.",
+        "label_ids": [
+          "topic:beauty_dermatology_skincare"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000024",
+        "summary": "Banter about tans, sunburn and putting on sunscreen."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000091",
+        "evidence_quote": "while delivering 18 grams of protein and three grams of sugar",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000084",
+        "summary": "Protein-bar ad copy citing protein and sugar content."
+      },
+      {
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000091",
+        "evidence_quote": "Find all one bars at a retailer near you or on Amazon.com.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000084",
+        "summary": "Paid read telling listeners where to buy the bars."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000021",
+        "evidence_quote": "This show is sponsored by BetterHelp.",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000004"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000091",
+        "evidence_quote": "Find all one bars at a retailer near you or on Amazon.com.",
+        "mention_role": "advertised",
+        "product_name": "ONE Bars",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000084"
+      },
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000087",
+        "evidence_quote": "is made with Reese's peanut butter",
+        "mention_role": "advertised",
+        "product_name": "Reese's Peanut Butter",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000086"
+      },
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000087",
+        "evidence_quote": "is made with Hershey's cookie bits",
+        "mention_role": "advertised",
+        "product_name": "Hershey's Cookie Bits",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000086"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp gives access to a network of more than 30,000 credentialed therapists.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "access a diverse network of more than 30,000 credentialed therapists",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "The size and credentialing of the therapist network is a checkable sponsor claim about a health service.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000016",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp serves over five million people worldwide.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "Serving over five million people worldwide",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A specific usage figure offered in ad copy that could be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000016",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The One Reese's peanut butter lovers protein bar delivers 18 grams of protein and three grams of sugar.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000087",
+        "evidence_quote": "while delivering 18 grams of protein and three grams of sugar",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A specific nutritional composition claim in ad copy that can be checked against the product.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000087",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      }
+    ],
+    "window_id": "episode_21327_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "BetterHelp is fully online, making therapy affordable and convenient",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000004",
+        "summary": "Sponsor read promoting therapy through BetterHelp."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "Visit BetterHelp.com/pmt today to get 10% off your first month",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000004",
+        "summary": "Paid sponsor read with URL and discount offer."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000013",
+        "evidence_quote": "I've personally used therapy in the past as a tool to help me get through some times of loss",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000009",
+        "summary": "Host offers his own history with therapy as grounds for recommending it."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "access a diverse network of more than 30,000 credentialed therapists with a wide range of specialties",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000016",
+        "summary": "Therapists' credentials invoked to vouch for the service."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "Yeah, a little bit, but I put on some sunscreen",
+        "label_ids": [
+          "topic:beauty_dermatology_skincare"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000024",
+        "summary": "Banter about tans, sunburn and putting on sunscreen."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000091",
+        "evidence_quote": "while delivering 18 grams of protein and three grams of sugar",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000084",
+        "summary": "Protein-bar ad copy citing protein and sugar content."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000091",
+        "evidence_quote": "Find all one bars at a retailer near you or on Amazon.com",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000084",
+        "summary": "Paid read telling listeners where to buy the bars."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000021",
+        "evidence_quote": "This show is sponsored by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000004"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000091",
+        "evidence_quote": "Find all one bars at a retailer near you or on Amazon.com",
+        "mention_role": "advertised",
+        "product_name": "ONE Bars",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000084"
+      },
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000087",
+        "evidence_quote": "is made with Reese's peanut butter",
+        "mention_role": "advertised",
+        "product_name": "Reese's Peanut Butter",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000086"
+      },
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000087",
+        "evidence_quote": "is made with Hershey's cookie bits",
+        "mention_role": "advertised",
+        "product_name": "Hershey's Cookie Bits",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000086"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp gives access to a network of more than 30,000 credentialed therapists.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "access a diverse network of more than 30,000 credentialed therapists",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "The size and credentialing of the therapist network is a checkable sponsor claim about a health service.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000016",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp serves over five million people worldwide.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "Serving over five million people worldwide",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A specific usage figure offered in ad copy that could be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000016",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The One Reese's peanut butter lovers protein bar delivers 18 grams of protein and three grams of sugar.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000087",
+        "evidence_quote": "while delivering 18 grams of protein and three grams of sugar",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A specific nutritional composition claim in ad copy that can be checked against the product.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000087",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      }
+    ],
+    "window_id": "episode_21327_window_0001"
+  },
+  "stored_at": "2026-09-09T18:04:01.526192+00:00"
+}

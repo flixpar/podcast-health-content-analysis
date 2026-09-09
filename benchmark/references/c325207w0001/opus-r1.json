@@ -1,0 +1,270 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c325207w0001",
+  "provenance": {
+    "bundle": "bundle_013",
+    "ingested_at": "2026-09-09T18:04:01.044587+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "Insight Tracker for biological data, Eight Sleep for naps, and AG1 for delicious health.",
+        "label_ids": [
+          "topic:wearables_self_tracking_digital_health",
+          "topic:sleep",
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000016",
+        "summary": "The sponsor rundown names a biological-data testing service, a sleep product and a greens powder."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "And now, a quick few second mention of each sponsor.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000012",
+        "summary": "The host runs through his sponsors and asks listeners to support the show through them."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000071",
+        "evidence_quote": "blood tests that give you information on all kinds of things going on inside your body",
+        "label_ids": [
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000062",
+        "summary": "An ad read for InsideTracker blood testing to track biological data."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000071",
+        "evidence_quote": "This show is also brought to you by Inside Tracker, a service I use to track data from my body",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000062",
+        "summary": "A delimited sponsor read for a health testing service."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000071",
+        "evidence_quote": "How to use AI to get data that comes from your body to do all kinds of things.",
+        "label_ids": [
+          "topic:ai_health_information"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000065",
+        "summary": "Using AI and LLMs to interpret body data and understand maladies is discussed inside the ad read."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000016",
+        "evidence_quote": "Insight Tracker for biological data, Eight Sleep for naps, and AG1 for delicious health.",
+        "mention_role": "advertised",
+        "product_name": "InsideTracker",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000016"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000016",
+        "evidence_quote": "Insight Tracker for biological data, Eight Sleep for naps, and AG1 for delicious health.",
+        "mention_role": "advertised",
+        "product_name": "Eight Sleep",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000016"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000016",
+        "evidence_quote": "Insight Tracker for biological data, Eight Sleep for naps, and AG1 for delicious health.",
+        "mention_role": "advertised",
+        "product_name": "AG1",
+        "product_type": "supplement",
+        "start_unit_id": "u000016"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000071",
+        "evidence_quote": "This show is also brought to you by Inside Tracker, a service I use to track data from my body",
+        "mention_role": "advertised",
+        "product_name": "InsideTracker",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000062"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "InsideTracker's blood tests give you information on all kinds of things going on inside your body so you can make better lifestyle decisions.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000062",
+        "evidence_quote": "blood tests that give you information on all kinds of things going on inside your body, so you can make better lifestyle decisions",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A sponsor claim about what a blood-testing service tells you that can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000062",
+        "topic_ids": [
+          "topic:wearables_self_tracking_digital_health"
+        ]
+      }
+    ],
+    "window_id": "episode_325207_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "Insight Tracker for biological data, Eight Sleep for naps, and AG1 for delicious health",
+        "label_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:sleep",
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000016",
+        "summary": "The sponsor rundown names a biological-data testing service, a sleep product and a greens powder."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "And now, a quick few second mention of each sponsor",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000012",
+        "summary": "The host runs through his sponsors and asks listeners to support the show through them."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000071",
+        "evidence_quote": "blood tests that give you information on all kinds of things going on inside your body",
+        "label_ids": [
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000062",
+        "summary": "An ad read for InsideTracker blood testing to track biological data."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000071",
+        "evidence_quote": "This show is also brought to you by Inside Tracker, a service I use to track data from my body",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000062",
+        "summary": "A delimited sponsor read for a health testing service."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000071",
+        "evidence_quote": "How to use AI to get data that comes from your body to do all kinds of things",
+        "label_ids": [
+          "topic:ai_health_information"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000065",
+        "summary": "Using AI and LLMs to interpret body data and understand maladies is discussed inside the ad read."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000016",
+        "evidence_quote": "Insight Tracker for biological data, Eight Sleep for naps, and AG1 for delicious health",
+        "mention_role": "advertised",
+        "product_name": "InsideTracker",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000016"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000016",
+        "evidence_quote": "Insight Tracker for biological data, Eight Sleep for naps, and AG1 for delicious health",
+        "mention_role": "advertised",
+        "product_name": "Eight Sleep",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000016"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000016",
+        "evidence_quote": "Insight Tracker for biological data, Eight Sleep for naps, and AG1 for delicious health",
+        "mention_role": "advertised",
+        "product_name": "AG1",
+        "product_type": "supplement",
+        "start_unit_id": "u000016"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000071",
+        "evidence_quote": "This show is also brought to you by Inside Tracker, a service I use to track data from my body",
+        "mention_role": "advertised",
+        "product_name": "InsideTracker",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000062"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "InsideTracker's blood tests give you information on all kinds of things going on inside your body so you can make better lifestyle decisions.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000062",
+        "evidence_quote": "blood tests that give you information on all kinds of things going on inside your body, so you can make better lifestyle decisions",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A sponsor claim about what a blood-testing service tells you that can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000062",
+        "topic_ids": [
+          "topic:wearables_self_tracking_digital_health"
+        ]
+      }
+    ],
+    "window_id": "episode_325207_window_0001"
+  },
+  "stored_at": "2026-09-09T18:04:01.044631+00:00"
+}

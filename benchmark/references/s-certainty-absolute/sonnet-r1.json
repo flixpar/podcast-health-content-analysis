@@ -1,0 +1,374 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "s-certainty-absolute",
+  "provenance": {
+    "bundle": "bundle_003",
+    "ingested_at": "2026-09-09T19:54:51.469289+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-sonnet-r1-synthetic-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "magnesium glycinate definitely helps you fall asleep faster its proven at this point and every single time i take it im out within ten minutes no joke",
+        "label_ids": [
+          "topic:sleep",
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "summary": "Host describes struggling to fall asleep and being recommended magnesium glycinate, which they say changed their sleep dramatically, plus discussion of different magnesium forms."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000048",
+        "evidence_quote": "you have how many cups a day at this point",
+        "label_ids": [
+          "topic:nicotine_tobacco_stimulants"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000041",
+        "summary": "Brief joking exchange about drinking four to five cups of coffee a day."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "i think you should try it and see how it goes for you everyones a little different but it worked for me",
+        "label_ids": [
+          "topic:sleep",
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000051",
+        "summary": "Host recommends trying magnesium glycinate for sleep, noting results vary by person but it worked for them."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "i started taking it a few months ago and honestly it changed everything for me",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "Speaker offers their own experience taking magnesium glycinate as evidence that it works."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "everyones a little different but it worked for me",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000051",
+        "summary": "Speaker again cites personal experience ('it worked for me') as grounds to recommend the supplement."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "magnesium glycinate is basically magnesium bonded to the amino acid glycine which is why its absorbed a little differently than other forms",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "Speaker explains magnesium glycinate's absorption using biochemical/mechanistic language about amino acid bonding."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "its proven at this point",
+        "label_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "summary": "Speaker explicitly asserts the sleep claim is 'proven', an evidence-strength assertion."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "definitely",
+          "proven",
+          "every single time"
+        ],
+        "claim_text": "Magnesium glycinate definitely helps people fall asleep faster and works every single time it is taken.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "magnesium glycinate definitely helps you fall asleep faster its proven at this point and every single time i take it im out within ten minutes no joke",
+        "evidence_signal_ids": [
+          "cross_cutting:evidence_strength_claim",
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "Specific, checkable claim about supplement efficacy for sleep onset, stated in absolute terms.",
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "topic_ids": [
+          "topic:sleep",
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Magnesium glycinate is magnesium bonded to the amino acid glycine, which is why it is absorbed differently than other forms of magnesium.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "magnesium glycinate is basically magnesium bonded to the amino acid glycine which is why its absorbed a little differently than other forms",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "States a specific compositional/mechanistic claim about magnesium glycinate's absorption that can be checked against pharmacology.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "like"
+        ],
+        "claim_text": "There are five or six common forms of magnesium and they each do slightly different things.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000030",
+        "evidence_quote": "theres like five or six common ones and they all do slightly different things",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about the number of common magnesium forms and their differing effects.",
+        "relevance": "substantive",
+        "start_unit_id": "u000030",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Magnesium glycinate is the form associated with sleep, while magnesium oxide is more associated with digestion.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "the glycinate form specifically is the one people talk about for sleep versus like magnesium oxide which is more for digestion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific claim differentiating magnesium forms by purpose that can be checked against nutritional evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000028",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      }
+    ],
+    "window_id": "synthetic_certainty_absolute_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "magnesium glycinate definitely helps you fall asleep faster its proven at this point and every single time i take it im out within ten minutes no joke",
+        "label_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "summary": "Host describes struggling to fall asleep and being recommended magnesium glycinate, which they say changed their sleep dramatically, plus discussion of different magnesium forms."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000048",
+        "evidence_quote": "you have how many cups a day at this point",
+        "label_ids": [
+          "topic:nicotine_tobacco_stimulants"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000041",
+        "summary": "Brief joking exchange about drinking four to five cups of coffee a day."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "i think you should try it and see how it goes for you everyones a little different but it worked for me",
+        "label_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000051",
+        "summary": "Host recommends trying magnesium glycinate for sleep, noting results vary by person but it worked for them."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "i started taking it a few months ago and honestly it changed everything for me",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "Speaker offers their own experience taking magnesium glycinate as evidence that it works."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "everyones a little different but it worked for me",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000051",
+        "summary": "Speaker again cites personal experience ('it worked for me') as grounds to recommend the supplement."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "magnesium glycinate is basically magnesium bonded to the amino acid glycine which is why its absorbed a little differently than other forms",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "Speaker explains magnesium glycinate's absorption using biochemical/mechanistic language about amino acid bonding."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "its proven at this point",
+        "label_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "summary": "Speaker explicitly asserts the sleep claim is 'proven', an evidence-strength assertion."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "definitely",
+          "proven",
+          "every single time"
+        ],
+        "claim_text": "Magnesium glycinate definitely helps people fall asleep faster and works every single time it is taken.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "magnesium glycinate definitely helps you fall asleep faster its proven at this point and every single time i take it im out within ten minutes no joke",
+        "evidence_signal_ids": [
+          "cross_cutting:evidence_strength_claim",
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "Specific, checkable claim about supplement efficacy for sleep onset, stated in absolute terms.",
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Magnesium glycinate is magnesium bonded to the amino acid glycine, which is why it is absorbed differently than other forms of magnesium.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "magnesium glycinate is basically magnesium bonded to the amino acid glycine which is why its absorbed a little differently than other forms",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "States a specific compositional/mechanistic claim about magnesium glycinate's absorption that can be checked against pharmacology.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "like"
+        ],
+        "claim_text": "There are five or six common forms of magnesium and they each do slightly different things.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000030",
+        "evidence_quote": "theres like five or six common ones and they all do slightly different things",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about the number of common magnesium forms and their differing effects.",
+        "relevance": "substantive",
+        "start_unit_id": "u000030",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Magnesium glycinate is the form associated with sleep, while magnesium oxide is more associated with digestion.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "the glycinate form specifically is the one people talk about for sleep versus like magnesium oxide which is more for digestion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific claim differentiating magnesium forms by purpose that can be checked against nutritional evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000028",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      }
+    ],
+    "window_id": "synthetic_certainty_absolute_window_0001"
+  },
+  "stored_at": "2026-09-09T19:54:51.469335+00:00"
+}

@@ -1,0 +1,184 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c193307w0006",
+  "provenance": {
+    "bundle": "bundle_020",
+    "ingested_at": "2026-09-09T18:04:01.404470+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states.",
+        "label_ids": [
+          "topic:glp_1_incretin_drugs",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "summary": "Closing disclaimer of a telehealth weight-loss ad naming Wegovy and safety information."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "To get started and learn more, including important safety information.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "summary": "Sponsor read directing listeners to a weight-loss service's website."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000309",
+        "evidence_quote": "Wagovi clinical study information and restrictions.",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000309",
+        "summary": "Ad points listeners to clinical study information for the drug."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states.",
+        "mention_role": "advertised",
+        "product_name": "Hers",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000306"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000309",
+        "evidence_quote": "Wegovy is a registered trademark of Novo Nordisk AS.",
+        "mention_role": "advertised",
+        "product_name": "Wegovy",
+        "product_type": "medication",
+        "start_unit_id": "u000307"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The Hers weight loss service is not available in all 50 states.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000306",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A checkable availability claim about access to a prescription weight-loss service.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "topic_ids": [
+          "topic:weight_loss_metabolic_health",
+          "topic:glp_1_incretin_drugs"
+        ]
+      }
+    ],
+    "window_id": "episode_193307_window_0006"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states",
+        "label_ids": [
+          "topic:glp_1_incretin_drugs",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "summary": "Closing disclaimer of a telehealth weight-loss ad naming Wegovy and safety information."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "To get started and learn more, including important safety information",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "summary": "Sponsor read directing listeners to a weight-loss service's website."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000309",
+        "evidence_quote": "Wagovi clinical study information and restrictions",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000309",
+        "summary": "Ad points listeners to clinical study information for the drug."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states",
+        "mention_role": "advertised",
+        "product_name": "Hers",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000306"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000309",
+        "evidence_quote": "Wegovy is a registered trademark of Novo Nordisk AS",
+        "mention_role": "advertised",
+        "product_name": "Wegovy",
+        "product_type": "medication",
+        "start_unit_id": "u000307"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The Hers weight loss service is not available in all 50 states.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000306",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A checkable availability claim about access to a prescription weight-loss service.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "topic_ids": [
+          "topic:glp_1_incretin_drugs",
+          "topic:weight_loss_metabolic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_193307_window_0006"
+  },
+  "stored_at": "2026-09-09T18:04:01.404515+00:00"
+}

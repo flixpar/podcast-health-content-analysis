@@ -1,0 +1,504 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "s-product-vs-generic",
+  "provenance": {
+    "bundle": "bundle_001",
+    "ingested_at": "2026-09-09T19:55:08.457187+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-sonnet-r2-synthetic-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "creatine basically helps your muscles regenerate atp faster which is why people notice more reps in the gym",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "summary": "Hosts explain how creatine works, its research base, dosing approaches, and correct the misconception that it causes bloating."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "the one i've actually been using myself the last few months is called suncrest creatine",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000029",
+        "summary": "Host names the specific creatine brand he personally uses and clarifies it is chemically identical to other creatine monohydrate."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "creatine basically helps your muscles regenerate atp faster",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "summary": "Creatine's benefit is explained through ATP regeneration in muscle."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "it's one of the most studied supplements out there honestly the research goes back decades",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Creatine's research base is invoked to support its credibility."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000020",
+        "evidence_quote": "there's some early work on cognition and fatigue especially in people who don't eat much meat",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "Early, preliminary research is cited for creatine's cognitive and fatigue effects."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "it's intracellular water though it's not the same as bloating it actually helps the muscle cell function",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "The host corrects the misconception that creatine's water retention is the same as bloating."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "it's intracellular water though it's not the same as bloating it actually helps the muscle cell function",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "Creatine's water retention is explained as intracellular water aiding muscle cell function."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000036",
+        "evidence_quote": "the one i've actually been using myself the last few months is called suncrest creatine",
+        "mention_role": "recommended",
+        "product_name": "Suncrest Creatine",
+        "product_type": "supplement",
+        "start_unit_id": "u000029"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Creatine helps muscles regenerate ATP faster, which is why people notice more reps in the gym.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "creatine basically helps your muscles regenerate atp faster which is why people notice more reps in the gym",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable mechanistic claim about how creatine improves gym performance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Creatine is one of the most studied supplements, with research going back decades.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "it's one of the most studied supplements out there honestly the research goes back decades",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about the extent of creatine research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "some early"
+        ],
+        "claim_text": "There is some early research on creatine's effects on cognition and fatigue, particularly in people who don't eat much meat.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000020",
+        "evidence_quote": "there's some early work on cognition and fatigue especially in people who don't eat much meat",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about preliminary creatine research for cognition and fatigue.",
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:brain_cognition_productivity"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Creatine loading leads to muscle saturation faster than a flat daily dose, but produces no different effect in the long term.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000023",
+        "evidence_quote": "loading just gets you there faster it's not like it does something different long term",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about creatine loading versus flat dosing protocols.",
+        "relevance": "substantive",
+        "start_unit_id": "u000023",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "think"
+        ],
+        "claim_text": "Creatine causes water retention that makes people look puffy or bloated.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.55,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000024",
+        "evidence_quote": "people also worry about the water retention thing like they think they're getting puffy or something",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable safety/side-effect claim about creatine that the hosts go on to dispute.",
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Creatine's water retention is intracellular water that helps muscle cell function, not the same as bloating or visible swelling.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "it's intracellular water though it's not the same as bloating it actually helps the muscle cell function",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Checkable mechanistic claim correcting a misconception about creatine and bloating.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Suncrest creatine is just creatine monohydrate, the same active ingredient as other creatine products.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000033",
+        "evidence_quote": "i'm not saying it works differently in your body it's still just creatine monohydrate",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable compositional claim about whether a specific branded creatine differs from generic creatine.",
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      }
+    ],
+    "window_id": "synthetic_product_vs_generic_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "creatine basically helps your muscles regenerate atp faster which is why people notice more reps in the gym",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "summary": "Hosts explain how creatine works, its research base, dosing approaches, and correct the misconception that it causes bloating."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "the one i've actually been using myself the last few months is called suncrest creatine",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000029",
+        "summary": "Host names the specific creatine brand he personally uses and clarifies it is chemically identical to other creatine monohydrate."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "creatine basically helps your muscles regenerate atp faster",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "summary": "Creatine's benefit is explained through ATP regeneration in muscle."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "it's one of the most studied supplements out there honestly the research goes back decades",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Creatine's research base is invoked to support its credibility."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000020",
+        "evidence_quote": "there's some early work on cognition and fatigue especially in people who don't eat much meat",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "Early, preliminary research is cited for creatine's cognitive and fatigue effects."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "it's intracellular water though it's not the same as bloating it actually helps the muscle cell function",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "The host corrects the misconception that creatine's water retention is the same as bloating."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "it's intracellular water though it's not the same as bloating it actually helps the muscle cell function",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "Creatine's water retention is explained as intracellular water aiding muscle cell function."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000036",
+        "evidence_quote": "the one i've actually been using myself the last few months is called suncrest creatine",
+        "mention_role": "recommended",
+        "product_name": "Suncrest Creatine",
+        "product_type": "supplement",
+        "start_unit_id": "u000029"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Creatine helps muscles regenerate ATP faster, which is why people notice more reps in the gym.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "creatine basically helps your muscles regenerate atp faster which is why people notice more reps in the gym",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable mechanistic claim about how creatine improves gym performance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Creatine is one of the most studied supplements, with research going back decades.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "it's one of the most studied supplements out there honestly the research goes back decades",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about the extent of creatine research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "some early"
+        ],
+        "claim_text": "There is some early research on creatine's effects on cognition and fatigue, particularly in people who don't eat much meat.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000020",
+        "evidence_quote": "there's some early work on cognition and fatigue especially in people who don't eat much meat",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about preliminary creatine research for cognition and fatigue.",
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "topic_ids": [
+          "topic:brain_cognition_productivity",
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Creatine loading leads to muscle saturation faster than a flat daily dose, but produces no different effect in the long term.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000023",
+        "evidence_quote": "loading just gets you there faster it's not like it does something different long term",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about creatine loading versus flat dosing protocols.",
+        "relevance": "substantive",
+        "start_unit_id": "u000023",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "think"
+        ],
+        "claim_text": "Creatine causes water retention that makes people look puffy or bloated.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.55,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000024",
+        "evidence_quote": "people also worry about the water retention thing like they think they're getting puffy or something",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable safety/side-effect claim about creatine that the hosts go on to dispute.",
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Creatine's water retention is intracellular water that helps muscle cell function, not the same as bloating or visible swelling.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "it's intracellular water though it's not the same as bloating it actually helps the muscle cell function",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Checkable mechanistic claim correcting a misconception about creatine and bloating.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Suncrest creatine is just creatine monohydrate, the same active ingredient as other creatine products.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000033",
+        "evidence_quote": "i'm not saying it works differently in your body it's still just creatine monohydrate",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable compositional claim about whether a specific branded creatine differs from generic creatine.",
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      }
+    ],
+    "window_id": "synthetic_product_vs_generic_window_0001"
+  },
+  "stored_at": "2026-09-09T19:55:08.457219+00:00"
+}

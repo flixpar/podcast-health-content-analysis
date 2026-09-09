@@ -1,0 +1,381 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c190223w0004",
+  "provenance": {
+    "bundle": "bundle_024",
+    "ingested_at": "2026-09-09T19:40:19.763806+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000291",
+        "evidence_quote": "have a second role beyond their role as energy generators and that is as environmental sensors.",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000206",
+        "summary": "Guest presents Dr. Naviaux's 'cell danger response' theory that mitochondria act as environmental danger sensors which redirect energy toward cellular defense under stress, explaining fatigue after illness or overtraining."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000242",
+        "evidence_quote": "result in increased levels of oxidative damage, increased levels of inflammatory cytokines",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "summary": "Dense mechanistic description of oxidative damage, inflammatory cytokines, and leakage of ATP/ADP and mitochondrial DNA into the bloodstream as danger signals."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000208",
+        "evidence_quote": "Well, what we now know through research, especially in the last decade and synthesized",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000208",
+        "summary": "Speaker invokes recent research as the basis for the mitochondrial framework being described."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "There's a whole field of research called mitochondrial psychobiology now where we look into how",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000232",
+        "summary": "Speaker names a 'field of research' (mitochondrial psychobiology) as backing for the mind-mitochondria link."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "in a coherent framework by Dr. Robert Navio with the cell danger response is that mitochondria",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000209",
+        "summary": "The framework is attributed to a named 'Dr.', invoking his title as grounds for the claim."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000266",
+        "evidence_quote": "Dr. Robert Navio calls this peacetime metabolism or wartime metabolism.",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000265",
+        "summary": "Second invocation of the same named doctor's title as authority for the 'peacetime/wartime metabolism' terminology."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Mitochondria have a second role beyond producing energy: acting as environmental sensors.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "have a second role beyond their role as energy generators and that is as environmental sensors.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about a specific mitochondrial function that could be checked against cell biology literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000211",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "basically"
+        ],
+        "claim_text": "Mitochondria can detect basically every type of threat, danger signal, or stress imaginable, from poor diet to leaky gut to infections to physical overtraining.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000230",
+        "evidence_quote": "Mitochondria can detect basically every type of threat or danger signal or stress imaginable from poor diet to leaky gut to infections to physical overtraining",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Broad causal/mechanistic claim about mitochondrial sensing capacity that could be checked against the research it invokes.",
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "almost"
+        ],
+        "claim_text": "When a stressor exceeds what the body can handle, it results in increased oxidative damage and increased inflammatory cytokines.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000238",
+        "evidence_quote": "almost every type of stress when in excess of what the body can handle will result in increased levels of oxidative damage, increased levels of inflammatory cytokines",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific mechanistic/causal claim about stress physiology that could be checked against the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000237",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "If a stress load exceeds the mitochondria's capacity (the 'resilience threshold'), the mitochondria shift into a 'cell danger response' that redirects resources away from energy production toward cellular defense.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000262",
+        "evidence_quote": "the mitochondria shift into the cell danger response, where they are redirecting resources away from energy production towards cellular defense.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific mechanistic/causal claim about mitochondrial stress response that could be checked against the cell danger response literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000260",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fatigue is one of the classic symptoms of having a cold, flu, or COVID.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000286",
+        "evidence_quote": "the last time you got a cold or a flu or a COVID, what's one of the classic symptoms? Fatigue.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Common but checkable claim about symptom association used to support the broader mitochondrial theory being presented.",
+        "relevance": "substantive",
+        "start_unit_id": "u000284",
+        "topic_ids": [
+          "topic:covid_19_pandemic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_190223_window_0004"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000291",
+        "evidence_quote": "have a second role beyond their role as energy generators and that is as environmental sensors",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000206",
+        "summary": "Guest presents Dr. Naviaux's 'cell danger response' theory that mitochondria act as environmental danger sensors which redirect energy toward cellular defense under stress, explaining fatigue after illness or overtraining."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000242",
+        "evidence_quote": "result in increased levels of oxidative damage, increased levels of inflammatory cytokines",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "summary": "Dense mechanistic description of oxidative damage, inflammatory cytokines, and leakage of ATP/ADP and mitochondrial DNA into the bloodstream as danger signals."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000208",
+        "evidence_quote": "Well, what we now know through research, especially in the last decade and synthesized",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000208",
+        "summary": "Speaker invokes recent research as the basis for the mitochondrial framework being described."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "There's a whole field of research called mitochondrial psychobiology now where we look into how",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000232",
+        "summary": "Speaker names a 'field of research' (mitochondrial psychobiology) as backing for the mind-mitochondria link."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "in a coherent framework by Dr. Robert Navio with the cell danger response is that mitochondria",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000209",
+        "summary": "The framework is attributed to a named 'Dr.', invoking his title as grounds for the claim."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000266",
+        "evidence_quote": "Dr. Robert Navio calls this peacetime metabolism or wartime metabolism",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000265",
+        "summary": "Second invocation of the same named doctor's title as authority for the 'peacetime/wartime metabolism' terminology."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Mitochondria have a second role beyond producing energy: acting as environmental sensors.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "have a second role beyond their role as energy generators and that is as environmental sensors",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about a specific mitochondrial function that could be checked against cell biology literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000211",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "basically"
+        ],
+        "claim_text": "Mitochondria can detect basically every type of threat, danger signal, or stress imaginable, from poor diet to leaky gut to infections to physical overtraining.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000230",
+        "evidence_quote": "Mitochondria can detect basically every type of threat or danger signal or stress imaginable from poor diet to leaky gut to infections to physical overtraining",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Broad causal/mechanistic claim about mitochondrial sensing capacity that could be checked against the research it invokes.",
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "almost"
+        ],
+        "claim_text": "When a stressor exceeds what the body can handle, it results in increased oxidative damage and increased inflammatory cytokines.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000238",
+        "evidence_quote": "almost every type of stress when in excess of what the body can handle will result in increased levels of oxidative damage, increased levels of inflammatory cytokines",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific mechanistic/causal claim about stress physiology that could be checked against the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000237",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "If a stress load exceeds the mitochondria's capacity (the 'resilience threshold'), the mitochondria shift into a 'cell danger response' that redirects resources away from energy production toward cellular defense.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000262",
+        "evidence_quote": "the mitochondria shift into the cell danger response, where they are redirecting resources away from energy production towards cellular defense",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific mechanistic/causal claim about mitochondrial stress response that could be checked against the cell danger response literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000260",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fatigue is one of the classic symptoms of having a cold, flu, or COVID.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000286",
+        "evidence_quote": "the last time you got a cold or a flu or a COVID, what's one of the classic symptoms? Fatigue",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Common but checkable claim about symptom association used to support the broader mitochondrial theory being presented.",
+        "relevance": "substantive",
+        "start_unit_id": "u000284",
+        "topic_ids": [
+          "topic:covid_19_pandemic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_190223_window_0004"
+  },
+  "stored_at": "2026-09-09T19:40:19.763825+00:00"
+}

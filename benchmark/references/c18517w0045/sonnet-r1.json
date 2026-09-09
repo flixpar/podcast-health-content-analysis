@@ -1,0 +1,412 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c18517w0045",
+  "provenance": {
+    "bundle": "bundle_019",
+    "ingested_at": "2026-09-09T19:40:19.537480+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004241",
+        "evidence_quote": "Joe, he had HIV.",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u004239",
+        "summary": "Notes in passing that a celebrity has HIV and its effect on him is unknown."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004260",
+        "evidence_quote": "It's not a death sentence anymore.",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004251",
+        "summary": "Discusses Magic Johnson's HIV diagnosis, his long survival, and the view that HIV is no longer a death sentence."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004271",
+        "evidence_quote": "they can they can basically cure it",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004269",
+        "summary": "Claims HIV can basically be cured, contrasted with herpes blisters that supposedly never go away."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u004283",
+        "evidence_quote": "No, the blisters go away.",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004273",
+        "summary": "Speakers dispute whether herpes blisters/outbreaks go away or persist permanently."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004334",
+        "evidence_quote": "because none of us really knew what HIV/AIDS was",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004316",
+        "summary": "Recounts 1990s-era fear (Karl Malone) of contracting HIV through basketball contact, attributed to widespread ignorance about transmission at the time."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "unclear",
+        "end_unit_id": "u004358",
+        "evidence_quote": "Can't they give you some HIV, bro?",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u004336",
+        "summary": "Comedic riff joking about getting HIV from a mosquito bite or oral sex."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u004362",
+        "evidence_quote": "there's no evidence mosquitoes can transmit HIV",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004361",
+        "summary": "Reads factual information stating there is no evidence mosquitoes can transmit HIV, correcting the joked-about myth."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u004362",
+        "evidence_quote": "there's no evidence mosquitoes can transmit HIV",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004361",
+        "summary": "Corrects the mosquito-HIV-transmission myth being joked about earlier."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u004362",
+        "evidence_quote": "Studies with HIV have shown clearly the virus disappears in the mosquito after about one to two days.",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004362",
+        "summary": "Cites studies showing HIV disappears in a mosquito within one to two days."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "HIV is no longer a death sentence, as illustrated by Magic Johnson's long survival after diagnosis.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004260",
+        "evidence_quote": "It's not a death sentence anymore.",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "General claim about HIV's modern prognosis is checkable against current medical understanding, illustrated with a specific case.",
+        "start_unit_id": "u004251",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "basically"
+        ],
+        "claim_text": "HIV can basically be cured.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004269",
+        "evidence_quote": "they can they can basically cure it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Claim that HIV can be cured is checkable and medically significant, since HIV is treatable but not currently curable.",
+        "start_unit_id": "u004269",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "never"
+        ],
+        "claim_text": "Herpes outbreaks/blisters never go away and recur forever.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.5,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u004280",
+        "evidence_quote": "They never go away.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "Claim about the permanence of herpes outbreaks is checkable and was disputed within the conversation itself.",
+        "start_unit_id": "u004277",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There is no evidence that mosquitoes can transmit HIV.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u004362",
+        "evidence_quote": "there's no evidence mosquitoes can transmit HIV",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Directly checkable claim about HIV transmission via mosquitoes, correcting a commonly joked-about myth.",
+        "start_unit_id": "u004361",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      }
+    ],
+    "window_id": "episode_18517_window_0045"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004241",
+        "evidence_quote": "Joe, he had HIV",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u004239",
+        "summary": "Notes in passing that a celebrity has HIV and its effect on him is unknown."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004260",
+        "evidence_quote": "It's not a death sentence anymore",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004251",
+        "summary": "Discusses Magic Johnson's HIV diagnosis, his long survival, and the view that HIV is no longer a death sentence."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004271",
+        "evidence_quote": "they can they can basically cure it",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004269",
+        "summary": "Claims HIV can basically be cured, contrasted with herpes blisters that supposedly never go away."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u004283",
+        "evidence_quote": "No, the blisters go away",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004273",
+        "summary": "Speakers dispute whether herpes blisters/outbreaks go away or persist permanently."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004334",
+        "evidence_quote": "because none of us really knew what HIV/AIDS was",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004316",
+        "summary": "Recounts 1990s-era fear (Karl Malone) of contracting HIV through basketball contact, attributed to widespread ignorance about transmission at the time."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "unclear",
+        "end_unit_id": "u004358",
+        "evidence_quote": "Can't they give you some HIV, bro",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u004336",
+        "summary": "Comedic riff joking about getting HIV from a mosquito bite or oral sex."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u004362",
+        "evidence_quote": "there's no evidence mosquitoes can transmit HIV",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004361",
+        "summary": "Reads factual information stating there is no evidence mosquitoes can transmit HIV, correcting the joked-about myth."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u004362",
+        "evidence_quote": "there's no evidence mosquitoes can transmit HIV",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004361",
+        "summary": "Corrects the mosquito-HIV-transmission myth being joked about earlier."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u004362",
+        "evidence_quote": "Studies with HIV have shown clearly the virus disappears in the mosquito after about one to two days",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004362",
+        "summary": "Cites studies showing HIV disappears in a mosquito within one to two days."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "HIV is no longer a death sentence, as illustrated by Magic Johnson's long survival after diagnosis.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004260",
+        "evidence_quote": "It's not a death sentence anymore",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "General claim about HIV's modern prognosis is checkable against current medical understanding, illustrated with a specific case.",
+        "relevance": null,
+        "start_unit_id": "u004251",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "basically"
+        ],
+        "claim_text": "HIV can basically be cured.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004269",
+        "evidence_quote": "they can they can basically cure it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Claim that HIV can be cured is checkable and medically significant, since HIV is treatable but not currently curable.",
+        "relevance": null,
+        "start_unit_id": "u004269",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "never"
+        ],
+        "claim_text": "Herpes outbreaks/blisters never go away and recur forever.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.5,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u004280",
+        "evidence_quote": "They never go away",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "Claim about the permanence of herpes outbreaks is checkable and was disputed within the conversation itself.",
+        "relevance": null,
+        "start_unit_id": "u004277",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There is no evidence that mosquitoes can transmit HIV.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u004362",
+        "evidence_quote": "there's no evidence mosquitoes can transmit HIV",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Directly checkable claim about HIV transmission via mosquitoes, correcting a commonly joked-about myth.",
+        "relevance": null,
+        "start_unit_id": "u004361",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      }
+    ],
+    "window_id": "episode_18517_window_0045"
+  },
+  "stored_at": "2026-09-09T19:40:19.537501+00:00"
+}

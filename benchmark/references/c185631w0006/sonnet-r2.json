@@ -1,0 +1,512 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c185631w0006",
+  "provenance": {
+    "bundle": "bundle_002",
+    "ingested_at": "2026-09-09T20:27:02.606678+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000270",
+        "evidence_quote": "Botox is a bandaid on that for sure.",
+        "label_ids": [
+          "topic:pain_musculoskeletal_health",
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000251",
+        "summary": "Discusses TMJ pain and teeth grinding as downstream effects of mouth breathing and airway problems rather than stress, criticizing Botox and night guards as band-aids that ignore the structural root cause."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000286",
+        "evidence_quote": "if you're mouth breathing, then The whole face can kind of shrink back because there's nothing pushing.",
+        "label_ids": [
+          "topic:sleep",
+          "topic:fluoride_oral_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000271",
+        "summary": "Explains how mouth breathing causes facial shrinkage and dental crowding over time, driving repeat orthodontic treatment like Invisalign."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000303",
+        "evidence_quote": "my bottom teeth are all starting to crowd again.",
+        "label_ids": [
+          "topic:fluoride_oral_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000287",
+        "summary": "The host recounts her own Invisalign and retainer history, including how her teeth started crowding again after forgetting her retainer."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000323",
+        "evidence_quote": "if we widen the maxilla, we can give them room to be in a more comfortable position, and it releases a lot of tension in the joint.",
+        "label_ids": [
+          "topic:pain_musculoskeletal_health",
+          "topic:fluoride_oral_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000304",
+        "summary": "Explains how a narrow upper jaw traps the lower jaw and TMJ, causing crowding and joint tension, and how widening the maxilla can relieve it."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000270",
+        "evidence_quote": "It's really important that we dial that back and look at the root cause.",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "summary": "Frames Botox and night guards as failing to address the 'root cause' of TMJ and grinding, attributed instead to structural airway/mouth-breathing problems."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000283",
+        "evidence_quote": "That's God's plan to help us grow forward and wide.",
+        "label_ids": [
+          "cross_cutting:naturalness_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000278",
+        "summary": "Describes tongue and facial growth as a natural, designed plan ('God's retainer', 'God's plan') that is disrupted when out of balance."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000309",
+        "evidence_quote": "We need to really restore their arch width to, you know, what it should have been before modern diets and epigenetic changes.",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000309",
+        "summary": "Frames treatment as restoring the arch to what it 'should have been' before modern diets, invoking restoration/root-cause language."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000303",
+        "evidence_quote": "And that's happening to pretty much everyone.",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000285",
+        "summary": "Uses personal Invisalign and retainer experience as evidence for the broader claim that this crowding pattern is happening to almost everyone."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000322",
+        "evidence_quote": "if you look at a CT scan, you can see the TMJ is like really close to the ear and jammed back.",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000305",
+        "summary": "Uses detailed anatomical/mechanistic language (maxilla, mandible, TMJ, epigenetic changes) to explain jaw and airway structure."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000260",
+        "evidence_quote": "Botox is a bandaid on that for sure.",
+        "mention_role": "criticized",
+        "product_name": "Botox",
+        "product_type": "medication",
+        "start_unit_id": "u000252"
+      },
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000303",
+        "evidence_quote": "they're all doing Invisalign again.",
+        "mention_role": "neutral",
+        "product_name": "Invisalign",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000286"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "TMJ pain and teeth grinding that are often attributed to stress or being busy are actually caused by structural airway problems from mouth breathing.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000270",
+        "evidence_quote": "When in reality, it's structural.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "rationale": "This is a specific causal claim about the origin of TMJ and bruxism symptoms that could be checked against dental and sleep-medicine literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000265",
+        "topic_ids": [
+          "topic:pain_musculoskeletal_health",
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can kind of"
+        ],
+        "claim_text": "Mouth breathing causes the face to shrink back over time because the tongue is not pushing on the palate.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000280",
+        "evidence_quote": "if you're mouth breathing, then The whole face can kind of shrink back because there's nothing pushing.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "This physiological mechanism linking mouth breathing to facial shrinkage is a checkable claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000280",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "pretty much"
+        ],
+        "claim_text": "This pattern of facial shrinkage and dental crowding from mouth breathing is happening to almost everyone.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000285",
+        "evidence_quote": "And that's happening to pretty much everyone.",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "This near-universal prevalence claim about mouth-breathing-related dental crowding is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000285",
+        "topic_ids": [
+          "topic:fluoride_oral_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "If the upper dental arch is too narrow, the lower arch will not have enough room and the teeth will become crowded quickly.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000307",
+        "evidence_quote": "Room for all the teeth, and they become crowded really quickly.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "This specific orthodontic mechanism claim about arch width and crowding speed is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000306",
+        "topic_ids": [
+          "topic:fluoride_oral_health",
+          "topic:pain_musculoskeletal_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can"
+        ],
+        "claim_text": "Widening the maxilla can give the jaw more room and release tension in the jaw joint.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000321",
+        "evidence_quote": "it releases a lot of tension in the joint.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "This is a specific claimed treatment effect of jaw-widening procedures that could be checked against orthodontic and TMJ literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000321",
+        "topic_ids": [
+          "topic:pain_musculoskeletal_health"
+        ]
+      }
+    ],
+    "window_id": "episode_185631_window_0006"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000270",
+        "evidence_quote": "Botox is a bandaid on that for sure",
+        "label_ids": [
+          "topic:pain_musculoskeletal_health",
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000251",
+        "summary": "Discusses TMJ pain and teeth grinding as downstream effects of mouth breathing and airway problems rather than stress, criticizing Botox and night guards as band-aids that ignore the structural root cause."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000286",
+        "evidence_quote": "if you're mouth breathing, then The whole face can kind of shrink back because there's nothing pushing",
+        "label_ids": [
+          "topic:fluoride_oral_health",
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000271",
+        "summary": "Explains how mouth breathing causes facial shrinkage and dental crowding over time, driving repeat orthodontic treatment like Invisalign."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000303",
+        "evidence_quote": "my bottom teeth are all starting to crowd again",
+        "label_ids": [
+          "topic:fluoride_oral_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000287",
+        "summary": "The host recounts her own Invisalign and retainer history, including how her teeth started crowding again after forgetting her retainer."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000323",
+        "evidence_quote": "if we widen the maxilla, we can give them room to be in a more comfortable position, and it releases a lot of tension in the joint",
+        "label_ids": [
+          "topic:fluoride_oral_health",
+          "topic:pain_musculoskeletal_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000304",
+        "summary": "Explains how a narrow upper jaw traps the lower jaw and TMJ, causing crowding and joint tension, and how widening the maxilla can relieve it."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000270",
+        "evidence_quote": "It's really important that we dial that back and look at the root cause",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "summary": "Frames Botox and night guards as failing to address the 'root cause' of TMJ and grinding, attributed instead to structural airway/mouth-breathing problems."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000283",
+        "evidence_quote": "That's God's plan to help us grow forward and wide",
+        "label_ids": [
+          "cross_cutting:naturalness_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000278",
+        "summary": "Describes tongue and facial growth as a natural, designed plan ('God's retainer', 'God's plan') that is disrupted when out of balance."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000309",
+        "evidence_quote": "We need to really restore their arch width to, you know, what it should have been before modern diets and epigenetic changes",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000309",
+        "summary": "Frames treatment as restoring the arch to what it 'should have been' before modern diets, invoking restoration/root-cause language."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000303",
+        "evidence_quote": "And that's happening to pretty much everyone",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000285",
+        "summary": "Uses personal Invisalign and retainer experience as evidence for the broader claim that this crowding pattern is happening to almost everyone."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000322",
+        "evidence_quote": "if you look at a CT scan, you can see the TMJ is like really close to the ear and jammed back",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000305",
+        "summary": "Uses detailed anatomical/mechanistic language (maxilla, mandible, TMJ, epigenetic changes) to explain jaw and airway structure."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000260",
+        "evidence_quote": "Botox is a bandaid on that for sure",
+        "mention_role": "criticized",
+        "product_name": "Botox",
+        "product_type": "medication",
+        "start_unit_id": "u000252"
+      },
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000303",
+        "evidence_quote": "they're all doing Invisalign again",
+        "mention_role": "neutral",
+        "product_name": "Invisalign",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000286"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "TMJ pain and teeth grinding that are often attributed to stress or being busy are actually caused by structural airway problems from mouth breathing.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000270",
+        "evidence_quote": "When in reality, it's structural",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "rationale": "This is a specific causal claim about the origin of TMJ and bruxism symptoms that could be checked against dental and sleep-medicine literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000265",
+        "topic_ids": [
+          "topic:pain_musculoskeletal_health",
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can kind of"
+        ],
+        "claim_text": "Mouth breathing causes the face to shrink back over time because the tongue is not pushing on the palate.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000280",
+        "evidence_quote": "if you're mouth breathing, then The whole face can kind of shrink back because there's nothing pushing",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "This physiological mechanism linking mouth breathing to facial shrinkage is a checkable claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000280",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "pretty much"
+        ],
+        "claim_text": "This pattern of facial shrinkage and dental crowding from mouth breathing is happening to almost everyone.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000285",
+        "evidence_quote": "And that's happening to pretty much everyone",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "This near-universal prevalence claim about mouth-breathing-related dental crowding is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000285",
+        "topic_ids": [
+          "topic:fluoride_oral_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "If the upper dental arch is too narrow, the lower arch will not have enough room and the teeth will become crowded quickly.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000307",
+        "evidence_quote": "Room for all the teeth, and they become crowded really quickly",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "This specific orthodontic mechanism claim about arch width and crowding speed is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000306",
+        "topic_ids": [
+          "topic:fluoride_oral_health",
+          "topic:pain_musculoskeletal_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can"
+        ],
+        "claim_text": "Widening the maxilla can give the jaw more room and release tension in the jaw joint.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000321",
+        "evidence_quote": "it releases a lot of tension in the joint",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "This is a specific claimed treatment effect of jaw-widening procedures that could be checked against orthodontic and TMJ literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000321",
+        "topic_ids": [
+          "topic:pain_musculoskeletal_health"
+        ]
+      }
+    ],
+    "window_id": "episode_185631_window_0006"
+  },
+  "stored_at": "2026-09-09T20:27:02.606750+00:00"
+}

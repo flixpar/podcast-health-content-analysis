@@ -1,0 +1,714 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c7981w0047",
+  "provenance": {
+    "bundle": "bundle_024",
+    "ingested_at": "2026-09-09T20:27:03.754935+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002766",
+        "evidence_quote": "Plants may have other nutrients that are useful for humans, but nutrients that occur in plants often not as bioavailable.",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002763",
+        "summary": "Discussion of protein bioavailability comparing plant sources like tofu to animal sources like steak."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002773",
+        "evidence_quote": "You hear the term \"soy boys,\" and the colloquial notion is that soy decreases androgens or testosterone.",
+        "label_ids": [
+          "topic:mens_health_male_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002767",
+        "summary": "Discussion of soy's effects on androgen receptors and the 'soy boys' testosterone trope."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002769",
+        "evidence_quote": "A study that shows that soy actually decreases androgen receptor density.",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002768",
+        "summary": "A study is cited as showing soy decreases androgen receptor density."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002773",
+        "evidence_quote": "at least in one study, androgen receptor density",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002773",
+        "summary": "The evidence for soy's effect on androgen receptors is flagged as coming from a single study."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002772",
+        "evidence_quote": "Soy doesn't decrease testosterone or sex hormones.",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002770",
+        "summary": "Speaker corrects the popular 'soy boys' belief that soy lowers testosterone."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002780",
+        "evidence_quote": "Maybe I'll have to check that, but forty-five billion potentially annually in crop subsidies for soy, and all that soy, most of that soy, goes to soybean oil.",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002774",
+        "summary": "Discussion of soy crop subsidies and their connection to soybean/seed oil production."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002809",
+        "evidence_quote": "So so you move to single single ingredient foods.",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002789",
+        "summary": "Discussion of reversing effects of a poor diet by shifting to single-ingredient, high-protein foods and questions about the body's ability to detox."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002809",
+        "evidence_quote": "Does your body cleanse itself?",
+        "label_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002800",
+        "summary": "Question and answer about the body cleansing itself invokes general toxin-clearance framing."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002831",
+        "evidence_quote": "You don't have to move to a lot of meat, but I do think in terms of protein, fat, and carbohydrate amounts, you want about one gram of protein per pound of body weight from animal protein.",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002810",
+        "summary": "Macro-nutrient targets discussed: protein per pound of bodyweight from animal sources, and fat/carbohydrate balance."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002836",
+        "evidence_quote": "Ketogenic diets have applications if you have epilepsy, advanced dementia.",
+        "label_ids": [
+          "topic:diet_tribes_food_ideologies"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002832",
+        "summary": "Discussion of when ketogenic diets are appropriate and their downsides for the general population."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002834",
+        "evidence_quote": "epilepsy",
+        "label_ids": [
+          "topic:neurology_seizures_brain_conditions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002834",
+        "summary": "Epilepsy named as a condition for which ketogenic diets have applications."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002834",
+        "evidence_quote": "advanced dementia",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002834",
+        "summary": "Advanced dementia named as a condition for which ketogenic diets have applications."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002846",
+        "evidence_quote": "So, get rid of the grains would be my advice to most people, or ferment the heck out of your grains.",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002837",
+        "summary": "Advice on carbohydrate sources, avoiding grains, and personal macro ratios."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A study found that soy decreases androgen receptor density.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002769",
+        "evidence_quote": "A study that shows that soy actually decreases androgen receptor density.",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific study-based mechanistic claim about soy and androgen receptors that can be checked for replication and human relevance.",
+        "relevance": "substantive",
+        "start_unit_id": "u002769",
+        "topic_ids": [
+          "topic:mens_health_male_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Soy decreases androgens or testosterone (the 'soy boys' claim).",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002771",
+        "evidence_quote": "You hear the term \"soy boys,\" and the colloquial notion is that soy decreases androgens or testosterone.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Widely circulated claim about soy lowering testosterone that the speaker goes on to dispute; worth checking against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u002771",
+        "topic_ids": [
+          "topic:mens_health_male_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "doesn't seem to happen",
+          "based on what I've seen"
+        ],
+        "claim_text": "Soy does not decrease testosterone or sex hormones in humans.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002772",
+        "evidence_quote": "That doesn't seem to happen in humans, based on what I've seen.",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Direct rebuttal claim about soy and human testosterone levels that can be checked against clinical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u002770",
+        "topic_ids": [
+          "topic:mens_health_male_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Maybe I'll have to check that",
+          "potentially"
+        ],
+        "claim_text": "The U.S. provides about $45 billion annually in crop subsidies for soy, most of which goes to soybean oil production.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002777",
+        "evidence_quote": "Maybe I'll have to check that, but forty-five billion potentially annually in crop subsidies for soy, and all that soy, most of that soy, goes to soybean oil.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific subsidy figure that can be verified against USDA agricultural subsidy data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002775",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Absolutely"
+        ],
+        "claim_text": "The health effects of a lifetime of poor diet are reversible.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002793",
+        "evidence_quote": "What so is it reversible? Absolutely.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "General reversibility claim about diet-related health damage that can be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u002792",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Absolutely"
+        ],
+        "claim_text": "The body detoxifies itself naturally within weeks to months.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002805",
+        "evidence_quote": "Does your body cleanse itself? Absolutely. How long does that take? Weeks to months, like we talked about.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "Specific claim about the body's detoxification timeline that can be checked against physiology.",
+        "relevance": "substantive",
+        "start_unit_id": "u002802",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Most humans need only about 0.8 grams of protein per pound of body weight, less than the 1 gram per pound sometimes recommended.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002822",
+        "evidence_quote": "Once you get one gram of protein per pound of body weight from animal food, which is actually a little more than most humans need, the number is probably point eight.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric protein-requirement claim that can be checked against nutrition science.",
+        "relevance": "substantive",
+        "start_unit_id": "u002822",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ketogenic diets have therapeutic applications for epilepsy and advanced dementia.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002834",
+        "evidence_quote": "Ketogenic diets have applications if you have epilepsy, advanced dementia.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Claim about clinical indications for ketogenic diets that can be checked against medical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u002834",
+        "topic_ids": [
+          "topic:diet_tribes_food_ideologies"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "A ketogenic diet is unnecessary for most people to be healthy and can cause electrolyte insufficiency and other downsides.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002835",
+        "evidence_quote": "But I think for most people, a ketogenic diet is not needed to be optimally healthy, and it can have some downsides to it: electrolyte insufficiency.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Claim about risks/necessity of ketogenic diets for the general population that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u002835",
+        "topic_ids": [
+          "topic:diet_tribes_food_ideologies"
+        ]
+      }
+    ],
+    "window_id": "episode_7981_window_0047"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002766",
+        "evidence_quote": "Plants may have other nutrients that are useful for humans, but nutrients that occur in plants often not as bioavailable",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002763",
+        "summary": "Discussion of protein bioavailability comparing plant sources like tofu to animal sources like steak."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002773",
+        "evidence_quote": "You hear the term \"soy boys,\" and the colloquial notion is that soy decreases androgens or testosterone",
+        "label_ids": [
+          "topic:mens_health_male_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002767",
+        "summary": "Discussion of soy's effects on androgen receptors and the 'soy boys' testosterone trope."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002769",
+        "evidence_quote": "A study that shows that soy actually decreases androgen receptor density",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002768",
+        "summary": "A study is cited as showing soy decreases androgen receptor density."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002773",
+        "evidence_quote": "at least in one study, androgen receptor density",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002773",
+        "summary": "The evidence for soy's effect on androgen receptors is flagged as coming from a single study."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002772",
+        "evidence_quote": "Soy doesn't decrease testosterone or sex hormones",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002770",
+        "summary": "Speaker corrects the popular 'soy boys' belief that soy lowers testosterone."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002780",
+        "evidence_quote": "Maybe I'll have to check that, but forty-five billion potentially annually in crop subsidies for soy, and all that soy, most of that soy, goes to soybean oil",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002774",
+        "summary": "Discussion of soy crop subsidies and their connection to soybean/seed oil production."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002809",
+        "evidence_quote": "So so you move to single single ingredient foods",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002789",
+        "summary": "Discussion of reversing effects of a poor diet by shifting to single-ingredient, high-protein foods and questions about the body's ability to detox."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002809",
+        "evidence_quote": "Does your body cleanse itself",
+        "label_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002800",
+        "summary": "Question and answer about the body cleansing itself invokes general toxin-clearance framing."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002831",
+        "evidence_quote": "You don't have to move to a lot of meat, but I do think in terms of protein, fat, and carbohydrate amounts, you want about one gram of protein per pound of body weight from animal protein",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002810",
+        "summary": "Macro-nutrient targets discussed: protein per pound of bodyweight from animal sources, and fat/carbohydrate balance."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002836",
+        "evidence_quote": "Ketogenic diets have applications if you have epilepsy, advanced dementia",
+        "label_ids": [
+          "topic:diet_tribes_food_ideologies"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002832",
+        "summary": "Discussion of when ketogenic diets are appropriate and their downsides for the general population."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002834",
+        "evidence_quote": "epilepsy",
+        "label_ids": [
+          "topic:neurology_seizures_brain_conditions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002834",
+        "summary": "Epilepsy named as a condition for which ketogenic diets have applications."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002834",
+        "evidence_quote": "advanced dementia",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002834",
+        "summary": "Advanced dementia named as a condition for which ketogenic diets have applications."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002846",
+        "evidence_quote": "So, get rid of the grains would be my advice to most people, or ferment the heck out of your grains",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002837",
+        "summary": "Advice on carbohydrate sources, avoiding grains, and personal macro ratios."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A study found that soy decreases androgen receptor density.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002769",
+        "evidence_quote": "A study that shows that soy actually decreases androgen receptor density",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific study-based mechanistic claim about soy and androgen receptors that can be checked for replication and human relevance.",
+        "relevance": "substantive",
+        "start_unit_id": "u002769",
+        "topic_ids": [
+          "topic:mens_health_male_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Soy decreases androgens or testosterone (the 'soy boys' claim).",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002771",
+        "evidence_quote": "You hear the term \"soy boys,\" and the colloquial notion is that soy decreases androgens or testosterone",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Widely circulated claim about soy lowering testosterone that the speaker goes on to dispute; worth checking against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u002771",
+        "topic_ids": [
+          "topic:mens_health_male_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "doesn't seem to happen",
+          "based on what I've seen"
+        ],
+        "claim_text": "Soy does not decrease testosterone or sex hormones in humans.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002772",
+        "evidence_quote": "That doesn't seem to happen in humans, based on what I've seen",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Direct rebuttal claim about soy and human testosterone levels that can be checked against clinical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u002770",
+        "topic_ids": [
+          "topic:mens_health_male_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Maybe I'll have to check that",
+          "potentially"
+        ],
+        "claim_text": "The U.S. provides about $45 billion annually in crop subsidies for soy, most of which goes to soybean oil production.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002777",
+        "evidence_quote": "Maybe I'll have to check that, but forty-five billion potentially annually in crop subsidies for soy, and all that soy, most of that soy, goes to soybean oil",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific subsidy figure that can be verified against USDA agricultural subsidy data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002775",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Absolutely"
+        ],
+        "claim_text": "The health effects of a lifetime of poor diet are reversible.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002793",
+        "evidence_quote": "What so is it reversible? Absolutely",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "General reversibility claim about diet-related health damage that can be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u002792",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Absolutely"
+        ],
+        "claim_text": "The body detoxifies itself naturally within weeks to months.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002805",
+        "evidence_quote": "Does your body cleanse itself? Absolutely. How long does that take? Weeks to months, like we talked about",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "Specific claim about the body's detoxification timeline that can be checked against physiology.",
+        "relevance": "substantive",
+        "start_unit_id": "u002802",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Most humans need only about 0.8 grams of protein per pound of body weight, less than the 1 gram per pound sometimes recommended.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002822",
+        "evidence_quote": "Once you get one gram of protein per pound of body weight from animal food, which is actually a little more than most humans need, the number is probably point eight",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric protein-requirement claim that can be checked against nutrition science.",
+        "relevance": "substantive",
+        "start_unit_id": "u002822",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ketogenic diets have therapeutic applications for epilepsy and advanced dementia.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002834",
+        "evidence_quote": "Ketogenic diets have applications if you have epilepsy, advanced dementia",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Claim about clinical indications for ketogenic diets that can be checked against medical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u002834",
+        "topic_ids": [
+          "topic:diet_tribes_food_ideologies"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "A ketogenic diet is unnecessary for most people to be healthy and can cause electrolyte insufficiency and other downsides.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002835",
+        "evidence_quote": "But I think for most people, a ketogenic diet is not needed to be optimally healthy, and it can have some downsides to it: electrolyte insufficiency",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Claim about risks/necessity of ketogenic diets for the general population that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u002835",
+        "topic_ids": [
+          "topic:diet_tribes_food_ideologies"
+        ]
+      }
+    ],
+    "window_id": "episode_7981_window_0047"
+  },
+  "stored_at": "2026-09-09T20:27:03.754965+00:00"
+}

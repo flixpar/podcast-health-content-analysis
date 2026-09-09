@@ -1,0 +1,309 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c321996w0007",
+  "provenance": {
+    "bundle": "bundle_010",
+    "ingested_at": "2026-09-09T20:27:03.029629+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "People have allergies too to like some of the stuff in the vaccine, so they can't get it.",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000572",
+        "summary": "Discusses vaccine ingredient allergies that prevent some people from being vaccinated."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000590",
+        "evidence_quote": "I think that's enough to have everyone get vax.",
+        "label_ids": [
+          "topic:vaccines_immunization",
+          "topic:public_health_policy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000577",
+        "summary": "Debates whether unvaccinated people should be accommodated like people with disabilities, and whether vaccine mandates for jobs like teaching are justified."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000604",
+        "evidence_quote": "Tell me why I'm callous and where I'm wrong in thinking that's still too small of a percentage to vaccinate an entire population.",
+        "label_ids": [
+          "topic:vaccines_immunization",
+          "topic:public_health_policy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000591",
+        "summary": "Questions what percentage of the population must be affected to justify vaccinating everyone, comparing to the small share of people who use wheelchair-accessible accommodations."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000619",
+        "evidence_quote": "there's no caveat for people that can't get vaccinated, so it's actually disbaring them from",
+        "label_ids": [
+          "topic:vaccines_immunization",
+          "topic:public_health_policy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "summary": "Argues that, unlike ADA accommodations, there is no exemption caveat for people who medically cannot get vaccinated, with uncertainty about the actual policy details."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000646",
+        "evidence_quote": "We're going to shut down businesses because we want our old people.",
+        "label_ids": [
+          "topic:covid_19_pandemic_health",
+          "topic:public_health_policy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000622",
+        "summary": "Questions what percentage of the population needs to be affected -- citing COVID risk among people over sixty -- to justify public-policy changes like business shutdowns."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000655",
+        "evidence_quote": "And I think that's the big pharma. I think big pharma has enough.",
+        "label_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000646",
+        "summary": "Suggests public-policy change is driven by financial benefit to big pharma and other powerful corporations profiting from COVID."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Some people are allergic to ingredients in the vaccine and therefore cannot receive it.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "People have allergies too to like some of the stuff in the vaccine, so they can't get it.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about vaccine-ingredient allergies as a contraindication to vaccination.",
+        "relevance": "substantive",
+        "start_unit_id": "u000575",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "About fifteen percent of the U.S. population is over sixty years old.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000641",
+        "evidence_quote": "Fifteen percent is over sixty.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Demographic prevalence claim used to justify COVID-era policy that could be checked against census data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000639",
+        "topic_ids": [
+          "topic:covid_19_pandemic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I don't know necessarily how true that is"
+        ],
+        "claim_text": "Certain people and corporations, including big pharma, have gotten richer from COVID-related lockdowns and restrictions.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000655",
+        "evidence_quote": "there's a lot of people that are getting richer from COVID and lockdowns and restrictions in general",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "rationale": "Institutional-conduct claim about who profits from pandemic policy, checkable against economic and financial data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000653",
+        "topic_ids": [
+          "topic:covid_19_pandemic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_321996_window_0007"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "People have allergies too to like some of the stuff in the vaccine, so they can't get it",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000572",
+        "summary": "Discusses vaccine ingredient allergies that prevent some people from being vaccinated."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000590",
+        "evidence_quote": "I think that's enough to have everyone get vax",
+        "label_ids": [
+          "topic:public_health_policy",
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000577",
+        "summary": "Debates whether unvaccinated people should be accommodated like people with disabilities, and whether vaccine mandates for jobs like teaching are justified."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000604",
+        "evidence_quote": "Tell me why I'm callous and where I'm wrong in thinking that's still too small of a percentage to vaccinate an entire population",
+        "label_ids": [
+          "topic:public_health_policy",
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000591",
+        "summary": "Questions what percentage of the population must be affected to justify vaccinating everyone, comparing to the small share of people who use wheelchair-accessible accommodations."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000619",
+        "evidence_quote": "there's no caveat for people that can't get vaccinated, so it's actually disbaring them from",
+        "label_ids": [
+          "topic:public_health_policy",
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "summary": "Argues that, unlike ADA accommodations, there is no exemption caveat for people who medically cannot get vaccinated, with uncertainty about the actual policy details."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000646",
+        "evidence_quote": "We're going to shut down businesses because we want our old people",
+        "label_ids": [
+          "topic:covid_19_pandemic_health",
+          "topic:public_health_policy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000622",
+        "summary": "Questions what percentage of the population needs to be affected -- citing COVID risk among people over sixty -- to justify public-policy changes like business shutdowns."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000655",
+        "evidence_quote": "And I think that's the big pharma. I think big pharma has enough",
+        "label_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000646",
+        "summary": "Suggests public-policy change is driven by financial benefit to big pharma and other powerful corporations profiting from COVID."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Some people are allergic to ingredients in the vaccine and therefore cannot receive it.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "People have allergies too to like some of the stuff in the vaccine, so they can't get it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about vaccine-ingredient allergies as a contraindication to vaccination.",
+        "relevance": "substantive",
+        "start_unit_id": "u000575",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "About fifteen percent of the U.S. population is over sixty years old.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000641",
+        "evidence_quote": "Fifteen percent is over sixty",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Demographic prevalence claim used to justify COVID-era policy that could be checked against census data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000639",
+        "topic_ids": [
+          "topic:covid_19_pandemic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I don't know necessarily how true that is"
+        ],
+        "claim_text": "Certain people and corporations, including big pharma, have gotten richer from COVID-related lockdowns and restrictions.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000655",
+        "evidence_quote": "there's a lot of people that are getting richer from COVID and lockdowns and restrictions in general",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "rationale": "Institutional-conduct claim about who profits from pandemic policy, checkable against economic and financial data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000653",
+        "topic_ids": [
+          "topic:covid_19_pandemic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_321996_window_0007"
+  },
+  "stored_at": "2026-09-09T20:27:03.029687+00:00"
+}

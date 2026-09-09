@@ -1,0 +1,509 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c36549w0004",
+  "provenance": {
+    "bundle": "bundle_019",
+    "ingested_at": "2026-09-09T19:40:19.557268+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000219",
+        "evidence_quote": "The shell of the egg makes progesterone throughout the cycle.",
+        "label_ids": [
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000197",
+        "summary": "Explains menstrual-cycle hormone physiology: progesterone from the egg shell, testosterone peaking at ovulation, and estrogen levels fluctuating across the cycle."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000219",
+        "evidence_quote": "We think it peaks during ovulation because that's what gets your libido going, makes you want to make a baby",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000197",
+        "summary": "Uses hormone-physiology detail (progesterone, testosterone, estrogen levels) to explain the menstrual cycle."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000223",
+        "evidence_quote": "if you are one of those people who breastfeeds and never gets their period back, you are menopausal",
+        "label_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000217",
+        "summary": "Describes the postpartum estrogen crash and how prolonged lactational amenorrhea puts a breastfeeding woman in a menopause-like state."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000230",
+        "evidence_quote": "because your estrogen just went from 3,000 to zero",
+        "label_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000224",
+        "summary": "Lists postpartum/breastfeeding symptoms (hot flashes, disrupted sleep, brain fog, vaginal dryness/irritation, UTIs) linked to the estrogen crash."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000241",
+        "evidence_quote": "Around 35, okay, around your 30s, your testosterone starts to drop precipitously.",
+        "label_ids": [
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000231",
+        "summary": "Explains age-related testosterone decline starting around the 30s, its effects (low libido, more UTIs, painful sex), and describes perimenopause and menopause as hormonal chaos."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000253",
+        "evidence_quote": "Whether you have PMS or PMDD or PCOS or endometriosis",
+        "label_ids": [
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000242",
+        "summary": "Argues women deserve care across every hormonal life stage, naming PMS, PMDD, PCOS and endometriosis as conditions dismissed when patients don't fit outdated textbook descriptions."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000251",
+        "evidence_quote": "the book is old and outdated, and no one taught us the updated version",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000246",
+        "summary": "Says medical understanding ('the book') is outdated and doctors were never taught the updated version, leaving patients gaslit."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000260",
+        "evidence_quote": "you have to get to the underlying root cause problem, which is the hormonal shifts that are happening with the woman in front of you",
+        "label_ids": [
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000254",
+        "summary": "Explains that UTIs are typically treated with antibiotics alone, but hormonal shifts are an underlying root cause affecting genital and urinary health."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000256",
+        "evidence_quote": "you have to get to the underlying root cause problem",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000255",
+        "summary": "Contrasts treating the infection with getting to the underlying root cause of the UTI."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000250",
+        "evidence_quote": "Doctor Rubin, you're here to teach us",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000250",
+        "summary": "Invokes the guest's title ('Doctor Rubin') as grounds for the teaching that follows."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "might",
+          "maybe"
+        ],
+        "claim_text": "Estrogen levels might rise to around 150, maybe 300, at ovulation.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000209",
+        "evidence_quote": "your estrogen might get to one hundred and fifty, maybe three hundred",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Specific numeric hormone-level claim is checkable against reproductive endocrinology data.",
+        "start_unit_id": "u000208",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "During pregnancy, estrogen levels reach about 3,000.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000217",
+        "evidence_quote": "When you are pregnant, your estrogen is 3,000.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric claim about pregnancy estrogen levels is checkable against endocrinology literature.",
+        "start_unit_id": "u000217",
+        "topic_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A woman who breastfeeds and does not get her period back is in a menopausal state until her periods return.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000222",
+        "evidence_quote": "if you are one of those people who breastfeeds and never gets their period back, you are menopausal",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable physiological claim equating prolonged lactational amenorrhea with a menopausal hormonal state.",
+        "start_unit_id": "u000222",
+        "topic_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Testosterone in women starts to drop precipitously around age 35, in the 30s.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000231",
+        "evidence_quote": "Around 35, okay, around your 30s, your testosterone starts to drop precipitously.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific age-related hormone-decline claim is checkable against endocrinology data.",
+        "start_unit_id": "u000231",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Birth control pills and spironolactone can lower a woman's testosterone levels.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000234",
+        "evidence_quote": "if you've done something before then to mess with your testosterone, like birth control pills or spironolactone",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim that specific medications lower testosterone levels.",
+        "start_unit_id": "u000234",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "absolutely"
+        ],
+        "claim_text": "Hormone fluctuations can commonly cause UTIs, not only bacterial infection.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000259",
+        "evidence_quote": "Yes, absolutely, and it's so common.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "rationale": "Checkable causal claim linking hormone fluctuations to UTI risk, stated with strong certainty.",
+        "start_unit_id": "u000257",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      }
+    ],
+    "window_id": "episode_36549_window_0004"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000219",
+        "evidence_quote": "The shell of the egg makes progesterone throughout the cycle",
+        "label_ids": [
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000197",
+        "summary": "Explains menstrual-cycle hormone physiology: progesterone from the egg shell, testosterone peaking at ovulation, and estrogen levels fluctuating across the cycle."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000219",
+        "evidence_quote": "We think it peaks during ovulation because that's what gets your libido going, makes you want to make a baby",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000197",
+        "summary": "Uses hormone-physiology detail (progesterone, testosterone, estrogen levels) to explain the menstrual cycle."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000223",
+        "evidence_quote": "if you are one of those people who breastfeeds and never gets their period back, you are menopausal",
+        "label_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000217",
+        "summary": "Describes the postpartum estrogen crash and how prolonged lactational amenorrhea puts a breastfeeding woman in a menopause-like state."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000230",
+        "evidence_quote": "because your estrogen just went from 3,000 to zero",
+        "label_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000224",
+        "summary": "Lists postpartum/breastfeeding symptoms (hot flashes, disrupted sleep, brain fog, vaginal dryness/irritation, UTIs) linked to the estrogen crash."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000241",
+        "evidence_quote": "Around 35, okay, around your 30s, your testosterone starts to drop precipitously",
+        "label_ids": [
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000231",
+        "summary": "Explains age-related testosterone decline starting around the 30s, its effects (low libido, more UTIs, painful sex), and describes perimenopause and menopause as hormonal chaos."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000253",
+        "evidence_quote": "Whether you have PMS or PMDD or PCOS or endometriosis",
+        "label_ids": [
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000242",
+        "summary": "Argues women deserve care across every hormonal life stage, naming PMS, PMDD, PCOS and endometriosis as conditions dismissed when patients don't fit outdated textbook descriptions."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000251",
+        "evidence_quote": "the book is old and outdated, and no one taught us the updated version",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000246",
+        "summary": "Says medical understanding ('the book') is outdated and doctors were never taught the updated version, leaving patients gaslit."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000260",
+        "evidence_quote": "you have to get to the underlying root cause problem, which is the hormonal shifts that are happening with the woman in front of you",
+        "label_ids": [
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000254",
+        "summary": "Explains that UTIs are typically treated with antibiotics alone, but hormonal shifts are an underlying root cause affecting genital and urinary health."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000256",
+        "evidence_quote": "you have to get to the underlying root cause problem",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000255",
+        "summary": "Contrasts treating the infection with getting to the underlying root cause of the UTI."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000250",
+        "evidence_quote": "Doctor Rubin, you're here to teach us",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000250",
+        "summary": "Invokes the guest's title ('Doctor Rubin') as grounds for the teaching that follows."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "might",
+          "maybe"
+        ],
+        "claim_text": "Estrogen levels might rise to around 150, maybe 300, at ovulation.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000209",
+        "evidence_quote": "your estrogen might get to one hundred and fifty, maybe three hundred",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Specific numeric hormone-level claim is checkable against reproductive endocrinology data.",
+        "relevance": null,
+        "start_unit_id": "u000208",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "During pregnancy, estrogen levels reach about 3,000.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000217",
+        "evidence_quote": "When you are pregnant, your estrogen is 3,000",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric claim about pregnancy estrogen levels is checkable against endocrinology literature.",
+        "relevance": null,
+        "start_unit_id": "u000217",
+        "topic_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A woman who breastfeeds and does not get her period back is in a menopausal state until her periods return.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000222",
+        "evidence_quote": "if you are one of those people who breastfeeds and never gets their period back, you are menopausal",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable physiological claim equating prolonged lactational amenorrhea with a menopausal hormonal state.",
+        "relevance": null,
+        "start_unit_id": "u000222",
+        "topic_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Testosterone in women starts to drop precipitously around age 35, in the 30s.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000231",
+        "evidence_quote": "Around 35, okay, around your 30s, your testosterone starts to drop precipitously",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific age-related hormone-decline claim is checkable against endocrinology data.",
+        "relevance": null,
+        "start_unit_id": "u000231",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Birth control pills and spironolactone can lower a woman's testosterone levels.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000234",
+        "evidence_quote": "if you've done something before then to mess with your testosterone, like birth control pills or spironolactone",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim that specific medications lower testosterone levels.",
+        "relevance": null,
+        "start_unit_id": "u000234",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "absolutely"
+        ],
+        "claim_text": "Hormone fluctuations can commonly cause UTIs, not only bacterial infection.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000259",
+        "evidence_quote": "Yes, absolutely, and it's so common",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "rationale": "Checkable causal claim linking hormone fluctuations to UTI risk, stated with strong certainty.",
+        "relevance": null,
+        "start_unit_id": "u000257",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      }
+    ],
+    "window_id": "episode_36549_window_0004"
+  },
+  "stored_at": "2026-09-09T19:40:19.557289+00:00"
+}

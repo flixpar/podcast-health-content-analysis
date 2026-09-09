@@ -1,0 +1,349 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "s-topic-boundary-maha",
+  "provenance": {
+    "bundle": "bundle_001",
+    "ingested_at": "2026-09-09T19:55:08.447055+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-sonnet-r2-synthetic-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000016",
+        "evidence_quote": "seed oils, everybody is talking about seed oils right now",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000004",
+        "summary": "Hosts describe the popular narrative that seed oils and food dyes are unnatural industrial substitutes for real food."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000013",
+        "evidence_quote": "your grandmother would not even recognize half of what is on grocery shelves now",
+        "label_ids": [
+          "cross_cutting:maha_food_vocabulary",
+          "cross_cutting:naturalness_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000004",
+        "summary": "The passage uses MAHA-style real-food-versus-manufactured-food framing around seed oils and dyes."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000005",
+        "evidence_quote": "canola oil and soybean oil are some kind of industrial byproduct that got pushed on people instead of real food",
+        "label_ids": [
+          "cross_cutting:big_food_food_system_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000005",
+        "summary": "Seed oils are framed as an industrial substitute pushed on people in place of traditional fats."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000030",
+        "evidence_quote": "the whole make America healthy again push",
+        "label_ids": [
+          "topic:maha_root_cause_health_politics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "summary": "Hosts discuss the MAHA movement as a political phenomenon with its own coalition, policy fights, and critics."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000020",
+        "evidence_quote": "chronic disease in kids has exploded and that the government and food companies are the root cause",
+        "label_ids": [
+          "cross_cutting:maha_official_core_vocabulary",
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "The movement's core framing casts childhood chronic disease as exploding with government and food companies as the unnamed root cause."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000019",
+        "evidence_quote": "the government and food companies are the root cause that nobody wants to name",
+        "label_ids": [
+          "cross_cutting:suppressed_science_framing",
+          "cross_cutting:government_institution_distrust",
+          "cross_cutting:big_food_food_system_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Government and food companies are blamed as a root cause that supposedly nobody wants to name."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "some kind of"
+        ],
+        "claim_text": "Canola oil and soybean oil are industrial byproducts that were promoted to consumers as substitutes for traditional fats like tallow and butter.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000005",
+        "evidence_quote": "canola oil and soybean oil are some kind of industrial byproduct that got pushed on people instead of real food",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:big_food_food_system_distrust",
+          "cross_cutting:naturalness_appeal"
+        ],
+        "rationale": "Checkable claim about the origin and promotion of seed oils.",
+        "relevance": "substantive",
+        "start_unit_id": "u000005",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Some other countries banned red and yellow food dyes years ago, while they remain in cereal and candy in the US.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000007",
+        "evidence_quote": "people are furious that it is still in cereal and candy over here when other countries banned it years ago",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable regulatory claim comparing dye bans across countries.",
+        "relevance": "substantive",
+        "start_unit_id": "u000007",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Chronic disease in children has increased dramatically in recent years.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000019",
+        "evidence_quote": "chronic disease in kids has exploded",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:maha_official_core_vocabulary"
+        ],
+        "rationale": "Checkable prevalence claim underlying the MAHA narrative.",
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:maha_root_cause_health_politics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Government and food companies are the unnamed root cause of rising childhood chronic disease.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000019",
+        "evidence_quote": "the government and food companies are the root cause that nobody wants to name",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:root_cause_framing",
+          "cross_cutting:suppressed_science_framing"
+        ],
+        "rationale": "Checkable institutional-blame claim about the cause of childhood chronic disease.",
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:maha_root_cause_health_politics"
+        ]
+      }
+    ],
+    "window_id": "synthetic_topic_boundary_maha_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000016",
+        "evidence_quote": "seed oils, everybody is talking about seed oils right now",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000004",
+        "summary": "Hosts describe the popular narrative that seed oils and food dyes are unnatural industrial substitutes for real food."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000013",
+        "evidence_quote": "your grandmother would not even recognize half of what is on grocery shelves now",
+        "label_ids": [
+          "cross_cutting:maha_food_vocabulary",
+          "cross_cutting:naturalness_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000004",
+        "summary": "The passage uses MAHA-style real-food-versus-manufactured-food framing around seed oils and dyes."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000005",
+        "evidence_quote": "canola oil and soybean oil are some kind of industrial byproduct that got pushed on people instead of real food",
+        "label_ids": [
+          "cross_cutting:big_food_food_system_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000005",
+        "summary": "Seed oils are framed as an industrial substitute pushed on people in place of traditional fats."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000030",
+        "evidence_quote": "the whole make America healthy again push",
+        "label_ids": [
+          "topic:maha_root_cause_health_politics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "summary": "Hosts discuss the MAHA movement as a political phenomenon with its own coalition, policy fights, and critics."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000020",
+        "evidence_quote": "chronic disease in kids has exploded and that the government and food companies are the root cause",
+        "label_ids": [
+          "cross_cutting:maha_official_core_vocabulary",
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "The movement's core framing casts childhood chronic disease as exploding with government and food companies as the unnamed root cause."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000019",
+        "evidence_quote": "the government and food companies are the root cause that nobody wants to name",
+        "label_ids": [
+          "cross_cutting:big_food_food_system_distrust",
+          "cross_cutting:government_institution_distrust",
+          "cross_cutting:suppressed_science_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Government and food companies are blamed as a root cause that supposedly nobody wants to name."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "some kind of"
+        ],
+        "claim_text": "Canola oil and soybean oil are industrial byproducts that were promoted to consumers as substitutes for traditional fats like tallow and butter.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000005",
+        "evidence_quote": "canola oil and soybean oil are some kind of industrial byproduct that got pushed on people instead of real food",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:big_food_food_system_distrust",
+          "cross_cutting:naturalness_appeal"
+        ],
+        "rationale": "Checkable claim about the origin and promotion of seed oils.",
+        "relevance": "substantive",
+        "start_unit_id": "u000005",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Some other countries banned red and yellow food dyes years ago, while they remain in cereal and candy in the US.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000007",
+        "evidence_quote": "people are furious that it is still in cereal and candy over here when other countries banned it years ago",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable regulatory claim comparing dye bans across countries.",
+        "relevance": "substantive",
+        "start_unit_id": "u000007",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Chronic disease in children has increased dramatically in recent years.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000019",
+        "evidence_quote": "chronic disease in kids has exploded",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:maha_official_core_vocabulary"
+        ],
+        "rationale": "Checkable prevalence claim underlying the MAHA narrative.",
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:maha_root_cause_health_politics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Government and food companies are the unnamed root cause of rising childhood chronic disease.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000019",
+        "evidence_quote": "the government and food companies are the root cause that nobody wants to name",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:root_cause_framing",
+          "cross_cutting:suppressed_science_framing"
+        ],
+        "rationale": "Checkable institutional-blame claim about the cause of childhood chronic disease.",
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:maha_root_cause_health_politics"
+        ]
+      }
+    ],
+    "window_id": "synthetic_topic_boundary_maha_window_0001"
+  },
+  "stored_at": "2026-09-09T19:55:08.447099+00:00"
+}

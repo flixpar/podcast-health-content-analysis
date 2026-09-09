@@ -1,0 +1,621 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c190562w0004",
+  "provenance": {
+    "bundle": "bundle_007",
+    "ingested_at": "2026-09-09T19:40:18.939053+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "adrenal burnout where your poor adrenal glands are so damn tired, they cannot produce enough cortisol, epinephrine, and norepinephrine",
+        "label_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000163",
+        "summary": "Host explains that ongoing stress, even 'good stress' like wedding planning, triggers epinephrine, norepinephrine and cortisol release, eventually causing adrenal burnout, fatigue and weight gain."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "epinephrine, norepinephrine are secreted",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000165",
+        "summary": "Endocrine mechanism vocabulary (epinephrine, norepinephrine, cortisol, adrenal glands) used to explain stress physiology."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000174",
+        "evidence_quote": "using L-tyrosine, in addition to it literally improving your mood, because it can improve your mood because it helps produce dopamine",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "summary": "L-tyrosine introduced as a supplement that improves mood via dopamine production and builds resilience to stress."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000183",
+        "evidence_quote": "our insulin regulation goes off the charts, glucose, why am I getting a 120 or a 180 reading on my glucometer",
+        "label_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness",
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000176",
+        "summary": "Host lists major and everyday stressors and says stress disrupts sleep and throws off insulin regulation and glucose readings."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000198",
+        "evidence_quote": "Serotonin is like called the happy hormone.",
+        "label_ids": [
+          "topic:mental_health",
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000184",
+        "summary": "Host explains dopamine and serotonin as 'feel good' neurotransmitters, referencing SSRIs, and claims L-tyrosine raises dopamine to lift mood and energy."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000198",
+        "evidence_quote": "selective serotonin reuptake inhibitors",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000184",
+        "summary": "Neurotransmitter mechanism language (dopamine, serotonin, SSRIs) used to explain mood."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000201",
+        "evidence_quote": "L-tyrosine can also increase energy by supporting thyroid function and the production of dopamine, norepinephrine, epinephrine.",
+        "label_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000199",
+        "summary": "L-tyrosine claimed to increase energy via thyroid support, making exercise easier and aiding weight loss."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000213",
+        "evidence_quote": "it contains a bioactive compound called forscolin, which this has been studied for decades, decades, for its effects on weight loss",
+        "label_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000202",
+        "summary": "Host describes Coleus forskohlii ('forskolin') as activating adenylate cyclase to raise cyclic AMP, promoting fat breakdown and weight loss, and says it has been studied for decades."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000213",
+        "evidence_quote": "increases levels of cyclic AMP in cells",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000205",
+        "summary": "Cellular/enzyme mechanism language (adenylate cyclase, cyclic AMP, lipolysis) used to explain forskolin's action."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "this has been studied for decades, decades, for its effects on weight loss",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000203",
+        "summary": "Vague claim that forskolin 'has been studied for decades' for weight loss."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000228",
+        "evidence_quote": "Because we know it takes 3,500 calories to equal one pound.",
+        "label_ids": [
+          "topic:weight_loss_metabolic_health",
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000214",
+        "summary": "Discussion of why rapid perceived weight gain isn't pure fat gain, covering basal metabolic rate, calorie math, and how a sluggish metabolism plus insulin resistance and overeating can allow real fat gain within days."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000219",
+        "evidence_quote": "I will literally hear my patients say, no, I put on five pounds of fat over the weekend",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000215",
+        "summary": "Host cites patients' reported experience of feeling they gained five pounds of fat overnight as a common complaint."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Ongoing stress increases epinephrine, norepinephrine, and cortisol until the adrenal glands become too exhausted to produce enough of these hormones, a state called adrenal burnout.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000167",
+        "evidence_quote": "adrenal burnout where your poor adrenal glands are so damn tired, they cannot produce enough cortisol, epinephrine, and norepinephrine",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Causal endocrine claim about stress hormones and 'adrenal burnout' that can be checked against physiology evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000165",
+        "topic_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "L-tyrosine improves mood because it helps the body produce dopamine.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000172",
+        "evidence_quote": "it can improve your mood because it helps produce dopamine",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific mechanistic claim about a supplement's effect on a neurotransmitter that is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "L-tyrosine increases energy by supporting thyroid function and the production of dopamine, norepinephrine, and epinephrine.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000199",
+        "evidence_quote": "L-tyrosine can also increase energy by supporting thyroid function and the production of dopamine, norepinephrine, epinephrine.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable mechanistic/efficacy claim about a supplement's effect on energy via thyroid and neurotransmitters.",
+        "relevance": "substantive",
+        "start_unit_id": "u000199",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Forskolin activates the enzyme adenylate cyclase, which raises cyclic AMP levels in cells and is associated with breakdown of stored fat, promoting fat loss and calorie burning.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "Horsicolin activates an enzyme called adenylate cyclase",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific biochemical mechanism claim about forskolin and fat metabolism that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000207",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Forskolin has been studied for decades for its effects on weight loss.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "this has been studied for decades, decades, for its effects on weight loss",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Vague appeal to a body of research on a supplement's weight-loss effect that should be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "It takes 3,500 calories to equal one pound of body fat.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000221",
+        "evidence_quote": "it takes 3,500 calories to equal one pound",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric claim about calorie-to-fat conversion that is directly checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000221",
+        "topic_ids": [
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "it is possible",
+          "could"
+        ],
+        "claim_text": "A low basal metabolic rate combined with overeating and insulin resistance could allow a person to gain about five pounds of fat within two days.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000225",
+        "evidence_quote": "it is possible that you could put on five pounds in two days",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Causal claim about rapid fat gain under specific metabolic conditions that is checkable and counterintuitive.",
+        "relevance": "substantive",
+        "start_unit_id": "u000222",
+        "topic_ids": [
+          "topic:weight_loss_metabolic_health",
+          "topic:cardiometabolic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_190562_window_0004"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "adrenal burnout where your poor adrenal glands are so damn tired, they cannot produce enough cortisol, epinephrine, and norepinephrine",
+        "label_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000163",
+        "summary": "Host explains that ongoing stress, even 'good stress' like wedding planning, triggers epinephrine, norepinephrine and cortisol release, eventually causing adrenal burnout, fatigue and weight gain."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "epinephrine, norepinephrine are secreted",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000165",
+        "summary": "Endocrine mechanism vocabulary (epinephrine, norepinephrine, cortisol, adrenal glands) used to explain stress physiology."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000174",
+        "evidence_quote": "using L-tyrosine, in addition to it literally improving your mood, because it can improve your mood because it helps produce dopamine",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "summary": "L-tyrosine introduced as a supplement that improves mood via dopamine production and builds resilience to stress."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000183",
+        "evidence_quote": "our insulin regulation goes off the charts, glucose, why am I getting a 120 or a 180 reading on my glucometer",
+        "label_ids": [
+          "topic:cardiometabolic_health",
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000176",
+        "summary": "Host lists major and everyday stressors and says stress disrupts sleep and throws off insulin regulation and glucose readings."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000198",
+        "evidence_quote": "Serotonin is like called the happy hormone",
+        "label_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000184",
+        "summary": "Host explains dopamine and serotonin as 'feel good' neurotransmitters, referencing SSRIs, and claims L-tyrosine raises dopamine to lift mood and energy."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000198",
+        "evidence_quote": "selective serotonin reuptake inhibitors",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000184",
+        "summary": "Neurotransmitter mechanism language (dopamine, serotonin, SSRIs) used to explain mood."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000201",
+        "evidence_quote": "L-tyrosine can also increase energy by supporting thyroid function and the production of dopamine, norepinephrine, epinephrine",
+        "label_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000199",
+        "summary": "L-tyrosine claimed to increase energy via thyroid support, making exercise easier and aiding weight loss."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000213",
+        "evidence_quote": "it contains a bioactive compound called forscolin, which this has been studied for decades, decades, for its effects on weight loss",
+        "label_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000202",
+        "summary": "Host describes Coleus forskohlii ('forskolin') as activating adenylate cyclase to raise cyclic AMP, promoting fat breakdown and weight loss, and says it has been studied for decades."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000213",
+        "evidence_quote": "increases levels of cyclic AMP in cells",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000205",
+        "summary": "Cellular/enzyme mechanism language (adenylate cyclase, cyclic AMP, lipolysis) used to explain forskolin's action."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "this has been studied for decades, decades, for its effects on weight loss",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000203",
+        "summary": "Vague claim that forskolin 'has been studied for decades' for weight loss."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000228",
+        "evidence_quote": "Because we know it takes 3,500 calories to equal one pound",
+        "label_ids": [
+          "topic:cardiometabolic_health",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000214",
+        "summary": "Discussion of why rapid perceived weight gain isn't pure fat gain, covering basal metabolic rate, calorie math, and how a sluggish metabolism plus insulin resistance and overeating can allow real fat gain within days."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000219",
+        "evidence_quote": "I will literally hear my patients say, no, I put on five pounds of fat over the weekend",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000215",
+        "summary": "Host cites patients' reported experience of feeling they gained five pounds of fat overnight as a common complaint."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Ongoing stress increases epinephrine, norepinephrine, and cortisol until the adrenal glands become too exhausted to produce enough of these hormones, a state called adrenal burnout.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000167",
+        "evidence_quote": "adrenal burnout where your poor adrenal glands are so damn tired, they cannot produce enough cortisol, epinephrine, and norepinephrine",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Causal endocrine claim about stress hormones and 'adrenal burnout' that can be checked against physiology evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000165",
+        "topic_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "L-tyrosine improves mood because it helps the body produce dopamine.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000172",
+        "evidence_quote": "it can improve your mood because it helps produce dopamine",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific mechanistic claim about a supplement's effect on a neurotransmitter that is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "L-tyrosine increases energy by supporting thyroid function and the production of dopamine, norepinephrine, and epinephrine.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000199",
+        "evidence_quote": "L-tyrosine can also increase energy by supporting thyroid function and the production of dopamine, norepinephrine, epinephrine",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable mechanistic/efficacy claim about a supplement's effect on energy via thyroid and neurotransmitters.",
+        "relevance": "substantive",
+        "start_unit_id": "u000199",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Forskolin activates the enzyme adenylate cyclase, which raises cyclic AMP levels in cells and is associated with breakdown of stored fat, promoting fat loss and calorie burning.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "Horsicolin activates an enzyme called adenylate cyclase",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific biochemical mechanism claim about forskolin and fat metabolism that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000207",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Forskolin has been studied for decades for its effects on weight loss.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "this has been studied for decades, decades, for its effects on weight loss",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Vague appeal to a body of research on a supplement's weight-loss effect that should be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "It takes 3,500 calories to equal one pound of body fat.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000221",
+        "evidence_quote": "it takes 3,500 calories to equal one pound",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric claim about calorie-to-fat conversion that is directly checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000221",
+        "topic_ids": [
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "it is possible",
+          "could"
+        ],
+        "claim_text": "A low basal metabolic rate combined with overeating and insulin resistance could allow a person to gain about five pounds of fat within two days.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000225",
+        "evidence_quote": "it is possible that you could put on five pounds in two days",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Causal claim about rapid fat gain under specific metabolic conditions that is checkable and counterintuitive.",
+        "relevance": "substantive",
+        "start_unit_id": "u000222",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:weight_loss_metabolic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_190562_window_0004"
+  },
+  "stored_at": "2026-09-09T19:40:18.939080+00:00"
+}

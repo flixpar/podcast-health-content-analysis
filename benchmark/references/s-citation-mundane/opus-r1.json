@@ -1,0 +1,524 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "s-citation-mundane",
+  "provenance": {
+    "bundle": "bundle_002",
+    "ingested_at": "2026-09-09T19:55:50.462569+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-opus-r1-synthetic-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000014",
+        "evidence_quote": "There was a study out of Ohio State that looked at people drinking a glass of water about twenty minutes before lunch.",
+        "label_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000008",
+        "summary": "A study on drinking a glass of water before lunch and eating fewer calories at the meal."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000014",
+        "evidence_quote": "There was a study out of Ohio State",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "summary": "An Ohio State study is cited and its design and comparison group described."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000014",
+        "evidence_quote": "just tracked what they normally ate at that meal",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000013",
+        "summary": "The evidence offered is an observational comparison of what two groups normally ate."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "just a glass of plain water before you eat",
+        "label_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "summary": "The plain takeaway: a glass of water before eating, no product needed."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "I have started doing it myself honestly and it does seem to help me not go back for seconds at dinner most nights.",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000016",
+        "summary": "Host's own experience with the habit offered as support for it."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000026",
+        "evidence_quote": "does it matter if the water is cold or room temperature",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Whether water temperature or sparkling water matters, answered from the study."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000026",
+        "evidence_quote": "the study did not really separate that out",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "The study is invoked again for what it did and did not test."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "it is not going to hurt you and it might curb some snacking over time",
+        "label_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "summary": "Takeaway that the habit is harmless and might curb snacking over time."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000033",
+        "evidence_quote": "small stuff like the water thing is nice because you do not need to buy anything",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000032",
+        "summary": "Passing reference back to the water habit as a change that costs nothing."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "something like",
+          "a bit less",
+          "on average"
+        ],
+        "claim_text": "In an Ohio State study, people who drank a glass of water about twenty minutes before lunch ate a bit less at that meal, something like fifty to a hundred fewer calories on average.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000011",
+        "evidence_quote": "The people who did that ended up eating a bit less at the meal, something like fifty to a hundred fewer calories on average.",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A specific quantified study finding that can be checked against the published research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a little"
+        ],
+        "claim_text": "Filling the stomach a little with water before a meal takes the edge off hunger before the food arrives.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "filling your stomach a little with water takes the edge off your hunger before the food arrives",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A physiological mechanism for the effect that could be checked against satiety research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000012",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a few hundred",
+          "a couple of months"
+        ],
+        "claim_text": "The study followed a few hundred adults over a couple of months and compared what they ate at lunch with a group that drank no water beforehand.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000014",
+        "evidence_quote": "The researchers followed a few hundred adults over a couple of months and just tracked what they normally ate at that meal.",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A description of the study's size and design that can be checked against the publication.",
+        "relevance": "substantive",
+        "start_unit_id": "u000013",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "From what I remember"
+        ],
+        "claim_text": "The study did not separate cold water from room temperature water and did not look at sparkling water specifically.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000026",
+        "evidence_quote": "the study did not really separate that out, they just had people drink a glass of water",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A claim about the study's scope that can be checked against the publication.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Drinking a glass of water before a meal is not going to hurt you.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000027",
+        "evidence_quote": "it is not going to hurt you",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A safety claim about the practice that could be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Drinking a glass of water before a meal might curb some snacking over time.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000027",
+        "evidence_quote": "it might curb some snacking over time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "A benefit claim extending the study finding to snacking over time.",
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ]
+      }
+    ],
+    "window_id": "synthetic_citation_mundane_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000014",
+        "evidence_quote": "There was a study out of Ohio State that looked at people drinking a glass of water about twenty minutes before lunch",
+        "label_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000008",
+        "summary": "A study on drinking a glass of water before lunch and eating fewer calories at the meal."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000014",
+        "evidence_quote": "There was a study out of Ohio State",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "summary": "An Ohio State study is cited and its design and comparison group described."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.5,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000014",
+        "evidence_quote": "just tracked what they normally ate at that meal",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000013",
+        "summary": "The evidence offered is an observational comparison of what two groups normally ate."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "just a glass of plain water before you eat",
+        "label_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "summary": "The plain takeaway: a glass of water before eating, no product needed."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "I have started doing it myself honestly and it does seem to help me not go back for seconds at dinner most nights",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000016",
+        "summary": "Host's own experience with the habit offered as support for it."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000026",
+        "evidence_quote": "does it matter if the water is cold or room temperature",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Whether water temperature or sparkling water matters, answered from the study."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000026",
+        "evidence_quote": "the study did not really separate that out",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "The study is invoked again for what it did and did not test."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "it is not going to hurt you and it might curb some snacking over time",
+        "label_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "summary": "Takeaway that the habit is harmless and might curb snacking over time."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000033",
+        "evidence_quote": "small stuff like the water thing is nice because you do not need to buy anything",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000032",
+        "summary": "Passing reference back to the water habit as a change that costs nothing."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "something like",
+          "a bit less",
+          "on average"
+        ],
+        "claim_text": "In an Ohio State study, people who drank a glass of water about twenty minutes before lunch ate a bit less at that meal, something like fifty to a hundred fewer calories on average.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000011",
+        "evidence_quote": "The people who did that ended up eating a bit less at the meal, something like fifty to a hundred fewer calories on average",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A specific quantified study finding that can be checked against the published research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a little"
+        ],
+        "claim_text": "Filling the stomach a little with water before a meal takes the edge off hunger before the food arrives.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "filling your stomach a little with water takes the edge off your hunger before the food arrives",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A physiological mechanism for the effect that could be checked against satiety research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000012",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a few hundred",
+          "a couple of months"
+        ],
+        "claim_text": "The study followed a few hundred adults over a couple of months and compared what they ate at lunch with a group that drank no water beforehand.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000014",
+        "evidence_quote": "The researchers followed a few hundred adults over a couple of months and just tracked what they normally ate at that meal",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A description of the study's size and design that can be checked against the publication.",
+        "relevance": "substantive",
+        "start_unit_id": "u000013",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "From what I remember"
+        ],
+        "claim_text": "The study did not separate cold water from room temperature water and did not look at sparkling water specifically.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000026",
+        "evidence_quote": "the study did not really separate that out, they just had people drink a glass of water",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A claim about the study's scope that can be checked against the publication.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Drinking a glass of water before a meal is not going to hurt you.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000027",
+        "evidence_quote": "it is not going to hurt you",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A safety claim about the practice that could be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Drinking a glass of water before a meal might curb some snacking over time.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000027",
+        "evidence_quote": "it might curb some snacking over time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "A benefit claim extending the study finding to snacking over time.",
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ]
+      }
+    ],
+    "window_id": "synthetic_citation_mundane_window_0001"
+  },
+  "stored_at": "2026-09-09T19:55:50.462600+00:00"
+}

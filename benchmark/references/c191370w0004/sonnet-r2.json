@@ -1,0 +1,360 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c191370w0004",
+  "provenance": {
+    "bundle": "bundle_022",
+    "ingested_at": "2026-09-09T20:27:03.636255+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000119",
+        "evidence_quote": "trauma and our interpretation of trauma has changed for this current generation",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000109",
+        "summary": "Hosts raise an open question about why the word 'trauma' is now used casually for things like breakups, contrasting it with clearly severe cases like veterans' PTSD."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000129",
+        "evidence_quote": "We don't want to stretch the word trauma to the point of meaninglessness, because then we stop studying it.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000120",
+        "summary": "Citing her book Unbroken, the guest argues that stretching the word 'trauma' to meaninglessness is dangerous because it could reduce research and treatment attention to genuine trauma."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000136",
+        "evidence_quote": "why are we reaching for this hyperbolic language to explain relatively mundane experiences",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000130",
+        "summary": "She questions why people reach for hyperbolic trauma language for mundane experiences like exams, speculating it may reflect a need for validation or a broader sense of societal overwhelm."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "more people are talking about trauma, and so that makes it less likely that people will feel really like too stigmatized to get help when they need it",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000137",
+        "summary": "She weighs benefits (destigmatizing help-seeking, normalizing the experience) and downsides of expanded trauma talk, and affirms that some breakups really are traumatic."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000143",
+        "evidence_quote": "one of the chapters is about referred pain.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000140",
+        "summary": "She describes her book's structure of case studies and healing tools and introduces 'referred pain' as a lens for understanding trauma."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "referred pain is a really strange biological thing",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000144",
+        "summary": "Explains the biological phenomenon of referred pain, where the location of felt pain does not match its source, using jaw pain (actually a heart attack) and shoulder pain (actually a spleen problem) as examples; subject named: referred pain."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "the source of the pain and the pain don't necessarily match up",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000144",
+        "summary": "Uses biological mechanism explanation (mismatched pain source and location) to account for jaw pain from a heart attack and shoulder pain from a spleen problem, without citing a study."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000151",
+        "evidence_quote": "it's not the job that's traumatic. It's the breakup that they just had",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "summary": "She recounts a client whose nightmares and job doubts were actually caused by an unexpected breakup rather than the job itself, illustrating displaced trauma symptoms, while noting not every breakup or war experience is traumatic."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000150",
+        "evidence_quote": "I've seen this with many many clients where they will come in and say",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "summary": "Clinical experience with many clients is offered as evidence that trauma symptoms can be displaced from their true source."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000123",
+        "evidence_quote": "a book that came out called Unbroken The Trauma Response is Never Wrong",
+        "mention_role": "own_product",
+        "product_name": "Unbroken: The Trauma Response is Never Wrong",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000123"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Jaw pain can actually be a symptom of a heart attack, rather than a dental problem, because of referred pain.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "even though the pain is in your jaw, you're actually having a heart attack",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "This is a checkable claim about referred pain presenting a heart attack as jaw pain; the specific mechanism and presentation are verifiable against clinical knowledge.",
+        "relevance": "substantive",
+        "start_unit_id": "u000144",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Shoulder pain can actually be caused by a problem with the spleen, because of referred pain.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000146",
+        "evidence_quote": "you might have pain in your shoulder and it's actually a result of your spleen",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "This is a checkable claim about referred pain linking shoulder pain to spleen problems; the specific organ-to-referral-site mapping is verifiable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000146",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      }
+    ],
+    "window_id": "episode_191370_window_0004"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000119",
+        "evidence_quote": "trauma and our interpretation of trauma has changed for this current generation",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000109",
+        "summary": "Hosts raise an open question about why the word 'trauma' is now used casually for things like breakups, contrasting it with clearly severe cases like veterans' PTSD."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000129",
+        "evidence_quote": "We don't want to stretch the word trauma to the point of meaninglessness, because then we stop studying it",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000120",
+        "summary": "Citing her book Unbroken, the guest argues that stretching the word 'trauma' to meaninglessness is dangerous because it could reduce research and treatment attention to genuine trauma."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000136",
+        "evidence_quote": "why are we reaching for this hyperbolic language to explain relatively mundane experiences",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000130",
+        "summary": "She questions why people reach for hyperbolic trauma language for mundane experiences like exams, speculating it may reflect a need for validation or a broader sense of societal overwhelm."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "more people are talking about trauma, and so that makes it less likely that people will feel really like too stigmatized to get help when they need it",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000137",
+        "summary": "She weighs benefits (destigmatizing help-seeking, normalizing the experience) and downsides of expanded trauma talk, and affirms that some breakups really are traumatic."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000143",
+        "evidence_quote": "one of the chapters is about referred pain",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000140",
+        "summary": "She describes her book's structure of case studies and healing tools and introduces 'referred pain' as a lens for understanding trauma."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "referred pain is a really strange biological thing",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000144",
+        "summary": "Explains the biological phenomenon of referred pain, where the location of felt pain does not match its source, using jaw pain (actually a heart attack) and shoulder pain (actually a spleen problem) as examples; subject named: referred pain."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "the source of the pain and the pain don't necessarily match up",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000144",
+        "summary": "Uses biological mechanism explanation (mismatched pain source and location) to account for jaw pain from a heart attack and shoulder pain from a spleen problem, without citing a study."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000151",
+        "evidence_quote": "it's not the job that's traumatic. It's the breakup that they just had",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "summary": "She recounts a client whose nightmares and job doubts were actually caused by an unexpected breakup rather than the job itself, illustrating displaced trauma symptoms, while noting not every breakup or war experience is traumatic."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000150",
+        "evidence_quote": "I've seen this with many many clients where they will come in and say",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "summary": "Clinical experience with many clients is offered as evidence that trauma symptoms can be displaced from their true source."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000123",
+        "evidence_quote": "a book that came out called Unbroken The Trauma Response is Never Wrong",
+        "mention_role": "own_product",
+        "product_name": "Unbroken: The Trauma Response is Never Wrong",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000123"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Jaw pain can actually be a symptom of a heart attack, rather than a dental problem, because of referred pain.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "even though the pain is in your jaw, you're actually having a heart attack",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "This is a checkable claim about referred pain presenting a heart attack as jaw pain; the specific mechanism and presentation are verifiable against clinical knowledge.",
+        "relevance": "substantive",
+        "start_unit_id": "u000144",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Shoulder pain can actually be caused by a problem with the spleen, because of referred pain.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000146",
+        "evidence_quote": "you might have pain in your shoulder and it's actually a result of your spleen",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "This is a checkable claim about referred pain linking shoulder pain to spleen problems; the specific organ-to-referral-site mapping is verifiable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000146",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      }
+    ],
+    "window_id": "episode_191370_window_0004"
+  },
+  "stored_at": "2026-09-09T20:27:03.636302+00:00"
+}

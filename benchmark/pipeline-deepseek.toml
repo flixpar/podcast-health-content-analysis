@@ -1,0 +1,30 @@
+# Candidate configuration for benchmark runs against DeepSeek's hosted API.
+#
+#   .venv/bin/python -m analysis.benchmark run --name ds-low \
+#       --pipeline-config benchmark/pipeline-deepseek.toml --repeats 2
+#
+# Same tables and keys as analysis/topic-labeling.toml; typed flags after the
+# command still win (e.g. `-- --reasoning-effort high`). [paths] is unused by
+# the benchmark runner, which takes its windows from benchmark/items.jsonl.
+
+[model]
+api_base = ["https://api.deepseek.com/v1"]
+api = "responses"
+api_key_env = "DEEPSEEK_API_KEY"
+env_file = ".env"
+model = "deepseek-v4-flash"
+reasoning_effort = "low"
+max_output_tokens = 32000
+timeout = 1800
+attempts = 3
+temperature = 1.0
+top_p = 0.95
+
+[usage]
+usage_limits = "analysis/usage-limits.toml"
+provider = "deepseek"
+experiment = "benchmark-validation"
+
+[label]
+batch_size = 4
+concurrency = 16

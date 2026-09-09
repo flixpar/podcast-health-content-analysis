@@ -1,0 +1,409 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c2317w0006",
+  "provenance": {
+    "bundle": "bundle_024",
+    "ingested_at": "2026-09-09T20:27:03.735896+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000410",
+        "evidence_quote": "menopause is defined by having no menstrual period for 12 months",
+        "label_ids": [
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000345",
+        "summary": "Doctor and host discuss menopause's definition, hormonal timeline, and its effects on body fat distribution and muscle mass."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000425",
+        "evidence_quote": "start to do more weight training, start to build muscle in the places not only that it was.",
+        "label_ids": [
+          "topic:fitness_exercise"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000411",
+        "summary": "Doctor recommends weight training and increased activity level to counter menopause-related muscle and fat changes."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000398",
+        "evidence_quote": "Our body is looking for more hormonally active cells.",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000378",
+        "summary": "Explanation of estrogen decline and fat cells producing estrogen uses physiological mechanism language."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000376",
+        "evidence_quote": "And I'll get flak for saying this because I'm a lean, athletic build kind of person, but all my pants fit very differently now.",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000357",
+        "summary": "Host offers her own body changes as evidence supporting the general claim about menopausal body composition shifts."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000414",
+        "evidence_quote": "Oh, I have a, I've used the tonal machine at home.",
+        "mention_role": "neutral",
+        "product_name": "Tonal",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000414"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Menopause is defined as having no menstrual period for 12 months.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000347",
+        "evidence_quote": "So, menopause is defined by having no menstrual period for 12 months.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Definitional/diagnostic claim about menopause that can be checked against medical definitions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000347",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The decline in estrogen and progesterone associated with perimenopause can begin up to 10 years before menopause.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000348",
+        "evidence_quote": "Okay, but the drop in estrogen and progesterone that we're talking about here happens up to 10 years before menopause.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific timeline claim about hormonal decline before menopause that can be checked against endocrinology literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000348",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can be as early as",
+          "usually"
+        ],
+        "claim_text": "Perimenopausal changes can begin as early as age 35 for some people, but usually start in the mid-forties.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000353",
+        "evidence_quote": "So it can be as early as thirty five for people who are going through menopause a little bit early, but usually in your forties, especially your mid forties, is when people really start to see up.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Prevalence/onset-age claim about perimenopause that can be checked against clinical data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000353",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fat accumulated around the midsection produces estrogen.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000380",
+        "evidence_quote": "So the fat that you accumulate—yes—in your middle—yes—it produces estrogen.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Physiological mechanism claim about fat tissue and estrogen production that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000380",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Estrogen helps the body maintain muscle mass.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000401",
+        "evidence_quote": "The other thing it does, what it helps us keep our muscle mass.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Mechanistic claim about estrogen's role in muscle maintenance, checkable against physiology research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000401",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Muscle loss occurs at a rate of about one to three percent per decade and accelerates during the menopause transition.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000410",
+        "evidence_quote": "But as you go into menopause, it goes faster, meaning that you're losing muscle at high rates.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific rate-of-muscle-loss claim tied to menopause that can be checked against clinical data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000408",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Declining estrogen during perimenopause causes activity level to drop, often without the person noticing.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000419",
+        "evidence_quote": "So what I'll tell you is that what we found is that when people start to go into perimenopause and their estrogen drops, their activity level drops a little bit, and they don't even notice it.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Causal claim linking estrogen decline to reduced physical activity, checkable against behavioral/endocrine research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000419",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      }
+    ],
+    "window_id": "episode_2317_window_0006"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000410",
+        "evidence_quote": "menopause is defined by having no menstrual period for 12 months",
+        "label_ids": [
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000345",
+        "summary": "Doctor and host discuss menopause's definition, hormonal timeline, and its effects on body fat distribution and muscle mass."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000425",
+        "evidence_quote": "start to do more weight training, start to build muscle in the places not only that it was",
+        "label_ids": [
+          "topic:fitness_exercise"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000411",
+        "summary": "Doctor recommends weight training and increased activity level to counter menopause-related muscle and fat changes."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000398",
+        "evidence_quote": "Our body is looking for more hormonally active cells",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000378",
+        "summary": "Explanation of estrogen decline and fat cells producing estrogen uses physiological mechanism language."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000376",
+        "evidence_quote": "And I'll get flak for saying this because I'm a lean, athletic build kind of person, but all my pants fit very differently now",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000357",
+        "summary": "Host offers her own body changes as evidence supporting the general claim about menopausal body composition shifts."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000414",
+        "evidence_quote": "Oh, I have a, I've used the tonal machine at home",
+        "mention_role": "neutral",
+        "product_name": "Tonal",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000414"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Menopause is defined as having no menstrual period for 12 months.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000347",
+        "evidence_quote": "So, menopause is defined by having no menstrual period for 12 months",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Definitional/diagnostic claim about menopause that can be checked against medical definitions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000347",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The decline in estrogen and progesterone associated with perimenopause can begin up to 10 years before menopause.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000348",
+        "evidence_quote": "Okay, but the drop in estrogen and progesterone that we're talking about here happens up to 10 years before menopause",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific timeline claim about hormonal decline before menopause that can be checked against endocrinology literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000348",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can be as early as",
+          "usually"
+        ],
+        "claim_text": "Perimenopausal changes can begin as early as age 35 for some people, but usually start in the mid-forties.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000353",
+        "evidence_quote": "So it can be as early as thirty five for people who are going through menopause a little bit early, but usually in your forties, especially your mid forties, is when people really start to see up",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Prevalence/onset-age claim about perimenopause that can be checked against clinical data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000353",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fat accumulated around the midsection produces estrogen.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000380",
+        "evidence_quote": "So the fat that you accumulate—yes—in your middle—yes—it produces estrogen",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Physiological mechanism claim about fat tissue and estrogen production that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000380",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Estrogen helps the body maintain muscle mass.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000401",
+        "evidence_quote": "The other thing it does, what it helps us keep our muscle mass",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Mechanistic claim about estrogen's role in muscle maintenance, checkable against physiology research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000401",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Muscle loss occurs at a rate of about one to three percent per decade and accelerates during the menopause transition.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000410",
+        "evidence_quote": "But as you go into menopause, it goes faster, meaning that you're losing muscle at high rates",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific rate-of-muscle-loss claim tied to menopause that can be checked against clinical data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000408",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Declining estrogen during perimenopause causes activity level to drop, often without the person noticing.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000419",
+        "evidence_quote": "So what I'll tell you is that what we found is that when people start to go into perimenopause and their estrogen drops, their activity level drops a little bit, and they don't even notice it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Causal claim linking estrogen decline to reduced physical activity, checkable against behavioral/endocrine research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000419",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      }
+    ],
+    "window_id": "episode_2317_window_0006"
+  },
+  "stored_at": "2026-09-09T20:27:03.735966+00:00"
+}

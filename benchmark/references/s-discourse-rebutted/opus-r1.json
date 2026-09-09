@@ -1,0 +1,505 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "s-discourse-rebutted",
+  "provenance": {
+    "bundle": "bundle_003",
+    "ingested_at": "2026-09-09T19:55:50.480266+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-opus-r1-synthetic-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000014",
+        "evidence_quote": "mostly just lifting a few days a week and some walking whenever i can fit it in",
+        "label_ids": [
+          "topic:fitness_exercise"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000010",
+        "summary": "Small talk about the guest's lifting and walking routine."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "i wanted to talk about flu season since its coming up",
+        "label_ids": [
+          "topic:infectious_disease_outbreaks"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000015",
+        "summary": "The hosts announce flu season as the segment's subject."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "i actually dont get the flu shot anymore because honestly it gives you the flu every single time",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Guest says he no longer gets the flu shot because it gives him the flu."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "i got it in the past i was sick for like a week straight",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Guest offers his own past illness after the shot as grounds for the claim."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000033",
+        "evidence_quote": "thats actually not accurate and i want to push back on it a bit",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Host rebuts the flu-shot-gives-you-flu belief and explains why people feel unwell afterward."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "i hear that a lot but thats actually not accurate and i want to push back on it a bit",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Host explicitly corrects a common flu-shot myth."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "Live-virus and replication vocabulary explains why the shot cannot cause flu."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "usually its your immune system reacting to the shot",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "Immune-system reaction offered as the physiological explanation for post-shot symptoms."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000029",
+        "evidence_quote": "its a really common misunderstanding but the timing is usually the other explanation too",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "summary": "Host calls the belief a common misunderstanding and gives coincidental timing as the real explanation."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000044",
+        "evidence_quote": "i do pretty much every fall usually right when the pharmacies start advertising it",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "summary": "Host describes getting the flu shot every year without illness and the guest reconsiders."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "nope worst i ever get is a sore arm for a day and thats about it",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000035",
+        "summary": "Host's own yearly experience of only a sore arm is offered as reassurance."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "i just wanted to correct that specific point since its such a common one",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000040",
+        "summary": "Host frames the exchange as correcting one common false point."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "every single time"
+        ],
+        "claim_text": "The flu shot gives you the flu every single time.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "honestly it gives you the flu every single time",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A specific causal claim about a vaccine's effects that could change whether listeners get vaccinated.",
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The flu shot does not contain a live virus that can replicate in the body, so it cannot give a person the flu.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body so it cannot give you the flu itself",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "A checkable statement about vaccine composition used to settle a disputed safety question.",
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "usually"
+        ],
+        "claim_text": "Feeling unwell after a flu shot is usually the immune system reacting, producing a sore arm, mild fatigue or a low fever for a day or two.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "usually its your immune system reacting to the shot so you might get a sore arm or mild fatigue or a low fever for a day or two",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "A physiological account of post-vaccination symptoms that can be checked against reported adverse-event data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Many people get the flu shot as cold and flu season is ramping up and then catch an unrelated virus at the same time and blame the shot.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000029",
+        "evidence_quote": "a lot of people get the shot right as cold and flu season is ramping up so they catch an unrelated virus right around the same time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "An empirical explanation for perceived post-shot illness that can be checked against evidence on timing and coincidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000029",
+        "topic_ids": [
+          "topic:vaccines_immunization",
+          "topic:infectious_disease_outbreaks"
+        ]
+      }
+    ],
+    "window_id": "synthetic_discourse_rebutted_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000014",
+        "evidence_quote": "mostly just lifting a few days a week and some walking whenever i can fit it in",
+        "label_ids": [
+          "topic:fitness_exercise"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000010",
+        "summary": "Small talk about the guest's lifting and walking routine."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "i wanted to talk about flu season since its coming up",
+        "label_ids": [
+          "topic:infectious_disease_outbreaks"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000015",
+        "summary": "The hosts announce flu season as the segment's subject."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "i actually dont get the flu shot anymore because honestly it gives you the flu every single time",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Guest says he no longer gets the flu shot because it gives him the flu."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "i got it in the past i was sick for like a week straight",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Guest offers his own past illness after the shot as grounds for the claim."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000033",
+        "evidence_quote": "thats actually not accurate and i want to push back on it a bit",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Host rebuts the flu-shot-gives-you-flu belief and explains why people feel unwell afterward."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "i hear that a lot but thats actually not accurate and i want to push back on it a bit",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Host explicitly corrects a common flu-shot myth."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "Live-virus and replication vocabulary explains why the shot cannot cause flu."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "usually its your immune system reacting to the shot",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "Immune-system reaction offered as the physiological explanation for post-shot symptoms."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000029",
+        "evidence_quote": "its a really common misunderstanding but the timing is usually the other explanation too",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "summary": "Host calls the belief a common misunderstanding and gives coincidental timing as the real explanation."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000044",
+        "evidence_quote": "i do pretty much every fall usually right when the pharmacies start advertising it",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "summary": "Host describes getting the flu shot every year without illness and the guest reconsiders."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "nope worst i ever get is a sore arm for a day and thats about it",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000035",
+        "summary": "Host's own yearly experience of only a sore arm is offered as reassurance."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "i just wanted to correct that specific point since its such a common one",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000040",
+        "summary": "Host frames the exchange as correcting one common false point."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "every single time"
+        ],
+        "claim_text": "The flu shot gives you the flu every single time.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "honestly it gives you the flu every single time",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A specific causal claim about a vaccine's effects that could change whether listeners get vaccinated.",
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The flu shot does not contain a live virus that can replicate in the body, so it cannot give a person the flu.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body so it cannot give you the flu itself",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "A checkable statement about vaccine composition used to settle a disputed safety question.",
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "usually"
+        ],
+        "claim_text": "Feeling unwell after a flu shot is usually the immune system reacting, producing a sore arm, mild fatigue or a low fever for a day or two.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "usually its your immune system reacting to the shot so you might get a sore arm or mild fatigue or a low fever for a day or two",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "A physiological account of post-vaccination symptoms that can be checked against reported adverse-event data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Many people get the flu shot as cold and flu season is ramping up and then catch an unrelated virus at the same time and blame the shot.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000029",
+        "evidence_quote": "a lot of people get the shot right as cold and flu season is ramping up so they catch an unrelated virus right around the same time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "An empirical explanation for perceived post-shot illness that can be checked against evidence on timing and coincidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000029",
+        "topic_ids": [
+          "topic:infectious_disease_outbreaks",
+          "topic:vaccines_immunization"
+        ]
+      }
+    ],
+    "window_id": "synthetic_discourse_rebutted_window_0001"
+  },
+  "stored_at": "2026-09-09T19:55:50.480296+00:00"
+}

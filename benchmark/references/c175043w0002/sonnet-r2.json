@@ -1,0 +1,513 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c175043w0002",
+  "provenance": {
+    "bundle": "bundle_025",
+    "ingested_at": "2026-09-09T20:27:03.807203+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000073",
+        "evidence_quote": "after semaglutide, Ozempic, Wegovy came, you know, became FDA approved for chronic weight management",
+        "label_ids": [
+          "topic:glp_1_incretin_drugs"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000045",
+        "summary": "Detailed history of GLP-1 drugs from Byetta through Saxenda to semaglutide, including FDA approval timeline and effectiveness."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000092",
+        "evidence_quote": "You were doing competitive, powerlifting.",
+        "label_ids": [
+          "topic:fitness_exercise"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000074",
+        "summary": "Physician describes her history of competitive powerlifting for confidence and community after struggling with dieting."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000122",
+        "evidence_quote": "it kind of was around 1,100 calories, five 45 minute sessions of cardio a day",
+        "label_ids": [
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000093",
+        "summary": "Physician recounts an extreme calorie-restricted diet and cardio regimen that harmed her health despite her medical training."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000066",
+        "evidence_quote": "the error bars are just all over the place",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000064",
+        "summary": "Early GLP-1 trial data (Byetta) showed a modest weight-loss effect with large error bars in the reported graph."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000122",
+        "evidence_quote": "I dieted myself to to the point where I failed medical school anatomy the first time",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "Physician uses her own dieting failure and health harm as evidence about the difficulty of calorie-based weight loss."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000097",
+        "evidence_quote": "As a fellowship-trained physician, it was hard for you to get your macros and your nutrition under wraps.",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000093",
+        "summary": "Speaker highlights the guest's status as a fellowship-trained physician to underscore how surprising her dieting struggles were."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000049",
+        "evidence_quote": "after semaglutide, Ozempic, Wegovy came",
+        "mention_role": "neutral",
+        "product_name": "Ozempic",
+        "product_type": "medication",
+        "start_unit_id": "u000049"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000049",
+        "evidence_quote": "after semaglutide, Ozempic, Wegovy came",
+        "mention_role": "neutral",
+        "product_name": "Wegovy",
+        "product_type": "medication",
+        "start_unit_id": "u000049"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000064",
+        "evidence_quote": "that was in 2005 with Byetta",
+        "mention_role": "neutral",
+        "product_name": "Byetta",
+        "product_type": "medication",
+        "start_unit_id": "u000064"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000067",
+        "evidence_quote": "I think it was Saxenda that was in twenty fourteen.",
+        "mention_role": "neutral",
+        "product_name": "Saxenda",
+        "product_type": "medication",
+        "start_unit_id": "u000067"
+      },
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000056",
+        "evidence_quote": "Read a true tide",
+        "mention_role": "neutral",
+        "product_name": "Retatrutide",
+        "product_type": "medication",
+        "start_unit_id": "u000055"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "never"
+        ],
+        "claim_text": "GLP-1 medications are the most effective weight-management treatment that has ever existed.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "There has never been something more effective than these medications.",
+        "evidence_signal_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "This is a strong comparative-effectiveness claim about GLP-1 drugs that can be checked against clinical trial evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000045",
+        "topic_ids": [
+          "topic:glp_1_incretin_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Semaglutide, marketed as Ozempic and Wegovy, became FDA approved for chronic weight management.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000049",
+        "evidence_quote": "became FDA approved for chronic weight management",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "This is a specific regulatory-approval claim that can be verified against FDA records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000049",
+        "topic_ids": [
+          "topic:glp_1_incretin_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Byetta was approved for type 2 diabetes in 2005 and required a twice-daily injection.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000064",
+        "evidence_quote": "Originally, it was for type two diabetes, and that was in 2005 with Byetta, and that was a twice a day injection.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific, checkable historical regulatory and dosing facts about Byetta.",
+        "relevance": "substantive",
+        "start_unit_id": "u000064",
+        "topic_ids": [
+          "topic:glp_1_incretin_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "somewhere along the order of"
+        ],
+        "claim_text": "Early GLP-1 drug data showed weight loss of only around five pounds, with error bars scattered widely in the published graph.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000066",
+        "evidence_quote": "somewhere along the order of five pounds in the error",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about the magnitude and statistical reliability of early GLP-1 weight-loss data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000065",
+        "topic_ids": [
+          "topic:glp_1_incretin_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Saxenda, approved in 2014, produced weight loss that was still not very impressive and required a daily injection.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000069",
+        "evidence_quote": "the weight loss aspect was also still not that impressive, and you had to inject every day",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable historical claim about Saxenda's approval date, efficacy, and dosing regimen.",
+        "relevance": "substantive",
+        "start_unit_id": "u000067",
+        "topic_ids": [
+          "topic:glp_1_incretin_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "impossible"
+        ],
+        "claim_text": "A diet of about 1,100 calories per day combined with five 45-minute cardio sessions per week and four weightlifting sessions per week would be impossible for anyone to sustain.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000119",
+        "evidence_quote": "that would be impossible for anyone",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "This is a checkable claim about the physiological sustainability of an extreme low-calorie, high-exercise regimen.",
+        "relevance": "substantive",
+        "start_unit_id": "u000114",
+        "topic_ids": [
+          "topic:weight_loss_metabolic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_175043_window_0002"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000073",
+        "evidence_quote": "after semaglutide, Ozempic, Wegovy came, you know, became FDA approved for chronic weight management",
+        "label_ids": [
+          "topic:glp_1_incretin_drugs"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000045",
+        "summary": "Detailed history of GLP-1 drugs from Byetta through Saxenda to semaglutide, including FDA approval timeline and effectiveness."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000092",
+        "evidence_quote": "You were doing competitive, powerlifting",
+        "label_ids": [
+          "topic:fitness_exercise"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000074",
+        "summary": "Physician describes her history of competitive powerlifting for confidence and community after struggling with dieting."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000122",
+        "evidence_quote": "it kind of was around 1,100 calories, five 45 minute sessions of cardio a day",
+        "label_ids": [
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000093",
+        "summary": "Physician recounts an extreme calorie-restricted diet and cardio regimen that harmed her health despite her medical training."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000066",
+        "evidence_quote": "the error bars are just all over the place",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000064",
+        "summary": "Early GLP-1 trial data (Byetta) showed a modest weight-loss effect with large error bars in the reported graph."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000122",
+        "evidence_quote": "I dieted myself to to the point where I failed medical school anatomy the first time",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "Physician uses her own dieting failure and health harm as evidence about the difficulty of calorie-based weight loss."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000097",
+        "evidence_quote": "As a fellowship-trained physician, it was hard for you to get your macros and your nutrition under wraps",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000093",
+        "summary": "Speaker highlights the guest's status as a fellowship-trained physician to underscore how surprising her dieting struggles were."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000049",
+        "evidence_quote": "after semaglutide, Ozempic, Wegovy came",
+        "mention_role": "neutral",
+        "product_name": "Ozempic",
+        "product_type": "medication",
+        "start_unit_id": "u000049"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000049",
+        "evidence_quote": "after semaglutide, Ozempic, Wegovy came",
+        "mention_role": "neutral",
+        "product_name": "Wegovy",
+        "product_type": "medication",
+        "start_unit_id": "u000049"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000064",
+        "evidence_quote": "that was in 2005 with Byetta",
+        "mention_role": "neutral",
+        "product_name": "Byetta",
+        "product_type": "medication",
+        "start_unit_id": "u000064"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000067",
+        "evidence_quote": "I think it was Saxenda that was in twenty fourteen",
+        "mention_role": "neutral",
+        "product_name": "Saxenda",
+        "product_type": "medication",
+        "start_unit_id": "u000067"
+      },
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000056",
+        "evidence_quote": "Read a true tide",
+        "mention_role": "neutral",
+        "product_name": "Retatrutide",
+        "product_type": "medication",
+        "start_unit_id": "u000055"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "never"
+        ],
+        "claim_text": "GLP-1 medications are the most effective weight-management treatment that has ever existed.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "There has never been something more effective than these medications",
+        "evidence_signal_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "This is a strong comparative-effectiveness claim about GLP-1 drugs that can be checked against clinical trial evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000045",
+        "topic_ids": [
+          "topic:glp_1_incretin_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Semaglutide, marketed as Ozempic and Wegovy, became FDA approved for chronic weight management.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000049",
+        "evidence_quote": "became FDA approved for chronic weight management",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "This is a specific regulatory-approval claim that can be verified against FDA records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000049",
+        "topic_ids": [
+          "topic:glp_1_incretin_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Byetta was approved for type 2 diabetes in 2005 and required a twice-daily injection.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000064",
+        "evidence_quote": "Originally, it was for type two diabetes, and that was in 2005 with Byetta, and that was a twice a day injection",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific, checkable historical regulatory and dosing facts about Byetta.",
+        "relevance": "substantive",
+        "start_unit_id": "u000064",
+        "topic_ids": [
+          "topic:glp_1_incretin_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "somewhere along the order of"
+        ],
+        "claim_text": "Early GLP-1 drug data showed weight loss of only around five pounds, with error bars scattered widely in the published graph.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000066",
+        "evidence_quote": "somewhere along the order of five pounds in the error",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about the magnitude and statistical reliability of early GLP-1 weight-loss data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000065",
+        "topic_ids": [
+          "topic:glp_1_incretin_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Saxenda, approved in 2014, produced weight loss that was still not very impressive and required a daily injection.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000069",
+        "evidence_quote": "the weight loss aspect was also still not that impressive, and you had to inject every day",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable historical claim about Saxenda's approval date, efficacy, and dosing regimen.",
+        "relevance": "substantive",
+        "start_unit_id": "u000067",
+        "topic_ids": [
+          "topic:glp_1_incretin_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "impossible"
+        ],
+        "claim_text": "A diet of about 1,100 calories per day combined with five 45-minute cardio sessions per week and four weightlifting sessions per week would be impossible for anyone to sustain.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000119",
+        "evidence_quote": "that would be impossible for anyone",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "This is a checkable claim about the physiological sustainability of an extreme low-calorie, high-exercise regimen.",
+        "relevance": "substantive",
+        "start_unit_id": "u000114",
+        "topic_ids": [
+          "topic:weight_loss_metabolic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_175043_window_0002"
+  },
+  "stored_at": "2026-09-09T20:27:03.807280+00:00"
+}

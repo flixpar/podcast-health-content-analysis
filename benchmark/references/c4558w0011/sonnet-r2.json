@@ -1,0 +1,439 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c4558w0011",
+  "provenance": {
+    "bundle": "bundle_003",
+    "ingested_at": "2026-09-09T20:27:02.672862+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000557",
+        "evidence_quote": "You can, you know, you can do the drug approvals very, very quickly with AI.",
+        "label_ids": [
+          "topic:ai_health_information"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000547",
+        "summary": "A government official describes using AI at FDA and CDC to speed drug approvals and analyze population-wide drug data."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000578",
+        "evidence_quote": "It is a company with one mission: improving your sleep, and is changing the way people do that—the way they get a good night's rest.",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "summary": "Sponsor read for Eight Sleep's Pod 5 Ultra mattress cover, which regulates temperature and detects snoring."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000578",
+        "evidence_quote": "Use the code Tucker to get 350 bucks off your Pod Five Ultra.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "summary": "Sponsor read for Eight Sleep includes a discount code for listeners."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000624",
+        "evidence_quote": "We just brought a guy in this week who's going to be revolutionizing the the vaccine injury compensation program",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000604",
+        "summary": "Speakers discuss people injured or killed by the COVID vaccine and the federal Vaccine Injury Compensation Program set up to compensate them."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000578",
+        "evidence_quote": "Use the code Tucker to get 350 bucks off your Pod Five Ultra.",
+        "mention_role": "advertised",
+        "product_name": "Eight Sleep Pod 5 Ultra",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000558"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "AI allows drug approvals to be accelerated without needing to use primates or animal models.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000550",
+        "evidence_quote": "Approvals, so that you don't need to use primates or even animal models.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about AI changing the drug approval process and animal testing requirements.",
+        "relevance": "substantive",
+        "start_unit_id": "u000549",
+        "topic_ids": [
+          "topic:ai_health_information"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "AI can analyze population-level data comparing different diabetes drugs, statins, and SSRIs to determine which works best and has the fewest side effects.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000555",
+        "evidence_quote": "we're using three different diabetes drugs, or five different statin drugs, or all these SSRIs and others",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about AI-driven comparative analysis of drug effectiveness and side effects across a population.",
+        "relevance": "substantive",
+        "start_unit_id": "u000555",
+        "topic_ids": [
+          "topic:ai_health_information"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Temperature has a massive effect on the way a person sleeps.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000567",
+        "evidence_quote": "Temperature has a massive effect on the way you sleep.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about temperature's effect on sleep made in a sponsor read.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000567",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Completely stop"
+        ],
+        "claim_text": "The Eight Sleep product detects snoring and adjusts bed position to reduce or completely stop it.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "Completely stop it.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A checkable product-performance claim about eliminating snoring made in a sponsor read.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000568",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Some people have died or been permanently disabled as a result of the COVID vaccine.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000608",
+        "evidence_quote": "Some were permanently disabled.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about death and permanent disability caused by the COVID vaccine.",
+        "relevance": "substantive",
+        "start_unit_id": "u000607",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The federal Vaccine Injury Compensation Program has paid out over five billion dollars.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000623",
+        "evidence_quote": "And it's paid out over five billion dollars.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific, checkable figure about total vaccine injury compensation payouts.",
+        "relevance": "substantive",
+        "start_unit_id": "u000623",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The American Academy of Pediatrics characterized vaccines as \"unavoidably unsafe.\"",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000617",
+        "evidence_quote": "It recognized that vaccines were, in the word of the, in the, in the description, the characterization of the American Academy of Pediatrics, were unavoidably unsafe.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable attribution claim about how a named medical body characterized vaccine safety.",
+        "relevance": "substantive",
+        "start_unit_id": "u000617",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The vaccine injury compensation trust fund is funded by a 75 cent surcharge on every vaccine.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000620",
+        "evidence_quote": "The trust fund is endowed by a 75 cent surcharge on every vaccine, and that program is supposed to.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific, checkable claim about how the vaccine injury compensation fund is financed.",
+        "relevance": "substantive",
+        "start_unit_id": "u000620",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      }
+    ],
+    "window_id": "episode_4558_window_0011"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000557",
+        "evidence_quote": "You can, you know, you can do the drug approvals very, very quickly with AI",
+        "label_ids": [
+          "topic:ai_health_information"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000547",
+        "summary": "A government official describes using AI at FDA and CDC to speed drug approvals and analyze population-wide drug data."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000578",
+        "evidence_quote": "It is a company with one mission: improving your sleep, and is changing the way people do that—the way they get a good night's rest",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "summary": "Sponsor read for Eight Sleep's Pod 5 Ultra mattress cover, which regulates temperature and detects snoring."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000578",
+        "evidence_quote": "Use the code Tucker to get 350 bucks off your Pod Five Ultra",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "summary": "Sponsor read for Eight Sleep includes a discount code for listeners."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000624",
+        "evidence_quote": "We just brought a guy in this week who's going to be revolutionizing the the vaccine injury compensation program",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000604",
+        "summary": "Speakers discuss people injured or killed by the COVID vaccine and the federal Vaccine Injury Compensation Program set up to compensate them."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000578",
+        "evidence_quote": "Use the code Tucker to get 350 bucks off your Pod Five Ultra",
+        "mention_role": "advertised",
+        "product_name": "Eight Sleep Pod 5 Ultra",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000558"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "AI allows drug approvals to be accelerated without needing to use primates or animal models.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000550",
+        "evidence_quote": "Approvals, so that you don't need to use primates or even animal models",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about AI changing the drug approval process and animal testing requirements.",
+        "relevance": "substantive",
+        "start_unit_id": "u000549",
+        "topic_ids": [
+          "topic:ai_health_information"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "AI can analyze population-level data comparing different diabetes drugs, statins, and SSRIs to determine which works best and has the fewest side effects.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000555",
+        "evidence_quote": "we're using three different diabetes drugs, or five different statin drugs, or all these SSRIs and others",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about AI-driven comparative analysis of drug effectiveness and side effects across a population.",
+        "relevance": "substantive",
+        "start_unit_id": "u000555",
+        "topic_ids": [
+          "topic:ai_health_information"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Temperature has a massive effect on the way a person sleeps.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000567",
+        "evidence_quote": "Temperature has a massive effect on the way you sleep",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about temperature's effect on sleep made in a sponsor read.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000567",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Completely stop"
+        ],
+        "claim_text": "The Eight Sleep product detects snoring and adjusts bed position to reduce or completely stop it.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "Completely stop it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A checkable product-performance claim about eliminating snoring made in a sponsor read.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000568",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Some people have died or been permanently disabled as a result of the COVID vaccine.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000608",
+        "evidence_quote": "Some were permanently disabled",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about death and permanent disability caused by the COVID vaccine.",
+        "relevance": "substantive",
+        "start_unit_id": "u000607",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The federal Vaccine Injury Compensation Program has paid out over five billion dollars.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000623",
+        "evidence_quote": "And it's paid out over five billion dollars",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific, checkable figure about total vaccine injury compensation payouts.",
+        "relevance": "substantive",
+        "start_unit_id": "u000623",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The American Academy of Pediatrics characterized vaccines as \"unavoidably unsafe.\"",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000617",
+        "evidence_quote": "It recognized that vaccines were, in the word of the, in the, in the description, the characterization of the American Academy of Pediatrics, were unavoidably unsafe",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable attribution claim about how a named medical body characterized vaccine safety.",
+        "relevance": "substantive",
+        "start_unit_id": "u000617",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The vaccine injury compensation trust fund is funded by a 75 cent surcharge on every vaccine.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000620",
+        "evidence_quote": "The trust fund is endowed by a 75 cent surcharge on every vaccine, and that program is supposed to",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific, checkable claim about how the vaccine injury compensation fund is financed.",
+        "relevance": "substantive",
+        "start_unit_id": "u000620",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      }
+    ],
+    "window_id": "episode_4558_window_0011"
+  },
+  "stored_at": "2026-09-09T20:27:02.672922+00:00"
+}

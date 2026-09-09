@@ -1,0 +1,284 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c160971w0001",
+  "provenance": {
+    "bundle": "bundle_010",
+    "ingested_at": "2026-09-09T19:40:19.095933+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000039",
+        "evidence_quote": "it is Beam Dream Sleep Tea",
+        "label_ids": [
+          "topic:sleep",
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000009",
+        "summary": "Host reads a sponsor ad for Beam Dream sleep tea/powder, describing her sleep problems and the product's taste, ingredients, and effects."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000039",
+        "evidence_quote": "use code AnnieElise at checkout",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000009",
+        "summary": "Sponsor read for Beam with a discount code for listeners."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000031",
+        "evidence_quote": "Nothing ever worked for me, and I actually had some pretty gnarly side effects with all the other things.",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000027",
+        "summary": "Host cites her own failed attempts with other sleep aids as evidence supporting the advertised product."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "my Aura Ring has showed that my sleep scores went from the 60s to now the 90s",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000037",
+        "summary": "Host cites her own wearable sleep-score data as personal evidence the product works."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "their science-backed healthy hot cocoa for sleep with no added sugar",
+        "label_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000034",
+        "summary": "Ad describes the product as 'science-backed' to assert its credibility."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "in a clinical study, 93% of participants reported that Dream helped them get better sleep",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000036",
+        "summary": "Ad invokes a clinical study statistic to support the product's sleep benefit."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000039",
+        "evidence_quote": "it is Beam Dream Sleep Tea",
+        "mention_role": "advertised",
+        "product_name": "Beam Dream Powder",
+        "product_type": "supplement",
+        "start_unit_id": "u000009"
+      },
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000027",
+        "evidence_quote": "I have tried Ambien.",
+        "mention_role": "neutral",
+        "product_name": "Ambien",
+        "product_type": "medication",
+        "start_unit_id": "u000027"
+      },
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000037",
+        "evidence_quote": "my Aura Ring has showed that my sleep scores went from the 60s to now the 90s",
+        "mention_role": "neutral",
+        "product_name": "Oura Ring",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000037"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "don't lie"
+        ],
+        "claim_text": "In a clinical study, 93% of participants reported that Beam's Dream Powder helped them get better sleep.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "in a clinical study, 93% of participants reported that Dream helped them get better sleep",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "The specific 93% clinical-study efficacy statistic for the advertised sleep product is checkable against the underlying trial and its rigor.",
+        "start_unit_id": "u000036",
+        "topic_ids": [
+          "topic:sleep",
+          "topic:functional_nutrition_supplements"
+        ]
+      }
+    ],
+    "window_id": "episode_160971_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000039",
+        "evidence_quote": "it is Beam Dream Sleep Tea",
+        "label_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:sleep"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000009",
+        "summary": "Host reads a sponsor ad for Beam Dream sleep tea/powder, describing her sleep problems and the product's taste, ingredients, and effects."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000039",
+        "evidence_quote": "use code AnnieElise at checkout",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000009",
+        "summary": "Sponsor read for Beam with a discount code for listeners."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000031",
+        "evidence_quote": "Nothing ever worked for me, and I actually had some pretty gnarly side effects with all the other things",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000027",
+        "summary": "Host cites her own failed attempts with other sleep aids as evidence supporting the advertised product."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "my Aura Ring has showed that my sleep scores went from the 60s to now the 90s",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000037",
+        "summary": "Host cites her own wearable sleep-score data as personal evidence the product works."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "their science-backed healthy hot cocoa for sleep with no added sugar",
+        "label_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000034",
+        "summary": "Ad describes the product as 'science-backed' to assert its credibility."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "in a clinical study, 93% of participants reported that Dream helped them get better sleep",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000036",
+        "summary": "Ad invokes a clinical study statistic to support the product's sleep benefit."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000039",
+        "evidence_quote": "it is Beam Dream Sleep Tea",
+        "mention_role": "advertised",
+        "product_name": "Beam Dream Powder",
+        "product_type": "supplement",
+        "start_unit_id": "u000009"
+      },
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000027",
+        "evidence_quote": "I have tried Ambien",
+        "mention_role": "neutral",
+        "product_name": "Ambien",
+        "product_type": "medication",
+        "start_unit_id": "u000027"
+      },
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000037",
+        "evidence_quote": "my Aura Ring has showed that my sleep scores went from the 60s to now the 90s",
+        "mention_role": "neutral",
+        "product_name": "Oura Ring",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000037"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "don't lie"
+        ],
+        "claim_text": "In a clinical study, 93% of participants reported that Beam's Dream Powder helped them get better sleep.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "in a clinical study, 93% of participants reported that Dream helped them get better sleep",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "The specific 93% clinical-study efficacy statistic for the advertised sleep product is checkable against the underlying trial and its rigor.",
+        "relevance": null,
+        "start_unit_id": "u000036",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:sleep"
+        ]
+      }
+    ],
+    "window_id": "episode_160971_window_0001"
+  },
+  "stored_at": "2026-09-09T19:40:19.095951+00:00"
+}
