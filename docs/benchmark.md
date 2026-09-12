@@ -367,6 +367,122 @@ transcript only in punctuation or an ASR stutter; and at `high` effort 69
 of 251 responses truncated at a 44k output budget, which is the main reason
 its first-attempt acceptance is lower.
 
+## Round 2 (2026-09-12): a second Opus pass, 60 more items, twins as items
+
+Round 1 left three things visible in the data: the gold was tilted toward
+what the two Sonnet passes agreed on (Opus labels about twice as
+exhaustively, and the adjudicators accepted 94% of its extras), five labels
+had no required gold at all and nineteen had fewer than five atoms, and the
+contrast twins had never been checked against anyone. Round 2 addressed
+each with about the same agent budget as round 1.
+
+### What changed in the design
+
+- **Four annotators, two per family.** A second Opus pass (`opus-r2`, a
+  different bundle grouping) labeled every item. "Required" became an
+  authority count of two rather than a two-thirds share, so agreement
+  between the two Opus passes is gold on the same terms as agreement
+  between the two Sonnet passes.
+- **Verdicts keyed by atom.** Adjudication verdicts attach to the singleton
+  atom's own identity and lapse once another annotator agrees with it, so
+  adding annotators re-clusters gold without invalidating the overlay.
+- **Adjacent-credit F1 and a leave-one-out ceiling** on the scorecard, both
+  derived from the references (see above).
+- **Contrast evaluation with the scoring match**, validated on the
+  annotators themselves.
+- **Sixty new corpus windows** for the labels round 1 covered thinly (50
+  rare-label windows across 21 labels, 10 mixed), screened by Sonnet and
+  labeled by all four annotators.
+
+### The reference set after round 2
+
+| | round 1 | round 2 |
+| --- | --- | --- |
+| items | 200 | 260 |
+| annotators per base item | 3 | 4 |
+| gold atoms | 3,870 | 6,786 |
+| required | 2,248 | 5,061 |
+| adjudicated acceptable / rejected | 1,532 / 90 | 1,572 / 153 |
+| labels with no required atoms | 5 | 1 (manosphere) |
+| labels with fewer than five | 19 | 5 |
+| labels with twenty or more | 25 | 53 |
+
+Every singleton left after the fourth annotator was adjudicated by Opus
+agents (1,185 verdicts across two passes, about 91% acceptable); the
+rejection grounds match round 1: the catch-all topic used where a listed
+topic applies, spans or quotes that do not carry the label, anecdotes,
+opinions, sponsor terms and political rhetoric extracted as claims, and
+generic substances or incidental brands recorded as products.
+
+Pairwise topic F1 by family: Opus vs Opus 0.81, Sonnet vs Sonnet 0.70,
+Opus vs Sonnet 0.60 to 0.63. Opus is internally consistent and
+exhaustive; the Sonnet passes under-call by about half. The leave-one-out
+table makes this the benchmark's most important reading:
+
+| annotator | topic P / R / F1 | claim F1 | product F1 |
+| --- | --- | --- | --- |
+| opus-r1 | 0.85 / 0.89 / 0.87 | 0.90 | 0.92 |
+| opus-r2 | 0.81 / 0.94 / 0.87 | 0.89 | 0.95 |
+| sonnet-r1 | 0.92 / 0.53 / 0.67 | 0.65 | 0.77 |
+| sonnet-r2 | 0.94 / 0.50 / 0.65 | 0.67 | 0.78 |
+
+A labeler that finds what one careful exhaustive annotator finds scores
+about 0.87 on topics; one that finds what a careful conservative annotator
+finds scores about 0.66 with precision above 0.9. The DeepSeek runs sit in
+the second group.
+
+### The candidate runs against the round-2 gold
+
+Same runs as round 1, re-scored (dev split, corpus strata, mean of two
+repeats):
+
+| metric | low | high |
+| --- | --- | --- |
+| topic F1 (strict) | 0.602 | 0.655 |
+| topic F1 (adjacent credit) | 0.617 | 0.676 |
+| topic recall (required) | 0.443 | 0.514 |
+| topic precision | 0.940 | 0.903 |
+| claim recall (required) | 0.429 | 0.483 |
+| claim precision | 0.979 | 0.975 |
+| product F1 (soft) | 0.775 | 0.829 |
+| topic yield ratio | 0.37 | 0.45 |
+
+The numbers fell from round 1 because the gold grew, not because the runs
+changed: recall is now measured against everything two of four annotators
+found. The ordering and the paired-bootstrap conclusions are unchanged
+(high beats low on topic recall, evidence detection and claim recall with
+intervals excluding zero; precision falls slightly). Against the
+leave-one-out table, high effort at 0.655 is at the ceiling of a
+conservative annotator and 0.21 below an exhaustive one, and its whole
+deficit is recall.
+
+### Contrast twins on the annotators
+
+With all four annotators labeling the 15 twins, the contrast evaluation
+could be checked on them. Per annotator, targeted pass rates run 0.67 to
+0.89, decoy pass rates 0.5 to 1.0, collateral change 0.32 to 0.60 of
+atoms outside the edit, and no-op collateral 0.20 to 0.64. That last
+number is the noise floor of independent labeling itself: two labelings
+of a window that differs by one reworded filler sentence still disagree
+on a fifth to two thirds of atoms outside the edit, and a candidate's
+collateral rate should be read against it. Two twins are defective and
+are excluded or flagged: the brand-to-generic twin keeps the sponsor's URL
+and promo code, so every annotator still records a product; the
+de-healthed twin's target was never a gold atom in the base. Both are
+fixed in the next authoring round.
+
+### Codebook findings, round 2
+
+The round-2 annotators reported the same themes as round 1, now with a
+fourth voice, and added: the `topic:cancer` definition routes alternative
+remedies to a label that does not exist; hepatobiliary, renal and
+thyroid content has no home; "can" was again coded every possible way;
+the product-mention rule pulls in incidental brands, retailers and
+platforms that no one thinks are health offerings; and the ad-read rules
+say nothing about a host's own product inside a delimited read
+(`advertised` and `own_product` are both right and only one fits). All of
+it is folded into `benchmark/codebook-v2-proposal.md`.
+
 ### What is not yet validated
 
 - The synthetic and contrast strata have reference labels but no candidate

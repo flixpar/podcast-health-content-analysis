@@ -77,6 +77,10 @@ Confusion pairs seen at least four times, and annotators' fallback to
   "mandates" from the policy list.
 - **Sleep vs EMF** for blue light: Sleep. Remove blue light from EMF.
 - **Hair loss**: Dermatology unless hormones are discussed.
+- The `topic:cancer` definition routes alternative remedies to "Natural &
+  Traditional Medicine", a label that does not exist; point it at
+  `cancer_alternative_treatments_cure_narratives` (and generic modalities
+  at `natural_alternative_functional_medicine`).
 - `other_health_topic` is never a second label on a span that carries a
   listed topic (the most common adjudication rejection); it is only for
   health content no listed topic covers, with the subject named in the
