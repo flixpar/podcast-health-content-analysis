@@ -1,0 +1,137 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c322584w0021",
+  "provenance": {
+    "bundle": "bundle_010",
+    "ingested_at": "2026-09-12T23:09:29.364944+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001461",
+        "evidence_quote": "it's not a long procedure, and local anesthetic is used",
+        "label_ids": [
+          "topic:surgery_medical_procedures",
+          "topic:mens_health_male_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001451",
+        "summary": "A listener message read aloud describes undergoing a vasectomy: short procedure, local anesthetic, a surgical sheet, compared to a dentist visit."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001592",
+        "evidence_quote": "Gambling problem?",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001591",
+        "summary": "The sportsbook ad disclaimer refers listeners with a gambling problem to a helpline."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.5,
+        "end_unit_id": "u001592",
+        "evidence_quote": "Call 1-800-GAMBLER",
+        "mention_role": "neutral",
+        "product_name": "1-800-GAMBLER",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u001592"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A vasectomy is not a long procedure and is performed with local anesthetic.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001452",
+        "evidence_quote": "it's not a long procedure, and local anesthetic is used",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A general statement about how long a vasectomy takes and what anesthesia is used could be checked against clinical sources and shapes listener expectations of the procedure.",
+        "relevance": "substantive",
+        "start_unit_id": "u001451",
+        "topic_ids": [
+          "topic:surgery_medical_procedures",
+          "topic:mens_health_male_hormones"
+        ]
+      }
+    ],
+    "window_id": "episode_322584_window_0021"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001461",
+        "evidence_quote": "it's not a long procedure, and local anesthetic is used",
+        "label_ids": [
+          "topic:mens_health_male_hormones",
+          "topic:surgery_medical_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001451",
+        "summary": "A listener message read aloud describes undergoing a vasectomy: short procedure, local anesthetic, a surgical sheet, compared to a dentist visit."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001592",
+        "evidence_quote": "Gambling problem",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001591",
+        "summary": "The sportsbook ad disclaimer refers listeners with a gambling problem to a helpline."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.5,
+        "end_unit_id": "u001592",
+        "evidence_quote": "Call 1-800-GAMBLER",
+        "mention_role": "neutral",
+        "product_name": "1-800-GAMBLER",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u001592"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A vasectomy is not a long procedure and is performed with local anesthetic.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001452",
+        "evidence_quote": "it's not a long procedure, and local anesthetic is used",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A general statement about how long a vasectomy takes and what anesthesia is used could be checked against clinical sources and shapes listener expectations of the procedure.",
+        "relevance": "substantive",
+        "start_unit_id": "u001451",
+        "topic_ids": [
+          "topic:mens_health_male_hormones",
+          "topic:surgery_medical_procedures"
+        ]
+      }
+    ],
+    "window_id": "episode_322584_window_0021"
+  },
+  "stored_at": "2026-09-12T23:09:29.364977+00:00"
+}

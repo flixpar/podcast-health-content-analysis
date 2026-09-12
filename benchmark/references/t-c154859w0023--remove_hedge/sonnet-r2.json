@@ -1,0 +1,375 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "t-c154859w0023--remove_hedge",
+  "provenance": {
+    "bundle": "bundle_001",
+    "ingested_at": "2026-09-12T22:33:10.280236+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-contrast-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002472",
+        "evidence_quote": "but fentanyl precursors are largely coming through the air.",
+        "label_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002433",
+        "summary": "Former DEA official discusses fentanyl precursor chemicals sourced from India and China, diversion by bad actors, and corruption enabling the fentanyl supply chain."
+      },
+      {
+        "confidence": 0.45,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002448",
+        "evidence_quote": "they can try to you know, degrade the US from the inside without firing a shot.",
+        "label_ids": [
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002442",
+        "summary": "Host raises whether China is waging a form of hybrid warfare against the US partly through fentanyl-related chemical exports."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002461",
+        "evidence_quote": "my experience is no, I mean, yes, stuff does get diverted, but they're they're they're they're just industry, right,",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002453",
+        "summary": "Speaker draws on personal DEA operational experience to describe chemical diversion patterns and fentanyl precursor shipment routes."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002509",
+        "evidence_quote": "if there's roughly if one hundred thousand Americans were dying a year and the problem is originating on our doorstep, you know, the Southwest border,",
+        "label_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002507",
+        "summary": "Speaker cites roughly 100,000 American overdose deaths per year, with the problem originating via the Southwest border, as justification for enforcement efforts."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "are they even",
+          "or that's like"
+        ],
+        "claim_text": "Chemical manufacturers in India and China producing industrial chemicals may not be intentionally targeting the drug trade, with product instead being hijacked by bad actors along the way.",
+        "claim_type": "other_factual",
+        "confidence": 0.45,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002441",
+        "evidence_quote": "are they manufacturing these chemicals like like in their in their mind, are they even thinking about the drug trade",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Open question about manufacturer intent versus criminal diversion in the fentanyl precursor supply chain is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u002437",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I don't know",
+          "is it hybrid warfare?"
+        ],
+        "claim_text": "China may be engaged in a form of hybrid warfare intended to degrade the United States from the inside, partly through fentanyl-related chemical exports.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.45,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002448",
+        "evidence_quote": "they can try to you know, degrade the US from the inside without firing a shot.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "rationale": "Allegation of coordinated state action via the drug trade is a checkable institutional/geopolitical claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u002442",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "my experience is"
+        ],
+        "claim_text": "India's massive chemical and pharmaceutical industry is not intentionally producing fentanyl precursor chemicals for the drug trade, though some product does get diverted.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.5,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002456",
+        "evidence_quote": "you know, reference India, they just have massive chemical industry. And my experience is no, I mean, yes, stuff does",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Claim rebutting deliberate institutional wrongdoing by India's chemical industry in the fentanyl supply chain is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u002451",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fentanyl precursor chemicals are largely coming into the United States through air shipments.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002461",
+        "evidence_quote": "but fentanyl precursors are largely coming through the air.",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific factual claim about the predominant fentanyl precursor smuggling route is checkable against enforcement data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002457",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Significant corruption exists within the international legitimate chemical and pharmaceutical commerce due to the scale of money involved, contributing to fentanyl precursor diversion.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002472",
+        "evidence_quote": "there's so much money in the international chemical and legitimate pharmaceutical legitimate chemical pharmaceutical world",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Claim about corruption in legitimate industry enabling precursor diversion is a checkable institutional claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u002470",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "roughly"
+        ],
+        "claim_text": "Roughly 100,000 Americans die per year from drug overdoses, with the problem originating via the Southwest border.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002509",
+        "evidence_quote": "if there's roughly if one hundred thousand Americans were dying a year and the problem is originating on our doorstep, you know, the Southwest border,",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific mortality statistic and origin claim about the fentanyl crisis is checkable against public health data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002507",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      }
+    ],
+    "window_id": "episode_154859_window_0023_remove_hedge"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002472",
+        "evidence_quote": "but fentanyl precursors are largely coming through the air",
+        "label_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002433",
+        "summary": "Former DEA official discusses fentanyl precursor chemicals sourced from India and China, diversion by bad actors, and corruption enabling the fentanyl supply chain."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.45,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002448",
+        "evidence_quote": "they can try to you know, degrade the US from the inside without firing a shot",
+        "label_ids": [
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002442",
+        "summary": "Host raises whether China is waging a form of hybrid warfare against the US partly through fentanyl-related chemical exports."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002461",
+        "evidence_quote": "my experience is no, I mean, yes, stuff does get diverted, but they're they're they're they're just industry, right",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002453",
+        "summary": "Speaker draws on personal DEA operational experience to describe chemical diversion patterns and fentanyl precursor shipment routes."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002509",
+        "evidence_quote": "if there's roughly if one hundred thousand Americans were dying a year and the problem is originating on our doorstep, you know, the Southwest border",
+        "label_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002507",
+        "summary": "Speaker cites roughly 100,000 American overdose deaths per year, with the problem originating via the Southwest border, as justification for enforcement efforts."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "are they even",
+          "or that's like"
+        ],
+        "claim_text": "Chemical manufacturers in India and China producing industrial chemicals may not be intentionally targeting the drug trade, with product instead being hijacked by bad actors along the way.",
+        "claim_type": "other_factual",
+        "confidence": 0.45,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002441",
+        "evidence_quote": "are they manufacturing these chemicals like like in their in their mind, are they even thinking about the drug trade",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Open question about manufacturer intent versus criminal diversion in the fentanyl precursor supply chain is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u002437",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I don't know",
+          "is it hybrid warfare"
+        ],
+        "claim_text": "China may be engaged in a form of hybrid warfare intended to degrade the United States from the inside, partly through fentanyl-related chemical exports.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.45,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002448",
+        "evidence_quote": "they can try to you know, degrade the US from the inside without firing a shot",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "rationale": "Allegation of coordinated state action via the drug trade is a checkable institutional/geopolitical claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u002442",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "my experience is"
+        ],
+        "claim_text": "India's massive chemical and pharmaceutical industry is not intentionally producing fentanyl precursor chemicals for the drug trade, though some product does get diverted.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.5,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002456",
+        "evidence_quote": "you know, reference India, they just have massive chemical industry. And my experience is no, I mean, yes, stuff does",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Claim rebutting deliberate institutional wrongdoing by India's chemical industry in the fentanyl supply chain is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u002451",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fentanyl precursor chemicals are largely coming into the United States through air shipments.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002461",
+        "evidence_quote": "but fentanyl precursors are largely coming through the air",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific factual claim about the predominant fentanyl precursor smuggling route is checkable against enforcement data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002457",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Significant corruption exists within the international legitimate chemical and pharmaceutical commerce due to the scale of money involved, contributing to fentanyl precursor diversion.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002472",
+        "evidence_quote": "there's so much money in the international chemical and legitimate pharmaceutical legitimate chemical pharmaceutical world",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Claim about corruption in legitimate industry enabling precursor diversion is a checkable institutional claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u002470",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "roughly"
+        ],
+        "claim_text": "Roughly 100,000 Americans die per year from drug overdoses, with the problem originating via the Southwest border.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002509",
+        "evidence_quote": "if there's roughly if one hundred thousand Americans were dying a year and the problem is originating on our doorstep, you know, the Southwest border",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific mortality statistic and origin claim about the fentanyl crisis is checkable against public health data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002507",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      }
+    ],
+    "window_id": "episode_154859_window_0023_remove_hedge"
+  },
+  "stored_at": "2026-09-12T22:33:10.280280+00:00"
+}

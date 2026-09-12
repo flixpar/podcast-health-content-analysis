@@ -1,0 +1,271 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c322364w0013",
+  "provenance": {
+    "bundle": "bundle_011",
+    "ingested_at": "2026-09-12T23:09:29.515305+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000951",
+        "evidence_quote": "For adults with Crohn's disease or ulcerative colitis symptoms, every choice matters.",
+        "label_ids": [
+          "topic:gut_health_microbiome",
+          "topic:autoimmune_immune_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000942",
+        "summary": "Pharmaceutical ad for a Crohn's disease and ulcerative colitis drug, with dosing and safety information."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000951",
+        "evidence_quote": "Ask your doctor about Trumphia today.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000942",
+        "summary": "Delimited drug advertisement telling listeners to ask their doctor about the product."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000951",
+        "evidence_quote": "Tremfya offers self-injection or intravenous infusion from the start.",
+        "mention_role": "advertised",
+        "product_name": "Tremfya",
+        "product_type": "medication",
+        "start_unit_id": "u000943"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Tremfya offers self-injection or intravenous infusion from the start of treatment.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000943",
+        "evidence_quote": "Tremfya offers self-injection or intravenous infusion from the start.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A checkable claim about how the advertised drug can be administered.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000943",
+        "topic_ids": [
+          "topic:gut_health_microbiome",
+          "topic:autoimmune_immune_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Tremfya is given as injections under the skin or infusions through a vein every four weeks, followed by injections under the skin every four or eight weeks.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000944",
+        "evidence_quote": "administered as injections under the skin or infusions through a vein every four weeks, followed by injections under the skin every four or eight weeks",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A specific dosing schedule that can be checked against the product labelling.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000944",
+        "topic_ids": [
+          "topic:gut_health_microbiome",
+          "topic:autoimmune_immune_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Tremfya is a prescription medicine used to treat adults with moderately to severely active Crohn's disease and moderately to severely active ulcerative colitis.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000947",
+        "evidence_quote": "Tremfya is a prescription medicine. Used to treat adults with moderately to severely active Crohn's disease",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A checkable claim about what the drug is approved and used to treat.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000946",
+        "topic_ids": [
+          "topic:gut_health_microbiome",
+          "topic:autoimmune_immune_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "may occur"
+        ],
+        "claim_text": "Serious allergic reactions, increased risk of infections or reduced ability to fight them, and liver problems may occur with Tremfya.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000947",
+        "evidence_quote": "serious allergic reactions, increased risk of infections or lower ability to fight them, and liver problems may occur",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A drug-safety claim listeners weigh when asking about the medicine.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000947",
+        "topic_ids": [
+          "topic:gut_health_microbiome",
+          "topic:autoimmune_immune_health"
+        ]
+      }
+    ],
+    "window_id": "episode_322364_window_0013"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000951",
+        "evidence_quote": "For adults with Crohn's disease or ulcerative colitis symptoms, every choice matters",
+        "label_ids": [
+          "topic:autoimmune_immune_health",
+          "topic:gut_health_microbiome"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000942",
+        "summary": "Pharmaceutical ad for a Crohn's disease and ulcerative colitis drug, with dosing and safety information."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000951",
+        "evidence_quote": "Ask your doctor about Trumphia today",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000942",
+        "summary": "Delimited drug advertisement telling listeners to ask their doctor about the product."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000951",
+        "evidence_quote": "Tremfya offers self-injection or intravenous infusion from the start",
+        "mention_role": "advertised",
+        "product_name": "Tremfya",
+        "product_type": "medication",
+        "start_unit_id": "u000943"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Tremfya offers self-injection or intravenous infusion from the start of treatment.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000943",
+        "evidence_quote": "Tremfya offers self-injection or intravenous infusion from the start",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A checkable claim about how the advertised drug can be administered.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000943",
+        "topic_ids": [
+          "topic:autoimmune_immune_health",
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Tremfya is given as injections under the skin or infusions through a vein every four weeks, followed by injections under the skin every four or eight weeks.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000944",
+        "evidence_quote": "administered as injections under the skin or infusions through a vein every four weeks, followed by injections under the skin every four or eight weeks",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A specific dosing schedule that can be checked against the product labelling.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000944",
+        "topic_ids": [
+          "topic:autoimmune_immune_health",
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Tremfya is a prescription medicine used to treat adults with moderately to severely active Crohn's disease and moderately to severely active ulcerative colitis.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000947",
+        "evidence_quote": "Tremfya is a prescription medicine. Used to treat adults with moderately to severely active Crohn's disease",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A checkable claim about what the drug is approved and used to treat.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000946",
+        "topic_ids": [
+          "topic:autoimmune_immune_health",
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "may occur"
+        ],
+        "claim_text": "Serious allergic reactions, increased risk of infections or reduced ability to fight them, and liver problems may occur with Tremfya.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000947",
+        "evidence_quote": "serious allergic reactions, increased risk of infections or lower ability to fight them, and liver problems may occur",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A drug-safety claim listeners weigh when asking about the medicine.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000947",
+        "topic_ids": [
+          "topic:autoimmune_immune_health",
+          "topic:gut_health_microbiome"
+        ]
+      }
+    ],
+    "window_id": "episode_322364_window_0013"
+  },
+  "stored_at": "2026-09-12T23:09:29.515338+00:00"
+}

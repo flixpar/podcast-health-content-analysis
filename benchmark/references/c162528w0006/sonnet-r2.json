@@ -1,0 +1,477 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c162528w0006",
+  "provenance": {
+    "bundle": "bundle_006",
+    "ingested_at": "2026-09-12T23:30:31.106867+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000325",
+        "evidence_quote": "it's strictly limited towards blood-borne illnesses, things like leukemia.",
+        "label_ids": [
+          "topic:regenerative_aesthetic_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000308",
+        "summary": "Guest distinguishes public umbilical cord blood banking, limited to treating blood-borne illnesses like leukemia in the donor child or their parents, from their own broader stem cell product."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000350",
+        "evidence_quote": "That's why I'm excited about Parify, Kim Rogers' 30-day full-spectrum parasite cleanse.",
+        "label_ids": [
+          "topic:detox_cleanses_parasites"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "summary": "Sponsor read for Parify, a 30-day parasite cleanse kit, claiming hidden parasite infections are common and offering a discount code."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000333",
+        "evidence_quote": "hidden in your gut, releasing toxins that sabotage your energy and digestion.",
+        "label_ids": [
+          "cross_cutting:parasite_framework",
+          "cross_cutting:toxin_framing"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "summary": "Ad frames parasites as a widespread hidden cause of chronic symptoms via toxin release, not just a travel risk."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000338",
+        "evidence_quote": "I'm actually doing it myself right now.",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000336",
+        "summary": "Host cites her own personal use of the cleanse products as evidence for their value."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000382",
+        "evidence_quote": "we have north of 100 billion stem cells that are in cryo preservation",
+        "label_ids": [
+          "topic:regenerative_aesthetic_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000352",
+        "summary": "Guest describes the umbilical cord donation, processing, cryopreservation and quality-check process behind their stem cell product."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000382",
+        "evidence_quote": "that's part of the the difficulty here is we create a great product",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000363",
+        "summary": "Guest promotes their own stem cell banking business, describing its processing capacity and quality controls."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000388",
+        "evidence_quote": "Talk about the process of how long it takes for those stem cells to find what is wrong and what needs to be repaired.",
+        "label_ids": [
+          "topic:regenerative_aesthetic_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000383",
+        "summary": "Host raises the open question of how long it takes administered stem cells to migrate to and repair damaged tissue, noting public misconceptions."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000388",
+        "evidence_quote": "the stem cells go into the body and they find what where they need to be within that individual",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000383",
+        "summary": "Discussion frames stem cell activity in mechanistic terms of cells finding and repairing damage in the body."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000350",
+        "evidence_quote": "Parify, Kim Rogers' 30-day full-spectrum parasite cleanse",
+        "mention_role": "advertised",
+        "product_name": "Parify",
+        "product_type": "supplement",
+        "start_unit_id": "u000334"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Umbilical cord blood banking is limited in use to the donor child or their parents and to treating blood-borne illnesses such as leukemia.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000323",
+        "evidence_quote": "it's strictly limited towards blood-borne illnesses, things like leukemia.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific, checkable claim about what conditions banked cord blood can be used to treat.",
+        "relevance": "substantive",
+        "start_unit_id": "u000320",
+        "topic_ids": [
+          "topic:regenerative_aesthetic_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "approximately"
+        ],
+        "claim_text": "A single donated umbilical cord can supply stem cell material for approximately 500 individual patients.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000368",
+        "evidence_quote": "Will accommodate approximately 500 individual patients.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A specific quantitative claim about product yield that could be checked against the company's records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000367",
+        "topic_ids": [
+          "topic:regenerative_aesthetic_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The cryopreserved umbilical cord stem cell product remains viable for up to ten years of frozen storage.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000374",
+        "evidence_quote": "Upwards of ten years.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about the shelf life of a cryopreserved biological product.",
+        "relevance": "substantive",
+        "start_unit_id": "u000373",
+        "topic_ids": [
+          "topic:regenerative_aesthetic_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Millions of Americans carry parasites, often without symptoms.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000329",
+        "evidence_quote": "Millions of Americans carry parasites right now, often without symptoms.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "rationale": "A prevalence claim about parasitic infection in the U.S. population that is checkable.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000328",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Millions of people in the United States have been exposed to Toxocara, a parasitic worm, without knowing it.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000330",
+        "evidence_quote": "it's estimated that millions in the United States have been exposed to Toxocara, a parasitic worm.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific exposure-prevalence claim naming a parasite species that could be checked against epidemiological data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000329",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Parify kit clears parasites, worms, candida, and heavy metals from the body and supports gut health and detox pathways.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000335",
+        "evidence_quote": "The kit works by clearing parasites, worms, candida, and heavy metals, targeting parasites in all life stages, supporting gut health, detox pathways, and toxin removal.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "rationale": "A specific efficacy claim about a sold product that is checkable.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000335",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      }
+    ],
+    "window_id": "episode_162528_window_0006"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000325",
+        "evidence_quote": "it's strictly limited towards blood-borne illnesses, things like leukemia",
+        "label_ids": [
+          "topic:regenerative_aesthetic_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000308",
+        "summary": "Guest distinguishes public umbilical cord blood banking, limited to treating blood-borne illnesses like leukemia in the donor child or their parents, from their own broader stem cell product."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000350",
+        "evidence_quote": "That's why I'm excited about Parify, Kim Rogers' 30-day full-spectrum parasite cleanse",
+        "label_ids": [
+          "topic:detox_cleanses_parasites"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "summary": "Sponsor read for Parify, a 30-day parasite cleanse kit, claiming hidden parasite infections are common and offering a discount code."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000333",
+        "evidence_quote": "hidden in your gut, releasing toxins that sabotage your energy and digestion",
+        "label_ids": [
+          "cross_cutting:parasite_framework",
+          "cross_cutting:toxin_framing"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "summary": "Ad frames parasites as a widespread hidden cause of chronic symptoms via toxin release, not just a travel risk."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000338",
+        "evidence_quote": "I'm actually doing it myself right now",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000336",
+        "summary": "Host cites her own personal use of the cleanse products as evidence for their value."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000382",
+        "evidence_quote": "we have north of 100 billion stem cells that are in cryo preservation",
+        "label_ids": [
+          "topic:regenerative_aesthetic_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000352",
+        "summary": "Guest describes the umbilical cord donation, processing, cryopreservation and quality-check process behind their stem cell product."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000382",
+        "evidence_quote": "that's part of the the difficulty here is we create a great product",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000363",
+        "summary": "Guest promotes their own stem cell banking business, describing its processing capacity and quality controls."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000388",
+        "evidence_quote": "Talk about the process of how long it takes for those stem cells to find what is wrong and what needs to be repaired",
+        "label_ids": [
+          "topic:regenerative_aesthetic_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000383",
+        "summary": "Host raises the open question of how long it takes administered stem cells to migrate to and repair damaged tissue, noting public misconceptions."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.5,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000388",
+        "evidence_quote": "the stem cells stem cells go into the body and they find what where they need to be within that individual",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000383",
+        "summary": "Discussion frames stem cell activity in mechanistic terms of cells finding and repairing damage in the body."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000350",
+        "evidence_quote": "Parify, Kim Rogers' 30-day full-spectrum parasite cleanse",
+        "mention_role": "advertised",
+        "product_name": "Parify",
+        "product_type": "supplement",
+        "start_unit_id": "u000334"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Umbilical cord blood banking is limited in use to the donor child or their parents and to treating blood-borne illnesses such as leukemia.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000323",
+        "evidence_quote": "it's strictly limited towards blood-borne illnesses, things like leukemia",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific, checkable claim about what conditions banked cord blood can be used to treat.",
+        "relevance": "substantive",
+        "start_unit_id": "u000320",
+        "topic_ids": [
+          "topic:regenerative_aesthetic_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "approximately"
+        ],
+        "claim_text": "A single donated umbilical cord can supply stem cell material for approximately 500 individual patients.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000368",
+        "evidence_quote": "Will accommodate approximately 500 individual patients",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A specific quantitative claim about product yield that could be checked against the company's records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000367",
+        "topic_ids": [
+          "topic:regenerative_aesthetic_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The cryopreserved umbilical cord stem cell product remains viable for up to ten years of frozen storage.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000374",
+        "evidence_quote": "Upwards of ten years",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about the shelf life of a cryopreserved biological product.",
+        "relevance": "substantive",
+        "start_unit_id": "u000373",
+        "topic_ids": [
+          "topic:regenerative_aesthetic_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Millions of Americans carry parasites, often without symptoms.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000329",
+        "evidence_quote": "Millions of Americans carry parasites right now, often without symptoms",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "rationale": "A prevalence claim about parasitic infection in the U.S. population that is checkable.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000328",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Millions of people in the United States have been exposed to Toxocara, a parasitic worm, without knowing it.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000330",
+        "evidence_quote": "it's estimated that millions in the United States have been exposed to Toxocara, a parasitic worm",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific exposure-prevalence claim naming a parasite species that could be checked against epidemiological data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000329",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Parify kit clears parasites, worms, candida, and heavy metals from the body and supports gut health and detox pathways.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000335",
+        "evidence_quote": "The kit works by clearing parasites, worms, candida, and heavy metals, targeting parasites in all life stages, supporting gut health, detox pathways, and toxin removal",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "rationale": "A specific efficacy claim about a sold product that is checkable.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000335",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      }
+    ],
+    "window_id": "episode_162528_window_0006"
+  },
+  "stored_at": "2026-09-12T23:30:31.106897+00:00"
+}

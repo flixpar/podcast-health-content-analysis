@@ -1,0 +1,455 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c71184w0031",
+  "provenance": {
+    "bundle": "bundle_012",
+    "ingested_at": "2026-09-12T23:16:54.960458+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002246",
+        "evidence_quote": "these people are not trying to keep us poisoned or keep us sick so they can make money",
+        "label_ids": [
+          "topic:vaccines_immunization",
+          "topic:health_care_system_medical_trust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002240",
+        "summary": "Speaker describes and then rejects the anti-vaccination, anti-Big-Pharma conspiracy narrative that powerful actors coordinate behind closed doors to keep people sick for profit."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002244",
+        "evidence_quote": "Big, powerful people, corporations, and government agents. The CDC and this company and and.",
+        "label_ids": [
+          "cross_cutting:conspiracy_cover_up",
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:government_institution_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002240",
+        "summary": "Speaker characterizes the anti-vaccine narrative as alleging that Big Pharma, corporations and government agencies like the CDC secretly coordinate for profit."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002253",
+        "evidence_quote": "they first they think they're more powerful than they really are, and second, that's not how the world works.",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002244",
+        "summary": "Speaker explicitly rejects the idea that pharmaceutical or government actors deliberately keep people sick for profit, arguing this is not how the world actually works."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002259",
+        "evidence_quote": "they already have a cure for cancer. They just don't want you to have the cure because",
+        "label_ids": [
+          "topic:cancer"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002256",
+        "summary": "Speaker recounts someone claiming that a cure for cancer already exists but is being withheld because pharmaceutical companies profit more from treatment."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002259",
+        "evidence_quote": "the money's in the treatment",
+        "label_ids": [
+          "cross_cutting:cancer_conspiracy",
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002256",
+        "summary": "The claim alleges a suppressed cancer cure withheld because the money is in ongoing treatment rather than cure -- a cancer-conspiracy narrative."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002279",
+        "evidence_quote": "it just doesn't make any sense that it would be the same person",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002259",
+        "summary": "Speaker rebuts the suppressed-cancer-cure claim as implausible, arguing it would require improbable secrecy among thousands of researchers across many companies."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002292",
+        "evidence_quote": "my doctor gave me not one but two different opiates to take",
+        "label_ids": [
+          "topic:substance_use_addiction_harm_reduction",
+          "topic:health_care_system_medical_trust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002279",
+        "summary": "Speakers discuss overprescription of opioid pain medication, including a personal account of being given two different opiates after minor nasal surgery despite not being in pain."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002292",
+        "evidence_quote": "I had a deviated septum repaired, and my doctor gave me not one but two different opiates to take. I didn't take anything.",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002283",
+        "summary": "Speaker offers his own experience of being prescribed unnecessary opiates after minor surgery as evidence of pharmaceutical overprescription."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002304",
+        "evidence_quote": "the the drug companies take the doctors out on their golfing trips, and they give them free samples and this and that",
+        "label_ids": [
+          "topic:health_care_system_medical_trust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002293",
+        "summary": "Speakers describe how pharmaceutical sales reps build friendly relationships with doctors and nurses through gifts and outings, creating an implicit expectation of reciprocal favorable treatment of their drugs."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002304",
+        "evidence_quote": "it was almost understood that in exchange you would talk well about their drugs",
+        "label_ids": [
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002293",
+        "summary": "Pharmaceutical reps' gifts and social outings to doctors are framed as creating an implicit quid pro quo influencing prescribing behavior."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Pharmaceutical companies, corporations and government agencies such as the CDC secretly coordinate behind closed doors to keep people sick or poisoned so they can profit.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002246",
+        "evidence_quote": "they're all and they want to make money",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:conspiracy_cover_up",
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:government_institution_distrust"
+        ],
+        "rationale": "This captures the institutional-conspiracy claim about pharma and government profiting by deliberately keeping people sick, which the speaker rebuts; extracting it preserves exposure separate from endorsement.",
+        "relevance": "substantive",
+        "start_unit_id": "u002240",
+        "topic_ids": [
+          "topic:health_care_system_medical_trust",
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A cure for cancer already exists but pharmaceutical companies are suppressing it because they profit more from ongoing treatment.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002259",
+        "evidence_quote": "they already have a cure for cancer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:cancer_conspiracy",
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "rationale": "This is a claim that a cancer cure is being deliberately withheld for profit; despite being rebutted here, it should be tracked since such suppressed-cure claims are common and consequential health misinformation.",
+        "relevance": "substantive",
+        "start_unit_id": "u002256",
+        "topic_ids": [
+          "topic:cancer"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Pharmaceutical sales representatives give doctors gifts such as golf trips and free samples, creating an implicit expectation that doctors will favorably promote their drugs.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002298",
+        "evidence_quote": "the the drug companies take the doctors out on their golfing trips, and they give them free samples and this and that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "rationale": "Whether pharmaceutical companies' gifts to doctors create an implicit quid-pro-quo affecting prescribing is a checkable claim about industry practice and physician behavior.",
+        "relevance": "substantive",
+        "start_unit_id": "u002293",
+        "topic_ids": [
+          "topic:health_care_system_medical_trust"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "definitely"
+        ],
+        "claim_text": "Too many people are being prescribed opioid pain pills.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002279",
+        "evidence_quote": "there's definitely too many people that are getting prescribed pain pills",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "The claim that opioid pain medication is over-prescribed to too many people is a specific, checkable prevalence claim relevant to health and safety.",
+        "relevance": "substantive",
+        "start_unit_id": "u002279",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      }
+    ],
+    "window_id": "episode_71184_window_0031"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002246",
+        "evidence_quote": "these people are not trying to keep us poisoned or keep us sick so they can make money",
+        "label_ids": [
+          "topic:health_care_system_medical_trust",
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002240",
+        "summary": "Speaker describes and then rejects the anti-vaccination, anti-Big-Pharma conspiracy narrative that powerful actors coordinate behind closed doors to keep people sick for profit."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002244",
+        "evidence_quote": "Big, powerful people, corporations, and government agents. The CDC and this company and and",
+        "label_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:conspiracy_cover_up",
+          "cross_cutting:government_institution_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002240",
+        "summary": "Speaker characterizes the anti-vaccine narrative as alleging that Big Pharma, corporations and government agencies like the CDC secretly coordinate for profit."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002253",
+        "evidence_quote": "they first they think they're more powerful than they really are, and second, that's not how the world works",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002244",
+        "summary": "Speaker explicitly rejects the idea that pharmaceutical or government actors deliberately keep people sick for profit, arguing this is not how the world actually works."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002259",
+        "evidence_quote": "they already have a cure for cancer. They just don't want you to have the cure because",
+        "label_ids": [
+          "topic:cancer"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002256",
+        "summary": "Speaker recounts someone claiming that a cure for cancer already exists but is being withheld because pharmaceutical companies profit more from treatment."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002259",
+        "evidence_quote": "the money's in the treatment",
+        "label_ids": [
+          "cross_cutting:cancer_conspiracy",
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002256",
+        "summary": "The claim alleges a suppressed cancer cure withheld because the money is in ongoing treatment rather than cure -- a cancer-conspiracy narrative."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002279",
+        "evidence_quote": "it just doesn't make any sense that it would be the same person",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002259",
+        "summary": "Speaker rebuts the suppressed-cancer-cure claim as implausible, arguing it would require improbable secrecy among thousands of researchers across many companies."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002292",
+        "evidence_quote": "my doctor gave me not one but two different opiates to take",
+        "label_ids": [
+          "topic:health_care_system_medical_trust",
+          "topic:substance_use_addiction_harm_reduction"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002279",
+        "summary": "Speakers discuss overprescription of opioid pain medication, including a personal account of being given two different opiates after minor nasal surgery despite not being in pain."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002292",
+        "evidence_quote": "I had a deviated septum repaired, and my doctor gave me not one but two different opiates to take. I didn't take anything",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002283",
+        "summary": "Speaker offers his own experience of being prescribed unnecessary opiates after minor surgery as evidence of pharmaceutical overprescription."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002304",
+        "evidence_quote": "the the drug companies take the doctors out on their golfing trips, and they give them free samples and this and that",
+        "label_ids": [
+          "topic:health_care_system_medical_trust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002293",
+        "summary": "Speakers describe how pharmaceutical sales reps build friendly relationships with doctors and nurses through gifts and outings, creating an implicit expectation of reciprocal favorable treatment of their drugs."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002304",
+        "evidence_quote": "it was almost understood that in exchange you would talk well about their drugs",
+        "label_ids": [
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002293",
+        "summary": "Pharmaceutical reps' gifts and social outings to doctors are framed as creating an implicit quid pro quo influencing prescribing behavior."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Pharmaceutical companies, corporations and government agencies such as the CDC secretly coordinate behind closed doors to keep people sick or poisoned so they can profit.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002246",
+        "evidence_quote": "they're all and they want to make money",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:conspiracy_cover_up",
+          "cross_cutting:government_institution_distrust"
+        ],
+        "rationale": "This captures the institutional-conspiracy claim about pharma and government profiting by deliberately keeping people sick, which the speaker rebuts; extracting it preserves exposure separate from endorsement.",
+        "relevance": "substantive",
+        "start_unit_id": "u002240",
+        "topic_ids": [
+          "topic:health_care_system_medical_trust",
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A cure for cancer already exists but pharmaceutical companies are suppressing it because they profit more from ongoing treatment.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002259",
+        "evidence_quote": "they already have a cure for cancer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:cancer_conspiracy",
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "rationale": "This is a claim that a cancer cure is being deliberately withheld for profit; despite being rebutted here, it should be tracked since such suppressed-cure claims are common and consequential health misinformation.",
+        "relevance": "substantive",
+        "start_unit_id": "u002256",
+        "topic_ids": [
+          "topic:cancer"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Pharmaceutical sales representatives give doctors gifts such as golf trips and free samples, creating an implicit expectation that doctors will favorably promote their drugs.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002298",
+        "evidence_quote": "the the drug companies take the doctors out on their golfing trips, and they give them free samples and this and that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "rationale": "Whether pharmaceutical companies' gifts to doctors create an implicit quid-pro-quo affecting prescribing is a checkable claim about industry practice and physician behavior.",
+        "relevance": "substantive",
+        "start_unit_id": "u002293",
+        "topic_ids": [
+          "topic:health_care_system_medical_trust"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "definitely"
+        ],
+        "claim_text": "Too many people are being prescribed opioid pain pills.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002279",
+        "evidence_quote": "there's definitely too many people that are getting prescribed pain pills",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "The claim that opioid pain medication is over-prescribed to too many people is a specific, checkable prevalence claim relevant to health and safety.",
+        "relevance": "substantive",
+        "start_unit_id": "u002279",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      }
+    ],
+    "window_id": "episode_71184_window_0031"
+  },
+  "stored_at": "2026-09-12T23:16:54.960510+00:00"
+}

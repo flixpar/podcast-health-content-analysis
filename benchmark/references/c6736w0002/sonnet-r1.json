@@ -1,0 +1,490 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c6736w0002",
+  "provenance": {
+    "bundle": "bundle_006",
+    "ingested_at": "2026-09-12T23:16:54.379519+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000064",
+        "evidence_quote": "Good Energy: The Surprising Connection Between Metabolism and Limitless Health.",
+        "label_ids": [
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000064",
+        "summary": "Host names the guest and her book about metabolism and health without yet discussing its content."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000078",
+        "evidence_quote": "It's a device that measures your metabolism through your breath.",
+        "label_ids": [
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000066",
+        "summary": "Sponsor read for the Lumen breath-based metabolism tracking device and its app-based guidance."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000078",
+        "evidence_quote": "To get fifteen percent off your Lumen",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000066",
+        "summary": "Delimited sponsor read for Lumen closing with a discount code and a thank-you to the sponsor."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000113",
+        "evidence_quote": "metabolic dysfunction is the root cause of nearly every chronic disease torturing American lives",
+        "label_ids": [
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000092",
+        "summary": "Guest frames cellular metabolic dysfunction as the root cause of nearly all chronic disease, contrasted with her conventional surgical training."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000113",
+        "evidence_quote": "when we look at root causes, what we find is that nearly every chronic disease torturing American lives today is rooted in metabolic dysfunction",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "Root-cause framing: looking past symptoms and drugs to the underlying metabolic cause of chronic disease."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000113",
+        "evidence_quote": "it is the intentional blind spot of the American healthcare system",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000100",
+        "summary": "Conventional medical training and the American healthcare system are portrayed as blind to the real, root cause of chronic disease."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000120",
+        "evidence_quote": "the food being such a huge influencer is empowering",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000114",
+        "summary": "Food is presented as the single biggest driver of cellular health, and the easiest place to start."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000117",
+        "evidence_quote": "it covers environmental toxins and",
+        "label_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000116",
+        "summary": "The book is said to also passingly cover environmental toxins and things put on the body."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000116",
+        "evidence_quote": "it covers some exercise too",
+        "label_ids": [
+          "topic:fitness_exercise"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000116",
+        "summary": "The book is said to also passingly cover exercise."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000064",
+        "evidence_quote": "Good Energy: The Surprising Connection Between Metabolism and Limitless Health.",
+        "mention_role": "own_product",
+        "product_name": "Good Energy",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000064"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000078",
+        "evidence_quote": "Lumen is the world's first handheld metabolic coach.",
+        "mention_role": "advertised",
+        "product_name": "Lumen",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000066"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Lumen is the world's first handheld metabolic coach.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000066",
+        "evidence_quote": "Lumen is the world's first handheld metabolic coach.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Specific, checkable priority/superiority claim made in sponsor copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000066",
+        "topic_ids": [
+          "topic:wearables_self_tracking_digital_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Lumen measures a user's metabolism through their breath.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000067",
+        "evidence_quote": "It's a device that measures your metabolism through your breath.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Checkable mechanistic claim about how the device works, made in sponsor copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000067",
+        "topic_ids": [
+          "topic:wearables_self_tracking_digital_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "nearly every"
+        ],
+        "claim_text": "Metabolic dysfunction is the root cause of nearly every chronic disease affecting Americans.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000095",
+        "evidence_quote": "metabolic dysfunction is the root cause of nearly every chronic disease torturing American lives.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "rationale": "Sweeping causal claim about the single cause of chronic disease that can be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000095",
+        "topic_ids": [
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Chronic illness is exploding across the lifespan in America.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000102",
+        "evidence_quote": "Chronic illness is exploding across the lifespan",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Trend/prevalence claim about rising chronic illness that can be checked against epidemiological data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000102",
+        "topic_ids": [
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "seems to be"
+        ],
+        "claim_text": "Food is the biggest driver of cellular health.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000115",
+        "evidence_quote": "that seems to be the biggest driver of cellular health",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Causal claim naming the primary driver of cellular health that could be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000115",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      }
+    ],
+    "window_id": "episode_6736_window_0002"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000064",
+        "evidence_quote": "Good Energy: The Surprising Connection Between Metabolism and Limitless Health",
+        "label_ids": [
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000064",
+        "summary": "Host names the guest and her book about metabolism and health without yet discussing its content."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000078",
+        "evidence_quote": "It's a device that measures your metabolism through your breath",
+        "label_ids": [
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000066",
+        "summary": "Sponsor read for the Lumen breath-based metabolism tracking device and its app-based guidance."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000078",
+        "evidence_quote": "To get fifteen percent off your Lumen",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000066",
+        "summary": "Delimited sponsor read for Lumen closing with a discount code and a thank-you to the sponsor."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000113",
+        "evidence_quote": "metabolic dysfunction is the root cause of nearly every chronic disease torturing American lives",
+        "label_ids": [
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000092",
+        "summary": "Guest frames cellular metabolic dysfunction as the root cause of nearly all chronic disease, contrasted with her conventional surgical training."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000113",
+        "evidence_quote": "when we look at root causes, what we find is that nearly every chronic disease torturing American lives today is rooted in metabolic dysfunction",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "Root-cause framing: looking past symptoms and drugs to the underlying metabolic cause of chronic disease."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000113",
+        "evidence_quote": "it is the intentional blind spot of the American healthcare system",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000100",
+        "summary": "Conventional medical training and the American healthcare system are portrayed as blind to the real, root cause of chronic disease."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000120",
+        "evidence_quote": "the food being such a huge influencer is empowering",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000114",
+        "summary": "Food is presented as the single biggest driver of cellular health, and the easiest place to start."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000117",
+        "evidence_quote": "it covers environmental toxins and",
+        "label_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000116",
+        "summary": "The book is said to also passingly cover environmental toxins and things put on the body."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000116",
+        "evidence_quote": "it covers some exercise too",
+        "label_ids": [
+          "topic:fitness_exercise"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000116",
+        "summary": "The book is said to also passingly cover exercise."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000064",
+        "evidence_quote": "Good Energy: The Surprising Connection Between Metabolism and Limitless Health",
+        "mention_role": "own_product",
+        "product_name": "Good Energy",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000064"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000078",
+        "evidence_quote": "Lumen is the world's first handheld metabolic coach",
+        "mention_role": "advertised",
+        "product_name": "Lumen",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000066"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Lumen is the world's first handheld metabolic coach.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000066",
+        "evidence_quote": "Lumen is the world's first handheld metabolic coach",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Specific, checkable priority/superiority claim made in sponsor copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000066",
+        "topic_ids": [
+          "topic:wearables_self_tracking_digital_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Lumen measures a user's metabolism through their breath.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000067",
+        "evidence_quote": "It's a device that measures your metabolism through your breath",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Checkable mechanistic claim about how the device works, made in sponsor copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000067",
+        "topic_ids": [
+          "topic:wearables_self_tracking_digital_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "nearly every"
+        ],
+        "claim_text": "Metabolic dysfunction is the root cause of nearly every chronic disease affecting Americans.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000095",
+        "evidence_quote": "metabolic dysfunction is the root cause of nearly every chronic disease torturing American lives",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "rationale": "Sweeping causal claim about the single cause of chronic disease that can be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000095",
+        "topic_ids": [
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Chronic illness is exploding across the lifespan in America.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000102",
+        "evidence_quote": "Chronic illness is exploding across the lifespan",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Trend/prevalence claim about rising chronic illness that can be checked against epidemiological data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000102",
+        "topic_ids": [
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "seems to be"
+        ],
+        "claim_text": "Food is the biggest driver of cellular health.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000115",
+        "evidence_quote": "that seems to be the biggest driver of cellular health",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Causal claim naming the primary driver of cellular health that could be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000115",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      }
+    ],
+    "window_id": "episode_6736_window_0002"
+  },
+  "stored_at": "2026-09-12T23:16:54.379563+00:00"
+}

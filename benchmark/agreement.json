@@ -1,19 +1,297 @@
 {
   "annotators_per_item": {
-    "3": 185
+    "4": 260
   },
   "atoms_per_annotator": {
-    "opus-r1": 3446,
-    "sonnet-r1": 1999,
-    "sonnet-r2": 2031
+    "opus-r1": 5332,
+    "opus-r2": 5618,
+    "sonnet-r1": 2962,
+    "sonnet-r2": 3054
   },
   "benchmark_version": "v1",
+  "contrast_validity": {
+    "opus-r1": {
+      "base_target_found_rate": 0.917,
+      "by_perturbation": {
+        "add_booster": {
+          "collateral": 0.259,
+          "pairs": 2,
+          "pass_rate": 1.0
+        },
+        "add_hedge": {
+          "collateral": 0.714,
+          "pairs": 2,
+          "pass_rate": 0.5
+        },
+        "attribute_claim": {
+          "collateral": 0.353,
+          "pairs": 2,
+          "pass_rate": 1.0
+        },
+        "brand_to_generic": {
+          "collateral": 0.316,
+          "pairs": 1,
+          "pass_rate": 0.0
+        },
+        "decoy_hedge_nonclaim": {
+          "collateral": 0.214,
+          "pairs": 1,
+          "pass_rate": 1.0
+        },
+        "decoy_hedge_reported": {
+          "collateral": 0.4,
+          "pairs": 1,
+          "pass_rate": 1.0
+        },
+        "dehealth_subject": {
+          "collateral": 0.0,
+          "pairs": 1,
+          "pass_rate": 0.0
+        },
+        "noop": {
+          "collateral": 0.333,
+          "pairs": 1,
+          "pass_rate": 1.0
+        },
+        "rebut_claim": {
+          "collateral": 0.641,
+          "pairs": 1,
+          "pass_rate": 1.0
+        },
+        "remove_hedge": {
+          "collateral": 0.214,
+          "pairs": 2,
+          "pass_rate": 0.5
+        },
+        "sponsor_framing": {
+          "collateral": 0.289,
+          "pairs": 1,
+          "pass_rate": 1.0
+        }
+      },
+      "collateral_rate": 0.35,
+      "decoy_pass_rate": 1.0,
+      "noop_collateral_rate": 0.333,
+      "pairs": 15,
+      "pass_rate": 0.727,
+      "pass_rate_all": 0.667,
+      "scored": 15,
+      "target_not_in_gold": []
+    },
+    "opus-r2": {
+      "base_target_found_rate": 1.0,
+      "by_perturbation": {
+        "add_booster": {
+          "collateral": 0.159,
+          "pairs": 2,
+          "pass_rate": 1.0
+        },
+        "add_hedge": {
+          "collateral": 0.5,
+          "pairs": 2,
+          "pass_rate": 0.5
+        },
+        "attribute_claim": {
+          "collateral": 0.343,
+          "pairs": 2,
+          "pass_rate": 1.0
+        },
+        "brand_to_generic": {
+          "collateral": 0.474,
+          "pairs": 1,
+          "pass_rate": 0.0
+        },
+        "decoy_hedge_nonclaim": {
+          "collateral": 0.615,
+          "pairs": 1,
+          "pass_rate": 0.0
+        },
+        "decoy_hedge_reported": {
+          "collateral": 0.519,
+          "pairs": 1,
+          "pass_rate": 1.0
+        },
+        "dehealth_subject": {
+          "collateral": 0.333,
+          "pairs": 1,
+          "pass_rate": 0.0
+        },
+        "noop": {
+          "collateral": 0.381,
+          "pairs": 1,
+          "pass_rate": 0.0
+        },
+        "rebut_claim": {
+          "collateral": 0.405,
+          "pairs": 1,
+          "pass_rate": 1.0
+        },
+        "remove_hedge": {
+          "collateral": 0.25,
+          "pairs": 2,
+          "pass_rate": 0.5
+        },
+        "sponsor_framing": {
+          "collateral": 0.375,
+          "pairs": 1,
+          "pass_rate": 1.0
+        }
+      },
+      "collateral_rate": 0.319,
+      "decoy_pass_rate": 0.5,
+      "noop_collateral_rate": 0.381,
+      "pairs": 15,
+      "pass_rate": 0.667,
+      "pass_rate_all": 0.667,
+      "scored": 15,
+      "target_not_in_gold": []
+    },
+    "sonnet-r1": {
+      "base_target_found_rate": 0.75,
+      "by_perturbation": {
+        "add_booster": {
+          "collateral": 0.405,
+          "pairs": 2,
+          "pass_rate": 0.5
+        },
+        "add_hedge": {
+          "collateral": 0.833,
+          "pairs": 2,
+          "pass_rate": 1.0
+        },
+        "attribute_claim": {
+          "collateral": 0.811,
+          "pairs": 2,
+          "pass_rate": 1.0
+        },
+        "brand_to_generic": {
+          "collateral": 1.75,
+          "pairs": 1,
+          "pass_rate": 0.0
+        },
+        "decoy_hedge_nonclaim": {
+          "collateral": 0.697,
+          "pairs": 1,
+          "pass_rate": 1.0
+        },
+        "decoy_hedge_reported": {
+          "collateral": 0.167,
+          "pairs": 1,
+          "pass_rate": 1.0
+        },
+        "dehealth_subject": {
+          "collateral": 1.0,
+          "pairs": 1,
+          "pass_rate": 0.0
+        },
+        "noop": {
+          "collateral": 0.2,
+          "pairs": 1,
+          "pass_rate": 0.0
+        },
+        "rebut_claim": {
+          "collateral": 0.429,
+          "pairs": 1,
+          "pass_rate": 1.0
+        },
+        "remove_hedge": {
+          "collateral": 0.484,
+          "pairs": 2,
+          "pass_rate": 0.5
+        },
+        "sponsor_framing": {
+          "collateral": 0.571,
+          "pairs": 1,
+          "pass_rate": 1.0
+        }
+      },
+      "collateral_rate": 0.595,
+      "decoy_pass_rate": 1.0,
+      "noop_collateral_rate": 0.2,
+      "pairs": 15,
+      "pass_rate": 0.889,
+      "pass_rate_all": 0.667,
+      "scored": 15,
+      "target_not_in_gold": []
+    },
+    "sonnet-r2": {
+      "base_target_found_rate": 0.75,
+      "by_perturbation": {
+        "add_booster": {
+          "collateral": 0.343,
+          "pairs": 2,
+          "pass_rate": 1.0
+        },
+        "add_hedge": {
+          "collateral": 1.2,
+          "pairs": 2,
+          "pass_rate": 0.5
+        },
+        "attribute_claim": {
+          "collateral": 0.4,
+          "pairs": 2,
+          "pass_rate": 0.5
+        },
+        "brand_to_generic": {
+          "collateral": 1.0,
+          "pairs": 1,
+          "pass_rate": 0.0
+        },
+        "decoy_hedge_nonclaim": {
+          "collateral": 0.621,
+          "pairs": 1,
+          "pass_rate": 0.0
+        },
+        "decoy_hedge_reported": {
+          "collateral": 0.571,
+          "pairs": 1,
+          "pass_rate": 1.0
+        },
+        "dehealth_subject": {
+          "collateral": 1.0,
+          "pairs": 1,
+          "pass_rate": 0.0
+        },
+        "noop": {
+          "collateral": 0.643,
+          "pairs": 1,
+          "pass_rate": 1.0
+        },
+        "rebut_claim": {
+          "collateral": 0.611,
+          "pairs": 1,
+          "pass_rate": 1.0
+        },
+        "remove_hedge": {
+          "collateral": 0.92,
+          "pairs": 2,
+          "pass_rate": 0.0
+        },
+        "sponsor_framing": {
+          "collateral": 0.444,
+          "pairs": 1,
+          "pass_rate": 1.0
+        }
+      },
+      "collateral_rate": 0.573,
+      "decoy_pass_rate": 0.5,
+      "noop_collateral_rate": 0.643,
+      "pairs": 15,
+      "pass_rate": 0.667,
+      "pass_rate_all": 0.5,
+      "scored": 15,
+      "target_not_in_gold": []
+    }
+  },
   "gold_items": [
+    "c10884w0014",
+    "c10899w0001",
     "c11515w0024",
     "c12107w0001",
     "c12499w0001",
     "c128911w0034",
     "c13214w0015",
+    "c14152w0032",
     "c14285w0004",
     "c154859w0010",
     "c154859w0023",
@@ -21,13 +299,17 @@
     "c15866w0005",
     "c158752w0002",
     "c159155w0009",
+    "c159422w0005",
     "c16003w0002",
     "c16003w0004",
     "c160804w0019",
     "c160971w0001",
     "c161491w0007",
+    "c162521w0007",
+    "c162528w0006",
     "c162700w0016",
     "c163105w0009",
+    "c163138w0005",
     "c163975w0007",
     "c164460w0004",
     "c164579w0001",
@@ -42,24 +324,40 @@
     "c174933w0002",
     "c174933w0013",
     "c175043w0002",
+    "c175341w0013",
     "c176562w0014",
+    "c176579w0010",
+    "c176604w0021",
+    "c176643w0011",
     "c176740w0012",
     "c176740w0013",
+    "c176979w0018",
+    "c177018w0009",
     "c177135w0002",
     "c177172w0003",
     "c177172w0006",
+    "c178194w0005",
+    "c178240w0010",
     "c178272w0003",
     "c178272w0010",
     "c178291w0010",
     "c178291w0011",
+    "c179429w0018",
     "c179765w0001",
     "c179765w0002",
+    "c180700w0015",
+    "c180821w0010",
     "c181065w0001",
+    "c181134w0003",
     "c181176w0006",
     "c181176w0013",
     "c181249w0003",
+    "c181355w0013",
     "c181494w0006",
     "c181805w0001",
+    "c182124w0023",
+    "c182305w0009",
+    "c182420w0016",
     "c182721w0002",
     "c182721w0003",
     "c182738w0001",
@@ -68,15 +366,20 @@
     "c18517w0045",
     "c185631w0006",
     "c185664w0014",
+    "c185744w0001",
+    "c185811w0024",
     "c185830w0017",
     "c185864w0011",
     "c185982w0005",
     "c186254w0005",
     "c186827w0007",
     "c189960w0013",
+    "c190103w0009",
     "c190223w0001",
     "c190223w0004",
+    "c190235w0011",
     "c190262w0001",
+    "c190399w0004",
     "c190550w0001",
     "c190562w0003",
     "c190562w0004",
@@ -90,10 +393,13 @@
     "c193307w0006",
     "c19484w0028",
     "c194948w0017",
+    "c195507w0016",
     "c195634w0025",
     "c196115w0015",
+    "c197481w0003",
     "c197921w0006",
     "c198034w0012",
+    "c199989w0021",
     "c20094w0004",
     "c204763w0002",
     "c204866w0016",
@@ -102,7 +408,9 @@
     "c205468w0010",
     "c205468w0012",
     "c206462w0007",
+    "c207280w0004",
     "c207917w0004",
+    "c208120w0004",
     "c21327w0001",
     "c22031w0016",
     "c22590w0005",
@@ -110,13 +418,16 @@
     "c2317w0006",
     "c23195w0001",
     "c23195w0002",
+    "c23571w0003",
     "c24723w0005",
+    "c24869w0011",
     "c2549w0016",
     "c26443w0005",
     "c26443w0006",
     "c27447w0012",
     "c28203w0012",
     "c28203w0027",
+    "c28560w0006",
     "c29218w0006",
     "c29445w0004",
     "c29445w0005",
@@ -126,13 +437,18 @@
     "c320982w0004",
     "c321803w0028",
     "c321996w0007",
+    "c322364w0013",
+    "c322584w0021",
     "c323367w0004",
     "c325207w0001",
     "c325734w0024",
     "c32677w0018",
     "c3280w0002",
+    "c329733w0001",
     "c330515w0028",
+    "c330613w0006",
     "c331158w0017",
+    "c33759w0003",
     "c3505w0007",
     "c3505w0015",
     "c36549w0004",
@@ -142,21 +458,33 @@
     "c388820w0004",
     "c389501w0016",
     "c38988w0011",
+    "c39523w0001",
+    "c40166w0011",
     "c41217w0001",
     "c4171w0010",
     "c42287w0010",
+    "c438811w0009",
     "c439984w0003",
     "c439984w0004",
     "c440411w0001",
     "c44395w0007",
     "c4558w0003",
     "c4558w0011",
+    "c4651w0003",
+    "c5436w0023",
+    "c58327w0007",
+    "c58479w0019",
+    "c5907w0028",
     "c60301w0007",
     "c62686w0004",
+    "c63195w0013",
     "c63957w0019",
     "c66062w0001",
+    "c6736w0002",
     "c70479w0003",
     "c70504w0001",
+    "c71136w0017",
+    "c71184w0031",
     "c72170w0003",
     "c73181w0001",
     "c73880w0014",
@@ -166,8 +494,10 @@
     "c75207w0008",
     "c77624w0013",
     "c77624w0014",
+    "c77764w0010",
     "c78305w0011",
     "c78310w0001",
+    "c78401w0009",
     "c78868w0003",
     "c79268w0017",
     "c7981w0047",
@@ -175,10 +505,15 @@
     "c84831w0006",
     "c89759w0004",
     "c90117w0001",
+    "c90375w0014",
     "c90600w0009",
     "c92895w0010",
+    "c92992w0007",
     "c94201w0016",
     "c94800w0006",
+    "c95062w0004",
+    "c96119w0008",
+    "c96366w0038",
     "s-ad-read-delimited",
     "s-certainty-absolute",
     "s-certainty-hedged",
@@ -193,61 +528,68 @@
     "s-product-vs-generic",
     "s-prompt-injection",
     "s-topic-boundary-maha",
-    "s-topic-boundary-vaccine-covid"
+    "s-topic-boundary-vaccine-covid",
+    "t-c128911w0034--decoy_hedge_reported",
+    "t-c154859w0023--remove_hedge",
+    "t-c15866w0005--dehealth_subject",
+    "t-c178272w0010--add_booster",
+    "t-c184181w0018--sponsor_framing",
+    "t-c190562w0004--rebut_claim",
+    "t-c192522w0001--add_booster",
+    "t-c192950w0011--remove_hedge",
+    "t-c195634w0025--attribute_claim",
+    "t-c205121w0027--noop",
+    "t-c29218w0006--add_hedge",
+    "t-c318639w0005--decoy_hedge_nonclaim",
+    "t-c380025w0001--add_hedge",
+    "t-c4558w0003--brand_to_generic",
+    "t-c4558w0011--attribute_claim"
   ],
   "items_below_min_annotators": 0,
-  "items_in_gold": 185,
-  "items_with_references": 185,
+  "items_in_gold": 260,
+  "items_with_references": 260,
   "krippendorff_alpha": {
     "claim:claim_type": {
-      "alpha": 0.7602,
-      "units": 699
+      "alpha": 0.7912,
+      "units": 1618
     },
     "claim:discourse_role": {
-      "alpha": 0.7383,
-      "units": 699
+      "alpha": 0.7445,
+      "units": 1618
     },
     "claim:expressed_certainty": {
-      "alpha": 0.7032,
-      "units": 699
+      "alpha": 0.7453,
+      "units": 1618
     },
     "claim:relevance": {
-      "alpha": 0.9323,
-      "units": 687
+      "alpha": 0.9421,
+      "units": 1589
     },
     "detection:discourse_role": {
-      "alpha": 0.5687,
-      "units": 1390
+      "alpha": 0.6144,
+      "units": 3102
     },
     "detection:relevance": {
-      "alpha": 0.821,
-      "units": 1390
+      "alpha": 0.8125,
+      "units": 3102
     },
     "product:mention_role": {
-      "alpha": 0.8831,
-      "units": 159
+      "alpha": 0.8879,
+      "units": 341
     },
     "product:product_name": {
-      "alpha": 0.8172,
-      "units": 159
+      "alpha": 0.8082,
+      "units": 341
     },
     "product:product_type": {
-      "alpha": 0.94,
-      "units": 159
+      "alpha": 0.9498,
+      "units": 341
     }
   },
   "label_adjacency": [
     {
       "axis": "topic",
-      "count": 7,
-      "labels": [
-        "topic:food_nutrition",
-        "topic:functional_nutrition_supplements"
-      ]
-    },
-    {
-      "axis": "topic",
-      "count": 6,
+      "count": 18,
       "labels": [
         "topic:cardiometabolic_health",
         "topic:weight_loss_metabolic_health"
@@ -255,7 +597,55 @@
     },
     {
       "axis": "topic",
-      "count": 5,
+      "count": 14,
+      "labels": [
+        "topic:food_nutrition",
+        "topic:functional_nutrition_supplements"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 14,
+      "labels": [
+        "topic:functional_nutrition_supplements",
+        "topic:longevity_anti_aging"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 12,
+      "labels": [
+        "topic:other_health_topic",
+        "topic:regenerative_aesthetic_medicine"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 11,
+      "labels": [
+        "topic:natural_alternative_functional_medicine",
+        "topic:other_health_topic"
+      ]
+    },
+    {
+      "axis": "evidence",
+      "count": 10,
+      "labels": [
+        "cross_cutting:scientific_study_citation",
+        "cross_cutting:weak_evidence_extrapolation_signal"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 10,
+      "labels": [
+        "cross_cutting:conflict_of_interest_framing",
+        "cross_cutting:conspiracy_cover_up"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 10,
       "labels": [
         "topic:autoimmune_immune_health",
         "topic:other_health_topic"
@@ -263,7 +653,135 @@
     },
     {
       "axis": "topic",
-      "count": 5,
+      "count": 10,
+      "labels": [
+        "topic:cancer",
+        "topic:cancer_alternative_treatments_cure_narratives"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 9,
+      "labels": [
+        "topic:cardiometabolic_health",
+        "topic:womens_health_female_hormones"
+      ]
+    },
+    {
+      "axis": "evidence",
+      "count": 8,
+      "labels": [
+        "cross_cutting:credential_appeal",
+        "cross_cutting:personal_experience_evidence"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 8,
+      "labels": [
+        "topic:beauty_dermatology_skincare",
+        "topic:surgery_medical_procedures"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 8,
+      "labels": [
+        "topic:injury_wound_care_first_aid",
+        "topic:pain_musculoskeletal_health"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 8,
+      "labels": [
+        "topic:other_health_topic",
+        "topic:surgery_medical_procedures"
+      ]
+    },
+    {
+      "axis": "evidence",
+      "count": 7,
+      "labels": [
+        "cross_cutting:personal_experience_evidence",
+        "cross_cutting:weak_evidence_extrapolation_signal"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 7,
+      "labels": [
+        "cross_cutting:optimization_framing",
+        "cross_cutting:root_cause_framing"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 7,
+      "labels": [
+        "topic:beauty_dermatology_skincare",
+        "topic:sleep"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 7,
+      "labels": [
+        "topic:biohacking_human_optimization",
+        "topic:sleep"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 7,
+      "labels": [
+        "topic:diet_tribes_food_ideologies",
+        "topic:food_nutrition"
+      ]
+    },
+    {
+      "axis": "evidence",
+      "count": 6,
+      "labels": [
+        "cross_cutting:credential_appeal",
+        "cross_cutting:evidence_strength_claim"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 6,
+      "labels": [
+        "cross_cutting:big_food_food_system_distrust",
+        "cross_cutting:purity_contamination_framing"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 6,
+      "labels": [
+        "cross_cutting:big_pharma_medical_industrial_complex",
+        "cross_cutting:conflict_of_interest_framing"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 6,
+      "labels": [
+        "topic:beauty_dermatology_skincare",
+        "topic:mens_health_male_hormones"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 6,
+      "labels": [
+        "topic:cardiometabolic_health",
+        "topic:other_health_topic"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 6,
       "labels": [
         "topic:covid_19_pandemic_health",
         "topic:health_care_system_medical_trust"
@@ -271,7 +789,7 @@
     },
     {
       "axis": "topic",
-      "count": 5,
+      "count": 6,
       "labels": [
         "topic:food_nutrition",
         "topic:maha_root_cause_health_politics"
@@ -279,10 +797,122 @@
     },
     {
       "axis": "topic",
+      "count": 6,
+      "labels": [
+        "topic:genetics_inheritance",
+        "topic:wearables_self_tracking_digital_health"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 6,
+      "labels": [
+        "topic:mens_health_male_hormones",
+        "topic:performance_enhancing_drugs_bodybuilding_compounds"
+      ]
+    },
+    {
+      "axis": "evidence",
       "count": 5,
       "labels": [
-        "topic:functional_nutrition_supplements",
-        "topic:longevity_anti_aging"
+        "cross_cutting:credential_appeal",
+        "cross_cutting:scientific_study_citation"
+      ]
+    },
+    {
+      "axis": "evidence",
+      "count": 5,
+      "labels": [
+        "cross_cutting:evidence_strength_claim",
+        "cross_cutting:scientific_study_citation"
+      ]
+    },
+    {
+      "axis": "evidence",
+      "count": 5,
+      "labels": [
+        "cross_cutting:prestige_science_invocation",
+        "cross_cutting:scientific_study_citation"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 5,
+      "labels": [
+        "cross_cutting:anti_mainstream_medicine_framing",
+        "cross_cutting:government_institution_distrust"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 5,
+      "labels": [
+        "cross_cutting:commercialization",
+        "cross_cutting:optimization_framing"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 5,
+      "labels": [
+        "cross_cutting:naturalness_appeal",
+        "cross_cutting:root_cause_framing"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 5,
+      "labels": [
+        "topic:biohacking_human_optimization",
+        "topic:food_nutrition"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 5,
+      "labels": [
+        "topic:brain_cognition_productivity",
+        "topic:functional_nutrition_supplements"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 5,
+      "labels": [
+        "topic:longevity_anti_aging",
+        "topic:other_health_topic"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 5,
+      "labels": [
+        "topic:mental_health",
+        "topic:stress_nervous_system_regulation_neurowellness"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 5,
+      "labels": [
+        "topic:other_health_topic",
+        "topic:vaccines_immunization"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 5,
+      "labels": [
+        "topic:stress_nervous_system_regulation_neurowellness",
+        "topic:womens_health_female_hormones"
+      ]
+    },
+    {
+      "axis": "evidence",
+      "count": 4,
+      "labels": [
+        "cross_cutting:credential_appeal",
+        "cross_cutting:prestige_science_invocation"
       ]
     },
     {
@@ -290,15 +920,39 @@
       "count": 4,
       "labels": [
         "cross_cutting:evidence_strength_claim",
-        "cross_cutting:scientific_study_citation"
+        "cross_cutting:weak_evidence_extrapolation_signal"
       ]
     },
     {
       "axis": "frame",
       "count": 4,
       "labels": [
-        "cross_cutting:conflict_of_interest_framing",
-        "cross_cutting:conspiracy_cover_up"
+        "cross_cutting:conspiracy_cover_up",
+        "cross_cutting:government_institution_distrust"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 4,
+      "labels": [
+        "cross_cutting:covid_conspiracy",
+        "cross_cutting:geo_environment_conspiracy"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 4,
+      "labels": [
+        "cross_cutting:covid_conspiracy",
+        "cross_cutting:government_institution_distrust"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 4,
+      "labels": [
+        "cross_cutting:food_conspiracy",
+        "cross_cutting:purity_contamination_framing"
       ]
     },
     {
@@ -313,8 +967,112 @@
       "axis": "frame",
       "count": 4,
       "labels": [
-        "cross_cutting:naturalness_appeal",
-        "cross_cutting:root_cause_framing"
+        "cross_cutting:government_institution_distrust",
+        "cross_cutting:misinformation_correction_debunking"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 4,
+      "labels": [
+        "cross_cutting:government_institution_distrust",
+        "cross_cutting:suppressed_science_framing"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:beauty_dermatology_skincare",
+        "topic:other_health_topic"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:biohacking_human_optimization",
+        "topic:hearing_vision_sensory_health"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:biohacking_human_optimization",
+        "topic:natural_alternative_functional_medicine"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:biohacking_human_optimization",
+        "topic:stress_nervous_system_regulation_neurowellness"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:brain_cognition_productivity",
+        "topic:other_health_topic"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:childrens_health",
+        "topic:maha_root_cause_health_politics"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:diet_tribes_food_ideologies",
+        "topic:weight_loss_metabolic_health"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:functional_nutrition_supplements",
+        "topic:hearing_vision_sensory_health"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:functional_nutrition_supplements",
+        "topic:mens_health_male_hormones"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:functional_nutrition_supplements",
+        "topic:mental_health"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:functional_nutrition_supplements",
+        "topic:other_health_topic"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:functional_nutrition_supplements",
+        "topic:womens_health_female_hormones"
       ]
     },
     {
@@ -322,7 +1080,31 @@
       "count": 4,
       "labels": [
         "topic:genetics_inheritance",
-        "topic:wearables_self_tracking_digital_health"
+        "topic:performance_enhancing_drugs_bodybuilding_compounds"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:health_care_system_medical_trust",
+        "topic:maha_root_cause_health_politics"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:health_care_system_medical_trust",
+        "topic:other_health_topic"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:neurology_seizures_brain_conditions",
+        "topic:other_health_topic"
       ]
     },
     {
@@ -330,7 +1112,15 @@
       "count": 4,
       "labels": [
         "topic:other_health_topic",
-        "topic:surgery_medical_procedures"
+        "topic:pain_musculoskeletal_health"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 4,
+      "labels": [
+        "topic:pain_musculoskeletal_health",
+        "topic:recovery_physical_optimization"
       ]
     },
     {
@@ -338,14 +1128,6 @@
       "count": 3,
       "labels": [
         "cross_cutting:credential_appeal",
-        "cross_cutting:evidence_strength_claim"
-      ]
-    },
-    {
-      "axis": "evidence",
-      "count": 3,
-      "labels": [
-        "cross_cutting:personal_experience_evidence",
         "cross_cutting:weak_evidence_extrapolation_signal"
       ]
     },
@@ -353,7 +1135,15 @@
       "axis": "evidence",
       "count": 3,
       "labels": [
-        "cross_cutting:scientific_study_citation",
+        "cross_cutting:mechanistic_scientific_language",
+        "cross_cutting:personal_experience_evidence"
+      ]
+    },
+    {
+      "axis": "evidence",
+      "count": 3,
+      "labels": [
+        "cross_cutting:mechanistic_scientific_language",
         "cross_cutting:weak_evidence_extrapolation_signal"
       ]
     },
@@ -361,7 +1151,39 @@
       "axis": "frame",
       "count": 3,
       "labels": [
+        "cross_cutting:anti_expert_populist_framing",
+        "cross_cutting:anti_mainstream_medicine_framing"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 3,
+      "labels": [
+        "cross_cutting:anti_mainstream_medicine_framing",
+        "cross_cutting:misinformation_correction_debunking"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 3,
+      "labels": [
+        "cross_cutting:anti_mainstream_medicine_framing",
+        "cross_cutting:root_cause_framing"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 3,
+      "labels": [
         "cross_cutting:big_food_food_system_distrust",
+        "cross_cutting:food_conspiracy"
+      ]
+    },
+    {
+      "axis": "frame",
+      "count": 3,
+      "labels": [
+        "cross_cutting:biohacking_framing",
         "cross_cutting:purity_contamination_framing"
       ]
     },
@@ -370,23 +1192,39 @@
       "count": 3,
       "labels": [
         "cross_cutting:commercialization",
-        "cross_cutting:optimization_framing"
+        "cross_cutting:maha_adjacent_online_vocabulary"
       ]
     },
     {
       "axis": "frame",
       "count": 3,
       "labels": [
-        "cross_cutting:covid_conspiracy",
-        "cross_cutting:government_institution_distrust"
+        "cross_cutting:food_conspiracy",
+        "cross_cutting:maha_food_vocabulary"
       ]
     },
     {
       "axis": "frame",
       "count": 3,
       "labels": [
-        "cross_cutting:optimization_framing",
-        "cross_cutting:root_cause_framing"
+        "cross_cutting:maha_adjacent_online_vocabulary",
+        "cross_cutting:purity_contamination_framing"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:autoimmune_immune_health",
+        "topic:functional_nutrition_supplements"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:autoimmune_immune_health",
+        "topic:gut_health_microbiome"
       ]
     },
     {
@@ -394,7 +1232,7 @@
       "count": 3,
       "labels": [
         "topic:beauty_dermatology_skincare",
-        "topic:other_health_topic"
+        "topic:biohacking_human_optimization"
       ]
     },
     {
@@ -402,7 +1240,7 @@
       "count": 3,
       "labels": [
         "topic:biohacking_human_optimization",
-        "topic:food_nutrition"
+        "topic:functional_nutrition_supplements"
       ]
     },
     {
@@ -410,7 +1248,7 @@
       "count": 3,
       "labels": [
         "topic:brain_cognition_productivity",
-        "topic:functional_nutrition_supplements"
+        "topic:mental_health"
       ]
     },
     {
@@ -425,7 +1263,95 @@
       "axis": "topic",
       "count": 3,
       "labels": [
-        "topic:functional_nutrition_supplements",
+        "topic:childrens_health",
+        "topic:mental_health"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:dementia_cognitive_decline_ageing",
+        "topic:other_health_topic"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:detox_cleanses_parasites",
+        "topic:environmental_health_chemical_exposures"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:environmental_health_chemical_exposures",
+        "topic:weight_loss_metabolic_health"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:fitness_exercise",
+        "topic:weight_loss_metabolic_health"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:food_nutrition",
+        "topic:inflammation_as_a_general_health_narrative"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:genetics_inheritance",
+        "topic:longevity_anti_aging"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:genetics_inheritance",
+        "topic:reproductive_sexual_health"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:glp_1_incretin_drugs",
+        "topic:weight_loss_metabolic_health"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:glp_1_incretin_drugs",
+        "topic:womens_health_female_hormones"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:gut_health_microbiome",
+        "topic:inflammation_as_a_general_health_narrative"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:health_care_system_medical_trust",
         "topic:mental_health"
       ]
     },
@@ -434,7 +1360,31 @@
       "count": 3,
       "labels": [
         "topic:health_care_system_medical_trust",
-        "topic:maha_root_cause_health_politics"
+        "topic:womens_health_female_hormones"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:hearing_vision_sensory_health",
+        "topic:sleep"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:infectious_disease_outbreaks",
+        "topic:other_health_topic"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:inflammation_as_a_general_health_narrative",
+        "topic:womens_health_female_hormones"
       ]
     },
     {
@@ -442,7 +1392,7 @@
       "count": 3,
       "labels": [
         "topic:injury_wound_care_first_aid",
-        "topic:pain_musculoskeletal_health"
+        "topic:longevity_anti_aging"
       ]
     },
     {
@@ -450,23 +1400,7 @@
       "count": 3,
       "labels": [
         "topic:longevity_anti_aging",
-        "topic:other_health_topic"
-      ]
-    },
-    {
-      "axis": "topic",
-      "count": 3,
-      "labels": [
-        "topic:mens_health_male_hormones",
-        "topic:performance_enhancing_drugs_bodybuilding_compounds"
-      ]
-    },
-    {
-      "axis": "topic",
-      "count": 3,
-      "labels": [
-        "topic:mental_health",
-        "topic:stress_nervous_system_regulation_neurowellness"
+        "topic:weight_loss_metabolic_health"
       ]
     },
     {
@@ -474,7 +1408,7 @@
       "count": 3,
       "labels": [
         "topic:natural_alternative_functional_medicine",
-        "topic:other_health_topic"
+        "topic:womens_health_female_hormones"
       ]
     },
     {
@@ -482,14 +1416,30 @@
       "count": 3,
       "labels": [
         "topic:other_health_topic",
-        "topic:vaccines_immunization"
+        "topic:sleep"
       ]
     },
     {
       "axis": "topic",
       "count": 3,
       "labels": [
-        "topic:stress_nervous_system_regulation_neurowellness",
+        "topic:other_health_topic",
+        "topic:womens_health_female_hormones"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:reproductive_sexual_health",
+        "topic:womens_health_female_hormones"
+      ]
+    },
+    {
+      "axis": "topic",
+      "count": 3,
+      "labels": [
+        "topic:weight_loss_metabolic_health",
         "topic:womens_health_female_hormones"
       ]
     }
@@ -500,388 +1450,584 @@
         "claim": {
           "adjacent": 0,
           "f1_adjacent": null,
-          "f1_soft": 0.6232,
-          "f1_strict": 0.6342,
-          "fn": 9,
-          "fp": 337,
-          "gold": 550,
+          "f1_soft": 0.8669,
+          "f1_strict": 0.9011,
+          "fn": 34,
+          "fp": 70,
+          "gold": 985,
           "mean_span_iou": null,
-          "precision": 0.471,
-          "pred": 828,
-          "recall_soft": 0.9207,
-          "recall_strict": 0.9709,
-          "required": 308,
-          "tp": 300,
-          "unscored": 191,
-          "yield_ratio": 1.505
+          "precision": 0.8713,
+          "pred": 846,
+          "recall_soft": 0.8625,
+          "recall_strict": 0.9331,
+          "required": 508,
+          "tp": 474,
+          "unscored": 302,
+          "yield_ratio": 0.859
         },
         "detection:evidence": {
-          "adjacent": 2,
-          "f1_adjacent": 0.6633,
-          "f1_soft": 0.6301,
-          "f1_strict": 0.6531,
-          "fn": 7,
-          "fp": 129,
-          "gold": 272,
-          "mean_span_iou": 1.273,
-          "precision": 0.4981,
-          "pred": 350,
-          "recall_soft": 0.8575,
-          "recall_strict": 0.9481,
-          "required": 135,
-          "tp": 128,
-          "unscored": 93,
-          "yield_ratio": 1.287
+          "adjacent": 1,
+          "f1_adjacent": 0.8948,
+          "f1_soft": 0.856,
+          "f1_strict": 0.8907,
+          "fn": 24,
+          "fp": 29,
+          "gold": 434,
+          "mean_span_iou": 1.164,
+          "precision": 0.8816,
+          "pred": 358,
+          "recall_soft": 0.8319,
+          "recall_strict": 0.9,
+          "required": 240,
+          "tp": 216,
+          "unscored": 113,
+          "yield_ratio": 0.825
         },
         "detection:frame": {
-          "adjacent": 4,
-          "f1_adjacent": 0.7427,
-          "f1_soft": 0.685,
-          "f1_strict": 0.7215,
-          "fn": 3,
-          "fp": 102,
-          "gold": 247,
-          "mean_span_iou": 1.005,
-          "precision": 0.5714,
-          "pred": 296,
-          "recall_soft": 0.8549,
-          "recall_strict": 0.9784,
-          "required": 139,
-          "tp": 136,
-          "unscored": 58,
-          "yield_ratio": 1.198
+          "adjacent": 2,
+          "f1_adjacent": 0.8995,
+          "f1_soft": 0.8566,
+          "f1_strict": 0.8904,
+          "fn": 25,
+          "fp": 23,
+          "gold": 384,
+          "mean_span_iou": 1.094,
+          "precision": 0.8945,
+          "pred": 305,
+          "recall_soft": 0.8217,
+          "recall_strict": 0.8864,
+          "required": 220,
+          "tp": 195,
+          "unscored": 87,
+          "yield_ratio": 0.794
         },
         "detection:topic": {
-          "adjacent": 20,
-          "f1_adjacent": 0.6667,
-          "f1_soft": 0.6157,
-          "f1_strict": 0.6291,
-          "fn": 28,
-          "fp": 367,
-          "gold": 674,
-          "mean_span_iou": 1.224,
-          "precision": 0.4772,
-          "pred": 932,
-          "recall_soft": 0.8675,
-          "recall_strict": 0.9229,
-          "required": 360,
-          "tp": 335,
-          "unscored": 230,
-          "yield_ratio": 1.383
+          "adjacent": 12,
+          "f1_adjacent": 0.8863,
+          "f1_soft": 0.8386,
+          "f1_strict": 0.8677,
+          "fn": 68,
+          "fp": 103,
+          "gold": 1134,
+          "mean_span_iou": 1.14,
+          "precision": 0.8449,
+          "pred": 968,
+          "recall_soft": 0.8324,
+          "recall_strict": 0.8919,
+          "required": 626,
+          "tp": 561,
+          "unscored": 304,
+          "yield_ratio": 0.854
         },
         "product": {
           "adjacent": 0,
           "f1_adjacent": null,
-          "f1_soft": 0.7324,
-          "f1_strict": 0.7424,
-          "fn": 5,
-          "fp": 63,
-          "gold": 132,
+          "f1_soft": 0.9069,
+          "f1_strict": 0.916,
+          "fn": 8,
+          "fp": 14,
+          "gold": 199,
           "mean_span_iou": null,
-          "precision": 0.6087,
-          "pred": 181,
-          "recall_soft": 0.9191,
-          "recall_strict": 0.9515,
-          "required": 103,
-          "tp": 98,
-          "unscored": 20,
-          "yield_ratio": 1.371
+          "precision": 0.8955,
+          "pred": 188,
+          "recall_soft": 0.9186,
+          "recall_strict": 0.9375,
+          "required": 128,
+          "tp": 120,
+          "unscored": 54,
+          "yield_ratio": 0.945
         }
       },
-      "items": 150
+      "items": 160
+    },
+    "opus-r2": {
+      "groups": {
+        "claim": {
+          "adjacent": 0,
+          "f1_adjacent": null,
+          "f1_soft": 0.8598,
+          "f1_strict": 0.8847,
+          "fn": 37,
+          "fp": 160,
+          "gold": 895,
+          "mean_span_iou": null,
+          "precision": 0.8253,
+          "pred": 923,
+          "recall_soft": 0.8973,
+          "recall_strict": 0.9533,
+          "required": 509,
+          "tp": 756,
+          "unscored": 7,
+          "yield_ratio": 1.031
+        },
+        "detection:evidence": {
+          "adjacent": 3,
+          "f1_adjacent": 0.9076,
+          "f1_soft": 0.8648,
+          "f1_strict": 0.8995,
+          "fn": 15,
+          "fp": 59,
+          "gold": 406,
+          "mean_span_iou": 0.761,
+          "precision": 0.8487,
+          "pred": 395,
+          "recall_soft": 0.8815,
+          "recall_strict": 0.9566,
+          "required": 232,
+          "tp": 331,
+          "unscored": 5,
+          "yield_ratio": 0.973
+        },
+        "detection:frame": {
+          "adjacent": 3,
+          "f1_adjacent": 0.9164,
+          "f1_soft": 0.8726,
+          "f1_strict": 0.9071,
+          "fn": 6,
+          "fp": 54,
+          "gold": 356,
+          "mean_span_iou": 0.786,
+          "precision": 0.8444,
+          "pred": 351,
+          "recall_soft": 0.9027,
+          "recall_strict": 0.9799,
+          "required": 201,
+          "tp": 293,
+          "unscored": 4,
+          "yield_ratio": 0.986
+        },
+        "detection:topic": {
+          "adjacent": 17,
+          "f1_adjacent": 0.8876,
+          "f1_soft": 0.8368,
+          "f1_strict": 0.8701,
+          "fn": 55,
+          "fp": 197,
+          "gold": 1062,
+          "mean_span_iou": 0.744,
+          "precision": 0.8108,
+          "pred": 1052,
+          "recall_soft": 0.8645,
+          "recall_strict": 0.9388,
+          "required": 616,
+          "tp": 844,
+          "unscored": 11,
+          "yield_ratio": 0.991
+        },
+        "product": {
+          "adjacent": 0,
+          "f1_adjacent": null,
+          "f1_soft": 0.9306,
+          "f1_strict": 0.9479,
+          "fn": 4,
+          "fp": 15,
+          "gold": 198,
+          "mean_span_iou": null,
+          "precision": 0.9202,
+          "pred": 192,
+          "recall_soft": 0.9412,
+          "recall_strict": 0.9774,
+          "required": 125,
+          "tp": 173,
+          "unscored": 4,
+          "yield_ratio": 0.97
+        }
+      },
+      "items": 160
     },
     "sonnet-r1": {
       "groups": {
         "claim": {
           "adjacent": 0,
           "f1_adjacent": null,
-          "f1_soft": 0.6863,
-          "f1_strict": 0.8098,
-          "fn": 106,
-          "fp": 33,
-          "gold": 849,
+          "f1_soft": 0.6536,
+          "f1_strict": 0.6504,
+          "fn": 396,
+          "fp": 20,
+          "gold": 1027,
           "mean_span_iou": null,
-          "precision": 0.8997,
-          "pred": 431,
-          "recall_soft": 0.5548,
-          "recall_strict": 0.7363,
-          "required": 402,
-          "tp": 296,
-          "unscored": 102,
-          "yield_ratio": 0.508
+          "precision": 0.9509,
+          "pred": 436,
+          "recall_soft": 0.498,
+          "recall_strict": 0.4943,
+          "required": 783,
+          "tp": 387,
+          "unscored": 29,
+          "yield_ratio": 0.425
         },
         "detection:evidence": {
           "adjacent": 4,
-          "f1_adjacent": 0.8185,
-          "f1_soft": 0.6849,
-          "f1_strict": 0.7938,
-          "fn": 43,
-          "fp": 24,
-          "gold": 376,
-          "mean_span_iou": 1.073,
-          "precision": 0.8431,
-          "pred": 211,
-          "recall_soft": 0.5766,
-          "recall_strict": 0.75,
-          "required": 172,
-          "tp": 129,
-          "unscored": 58,
-          "yield_ratio": 0.561
+          "f1_adjacent": 0.7015,
+          "f1_soft": 0.6746,
+          "f1_strict": 0.6866,
+          "fn": 153,
+          "fp": 15,
+          "gold": 450,
+          "mean_span_iou": 0.792,
+          "precision": 0.9246,
+          "pred": 212,
+          "recall_soft": 0.531,
+          "recall_strict": 0.546,
+          "required": 337,
+          "tp": 184,
+          "unscored": 13,
+          "yield_ratio": 0.471
         },
         "detection:frame": {
           "adjacent": 4,
-          "f1_adjacent": 0.852,
-          "f1_soft": 0.714,
-          "f1_strict": 0.8278,
-          "fn": 26,
-          "fp": 31,
-          "gold": 322,
-          "mean_span_iou": 0.891,
-          "precision": 0.8155,
-          "pred": 202,
-          "recall_soft": 0.6351,
-          "recall_strict": 0.8405,
-          "required": 163,
-          "tp": 137,
-          "unscored": 34,
-          "yield_ratio": 0.627
+          "f1_adjacent": 0.728,
+          "f1_soft": 0.7053,
+          "f1_strict": 0.7117,
+          "fn": 121,
+          "fp": 20,
+          "gold": 394,
+          "mean_span_iou": 0.759,
+          "precision": 0.8969,
+          "pred": 206,
+          "recall_soft": 0.5812,
+          "recall_strict": 0.5898,
+          "required": 295,
+          "tp": 174,
+          "unscored": 12,
+          "yield_ratio": 0.523
         },
         "detection:topic": {
-          "adjacent": 10,
-          "f1_adjacent": 0.8159,
-          "f1_soft": 0.684,
-          "f1_strict": 0.7918,
-          "fn": 116,
-          "fp": 57,
-          "gold": 970,
-          "mean_span_iou": 1.049,
-          "precision": 0.8523,
-          "pred": 537,
-          "recall_soft": 0.5711,
-          "recall_strict": 0.7393,
-          "required": 443,
-          "tp": 329,
-          "unscored": 151,
-          "yield_ratio": 0.554
+          "adjacent": 21,
+          "f1_adjacent": 0.7014,
+          "f1_soft": 0.6634,
+          "f1_strict": 0.6714,
+          "fn": 419,
+          "fp": 41,
+          "gold": 1194,
+          "mean_span_iou": 0.764,
+          "precision": 0.9198,
+          "pred": 554,
+          "recall_soft": 0.5188,
+          "recall_strict": 0.5287,
+          "required": 887,
+          "tp": 470,
+          "unscored": 43,
+          "yield_ratio": 0.464
         },
         "product": {
           "adjacent": 0,
           "f1_adjacent": null,
-          "f1_soft": 0.8131,
-          "f1_strict": 0.9302,
-          "fn": 11,
-          "fp": 4,
-          "gold": 190,
+          "f1_soft": 0.7839,
+          "f1_strict": 0.7619,
+          "fn": 67,
+          "fp": 3,
+          "gold": 208,
           "mean_span_iou": null,
-          "precision": 0.9615,
-          "pred": 116,
-          "recall_soft": 0.7043,
-          "recall_strict": 0.9009,
-          "required": 111,
-          "tp": 100,
-          "unscored": 12,
-          "yield_ratio": 0.611
+          "precision": 0.9739,
+          "pred": 118,
+          "recall_soft": 0.656,
+          "recall_strict": 0.6257,
+          "required": 179,
+          "tp": 112,
+          "unscored": 3,
+          "yield_ratio": 0.567
         }
       },
-      "items": 150
+      "items": 160
     },
     "sonnet-r2": {
       "groups": {
         "claim": {
           "adjacent": 0,
           "f1_adjacent": null,
-          "f1_soft": 0.7032,
-          "f1_strict": 0.8366,
-          "fn": 89,
-          "fp": 27,
-          "gold": 857,
+          "f1_soft": 0.6689,
+          "f1_strict": 0.6683,
+          "fn": 382,
+          "fp": 16,
+          "gold": 1034,
           "mean_span_iou": null,
-          "precision": 0.9167,
-          "pred": 439,
-          "recall_soft": 0.5704,
-          "recall_strict": 0.7694,
-          "required": 386,
-          "tp": 297,
-          "unscored": 115,
-          "yield_ratio": 0.512
+          "precision": 0.9616,
+          "pred": 445,
+          "recall_soft": 0.5128,
+          "recall_strict": 0.5121,
+          "required": 783,
+          "tp": 401,
+          "unscored": 28,
+          "yield_ratio": 0.43
         },
         "detection:evidence": {
-          "adjacent": 0,
-          "f1_adjacent": 0.7748,
-          "f1_soft": 0.6664,
-          "f1_strict": 0.7748,
-          "fn": 51,
-          "fp": 24,
-          "gold": 379,
-          "mean_span_iou": 1.016,
-          "precision": 0.8431,
-          "pred": 203,
-          "recall_soft": 0.551,
-          "recall_strict": 0.7167,
-          "required": 180,
-          "tp": 129,
-          "unscored": 50,
-          "yield_ratio": 0.536
+          "adjacent": 4,
+          "f1_adjacent": 0.6704,
+          "f1_soft": 0.6464,
+          "f1_strict": 0.6554,
+          "fn": 165,
+          "fp": 19,
+          "gold": 449,
+          "mean_span_iou": 0.777,
+          "precision": 0.9021,
+          "pred": 205,
+          "recall_soft": 0.5036,
+          "recall_strict": 0.5147,
+          "required": 340,
+          "tp": 175,
+          "unscored": 11,
+          "yield_ratio": 0.457
         },
         "detection:frame": {
-          "adjacent": 6,
-          "f1_adjacent": 0.8735,
-          "f1_soft": 0.7184,
-          "f1_strict": 0.8373,
-          "fn": 30,
-          "fp": 24,
-          "gold": 324,
-          "mean_span_iou": 0.846,
-          "precision": 0.8528,
-          "pred": 191,
-          "recall_soft": 0.6207,
-          "recall_strict": 0.8225,
-          "required": 169,
-          "tp": 139,
-          "unscored": 28,
-          "yield_ratio": 0.59
+          "adjacent": 8,
+          "f1_adjacent": 0.7386,
+          "f1_soft": 0.7005,
+          "f1_strict": 0.7054,
+          "fn": 127,
+          "fp": 15,
+          "gold": 394,
+          "mean_span_iou": 0.751,
+          "precision": 0.9189,
+          "pred": 195,
+          "recall_soft": 0.5659,
+          "recall_strict": 0.5724,
+          "required": 297,
+          "tp": 170,
+          "unscored": 10,
+          "yield_ratio": 0.495
         },
         "detection:topic": {
-          "adjacent": 13,
-          "f1_adjacent": 0.8198,
-          "f1_soft": 0.6745,
-          "f1_strict": 0.7884,
-          "fn": 133,
-          "fp": 42,
-          "gold": 990,
-          "mean_span_iou": 1.039,
-          "precision": 0.8859,
-          "pred": 505,
-          "recall_soft": 0.5445,
-          "recall_strict": 0.7102,
-          "required": 459,
-          "tp": 326,
-          "unscored": 137,
-          "yield_ratio": 0.51
+          "adjacent": 14,
+          "f1_adjacent": 0.6755,
+          "f1_soft": 0.6466,
+          "f1_strict": 0.6548,
+          "fn": 441,
+          "fp": 26,
+          "gold": 1214,
+          "mean_span_iou": 0.789,
+          "precision": 0.9446,
+          "pred": 519,
+          "recall_soft": 0.4916,
+          "recall_strict": 0.5011,
+          "required": 884,
+          "tp": 443,
+          "unscored": 50,
+          "yield_ratio": 0.428
         },
         "product": {
           "adjacent": 0,
           "f1_adjacent": null,
-          "f1_soft": 0.8292,
-          "f1_strict": 0.939,
-          "fn": 7,
-          "fp": 6,
-          "gold": 185,
+          "f1_soft": 0.8003,
+          "f1_strict": 0.777,
+          "fn": 62,
+          "fp": 4,
+          "gold": 205,
           "mean_span_iou": null,
-          "precision": 0.9434,
-          "pred": 122,
-          "recall_soft": 0.7397,
-          "recall_strict": 0.9346,
-          "required": 107,
-          "tp": 100,
-          "unscored": 16,
-          "yield_ratio": 0.659
+          "precision": 0.9664,
+          "pred": 124,
+          "recall_soft": 0.6829,
+          "recall_strict": 0.6497,
+          "required": 177,
+          "tp": 115,
+          "unscored": 5,
+          "yield_ratio": 0.605
         }
       },
-      "items": 150
+      "items": 160
     }
   },
   "min_annotators": 2,
   "pairwise": {
-    "opus-r1|sonnet-r1": {
+    "opus-r1|opus-r2": {
       "claim": {
-        "f1": 0.6348,
-        "fn": 563,
-        "fp": 56,
-        "tp": 538
+        "f1": 0.8409,
+        "fn": 235,
+        "fp": 326,
+        "tp": 1482
       },
       "detection:evidence": {
-        "f1": 0.6278,
-        "fn": 229,
-        "fp": 33,
-        "tp": 221
+        "f1": 0.8349,
+        "fn": 87,
+        "fp": 136,
+        "tp": 564
       },
       "detection:frame": {
-        "f1": 0.6676,
-        "fn": 187,
-        "fp": 47,
-        "tp": 235
+        "f1": 0.8425,
+        "fn": 79,
+        "fp": 142,
+        "tp": 591
       },
       "detection:topic": {
-        "f1": 0.6297,
-        "fn": 631,
-        "fp": 97,
-        "tp": 619
+        "f1": 0.8133,
+        "fn": 330,
+        "fp": 409,
+        "tp": 1610
       },
       "product": {
-        "f1": 0.75,
-        "fn": 82,
-        "fp": 12,
-        "tp": 141
+        "f1": 0.9185,
+        "fn": 27,
+        "fp": 31,
+        "tp": 327
+      }
+    },
+    "opus-r1|sonnet-r1": {
+      "claim": {
+        "f1": 0.6102,
+        "fn": 924,
+        "fp": 89,
+        "tp": 793
+      },
+      "detection:evidence": {
+        "f1": 0.6148,
+        "fn": 339,
+        "fp": 52,
+        "tp": 312
+      },
+      "detection:frame": {
+        "f1": 0.6593,
+        "fn": 311,
+        "fp": 60,
+        "tp": 359
+      },
+      "detection:topic": {
+        "f1": 0.6249,
+        "fn": 1002,
+        "fp": 124,
+        "tp": 938
+      },
+      "product": {
+        "f1": 0.7538,
+        "fn": 132,
+        "fp": 13,
+        "tp": 222
       }
     },
     "opus-r1|sonnet-r2": {
       "claim": {
-        "f1": 0.6616,
-        "fn": 532,
-        "fp": 50,
-        "tp": 569
+        "f1": 0.6354,
+        "fn": 878,
+        "fp": 85,
+        "tp": 839
       },
       "detection:evidence": {
-        "f1": 0.6245,
-        "fn": 228,
-        "fp": 39,
-        "tp": 222
+        "f1": 0.6166,
+        "fn": 335,
+        "fp": 58,
+        "tp": 316
       },
       "detection:frame": {
-        "f1": 0.6676,
-        "fn": 187,
-        "fp": 47,
-        "tp": 235
+        "f1": 0.6455,
+        "fn": 315,
+        "fp": 75,
+        "tp": 355
       },
       "detection:topic": {
-        "f1": 0.6276,
-        "fn": 634,
-        "fp": 97,
-        "tp": 616
+        "f1": 0.6263,
+        "fn": 994,
+        "fp": 135,
+        "tp": 946
       },
       "product": {
-        "f1": 0.7546,
-        "fn": 80,
+        "f1": 0.7579,
+        "fn": 127,
+        "fp": 18,
+        "tp": 227
+      }
+    },
+    "opus-r2|sonnet-r1": {
+      "claim": {
+        "f1": 0.5792,
+        "fn": 1029,
+        "fp": 103,
+        "tp": 779
+      },
+      "detection:evidence": {
+        "f1": 0.5902,
+        "fn": 386,
+        "fp": 50,
+        "tp": 314
+      },
+      "detection:frame": {
+        "f1": 0.6458,
+        "fn": 361,
+        "fp": 47,
+        "tp": 372
+      },
+      "detection:topic": {
+        "f1": 0.5992,
+        "fn": 1096,
+        "fp": 139,
+        "tp": 923
+      },
+      "product": {
+        "f1": 0.7487,
+        "fn": 136,
         "fp": 13,
-        "tp": 143
+        "tp": 222
+      }
+    },
+    "opus-r2|sonnet-r2": {
+      "claim": {
+        "f1": 0.6105,
+        "fn": 974,
+        "fp": 90,
+        "tp": 834
+      },
+      "detection:evidence": {
+        "f1": 0.6052,
+        "fn": 375,
+        "fp": 49,
+        "tp": 325
+      },
+      "detection:frame": {
+        "f1": 0.6363,
+        "fn": 363,
+        "fp": 60,
+        "tp": 370
+      },
+      "detection:topic": {
+        "f1": 0.6071,
+        "fn": 1078,
+        "fp": 140,
+        "tp": 941
+      },
+      "product": {
+        "f1": 0.7728,
+        "fn": 125,
+        "fp": 12,
+        "tp": 233
       }
     },
     "sonnet-r1|sonnet-r2": {
       "claim": {
-        "f1": 0.7271,
-        "fn": 153,
-        "fp": 178,
-        "tp": 441
+        "f1": 0.7143,
+        "fn": 237,
+        "fp": 279,
+        "tp": 645
       },
       "detection:evidence": {
-        "f1": 0.6447,
-        "fn": 88,
-        "fp": 95,
-        "tp": 166
+        "f1": 0.6504,
+        "fn": 124,
+        "fp": 134,
+        "tp": 240
       },
       "detection:frame": {
-        "f1": 0.7199,
-        "fn": 79,
-        "fp": 79,
-        "tp": 203
+        "f1": 0.7067,
+        "fn": 119,
+        "fp": 130,
+        "tp": 300
       },
       "detection:topic": {
-        "f1": 0.6844,
-        "fn": 227,
-        "fp": 224,
-        "tp": 489
+        "f1": 0.7009,
+        "fn": 311,
+        "fp": 330,
+        "tp": 751
       },
       "product": {
-        "f1": 0.8673,
-        "fn": 19,
-        "fp": 22,
-        "tp": 134
+        "f1": 0.8792,
+        "fn": 24,
+        "fp": 34,
+        "tp": 211
       }
     }
   },
   "repair_delta_per_annotator": {
     "opus-r1": {
+      "detections": 0,
+      "product_mentions": 0,
+      "verification_candidates": 0
+    },
+    "opus-r2": {
       "detections": 0,
       "product_mentions": 0,
       "verification_candidates": 0
@@ -917,23 +2063,8 @@
         "verdict": "missing"
       }
     ],
-    "ok": 57,
+    "ok": 59,
     "singleton": [
-      {
-        "attribute_mismatches": {},
-        "found": true,
-        "item_id": "s-ad-read-delimited",
-        "kind": "detection",
-        "label": "topic:food_nutrition",
-        "ok": false,
-        "span": [
-          "u000017",
-          "u000025"
-        ],
-        "support": 0.3333,
-        "tier": "acceptable",
-        "verdict": "singleton"
-      },
       {
         "attribute_mismatches": {},
         "found": true,
@@ -945,53 +2076,7 @@
           "u000040",
           "u000040"
         ],
-        "support": 0.3333,
-        "tier": "acceptable",
-        "verdict": "singleton"
-      },
-      {
-        "attribute_mismatches": {
-          "discourse_role": {
-            "planted": "asserted_or_endorsed",
-            "plurality": "reported_or_quoted",
-            "votes": {
-              "reported_or_quoted": 1
-            }
-          }
-        },
-        "found": true,
-        "item_id": "s-citation-mundane",
-        "kind": "detection",
-        "label": "cross_cutting:scientific_study_citation",
-        "ok": false,
-        "span": [
-          "u000025",
-          "u000025"
-        ],
-        "support": 0.3333,
-        "tier": "acceptable",
-        "verdict": "singleton"
-      },
-      {
-        "attribute_mismatches": {
-          "discourse_role": {
-            "planted": "questioned",
-            "plurality": "asserted_or_endorsed",
-            "votes": {
-              "asserted_or_endorsed": 1
-            }
-          }
-        },
-        "found": true,
-        "item_id": "s-discourse-questioned",
-        "kind": "detection",
-        "label": "topic:wearables_self_tracking_digital_health",
-        "ok": false,
-        "span": [
-          "u000020",
-          "u000021"
-        ],
-        "support": 0.3333,
+        "support": 0.25,
         "tier": "acceptable",
         "verdict": "singleton"
       }
@@ -1004,7 +2089,7 @@
             "plurality": "recommended",
             "votes": {
               "neutral": 1,
-              "recommended": 2
+              "recommended": 3
             }
           }
         },
@@ -1027,7 +2112,7 @@
             "planted": "unhedged",
             "plurality": "hedged",
             "votes": {
-              "hedged": 2,
+              "hedged": 3,
               "unhedged": 1
             }
           }
@@ -1047,68 +2132,12 @@
       },
       {
         "attribute_mismatches": {
-          "discourse_role": {
-            "planted": "asserted_or_endorsed",
-            "plurality": "questioned",
-            "votes": {
-              "asserted_or_endorsed": 1,
-              "questioned": 2
-            }
-          }
-        },
-        "found": true,
-        "item_id": "s-certainty-speculative",
-        "kind": "detection",
-        "label": "topic:brain_cognition_productivity",
-        "ok": false,
-        "span": [
-          "u000021",
-          "u000052"
-        ],
-        "support": 1.0,
-        "tier": "required",
-        "verdict": "split"
-      },
-      {
-        "attribute_mismatches": {
-          "discourse_role": {
-            "planted": "asserted_or_endorsed",
-            "plurality": "questioned",
-            "votes": {
-              "asserted_or_endorsed": 1,
-              "questioned": 2
-            }
-          }
-        },
-        "found": true,
-        "item_id": "s-certainty-speculative",
-        "kind": "detection",
-        "label": "topic:food_nutrition",
-        "ok": false,
-        "span": [
-          "u000021",
-          "u000052"
-        ],
-        "support": 1.0,
-        "tier": "required",
-        "verdict": "split"
-      },
-      {
-        "attribute_mismatches": {
           "claim_type": {
             "planted": "causal",
             "plurality": "mechanism",
             "votes": {
               "causal": 1,
-              "mechanism": 2
-            }
-          },
-          "discourse_role": {
-            "planted": "asserted_or_endorsed",
-            "plurality": "questioned",
-            "votes": {
-              "asserted_or_endorsed": 1,
-              "questioned": 2
+              "mechanism": 3
             }
           }
         },
@@ -1128,22 +2157,116 @@
       {
         "attribute_mismatches": {
           "discourse_role": {
-            "planted": "asserted_or_endorsed",
-            "plurality": "reported_or_quoted",
+            "planted": "questioned",
+            "plurality": "asserted_or_endorsed",
             "votes": {
-              "asserted_or_endorsed": 1,
-              "reported_or_quoted": 2
+              "asserted_or_endorsed": 2
+            }
+          },
+          "relevance": {
+            "planted": "substantive",
+            "plurality": "passing",
+            "votes": {
+              "passing": 1,
+              "substantive": 1
             }
           }
         },
         "found": true,
-        "item_id": "s-topic-boundary-maha",
+        "item_id": "s-discourse-questioned",
+        "kind": "detection",
+        "label": "topic:wearables_self_tracking_digital_health",
+        "ok": false,
+        "span": [
+          "u000020",
+          "u000021"
+        ],
+        "support": 0.5,
+        "tier": "required",
+        "verdict": "split"
+      },
+      {
+        "attribute_mismatches": {
+          "claim_type": {
+            "planted": "mechanism",
+            "plurality": "causal",
+            "votes": {
+              "causal": 2,
+              "risk_or_safety": 2
+            }
+          },
+          "discourse_role": {
+            "planted": "asserted_or_endorsed",
+            "plurality": "rebutted",
+            "votes": {
+              "asserted_or_endorsed": 1,
+              "rebutted": 3
+            }
+          },
+          "expressed_certainty": {
+            "planted": "unhedged",
+            "plurality": "absolute",
+            "votes": {
+              "absolute": 4
+            }
+          }
+        },
+        "found": true,
+        "item_id": "s-discourse-rebutted",
         "kind": "claim",
         "label": null,
         "ok": false,
         "span": [
-          "u000007",
-          "u000007"
+          "u000021",
+          "u000021"
+        ],
+        "support": 1.0,
+        "tier": "required",
+        "verdict": "split"
+      },
+      {
+        "attribute_mismatches": {
+          "claim_type": {
+            "planted": "risk_or_safety",
+            "plurality": "causal",
+            "votes": {
+              "causal": 2,
+              "risk_or_safety": 2
+            }
+          }
+        },
+        "found": true,
+        "item_id": "s-discourse-reported",
+        "kind": "claim",
+        "label": null,
+        "ok": false,
+        "span": [
+          "u000019",
+          "u000019"
+        ],
+        "support": 1.0,
+        "tier": "required",
+        "verdict": "split"
+      },
+      {
+        "attribute_mismatches": {
+          "expressed_certainty": {
+            "planted": "unhedged",
+            "plurality": "hedged",
+            "votes": {
+              "hedged": 2,
+              "unhedged": 2
+            }
+          }
+        },
+        "found": true,
+        "item_id": "s-product-vs-generic",
+        "kind": "claim",
+        "label": null,
+        "ok": false,
+        "span": [
+          "u000017",
+          "u000017"
         ],
         "support": 1.0,
         "tier": "required",
@@ -1152,8 +2275,8 @@
     ]
   },
   "tiers": {
-    "acceptable": 1532,
-    "rejected": 90,
-    "required": 2248
+    "acceptable": 1572,
+    "rejected": 153,
+    "required": 5061
   }
 }

@@ -1,0 +1,727 @@
+{
+  "annotator_id": "opus-r2",
+  "benchmark_version": "v1",
+  "item_id": "c181805w0001",
+  "provenance": {
+    "bundle": "bundle_008",
+    "ingested_at": "2026-09-12T22:15:54.979785+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r2-opus-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "you can visit us at peteratia.md.com forward slash.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000006",
+        "summary": "Promo for the host's subscriber-only podcast feed with a subscribe URL."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "what you're not going to get on a standard blood test is any of the longevity genes",
+        "label_ids": [
+          "topic:longevity_anti_aging",
+          "topic:genetics_inheritance"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000011",
+        "summary": "Whether blood tests can predict lifespan, and longevity genes such as APOE and Lp(a)."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "Cardiovascular disease largely driven by three things: lipoproteins, inflammation, endothelial dysfunction.",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "Blood markers of cardiovascular risk: lipoproteins, inflammation markers, insulin, homocysteine and calcium scoring."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "What is this person's risk of neurodegenerative disease?",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000022",
+        "summary": "Risk of neurodegenerative disease named as one of three things to look for in blood."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "asymmetric dimethylarginine, or ADMA, and SDMA, which are inhibitors of nitric oxide synthase",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Mechanism vocabulary - lipoproteins, endothelial dysfunction, nitric oxide synthase - used to explain cardiovascular risk."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000035",
+        "evidence_quote": "James O'Keefe just recently was on a paper that looked at cardiovascular health in patients with type 1 diabetes",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "summary": "Cites a paper James O'Keefe co-authored on cardiovascular health in type 1 diabetes."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "the latest study I saw, which actually just was an editorial that came out two days ago, based on a study in one of the atherosclerosis journals",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000043",
+        "summary": "Cites a two-day-old editorial and an atherosclerosis-journal study about events at non-calcified lesions."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000054",
+        "evidence_quote": "On the cancer side, I think that's really, frankly, where blood gives us the least insight.",
+        "label_ids": [
+          "topic:cancer"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000046",
+        "summary": "What blood gives about cancer risk: liquid biopsies, mutations, inflammation and metabolic health."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "virtually every cancer is a result of a somatic mutation, not a germline mutation",
+        "label_ids": [
+          "topic:genetics_inheritance"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000051",
+        "summary": "Somatic versus germline mutation, and the limited use of genotype outside BRCA and Lynch."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000054",
+        "evidence_quote": "in cancer, it really comes down to understanding inflammation, which we've already addressed, and metabolic health",
+        "label_ids": [
+          "topic:inflammation_as_a_general_health_narrative",
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000053",
+        "summary": "Inflammation and metabolic health, including minimizing hyperinsulinemia, offered as what cancer comes down to."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000009",
+        "evidence_quote": "Welcome to the Qualies, a subscriber exclusive podcast.",
+        "mention_role": "own_product",
+        "product_name": "Qualies",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000001"
+      },
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000048",
+        "evidence_quote": "until companies like GRAIL have fully functioning liquid biopsies",
+        "mention_role": "neutral",
+        "product_name": "GRAIL",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000047"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The lower a person's Lp(a), the greater their chance of cardiovascular mortality.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "So the lower your LP little A, the greater your chance of cardiovascular mortality.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific directional relationship between a blood marker and cardiovascular mortality that outside evidence can check.",
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:genetics_inheritance"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A standard blood test does not report any of the longevity genes.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000015",
+        "evidence_quote": "what you're not going to get on a standard blood test is any of the longevity genes",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "What a standard blood panel measures is checkable against ordinary lab panels.",
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "topic_ids": [
+          "topic:longevity_anti_aging",
+          "topic:genetics_inheritance"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "largely"
+        ],
+        "claim_text": "Cardiovascular disease is largely driven by three things: lipoproteins, inflammation and endothelial dysfunction.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "Cardiovascular disease largely driven by three things: lipoproteins, inflammation, endothelial dysfunction.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A causal attribution of heart disease to three named mechanisms that the literature can be checked against.",
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Insulin is itself toxic to the endothelium at high levels.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "I include insulin here because I think that insulin is, in and of itself, actually toxic at high levels to the endothelium.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A physiological harm claim about high insulin that can be checked against endothelial research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000032",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Probably"
+        ],
+        "claim_text": "In a 40-year-old without extreme markers, blood tests give probably eighty to eighty-five percent of what is needed to assess cardiovascular risk, and blood is less informative in older patients.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "the younger you are, the more your blood tells me about your risk of cardiovascular disease.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A quantified claim about how much of cardiovascular risk blood testing captures by age.",
+        "relevance": "substantive",
+        "start_unit_id": "u000038",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "somewhat"
+        ],
+        "claim_text": "A coronary calcium score becomes less relevant as a patient gets older but can be somewhat helpful in a younger patient.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000042",
+        "evidence_quote": "Calcium score can be somewhat helpful in a younger patient, though.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A claim about the diagnostic usefulness of calcium scoring by age that can be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000041",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fifty percent of patients who had cardiovascular events had them at the site of non-calcified lesions.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "looking at fifty percent of patients that had that had events",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific statistic attributed to a published study, checkable against that literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000043",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "virtually every"
+        ],
+        "claim_text": "Virtually every cancer results from a somatic mutation rather than a germline mutation.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000051",
+        "evidence_quote": "virtually every cancer is a result of a somatic mutation, not a germline mutation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A near-universal claim about the origin of cancers that cancer genetics can check.",
+        "relevance": "substantive",
+        "start_unit_id": "u000051",
+        "topic_ids": [
+          "topic:cancer",
+          "topic:genetics_inheritance"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "doesn't really help"
+        ],
+        "claim_text": "Knowing your genotype does not really help for cancer risk, apart from a few outliers such as BRCA or Lynch.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "knowing your genotype doesn't really help, outside of a few outlier things like BRCA or Lynch.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A claim about the predictive value of genetic testing for cancer that evidence can check.",
+        "relevance": "substantive",
+        "start_unit_id": "u000052",
+        "topic_ids": [
+          "topic:genetics_inheritance",
+          "topic:cancer"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "ADMA and SDMA are inhibitors of nitric oxide synthase.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "asymmetric dimethylarginine, or ADMA, and SDMA, which are inhibitors of nitric oxide synthase",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A stated biochemical fact about two named markers that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000037",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_181805_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "you can visit us at peteratia.md.com forward slash",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000006",
+        "summary": "Promo for the host's subscriber-only podcast feed with a subscribe URL."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "what you're not going to get on a standard blood test is any of the longevity genes",
+        "label_ids": [
+          "topic:genetics_inheritance",
+          "topic:longevity_anti_aging"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000011",
+        "summary": "Whether blood tests can predict lifespan, and longevity genes such as APOE and Lp(a)."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "Cardiovascular disease largely driven by three things: lipoproteins, inflammation, endothelial dysfunction",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "Blood markers of cardiovascular risk: lipoproteins, inflammation markers, insulin, homocysteine and calcium scoring."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "What is this person's risk of neurodegenerative disease",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000022",
+        "summary": "Risk of neurodegenerative disease named as one of three things to look for in blood."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "asymmetric dimethylarginine, or ADMA, and SDMA, which are inhibitors of nitric oxide synthase",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Mechanism vocabulary - lipoproteins, endothelial dysfunction, nitric oxide synthase - used to explain cardiovascular risk."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000035",
+        "evidence_quote": "James O'Keefe just recently was on a paper that looked at cardiovascular health in patients with type 1 diabetes",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "summary": "Cites a paper James O'Keefe co-authored on cardiovascular health in type 1 diabetes."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "the latest study I saw, which actually just was an editorial that came out two days ago, based on a study in one of the atherosclerosis journals",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000043",
+        "summary": "Cites a two-day-old editorial and an atherosclerosis-journal study about events at non-calcified lesions."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000054",
+        "evidence_quote": "On the cancer side, I think that's really, frankly, where blood gives us the least insight",
+        "label_ids": [
+          "topic:cancer"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000046",
+        "summary": "What blood gives about cancer risk: liquid biopsies, mutations, inflammation and metabolic health."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "virtually every cancer is a result of a somatic mutation, not a germline mutation",
+        "label_ids": [
+          "topic:genetics_inheritance"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000051",
+        "summary": "Somatic versus germline mutation, and the limited use of genotype outside BRCA and Lynch."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000054",
+        "evidence_quote": "in cancer, it really comes down to understanding inflammation, which we've already addressed, and metabolic health",
+        "label_ids": [
+          "topic:cardiometabolic_health",
+          "topic:inflammation_as_a_general_health_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000053",
+        "summary": "Inflammation and metabolic health, including minimizing hyperinsulinemia, offered as what cancer comes down to."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000009",
+        "evidence_quote": "Welcome to the Qualies, a subscriber exclusive podcast",
+        "mention_role": "own_product",
+        "product_name": "Qualies",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000001"
+      },
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000048",
+        "evidence_quote": "until companies like GRAIL have fully functioning liquid biopsies",
+        "mention_role": "neutral",
+        "product_name": "GRAIL",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000047"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The lower a person's Lp(a), the greater their chance of cardiovascular mortality.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "So the lower your LP little A, the greater your chance of cardiovascular mortality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific directional relationship between a blood marker and cardiovascular mortality that outside evidence can check.",
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:genetics_inheritance"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A standard blood test does not report any of the longevity genes.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000015",
+        "evidence_quote": "what you're not going to get on a standard blood test is any of the longevity genes",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "What a standard blood panel measures is checkable against ordinary lab panels.",
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "topic_ids": [
+          "topic:genetics_inheritance",
+          "topic:longevity_anti_aging"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "largely"
+        ],
+        "claim_text": "Cardiovascular disease is largely driven by three things: lipoproteins, inflammation and endothelial dysfunction.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "Cardiovascular disease largely driven by three things: lipoproteins, inflammation, endothelial dysfunction",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A causal attribution of heart disease to three named mechanisms that the literature can be checked against.",
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Insulin is itself toxic to the endothelium at high levels.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "I include insulin here because I think that insulin is, in and of itself, actually toxic at high levels to the endothelium",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A physiological harm claim about high insulin that can be checked against endothelial research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000032",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Probably"
+        ],
+        "claim_text": "In a 40-year-old without extreme markers, blood tests give probably eighty to eighty-five percent of what is needed to assess cardiovascular risk, and blood is less informative in older patients.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "the younger you are, the more your blood tells me about your risk of cardiovascular disease",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A quantified claim about how much of cardiovascular risk blood testing captures by age.",
+        "relevance": "substantive",
+        "start_unit_id": "u000038",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "somewhat"
+        ],
+        "claim_text": "A coronary calcium score becomes less relevant as a patient gets older but can be somewhat helpful in a younger patient.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000042",
+        "evidence_quote": "Calcium score can be somewhat helpful in a younger patient, though",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A claim about the diagnostic usefulness of calcium scoring by age that can be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000041",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fifty percent of patients who had cardiovascular events had them at the site of non-calcified lesions.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "looking at fifty percent of patients that had that had events",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific statistic attributed to a published study, checkable against that literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000043",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "virtually every"
+        ],
+        "claim_text": "Virtually every cancer results from a somatic mutation rather than a germline mutation.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000051",
+        "evidence_quote": "virtually every cancer is a result of a somatic mutation, not a germline mutation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A near-universal claim about the origin of cancers that cancer genetics can check.",
+        "relevance": "substantive",
+        "start_unit_id": "u000051",
+        "topic_ids": [
+          "topic:cancer",
+          "topic:genetics_inheritance"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "doesn't really help"
+        ],
+        "claim_text": "Knowing your genotype does not really help for cancer risk, apart from a few outliers such as BRCA or Lynch.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "knowing your genotype doesn't really help, outside of a few outlier things like BRCA or Lynch",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A claim about the predictive value of genetic testing for cancer that evidence can check.",
+        "relevance": "substantive",
+        "start_unit_id": "u000052",
+        "topic_ids": [
+          "topic:cancer",
+          "topic:genetics_inheritance"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "ADMA and SDMA are inhibitors of nitric oxide synthase.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "asymmetric dimethylarginine, or ADMA, and SDMA, which are inhibitors of nitric oxide synthase",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A stated biochemical fact about two named markers that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000037",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_181805_window_0001"
+  },
+  "stored_at": "2026-09-12T22:15:54.979822+00:00"
+}

@@ -1,0 +1,266 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c96119w0008",
+  "provenance": {
+    "bundle": "bundle_008",
+    "ingested_at": "2026-09-12T23:16:54.551361+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000723",
+        "evidence_quote": "Nature Raised Farms is free from gluten, dairy, and soy.",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000720",
+        "summary": "Sponsor read claims Nature Raised Farms chicken is free of gluten, dairy, soy, seed oils and artificial ingredients, and states its fiber and fat content."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000721",
+        "evidence_quote": "no seed oils and no artificial ingredients",
+        "label_ids": [
+          "cross_cutting:naturalness_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000720",
+        "summary": "Ad recommends the chicken on the grounds that it is free of seed oils and artificial ingredients."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000728",
+        "evidence_quote": "This episode is sponsored by Nature Raised Farms.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000709",
+        "summary": "Delimited sponsor read for Nature Raised Farms chicken."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000735",
+        "evidence_quote": "it might be time to screen for colon cancer",
+        "label_ids": [
+          "topic:cancer"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000730",
+        "summary": "Sponsor read for the Cologuard at-home colon cancer screening test, describing eligibility and how it works."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000735",
+        "evidence_quote": "This message is brought to you by Colgard.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000729",
+        "summary": "Delimited sponsor read for the Cologuard test."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000728",
+        "evidence_quote": "This episode is sponsored by Nature Raised Farms.",
+        "mention_role": "advertised",
+        "product_name": "Nature Raised Farms",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000709"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000735",
+        "evidence_quote": "The ColiGuard test is non-invasive, requires no special prep or time off, and you start screening right from your home.",
+        "mention_role": "advertised",
+        "product_name": "Cologuard",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000729"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms chicken is a good source of fiber and contains between eight and twelve grams of fat per serving, depending on the product.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000723",
+        "evidence_quote": "Nature Raised Farms chicken is a good source of fiber and only Between eight to twelve grams of fat per serving, depending on the product.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific, checkable claim about the product's fiber and fat content per serving.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000722",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Cologuard colon cancer screening test is non-invasive, requires no special preparation or time off work, and can be started at home.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000731",
+        "evidence_quote": "The ColiGuard test is non-invasive, requires no special prep or time off, and you start screening right from your home.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Checkable claim about the screening test's invasiveness, preparation requirements, and at-home use.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000731",
+        "topic_ids": [
+          "topic:cancer"
+        ]
+      }
+    ],
+    "window_id": "episode_96119_window_0008"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000723",
+        "evidence_quote": "Nature Raised Farms is free from gluten, dairy, and soy",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000720",
+        "summary": "Sponsor read claims Nature Raised Farms chicken is free of gluten, dairy, soy, seed oils and artificial ingredients, and states its fiber and fat content."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000721",
+        "evidence_quote": "no seed oils and no artificial ingredients",
+        "label_ids": [
+          "cross_cutting:naturalness_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000720",
+        "summary": "Ad recommends the chicken on the grounds that it is free of seed oils and artificial ingredients."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000728",
+        "evidence_quote": "This episode is sponsored by Nature Raised Farms",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000709",
+        "summary": "Delimited sponsor read for Nature Raised Farms chicken."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000735",
+        "evidence_quote": "it might be time to screen for colon cancer",
+        "label_ids": [
+          "topic:cancer"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000730",
+        "summary": "Sponsor read for the Cologuard at-home colon cancer screening test, describing eligibility and how it works."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000735",
+        "evidence_quote": "This message is brought to you by Colgard",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000729",
+        "summary": "Delimited sponsor read for the Cologuard test."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000728",
+        "evidence_quote": "This episode is sponsored by Nature Raised Farms",
+        "mention_role": "advertised",
+        "product_name": "Nature Raised Farms",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000709"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000735",
+        "evidence_quote": "The ColiGuard test is non-invasive, requires no special prep or time off, and you start screening right from your home",
+        "mention_role": "advertised",
+        "product_name": "Cologuard",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000729"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms chicken is a good source of fiber and contains between eight and twelve grams of fat per serving, depending on the product.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000723",
+        "evidence_quote": "Nature Raised Farms chicken is a good source of fiber and only. Between eight to twelve grams of fat per serving, depending on the product",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific, checkable claim about the product's fiber and fat content per serving.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000722",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Cologuard colon cancer screening test is non-invasive, requires no special preparation or time off work, and can be started at home.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000731",
+        "evidence_quote": "The ColiGuard test is non-invasive, requires no special prep or time off, and you start screening right from your home",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Checkable claim about the screening test's invasiveness, preparation requirements, and at-home use.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000731",
+        "topic_ids": [
+          "topic:cancer"
+        ]
+      }
+    ],
+    "window_id": "episode_96119_window_0008"
+  },
+  "stored_at": "2026-09-12T23:16:54.551394+00:00"
+}

@@ -1,0 +1,167 @@
+{
+  "annotator_id": "opus-r2",
+  "benchmark_version": "v1",
+  "item_id": "c321803w0028",
+  "provenance": {
+    "bundle": "bundle_030",
+    "ingested_at": "2026-09-12T22:15:56.144799+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r2-opus-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003216",
+        "evidence_quote": "Pussy, which is a guaranteed yeast infection.",
+        "label_ids": [
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u003211",
+        "summary": "Claim that a performer's back-to-front wiping motion causes a yeast infection, discussed as unsanitary."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u003271",
+        "evidence_quote": "So, what was that pictures with all them bumps on your shit?",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003256",
+        "summary": "Joking exchange about pictures showing bumps on a co-host's genitals."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003278",
+        "evidence_quote": "she rather say you have an STD?",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003278",
+        "summary": "Aside about a jealous partner falsely claiming someone has an STD."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003351",
+        "evidence_quote": "my whole life I thought it was just size dependent, but now I know that there's a skill to sex",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003283",
+        "summary": "Comedic banter rating sexual performance and penis size."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "guaranteed"
+        ],
+        "claim_text": "Wiping from the anus forward through the vulva guarantees a yeast infection.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003215",
+        "evidence_quote": "Pussy, which is a guaranteed yeast infection.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A specific causal claim about how a hygiene practice produces vaginal infection that a listener could act on.",
+        "relevance": "substantive",
+        "start_unit_id": "u003211",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      }
+    ],
+    "window_id": "episode_321803_window_0028"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003216",
+        "evidence_quote": "Pussy, which is a guaranteed yeast infection",
+        "label_ids": [
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u003211",
+        "summary": "Claim that a performer's back-to-front wiping motion causes a yeast infection, discussed as unsanitary."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u003271",
+        "evidence_quote": "So, what was that pictures with all them bumps on your shit",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003256",
+        "summary": "Joking exchange about pictures showing bumps on a co-host's genitals."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003278",
+        "evidence_quote": "she rather say you have an STD",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003278",
+        "summary": "Aside about a jealous partner falsely claiming someone has an STD."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003351",
+        "evidence_quote": "my whole life I thought it was just size dependent, but now I know that there's a skill to sex",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003283",
+        "summary": "Comedic banter rating sexual performance and penis size."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "guaranteed"
+        ],
+        "claim_text": "Wiping from the anus forward through the vulva guarantees a yeast infection.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003215",
+        "evidence_quote": "Pussy, which is a guaranteed yeast infection",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A specific causal claim about how a hygiene practice produces vaginal infection that a listener could act on.",
+        "relevance": "substantive",
+        "start_unit_id": "u003211",
+        "topic_ids": [
+          "topic:womens_health_female_hormones"
+        ]
+      }
+    ],
+    "window_id": "episode_321803_window_0028"
+  },
+  "stored_at": "2026-09-12T22:15:56.144821+00:00"
+}

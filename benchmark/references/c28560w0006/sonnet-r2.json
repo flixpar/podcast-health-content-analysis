@@ -1,0 +1,387 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c28560w0006",
+  "provenance": {
+    "bundle": "bundle_008",
+    "ingested_at": "2026-09-12T23:30:31.225670+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000219",
+        "evidence_quote": "at least 93.2% of American adults have at least one biomarker of metabolic dysfunction, some signal that this process is not going perfectly",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000218",
+        "summary": "Claim that a large majority of American adults have at least one biomarker of metabolic dysfunction."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000219",
+        "evidence_quote": "that is research that came out a couple years ago",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000218",
+        "summary": "The 93.2% metabolic dysfunction statistic is attributed to research published a couple of years earlier."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "there is likely a metabolic problem, an underpowering mitochondrial dysfunction",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000220",
+        "summary": "Analogy of underpowered cells as factories, with a claim that mitochondrial/metabolic dysfunction underlies numerous seemingly unrelated diseases across different cell types."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "an underpowering mitochondrial dysfunction",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000223",
+        "summary": "Mitochondrial and cellular mechanism language is used to explain how metabolic dysfunction produces diverse disease symptoms."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000245",
+        "evidence_quote": "the eighty thousand plus synthetic chemicals that are now created in factories that live in our food, water, air, personal care products",
+        "label_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000233",
+        "summary": "Modern industrialization and eighty-thousand-plus synthetic chemicals in food, water, air and personal-care products are blamed for harming mitochondria."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000236",
+        "evidence_quote": "the eighty thousand plus synthetic chemicals that are now created in factories",
+        "label_ids": [
+          "cross_cutting:maha_environmental_vocabulary"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000236",
+        "summary": "Synthetic chemical exposure is invoked in a chronic-disease-driver framing typical of MAHA-adjacent rhetoric."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000266",
+        "evidence_quote": "we have to fix the metabolic dysfunction",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000246",
+        "summary": "Claim that a shared metabolic and mitochondrial dysfunction underlies the modern chronic disease epidemic (cancer, heart disease, diabetes, depression, etc.) and must be fixed to restore health, described in quasi-spiritual terms as 'life force.'"
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000266",
+        "evidence_quote": "We have to fix this for our bodies.",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000254",
+        "summary": "Fixing the underlying metabolic/mitochondrial dysfunction is framed as the root-cause solution to both bodily and societal problems."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "At least 93.2% of American adults have at least one biomarker of metabolic dysfunction.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000219",
+        "evidence_quote": "at least 93.2% of American adults have at least one biomarker of metabolic dysfunction",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific prevalence statistic attributed to research that should be checked against the source study.",
+        "relevance": "substantive",
+        "start_unit_id": "u000218",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "likely"
+        ],
+        "claim_text": "Recent research shows that a wide range of seemingly unrelated chronic diseases each involve an underlying mitochondrial/metabolic dysfunction at the cellular level.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "what we know now from the most recent research is that actually, in each of those cells, there is likely a metabolic problem, an underpowering mitochondrial dysfunction",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language",
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Broad claim that diverse chronic diseases share a common mitochondrial mechanism, attributed to recent research and worth checking against the primary literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "More than eighty thousand synthetic chemicals are now created in factories and are present in food, water, air, and personal care products.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000236",
+        "evidence_quote": "the eighty thousand plus synthetic chemicals that are now created in factories that live in our food, water, air, personal care products",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric claim about synthetic chemical proliferation that can be checked against chemical registry data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000236",
+        "topic_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Modern environmental and lifestyle changes uniquely damage mitochondria, which is why so many Americans currently have metabolic dysfunction.",
+        "claim_type": "causal",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000245",
+        "evidence_quote": "all of those different vectors uniquely hurt our mitochondria, and that is why so many Americans have metabolic dysfunction right now",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Broad causal claim attributing widespread metabolic dysfunction to modern exposures, checkable against epidemiological evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000245",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:environmental_health_chemical_exposures"
+        ]
+      }
+    ],
+    "window_id": "episode_28560_window_0006"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000219",
+        "evidence_quote": "at least 93.2% of American adults have at least one biomarker of metabolic dysfunction, some signal that this process is not going perfectly",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000218",
+        "summary": "Claim that a large majority of American adults have at least one biomarker of metabolic dysfunction."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000219",
+        "evidence_quote": "that is research that came out a couple years ago",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000218",
+        "summary": "The 93.2% metabolic dysfunction statistic is attributed to research published a couple of years earlier."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "there is likely a metabolic problem, an underpowering mitochondrial dysfunction",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000220",
+        "summary": "Analogy of underpowered cells as factories, with a claim that mitochondrial/metabolic dysfunction underlies numerous seemingly unrelated diseases across different cell types."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "an underpowering mitochondrial dysfunction",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000223",
+        "summary": "Mitochondrial and cellular mechanism language is used to explain how metabolic dysfunction produces diverse disease symptoms."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000245",
+        "evidence_quote": "the eighty thousand plus synthetic chemicals that are now created in factories that live in our food, water, air, personal care products",
+        "label_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000233",
+        "summary": "Modern industrialization and eighty-thousand-plus synthetic chemicals in food, water, air and personal-care products are blamed for harming mitochondria."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000236",
+        "evidence_quote": "the eighty thousand plus synthetic chemicals that are now created in factories",
+        "label_ids": [
+          "cross_cutting:maha_environmental_vocabulary"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000236",
+        "summary": "Synthetic chemical exposure is invoked in a chronic-disease-driver framing typical of MAHA-adjacent rhetoric."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000266",
+        "evidence_quote": "we have to fix the metabolic dysfunction",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000246",
+        "summary": "Claim that a shared metabolic and mitochondrial dysfunction underlies the modern chronic disease epidemic (cancer, heart disease, diabetes, depression, etc.) and must be fixed to restore health, described in quasi-spiritual terms as 'life force.'"
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000266",
+        "evidence_quote": "We have to fix this for our bodies",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000254",
+        "summary": "Fixing the underlying metabolic/mitochondrial dysfunction is framed as the root-cause solution to both bodily and societal problems."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "At least 93.2% of American adults have at least one biomarker of metabolic dysfunction.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000219",
+        "evidence_quote": "at least 93.2% of American adults have at least one biomarker of metabolic dysfunction",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific prevalence statistic attributed to research that should be checked against the source study.",
+        "relevance": "substantive",
+        "start_unit_id": "u000218",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "likely"
+        ],
+        "claim_text": "Recent research shows that a wide range of seemingly unrelated chronic diseases each involve an underlying mitochondrial/metabolic dysfunction at the cellular level.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "what we know now from the most recent research is that actually, in each of those cells, there is likely a metabolic problem, an underpowering mitochondrial dysfunction",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language",
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Broad claim that diverse chronic diseases share a common mitochondrial mechanism, attributed to recent research and worth checking against the primary literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "More than eighty thousand synthetic chemicals are now created in factories and are present in food, water, air, and personal care products.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000236",
+        "evidence_quote": "the eighty thousand plus synthetic chemicals that are now created in factories that live in our food, water, air, personal care products",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric claim about synthetic chemical proliferation that can be checked against chemical registry data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000236",
+        "topic_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Modern environmental and lifestyle changes uniquely damage mitochondria, which is why so many Americans currently have metabolic dysfunction.",
+        "claim_type": "causal",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000245",
+        "evidence_quote": "all of those different vectors uniquely hurt our mitochondria, and that is why so many Americans have metabolic dysfunction right now",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Broad causal claim attributing widespread metabolic dysfunction to modern exposures, checkable against epidemiological evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000245",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:environmental_health_chemical_exposures"
+        ]
+      }
+    ],
+    "window_id": "episode_28560_window_0006"
+  },
+  "stored_at": "2026-09-12T23:30:31.225707+00:00"
+}

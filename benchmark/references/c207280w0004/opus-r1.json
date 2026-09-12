@@ -1,0 +1,162 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c207280w0004",
+  "provenance": {
+    "bundle": "bundle_008",
+    "ingested_at": "2026-09-12T23:09:29.221184+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000179",
+        "evidence_quote": "Switch from juicy, delicious, nutritious meat to you know something called lentils or veggie patties or even worse, bugs.",
+        "label_ids": [
+          "topic:diet_tribes_food_ideologies",
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "summary": "Host argues against a supposed war on meat and against replacing meat with lentils, veggie patties or insects."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000192",
+        "evidence_quote": "So please don't let the vegans and bug eaters win.",
+        "label_ids": [
+          "topic:food_nutrition",
+          "topic:diet_tribes_food_ideologies"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000180",
+        "summary": "Sponsor read urging listeners to eat more meat and buy beef rather than side with vegans and bug eaters."
+      },
+      {
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000192",
+        "evidence_quote": "For a limited time, Good Ranchers is offering two pounds of free American Wagyu beef when you go to GoodRanchers.com/WalshEnter.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000180",
+        "summary": "Delimited sponsor read with a promo code and free-beef offer for Good Ranchers."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000192",
+        "evidence_quote": "I'm inviting you to join me as well with Good Ranchers.",
+        "mention_role": "advertised",
+        "product_name": "Good Ranchers",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000180"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Outlets such as Time Magazine say that eating bugs is the solution to all of your problems.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000172",
+        "evidence_quote": "Outlets like Time Magazine tell us eating bugs is is the solution to all of your problems.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "What a named magazine actually said about eating insects as food can be checked against its coverage.",
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      }
+    ],
+    "window_id": "episode_207280_window_0004"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000179",
+        "evidence_quote": "Switch from juicy, delicious, nutritious meat to you know something called lentils or veggie patties or even worse, bugs",
+        "label_ids": [
+          "topic:diet_tribes_food_ideologies",
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "summary": "Host argues against a supposed war on meat and against replacing meat with lentils, veggie patties or insects."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000192",
+        "evidence_quote": "So please don't let the vegans and bug eaters win",
+        "label_ids": [
+          "topic:diet_tribes_food_ideologies",
+          "topic:food_nutrition"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000180",
+        "summary": "Sponsor read urging listeners to eat more meat and buy beef rather than side with vegans and bug eaters."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000192",
+        "evidence_quote": "For a limited time, Good Ranchers is offering two pounds of free American Wagyu beef when you go to GoodRanchers.com/WalshEnter",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000180",
+        "summary": "Delimited sponsor read with a promo code and free-beef offer for Good Ranchers."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000192",
+        "evidence_quote": "I'm inviting you to join me as well with Good Ranchers",
+        "mention_role": "advertised",
+        "product_name": "Good Ranchers",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000180"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Outlets such as Time Magazine say that eating bugs is the solution to all of your problems.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000172",
+        "evidence_quote": "Outlets like Time Magazine tell us eating bugs is is the solution to all of your problems",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "What a named magazine actually said about eating insects as food can be checked against its coverage.",
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      }
+    ],
+    "window_id": "episode_207280_window_0004"
+  },
+  "stored_at": "2026-09-12T23:09:29.221219+00:00"
+}

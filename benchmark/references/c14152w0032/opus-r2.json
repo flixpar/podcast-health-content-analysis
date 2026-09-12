@@ -1,0 +1,466 @@
+{
+  "annotator_id": "opus-r2",
+  "benchmark_version": "v1",
+  "item_id": "c14152w0032",
+  "provenance": {
+    "bundle": "bundle_008",
+    "ingested_at": "2026-09-12T23:15:38.716539+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002377",
+        "evidence_quote": "in vaccinating people and preventing illness, the health benefits to the economy overall has a a tremendous impact in a positive manner",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002362",
+        "summary": "Hosts relay what Bill Gates said about vaccination preventing illness and benefiting economies."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002366",
+        "evidence_quote": "Talking about it from this profiteering, like vulture perspective.",
+        "label_ids": [
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002365",
+        "summary": "The profiteering reading of Gates's vaccine investment is named and rejected."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002375",
+        "evidence_quote": "and it's really disingenuously edited.",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002368",
+        "summary": "Hosts correct a circulating clip, saying it was disingenuously edited."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002403",
+        "evidence_quote": "You've invested $10 billion in vaccinations over the last two decades, and you figured out the return on investment for that",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002393",
+        "summary": "The edited clip plays, with Gates describing the return on investment from vaccination spending."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002414",
+        "evidence_quote": "This is the distorted version. You could see in there that it's edited.",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002405",
+        "summary": "Host identifies the first clip as the distorted version and calls for the real one."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002434",
+        "evidence_quote": "You literally save millions of lives.",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002411",
+        "summary": "The unedited clip plays, with Gates on cheap vaccines, lives saved and returns on global health spending."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002428",
+        "evidence_quote": "let's not forget about the great success in global health and maintaining that commitment",
+        "label_ids": [
+          "topic:public_health_policy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002417",
+        "summary": "Global health funding bodies, replenishments and political commitment to them are discussed in the clip."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002420",
+        "evidence_quote": "Global Fund for HIV, TB, and malaria",
+        "label_ids": [
+          "topic:infectious_disease_outbreaks"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002420",
+        "summary": "HIV, TB and malaria are named as the diseases a global fund was created for."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002441",
+        "evidence_quote": "there's this weird conspiracy that Bill Gates is some. Fucking demon that just wants to make money off of vaccines",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002436",
+        "summary": "The claim that Gates pushes vaccines to make money is restated and rejected."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002439",
+        "evidence_quote": "See, that's what he really said.",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002436",
+        "summary": "Host contrasts the real quote with the edited version being passed around."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002441",
+        "evidence_quote": "There's this weird narrative, there's this weird meme, there's this weird conspiracy",
+        "label_ids": [
+          "cross_cutting:conspiracy_cover_up",
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002437",
+        "summary": "The Bill Gates vaccine-profiteering conspiracy narrative is described and dismissed."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Vaccinating people and preventing illness has a large positive impact on economies overall, including in developing countries.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002362",
+        "evidence_quote": "in vaccinating people and preventing illness, the health benefits to the economy overall has a a tremendous impact in a positive manner",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "An economic claim about the benefits of vaccination that can be checked against health-economics evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u002362",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "literally"
+        ],
+        "claim_text": "Making vaccines inexpensive and delivering them widely saves millions of lives.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002419",
+        "evidence_quote": "You literally save millions of lives.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A quantified claim about lives saved by vaccination programmes that can be checked against published estimates.",
+        "relevance": "substantive",
+        "start_unit_id": "u002419",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "we feel"
+        ],
+        "claim_text": "About $100 billion has been invested in vaccination worldwide, of which the Gates Foundation put in more than $10 billion, with over a twenty-to-one return.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002425",
+        "evidence_quote": "It's been a hundred billion overall that the world's put in. Our foundation is a bit more than ten billion, but we feel there's been over a twenty-to-one return.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific investment and return-on-investment figures for global vaccination that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u002424",
+        "topic_ids": [
+          "topic:vaccines_immunization",
+          "topic:public_health_policy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Clearly"
+        ],
+        "claim_text": "The circulating video in which Bill Gates appears to say he funds vaccines to make money is a deceptive edit of what he actually said.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002439",
+        "evidence_quote": "And you know, people have edited that and they're passing it around",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "A checkable claim about whether a widely shared vaccine clip was deceptively edited.",
+        "relevance": "substantive",
+        "start_unit_id": "u002436",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      }
+    ],
+    "window_id": "episode_14152_window_0032"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002377",
+        "evidence_quote": "in vaccinating people and preventing illness, the health benefits to the economy overall has a a tremendous impact in a positive manner",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002362",
+        "summary": "Hosts relay what Bill Gates said about vaccination preventing illness and benefiting economies."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002366",
+        "evidence_quote": "Talking about it from this profiteering, like vulture perspective",
+        "label_ids": [
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002365",
+        "summary": "The profiteering reading of Gates's vaccine investment is named and rejected."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002375",
+        "evidence_quote": "and it's really disingenuously edited",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002368",
+        "summary": "Hosts correct a circulating clip, saying it was disingenuously edited."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002403",
+        "evidence_quote": "You've invested $10 billion in vaccinations over the last two decades, and you figured out the return on investment for that",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002393",
+        "summary": "The edited clip plays, with Gates describing the return on investment from vaccination spending."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002414",
+        "evidence_quote": "This is the distorted version. You could see in there that it's edited",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002405",
+        "summary": "Host identifies the first clip as the distorted version and calls for the real one."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002434",
+        "evidence_quote": "You literally save millions of lives",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002411",
+        "summary": "The unedited clip plays, with Gates on cheap vaccines, lives saved and returns on global health spending."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002428",
+        "evidence_quote": "let's not forget about the great success in global health and maintaining that commitment",
+        "label_ids": [
+          "topic:public_health_policy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002417",
+        "summary": "Global health funding bodies, replenishments and political commitment to them are discussed in the clip."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002420",
+        "evidence_quote": "Global Fund for HIV, TB, and malaria",
+        "label_ids": [
+          "topic:infectious_disease_outbreaks"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002420",
+        "summary": "HIV, TB and malaria are named as the diseases a global fund was created for."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002441",
+        "evidence_quote": "there's this weird conspiracy that Bill Gates is some. Fucking demon that just wants to make money off of vaccines",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002436",
+        "summary": "The claim that Gates pushes vaccines to make money is restated and rejected."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002439",
+        "evidence_quote": "See, that's what he really said",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002436",
+        "summary": "Host contrasts the real quote with the edited version being passed around."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002441",
+        "evidence_quote": "There's this weird narrative, there's this weird meme, there's this weird conspiracy",
+        "label_ids": [
+          "cross_cutting:conflict_of_interest_framing",
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002437",
+        "summary": "The Bill Gates vaccine-profiteering conspiracy narrative is described and dismissed."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Vaccinating people and preventing illness has a large positive impact on economies overall, including in developing countries.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002362",
+        "evidence_quote": "in vaccinating people and preventing illness, the health benefits to the economy overall has a a tremendous impact in a positive manner",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "An economic claim about the benefits of vaccination that can be checked against health-economics evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u002362",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "literally"
+        ],
+        "claim_text": "Making vaccines inexpensive and delivering them widely saves millions of lives.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002419",
+        "evidence_quote": "You literally save millions of lives",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A quantified claim about lives saved by vaccination programmes that can be checked against published estimates.",
+        "relevance": "substantive",
+        "start_unit_id": "u002419",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "we feel"
+        ],
+        "claim_text": "About $100 billion has been invested in vaccination worldwide, of which the Gates Foundation put in more than $10 billion, with over a twenty-to-one return.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002425",
+        "evidence_quote": "It's been a hundred billion overall that the world's put in. Our foundation is a bit more than ten billion, but we feel there's been over a twenty-to-one return",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific investment and return-on-investment figures for global vaccination that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u002424",
+        "topic_ids": [
+          "topic:public_health_policy",
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Clearly"
+        ],
+        "claim_text": "The circulating video in which Bill Gates appears to say he funds vaccines to make money is a deceptive edit of what he actually said.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002439",
+        "evidence_quote": "And you know, people have edited that and they're passing it around",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "A checkable claim about whether a widely shared vaccine clip was deceptively edited.",
+        "relevance": "substantive",
+        "start_unit_id": "u002436",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      }
+    ],
+    "window_id": "episode_14152_window_0032"
+  },
+  "stored_at": "2026-09-12T23:15:38.716581+00:00"
+}

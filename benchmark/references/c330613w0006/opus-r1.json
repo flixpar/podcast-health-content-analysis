@@ -1,0 +1,376 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c330613w0006",
+  "provenance": {
+    "bundle": "bundle_010",
+    "ingested_at": "2026-09-12T23:09:29.432225+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000246",
+        "evidence_quote": "He will testify again before the United States Senate two different committees",
+        "label_ids": [
+          "topic:public_health_policy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000242",
+        "summary": "The hosts report RFK Jr's Senate confirmation testimony for the health department and the attacks on his past statements."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000249",
+        "evidence_quote": "basically laid out the Make America Healthy Again movement",
+        "label_ids": [
+          "topic:maha_root_cause_health_politics"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000247",
+        "summary": "The host says the nominee's opening statement laid out the Make America Healthy Again movement."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000252",
+        "evidence_quote": "Over seventy percent of adults and a third of children are overweight or obese.",
+        "label_ids": [
+          "topic:weight_loss_metabolic_health",
+          "topic:childrens_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000250",
+        "summary": "The nominee cites overweight and obesity rates among adults and children as evidence of poor national health."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000253",
+        "evidence_quote": "Cancer among young people is rising by one or two percent a year.",
+        "label_ids": [
+          "topic:cancer"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000253",
+        "summary": "Cancer in young people is said to be rising one or two percent a year."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000254",
+        "evidence_quote": "Autoimmune diseases, neurodevelopmental disorders, Alzheimer's, asthma, ADHD, depression, addiction, and a host of other physical and mental health conditions are all on the rise",
+        "label_ids": [
+          "topic:autoimmune_immune_health",
+          "topic:neurodevelopment_autism_discourse",
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:mental_health",
+          "topic:substance_use_addiction_harm_reduction"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000254",
+        "summary": "A list of conditions - autoimmune disease, neurodevelopmental disorders, Alzheimer's, asthma, ADHD, depression and addiction - is said to be rising."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000257",
+        "evidence_quote": "There is no single culprint in chronic disease.",
+        "label_ids": [
+          "topic:maha_root_cause_health_politics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000250",
+        "summary": "The nominee frames a national chronic-disease crisis with no single culprit and promises to unite stakeholders behind it."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000257",
+        "evidence_quote": "Today, American's overall health is in grievous condition.",
+        "label_ids": [
+          "cross_cutting:maha_official_core_vocabulary"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000250",
+        "summary": "The movement's own chronic-disease-crisis framing is used in the opening statement."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000261",
+        "evidence_quote": "News reports have claimed that I am anti vaccine or any industry.",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "summary": "The nominee rejects reports that he is anti-vaccine and says he is pro-safety and pro-vaccine."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000269",
+        "evidence_quote": "Let's get then to what he referenced their vaccine statements.",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000265",
+        "summary": "The hosts introduce the senators' questioning of the nominee's past vaccine statements."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Over seventy percent of American adults and a third of American children are overweight or obese.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000251",
+        "evidence_quote": "Over seventy percent of adults and a third of children are overweight or obese.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific prevalence figure for adults and children that can be checked against national survey data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000251",
+        "topic_ids": [
+          "topic:weight_loss_metabolic_health",
+          "topic:childrens_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Cancer among young people is rising by one to two percent a year.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000253",
+        "evidence_quote": "Cancer among young people is rising by one or two percent a year.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A quantified trend in cancer incidence among young people that can be checked against cancer registry data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000253",
+        "topic_ids": [
+          "topic:cancer"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Autoimmune diseases, neurodevelopmental disorders, Alzheimer's, asthma, ADHD, depression, addiction and other physical and mental health conditions are all rising, some of them exponentially.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000254",
+        "evidence_quote": "are all on the rise, some of them exponentially",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A sweeping prevalence-trend claim across many named conditions that can be checked against surveillance data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000254",
+        "topic_ids": [
+          "topic:autoimmune_immune_health",
+          "topic:neurodevelopment_autism_discourse",
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_330613_window_0006"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000246",
+        "evidence_quote": "He will testify again before the United States Senate two different committees",
+        "label_ids": [
+          "topic:public_health_policy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000242",
+        "summary": "The hosts report RFK Jr's Senate confirmation testimony for the health department and the attacks on his past statements."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000249",
+        "evidence_quote": "basically laid out the Make America Healthy Again movement",
+        "label_ids": [
+          "topic:maha_root_cause_health_politics"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000247",
+        "summary": "The host says the nominee's opening statement laid out the Make America Healthy Again movement."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000252",
+        "evidence_quote": "Over seventy percent of adults and a third of children are overweight or obese",
+        "label_ids": [
+          "topic:childrens_health",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000250",
+        "summary": "The nominee cites overweight and obesity rates among adults and children as evidence of poor national health."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000253",
+        "evidence_quote": "Cancer among young people is rising by one or two percent a year",
+        "label_ids": [
+          "topic:cancer"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000253",
+        "summary": "Cancer in young people is said to be rising one or two percent a year."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000254",
+        "evidence_quote": "Autoimmune diseases, neurodevelopmental disorders, Alzheimer's, asthma, ADHD, depression, addiction, and a host of other physical and mental health conditions are all on the rise",
+        "label_ids": [
+          "topic:autoimmune_immune_health",
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:mental_health",
+          "topic:neurodevelopment_autism_discourse",
+          "topic:substance_use_addiction_harm_reduction"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000254",
+        "summary": "A list of conditions - autoimmune disease, neurodevelopmental disorders, Alzheimer's, asthma, ADHD, depression and addiction - is said to be rising."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000257",
+        "evidence_quote": "There is no single culprint in chronic disease",
+        "label_ids": [
+          "topic:maha_root_cause_health_politics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000250",
+        "summary": "The nominee frames a national chronic-disease crisis with no single culprit and promises to unite stakeholders behind it."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000257",
+        "evidence_quote": "Today, American's overall health is in grievous condition",
+        "label_ids": [
+          "cross_cutting:maha_official_core_vocabulary"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000250",
+        "summary": "The movement's own chronic-disease-crisis framing is used in the opening statement."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000261",
+        "evidence_quote": "News reports have claimed that I am anti vaccine or any industry",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "summary": "The nominee rejects reports that he is anti-vaccine and says he is pro-safety and pro-vaccine."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000269",
+        "evidence_quote": "Let's get then to what he referenced their vaccine statements",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000265",
+        "summary": "The hosts introduce the senators' questioning of the nominee's past vaccine statements."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Over seventy percent of American adults and a third of American children are overweight or obese.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000251",
+        "evidence_quote": "Over seventy percent of adults and a third of children are overweight or obese",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific prevalence figure for adults and children that can be checked against national survey data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000251",
+        "topic_ids": [
+          "topic:childrens_health",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Cancer among young people is rising by one to two percent a year.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000253",
+        "evidence_quote": "Cancer among young people is rising by one or two percent a year",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A quantified trend in cancer incidence among young people that can be checked against cancer registry data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000253",
+        "topic_ids": [
+          "topic:cancer"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Autoimmune diseases, neurodevelopmental disorders, Alzheimer's, asthma, ADHD, depression, addiction and other physical and mental health conditions are all rising, some of them exponentially.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000254",
+        "evidence_quote": "are all on the rise, some of them exponentially",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A sweeping prevalence-trend claim across many named conditions that can be checked against surveillance data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000254",
+        "topic_ids": [
+          "topic:autoimmune_immune_health",
+          "topic:mental_health",
+          "topic:neurodevelopment_autism_discourse"
+        ]
+      }
+    ],
+    "window_id": "episode_330613_window_0006"
+  },
+  "stored_at": "2026-09-12T23:09:29.432287+00:00"
+}

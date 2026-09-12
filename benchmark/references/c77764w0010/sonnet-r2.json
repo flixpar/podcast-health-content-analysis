@@ -1,0 +1,268 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c77764w0010",
+  "provenance": {
+    "bundle": "bundle_008",
+    "ingested_at": "2026-09-12T23:30:31.235033+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000570",
+        "evidence_quote": "Surgeons who don't have a checklist kill forty-two percent more people.",
+        "label_ids": [
+          "topic:surgery_medical_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000565",
+        "summary": "Claim that surgical checklists reduce patient deaths, illustrated with a specific mortality statistic for surgeons who skip them."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000565",
+        "evidence_quote": "The research is insane.",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000565",
+        "summary": "A vague, unnamed body of research is invoked to support the surgical checklist claim."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "the unfortunate fact is, 80 of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000591",
+        "summary": "Claim that the large majority of people struggle with anxiety, depression or similar issues, and that suicide and self-harm rates among younger generations are alarmingly high."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000635",
+        "evidence_quote": "Intrinsic motivation, on the other hand, is what's been shown to lead to deep levels of sustainable happiness.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "Discussion of intrinsic versus extrinsic motivation research and its link to psychological well-being and stability."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000624",
+        "evidence_quote": "So scientists have studied motivation, and as you framed it up, there's two different types, principally intrinsic vis-a-vis extrinsic.",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000624",
+        "summary": "A vague reference to scientists having studied motivation types."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Surgeons who do not use a checklist have a mortality rate 42% higher than those who do.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "Surgeons who don't have a checklist kill forty-two percent more people.",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific quantitative claim about surgical checklist use and patient mortality that is checkable against the underlying safety research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000569",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "About 80 percent of people are struggling mentally, psychologically, or emotionally with anxiety, depression, or similar conditions.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000591",
+        "evidence_quote": "the unfortunate fact is, 80 of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific prevalence claim about the proportion of people struggling with mental health issues, checkable against survey data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000591",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People who predominantly pursue extrinsic goals end up less psychologically stable than those who pursue intrinsic goals, even when they succeed.",
+        "claim_type": "causal",
+        "confidence": 0.45,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000633",
+        "evidence_quote": "If you are predominantly focused on the extrinsic stuff, even if you are successfully pursuing them, you will be.",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Comparative psychological claim about extrinsic versus intrinsic goal pursuit and stability, attributed to motivation science, checkable against well-being research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000633",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_77764_window_0010"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000570",
+        "evidence_quote": "Surgeons who don't have a checklist kill forty-two percent more people",
+        "label_ids": [
+          "topic:surgery_medical_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000565",
+        "summary": "Claim that surgical checklists reduce patient deaths, illustrated with a specific mortality statistic for surgeons who skip them."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000565",
+        "evidence_quote": "The research is insane",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000565",
+        "summary": "A vague, unnamed body of research is invoked to support the surgical checklist claim."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "the unfortunate fact is, 80 of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000591",
+        "summary": "Claim that the large majority of people struggle with anxiety, depression or similar issues, and that suicide and self-harm rates among younger generations are alarmingly high."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000635",
+        "evidence_quote": "Intrinsic motivation, on the other hand, is what's been shown to lead to deep levels of sustainable happiness",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "Discussion of intrinsic versus extrinsic motivation research and its link to psychological well-being and stability."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000624",
+        "evidence_quote": "So scientists have studied motivation, and as you framed it up, there's two different types, principally intrinsic vis-a-vis extrinsic",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000624",
+        "summary": "A vague reference to scientists having studied motivation types."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Surgeons who do not use a checklist have a mortality rate 42% higher than those who do.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "Surgeons who don't have a checklist kill forty-two percent more people",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific quantitative claim about surgical checklist use and patient mortality that is checkable against the underlying safety research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000569",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "About 80 percent of people are struggling mentally, psychologically, or emotionally with anxiety, depression, or similar conditions.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000591",
+        "evidence_quote": "the unfortunate fact is, 80 of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific prevalence claim about the proportion of people struggling with mental health issues, checkable against survey data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000591",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People who predominantly pursue extrinsic goals end up less psychologically stable than those who pursue intrinsic goals, even when they succeed.",
+        "claim_type": "causal",
+        "confidence": 0.45,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000633",
+        "evidence_quote": "If you are predominantly focused on the extrinsic stuff, even if you are successfully pursuing them, you will be",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Comparative psychological claim about extrinsic versus intrinsic goal pursuit and stability, attributed to motivation science, checkable against well-being research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000633",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_77764_window_0010"
+  },
+  "stored_at": "2026-09-12T23:30:31.235065+00:00"
+}

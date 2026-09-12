@@ -1,0 +1,462 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c185744w0001",
+  "provenance": {
+    "bundle": "bundle_002",
+    "ingested_at": "2026-09-12T23:30:30.902854+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000010",
+        "evidence_quote": "Actually, need to sleep less in the summer and more in the winter, and that's how we're biologically designed.",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000001",
+        "summary": "Host and guest tease claims about sunglasses, circadian rhythm, seasonal sleep needs, and introduce the guest as a circadian-rhythm biohacker."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000010",
+        "evidence_quote": "helping people harness the power of circadian rhythms for peak performance and vibrant health",
+        "label_ids": [
+          "cross_cutting:biohacking_framing",
+          "cross_cutting:optimization_framing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000009",
+        "summary": "Guest introduced as a biohacker pursuing circadian-rhythm optimization for peak performance."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "we should be wearing them indoors and at night",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000019",
+        "summary": "Restated teaser claim recommending wearing sunglasses indoors and at night but not outdoors during the day."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000047",
+        "evidence_quote": "we can create melanin on our skin to absorb the ultraviolet, which creates vitamin D or hormone D in the body",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "summary": "Guest explains that sunglasses block UV signaling needed for melanin production, vitamin D synthesis, and nitric oxide release."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000035",
+        "evidence_quote": "Optometrists and doctors that UV is bad for the eyes, and in fact, our eyes have receptors to read the ultraviolet light.",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000032",
+        "summary": "Guest contradicts the conventional medical/optometric claim that UV exposure to the eyes is harmful."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "It increases nitric oxide, which lowers blood pressure.",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "summary": "Mechanistic language about UV receptors, melanin, vitamin D and nitric oxide is used to explain the claims."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000061",
+        "evidence_quote": "When you cover us with sunglasses and we hide from the sun, it's not how we were born.",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000048",
+        "summary": "Guest argues via an orange-tree/tarp analogy that covering the body from sun with sunglasses, sunscreen and clothing makes people less healthy."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000061",
+        "evidence_quote": "So our biology is tuned and designed to utilize the sun.",
+        "label_ids": [
+          "cross_cutting:naturalness_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000053",
+        "summary": "Sun exposure is framed as natural and biologically intended, with covering up portrayed as unnatural and unhealthy."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000072",
+        "evidence_quote": "the more sleep we get, the healthier we are",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000062",
+        "summary": "Guest describes waking with the sun and states that getting more sleep makes people healthier."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.5,
+        "end_unit_id": "u000010",
+        "evidence_quote": "As the co-founder of Dreamwalkers, he's on the cutting edge of creating groundbreaking tools that promote deep, restorative sleep.",
+        "mention_role": "own_product",
+        "product_name": "Dreamwalkers",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000010"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Wearing sunglasses prevents the eyes from reading UV levels, which causes sunburn.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "we cannot read how much UV is in the sun, and so we get sunburned",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific causal mechanism claim linking sunglasses use to sunburn that can be checked against dermatology/ophthalmology evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Reading UV light through unprotected eyes causes the skin to create melanin, which produces vitamin D in the body.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000035",
+        "evidence_quote": "we can create melanin on our skin to absorb the ultraviolet, which creates vitamin D or hormone D in the body",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific mechanistic claim about UV exposure, melanin and vitamin D synthesis that can be checked against physiology.",
+        "relevance": "substantive",
+        "start_unit_id": "u000035",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Sun exposure increases nitric oxide, which lowers blood pressure.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "It increases nitric oxide, which lowers blood pressure.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific physiological claim linking sun exposure, nitric oxide and blood pressure that is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000036",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Humans are biologically designed to need less sleep in summer and more sleep in winter.",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000007",
+        "evidence_quote": "need to sleep less in the summer and more in the winter, and that's how we're biologically designed",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about seasonal variation in human sleep need tied to biological design.",
+        "relevance": "substantive",
+        "start_unit_id": "u000007",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Getting more sleep makes people healthier.",
+        "claim_type": "causal",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000071",
+        "evidence_quote": "the more sleep we get, the healthier we are",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "General causal claim about sleep quantity and health that could be checked against evidence on sleep dose-response.",
+        "relevance": "substantive",
+        "start_unit_id": "u000071",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      }
+    ],
+    "window_id": "episode_185744_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000010",
+        "evidence_quote": "Actually, need to sleep less in the summer and more in the winter, and that's how we're biologically designed",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000001",
+        "summary": "Host and guest tease claims about sunglasses, circadian rhythm, seasonal sleep needs, and introduce the guest as a circadian-rhythm biohacker."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000010",
+        "evidence_quote": "helping people harness the power of circadian rhythms for peak performance and vibrant health",
+        "label_ids": [
+          "cross_cutting:biohacking_framing",
+          "cross_cutting:optimization_framing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000009",
+        "summary": "Guest introduced as a biohacker pursuing circadian-rhythm optimization for peak performance."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "we should be wearing them indoors and at night",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000019",
+        "summary": "Restated teaser claim recommending wearing sunglasses indoors and at night but not outdoors during the day."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000047",
+        "evidence_quote": "we can create melanin on our skin to absorb the ultraviolet, which creates vitamin D or hormone D in the body",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "summary": "Guest explains that sunglasses block UV signaling needed for melanin production, vitamin D synthesis, and nitric oxide release."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000035",
+        "evidence_quote": "Optometrists and doctors that UV is bad for the eyes, and in fact, our eyes have receptors to read the ultraviolet light",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000032",
+        "summary": "Guest contradicts the conventional medical/optometric claim that UV exposure to the eyes is harmful."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "It increases nitric oxide, which lowers blood pressure",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "summary": "Mechanistic language about UV receptors, melanin, vitamin D and nitric oxide is used to explain the claims."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000061",
+        "evidence_quote": "When you cover us with sunglasses and we hide from the sun, it's not how we were born",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000048",
+        "summary": "Guest argues via an orange-tree/tarp analogy that covering the body from sun with sunglasses, sunscreen and clothing makes people less healthy."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000061",
+        "evidence_quote": "So our biology is tuned and designed to utilize the sun",
+        "label_ids": [
+          "cross_cutting:naturalness_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000053",
+        "summary": "Sun exposure is framed as natural and biologically intended, with covering up portrayed as unnatural and unhealthy."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000072",
+        "evidence_quote": "the more sleep we get, the healthier we are",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000062",
+        "summary": "Guest describes waking with the sun and states that getting more sleep makes people healthier."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.5,
+        "end_unit_id": "u000010",
+        "evidence_quote": "As the co-founder of Dreamwalkers, he's on the cutting edge of creating groundbreaking tools that promote deep, restorative sleep",
+        "mention_role": "own_product",
+        "product_name": "Dreamwalkers",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000010"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Wearing sunglasses prevents the eyes from reading UV levels, which causes sunburn.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "we cannot read how much UV is in the sun, and so we get sunburned",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific causal mechanism claim linking sunglasses use to sunburn that can be checked against dermatology/ophthalmology evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Reading UV light through unprotected eyes causes the skin to create melanin, which produces vitamin D in the body.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000035",
+        "evidence_quote": "we can create melanin on our skin to absorb the ultraviolet, which creates vitamin D or hormone D in the body",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific mechanistic claim about UV exposure, melanin and vitamin D synthesis that can be checked against physiology.",
+        "relevance": "substantive",
+        "start_unit_id": "u000035",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Sun exposure increases nitric oxide, which lowers blood pressure.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "It increases nitric oxide, which lowers blood pressure",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific physiological claim linking sun exposure, nitric oxide and blood pressure that is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000036",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Humans are biologically designed to need less sleep in summer and more sleep in winter.",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000007",
+        "evidence_quote": "need to sleep less in the summer and more in the winter, and that's how we're biologically designed",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about seasonal variation in human sleep need tied to biological design.",
+        "relevance": "substantive",
+        "start_unit_id": "u000007",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Getting more sleep makes people healthier.",
+        "claim_type": "causal",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000071",
+        "evidence_quote": "the more sleep we get, the healthier we are",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "General causal claim about sleep quantity and health that could be checked against evidence on sleep dose-response.",
+        "relevance": "substantive",
+        "start_unit_id": "u000071",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      }
+    ],
+    "window_id": "episode_185744_window_0001"
+  },
+  "stored_at": "2026-09-12T23:30:30.902897+00:00"
+}

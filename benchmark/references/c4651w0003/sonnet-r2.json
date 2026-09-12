@@ -1,0 +1,307 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c4651w0003",
+  "provenance": {
+    "bundle": "bundle_003",
+    "ingested_at": "2026-09-12T23:30:30.988666+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000163",
+        "evidence_quote": "we're neurobiologically wired for connection",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000132",
+        "summary": "Discussion of the 'loneliness epidemic' and how humans are neurobiologically wired for connection, and why eye contact and empathy are hard to practice and learn."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000135",
+        "evidence_quote": "we're neurobiologically wired for connection",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000135",
+        "summary": "Neurobiological-wiring language is used to explain the human drive toward connection."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000158",
+        "evidence_quote": "on the autism spectrum",
+        "label_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000156",
+        "summary": "A brief aside raising whether the point about eye contact still applies to autistic children."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "Train your sleep with Galaxy Watch 8.",
+        "label_ids": [
+          "topic:sleep",
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000164",
+        "summary": "Sponsor ad for the Galaxy Watch 8's sleep tracking and personalized insights from Samsung Health."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "Learn more at Samsung.com.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000164",
+        "summary": "Delimited sponsor read directing listeners to buy or learn more about the Galaxy Watch 8."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000190",
+        "evidence_quote": "The physical presence of another human being is what we need when we are in our most dire straits",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000179",
+        "summary": "Continued discussion of loneliness and connection: the physical presence of another person, not words, is what people need in crisis."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000204",
+        "evidence_quote": "My dad was very disconnected from us",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000191",
+        "summary": "The guest recounts her childhood, her parents' eventual divorce, and an underlying sadness and disconnection from her father."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000204",
+        "evidence_quote": "why connection and human connection was like such a big thing for me",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000191",
+        "summary": "The guest's personal childhood story is offered as the origin of her focus on human connection."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000173",
+        "evidence_quote": "Train your sleep with Galaxy Watch 8.",
+        "mention_role": "advertised",
+        "product_name": "Galaxy Watch 8",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000164"
+      },
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000173",
+        "evidence_quote": "personalized insights from Samsung Health help you improve, so you can wake up to a whole new you.",
+        "mention_role": "advertised",
+        "product_name": "Samsung Health",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000168"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "it is estimated that"
+        ],
+        "claim_text": "It is estimated that our great-grandparents looked at their children about seventy-two percent more of the time than we look at our babies today.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000160",
+        "evidence_quote": "it is estimated that our great grandparents looked at their children seventy-two percent more of the time than we look at our babies today",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "The specific magnitude of the claimed historical decline in eye contact with children is a checkable statistical claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000160",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_4651_window_0003"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000163",
+        "evidence_quote": "we're neurobiologically wired for connection",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000132",
+        "summary": "Discussion of the 'loneliness epidemic' and how humans are neurobiologically wired for connection, and why eye contact and empathy are hard to practice and learn."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000135",
+        "evidence_quote": "we're neurobiologically wired for connection",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000135",
+        "summary": "Neurobiological-wiring language is used to explain the human drive toward connection."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000158",
+        "evidence_quote": "on the autism spectrum",
+        "label_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000156",
+        "summary": "A brief aside raising whether the point about eye contact still applies to autistic children."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "Train your sleep with Galaxy Watch 8",
+        "label_ids": [
+          "topic:sleep",
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000164",
+        "summary": "Sponsor ad for the Galaxy Watch 8's sleep tracking and personalized insights from Samsung Health."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "Learn more at Samsung.com",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000164",
+        "summary": "Delimited sponsor read directing listeners to buy or learn more about the Galaxy Watch 8."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000190",
+        "evidence_quote": "The physical presence of another human being is what we need when we are in our most dire straits",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000179",
+        "summary": "Continued discussion of loneliness and connection: the physical presence of another person, not words, is what people need in crisis."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000204",
+        "evidence_quote": "My dad was very disconnected from us",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000191",
+        "summary": "The guest recounts her childhood, her parents' eventual divorce, and an underlying sadness and disconnection from her father."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000204",
+        "evidence_quote": "why connection and human connection was like such a big thing for me",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000191",
+        "summary": "The guest's personal childhood story is offered as the origin of her focus on human connection."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000173",
+        "evidence_quote": "Train your sleep with Galaxy Watch 8",
+        "mention_role": "advertised",
+        "product_name": "Galaxy Watch 8",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000164"
+      },
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000173",
+        "evidence_quote": "personalized insights from Samsung Health help you improve, so you can wake up to a whole new you",
+        "mention_role": "advertised",
+        "product_name": "Samsung Health",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000168"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "it is estimated that"
+        ],
+        "claim_text": "It is estimated that our great-grandparents looked at their children about seventy-two percent more of the time than we look at our babies today.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000160",
+        "evidence_quote": "it is estimated that our great grandparents looked at their children seventy-two percent more of the time than we look at our babies today",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "The specific magnitude of the claimed historical decline in eye contact with children is a checkable statistical claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000160",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_4651_window_0003"
+  },
+  "stored_at": "2026-09-12T23:30:30.988703+00:00"
+}

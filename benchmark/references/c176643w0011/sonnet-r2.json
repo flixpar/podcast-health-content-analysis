@@ -1,0 +1,917 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c176643w0011",
+  "provenance": {
+    "bundle": "bundle_012",
+    "ingested_at": "2026-09-12T23:30:31.426395+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000679",
+        "evidence_quote": "so that that will that will cause weight loss, but taking vitamins not so.",
+        "label_ids": [
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000679",
+        "summary": "Contrasts slowing gastric release, which causes weight loss, with taking vitamins, which does not."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000679",
+        "evidence_quote": "slow gastric release",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000679",
+        "summary": "Uses gastric-emptying mechanism language to explain weight loss."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000696",
+        "evidence_quote": "The men that had the fattiest liver that were on NR had a reduction in their liver fat.",
+        "label_ids": [
+          "topic:longevity_anti_aging"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000680",
+        "summary": "Discusses a Danish trial of NR (nicotinamide riboside) and its effect on liver fat, including limits of the finding."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000696",
+        "evidence_quote": "So it got to like a p of .013, which means probably was not by chance. It was probably a real result.",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000680",
+        "summary": "Cites a specific trial's fatty-liver subgroup finding while flagging that it was not randomized for that outcome and reached only p=.013."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000708",
+        "evidence_quote": "If people have overweight and fatty liver, then something like exercise or GLP-1 is probably the standard.",
+        "label_ids": [
+          "topic:glp_1_incretin_drugs",
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000704",
+        "summary": "Says exercise or GLP-1 drugs are probably the standard of care for people with overweight and fatty liver."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000713",
+        "evidence_quote": "I think there's the the like you said there's a signal there.",
+        "label_ids": [
+          "topic:longevity_anti_aging"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000710",
+        "summary": "Continues discussing NR's fatty liver signal as a possible use case."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000724",
+        "evidence_quote": "Protect people against chemotherapy neuropathy. Okay, because chemo neuropathy specifically attacks the NED system",
+        "label_ids": [
+          "topic:cancer",
+          "topic:neurology_seizures_brain_conditions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000714",
+        "summary": "Explains the idea that NR might protect chemotherapy patients from chemo-induced peripheral neuropathy, noting the trials are not yet completed."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000720",
+        "evidence_quote": "which attack the microtubules, the longest cells in our in our body are cells that kind of start at the sciatic nerve",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000718",
+        "summary": "Describes the mechanism of chemo neuropathy via microtubule-attacking drugs and the long nerve cells starting at the sciatic nerve."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000725",
+        "evidence_quote": "NR has been very active in animal models of chemotherapeutic neuropathy, and has not simultaneously like driven the cancer, right?",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000725",
+        "summary": "Cites animal-model evidence that NR is active against chemo neuropathy without promoting cancer."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000730",
+        "evidence_quote": "So, I don't think it's going to be used as like a cancer treatment, but it could be used as an adjuvant to protect against chemo brain or chemo neuropathy.",
+        "label_ids": [
+          "topic:cancer"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000726",
+        "summary": "Discusses nicotinamide as cancer preventative in a cited Australian trial, and says NR is unlikely to be a cancer treatment but could be an adjuvant against chemo neuropathy."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000730",
+        "evidence_quote": "nicotinamide is cancer preventative in a large Australian trial of of skin cancer prevention.",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000726",
+        "summary": "Cites a large Australian trial as evidence that nicotinamide is cancer preventative."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000735",
+        "evidence_quote": "Next Health is the Apple Store of wellness, where you can optimize your health span and lifespan using cutting-edge technology.",
+        "label_ids": [
+          "topic:longevity_anti_aging"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000733",
+        "summary": "Sponsor read for NextHealth, a longevity clinic offering biomarker testing and health/lifespan optimization."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000737",
+        "evidence_quote": "The longevity circuit in Next Health, using hyperbaric oxygen, sauna, cryotherapy, and LED light, is a game changer.",
+        "label_ids": [
+          "topic:recovery_physical_optimization",
+          "topic:longevity_anti_aging",
+          "topic:peptides_experimental_optimization_compounds"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000736",
+        "summary": "Ad describes NextHealth's longevity circuit (hyperbaric oxygen, sauna, cryotherapy, LED light) and a longevity plan using ozone, plasma exchange and peptides."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000738",
+        "evidence_quote": "This episode was brought to you by NextHealth.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000732",
+        "summary": "Sponsor read for the host's own longevity clinic, NextHealth."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000737",
+        "evidence_quote": "optimize your health span and lifespan using cutting-edge technology",
+        "label_ids": [
+          "cross_cutting:optimization_framing"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000734",
+        "summary": "Frames the clinic's offerings as optimizing health span and lifespan using biomarkers and a longevity plan."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000746",
+        "evidence_quote": "VitaBoom is a revolutionary company that sends you a custom supplement protocol based on your needs using blood-based biomarkers.",
+        "label_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000740",
+        "summary": "Sponsor read for VitaBoom, which ships a custom supplement protocol based on blood-based biomarker testing."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000746",
+        "evidence_quote": "This episode was also brought to you by Vitaboom.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000739",
+        "summary": "Sponsor read for VitaBoom's custom supplement subscription."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000742",
+        "evidence_quote": "sends you a custom supplement protocol based on your needs using blood-based biomarkers",
+        "label_ids": [
+          "cross_cutting:optimization_framing"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000740",
+        "summary": "Frames supplementation as a personalized protocol based on biomarkers."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000749",
+        "evidence_quote": "almost every kind of heart disturbance disturbs the cardiac NED system, and so it's you know probably a very heart healthy and liver healthy supplement.",
+        "label_ids": [
+          "topic:cardiometabolic_health",
+          "topic:longevity_anti_aging"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000747",
+        "summary": "Suggests NR is probably heart- and liver-healthy since nearly every kind of heart disturbance affects the cardiac NAD system."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000748",
+        "evidence_quote": "There's a group in at University of Washington that has been doing the heart failure stuff",
+        "label_ids": [
+          "cross_cutting:prestige_science_invocation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000748",
+        "summary": "Names a University of Washington research group working on heart failure as a source of authority."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000738",
+        "evidence_quote": "This episode was brought to you by NextHealth.",
+        "mention_role": "advertised",
+        "product_name": "NextHealth",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000732"
+      },
+      {
+        "confidence": 0.65,
+        "end_unit_id": "u000746",
+        "evidence_quote": "This episode was also brought to you by Vitaboom.",
+        "mention_role": "advertised",
+        "product_name": "VitaBoom",
+        "product_type": "program_or_course",
+        "start_unit_id": "u000739"
+      },
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000744",
+        "evidence_quote": "they also provide all the best brands, like Timeline.",
+        "mention_role": "advertised",
+        "product_name": "Timeline",
+        "product_type": "supplement",
+        "start_unit_id": "u000743"
+      },
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000744",
+        "evidence_quote": "TruNiacin and many others for your custom daily packs.",
+        "mention_role": "advertised",
+        "product_name": "TruNiacin",
+        "product_type": "supplement",
+        "start_unit_id": "u000743"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Slowing gastric emptying causes weight loss, but taking vitamins does not cause weight loss.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000679",
+        "evidence_quote": "while also doing other things to like slow gastric release and and other things, so that that will that will cause weight loss, but taking vitamins not so.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Comparative causal claim about mechanisms of weight loss (delayed gastric emptying versus vitamins) is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000679",
+        "topic_ids": [
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "In a Danish trial, men with the fattiest livers who took NR had a reduction in liver fat, a non-randomized finding that reached p=.013.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "So it got to like a p of .013, which means probably was not by chance. It was probably a real result.",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific trial finding with a stated p-value and an explicit randomization caveat is directly checkable against the source trial.",
+        "relevance": "substantive",
+        "start_unit_id": "u000686",
+        "topic_ids": [
+          "topic:longevity_anti_aging"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "For people with overweight and fatty liver, exercise or GLP-1 medications are probably the standard of care.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000704",
+        "evidence_quote": "If people have overweight and fatty liver, then something like exercise or GLP-1 is probably the standard.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Claim about the standard of care for fatty liver is checkable against current clinical guidelines.",
+        "relevance": "substantive",
+        "start_unit_id": "u000704",
+        "topic_ids": [
+          "topic:glp_1_incretin_drugs",
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "NR might protect chemotherapy patients from chemotherapy-induced neuropathy.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000723",
+        "evidence_quote": "So the idea is that NR might protect them from neuropathy.",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Speculative treatment claim about NR preventing chemo neuropathy is checkable against ongoing and completed trials.",
+        "relevance": "substantive",
+        "start_unit_id": "u000723",
+        "topic_ids": [
+          "topic:cancer",
+          "topic:neurology_seizures_brain_conditions"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "NR is active against chemotherapy-induced neuropathy in animal models without simultaneously promoting cancer growth.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000725",
+        "evidence_quote": "NR has been very active in animal models of chemotherapeutic neuropathy, and has not simultaneously like driven the cancer, right?",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific animal-model efficacy and safety claim is checkable against the primary preclinical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000725",
+        "topic_ids": [
+          "topic:cancer",
+          "topic:neurology_seizures_brain_conditions"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nicotinamide is cancer preventative, based on a large Australian trial of skin cancer prevention.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000727",
+        "evidence_quote": "nicotinamide is cancer preventative in a large Australian trial of of skin cancer prevention.",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Names a specific trial and outcome that is directly checkable against the published study.",
+        "relevance": "substantive",
+        "start_unit_id": "u000727",
+        "topic_ids": [
+          "topic:cancer"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Because almost every kind of heart disturbance affects the cardiac NAD system, NR is probably a heart-healthy and liver-healthy supplement.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000749",
+        "evidence_quote": "almost every kind of heart disturbance disturbs the cardiac NED system, and so it's you know probably a very heart healthy and liver healthy supplement.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Inferential health-benefit claim about NR for heart and liver based on a stated mechanism is checkable against clinical evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000749",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:longevity_anti_aging"
+        ]
+      }
+    ],
+    "window_id": "episode_176643_window_0011"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000679",
+        "evidence_quote": "so that that will that will cause weight loss, but taking vitamins not so",
+        "label_ids": [
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000679",
+        "summary": "Contrasts slowing gastric release, which causes weight loss, with taking vitamins, which does not."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000679",
+        "evidence_quote": "slow gastric release",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000679",
+        "summary": "Uses gastric-emptying mechanism language to explain weight loss."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000696",
+        "evidence_quote": "The men that had the fattiest liver that were on NR had a reduction in their liver fat",
+        "label_ids": [
+          "topic:longevity_anti_aging"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000680",
+        "summary": "Discusses a Danish trial of NR (nicotinamide riboside) and its effect on liver fat, including limits of the finding."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000696",
+        "evidence_quote": "So it got to like a p of .013, which means probably was not by chance. It was probably a real result",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000680",
+        "summary": "Cites a specific trial's fatty-liver subgroup finding while flagging that it was not randomized for that outcome and reached only p=.013."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000708",
+        "evidence_quote": "If people have overweight and fatty liver, then something like exercise or GLP-1 is probably the standard",
+        "label_ids": [
+          "topic:cardiometabolic_health",
+          "topic:glp_1_incretin_drugs"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000704",
+        "summary": "Says exercise or GLP-1 drugs are probably the standard of care for people with overweight and fatty liver."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000713",
+        "evidence_quote": "I think there's the the like you said there's a signal there",
+        "label_ids": [
+          "topic:longevity_anti_aging"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000710",
+        "summary": "Continues discussing NR's fatty liver signal as a possible use case."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000724",
+        "evidence_quote": "Protect people against chemotherapy neuropathy. Okay, because chemo neuropathy specifically attacks the NED system",
+        "label_ids": [
+          "topic:cancer",
+          "topic:neurology_seizures_brain_conditions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000714",
+        "summary": "Explains the idea that NR might protect chemotherapy patients from chemo-induced peripheral neuropathy, noting the trials are not yet completed."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000720",
+        "evidence_quote": "which attack the microtubules, the longest cells in our in our body are cells that kind of start at the sciatic nerve",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000718",
+        "summary": "Describes the mechanism of chemo neuropathy via microtubule-attacking drugs and the long nerve cells starting at the sciatic nerve."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000725",
+        "evidence_quote": "NR has been very active in animal models of chemotherapeutic neuropathy, and has not simultaneously like driven the cancer, right",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000725",
+        "summary": "Cites animal-model evidence that NR is active against chemo neuropathy without promoting cancer."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000730",
+        "evidence_quote": "So, I don't think it's going to be used as like a cancer treatment, but it could be used as an adjuvant to protect against chemo brain or chemo neuropathy",
+        "label_ids": [
+          "topic:cancer"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000726",
+        "summary": "Discusses nicotinamide as cancer preventative in a cited Australian trial, and says NR is unlikely to be a cancer treatment but could be an adjuvant against chemo neuropathy."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000730",
+        "evidence_quote": "nicotinamide is cancer preventative in a large Australian trial of of skin cancer prevention",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000726",
+        "summary": "Cites a large Australian trial as evidence that nicotinamide is cancer preventative."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000735",
+        "evidence_quote": "Next Health is the Apple Store of wellness, where you can optimize your health span and lifespan using cutting-edge technology",
+        "label_ids": [
+          "topic:longevity_anti_aging"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000733",
+        "summary": "Sponsor read for NextHealth, a longevity clinic offering biomarker testing and health/lifespan optimization."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000737",
+        "evidence_quote": "The longevity circuit in Next Health, using hyperbaric oxygen, sauna, cryotherapy, and LED light, is a game changer",
+        "label_ids": [
+          "topic:longevity_anti_aging",
+          "topic:peptides_experimental_optimization_compounds",
+          "topic:recovery_physical_optimization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000736",
+        "summary": "Ad describes NextHealth's longevity circuit (hyperbaric oxygen, sauna, cryotherapy, LED light) and a longevity plan using ozone, plasma exchange and peptides."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000738",
+        "evidence_quote": "This episode was brought to you by NextHealth",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000732",
+        "summary": "Sponsor read for the host's own longevity clinic, NextHealth."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000737",
+        "evidence_quote": "optimize your health span and lifespan using cutting-edge technology",
+        "label_ids": [
+          "cross_cutting:optimization_framing"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000734",
+        "summary": "Frames the clinic's offerings as optimizing health span and lifespan using biomarkers and a longevity plan."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000746",
+        "evidence_quote": "VitaBoom is a revolutionary company that sends you a custom supplement protocol based on your needs using blood-based biomarkers",
+        "label_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000740",
+        "summary": "Sponsor read for VitaBoom, which ships a custom supplement protocol based on blood-based biomarker testing."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000746",
+        "evidence_quote": "This episode was also brought to you by Vitaboom",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000739",
+        "summary": "Sponsor read for VitaBoom's custom supplement subscription."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000742",
+        "evidence_quote": "sends you a custom supplement protocol based on your needs using blood-based biomarkers",
+        "label_ids": [
+          "cross_cutting:optimization_framing"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000740",
+        "summary": "Frames supplementation as a personalized protocol based on biomarkers."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000749",
+        "evidence_quote": "almost every kind of heart disturbance disturbs the cardiac NED system, and so it's you know probably a very heart healthy and liver healthy supplement",
+        "label_ids": [
+          "topic:cardiometabolic_health",
+          "topic:longevity_anti_aging"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000747",
+        "summary": "Suggests NR is probably heart- and liver-healthy since nearly every kind of heart disturbance affects the cardiac NAD system."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000749",
+        "evidence_quote": "There's a group in at University of Washington that has been doing the heart failure stuff",
+        "label_ids": [
+          "cross_cutting:prestige_science_invocation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000749",
+        "summary": "Names a University of Washington research group working on heart failure as a source of authority."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000738",
+        "evidence_quote": "This episode was brought to you by NextHealth",
+        "mention_role": "advertised",
+        "product_name": "NextHealth",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000732"
+      },
+      {
+        "confidence": 0.65,
+        "end_unit_id": "u000746",
+        "evidence_quote": "This episode was also brought to you by Vitaboom",
+        "mention_role": "advertised",
+        "product_name": "VitaBoom",
+        "product_type": "program_or_course",
+        "start_unit_id": "u000739"
+      },
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000744",
+        "evidence_quote": "they also provide all the best brands, like Timeline",
+        "mention_role": "advertised",
+        "product_name": "Timeline",
+        "product_type": "supplement",
+        "start_unit_id": "u000743"
+      },
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000744",
+        "evidence_quote": "TruNiacin and many others for your custom daily packs",
+        "mention_role": "advertised",
+        "product_name": "TruNiacin",
+        "product_type": "supplement",
+        "start_unit_id": "u000743"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Slowing gastric emptying causes weight loss, but taking vitamins does not cause weight loss.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000679",
+        "evidence_quote": "while also doing other things to like slow gastric release and and other things, so that that will that will cause weight loss, but taking vitamins not so",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Comparative causal claim about mechanisms of weight loss (delayed gastric emptying versus vitamins) is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000679",
+        "topic_ids": [
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "In a Danish trial, men with the fattiest livers who took NR had a reduction in liver fat, a non-randomized finding that reached p=.013.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "So it got to like a p of .013, which means probably was not by chance. It was probably a real result",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific trial finding with a stated p-value and an explicit randomization caveat is directly checkable against the source trial.",
+        "relevance": "substantive",
+        "start_unit_id": "u000686",
+        "topic_ids": [
+          "topic:longevity_anti_aging"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "For people with overweight and fatty liver, exercise or GLP-1 medications are probably the standard of care.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000704",
+        "evidence_quote": "If people have overweight and fatty liver, then something like exercise or GLP-1 is probably the standard",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Claim about the standard of care for fatty liver is checkable against current clinical guidelines.",
+        "relevance": "substantive",
+        "start_unit_id": "u000704",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:glp_1_incretin_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "NR might protect chemotherapy patients from chemotherapy-induced neuropathy.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000723",
+        "evidence_quote": "So the idea is that NR might protect them from neuropathy",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Speculative treatment claim about NR preventing chemo neuropathy is checkable against ongoing and completed trials.",
+        "relevance": "substantive",
+        "start_unit_id": "u000723",
+        "topic_ids": [
+          "topic:cancer",
+          "topic:neurology_seizures_brain_conditions"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "NR is active against chemotherapy-induced neuropathy in animal models without simultaneously promoting cancer growth.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000725",
+        "evidence_quote": "NR has been very active in animal models of chemotherapeutic neuropathy, and has not simultaneously like driven the cancer, right",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific animal-model efficacy and safety claim is checkable against the primary preclinical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000725",
+        "topic_ids": [
+          "topic:cancer",
+          "topic:neurology_seizures_brain_conditions"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nicotinamide is cancer preventative, based on a large Australian trial of skin cancer prevention.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000727",
+        "evidence_quote": "nicotinamide is cancer preventative in a large Australian trial of of skin cancer prevention",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Names a specific trial and outcome that is directly checkable against the published study.",
+        "relevance": "substantive",
+        "start_unit_id": "u000727",
+        "topic_ids": [
+          "topic:cancer"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Because almost every kind of heart disturbance affects the cardiac NAD system, NR is probably a heart-healthy and liver-healthy supplement.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000749",
+        "evidence_quote": "almost every kind of heart disturbance disturbs the cardiac NED system, and so it's you know probably a very heart healthy and liver healthy supplement",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Inferential health-benefit claim about NR for heart and liver based on a stated mechanism is checkable against clinical evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000749",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:longevity_anti_aging"
+        ]
+      }
+    ],
+    "window_id": "episode_176643_window_0011"
+  },
+  "stored_at": "2026-09-12T23:30:31.426425+00:00"
+}

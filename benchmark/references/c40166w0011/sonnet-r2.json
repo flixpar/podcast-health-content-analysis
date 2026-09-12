@@ -1,0 +1,167 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c40166w0011",
+  "provenance": {
+    "bundle": "bundle_004",
+    "ingested_at": "2026-09-12T23:30:31.036447+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000679",
+        "summary": "Frames vaccines, with recurring dosing such as every six months, as a rent-seeking business model benefiting Big Pharma and the investment funds behind it."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters, which are these huge investment funds that also control the media and control Big Tech",
+        "label_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000679",
+        "summary": "Casts vaccines as a rent-seeking scheme run by Big Pharma and the investment funds that control it."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000688",
+        "evidence_quote": "which are these huge investment funds that also control the media and control Big Tech, and it goes on and on and on.",
+        "label_ids": [
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "summary": "Alleges that the investment funds behind Big Pharma also control media and Big Tech, describing a broad interconnected system of control."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "when you have that feeling, I suggest you listen to it, because it's usually right.",
+        "label_ids": [
+          "cross_cutting:anti_expert_populist_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000690",
+        "summary": "Urges listeners to trust instinct and common sense over institutional authority regarding the vaccine/pharma system."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "These vaccines are given or recommended every six months.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000682",
+        "evidence_quote": "in the case of these vaccines, every six months.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex"
+        ],
+        "rationale": "The claimed six-month vaccine dosing interval is a specific, checkable claim about vaccination recommendations.",
+        "relevance": "substantive",
+        "start_unit_id": "u000682",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      }
+    ],
+    "window_id": "episode_40166_window_0011"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000679",
+        "summary": "Frames vaccines, with recurring dosing such as every six months, as a rent-seeking business model benefiting Big Pharma and the investment funds behind it."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters, which are these huge investment funds that also control the media and control Big Tech",
+        "label_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000679",
+        "summary": "Casts vaccines as a rent-seeking scheme run by Big Pharma and the investment funds that control it."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000688",
+        "evidence_quote": "which are these huge investment funds that also control the media and control Big Tech, and it goes on and on and on",
+        "label_ids": [
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "summary": "Alleges that the investment funds behind Big Pharma also control media and Big Tech, describing a broad interconnected system of control."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "when you have that feeling, I suggest you listen to it, because it's usually right",
+        "label_ids": [
+          "cross_cutting:anti_expert_populist_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000690",
+        "summary": "Urges listeners to trust instinct and common sense over institutional authority regarding the vaccine/pharma system."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "These vaccines are given or recommended every six months.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000682",
+        "evidence_quote": "in the case of these vaccines, every six months",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex"
+        ],
+        "rationale": "The claimed six-month vaccine dosing interval is a specific, checkable claim about vaccination recommendations.",
+        "relevance": "substantive",
+        "start_unit_id": "u000682",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      }
+    ],
+    "window_id": "episode_40166_window_0011"
+  },
+  "stored_at": "2026-09-12T23:30:31.036499+00:00"
+}

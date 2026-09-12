@@ -1,0 +1,166 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c159422w0005",
+  "provenance": {
+    "bundle": "bundle_002",
+    "ingested_at": "2026-09-12T23:16:54.045018+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000316",
+        "evidence_quote": "she lost almost sixty pounds",
+        "label_ids": [
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000316",
+        "summary": "A family member notes that Patty lost almost sixty pounds as one of several signs that made them suspect an affair."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000348",
+        "evidence_quote": "Certa Perfect Sleeper X mattresses and adjustable base sets with the Q Four Support",
+        "label_ids": [
+          "topic:sleep",
+          "topic:pain_musculoskeletal_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000344",
+        "summary": "Ad for Serta Perfect Sleeper mattresses and an adjustable base, pitched for better sleep and back-pain relief."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000348",
+        "evidence_quote": "Visit Certa. dot com to find a retailer near you.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000344",
+        "summary": "Sponsor read directing listeners to a retailer to buy the mattress at a discount."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u000348",
+        "evidence_quote": "Certa Perfect Sleeper X mattresses",
+        "mention_role": "advertised",
+        "product_name": "Serta Perfect Sleeper X",
+        "product_type": "other_product",
+        "start_unit_id": "u000344"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The Serta Perfect Sleeper X mattress's Q4 Support System helps relieve aches and back pain.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000346",
+        "evidence_quote": "helps relieve aches and back pain",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "An efficacy claim about a mattress product's ability to relieve back pain that could be checked against evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000345",
+        "topic_ids": [
+          "topic:pain_musculoskeletal_health",
+          "topic:sleep"
+        ]
+      }
+    ],
+    "window_id": "episode_159422_window_0005"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000316",
+        "evidence_quote": "she lost almost sixty pounds",
+        "label_ids": [
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000316",
+        "summary": "A family member notes that Patty lost almost sixty pounds as one of several signs that made them suspect an affair."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000348",
+        "evidence_quote": "Certa Perfect Sleeper X mattresses and adjustable base sets with the Q Four Support",
+        "label_ids": [
+          "topic:pain_musculoskeletal_health",
+          "topic:sleep"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000344",
+        "summary": "Ad for Serta Perfect Sleeper mattresses and an adjustable base, pitched for better sleep and back-pain relief."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000348",
+        "evidence_quote": "Visit Certa. dot com to find a retailer near you",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000344",
+        "summary": "Sponsor read directing listeners to a retailer to buy the mattress at a discount."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u000348",
+        "evidence_quote": "Certa Perfect Sleeper X mattresses",
+        "mention_role": "advertised",
+        "product_name": "Serta Perfect Sleeper X",
+        "product_type": "other_product",
+        "start_unit_id": "u000344"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The Serta Perfect Sleeper X mattress's Q4 Support System helps relieve aches and back pain.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000346",
+        "evidence_quote": "helps relieve aches and back pain",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "An efficacy claim about a mattress product's ability to relieve back pain that could be checked against evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000345",
+        "topic_ids": [
+          "topic:pain_musculoskeletal_health",
+          "topic:sleep"
+        ]
+      }
+    ],
+    "window_id": "episode_159422_window_0005"
+  },
+  "stored_at": "2026-09-12T23:16:54.045049+00:00"
+}

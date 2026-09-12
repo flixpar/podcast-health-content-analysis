@@ -1,0 +1,119 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "t-c380025w0001--add_hedge",
+  "provenance": {
+    "bundle": "bundle_002",
+    "ingested_at": "2026-09-12T22:31:21.186159+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-contrast-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "Held with a level of conviction that is resistant to contradictory evidence and is disconnected from consensual reality",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000001",
+        "summary": "Host explains the clinical distinction between delusion and psychosis, how sustained misperception can progress toward delusion, and how reality testing and gaslighting labels play out, using the Lindsay Clancy trial as a frame."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "the person who believes they're being gaslit is the one gaslighting the person who is desperately trying to ask the right questions",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000049",
+        "summary": "Host corrects the popular misuse of 'narcissistic' and 'gaslighting' labels for ordinary reality-testing questions."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "could",
+          "not necessarily"
+        ],
+        "claim_text": "Repeatedly and consistently misinterpreting reality in a sustained way can eventually lead to psychosis.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000041",
+        "evidence_quote": "That is not necessarily psychosis, although repeatedly in a sustained manner, that could eventually lead to psychosis.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Whether sustained ordinary misperception can progress into clinical psychosis is a checkable claim about psychiatric progression.",
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_380025_window_0001_add_hedge"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "Held with a level of conviction that is resistant to contradictory evidence and is disconnected from consensual reality",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000001",
+        "summary": "Host explains the clinical distinction between delusion and psychosis, how sustained misperception can progress toward delusion, and how reality testing and gaslighting labels play out, using the Lindsay Clancy trial as a frame."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "the person who believes they're being gaslit is the one gaslighting the person who is desperately trying to ask the right questions",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000049",
+        "summary": "Host corrects the popular misuse of 'narcissistic' and 'gaslighting' labels for ordinary reality-testing questions."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "could",
+          "not necessarily"
+        ],
+        "claim_text": "Repeatedly and consistently misinterpreting reality in a sustained way can eventually lead to psychosis.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000041",
+        "evidence_quote": "That is not necessarily psychosis, although repeatedly in a sustained manner, that could eventually lead to psychosis",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Whether sustained ordinary misperception can progress into clinical psychosis is a checkable claim about psychiatric progression.",
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_380025_window_0001_add_hedge"
+  },
+  "stored_at": "2026-09-12T22:31:21.186186+00:00"
+}

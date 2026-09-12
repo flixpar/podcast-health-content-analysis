@@ -1,0 +1,855 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c5436w0023",
+  "provenance": {
+    "bundle": "bundle_009",
+    "ingested_at": "2026-09-12T23:30:31.245850+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001355",
+        "evidence_quote": "But you also lower the support for the brain.",
+        "label_ids": [
+          "topic:cardiometabolic_health",
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001339",
+        "summary": "Discussion of cholesterol-lowering options (statins, PCSK9 inhibitors, Zetia, bergamot) framed around protecting brain health and cognitive decline as people age."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001380",
+        "evidence_quote": "We want to pull out, you know, all the stops to get the optimal reversal of cognitive decline.",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001356",
+        "summary": "Discussion of Dr. Dale Bredesen's book The Ageless Brain and a lifestyle protocol (eliminating dairy, grains, and simple carbs, plant-rich mildly ketogenic diet) to reverse or prevent cognitive decline."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001381",
+        "evidence_quote": "Managing stress, optimizing sleep.",
+        "label_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001381",
+        "summary": "Stress management named as one checklist item without elaboration."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001390",
+        "evidence_quote": "So you want to have at least seven hours of sleep at night.",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001381",
+        "summary": "Specific numeric targets given for sleep duration, REM sleep, deep sleep, and blood oxygen saturation during sleep."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001397",
+        "evidence_quote": "But all that information Dale just mentioned is comes to me every morning on this Aura ring.",
+        "label_ids": [
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001392",
+        "summary": "Host describes tracking sleep and health metrics via a wearable ring, and names Fitbit and Apple Watch as alternatives."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001405",
+        "evidence_quote": "high intensity interval training has turned out to be the one that seems to be the most effective at reducing your risk for cognitive",
+        "label_ids": [
+          "topic:fitness_exercise",
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001397",
+        "summary": "High-intensity interval training and blood-flow-restriction ('katsu') bands are discussed as exercise strategies to reduce Alzheimer's risk via improved insulin sensitivity."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001358",
+        "evidence_quote": "The book is called \"The Ageless Brain\" by Dr.",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001357",
+        "summary": "The book's author is introduced as 'Dr.' and endorsed personally, invoking his credentials to support the protocol that follows."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001372",
+        "evidence_quote": "And we were the first to publish that back in 2014.",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001368",
+        "summary": "Speaker cites his own team's publications as support for the claim that cognitive decline can be reversed."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001365",
+        "evidence_quote": "optimize your brain span",
+        "label_ids": [
+          "cross_cutting:optimization_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001365",
+        "summary": "Brain health is framed as something to be optimized."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001371",
+        "evidence_quote": "to get the optimal reversal of cognitive decline",
+        "label_ids": [
+          "cross_cutting:optimization_framing",
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001370",
+        "summary": "Reversal of cognitive decline is promised via an all-out optimization effort."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u001350",
+        "evidence_quote": "There are things like Zetia and bergamot, and just changing your diet and exercise.",
+        "mention_role": "recommended",
+        "product_name": "Zetia",
+        "product_type": "medication",
+        "start_unit_id": "u001350"
+      },
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u001355",
+        "evidence_quote": "That would be like a Crestor, instead of one that is a hydrophobic statin, which would be like a Lipitor.",
+        "mention_role": "recommended",
+        "product_name": "Crestor",
+        "product_type": "medication",
+        "start_unit_id": "u001354"
+      },
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u001355",
+        "evidence_quote": "instead of one that is a hydrophobic statin, which would be like a Lipitor.",
+        "mention_role": "neutral",
+        "product_name": "Lipitor",
+        "product_type": "medication",
+        "start_unit_id": "u001354"
+      },
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u001358",
+        "evidence_quote": "The book is called \"The Ageless Brain\" by Dr.",
+        "mention_role": "recommended",
+        "product_name": "The Ageless Brain",
+        "product_type": "book_or_media",
+        "start_unit_id": "u001357"
+      },
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u001395",
+        "evidence_quote": "I have an Aura ring on here.",
+        "mention_role": "recommended",
+        "product_name": "Oura Ring",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001393"
+      },
+      {
+        "confidence": 0.65,
+        "end_unit_id": "u001396",
+        "evidence_quote": "You can get a Fitbit, you can get an Apple Watch, but all that stuff is very easy.",
+        "mention_role": "neutral",
+        "product_name": "Fitbit",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001396"
+      },
+      {
+        "confidence": 0.65,
+        "end_unit_id": "u001396",
+        "evidence_quote": "you can get an Apple Watch, but all that stuff is very easy.",
+        "mention_role": "neutral",
+        "product_name": "Apple Watch",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001396"
+      },
+      {
+        "confidence": 0.5,
+        "end_unit_id": "u001403",
+        "evidence_quote": "These are restriction bands that you can put on your arms and your legs.",
+        "mention_role": "recommended",
+        "product_name": "KAATSU Bands",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001402"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Statins lower inflammation in the body.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001345",
+        "evidence_quote": "Yes, you lower the inflammation, which, by the way, you can do with other things.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Whether statins meaningfully reduce inflammation is a checkable pharmacological claim relevant to treatment choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u001345",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can be"
+        ],
+        "claim_text": "PCSK9 inhibitors can be more effective than statins at lowering cholesterol.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001353",
+        "evidence_quote": "PCSK9 inhibitors can be even better than this.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Comparative drug efficacy claim checkable against clinical trial evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u001353",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Hydrophilic statins such as Crestor are safer for the brain than hydrophobic statins such as Lipitor.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001355",
+        "evidence_quote": "But if you're going to use a statin, use one that would be called a hydrophilic statin.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about differential brain safety between statin subtypes based on lipophilicity.",
+        "relevance": "substantive",
+        "start_unit_id": "u001354",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Dairy consumption can produce some degree of inflammation.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001364",
+        "evidence_quote": "when you have any sort of dairy, can produce some degree of inflammation.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim that dairy causes inflammation, relevant to whether listeners should eliminate dairy.",
+        "relevance": "substantive",
+        "start_unit_id": "u001364",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Grains can damage the lining of the gut.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001366",
+        "evidence_quote": "You want to get rid of grains, which can damage your lining of your gut.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable causal claim about grains damaging gut lining, relevant to whether listeners should eliminate grains.",
+        "relevance": "substantive",
+        "start_unit_id": "u001366",
+        "topic_ids": [
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "seems to be"
+        ],
+        "claim_text": "High-intensity interval training is the most effective exercise for reducing the risk of cognitive decline.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001401",
+        "evidence_quote": "this this high intensity interval training has turned out to be the one that seems to be the most effective at reducing your risk for cognitive.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim comparing exercise modalities' effectiveness for reducing cognitive decline risk.",
+        "relevance": "substantive",
+        "start_unit_id": "u001400",
+        "topic_ids": [
+          "topic:fitness_exercise",
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Strength training improves insulin sensitivity, which is critical for the brain and for preventing Alzheimer's-related cognitive decline.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001405",
+        "evidence_quote": "when you do strength training, you are improving your insulin sensitivity, which is critical for your brain and critical for preventing cognitive decline of Alzheimer's disease.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable mechanistic claim linking strength training's effect on insulin sensitivity to Alzheimer's prevention.",
+        "relevance": "substantive",
+        "start_unit_id": "u001405",
+        "topic_ids": [
+          "topic:fitness_exercise",
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "At least seven hours of sleep per night is needed for optimal brain health.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001386",
+        "evidence_quote": "So you want to have at least seven hours of sleep at night.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric sleep-duration threshold checkable against sleep science recommendations.",
+        "relevance": "substantive",
+        "start_unit_id": "u001386",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "At least ninety minutes of REM sleep per night is needed.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001387",
+        "evidence_quote": "You want to have at least an hour and a half of REM each night.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric REM-sleep threshold checkable against sleep science.",
+        "relevance": "substantive",
+        "start_unit_id": "u001387",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "At least one hour of deep sleep per night is needed.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001388",
+        "evidence_quote": "You want to have at least one hour of deep sleep each night, and you want to have an oxygen concentration.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric deep-sleep threshold checkable against sleep science.",
+        "relevance": "substantive",
+        "start_unit_id": "u001388",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Blood oxygen saturation should be at least 94% during sleep.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001389",
+        "evidence_quote": "Saturation in your blood of at least 94% while you're sleeping.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric blood-oxygen threshold during sleep, checkable against sleep medicine standards.",
+        "relevance": "substantive",
+        "start_unit_id": "u001389",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      }
+    ],
+    "window_id": "episode_5436_window_0023"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001355",
+        "evidence_quote": "But you also lower the support for the brain",
+        "label_ids": [
+          "topic:cardiometabolic_health",
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001339",
+        "summary": "Discussion of cholesterol-lowering options (statins, PCSK9 inhibitors, Zetia, bergamot) framed around protecting brain health and cognitive decline as people age."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001380",
+        "evidence_quote": "We want to pull out, you know, all the stops to get the optimal reversal of cognitive decline",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001356",
+        "summary": "Discussion of Dr. Dale Bredesen's book The Ageless Brain and a lifestyle protocol (eliminating dairy, grains, and simple carbs, plant-rich mildly ketogenic diet) to reverse or prevent cognitive decline."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001381",
+        "evidence_quote": "Managing stress, optimizing sleep",
+        "label_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001381",
+        "summary": "Stress management named as one checklist item without elaboration."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001390",
+        "evidence_quote": "So you want to have at least seven hours of sleep at night",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001381",
+        "summary": "Specific numeric targets given for sleep duration, REM sleep, deep sleep, and blood oxygen saturation during sleep."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001397",
+        "evidence_quote": "But all that information Dale just mentioned is comes to me every morning on this Aura ring",
+        "label_ids": [
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001392",
+        "summary": "Host describes tracking sleep and health metrics via a wearable ring, and names Fitbit and Apple Watch as alternatives."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001405",
+        "evidence_quote": "high intensity interval training has turned out to be the one that seems to be the most effective at reducing your risk for cognitive",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:fitness_exercise"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001397",
+        "summary": "High-intensity interval training and blood-flow-restriction ('katsu') bands are discussed as exercise strategies to reduce Alzheimer's risk via improved insulin sensitivity."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001358",
+        "evidence_quote": "The book is called \"The Ageless Brain\" by Dr",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001357",
+        "summary": "The book's author is introduced as 'Dr.' and endorsed personally, invoking his credentials to support the protocol that follows."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001372",
+        "evidence_quote": "And we were the first to publish that back in 2014",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001368",
+        "summary": "Speaker cites his own team's publications as support for the claim that cognitive decline can be reversed."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001365",
+        "evidence_quote": "optimize your brain span",
+        "label_ids": [
+          "cross_cutting:optimization_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001365",
+        "summary": "Brain health is framed as something to be optimized."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001371",
+        "evidence_quote": "to get the optimal reversal of cognitive decline",
+        "label_ids": [
+          "cross_cutting:optimization_framing",
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001370",
+        "summary": "Reversal of cognitive decline is promised via an all-out optimization effort."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u001350",
+        "evidence_quote": "There are things like Zetia and bergamot, and just changing your diet and exercise",
+        "mention_role": "recommended",
+        "product_name": "Zetia",
+        "product_type": "medication",
+        "start_unit_id": "u001350"
+      },
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u001355",
+        "evidence_quote": "That would be like a Crestor, instead of one that is a hydrophobic statin, which would be like a Lipitor",
+        "mention_role": "recommended",
+        "product_name": "Crestor",
+        "product_type": "medication",
+        "start_unit_id": "u001354"
+      },
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u001355",
+        "evidence_quote": "instead of one that is a hydrophobic statin, which would be like a Lipitor",
+        "mention_role": "neutral",
+        "product_name": "Lipitor",
+        "product_type": "medication",
+        "start_unit_id": "u001354"
+      },
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u001358",
+        "evidence_quote": "The book is called \"The Ageless Brain\" by Dr",
+        "mention_role": "recommended",
+        "product_name": "The Ageless Brain",
+        "product_type": "book_or_media",
+        "start_unit_id": "u001357"
+      },
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u001395",
+        "evidence_quote": "I have an Aura ring on here",
+        "mention_role": "recommended",
+        "product_name": "Oura Ring",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001393"
+      },
+      {
+        "confidence": 0.65,
+        "end_unit_id": "u001396",
+        "evidence_quote": "You can get a Fitbit, you can get an Apple Watch, but all that stuff is very easy",
+        "mention_role": "neutral",
+        "product_name": "Fitbit",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001396"
+      },
+      {
+        "confidence": 0.65,
+        "end_unit_id": "u001396",
+        "evidence_quote": "you can get an Apple Watch, but all that stuff is very easy",
+        "mention_role": "neutral",
+        "product_name": "Apple Watch",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001396"
+      },
+      {
+        "confidence": 0.5,
+        "end_unit_id": "u001403",
+        "evidence_quote": "These are restriction bands that you can put on your arms and your legs",
+        "mention_role": "recommended",
+        "product_name": "KAATSU Bands",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001402"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Statins lower inflammation in the body.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001345",
+        "evidence_quote": "Yes, you lower the inflammation, which, by the way, you can do with other things",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Whether statins meaningfully reduce inflammation is a checkable pharmacological claim relevant to treatment choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u001345",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can be"
+        ],
+        "claim_text": "PCSK9 inhibitors can be more effective than statins at lowering cholesterol.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001353",
+        "evidence_quote": "PCSK9 inhibitors can be even better than this",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Comparative drug efficacy claim checkable against clinical trial evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u001353",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Hydrophilic statins such as Crestor are safer for the brain than hydrophobic statins such as Lipitor.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001355",
+        "evidence_quote": "But if you're going to use a statin, use one that would be called a hydrophilic statin",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about differential brain safety between statin subtypes based on lipophilicity.",
+        "relevance": "substantive",
+        "start_unit_id": "u001354",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Dairy consumption can produce some degree of inflammation.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001364",
+        "evidence_quote": "when you have any sort of dairy, can produce some degree of inflammation",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim that dairy causes inflammation, relevant to whether listeners should eliminate dairy.",
+        "relevance": "substantive",
+        "start_unit_id": "u001364",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Grains can damage the lining of the gut.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001366",
+        "evidence_quote": "You want to get rid of grains, which can damage your lining of your gut",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable causal claim about grains damaging gut lining, relevant to whether listeners should eliminate grains.",
+        "relevance": "substantive",
+        "start_unit_id": "u001366",
+        "topic_ids": [
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "seems to be"
+        ],
+        "claim_text": "High-intensity interval training is the most effective exercise for reducing the risk of cognitive decline.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001401",
+        "evidence_quote": "this this high intensity interval training has turned out to be the one that seems to be the most effective at reducing your risk for cognitive",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim comparing exercise modalities' effectiveness for reducing cognitive decline risk.",
+        "relevance": "substantive",
+        "start_unit_id": "u001400",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:fitness_exercise"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Strength training improves insulin sensitivity, which is critical for the brain and for preventing Alzheimer's-related cognitive decline.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001405",
+        "evidence_quote": "when you do strength training, you are improving your insulin sensitivity, which is critical for your brain and critical for preventing cognitive decline of Alzheimer's disease",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable mechanistic claim linking strength training's effect on insulin sensitivity to Alzheimer's prevention.",
+        "relevance": "substantive",
+        "start_unit_id": "u001405",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:fitness_exercise"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "At least seven hours of sleep per night is needed for optimal brain health.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001386",
+        "evidence_quote": "So you want to have at least seven hours of sleep at night",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric sleep-duration threshold checkable against sleep science recommendations.",
+        "relevance": "substantive",
+        "start_unit_id": "u001386",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "At least ninety minutes of REM sleep per night is needed.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001387",
+        "evidence_quote": "You want to have at least an hour and a half of REM each night",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric REM-sleep threshold checkable against sleep science.",
+        "relevance": "substantive",
+        "start_unit_id": "u001387",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "At least one hour of deep sleep per night is needed.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001388",
+        "evidence_quote": "You want to have at least one hour of deep sleep each night, and you want to have an oxygen concentration",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric deep-sleep threshold checkable against sleep science.",
+        "relevance": "substantive",
+        "start_unit_id": "u001388",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Blood oxygen saturation should be at least 94% during sleep.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001389",
+        "evidence_quote": "Saturation in your blood of at least 94% while you're sleeping",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific numeric blood-oxygen threshold during sleep, checkable against sleep medicine standards.",
+        "relevance": "substantive",
+        "start_unit_id": "u001389",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      }
+    ],
+    "window_id": "episode_5436_window_0023"
+  },
+  "stored_at": "2026-09-12T23:30:31.245884+00:00"
+}
