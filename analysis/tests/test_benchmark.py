@@ -260,3 +260,45 @@ def test_run_fingerprint_ignores_item_set_and_bookkeeping():
     assert runner.fingerprint_from_manifest(base) == runner.fingerprint_from_manifest(grown)
     assert runner.fingerprint_from_manifest(base) != runner.fingerprint_from_manifest(changed)
 
+
+def test_adjudication_survives_an_added_annotator_and_required_is_a_count():
+    item = make_item()
+    refs = {item["item_id"]: {"a": {"result": reference_result(item, 0)}, "b": {"result": reference_result(item, 1)}, "c": {"result": reference_result(item, 2)}}}
+    records, _ = references.aggregate([item], refs, {}, {})
+    singles = [r for r in records if r["tier"] == "singleton"]
+    assert singles, "fixture should leave at least one singleton"
+    target = singles[0]
+    overlay = {(item["item_id"], target["members"][0]): {"tier": "rejected", "member": target["members"][0]}}
+    records2, _ = references.aggregate([item], refs, {}, overlay)
+    assert [r["tier"] for r in records2 if r["members"] == target["members"]] == ["rejected"]
+    # A fourth annotator that repeats annotator a's labels re-clusters everything; the verdict
+    # still lands on the same atom, and atoms a and d share become required by count (2 of 4).
+    refs[item["item_id"]]["d"] = {"result": reference_result(item, 0)}
+    records3, _ = references.aggregate([item], refs, {}, overlay)
+    hit = [r for r in records3 if target["members"][0] in r["members"]]
+    assert len(hit) == 1
+    assert hit[0]["tier"] in ("rejected", "required")
+    assert all(r["tier"] == "required" for r in records3 if len(r["annotators"]) >= 2)
+    assert all(r["tier"] != "required" for r in records3 if len(r["annotators"]) < 2)
+
+
+def test_adjacent_credit_counts_a_reference_confusion_pair_once():
+    item = make_item()
+    last = min(2, len(item["units"]) - 1)
+    gold = [matching.GoldAtom("g", "detection", (0, last), (0, last), "topic", "topic:food_nutrition", "required", 1.0, ["a", "b"], {}, [], [], [], [], [])]
+    result = {
+        "window_id": item["window_id"],
+        "detections": [
+            {"start_unit_id": item["units"][0]["unit_id"], "end_unit_id": item["units"][last]["unit_id"], "axis": "topic", "label_ids": ["topic:functional_nutrition_supplements"], "relevance": "substantive", "discourse_role": "asserted_or_endorsed", "confidence": 0.8, "summary": "s", "evidence_quote": item["units"][0]["text"]},
+        ],
+        "verification_candidates": [],
+        "product_mentions": [],
+    }
+    strict = scoring.score_item(item, result, gold)
+    assert strict["counts"]["detection:topic"]["fp"] == 1 and strict["counts"]["detection:topic"]["fn"] == 1
+    adjacency = {tuple(sorted(("topic:food_nutrition", "topic:functional_nutrition_supplements")))}
+    loose = scoring.score_item(item, result, gold, adjacency=adjacency)
+    assert loose["counts"]["detection:topic"]["adjacent"] == 1
+    pooled = scoring._pool([loose], "detection:topic")
+    assert pooled["f1_strict"] == 0.0 and pooled["f1_adjacent"] == 1.0
+

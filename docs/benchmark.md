@@ -75,8 +75,14 @@ delta per annotator so a repair habit that drops hard annotations is visible.
 clustering uses the same matching rules a candidate is scored with. Each gold
 atom records:
 
-- `tier`: `required` (at least two of three annotators), `singleton` (one),
-  or, through the adjudication overlay, `acceptable` or `rejected`;
+- `tier`: `required` (annotator authority of at least 2 behind it, i.e.
+  two ordinary annotators, however many there are in total), `singleton`
+  (one), or, through the adjudication overlay, `acceptable` or `rejected`;
+- `members`: one `<annotator>:<atom hash>` per contributing atom. An
+  adjudication verdict is keyed by the singleton's member, not by the
+  cluster's position, so it survives re-clustering when annotators are
+  added, and it lapses on its own once a second annotator agrees with the
+  atom (the atom is then required on its merits);
 - the tightest and widest reference span (the envelope);
 - per-attribute vote distributions (discourse role, relevance, certainty,
   claim type, product type, mention role, product name).
@@ -90,6 +96,21 @@ passage does not do what it was written to do and should be fixed or
 dropped; a contradicted peripheral attribute is corrected in the plant with
 a note under `provenance.plant_revisions`, since the plant is a check on the
 item, not part of the gold.
+
+`aggregate` also derives two things from the references that scoring reads
+back:
+
+- a **label adjacency table** (`agreement.json: label_adjacency`): same-axis
+  label pairs that different annotators put on the same span in each
+  other's place at least three times. A candidate that lands on the other
+  side of one of these pairs is making a disagreement the references make
+  themselves; the scorecard reports an adjacent-credit F1 beside strict F1
+  (never in its place), and marks such pairs in its confusion list;
+- a **leave-one-out ceiling** (`agreement.json: leave_one_out`): each
+  annotator scored as a candidate against gold rebuilt without it, with
+  the same scoring and the overlay still applied. This is what a labeler
+  of reference quality scores on the scorecard, in the scorecard's own
+  units, and is the ceiling to read the headline numbers against.
 
 The mechanical gold is reproducible from the references; the overlay is
 applied on top, never edited in. A future human expert pass is just another
@@ -191,6 +212,14 @@ its store does not hold yet, so an old run and a new one compare over their
 shared items rather than starting over.
 
 ## Building and extending the benchmark
+
+Growing the item set: raise the quotas in a config (see
+`benchmark/config-grow.toml`, which also narrows the rare-label lists to the
+labels round 1 covered thinly and raises the per-label caps), build a pool
+with `--config <that file> pool --out-dir benchmark/pool-grow`, screen the
+strata that need filling, then `select --grow`, which keeps every existing
+item and its split and only fills strata below quota. New items then get
+reference passes with `reference tasks --annotator <id> --only-missing`.
 
 The agent-driven steps all use the same mechanism: the CLI writes
 self-contained bundles under `../podcast-misinfo-benchmark-tasks/` (or

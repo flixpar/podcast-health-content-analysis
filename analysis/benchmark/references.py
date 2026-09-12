@@ -40,7 +40,10 @@ from analysis.benchmark.matching import (
 )
 from analysis.benchmark.taxonomy import label_axes
 
-REQUIRED_SUPPORT = 2 / 3 - 1e-9
+# An atom is required gold once this much annotator authority stands behind it
+# (two ordinary annotators, or one whose registered authority is 2). A count,
+# not a share, so adding annotators never demotes what two already agreed on.
+REQUIRED_WEIGHT = 2.0 - 1e-9
 CLAIM_OPTIONAL_FIELDS = ("relevance",)
 VOTED_ATTRIBUTES = {
     "detection": ("relevance", "discourse_role"),
@@ -225,6 +228,7 @@ def _cluster_as_gold(cluster: dict[str, Any], number: int, total_annotators: int
         claim_texts=[atom.claim_text for _, atom in members if atom.claim_text],
         product_keys=sorted({atom.product_key for _, atom in members if atom.product_key}),
         product_names=sorted({atom.product_name for _, atom in members if atom.product_name}),
+        members=sorted(atom.member_key(annotator) for annotator, atom in members),
     )
 
 
@@ -244,24 +248,35 @@ def gold_for_item(
         gold = _cluster_as_gold(cluster, number, len(per_annotator))
         weight = sum(float(annotators.get(a, {}).get("authority", 1.0)) for a in gold.annotators)
         gold.support = weight / total_weight if total_weight else 0.0
-        gold.tier = "required" if gold.support >= REQUIRED_SUPPORT else "singleton"
+        gold.tier = "required" if weight >= REQUIRED_WEIGHT else "singleton"
         golds.append(gold)
     return golds
 
 
 def load_adjudication(path: Path = ADJUDICATION_PATH) -> dict[tuple[str, str], dict[str, Any]]:
+    """Verdicts keyed by (item_id, member key); legacy rows without a member key by (item_id, gold_id)."""
     if not Path(path).exists():
         return {}
     out = {}
     for row in tl.iter_jsonl(Path(path)):
-        out[(row["item_id"], row["gold_id"])] = row
+        out[(row["item_id"], row.get("member") or row["gold_id"])] = row
     return out
 
 
 def apply_overlay(item_id: str, golds: list[GoldAtom], overlay: dict[tuple[str, str], dict[str, Any]]) -> list[GoldAtom]:
+    """Apply adjudication verdicts to the singletons they were made about.
+
+    A verdict is attached to one annotator's atom. It only matters while that
+    atom still stands alone: once another annotator agrees with it the atom is
+    required on its own merits, and the verdict is moot.
+    """
     for gold in golds:
-        decision = overlay.get((item_id, gold.gold_id))
-        if decision and decision.get("tier") in ("required", "acceptable", "singleton", "rejected"):
+        if gold.tier != "singleton":
+            continue
+        decision = overlay.get((item_id, gold.members[0])) if gold.members else None
+        if decision is None:
+            decision = overlay.get((item_id, gold.gold_id))
+        if decision and decision.get("tier") in ("acceptable", "rejected"):
             gold.tier = decision["tier"]
     return golds
 
@@ -287,6 +302,7 @@ def gold_record(item: dict[str, Any], gold: GoldAtom) -> dict[str, Any]:
         "claim_texts": gold.claim_texts,
         "product_keys": gold.product_keys,
         "product_names": gold.product_names,
+        "members": gold.members,
     }
 
 
@@ -307,6 +323,7 @@ def gold_from_record(record: dict[str, Any]) -> GoldAtom:
         claim_texts=record.get("claim_texts", []),
         product_keys=record.get("product_keys", []),
         product_names=record.get("product_names", []),
+        members=list(record.get("members", [])),
     )
 
 
@@ -544,3 +561,100 @@ def check_plants(items: Sequence[dict[str, Any]], records: Sequence[dict[str, An
                     entry["ok"] = verdict == "ok"
                     report.append(entry)
     return report
+
+
+# --------------------------------------------------------------------------
+# Label adjacency and the leave-one-out ceiling
+# --------------------------------------------------------------------------
+
+ADJACENCY_MIN_COUNT = 3
+
+
+def label_adjacency(
+    items: Sequence[dict[str, Any]],
+    references: dict[str, dict[str, dict[str, Any]]],
+    min_count: int = ADJACENCY_MIN_COUNT,
+) -> list[dict[str, Any]]:
+    """Same-axis label pairs the annotators put on the same span in each other's place.
+
+    Counted once per (item, annotator pair, span) where annotator A used
+    label X and annotator B used label Y on a span at least 80% shared, and
+    neither used the other's label there. Pairs seen ``min_count`` times or
+    more are the benchmark's adjacency table: a candidate that lands on the
+    other side of one of these is making a disagreement the references make
+    themselves, and adjacent-credit F1 says how much of its error is that.
+    """
+    from analysis.benchmark.matching import overlap_coefficient
+
+    counts: Counter[tuple[str, str, str]] = Counter()
+    for item in items:
+        refs = references.get(item["item_id"])
+        if not refs or len(refs) < 2:
+            continue
+        index = WindowIndex(item)
+        atoms = {a: [x for x in _atoms_for(r, index) if x.kind == "detection"] for a, r in refs.items()}
+        ids = sorted(atoms)
+        for i, a in enumerate(ids):
+            for b in ids[i + 1 :]:
+                for x in atoms[a]:
+                    if any(y.label == x.label and overlap_coefficient((x.start, x.end), (y.start, y.end)) >= 0.5 for y in atoms[b]):
+                        continue
+                    for y in atoms[b]:
+                        if y.axis != x.axis or y.label == x.label:
+                            continue
+                        if overlap_coefficient((x.start, x.end), (y.start, y.end)) < 0.8:
+                            continue
+                        if any(z.label == y.label and overlap_coefficient((z.start, z.end), (y.start, y.end)) >= 0.5 for z in atoms[a]):
+                            continue
+                        first, second = sorted((x.label, y.label))
+                        counts[(x.axis, first, second)] += 1
+    return [
+        {"axis": axis, "labels": [first, second], "count": n}
+        for (axis, first, second), n in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))
+        if n >= min_count
+    ]
+
+
+def adjacency_set(table: Sequence[dict[str, Any]]) -> set[tuple[str, str]]:
+    return {tuple(sorted(row["labels"])) for row in table}
+
+
+HEADLINE_STRATA = ("health_dense", "mixed", "null", "ad_read", "discourse")
+
+
+def leave_one_out(
+    items: Sequence[dict[str, Any]],
+    references: dict[str, dict[str, dict[str, Any]]],
+    annotators: dict[str, dict[str, Any]],
+    overlay: dict[tuple[str, str], dict[str, Any]],
+    aliases: dict[str, str] | None = None,
+    adjacency: set[tuple[str, str]] | None = None,
+) -> dict[str, Any]:
+    """Each annotator scored, as if it were a candidate, against gold built from the others.
+
+    This is the ceiling a labeler of reference quality reaches on the same
+    scorecard: gold is rebuilt without the held-out annotator (so its own
+    atoms cannot vote), the adjudication overlay still applies to whatever
+    singletons remain (verdicts are keyed by atom), and the score is the
+    headline strata only.
+    """
+    from analysis.benchmark import scoring
+
+    ids = sorted({a for refs in references.values() for a in refs})
+    head = [item for item in items if item.get("stratum") in HEADLINE_STRATA and item["item_id"] in references]
+    out: dict[str, Any] = {}
+    for held in ids:
+        rest = {iid: {a: r for a, r in refs.items() if a != held} for iid, refs in references.items()}
+        records, _ = aggregate(head, rest, annotators, overlay)
+        gold: dict[str, list[GoldAtom]] = defaultdict(list)
+        for record in records:
+            gold[record["item_id"]].append(gold_from_record(record))
+        rows = []
+        for item in head:
+            ref = references[item["item_id"]].get(held)
+            if ref is None or len(rest[item["item_id"]]) < MIN_ANNOTATORS:
+                continue
+            rows.append(scoring.score_item(item, ref["result"], gold.get(item["item_id"], []), aliases, adjacency))
+        summary = scoring.summarize(rows)
+        out[held] = {"items": len(rows), "groups": summary.get("groups", {})}
+    return out

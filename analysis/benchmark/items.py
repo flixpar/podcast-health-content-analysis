@@ -506,7 +506,7 @@ def build_pool(
         for episode_id, rare_key in candidates:
             if taken >= targets[stratum]:
                 break
-            if stratum == "rare_label" and per_label_taken[rare_key] >= 3:
+            if stratum == "rare_label" and per_label_taken[rare_key] >= int(config["strata"]["rare_label"].get("pool_windows_per_label", 3)):
                 continue
             windows, features = windows_and_features(episode_id)
             qualifying: list[int] = []
@@ -693,7 +693,7 @@ def select_items(
             show = window["provenance"].get("podcast_id")
             if per_show[show] >= max_per_show or per_episode[window["episode_id"]] >= max_per_episode:
                 continue
-            if stratum == "rare_label" and rare_taken[window["pool_rare_label"]] >= 2:
+            if stratum == "rare_label" and rare_taken[window["pool_rare_label"]] >= int(config["strata"]["rare_label"].get("items_per_label", 2)):
                 continue
             tags = sorted(set(window.get("tags", [])) | set(verdict.get("tags", [])))
             item = {
@@ -706,7 +706,7 @@ def select_items(
                 "provenance": {**window["provenance"], "rare_label": window.get("pool_rare_label")},
                 "features": window.get("features", {}),
                 "screening": {k: verdict.get(k) for k in ("interest", "ambiguity", "notes") if k in verdict},
-                "added_in": BENCHMARK_VERSION,
+                "added_in": str(config.get("benchmark", {}).get("added_in", BENCHMARK_VERSION)),
             }
             kept.append(item)
             existing_ids.add(item_id)

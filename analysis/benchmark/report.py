@@ -12,6 +12,7 @@ HEADLINE_ROWS: list[tuple[str, str, str]] = [
     # (label, group, field)
     ("Topic F1 (strict)", "detection:topic", "f1_strict"),
     ("Topic F1 (soft)", "detection:topic", "f1_soft"),
+    ("Topic F1 (adjacent credit)", "detection:topic", "f1_adjacent"),
     ("Topic recall (required)", "detection:topic", "recall_strict"),
     ("Topic precision", "detection:topic", "precision"),
     ("Frame F1 (soft)", "detection:frame", "f1_soft"),
@@ -82,6 +83,38 @@ def scorecard(score: dict[str, Any]) -> str:
         lines.append(f"| {group} | {_fmt(candidate)} | {ref_text} | {_fmt(noise.get(group, {}).get('f1'))} |")
     attributes = score.get("mean", {}).get("headline", {}).get("attributes", {})
     lines.append("")
+    loo = score.get("leave_one_out") or {}
+    if loo:
+        lines.append("## Reference annotators scored against the others' gold (leave one out)")
+        lines.append("")
+        lines.append(
+            "Each reference annotator scored as a candidate against gold rebuilt without it, on the "
+            "headline strata with the same scoring. This is what a labeler of reference quality "
+            "scores on this scorecard; a candidate at these numbers is at ceiling."
+        )
+        lines.append("")
+        lines.append("| annotator | items | topic P / R / F1 | topic F1 adjacent | frame F1 | evidence F1 | claim P / R / F1 | product F1 |")
+        lines.append("| --- | --- | --- | --- | --- | --- | --- | --- |")
+        for annotator, entry in sorted(loo.items()):
+            g = entry.get("groups", {})
+            t, c = g.get("detection:topic", {}), g.get("claim", {})
+            lines.append(
+                f"| {annotator} | {entry.get('items')} | {_fmt(t.get('precision'))} / {_fmt(t.get('recall_strict'))} / {_fmt(t.get('f1_strict'))} "
+                f"| {_fmt(t.get('f1_adjacent'))} | {_fmt(g.get('detection:frame', {}).get('f1_strict'))} | {_fmt(g.get('detection:evidence', {}).get('f1_strict'))} "
+                f"| {_fmt(c.get('precision'))} / {_fmt(c.get('recall_strict'))} / {_fmt(c.get('f1_strict'))} | {_fmt(g.get('product', {}).get('f1_strict'))} |"
+            )
+        lines.append("")
+    confusions = (score.get("mean", {}).get("headline", {}) or {}).get("confusions") or []
+    adjacency = {tuple(sorted(r["labels"])) for r in score.get("label_adjacency", [])}
+    if confusions:
+        lines.append("## Top label confusions (same-axis false positives, predicted -> nearest gold label)")
+        lines.append("")
+        lines.append("Pairs marked * are ones the reference annotators confuse among themselves (the adjacency table); they earn adjacent credit.")
+        lines.append("")
+        for row in confusions[:12]:
+            mark = " *" if tuple(sorted((row["predicted"], row["gold"]))) in adjacency else ""
+            lines.append(f"- {row['predicted']} -> {row['gold']}: {_fmt(row['count'])}{mark}")
+        lines.append("")
     lines.append("## Attribute agreement on matched atoms")
     lines.append("")
     lines.append("| attribute | n | exact | vote share | weighted kappa | reference alpha |")

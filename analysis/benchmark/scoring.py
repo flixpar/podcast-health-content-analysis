@@ -15,6 +15,9 @@ from typing import Any, Sequence
 from analysis import topic_labeling as tl
 from analysis.benchmark import stats
 from analysis.benchmark.matching import (
+    overlap_coefficient,
+    overlaps,
+    match_score,
     iou,
     CERTAINTY_ORDER,
     Atom,
@@ -34,13 +37,36 @@ def group_of(atom: Atom | GoldAtom) -> str:
     return f"detection:{atom.axis}" if atom.kind == "detection" else atom.kind
 
 
+def _nearest_same_axis_label(pred: Atom, golds: Sequence[GoldAtom]) -> str | None:
+    """The label of the closest same-axis gold atom overlapping a false positive, for confusion counts."""
+    best = None
+    for gold in golds:
+        if gold.kind != "detection" or gold.axis != pred.axis or gold.label == pred.label:
+            continue
+        if not overlaps((pred.start, pred.end), gold.envelope):
+            continue
+        score = overlap_coefficient((pred.start, pred.end), gold.tight)
+        if best is None or score > best[0]:
+            best = (score, gold.label)
+    return best[1] if best else None
+
+
 def score_item(
     item: dict[str, Any],
     result: dict[str, Any] | None,
     golds: Sequence[GoldAtom],
     aliases: dict[str, str] | None = None,
+    adjacency: set[tuple[str, str]] | None = None,
 ) -> dict[str, Any]:
-    """Everything about one item: counts per group, attribute pairs, errors."""
+    """Everything about one item: counts per group, attribute pairs, errors.
+
+    ``adjacency`` is the set of same-axis label pairs the reference annotators
+    themselves confuse (see references.label_adjacency). After the strict
+    matching, unmatched predictions and unmatched credit-bearing gold of an
+    adjacent label on the same span are paired once more and counted as
+    ``adjacent``; F1 with adjacent credit is reported beside strict F1, never
+    in its place.
+    """
     index = WindowIndex(item)
     preds = explode(result, index, aliases) if result else []
     scorable = [g for g in golds if g.tier != "rejected"]
@@ -105,10 +131,25 @@ def score_item(
                     "group": group,
                     "class": near_miss_class(pred, scorable),
                     "label": pred.label,
+                    "near_label": _nearest_same_axis_label(pred, scorable),
                     "span": [pred.start, pred.end],
                     "text": pred.claim_text or pred.product_name or pred.quote,
                 }
             )
+    if adjacency:
+        loose_preds = [(i, p) for i, p in enumerate(preds) if i not in pred_to_gold and p.kind == "detection"]
+        loose_gold = [(j, g) for j, g in enumerate(scorable) if j not in matched_gold and g.kind == "detection" and g.tier in CREDIT_TIERS]
+        for pi, pred in loose_preds:
+            best = None
+            for gj, gold in loose_gold:
+                if gold.axis != pred.axis or tuple(sorted((pred.label, gold.label))) not in adjacency:
+                    continue
+                score = match_score(Atom(pred.kind, pred.start, pred.end, axis=pred.axis, label=gold.label), gold)
+                if score > 0 and (best is None or score > best[1]):
+                    best = (gj, score)
+            if best is not None:
+                counts[group_of(pred)]["adjacent"] += 1
+                loose_gold = [(gj, g) for gj, g in loose_gold if gj != best[0]]
     for j, gold in enumerate(scorable):
         group = group_of(gold)
         counts[group]["gold"] += 1
@@ -183,6 +224,7 @@ def _pool(rows: Sequence[dict[str, Any]], group: str) -> dict[str, Any]:
     soft_gold = sum(r["counts"].get(group, {}).get("soft_gold", 0.0) for r in rows)
     soft_matched = sum(r["counts"].get(group, {}).get("soft_matched", 0.0) for r in rows)
     iou_sum = sum(r["counts"].get(group, {}).get("span_iou_sum", 0.0) for r in rows)
+    adjacent = sum(r["counts"].get(group, {}).get("adjacent", 0) for r in rows)
     return {
         "pred": pred,
         "gold": gold,
@@ -198,6 +240,8 @@ def _pool(rows: Sequence[dict[str, Any]], group: str) -> dict[str, Any]:
         "f1_soft": round(_soft_f1(tp, fp, soft_matched, soft_gold), 4) if soft_gold else None,
         "yield_ratio": round(pred / gold, 3) if gold else None,
         "mean_span_iou": round(iou_sum / tp, 3) if tp and group.startswith("detection") else None,
+        "adjacent": adjacent,
+        "f1_adjacent": round(stats.f1(tp + adjacent, fp - adjacent, fn - adjacent), 4) if group.startswith("detection") and tp + fp + fn else None,
     }
 
 
@@ -233,6 +277,16 @@ def _attribute_summary(rows: Sequence[dict[str, Any]]) -> dict[str, Any]:
         entry["confusions"] = dict(confusion.most_common(8))
         out[key] = entry
     return out
+
+
+def _confusion_summary(rows: Sequence[dict[str, Any]], top: int = 12) -> list[dict[str, Any]]:
+    """Most frequent (predicted label, nearest gold label) pairs among same-axis false positives."""
+    pairs: Counter[tuple[str, str]] = Counter()
+    for row in rows:
+        for error in row.get("errors", []):
+            if error.get("type") == "false_positive" and error.get("class") == "same_axis_wrong_label" and error.get("near_label"):
+                pairs[(error["label"], error["near_label"])] += 1
+    return [{"predicted": a, "gold": b, "count": n} for (a, b), n in pairs.most_common(top)]
 
 
 def _error_summary(rows: Sequence[dict[str, Any]]) -> dict[str, Any]:
@@ -296,6 +350,7 @@ def summarize(rows: Sequence[dict[str, Any]]) -> dict[str, Any]:
         "groups": {group: _pool(labeled, group) for group in GROUPS},
         "attributes": _attribute_summary(labeled),
         "errors": _error_summary(labeled),
+        "confusions": _confusion_summary(labeled),
         "null": _null_summary(labeled),
         "calibration": _calibration_summary(labeled),
     }
@@ -320,13 +375,14 @@ def score_run(
     gold: dict[str, list[GoldAtom]],
     aliases: dict[str, str] | None = None,
     hide_test: bool = True,
+    adjacency: set[tuple[str, str]] | None = None,
 ) -> dict[str, Any]:
     """Score one repeat of a run over the items that have gold."""
     rows = []
     for item in items:
         if item["item_id"] not in gold:
             continue
-        rows.append(score_item(item, results.get(item["window_id"]), gold[item["item_id"]], aliases))
+        rows.append(score_item(item, results.get(item["window_id"]), gold[item["item_id"]], aliases, adjacency))
     headline_rows = [r for r in rows if r["stratum"] not in ("rare_label", "synthetic", "contrast")]
     report = {
         "items_scored": len(rows),

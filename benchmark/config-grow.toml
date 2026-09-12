@@ -1,0 +1,119 @@
+# Benchmark composition and sourcing. Read by `python -m analysis.benchmark`.
+# Quotas and seeds live here so growing the set is a config change plus a
+# re-run of `pool` / `select`, and the item hash in manifest.json says which
+# set a run was scored on.
+
+[benchmark]
+version = "v1"
+# Items selected under this config carry this marker in `added_in`.
+added_in = "v1-r2"
+seed = 20260909
+
+[paths]
+scan_dir = "/mnt/data2/podcast-data/fast-analysis/scan_v2"
+metadata_db = "downloader/data/podcast_metadata.db"
+transcripts = "downloader/data/transcripts"
+lexicon = "benchmark/lexicon-v2.json"
+topics = "benchmark/topics-v6.md"
+
+# Identical to the pipeline defaults, so an item is exactly the window the
+# production pass would have built for that episode.
+[windowing]
+window_words = 900
+overlap_words = 150
+max_unit_words = 45
+
+# Final item counts per stratum. `contrast` counts twins, not pairs.
+# Growth round (2026-09-12): quotas are totals, `select --grow` keeps the
+# existing items and fills only the strata below quota, drawing rare-label
+# windows for the labels the v1 gold covers thinly.
+[quotas]
+health_dense = 40
+mixed = 40
+null = 40
+ad_read = 20
+discourse = 20
+rare_label = 70
+synthetic = 15
+contrast = 15
+
+[pool]
+# Candidate windows per stratum relative to its quota; screening trims them.
+oversample = 2.5
+# Episodes read per stratum; each yields at most `max_windows_per_episode`.
+episodes_per_stratum = 120
+max_windows_per_episode = 2
+max_items_per_show = 6
+max_episodes_per_show = 4
+# Windows shorter than this (an episode's tail) are not sampled.
+min_window_words = 600
+
+[split]
+# Stratified dev/test split; test per-item results are hidden by default.
+test_fraction = 0.34
+
+# Ordered: the first matching category wins, else "other" (the same rule the
+# corpus profile in analysis/output/fast-analysis uses).
+[genre_groups]
+news_politics = ["Daily News", "News Commentary", "Politics", "Government", "News", "Business News", "Tech News"]
+true_crime = ["True Crime"]
+health_wellness = ["Alternative Health", "Mental Health", "Nutrition", "Fitness", "Medicine", "Sexuality", "Health & Fitness"]
+business_selfhelp = ["Entrepreneurship", "Investing", "Management", "Marketing", "Careers", "Self-Improvement", "Business", "How To"]
+religion = ["Christianity", "Spirituality", "Religion & Spirituality", "Philosophy"]
+comedy = ["Stand-Up", "Improv", "Comedy Interviews", "Comedy"]
+sports = ["Football", "Fantasy Sports", "Sports"]
+education_science = ["Natural Sciences", "Life Sciences", "Social Sciences", "Science", "History", "Courses", "Education"]
+entertainment = ["TV & Film", "Film History", "Music Interviews", "Music", "Performing Arts", "Books", "Fiction", "Drama", "Fantasy", "Science Fiction", "Arts", "Leisure", "Hobbies", "Wilderness", "Technology"]
+society_culture = ["Relationships", "Personal Journals", "Documentary", "Society & Culture"]
+
+[strata.health_dense]
+genres = ["health_wellness"]
+# Episode health density (health-section hit sentences per sentence) must be
+# in this top quantile of its genre group.
+episode_density_quantile = 0.8
+# Units with a health-section hit, per window.
+min_health_units = 5
+
+[strata.mixed]
+genres = ["news_politics", "comedy", "society_culture", "business_selfhelp", "true_crime", "entertainment", "sports", "education_science", "religion"]
+min_health_units = 1
+max_health_units = 3
+max_commercial_units = 1
+
+[strata.null]
+genres = ["news_politics", "comedy", "society_culture", "business_selfhelp", "true_crime", "entertainment", "sports", "education_science", "religion"]
+# Episodes in the bottom half of health density within the genre.
+episode_density_quantile_max = 0.5
+max_health_units = 0
+# Neighbouring windows must also be nearly empty, so the item is not the edge
+# of a health discussion that overlap would carry in.
+max_neighbour_health_units = 1
+
+[strata.ad_read]
+genres = ["health_wellness", "news_politics", "comedy", "society_culture", "business_selfhelp", "true_crime", "entertainment", "sports", "education_science", "religion"]
+min_commercial_units = 2
+min_health_product_units = 1
+
+[strata.discourse]
+# Debunking and science-explainer shows by podcast id (Maintenance Phase,
+# Science Vs, Conspiracy Theories, Behind the Bastards, Radiolab, Hidden
+# Brain, Something You Should Know, Stuff You Should Know, Decoded).
+podcast_ids = [151, 245, 194, 257, 83, 133, 69, 15, 79]
+min_health_units = 2
+min_discourse_units = 1
+
+[strata.rare_label]
+# Windows are drawn round-robin across these scan labels, least common first.
+# Round 2: the labels with fewer than five required gold atoms after round 1
+# and a scan label to retrieve them by.
+topics = ["manosphere_masculinity_adjacent_health", "biohacking_human_optimization", "cancer_alternative_treatments_cure_narratives", "cannabis_psychedelics_emerging_psychoactive_substances", "chronic_complex_symptom_communities", "infectious_disease_outbreaks", "neurodevelopment_autism_discourse", "nicotine_tobacco_stimulants", "peptides_experimental_optimization_compounds", "regenerative_aesthetic_medicine"]
+frames = ["cancer_conspiracy", "fluoride_conspiracy", "maha_adjacent_online_vocabulary", "biohacking_framing", "food_conspiracy", "geo_environment_conspiracy", "maha_environmental_vocabulary", "maha_food_vocabulary", "maha_official_core_vocabulary", "medical_freedom", "parasite_framework"]
+narratives = []
+episodes_per_label = 5
+# Round 2 draws more candidates per label than v1 (3 and 2) to fill 50 items over 21 labels.
+pool_windows_per_label = 7
+items_per_label = 3
+
+[tags]
+# Repeated word-trigram share above which a window is tagged asr_noise.
+asr_noise_repeat_ratio = 0.04

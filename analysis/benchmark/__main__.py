@@ -252,9 +252,13 @@ def cmd_reference_tasks(args: argparse.Namespace) -> int:
     config = items_mod.load_config(args.config)
     taxonomy = load_benchmark_taxonomy(args.taxonomy)
     items = items_mod.load_items(args.items)
-    items = [i for i in items if i.get("source") != "contrast"]
+    # Contrast twins are left out unless asked for by stratum: they exist to be
+    # compared with their base, but annotating them too lets the perturbation
+    # spec be checked against the annotators themselves.
     if args.strata:
         items = [i for i in items if i["stratum"] in args.strata]
+    else:
+        items = [i for i in items if i.get("source") != "contrast"]
     if args.only_missing:
         existing = refs_mod.load_references()
         items = [i for i in items if args.annotator not in existing.get(i["item_id"], {})]
@@ -311,6 +315,11 @@ def cmd_aggregate(args: argparse.Namespace) -> int:
     annotators = refs_mod.load_annotators()
     overlay = refs_mod.load_adjudication(args.adjudication)
     records, agreement = refs_mod.aggregate(items, references, annotators, overlay)
+    taxonomy = load_benchmark_taxonomy(args.taxonomy)
+    aliases = alias_map(taxonomy, None)
+    agreement["label_adjacency"] = refs_mod.label_adjacency(items, references)
+    adjacency = refs_mod.adjacency_set(agreement["label_adjacency"])
+    agreement["leave_one_out"] = refs_mod.leave_one_out(items, references, annotators, overlay, aliases, adjacency)
     plants = refs_mod.check_plants(items, records)
     agreement["synthetic_plants"] = {
         "checked": len(plants),
@@ -328,7 +337,7 @@ def cmd_aggregate(args: argparse.Namespace) -> int:
         "items": len(items),
         "items_hash": items_mod.items_hash(items),
         "composition": items_mod.composition(items),
-        "taxonomy_sha256": load_benchmark_taxonomy(args.taxonomy)["taxonomy_sha256"],
+        "taxonomy_sha256": taxonomy["taxonomy_sha256"],
         "annotators": sorted(annotators),
         "gold_atoms": count,
         "gold_sha256": sha,
@@ -342,6 +351,8 @@ def cmd_aggregate(args: argparse.Namespace) -> int:
         "items_with_references": agreement["items_with_references"],
         "annotators_per_item": agreement["annotators_per_item"],
         "synthetic_plants": {k: (v if isinstance(v, int) else len(v)) for k, v in agreement["synthetic_plants"].items()},
+        "label_adjacency_pairs": len(agreement["label_adjacency"]),
+        "leave_one_out_topic_f1": {a: (v["groups"].get("detection:topic") or {}).get("f1_strict") for a, v in agreement["leave_one_out"].items()},
     }
     _print(summary)
     for plant in agreement["synthetic_plants"]["missing"]:
@@ -365,14 +376,14 @@ def cmd_adjudicate_tasks(args: argparse.Namespace) -> int:
 
 def cmd_adjudicate_ingest(args: argparse.Namespace) -> int:
     records = list(tl.iter_jsonl(args.gold))
-    valid = {(r["item_id"], r["gold_id"]) for r in records if r["tier"] == "singleton"}
+    valid = {(r["item_id"], r["gold_id"]): r["members"][0] for r in records if r["tier"] == "singleton"}
     rows, problems = tasks_mod.ingest_adjudication(args.run_dir, valid)
     for problem in problems:
         print(f"problem: {problem}", file=sys.stderr)
-    existing = {(r["item_id"], r["gold_id"]): r for r in tl.iter_jsonl(args.out)} if args.out.exists() else {}
+    existing = {(r["item_id"], r.get("member") or r["gold_id"]): r for r in tl.iter_jsonl(args.out)} if args.out.exists() else {}
     for row in rows:
-        existing[(row["item_id"], row["gold_id"])] = row
-    count, _ = tl.write_jsonl_atomic(args.out, sorted(existing.values(), key=lambda r: (r["item_id"], r["gold_id"])))
+        existing[(row["item_id"], row["member"])] = row
+    count, _ = tl.write_jsonl_atomic(args.out, sorted(existing.values(), key=lambda r: (r["item_id"], r.get("member") or r["gold_id"])))
     _print({"ingested": len(rows), "total": count, "tiers": dict(Counter(r["tier"] for r in existing.values())), "problems": len(problems)})
     return 0 if not problems else 2
 
@@ -406,9 +417,10 @@ def _score(run_dir: Path, items, gold, taxonomy, aliases, references, hide_test:
     run = runner_mod.load_run(run_dir)
     manifest = run["manifest"]
     repeats = run["repeats"]
-    per_repeat = [scoring_mod.score_run(items, results, gold, aliases, hide_test) for results in repeats]
-    mean = _mean_reports(per_repeat)
     agreement = json.loads(AGREEMENT_PATH.read_text()) if AGREEMENT_PATH.exists() else {}
+    adjacency = refs_mod.adjacency_set(agreement.get("label_adjacency", []))
+    per_repeat = [scoring_mod.score_run(items, results, gold, aliases, hide_test, adjacency) for results in repeats]
+    mean = _mean_reports(per_repeat)
     ceiling = _ceiling(agreement)
     prices = runner_mod.model_prices(usage_limits or (Path(manifest["usage_limits"]) if manifest.get("usage_limits") else None), manifest.get("provider"), manifest.get("model"))
     contrast = scoring_contrast(items, repeats, aliases)
@@ -423,6 +435,8 @@ def _score(run_dir: Path, items, gold, taxonomy, aliases, references, hide_test:
         "agreement_with_annotators": scoring_mod.agreement_with_annotators(items, repeats[0], references, aliases) if repeats else {},
         "reference_pairwise": agreement.get("pairwise", {}),
         "reference_alpha": agreement.get("krippendorff_alpha", {}),
+        "leave_one_out": agreement.get("leave_one_out", {}),
+        "label_adjacency": agreement.get("label_adjacency", []),
         "ceiling": ceiling,
         "contrast": contrast,
         "usage": runner_mod.usage_summary(run["attempts"], prices),

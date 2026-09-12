@@ -588,7 +588,8 @@ def adjudication_bundles(
     )
 
 
-def ingest_adjudication(run_dir: Path, valid_ids: set[tuple[str, str]]) -> tuple[list[dict[str, Any]], list[str]]:
+def ingest_adjudication(run_dir: Path, valid_ids: dict[tuple[str, str], str]) -> tuple[list[dict[str, Any]], list[str]]:
+    """Verdict rows from every bundle; ``valid_ids`` maps (item_id, gold_id) of each singleton to its member key."""
     rows: list[dict[str, Any]] = []
     problems: list[str] = []
     for path, parsed in read_bundle_outputs(run_dir, "adjudication.json"):
@@ -606,5 +607,5 @@ def ingest_adjudication(run_dir: Path, valid_ids: set[tuple[str, str]]) -> tuple
             if entry.get("tier") not in ("acceptable", "rejected"):
                 problems.append(f"{path}: {key} bad tier {entry.get('tier')!r}")
                 continue
-            rows.append({"item_id": key[0], "gold_id": key[1], "tier": entry["tier"], "note": str(entry.get("note", ""))[:300], "bundle": path.parent.name, "decided_at": tl.utc_now()})
+            rows.append({"item_id": key[0], "gold_id": key[1], "member": valid_ids[key], "tier": entry["tier"], "note": str(entry.get("note", ""))[:300], "bundle": path.parent.name, "decided_at": tl.utc_now()})
     return rows, problems

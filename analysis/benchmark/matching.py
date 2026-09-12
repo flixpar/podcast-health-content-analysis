@@ -57,6 +57,13 @@ class Atom:
     def length(self) -> int:
         return self.end - self.start + 1
 
+    def member_key(self, annotator: str) -> str:
+        """Identity of this atom as one annotator's contribution to a gold cluster."""
+        import hashlib
+
+        digest = hashlib.sha256(repr(self.key()).encode("utf-8")).hexdigest()[:12]
+        return f"{annotator}:{digest}"
+
     def key(self) -> tuple[Any, ...]:
         """A stable identity used for diffs and repeat agreement."""
         if self.kind == "detection":
@@ -235,6 +242,9 @@ class GoldAtom:
     claim_texts: list[str]
     product_keys: list[str]
     product_names: list[str]
+    # "<annotator>:<atom hash>" per member atom: the identity an adjudication
+    # verdict attaches to, stable across re-clustering when annotators are added.
+    members: list[str] = field(default_factory=list)
 
     def plurality(self, attribute: str) -> Any:
         votes = self.votes.get(attribute) or {}
