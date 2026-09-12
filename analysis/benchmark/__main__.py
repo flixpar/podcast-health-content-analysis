@@ -320,6 +320,12 @@ def cmd_aggregate(args: argparse.Namespace) -> int:
     agreement["label_adjacency"] = refs_mod.label_adjacency(items, references)
     adjacency = refs_mod.adjacency_set(agreement["label_adjacency"])
     agreement["leave_one_out"] = refs_mod.leave_one_out(items, references, annotators, overlay, aliases, adjacency)
+    from analysis.benchmark.contrast import annotator_contrast_validity
+
+    gold_atoms: dict[str, list] = {}
+    for record in records:
+        gold_atoms.setdefault(record["item_id"], []).append(refs_mod.gold_from_record(record))
+    agreement["contrast_validity"] = annotator_contrast_validity(items, references, aliases, gold_atoms)
     plants = refs_mod.check_plants(items, records)
     agreement["synthetic_plants"] = {
         "checked": len(plants),
@@ -423,7 +429,7 @@ def _score(run_dir: Path, items, gold, taxonomy, aliases, references, hide_test:
     mean = _mean_reports(per_repeat)
     ceiling = _ceiling(agreement)
     prices = runner_mod.model_prices(usage_limits or (Path(manifest["usage_limits"]) if manifest.get("usage_limits") else None), manifest.get("provider"), manifest.get("model"))
-    contrast = scoring_contrast(items, repeats, aliases)
+    contrast = scoring_contrast(items, repeats, aliases, gold)
     return {
         "name": manifest.get("name"),
         "manifest": manifest,
@@ -436,6 +442,7 @@ def _score(run_dir: Path, items, gold, taxonomy, aliases, references, hide_test:
         "reference_pairwise": agreement.get("pairwise", {}),
         "reference_alpha": agreement.get("krippendorff_alpha", {}),
         "leave_one_out": agreement.get("leave_one_out", {}),
+        "contrast_validity": agreement.get("contrast_validity", {}),
         "label_adjacency": agreement.get("label_adjacency", []),
         "ceiling": ceiling,
         "contrast": contrast,
@@ -474,12 +481,12 @@ def _ceiling(agreement: dict[str, Any]) -> dict[str, Any]:
     return out
 
 
-def scoring_contrast(items, repeats, aliases) -> dict[str, Any]:
+def scoring_contrast(items, repeats, aliases, gold=None) -> dict[str, Any]:
     from analysis.benchmark.contrast import evaluate_contrast
 
     if not repeats:
         return {}
-    return evaluate_contrast(items, repeats[0], aliases)
+    return evaluate_contrast(items, repeats[0], aliases, gold)
 
 
 def cmd_score(args: argparse.Namespace) -> int:

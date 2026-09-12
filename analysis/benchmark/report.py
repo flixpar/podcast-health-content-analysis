@@ -115,6 +115,17 @@ def scorecard(score: dict[str, Any]) -> str:
             mark = " *" if tuple(sorted((row["predicted"], row["gold"]))) in adjacency else ""
             lines.append(f"- {row['predicted']} -> {row['gold']}: {_fmt(row['count'])}{mark}")
         lines.append("")
+    validity = score.get("contrast_validity") or {}
+    if validity:
+        lines.append("## Contrast pairs on the reference annotators themselves")
+        lines.append("")
+        lines.append("Each annotator's own labels of base and twin, scored like a candidate. A perturbation no annotator passes is a twin or spec problem, not a labeler failure.")
+        lines.append("")
+        lines.append("| annotator | pass rate | decoy pass | collateral | no-op collateral |")
+        lines.append("| --- | --- | --- | --- | --- |")
+        for annotator, entry in sorted(validity.items()):
+            lines.append(f"| {annotator} | {_fmt(entry.get('pass_rate'))} | {_fmt(entry.get('decoy_pass_rate'))} | {_fmt(entry.get('collateral_rate'))} | {_fmt(entry.get('noop_collateral_rate'))} |")
+        lines.append("")
     lines.append("## Attribute agreement on matched atoms")
     lines.append("")
     lines.append("| attribute | n | exact | vote share | weighted kappa | reference alpha |")
@@ -135,6 +146,7 @@ def scorecard(score: dict[str, Any]) -> str:
         lines.append(
             f"- Contrast pairs: targeted pass rate {_fmt(contrast.get('pass_rate'))} over {contrast.get('pairs')} pairs; "
             f"decoy pass rate {_fmt(contrast.get('decoy_pass_rate'))}; collateral change {_fmt(contrast.get('collateral_rate'))} vs no-op {_fmt(contrast.get('noop_collateral_rate'))}"
+            + (f"; {len(contrast.get('target_not_in_gold') or [])} pairs excluded (target not in gold)" if contrast.get('target_not_in_gold') else "")
         )
     usage = score.get("usage", {})
     lines.append(

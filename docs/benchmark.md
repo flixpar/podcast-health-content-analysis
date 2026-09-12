@@ -112,6 +112,22 @@ back:
   of reference quality scores on the scorecard, in the scorecard's own
   units, and is the ceiling to read the headline numbers against.
 
+- a **contrast validity table** (`agreement.json: contrast_validity`): once
+  the twins are reference-labeled too, each annotator's own labels of base
+  and twin are run through the contrast evaluation as if it were a
+  candidate. A perturbation no annotator passes is a bad twin or a bad
+  spec, and a twin whose target the gold does not recognise is excluded
+  from every pass rate (`target_not_in_gold`). The candidate's contrast
+  numbers are read against these rates, and the annotators' no-op
+  collateral is the noise floor of independent labeling itself.
+
+Contrast pairs are judged on the targeted atom with the scoring match, not
+by exact identity: the target is read with a one-unit margin, certainty
+perturbations pass when the level moves in the intended direction from
+wherever the base labeling put it, decoys and the no-op pass when no claim
+at the target appears, disappears or changes certainty or role, and
+everything else that differs between base and twin is collateral.
+
 The mechanical gold is reproducible from the references; the overlay is
 applied on top, never edited in. A future human expert pass is just another
 annotator: register it in `annotators.json` with a higher `authority`,
