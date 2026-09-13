@@ -229,7 +229,7 @@ def test_runner_records_attempts_and_repeats(tmp_path, monkeypatch):
     items[1]["window_id"] = "episode_2_window_0001"
     calls = {"n": 0}
 
-    def fake_classify(self, window, taxonomy, model, settings, instructions=None, on_attempt=None):
+    def fake_classify(self, window, taxonomy, model, settings, instructions=None, on_attempt=None, validation="strict"):
         calls["n"] += 1
         if calls["n"] == 1:
             on_attempt({"attempt": 0, "ok": False, "window_id": window["window_id"], "seconds": 0.1, "kind": "non_verbatim_quote", "message": "m", "usage": {"input_tokens": 10, "output_tokens": 5}})
@@ -325,3 +325,48 @@ def test_adjacent_credit_counts_a_reference_confusion_pair_once():
     pooled = scoring._pool([loose], "detection:topic")
     assert pooled["f1_strict"] == 0.0 and pooled["f1_adjacent"] == 1.0
 
+
+
+def test_runner_threads_validation_and_totals_what_lenient_changed(tmp_path, monkeypatch):
+    items = [make_item("c1w0001"), make_item("c2w0001")]
+    items[1]["window_id"] = "episode_2_window_0001"
+    modes = []
+
+    def fake_classify(self, window, taxonomy, model, settings, instructions=None, on_attempt=None, validation="strict"):
+        modes.append(validation)
+        changes = (
+            {"repaired": {"span_widened_for_quote": 1}, "dropped": {"non_verbatim_quote": 2}}
+            if validation == "lenient"
+            else {"repaired": {}, "dropped": {}}
+        )
+        summary = {"mode": validation, **changes}
+        on_attempt({"attempt": 0, "ok": True, "window_id": window["window_id"], "seconds": 0.1, "usage": None, "validation": summary})
+        return result(window["window_id"]), {"response_id": "r", "usage": None, "response_model": model, "effective_sampling": {}, "validation": summary}
+
+    monkeypatch.setattr(tl.ResponsesClient, "classify", fake_classify)
+    monkeypatch.setattr(tl.ResponsesClient, "served_models", lambda self: {"http://x/v1": "stub-model"})
+    flags = ["--api-base", "http://x/v1", "--model", "stub-model", "--concurrency", "1", "--reasoning-effort", "none"]
+    strict = runner.run_benchmark(items, TAXONOMY, runner.label_args(flags, config=None), "strict", repeats=1, runs_dir=tmp_path)
+    lenient = runner.run_benchmark(
+        items, TAXONOMY, runner.label_args([*flags, "--validation", "lenient"], config=None), "lenient", repeats=2, runs_dir=tmp_path
+    )
+    assert modes == ["strict"] * 2 + ["lenient"] * 4
+    assert (strict["validation"], lenient["validation"]) == ("strict", "lenient")
+    assert strict["run_fingerprint"] != lenient["run_fingerprint"]
+    # The totals are bookkeeping: a finished manifest recomputes to its own fingerprint.
+    assert runner.fingerprint_from_manifest(lenient) == lenient["run_fingerprint"]
+
+    assert strict["validation_changes"] == {"repaired": {}, "dropped": {}}
+    assert lenient["repeat_summaries"][0]["validation_changes"] == {
+        "repaired": {"span_widened_for_quote": 2},
+        "dropped": {"non_verbatim_quote": 4},
+    }
+    assert lenient["validation_changes"] == {
+        "repaired": {"span_widened_for_quote": 4},
+        "dropped": {"non_verbatim_quote": 8},
+    }
+    usage = runner.usage_summary(runner.load_run(tmp_path / "lenient")["attempts"], None)
+    # Accepted with drops is still accepted.
+    assert usage["accepted"] == 4 and usage["first_attempt_validity"] == 1.0
+    assert usage["annotations_repaired"] == {"span_widened_for_quote": 4}
+    assert usage["annotations_dropped"] == {"non_verbatim_quote": 8}

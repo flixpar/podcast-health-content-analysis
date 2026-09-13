@@ -105,6 +105,11 @@ top_p = 0.95
 # request saved little, and validation rejects a whole response: one bad
 # annotation or one truncation threw away every window in the request.
 concurrency = 128
+# One bad annotation still rejects the whole response and repeats a full
+# reasoning pass. "lenient" repairs an annotation where the fix is unambiguous
+# (a quote just outside its span widens the span) and drops it where it is not,
+# counting both; "strict" is the default. See docs/topic-labeling-method.md.
+# validation = "lenient"
 
 [verify]
 concurrency = 8

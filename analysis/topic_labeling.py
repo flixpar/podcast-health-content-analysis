@@ -41,7 +41,7 @@ import urllib.parse
 import urllib.request
 from collections import Counter, defaultdict
 from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Callable, Iterable, Iterator, Sequence
@@ -187,6 +187,12 @@ ALLOWED_REASONING_EFFORTS = (
     "xhigh",
     "max",
 )
+# How a labeling response with a bad annotation in it is treated. `strict`
+# rejects the whole response and retries it; `lenient` repairs the annotation
+# where the fix is unambiguous and drops it where it is not. See
+# validate_window_result.
+ALLOWED_VALIDATION = ("strict", "lenient")
+DEFAULT_VALIDATION = "strict"
 
 
 SYSTEM_RUBRIC = """\
@@ -1206,27 +1212,60 @@ def _unit_number(unit_id: str) -> int:
     return int(unit_id[1:])
 
 
+@dataclass
+class ValidationReport:
+    """What lenient validation changed in one response: the sidecar summary.
+
+    ``repaired`` counts annotations kept after a repair, by repair (one count
+    per annotation however many markers or labels it lost). ``dropped`` counts
+    annotations removed, by the rejection kind strict validation would have
+    raised for them, plus ``over_cap`` for those truncated past a per-window
+    cap. Neither reaches the stored result, which keeps its shape.
+    """
+
+    repaired: Counter[str] = field(default_factory=Counter)
+    dropped: Counter[str] = field(default_factory=Counter)
+
+    def summary(self) -> dict[str, dict[str, int]]:
+        return {
+            "repaired": dict(sorted(self.repaired.items())),
+            "dropped": dict(sorted(self.dropped.items())),
+        }
+
+
 def validate_window_result(
-    result: dict[str, Any], window: dict[str, Any], label_axes: dict[str, str]
+    result: dict[str, Any],
+    window: dict[str, Any],
+    label_axes: dict[str, str],
+    report: ValidationReport | None = None,
 ) -> dict[str, Any]:
+    """Validate and normalize one window's result.
+
+    Without a ``report`` validation is strict: the first bad annotation raises
+    and the whole response is rejected. With one it is lenient: each annotation
+    is repaired where the fix is unambiguous, then held to the same checks, and
+    one that still fails is dropped and counted in ``report`` instead of taking
+    every other annotation in the response down with it. The response-level
+    contract -- the window ID and the three arrays -- is enforced either way.
+    """
     if result.get("window_id") != window["window_id"]:
         raise TopicLabelingError(
             f"response window ID {result.get('window_id')!r} does not match {window['window_id']!r}",
             kind="window_id_mismatch",
         )
     detections = result.get("detections")
-    if not isinstance(detections, list) or len(detections) > 40:
+    if not isinstance(detections, list) or (report is None and len(detections) > 40):
         raise TopicLabelingError(
             f"invalid detections for {window['window_id']}", kind="schema_shape"
         )
     claims = result.get("verification_candidates")
-    if not isinstance(claims, list) or len(claims) > 30:
+    if not isinstance(claims, list) or (report is None and len(claims) > 30):
         raise TopicLabelingError(
             f"invalid verification candidates for {window['window_id']}",
             kind="schema_shape",
         )
     products = result.get("product_mentions")
-    if not isinstance(products, list) or len(products) > 30:
+    if not isinstance(products, list) or (report is None and len(products) > 30):
         raise TopicLabelingError(
             f"invalid product mentions for {window['window_id']}", kind="schema_shape"
         )
@@ -1314,9 +1353,9 @@ def validate_window_result(
             )
         return cleaned
 
-    normalized: list[dict[str, Any]] = []
     seen: set[tuple[Any, ...]] = set()
-    for detection in detections:
+
+    def validate_detection(detection: Any) -> dict[str, Any]:
         if not isinstance(detection, dict):
             raise TopicLabelingError("detection must be an object", kind="schema_shape")
         expected_fields = {
@@ -1383,21 +1422,18 @@ def validate_window_result(
                 kind="duplicate_annotation",
             )
         seen.add(key)
-        normalized.append(
-            {
-                "start_unit_id": start_id,
-                "end_unit_id": end_id,
-                "axis": axis,
-                "label_ids": sorted(labels),
-                "relevance": relevance,
-                "discourse_role": discourse_role,
-                "confidence": confidence,
-                "summary": re.sub(r"\s+", " ", summary).strip(),
-                "evidence_quote": quote,
-            }
-        )
+        return {
+            "start_unit_id": start_id,
+            "end_unit_id": end_id,
+            "axis": axis,
+            "label_ids": sorted(labels),
+            "relevance": relevance,
+            "discourse_role": discourse_role,
+            "confidence": confidence,
+            "summary": re.sub(r"\s+", " ", summary).strip(),
+            "evidence_quote": quote,
+        }
 
-    normalized_claims: list[dict[str, Any]] = []
     seen_claims: set[tuple[Any, ...]] = set()
     claim_fields = {
         "start_unit_id",
@@ -1414,7 +1450,8 @@ def validate_window_result(
         "confidence",
         "rationale",
     }
-    for claim in claims:
+
+    def validate_claim(claim: Any) -> dict[str, Any]:
         if not isinstance(claim, dict) or set(claim) != claim_fields:
             raise TopicLabelingError(
                 f"unexpected verification-candidate fields in {window['window_id']}",
@@ -1487,25 +1524,22 @@ def validate_window_result(
                 kind="duplicate_annotation",
             )
         seen_claims.add(key)
-        normalized_claims.append(
-            {
-                "start_unit_id": start_id,
-                "end_unit_id": end_id,
-                "topic_ids": sorted(topic_ids),
-                "frame_ids": sorted(frame_ids),
-                "evidence_signal_ids": sorted(evidence_ids),
-                "discourse_role": discourse_role,
-                "claim_type": claim_type,
-                "claim_text": normalized_text,
-                "expressed_certainty": certainty,
-                "certainty_markers": markers,
-                "evidence_quote": quote,
-                "confidence": confidence,
-                "rationale": re.sub(r"\s+", " ", rationale).strip(),
-            }
-        )
+        return {
+            "start_unit_id": start_id,
+            "end_unit_id": end_id,
+            "topic_ids": sorted(topic_ids),
+            "frame_ids": sorted(frame_ids),
+            "evidence_signal_ids": sorted(evidence_ids),
+            "discourse_role": discourse_role,
+            "claim_type": claim_type,
+            "claim_text": normalized_text,
+            "expressed_certainty": certainty,
+            "certainty_markers": markers,
+            "evidence_quote": quote,
+            "confidence": confidence,
+            "rationale": re.sub(r"\s+", " ", rationale).strip(),
+        }
 
-    normalized_products: list[dict[str, Any]] = []
     seen_products: set[tuple[Any, ...]] = set()
     product_fields = {
         "start_unit_id",
@@ -1516,7 +1550,8 @@ def validate_window_result(
         "evidence_quote",
         "confidence",
     }
-    for product in products:
+
+    def validate_product(product: Any) -> dict[str, Any]:
         if not isinstance(product, dict) or set(product) != product_fields:
             raise TopicLabelingError(
                 f"unexpected product-mention fields in {window['window_id']}",
@@ -1551,30 +1586,200 @@ def validate_window_result(
                 kind="duplicate_annotation",
             )
         seen_products.add(key)
-        normalized_products.append(
-            {
-                "start_unit_id": start_id,
-                "end_unit_id": end_id,
-                "product_name": clean_name,
-                "product_type": product_type,
-                "mention_role": mention_role,
-                "evidence_quote": quote,
-                "confidence": confidence,
-            }
-        )
+        return {
+            "start_unit_id": start_id,
+            "end_unit_id": end_id,
+            "product_name": clean_name,
+            "product_type": product_type,
+            "mention_role": mention_role,
+            "evidence_quote": quote,
+            "confidence": confidence,
+        }
+
+    if report is None:
+        return {
+            "window_id": window["window_id"],
+            "detections": [validate_detection(row) for row in detections],
+            "verification_candidates": [validate_claim(row) for row in claims],
+            "product_mentions": [validate_product(row) for row in products],
+        }
+    return _lenient_window_result(
+        window,
+        report,
+        label_axes,
+        (detections, validate_detection, 40),
+        (claims, validate_claim, 30),
+        (products, validate_product, 30),
+    )
+
+
+def _lenient_window_result(
+    window: dict[str, Any],
+    report: ValidationReport,
+    label_axes: dict[str, str],
+    detections: tuple[list[Any], Callable[[Any], dict[str, Any]], int],
+    claims: tuple[list[Any], Callable[[Any], dict[str, Any]], int],
+    products: tuple[list[Any], Callable[[Any], dict[str, Any]], int],
+) -> dict[str, Any]:
+    """Repair a copy of each annotation, then hold it to the strict checks.
+
+    Each tuple is (annotations, strict validator, per-window cap). A validator
+    that still raises drops its annotation under the kind it raised. Repairs are
+    counted only for annotations that survive, so a repaired-then-dropped one
+    shows up once, as a drop.
+    """
+    units = window["units"]
+    unit_order = {unit["unit_id"]: index for index, unit in enumerate(units)}
+
+    def text_of(start: int, end: int) -> str:
+        return " ".join(unit["text"] for unit in units[start : end + 1])
+
+    def span_of(annotation: dict[str, Any]) -> tuple[int, int] | None:
+        start_id = annotation.get("start_unit_id")
+        end_id = annotation.get("end_unit_id")
+        if not isinstance(start_id, str) or not isinstance(end_id, str):
+            return None
+        start, end = unit_order.get(start_id), unit_order.get(end_id)
+        if start is None or end is None or start > end:
+            return None  # an invalid span is not widened; the strict check drops it
+        return start, end
+
+    def widened(phrase: str, start: int, end: int) -> tuple[int, int] | None:
+        """The smallest span covering start..end and the nearest copy of ``phrase``.
+
+        None when the phrase is nowhere in the window. The range grows one unit
+        either side at a time, so a phrase said twice widens towards the copy
+        closest to the span rather than the first in the window. Quote location
+        works on joined unit text, so the match's character offsets are mapped
+        back to the units they fall in.
+        """
+        if locate_quote_span(phrase, text_of(0, len(units) - 1)) is None:
+            return None
+        for reach in range(1, len(units)):
+            low, high = max(0, start - reach), min(len(units) - 1, end + reach)
+            found = locate_quote_span(phrase, text_of(low, high))
+            if found is None:
+                continue
+            first = last = low
+            offset = 0
+            for index in range(low, high + 1):
+                if offset <= found[0]:
+                    first = index
+                if offset < found[1]:
+                    last = index
+                offset += len(units[index]["text"]) + 1
+            return min(start, first), max(end, last)
+        return None
+
+    def set_span(annotation: dict[str, Any], start: int, end: int) -> None:
+        annotation["start_unit_id"] = units[start]["unit_id"]
+        annotation["end_unit_id"] = units[end]["unit_id"]
+
+    def repair_quote(annotation: dict[str, Any], repairs: set[str]) -> None:
+        # A quote verbatim in the window but outside the span widens the span.
+        # One nowhere in the window is a paraphrase or a tidying, and is dropped.
+        span = span_of(annotation)
+        quote = annotation.get("evidence_quote")
+        if span is None or not isinstance(quote, str) or not quote.strip():
+            return
+        if locate_quote_span(quote, text_of(*span)) is not None:
+            return
+        wider = widened(quote, *span)
+        if wider is not None:
+            set_span(annotation, *wider)
+            repairs.add("span_widened_for_quote")
+
+    def repair_labels(detection: dict[str, Any], repairs: set[str]) -> None:
+        # Drop just the unknown labels when the known rest share one axis.
+        labels = detection.get("label_ids")
+        if (
+            not isinstance(labels, list)
+            or not all(isinstance(label, str) for label in labels)
+            or len(labels) != len(set(labels))
+        ):
+            return
+        known = [label for label in labels if label in label_axes]
+        if known and len(known) < len(labels):
+            if len({label_axes[label] for label in known}) == 1:
+                detection["label_ids"] = known
+                repairs.add("unknown_label_dropped")
+
+    def repair_certainty(claim: dict[str, Any], repairs: set[str]) -> None:
+        span = span_of(claim)
+        certainty = claim.get("expressed_certainty")
+        markers = claim.get("certainty_markers")
+        if (
+            span is None
+            or certainty not in ALLOWED_EXPRESSED_CERTAINTY
+            or not isinstance(markers, list)
+            or len(markers) > MAX_CERTAINTY_MARKERS
+            or any(not isinstance(marker, str) or not marker.strip() for marker in markers)
+            or len({_normalized_quote(marker) for marker in markers}) != len(markers)
+        ):
+            return  # a malformed marker list is left for the strict check to drop
+        start, end = span
+        kept: list[str] = []
+        for marker in markers:
+            if locate_quote_span(marker, text_of(start, end)) is None:
+                wider = widened(marker, start, end)
+                if wider is None:
+                    repairs.add("certainty_marker_dropped")
+                    continue
+                start, end = wider
+                repairs.add("span_widened_for_certainty_marker")
+            kept.append(marker)
+        set_span(claim, start, end)
+        claim["certainty_markers"] = kept
+        # Markers and certainty must still agree. `unhedged` with a marker left
+        # is ambiguous and fails the strict check. A non-`unhedged` coding left
+        # with no markers becomes `unhedged` only if the model named none in the
+        # first place: that is the ungrounded assertion the rule refuses, and
+        # unhedged is the grounded default. If it named markers and none were in
+        # the window, the hedge may be real but misquoted, so the candidate is
+        # dropped as certainty_markers_mismatch instead of recoded.
+        if not kept and not markers and certainty != "unhedged":
+            claim["expressed_certainty"] = "unhedged"
+            repairs.add("certainty_set_unhedged")
+
+    def keep(
+        spec: tuple[list[Any], Callable[[Any], dict[str, Any]], int],
+        repair: Callable[[dict[str, Any], set[str]], None],
+    ) -> list[dict[str, Any]]:
+        rows, validate, cap = spec
+        accepted: list[dict[str, Any]] = []
+        for row in rows:
+            repairs: set[str] = set()
+            if isinstance(row, dict):
+                row = dict(row)
+                repair(row, repairs)
+            try:
+                accepted.append(validate(row))
+            except TopicLabelingError as exc:
+                report.dropped[exc.kind] += 1
+                continue
+            report.repaired.update(repairs)
+        # Past the per-window cap, keep the first ones rather than reject.
+        if len(accepted) > cap:
+            report.dropped["over_cap"] += len(accepted) - cap
+        return accepted[:cap]
+
+    def repair_detection(detection: dict[str, Any], repairs: set[str]) -> None:
+        repair_labels(detection, repairs)
+        repair_quote(detection, repairs)
+
+    def repair_claim(claim: dict[str, Any], repairs: set[str]) -> None:
+        repair_quote(claim, repairs)
+        repair_certainty(claim, repairs)
+
     return {
         "window_id": window["window_id"],
-        "detections": normalized,
-        "verification_candidates": normalized_claims,
-        "product_mentions": normalized_products,
+        "detections": keep(detections, repair_detection),
+        "verification_candidates": keep(claims, repair_claim),
+        "product_mentions": keep(products, repair_quote),
     }
 
 
-def validate_response(
-    parsed: dict[str, Any],
-    window: dict[str, Any],
-    label_axes: dict[str, str],
-) -> dict[str, Any]:
+def _check_response_shape(parsed: Any) -> None:
     # window_id is redundant with one window per request, and kept as a cheap
     # check that the answer is to the question asked: validate_window_result
     # rejects a mismatch as window_id_mismatch.
@@ -1588,7 +1793,32 @@ def validate_response(
             "response must contain window_id, detections, verification_candidates, and product_mentions",
             kind="schema_shape",
         )
+
+
+def validate_response(
+    parsed: dict[str, Any],
+    window: dict[str, Any],
+    label_axes: dict[str, str],
+) -> dict[str, Any]:
+    _check_response_shape(parsed)
     return validate_window_result(parsed, window, label_axes)
+
+
+def validate_response_lenient(
+    parsed: dict[str, Any],
+    window: dict[str, Any],
+    label_axes: dict[str, str],
+) -> tuple[dict[str, Any], dict[str, dict[str, int]]]:
+    """``validate_response`` that repairs or drops bad annotations.
+
+    The response must still be the right shape for the right window; only the
+    annotations inside it are forgiven. Returns the result, stored as-is, and
+    the sidecar summary of what was repaired and dropped to get it.
+    """
+    _check_response_shape(parsed)
+    report = ValidationReport()
+    result = validate_window_result(parsed, window, label_axes, report)
+    return result, report.summary()
 
 
 def extract_output_text(response: dict[str, Any]) -> str:
@@ -2475,6 +2705,7 @@ class ResponsesClient:
         settings: ModelSettings,
         instructions: str | None = None,
         on_attempt: Callable[[dict[str, Any]], None] | None = None,
+        validation: str = DEFAULT_VALIDATION,
     ) -> tuple[dict[str, Any], dict[str, Any]]:
         """Label one window.
 
@@ -2482,7 +2713,13 @@ class ResponsesClient:
         evaluating a prompt variant; ``on_attempt`` is told about every request,
         accepted or rejected, which the run manifest's last-state counters
         cannot show. Both default to the production behaviour.
+
+        ``validation`` is ``strict`` or ``lenient``. Either way ``meta`` and the
+        accepted attempt record carry a ``validation`` summary of the mode and
+        what it repaired and dropped, which under ``strict`` is always nothing.
         """
+        if validation not in ALLOWED_VALIDATION:
+            raise TopicLabelingError(f"unknown validation mode {validation!r}")
         label_axes = {label["label_id"]: label["axis"] for label in taxonomy["labels"]}
         payload: dict[str, Any] = {
             "model": model,
@@ -2504,12 +2741,22 @@ class ResponsesClient:
                 self.flavor.raise_for_status(response)
                 output_text = self.flavor.output_text(response)
                 parsed = parse_json_output(output_text)
-                result = validate_response(parsed, window, label_axes)
+                if validation == "lenient":
+                    result, changes = validate_response_lenient(
+                        parsed, window, label_axes
+                    )
+                else:
+                    result = validate_response(parsed, window, label_axes)
+                    changes = {"repaired": {}, "dropped": {}}
+                # A sidecar rather than fields on the result: the result is
+                # stored as-is, and its readers expect the schema's shape.
+                validation_summary = {"mode": validation, **changes}
                 meta = {
                     "response_id": response.get("id"),
                     "usage": response.get("usage"),
                     "response_model": response.get("model"),
                     "effective_sampling": self.flavor.effective_sampling(response),
+                    "validation": validation_summary,
                 }
                 if on_attempt is not None:
                     on_attempt(
@@ -2520,6 +2767,7 @@ class ResponsesClient:
                             "seconds": round(time.monotonic() - started, 3),
                             "response_id": response.get("id"),
                             "usage": response.get("usage"),
+                            "validation": validation_summary,
                         }
                     )
                 return result, meta
@@ -2955,6 +3203,9 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
         "windows_sha256": prepare_manifest["windows_sha256"],
         "model": model,
         "api": args.api,
+        # Lenient validation stores repaired spans and drops annotations strict
+        # would have retried for, so the two modes produce different labels.
+        "validation": args.validation,
         **settings.fingerprint(),
     }
     run_fingerprint = sha256_bytes(canonical_json(fingerprint_inputs).encode("utf-8"))
@@ -2983,7 +3234,9 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
     def classify(
         window: dict[str, Any],
     ) -> tuple[dict[str, Any], dict[str, Any]]:
-        return client.classify(window, taxonomy, model, settings)
+        return client.classify(
+            window, taxonomy, model, settings, validation=args.validation
+        )
 
     # What the server says it decoded with. Settings omitted from the request
     # are resolved server-side from the model's generation config, so this is
@@ -2997,6 +3250,9 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
     # where the money stopped rather than from where the last request started.
     budget_stop: BudgetExceeded | None = None
     submitted = completed_requests = failed_requests = 0
+    # What lenient validation repaired and dropped in the accepted responses.
+    repaired: Counter[str] = Counter()
+    dropped: Counter[str] = Counter()
     iterator = pending()
     futures: dict[Future[tuple[dict[str, Any], dict[str, Any]]], dict[str, Any]] = {}
     try:
@@ -3018,6 +3274,9 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
                         observed_sampling = observed_sampling or meta.get(
                             "effective_sampling", {}
                         )
+                        changes = meta.get("validation") or {}
+                        repaired.update(changes.get("repaired") or {})
+                        dropped.update(changes.get("dropped") or {})
                     except BudgetExceeded as exc:
                         budget_stop = budget_stop or exc
                         failed_requests += 1
@@ -3050,6 +3309,8 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
             "completed_at": utc_now(),
             "requests_completed_this_invocation": completed_requests,
             "requests_failed_this_invocation": failed_requests,
+            "annotations_repaired_this_invocation": dict(sorted(repaired.items())),
+            "annotations_dropped_this_invocation": dict(sorted(dropped.items())),
             "stopped_by_usage_limit": str(budget_stop) if budget_stop else None,
             "effective_sampling": observed_sampling or None,
             "windows_labeled": complete,
@@ -4838,6 +5099,16 @@ def build_parser() -> argparse.ArgumentParser:
         help="DeepSeek-V4 recommends 1.0, or 0.95 for the 0731 checkpoint",
     )
     label.add_argument("--seed", type=int, help="Per-request sampling seed")
+    label.add_argument(
+        "--validation",
+        choices=ALLOWED_VALIDATION,
+        default=DEFAULT_VALIDATION,
+        help=(
+            "strict rejects and retries a whole response for one bad annotation; "
+            "lenient repairs an annotation where the fix is unambiguous and "
+            "drops it otherwise (default: %(default)s)"
+        ),
+    )
 
     merge = subparsers.add_parser("merge", help="Merge overlap detections into clips")
     merge.add_argument(

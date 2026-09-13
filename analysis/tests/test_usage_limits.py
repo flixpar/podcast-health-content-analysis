@@ -464,6 +464,7 @@ def _label_args(tmp_path, config, **overrides):
         temperature=None,
         top_p=None,
         seed=None,
+        validation="strict",
         usage_limits=config,
         provider="demo",
         experiment=None,

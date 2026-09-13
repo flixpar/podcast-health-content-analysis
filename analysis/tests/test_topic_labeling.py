@@ -1357,7 +1357,7 @@ def test_each_window_is_its_own_request_so_one_bad_window_fails_alone(
     poison = "episode_1_window_0002"
     calls: list[str] = []
 
-    def fake_classify(self, window, taxonomy_arg, model, *rest):
+    def fake_classify(self, window, taxonomy_arg, model, *rest, **kwargs):
         calls.append(window["window_id"])
         if window["window_id"] == poison:
             raise labeling.TopicLabelingError(
@@ -1396,6 +1396,7 @@ def test_each_window_is_its_own_request_so_one_bad_window_fails_alone(
             temperature=None,
             top_p=None,
             seed=None,
+            validation="strict",
             usage_limits=None,
             provider=None,
             experiment=None,
@@ -1707,3 +1708,445 @@ def test_quotes_match_on_word_sequence_not_punctuation():
     stutter = "and were healing my healing my body at the same time"
     assert labeling.locate_quote("were healing my body at the same", stutter) == "were healing my healing my body at the same"
     assert labeling.locate_quote("healing my healing my body", stutter) == "healing my healing my body"
+
+
+# --------------------------------------------------------------------------
+# Lenient validation
+# --------------------------------------------------------------------------
+
+LENIENT_UNITS = [
+    "Welcome back, today we talk about sleep.",
+    "I think magnesium improves deep sleep.",
+    "A clinical trial found it adds forty minutes.",
+    "Try Vitalyx magnesium tonight.",
+    "Anyway, we talk about sleep again later.",
+]
+
+
+def _lenient_window():
+    return {
+        "window_id": "episode_1_window_0001",
+        "units": [
+            {"unit_id": f"u{index:06d}", "text": text}
+            for index, text in enumerate(LENIENT_UNITS, 1)
+        ],
+    }
+
+
+def _detection(**overrides):
+    base = {
+        "start_unit_id": "u000002",
+        "end_unit_id": "u000002",
+        "label_ids": ["topic:sleep"],
+        "relevance": "substantive",
+        "discourse_role": "asserted_or_endorsed",
+        "confidence": 0.9,
+        "summary": "Magnesium and sleep.",
+        "evidence_quote": "magnesium improves deep sleep",
+    }
+    return {**base, **overrides}
+
+
+def _lenient_claim(**overrides):
+    base = {
+        "start_unit_id": "u000002",
+        "end_unit_id": "u000002",
+        "topic_ids": ["topic:sleep"],
+        "frame_ids": [],
+        "evidence_signal_ids": [],
+        "discourse_role": "asserted_or_endorsed",
+        "claim_type": "causal",
+        "claim_text": "Magnesium improves deep sleep.",
+        "expressed_certainty": "hedged",
+        "certainty_markers": ["I think"],
+        "evidence_quote": "magnesium improves deep sleep",
+        "confidence": 0.8,
+        "rationale": "Checkable treatment effect.",
+    }
+    return {**base, **overrides}
+
+
+def _product(**overrides):
+    base = {
+        "start_unit_id": "u000004",
+        "end_unit_id": "u000004",
+        "product_name": "Vitalyx",
+        "product_type": "supplement",
+        "mention_role": "advertised",
+        "evidence_quote": "Vitalyx magnesium",
+        "confidence": 0.9,
+    }
+    return {**base, **overrides}
+
+
+def _response(**fields):
+    return {
+        "window_id": "episode_1_window_0001",
+        "detections": [],
+        "verification_candidates": [],
+        "product_mentions": [],
+        **fields,
+    }
+
+
+def _axes():
+    return {row["label_id"]: row["axis"] for row in small_taxonomy()["labels"]}
+
+
+def _lenient(**fields):
+    return labeling.validate_response_lenient(
+        _response(**fields), _lenient_window(), _axes()
+    )
+
+
+def _strict_kind(**fields):
+    with pytest.raises(labeling.TopicLabelingError) as exc:
+        labeling.validate_response(_response(**fields), _lenient_window(), _axes())
+    return exc.value.kind
+
+
+def test_lenient_widens_a_span_to_a_verbatim_quote_just_outside_it():
+    after = _detection(evidence_quote="a clinical trial found")
+    before = _product(evidence_quote="we talk about sleep")
+    # Strict rejects both: the quotes are in the window, not in their spans.
+    assert _strict_kind(detections=[after]) == "non_verbatim_quote"
+    assert _strict_kind(product_mentions=[before]) == "non_verbatim_quote"
+
+    result, changes = _lenient(detections=[after], product_mentions=[before])
+    detection = result["detections"][0]
+    assert (detection["start_unit_id"], detection["end_unit_id"]) == ("u000002", "u000003")
+    # The stored quote is still the transcript's own wording.
+    assert detection["evidence_quote"] == "A clinical trial found"
+    # "we talk about sleep" is said in u000001 and u000005; the span grows
+    # towards the copy beside it, not the first one in the window.
+    mention = result["product_mentions"][0]
+    assert (mention["start_unit_id"], mention["end_unit_id"]) == ("u000004", "u000005")
+    assert changes == {"repaired": {"span_widened_for_quote": 2}, "dropped": {}}
+    # Nothing is added to the stored result.
+    assert set(result) == {
+        "window_id",
+        "detections",
+        "verification_candidates",
+        "product_mentions",
+    }
+    assert set(detection) == set(
+        labeling.validate_response(
+            _response(detections=[_detection()]), _lenient_window(), _axes()
+        )["detections"][0]
+    )
+
+
+def test_lenient_drops_a_quote_that_is_nowhere_in_the_window():
+    paraphrase = _detection(evidence_quote="magnesium makes sleep deeper")
+    good = _detection(label_ids=["cross_cutting:scientific_study"], evidence_quote="I think")
+    result, changes = _lenient(detections=[paraphrase, good])
+    assert [row["label_ids"] for row in result["detections"]] == [
+        ["cross_cutting:scientific_study"]
+    ]
+    assert changes == {"repaired": {}, "dropped": {"non_verbatim_quote": 1}}
+
+
+def test_lenient_certainty_markers_widen_drop_and_must_still_agree():
+    # A marker in the window but outside the span widens the span to it.
+    widened, changes = _lenient(
+        verification_candidates=[
+            _lenient_claim(
+                start_unit_id="u000003",
+                end_unit_id="u000003",
+                evidence_quote="adds forty minutes",
+            )
+        ]
+    )
+    claim = widened["verification_candidates"][0]
+    assert (claim["start_unit_id"], claim["end_unit_id"]) == ("u000002", "u000003")
+    assert claim["certainty_markers"] == ["I think"]
+    assert changes == {"repaired": {"span_widened_for_certainty_marker": 1}, "dropped": {}}
+
+    # A marker nowhere in the window is dropped on its own when another stays.
+    kept, changes = _lenient(
+        verification_candidates=[_lenient_claim(certainty_markers=["I think", "perhaps"])]
+    )
+    assert kept["verification_candidates"][0]["certainty_markers"] == ["I think"]
+    assert kept["verification_candidates"][0]["expressed_certainty"] == "hedged"
+    assert changes == {"repaired": {"certainty_marker_dropped": 1}, "dropped": {}}
+
+    # Every marker it named was missing: the hedge may be real but misquoted,
+    # so the candidate goes rather than being recoded.
+    _, changes = _lenient(
+        verification_candidates=[_lenient_claim(certainty_markers=["perhaps"])]
+    )
+    assert changes == {"repaired": {}, "dropped": {"certainty_markers_mismatch": 1}}
+
+    # It named none: an ungrounded hedge is recoded to the grounded default.
+    recoded, changes = _lenient(
+        verification_candidates=[_lenient_claim(certainty_markers=[])]
+    )
+    claim = recoded["verification_candidates"][0]
+    assert (claim["expressed_certainty"], claim["certainty_markers"]) == ("unhedged", [])
+    assert changes == {"repaired": {"certainty_set_unhedged": 1}, "dropped": {}}
+
+    # Unhedged with a marker that really is there is ambiguous, and dropped.
+    _, changes = _lenient(
+        verification_candidates=[_lenient_claim(expressed_certainty="unhedged")]
+    )
+    assert changes == {"repaired": {}, "dropped": {"certainty_markers_mismatch": 1}}
+
+    # Strict still rejects these with today's kinds.
+    assert (
+        _strict_kind(verification_candidates=[_lenient_claim(certainty_markers=["perhaps"])])
+        == "non_verbatim_quote"
+    )
+    assert (
+        _strict_kind(verification_candidates=[_lenient_claim(certainty_markers=[])])
+        == "certainty_markers_mismatch"
+    )
+
+
+def test_lenient_drops_unknown_labels_only_when_the_rest_stand_on_one_axis():
+    partly_unknown = _detection(label_ids=["topic:sleep", "topic:not_a_label"])
+    all_unknown = _detection(label_ids=["topic:not_a_label"], summary="Other.")
+    mixed = _detection(
+        label_ids=["topic:sleep", "cross_cutting:scientific_study", "topic:not_a_label"],
+        summary="Mixed.",
+    )
+    assert _strict_kind(detections=[partly_unknown]) == "mixed_or_unknown_labels"
+    result, changes = _lenient(detections=[partly_unknown, all_unknown, mixed])
+    assert [row["label_ids"] for row in result["detections"]] == [["topic:sleep"]]
+    assert changes == {
+        "repaired": {"unknown_label_dropped": 1},
+        "dropped": {"mixed_or_unknown_labels": 2},
+    }
+
+
+def test_lenient_drops_invalid_annotations_under_their_strict_kind_and_keeps_the_first_duplicate():
+    first = _detection()
+    bad = {
+        "span_out_of_window": _detection(end_unit_id="u000099"),
+        "reversed_span": _detection(start_unit_id="u000003", end_unit_id="u000002"),
+        "invalid_field": _detection(relevance="central"),
+        "duplicate_annotation": _detection(summary="The same detection again."),
+        "schema_shape": {"start_unit_id": "u000002"},
+    }
+    for kind, row in bad.items():
+        assert _strict_kind(detections=[first, row]) == kind
+    result, changes = _lenient(
+        detections=[
+            first,
+            *bad.values(),
+            _detection(confidence=1.5),
+            _detection(summary="  "),
+        ],
+        verification_candidates=[_lenient_claim(claim_type="anecdote")],
+        product_mentions=[_product(product_name=""), _product()],
+    )
+    assert result["detections"] == labeling.validate_response(
+        _response(detections=[first]), _lenient_window(), _axes()
+    )["detections"]
+    assert result["verification_candidates"] == []
+    assert [row["product_name"] for row in result["product_mentions"]] == ["Vitalyx"]
+    assert changes == {
+        "repaired": {},
+        "dropped": {
+            "duplicate_annotation": 1,
+            "invalid_field": 5,
+            "reversed_span": 1,
+            "schema_shape": 1,
+            "span_out_of_window": 1,
+        },
+    }
+
+
+def test_lenient_truncates_past_the_per_window_caps():
+    detections = []
+    for index in range(42):
+        # A distinct (span, labels, relevance, role) for each, so none is a
+        # duplicate of another and only the cap removes any.
+        unit = index % 5
+        detections.append(
+            _detection(
+                start_unit_id=f"u{unit + 1:06d}",
+                end_unit_id=f"u{unit + 1:06d}",
+                label_ids=[("topic:sleep", "cross_cutting:scientific_study")[index // 5 % 2]],
+                relevance=labeling.ALLOWED_RELEVANCE[index // 10 % 3],
+                discourse_role=labeling.ALLOWED_DISCOURSE_ROLES[index // 30],
+                summary=f"Detection {index}.",
+                evidence_quote=LENIENT_UNITS[unit],
+            )
+        )
+    assert _strict_kind(detections=detections) == "schema_shape"
+    result, changes = _lenient(detections=detections)
+    assert [row["summary"] for row in result["detections"]] == [
+        f"Detection {index}." for index in range(40)
+    ]
+    assert changes == {"repaired": {}, "dropped": {"over_cap": 2}}
+
+
+def test_lenient_still_rejects_a_malformed_response():
+    window, axes = _lenient_window(), _axes()
+    for wrong, kind in (
+        ({"results": []}, "schema_shape"),
+        (_response(window_id="episode_1_window_0002"), "window_id_mismatch"),
+        (_response(detections={"not": "a list"}), "schema_shape"),
+        (_response(product_mentions=None), "schema_shape"),
+    ):
+        with pytest.raises(labeling.TopicLabelingError) as exc:
+            labeling.validate_response_lenient(wrong, window, axes)
+        assert exc.value.kind == kind
+
+
+def _classify_with(validation, model_result, on_attempt=None):
+    class FakeClient(labeling.ResponsesClient):
+        def _request(self, url, payload=None):
+            return {
+                "id": "resp_lenient",
+                "status": "completed",
+                "model": "local-model",
+                "output": [
+                    {
+                        "type": "message",
+                        "content": [
+                            {"type": "output_text", "text": json.dumps(model_result)}
+                        ],
+                    }
+                ],
+                "usage": {"input_tokens": 100, "output_tokens": 40},
+            }
+
+    return FakeClient("http://localhost:8000/v1", attempts=1).classify(
+        _lenient_window(),
+        small_taxonomy(),
+        "local-model",
+        labeling.ModelSettings(max_output_tokens=1000, reasoning_effort="none"),
+        on_attempt=on_attempt,
+        validation=validation,
+    )
+
+
+def test_classify_returns_the_lenient_sidecar_in_meta_and_the_attempt_record():
+    model_result = _response(
+        detections=[
+            _detection(evidence_quote="a clinical trial found"),
+            _detection(evidence_quote="not said anywhere", summary="Paraphrase."),
+        ]
+    )
+    records = []
+    result, meta = _classify_with("lenient", model_result, records.append)
+    expected = {
+        "mode": "lenient",
+        "repaired": {"span_widened_for_quote": 1},
+        "dropped": {"non_verbatim_quote": 1},
+    }
+    assert meta["validation"] == expected
+    # Accepted, drops and all, and the attempts log carries the same summary.
+    assert [record["ok"] for record in records] == [True]
+    assert records[0]["validation"] == expected
+    assert len(result["detections"]) == 1 and "validation" not in result
+
+    # Strict rejects the same response as it always has, and reports nothing
+    # changed in a response it accepts.
+    records = []
+    with pytest.raises(labeling.TopicLabelingError) as exc:
+        _classify_with("strict", model_result, records.append)
+    assert exc.value.kind == "non_verbatim_quote"
+    assert records[0]["ok"] is False and "validation" not in records[0]
+    _, meta = _classify_with("strict", _response(detections=[_detection()]))
+    assert meta["validation"] == {"mode": "strict", "repaired": {}, "dropped": {}}
+
+    with pytest.raises(labeling.TopicLabelingError, match="unknown validation mode"):
+        _classify_with("loose", model_result)
+
+
+def test_validation_mode_is_a_label_setting_and_part_of_the_run_fingerprint(
+    tmp_path, monkeypatch
+):
+    config = tmp_path / "config.toml"
+    config.write_text('[model]\nvalidation = "lenient"\n', encoding="utf-8")
+    parser = labeling.build_parser()
+    assert parser.parse_args(["label"]).validation == "strict"
+    assert (
+        parser.parse_args(
+            labeling.expand_config_args(["label", "--config", str(config)])
+        ).validation
+        == "lenient"
+    )
+    # verify validates no labels, so the shared table has nothing to tell it.
+    verify = parser.parse_args(
+        labeling.expand_config_args(["verify", "--config", str(config)])
+    )
+    assert not hasattr(verify, "validation")
+    with pytest.raises(SystemExit):
+        parser.parse_args(["label", "--validation", "loose"])
+
+    taxonomy = small_taxonomy()
+    taxonomy_path = tmp_path / "taxonomy.json"
+    labeling.write_json(taxonomy_path, taxonomy)
+    windows = [{**_lenient_window(), "episode_id": 1, "window_index": 1}]
+    windows_path = tmp_path / "windows.jsonl.zst"
+    _, windows_sha256 = labeling.write_jsonl_atomic(windows_path, windows)
+    prepare_manifest_path = tmp_path / "prepare_manifest.json"
+    labeling.write_json(
+        prepare_manifest_path,
+        {"windows_sha256": windows_sha256, "taxonomy_sha256": taxonomy["taxonomy_sha256"]},
+    )
+    modes: list[str] = []
+
+    def fake_classify(self, window, taxonomy_arg, model, settings, validation="strict"):
+        modes.append(validation)
+        changes = (
+            {"repaired": {"span_widened_for_quote": 2}, "dropped": {"non_verbatim_quote": 1}}
+            if validation == "lenient"
+            else {"repaired": {}, "dropped": {}}
+        )
+        return _response(), {
+            "response_id": "r",
+            "response_model": model,
+            "usage": None,
+            "validation": {"mode": validation, **changes},
+        }
+
+    monkeypatch.setattr(labeling.ResponsesClient, "classify", fake_classify)
+    monkeypatch.setattr(
+        labeling.ResponsesClient,
+        "served_models",
+        lambda self: {root: "local-model" for root in self.roots},
+    )
+
+    def run(output_dir, validation):
+        return labeling.run_label(
+            argparse.Namespace(
+                output_dir=output_dir,
+                taxonomy=taxonomy_path,
+                windows=windows_path,
+                prepare_manifest=prepare_manifest_path,
+                api_base=["http://127.0.0.1:8000/v1"],
+                api=labeling.DEFAULT_API,
+                model="local-model",
+                api_key_env=None,
+                env_file=None,
+                concurrency=1,
+                max_output_tokens=100,
+                timeout=10,
+                attempts=1,
+                reasoning_effort="none",
+                temperature=None,
+                top_p=None,
+                seed=None,
+                validation=validation,
+                usage_limits=None,
+                provider=None,
+                experiment=None,
+                config=tmp_path / "no-config.toml",
+            )
+        )
+
+    strict = run(tmp_path / "strict", "strict")
+    lenient = run(tmp_path / "lenient", "lenient")
+    assert modes == ["strict", "lenient"]
+    assert (strict["validation"], lenient["validation"]) == ("strict", "lenient")
+    assert strict["run_fingerprint"] != lenient["run_fingerprint"]
+    assert strict["annotations_repaired_this_invocation"] == {}
+    assert lenient["annotations_repaired_this_invocation"] == {"span_widened_for_quote": 2}
+    assert lenient["annotations_dropped_this_invocation"] == {"non_verbatim_quote": 1}
+    # A store labeled under one mode refuses to be resumed under the other.
+    with pytest.raises(labeling.TopicLabelingError, match="different run"):
+        run(tmp_path / "strict", "lenient")

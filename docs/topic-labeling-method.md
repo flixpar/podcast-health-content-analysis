@@ -120,6 +120,21 @@ or one truncation threw away every window in the request. `verify` likewise
 sends one candidate per request. Failed windows are durable and retryable; they
 never become implicit negatives.
 
+Even one window per request is expensive to reject: with thinking on, a retry
+repeats a full reasoning pass of 25-45k tokens, and on the local
+DeepSeek-V4-Flash server about half of all output tokens went to responses
+rejected for a single bad annotation -- most often a quote that was verbatim in
+the window but sat a unit or two outside its own span. `label --validation`
+therefore has two modes. `strict`, the default, is the behaviour above.
+`lenient` still rejects a response with the wrong shape or `window_id`, but
+judges each annotation on its own: a quote or certainty marker found elsewhere
+in the window widens the span to cover it, an annotation that cannot be repaired
+unambiguously (a paraphrased quote, an invalid span or field, a duplicate) is
+dropped, and the per-window caps truncate. The stored result has the same shape
+in both modes; what lenient repaired and dropped is counted beside it, in the
+attempts log and the run manifests, so its acceptance rate is never read
+without that cost. The mode is part of the run fingerprint.
+
 ### 3. Merge overlap duplicates without collapsing axes
 
 `merge` deduplicates overlapping window decisions deterministically. It writes

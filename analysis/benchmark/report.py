@@ -152,6 +152,13 @@ def scorecard(score: dict[str, Any]) -> str:
     lines.append(
         f"- Validity: first-attempt acceptance {_fmt(usage.get('first_attempt_validity'))}, "
         f"{_fmt(usage.get('requests_per_accepted_window'))} requests per accepted window, rejected by kind {usage.get('rejected_by_kind', {})}"
+        # Lenient validation accepts a response after repairing or dropping
+        # annotations in it; say how much, so its acceptance is not read bare.
+        + (
+            f"; annotations repaired {usage.get('annotations_repaired')}, dropped {usage.get('annotations_dropped')}"
+            if usage.get("annotations_repaired") or usage.get("annotations_dropped")
+            else ""
+        )
     )
     lines.append(
         f"- Cost: {usage.get('output_tokens_per_accepted_window')} output tokens per accepted window, "

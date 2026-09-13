@@ -35,7 +35,13 @@ def validator_sha256() -> str:
     """Identity of the validator the pipeline currently ships, for the manifest."""
     source = "".join(
         inspect.getsource(function)
-        for function in (tl.parse_json_output, tl.validate_response, tl.validate_window_result)
+        for function in (
+            tl.parse_json_output,
+            tl.validate_response,
+            tl.validate_response_lenient,
+            tl.validate_window_result,
+            tl._lenient_window_result,
+        )
     )
     return hashlib.sha256(source.encode("utf-8")).hexdigest()
 
@@ -96,12 +102,18 @@ class AttemptLog:
         self.path = path
         self.lock = threading.Lock()
         self.counts: Counter[str] = Counter()
+        # What lenient validation repaired and dropped across accepted attempts.
+        self.repaired: Counter[str] = Counter()
+        self.dropped: Counter[str] = Counter()
 
     def __call__(self, record: dict[str, Any]) -> None:
         record = {**record, "logged_at": tl.utc_now()}
         with self.lock:
             self.counts["attempts"] += 1
             self.counts["accepted" if record["ok"] else f"rejected:{record.get('kind')}"] += 1
+            changes = record.get("validation") or {}
+            self.repaired.update(changes.get("repaired") or {})
+            self.dropped.update(changes.get("dropped") or {})
             with open(self.path, "a", encoding="utf-8") as handle:
                 handle.write(json.dumps(record, ensure_ascii=False) + "\n")
 
@@ -115,7 +127,7 @@ MANIFEST_ONLY_KEYS = frozenset({
     "run_fingerprint", "items_hash", "benchmark_version", "name", "notes", "created_at",
     "validator_sha256", "git_commit", "endpoints", "provider", "experiment", "usage_limits",
     "config", "rubric_file", "no_auth", "items", "repeats", "concurrency", "repeat_summaries",
-    "stopped_by_usage_limit", "finished_at", "completed_at", "repeat",
+    "stopped_by_usage_limit", "finished_at", "completed_at", "repeat", "validation_changes",
 })
 
 
@@ -158,6 +170,7 @@ def run_benchmark(
         "taxonomy_sha256": taxonomy["taxonomy_sha256"],
         "model": model,
         "api": args.api,
+        "validation": args.validation,
         **settings.fingerprint(),
     }
     manifest: dict[str, Any] = {
@@ -202,6 +215,10 @@ def run_benchmark(
                     "repeat": repeat,
                     "wall_seconds": round(time.monotonic() - started, 1),
                     "attempts": dict(attempts.counts),
+                    "validation_changes": {
+                        "repaired": dict(sorted(attempts.repaired.items())),
+                        "dropped": dict(sorted(attempts.dropped.items())),
+                    },
                 }
             )
             tl.write_json(repeat_dir / "repeat_manifest.json", summary)
@@ -211,10 +228,21 @@ def run_benchmark(
                 break
     finally:
         limiter.close()
+    repaired: Counter[str] = Counter()
+    dropped: Counter[str] = Counter()
+    for summary in repeat_summaries:
+        repaired.update(summary["validation_changes"]["repaired"])
+        dropped.update(summary["validation_changes"]["dropped"])
     manifest.update(
         {
             "completed_at": tl.utc_now(),
             "repeat_summaries": repeat_summaries,
+            # Summed over the repeats' accepted responses in this invocation;
+            # always empty under strict validation.
+            "validation_changes": {
+                "repaired": dict(sorted(repaired.items())),
+                "dropped": dict(sorted(dropped.items())),
+            },
             "stopped_by_usage_limit": budget_stop,
         }
     )
@@ -238,7 +266,9 @@ def _label_repeat(
     pending = [window for window in windows if window["window_id"] not in done]
 
     def classify(window: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
-        return client.classify(window, taxonomy, model, settings, instructions=instructions, on_attempt=attempts)
+        return client.classify(
+            window, taxonomy, model, settings, instructions=instructions, on_attempt=attempts, validation=args.validation
+        )
 
     budget_stop: tl.BudgetExceeded | None = None
     iterator = iter(pending)
@@ -326,6 +356,8 @@ def usage_summary(attempts: Sequence[dict[str, Any]], prices: dict[str, float] |
     """Tokens, validity and cost from the attempts log (one row per request)."""
     totals: Counter[str] = Counter()
     kinds: Counter[str] = Counter()
+    repaired: Counter[str] = Counter()
+    dropped: Counter[str] = Counter()
     seconds = 0.0
     windows_accepted = 0
     for record in attempts:
@@ -344,6 +376,10 @@ def usage_summary(attempts: Sequence[dict[str, Any]], prices: dict[str, float] |
             totals["accepted"] += 1
             # One window per request; a log from a batched run lists them.
             windows_accepted += len(record["windows"]) if "windows" in record else 1
+            # Lenient validation's repairs and drops ride on accepted attempts.
+            changes = record.get("validation") or {}
+            repaired.update(changes.get("repaired") or {})
+            dropped.update(changes.get("dropped") or {})
         else:
             totals["rejected"] += 1
             kinds[str(record.get("kind"))] += 1
@@ -352,6 +388,8 @@ def usage_summary(attempts: Sequence[dict[str, Any]], prices: dict[str, float] |
         **dict(totals),
         "windows_accepted": windows_accepted,
         "rejected_by_kind": dict(kinds),
+        "annotations_repaired": dict(sorted(repaired.items())),
+        "annotations_dropped": dict(sorted(dropped.items())),
         "first_attempt_validity": round(
             sum(1 for r in first_attempts if r.get("ok")) / len(first_attempts), 4
         ) if first_attempts else None,
