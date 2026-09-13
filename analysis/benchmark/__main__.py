@@ -415,7 +415,7 @@ def cmd_run(args: argparse.Namespace) -> int:
     manifest = runner_mod.run_benchmark(
         items, taxonomy, pipeline_args, args.name, args.repeats, args.rubric_file, args.runs_dir, args.notes, log=sys.stderr
     )
-    _print({k: manifest[k] for k in ("name", "run_fingerprint", "model", "reasoning_effort", "batch_size", "items", "repeats", "repeat_summaries", "stopped_by_usage_limit")})
+    _print({k: manifest[k] for k in ("name", "run_fingerprint", "model", "reasoning_effort", "items", "repeats", "repeat_summaries", "stopped_by_usage_limit")})
     return 0 if not manifest.get("stopped_by_usage_limit") else 2
 
 

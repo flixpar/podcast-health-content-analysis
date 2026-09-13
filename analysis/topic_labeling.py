@@ -5,9 +5,9 @@ The pipeline has five explicit stages:
 
 1. ``prepare`` compiles the canonical tables in ``topics.md`` and turns every
    transcript into overlapping, line-addressable windows.
-2. ``label`` sends batches of windows to an OpenAI-compatible endpoint -- the
-   Responses API or Chat Completions, whichever the server offers -- using
-   strict Structured Outputs.
+2. ``label`` sends each window, one per request, to an OpenAI-compatible
+   endpoint -- the Responses API or Chat Completions, whichever the server
+   offers -- using strict Structured Outputs.
 3. ``merge`` removes duplicate detections caused by window overlap and emits
    topic clips, independent frame/evidence annotations, and atomic claims that
    are flagged for possible-misinformation review.
@@ -67,8 +67,8 @@ else:
 
 
 SCHEMA_VERSION = "topic-labeling-v4"
-PROMPT_VERSION = "topic-clips-claims-products-v5"
-VERIFICATION_PROMPT_VERSION = "evidence-corpus-verification-v2"
+PROMPT_VERSION = "topic-clips-claims-products-v6"
+VERIFICATION_PROMPT_VERSION = "evidence-corpus-verification-v3"
 EVIDENCE_CORPUS_MANIFEST_VERSION = "evidence-corpus-validation-v1"
 DEFAULT_TOPICS = Path("topics.md")
 DEFAULT_TRANSCRIPTS = Path("downloader/data/transcripts")
@@ -212,8 +212,8 @@ something out because a neighbouring window might cover it.
 
 # Contract
 
-Return exactly one result object for every window in the input, matched by
-window_id. A window with no health content returns empty arrays for
+The input is one window. Return one result object for it, carrying that
+window's window_id. A window with no health content returns empty arrays for
 detections, verification_candidates and product_mentions. Empty is a valid and
 common answer. At most 40 detections, 30 candidates and 30 product mentions per
 window; if a window would exceed that, keep the most substantive.
@@ -391,10 +391,9 @@ def parse_json_output(text: str) -> Any:
     A hosted provider asked for strict JSON Schema output may still hand back
     the object wrapped in a ```json fence -- DeepSeek's Responses API does, on
     every request -- and rejecting that as malformed throws away a correct
-    answer for a formatting habit. The same provider also emits a bare results
-    array and the occasional trailing comma. Only those three slips are
-    absorbed; anything else still fails, and the parsed value is validated as
-    before.
+    answer for a formatting habit. The same provider also emits the occasional
+    trailing comma. Only those two slips are absorbed; anything else still
+    fails, and the parsed value is validated as before.
     """
     try:
         parsed = json.loads(text)
@@ -408,12 +407,6 @@ def parse_json_output(text: str) -> Any:
             # so removing it cannot change the meaning of a document that was
             # valid -- and this branch only runs when it was not.
             parsed = json.loads(_TRAILING_COMMA.sub(r"\1", candidate))
-    # Both request schemas wrap the per-item results in {"results": [...]}. A
-    # provider that ignores the schema sometimes returns the bare array; that
-    # is the same answer with the envelope dropped, and every element is still
-    # validated. Anything else is left for validate_response to reject.
-    if isinstance(parsed, list):
-        return {"results": parsed}
     return parsed
 
 
@@ -1096,12 +1089,7 @@ def response_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
         ],
         "additionalProperties": False,
     }
-    return {
-        "type": "object",
-        "properties": {"results": {"type": "array", "items": result}},
-        "required": ["results"],
-        "additionalProperties": False,
-    }
+    return result
 
 
 def taxonomy_instructions(taxonomy: dict[str, Any]) -> str:
@@ -1124,19 +1112,15 @@ def taxonomy_instructions(taxonomy: dict[str, Any]) -> str:
     )
 
 
-def batch_input(windows: Sequence[dict[str, Any]]) -> str:
-    records = []
-    for window in windows:
-        records.append(
-            {
-                "window_id": window["window_id"],
-                "units": [
-                    {"unit_id": unit["unit_id"], "text": unit["text"]}
-                    for unit in window["units"]
-                ],
-            }
-        )
-    return "Label every window in this JSON array:\n" + canonical_json(records)
+def window_input(window: dict[str, Any]) -> str:
+    record = {
+        "window_id": window["window_id"],
+        "units": [
+            {"unit_id": unit["unit_id"], "text": unit["text"]}
+            for unit in window["units"]
+        ],
+    }
+    return "Label this window:\n" + canonical_json(record)
 
 
 def _normalized_quote(value: str) -> str:
@@ -1588,46 +1572,23 @@ def validate_window_result(
 
 def validate_response(
     parsed: dict[str, Any],
-    windows: Sequence[dict[str, Any]],
+    window: dict[str, Any],
     label_axes: dict[str, str],
-) -> list[dict[str, Any]]:
-    if not isinstance(parsed, dict) or set(parsed) != {"results"}:
+) -> dict[str, Any]:
+    # window_id is redundant with one window per request, and kept as a cheap
+    # check that the answer is to the question asked: validate_window_result
+    # rejects a mismatch as window_id_mismatch.
+    if not isinstance(parsed, dict) or set(parsed) != {
+        "window_id",
+        "detections",
+        "verification_candidates",
+        "product_mentions",
+    }:
         raise TopicLabelingError(
-            "response must contain only a results array", kind="schema_shape"
+            "response must contain window_id, detections, verification_candidates, and product_mentions",
+            kind="schema_shape",
         )
-    results = parsed["results"]
-    if not isinstance(results, list):
-        raise TopicLabelingError(
-            "response results must be an array", kind="schema_shape"
-        )
-    expected = {window["window_id"]: window for window in windows}
-    if len(results) != len(expected):
-        raise TopicLabelingError(
-            f"response returned {len(results)} windows; expected {len(expected)}",
-            kind="omitted_windows",
-        )
-    by_id: dict[str, dict[str, Any]] = {}
-    for result in results:
-        if not isinstance(result, dict) or set(result) != {
-            "window_id",
-            "detections",
-            "verification_candidates",
-            "product_mentions",
-        }:
-            raise TopicLabelingError(
-                "each result must contain window_id, detections, verification_candidates, and product_mentions",
-                kind="schema_shape",
-            )
-        window_id = result.get("window_id")
-        if window_id not in expected or window_id in by_id:
-            raise TopicLabelingError(
-                f"unexpected or duplicate response window ID: {window_id!r}",
-                kind="window_id_mismatch",
-            )
-        by_id[window_id] = validate_window_result(
-            result, expected[window_id], label_axes
-        )
-    return [by_id[window["window_id"]] for window in windows]
+    return validate_window_result(parsed, window, label_axes)
 
 
 def extract_output_text(response: dict[str, Any]) -> str:
@@ -1664,14 +1625,15 @@ Verdicts:
 - insufficient_evidence: the packet does not resolve an otherwise verifiable claim.
 - not_verifiable: the item is not a sufficiently factual/testable proposition.
 
-Cite only passage_id values from that candidate's packet. Keep the rationale
-concise and explain evidence limitations. The podcast discourse role does not
-change the factual verdict; it is preserved separately to distinguish
-endorsement, reporting, questioning, and rebuttal downstream. Judge the claim
-as stated: expressed_certainty and certainty_markers record how firmly it was
-put, so a hedged claim is not contradicted merely because the firm version
-would be, and an absolute claim is not supported by evidence for a qualified
-one.
+The input is one candidate with its own evidence packet. Return one result for
+it, carrying its candidate_id, and cite only passage_id values from its packet.
+Keep the rationale concise and explain evidence limitations. The podcast
+discourse role does not change the factual verdict; it is preserved separately
+to distinguish endorsement, reporting, questioning, and rebuttal downstream.
+Judge the claim as stated: expressed_certainty and certainty_markers record how
+firmly it was put, so a hedged claim is not contradicted merely because the firm
+version would be, and an absolute claim is not supported by evidence for a
+qualified one.
 """
 
 
@@ -1704,40 +1666,32 @@ def verification_response_schema() -> dict[str, Any]:
         ],
         "additionalProperties": False,
     }
-    return {
-        "type": "object",
-        "properties": {"results": {"type": "array", "items": item}},
-        "required": ["results"],
-        "additionalProperties": False,
+    return item
+
+
+def verification_input(pair: dict[str, Any]) -> str:
+    record = {
+        "candidate": {
+            key: pair["candidate"][key]
+            for key in (
+                "candidate_id",
+                "claim_text",
+                "evidence_quote",
+                "context_text",
+                "discourse_role",
+                "claim_type",
+                "expressed_certainty",
+                "certainty_markers",
+                "topic_ids",
+                "frame_ids",
+                "evidence_signal_ids",
+            )
+        },
+        "corpus": pair["evidence_packet"]["corpus"],
+        "retrieval": pair["evidence_packet"]["retrieval"],
+        "passages": pair["evidence_packet"]["passages"],
     }
-
-
-def verification_batch_input(pairs: Sequence[dict[str, Any]]) -> str:
-    records = [
-        {
-            "candidate": {
-                key: pair["candidate"][key]
-                for key in (
-                    "candidate_id",
-                    "claim_text",
-                    "evidence_quote",
-                    "context_text",
-                    "discourse_role",
-                    "claim_type",
-                    "expressed_certainty",
-                    "certainty_markers",
-                    "topic_ids",
-                    "frame_ids",
-                    "evidence_signal_ids",
-                )
-            },
-            "corpus": pair["evidence_packet"]["corpus"],
-            "retrieval": pair["evidence_packet"]["retrieval"],
-            "passages": pair["evidence_packet"]["passages"],
-        }
-        for pair in pairs
-    ]
-    return "Verify every candidate in this JSON array:\n" + canonical_json(records)
+    return "Verify this candidate:\n" + canonical_json(record)
 
 
 def validate_corpus_validation_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
@@ -1937,14 +1891,8 @@ def validate_evidence_packet(packet: dict[str, Any]) -> dict[str, Any]:
 
 
 def validate_verification_response(
-    parsed: dict[str, Any], pairs: Sequence[dict[str, Any]]
-) -> list[dict[str, Any]]:
-    if not isinstance(parsed, dict) or set(parsed) != {"results"}:
-        raise TopicLabelingError("verification response must contain only results")
-    expected = {pair["candidate"]["candidate_id"]: pair for pair in pairs}
-    results = parsed["results"]
-    if not isinstance(results, list) or len(results) != len(expected):
-        raise TopicLabelingError("verification response candidate count mismatch")
+    result: dict[str, Any], pair: dict[str, Any]
+) -> dict[str, Any]:
     fields = {
         "candidate_id",
         "verdict",
@@ -1954,81 +1902,75 @@ def validate_verification_response(
         "rationale",
         "limitations",
     }
-    by_id: dict[str, dict[str, Any]] = {}
-    for result in results:
-        if not isinstance(result, dict) or set(result) != fields:
-            raise TopicLabelingError(
-                "verification result fields do not match the schema"
-            )
-        candidate_id = result.get("candidate_id")
-        if candidate_id not in expected or candidate_id in by_id:
-            raise TopicLabelingError(
-                f"unknown or duplicate verification candidate {candidate_id!r}"
-            )
-        passage_ids = {
-            row["passage_id"]
-            for row in expected[candidate_id]["evidence_packet"]["passages"]
-        }
-        supporting = result.get("supporting_passage_ids")
-        contradicting = result.get("contradicting_passage_ids")
-        if (
-            not isinstance(supporting, list)
-            or len(supporting) != len(set(supporting))
-            or any(passage_id not in passage_ids for passage_id in supporting)
-            or not isinstance(contradicting, list)
-            or len(contradicting) != len(set(contradicting))
-            or any(passage_id not in passage_ids for passage_id in contradicting)
-        ):
-            raise TopicLabelingError(f"invalid passage citations for {candidate_id}")
-        verdict = result.get("verdict")
-        if verdict not in ALLOWED_VERDICTS:
-            raise TopicLabelingError(f"invalid verification verdict for {candidate_id}")
-        if verdict == "supported" and (not supporting or contradicting):
-            raise TopicLabelingError(
-                f"supported verdict needs only supporting evidence for {candidate_id}"
-            )
-        if verdict == "contradicted" and (not contradicting or supporting):
-            raise TopicLabelingError(
-                f"contradicted verdict needs only contradicting evidence for {candidate_id}"
-            )
-        if verdict == "mixed" and (not supporting or not contradicting):
-            raise TopicLabelingError(
-                f"mixed verdict needs both evidence types for {candidate_id}"
-            )
-        if verdict == "misleading_or_missing_context" and not (
-            supporting or contradicting
-        ):
-            raise TopicLabelingError(
-                f"misleading verdict lacks cited evidence for {candidate_id}"
-            )
-        confidence = result.get("confidence")
-        if isinstance(confidence, bool) or not isinstance(confidence, (int, float)):
-            raise TopicLabelingError(
-                f"invalid verification confidence for {candidate_id}"
-            )
-        if not 0 <= float(confidence) <= 1:
-            raise TopicLabelingError(
-                f"verification confidence outside [0,1] for {candidate_id}"
-            )
-        if (
-            not isinstance(result.get("rationale"), str)
-            or not result["rationale"].strip()
-        ):
-            raise TopicLabelingError(f"empty verification rationale for {candidate_id}")
-        if not isinstance(result.get("limitations"), str):
-            raise TopicLabelingError(
-                f"invalid verification limitations for {candidate_id}"
-            )
-        by_id[candidate_id] = {
-            "candidate_id": candidate_id,
-            "verdict": verdict,
-            "confidence": float(confidence),
-            "supporting_passage_ids": supporting,
-            "contradicting_passage_ids": contradicting,
-            "rationale": re.sub(r"\s+", " ", result["rationale"]).strip(),
-            "limitations": re.sub(r"\s+", " ", result["limitations"]).strip(),
-        }
-    return [by_id[pair["candidate"]["candidate_id"]] for pair in pairs]
+    if not isinstance(result, dict) or set(result) != fields:
+        raise TopicLabelingError(
+            "verification result fields do not match the schema"
+        )
+    candidate_id = result.get("candidate_id")
+    if candidate_id != pair["candidate"]["candidate_id"]:
+        raise TopicLabelingError(
+            f"verification result is for unexpected candidate {candidate_id!r}"
+        )
+    passage_ids = {row["passage_id"] for row in pair["evidence_packet"]["passages"]}
+    supporting = result.get("supporting_passage_ids")
+    contradicting = result.get("contradicting_passage_ids")
+    if (
+        not isinstance(supporting, list)
+        or len(supporting) != len(set(supporting))
+        or any(passage_id not in passage_ids for passage_id in supporting)
+        or not isinstance(contradicting, list)
+        or len(contradicting) != len(set(contradicting))
+        or any(passage_id not in passage_ids for passage_id in contradicting)
+    ):
+        raise TopicLabelingError(f"invalid passage citations for {candidate_id}")
+    verdict = result.get("verdict")
+    if verdict not in ALLOWED_VERDICTS:
+        raise TopicLabelingError(f"invalid verification verdict for {candidate_id}")
+    if verdict == "supported" and (not supporting or contradicting):
+        raise TopicLabelingError(
+            f"supported verdict needs only supporting evidence for {candidate_id}"
+        )
+    if verdict == "contradicted" and (not contradicting or supporting):
+        raise TopicLabelingError(
+            f"contradicted verdict needs only contradicting evidence for {candidate_id}"
+        )
+    if verdict == "mixed" and (not supporting or not contradicting):
+        raise TopicLabelingError(
+            f"mixed verdict needs both evidence types for {candidate_id}"
+        )
+    if verdict == "misleading_or_missing_context" and not (
+        supporting or contradicting
+    ):
+        raise TopicLabelingError(
+            f"misleading verdict lacks cited evidence for {candidate_id}"
+        )
+    confidence = result.get("confidence")
+    if isinstance(confidence, bool) or not isinstance(confidence, (int, float)):
+        raise TopicLabelingError(
+            f"invalid verification confidence for {candidate_id}"
+        )
+    if not 0 <= float(confidence) <= 1:
+        raise TopicLabelingError(
+            f"verification confidence outside [0,1] for {candidate_id}"
+        )
+    if (
+        not isinstance(result.get("rationale"), str)
+        or not result["rationale"].strip()
+    ):
+        raise TopicLabelingError(f"empty verification rationale for {candidate_id}")
+    if not isinstance(result.get("limitations"), str):
+        raise TopicLabelingError(
+            f"invalid verification limitations for {candidate_id}"
+        )
+    return {
+        "candidate_id": candidate_id,
+        "verdict": verdict,
+        "confidence": float(confidence),
+        "supporting_passage_ids": supporting,
+        "contradicting_passage_ids": contradicting,
+        "rationale": re.sub(r"\s+", " ", result["rationale"]).strip(),
+        "limitations": re.sub(r"\s+", " ", result["limitations"]).strip(),
+    }
 
 
 @dataclass(frozen=True)
@@ -2527,14 +2469,14 @@ class ResponsesClient:
 
     def classify(
         self,
-        windows: Sequence[dict[str, Any]],
+        window: dict[str, Any],
         taxonomy: dict[str, Any],
         model: str,
         settings: ModelSettings,
         instructions: str | None = None,
         on_attempt: Callable[[dict[str, Any]], None] | None = None,
-    ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-        """Label one batch of windows.
+    ) -> tuple[dict[str, Any], dict[str, Any]]:
+        """Label one window.
 
         ``instructions`` replaces the rubric-plus-codebook prefix, for a caller
         evaluating a prompt variant; ``on_attempt`` is told about every request,
@@ -2546,7 +2488,7 @@ class ResponsesClient:
             "model": model,
             **self.flavor.payload(
                 instructions if instructions is not None else taxonomy_instructions(taxonomy),
-                batch_input(windows),
+                window_input(window),
                 "podcast_topic_clips",
                 response_schema(taxonomy),
                 settings,
@@ -2562,7 +2504,7 @@ class ResponsesClient:
                 self.flavor.raise_for_status(response)
                 output_text = self.flavor.output_text(response)
                 parsed = parse_json_output(output_text)
-                results = validate_response(parsed, windows, label_axes)
+                result = validate_response(parsed, window, label_axes)
                 meta = {
                     "response_id": response.get("id"),
                     "usage": response.get("usage"),
@@ -2574,13 +2516,13 @@ class ResponsesClient:
                         {
                             "attempt": attempt,
                             "ok": True,
-                            "windows": [window["window_id"] for window in windows],
+                            "window_id": window["window_id"],
                             "seconds": round(time.monotonic() - started, 3),
                             "response_id": response.get("id"),
                             "usage": response.get("usage"),
                         }
                     )
-                return results, meta
+                return result, meta
             except (TopicLabelingError, json.JSONDecodeError) as exc:
                 last_error = exc
                 if on_attempt is not None:
@@ -2588,7 +2530,7 @@ class ResponsesClient:
                         {
                             "attempt": attempt,
                             "ok": False,
-                            "windows": [window["window_id"] for window in windows],
+                            "window_id": window["window_id"],
                             "seconds": round(time.monotonic() - started, 3),
                             "kind": error_kind(exc),
                             "message": str(exc)[:300],
@@ -2610,15 +2552,16 @@ class ResponsesClient:
 
     def verify(
         self,
-        pairs: Sequence[dict[str, Any]],
+        pair: dict[str, Any],
         model: str,
         settings: ModelSettings,
-    ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    ) -> tuple[dict[str, Any], dict[str, Any]]:
+        """Verify one candidate against its evidence packet."""
         payload: dict[str, Any] = {
             "model": model,
             **self.flavor.payload(
                 VERIFICATION_RUBRIC,
-                verification_batch_input(pairs),
+                verification_input(pair),
                 "podcast_claim_verification",
                 verification_response_schema(),
                 settings,
@@ -2630,8 +2573,8 @@ class ResponsesClient:
                 response = self._send(payload, model)
                 self.flavor.raise_for_status(response)
                 parsed = parse_json_output(self.flavor.output_text(response))
-                results = validate_verification_response(parsed, pairs)
-                return results, {
+                result = validate_verification_response(parsed, pair)
+                return result, {
                     "response_id": response.get("id"),
                     "usage": response.get("usage"),
                     "response_model": response.get("model"),
@@ -2650,7 +2593,7 @@ class ResponsesClient:
 
 
 class LabelStore:
-    """SQLite checkpoint store; one transaction makes each model batch durable."""
+    """SQLite checkpoint store; one transaction makes each model response durable."""
 
     def __init__(self, path: Path, run_manifest: dict[str, Any]) -> None:
         self.path = Path(path)
@@ -2730,56 +2673,52 @@ class LabelStore:
 
     def record_success(
         self,
-        windows: Sequence[dict[str, Any]],
-        results: Sequence[dict[str, Any]],
+        window: dict[str, Any],
+        result: dict[str, Any],
         response_meta: dict[str, Any],
     ) -> None:
         now = utc_now()
         with self.conn:
-            for window, result in zip(windows, results, strict=True):
-                self.conn.execute(
-                    """INSERT OR REPLACE INTO window_labels
-                       (window_id, episode_id, window_index, result_json, response_id,
-                        response_model, usage_json, labeled_at)
-                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-                    (
-                        window["window_id"],
-                        window["episode_id"],
-                        window["window_index"],
-                        canonical_json(result),
-                        response_meta.get("response_id"),
-                        response_meta.get("response_model"),
-                        canonical_json(response_meta.get("usage")),
-                        now,
-                    ),
-                )
-                self.conn.execute(
-                    "DELETE FROM failures WHERE window_id = ?", (window["window_id"],)
-                )
+            self.conn.execute(
+                """INSERT OR REPLACE INTO window_labels
+                   (window_id, episode_id, window_index, result_json, response_id,
+                    response_model, usage_json, labeled_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    window["window_id"],
+                    window["episode_id"],
+                    window["window_index"],
+                    canonical_json(result),
+                    response_meta.get("response_id"),
+                    response_meta.get("response_model"),
+                    canonical_json(response_meta.get("usage")),
+                    now,
+                ),
+            )
+            self.conn.execute(
+                "DELETE FROM failures WHERE window_id = ?", (window["window_id"],)
+            )
 
-    def record_failure(
-        self, windows: Sequence[dict[str, Any]], error: Exception
-    ) -> None:
+    def record_failure(self, window: dict[str, Any], error: Exception) -> None:
         message = f"{type(error).__name__}: {error}"[:1000]
         kind = error_kind(error)
         now = utc_now()
         with self.conn:
-            for window in windows:
-                self.conn.execute(
-                    """INSERT INTO failures(window_id, episode_id, window_index, error, kind, updated_at)
-                       VALUES (?, ?, ?, ?, ?, ?)
-                       ON CONFLICT(window_id) DO UPDATE
-                       SET error = excluded.error, kind = excluded.kind,
-                           updated_at = excluded.updated_at""",
-                    (
-                        window["window_id"],
-                        window["episode_id"],
-                        window["window_index"],
-                        message,
-                        kind,
-                        now,
-                    ),
-                )
+            self.conn.execute(
+                """INSERT INTO failures(window_id, episode_id, window_index, error, kind, updated_at)
+                   VALUES (?, ?, ?, ?, ?, ?)
+                   ON CONFLICT(window_id) DO UPDATE
+                   SET error = excluded.error, kind = excluded.kind,
+                       updated_at = excluded.updated_at""",
+                (
+                    window["window_id"],
+                    window["episode_id"],
+                    window["window_index"],
+                    message,
+                    kind,
+                    now,
+                ),
+            )
 
     def labels_for_episode(self, episode_id: int) -> dict[str, dict[str, Any]]:
         rows = self.conn.execute(
@@ -2877,43 +2816,41 @@ class VerificationStore:
 
     def record_success(
         self,
-        pairs: Sequence[dict[str, Any]],
-        results: Sequence[dict[str, Any]],
+        pair: dict[str, Any],
+        result: dict[str, Any],
         response_meta: dict[str, Any],
     ) -> None:
         now = utc_now()
+        candidate_id = pair["candidate"]["candidate_id"]
         with self.conn:
-            for pair, result in zip(pairs, results, strict=True):
-                candidate_id = pair["candidate"]["candidate_id"]
-                self.conn.execute(
-                    """INSERT OR REPLACE INTO verification_results
-                       (candidate_id, result_json, response_id, response_model,
-                        usage_json, verified_at) VALUES (?, ?, ?, ?, ?, ?)""",
-                    (
-                        candidate_id,
-                        canonical_json(result),
-                        response_meta.get("response_id"),
-                        response_meta.get("response_model"),
-                        canonical_json(response_meta.get("usage")),
-                        now,
-                    ),
-                )
-                self.conn.execute(
-                    "DELETE FROM failures WHERE candidate_id = ?", (candidate_id,)
-                )
+            self.conn.execute(
+                """INSERT OR REPLACE INTO verification_results
+                   (candidate_id, result_json, response_id, response_model,
+                    usage_json, verified_at) VALUES (?, ?, ?, ?, ?, ?)""",
+                (
+                    candidate_id,
+                    canonical_json(result),
+                    response_meta.get("response_id"),
+                    response_meta.get("response_model"),
+                    canonical_json(response_meta.get("usage")),
+                    now,
+                ),
+            )
+            self.conn.execute(
+                "DELETE FROM failures WHERE candidate_id = ?", (candidate_id,)
+            )
 
-    def record_failure(self, pairs: Sequence[dict[str, Any]], error: Exception) -> None:
+    def record_failure(self, pair: dict[str, Any], error: Exception) -> None:
         message = f"{type(error).__name__}: {error}"[:1000]
         now = utc_now()
+        candidate_id = pair["candidate"]["candidate_id"]
         with self.conn:
-            for pair in pairs:
-                candidate_id = pair["candidate"]["candidate_id"]
-                self.conn.execute(
-                    """INSERT INTO failures(candidate_id, error, updated_at) VALUES (?, ?, ?)
-                       ON CONFLICT(candidate_id) DO UPDATE
-                       SET error = excluded.error, updated_at = excluded.updated_at""",
-                    (candidate_id, message, now),
-                )
+            self.conn.execute(
+                """INSERT INTO failures(candidate_id, error, updated_at) VALUES (?, ?, ?)
+                   ON CONFLICT(candidate_id) DO UPDATE
+                   SET error = excluded.error, updated_at = excluded.updated_at""",
+                (candidate_id, message, now),
+            )
 
     def export_jsonl(self, path: Path) -> tuple[int, str]:
         def rows() -> Iterator[dict[str, Any]]:
@@ -2964,7 +2901,7 @@ def build_limiter(args: argparse.Namespace) -> UsageLimiter:
         )
     limiter = UsageLimiter.from_config(args.usage_limits, args.experiment)
     # Checked here rather than on the first request: a request refused by the
-    # limiter is recorded as one more failed batch and the run carries on, so a
+    # limiter is recorded as one more failed window and the run carries on, so a
     # typo in --provider would otherwise mark every window unresolved instead
     # of stopping before anything was submitted.
     if limiter.config is not None and args.provider not in limiter.config.providers:
@@ -2975,24 +2912,9 @@ def build_limiter(args: argparse.Namespace) -> UsageLimiter:
     return limiter
 
 
-def _batched(
-    rows: Iterable[dict[str, Any]], size: int
-) -> Iterator[list[dict[str, Any]]]:
-    batch: list[dict[str, Any]] = []
-    for row in rows:
-        batch.append(row)
-        if len(batch) >= size:
-            yield batch
-            batch = []
-    if batch:
-        yield batch
-
-
 def run_label(args: argparse.Namespace) -> dict[str, Any]:
-    if args.batch_size < 1 or args.concurrency < 1 or args.attempts < 1:
-        raise TopicLabelingError(
-            "batch-size, concurrency, and attempts must all be positive"
-        )
+    if args.concurrency < 1 or args.attempts < 1:
+        raise TopicLabelingError("concurrency and attempts must both be positive")
     if args.max_output_tokens < 1 or args.timeout < 1:
         raise TopicLabelingError("max-output-tokens and timeout must both be positive")
     # Before the input checks below: hashing a corpus-sized windows file takes
@@ -3033,7 +2955,6 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
         "windows_sha256": prepare_manifest["windows_sha256"],
         "model": model,
         "api": args.api,
-        "batch_size": args.batch_size,
         **settings.fingerprint(),
     }
     run_fingerprint = sha256_bytes(canonical_json(fingerprint_inputs).encode("utf-8"))
@@ -3060,11 +2981,10 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
                 yield window
 
     def classify(
-        batch: list[dict[str, Any]],
-    ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-        return client.classify(batch, taxonomy, model, settings)
+        window: dict[str, Any],
+    ) -> tuple[dict[str, Any], dict[str, Any]]:
+        return client.classify(window, taxonomy, model, settings)
 
-    counters: Counter[str] = Counter()
     # What the server says it decoded with. Settings omitted from the request
     # are resolved server-side from the model's generation config, so this is
     # the only record of them. Empty on --api chat_completions, which echoes
@@ -3072,109 +2992,48 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
     # run rather than reading them out of the manifest afterwards.
     observed_sampling: dict[str, Any] = {}
 
-    def classify_isolating(
-        batch: list[dict[str, Any]],
-    ) -> tuple[
-        list[tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]],
-        list[tuple[list[dict[str, Any]], Exception]],
-    ]:
-        """Classify a batch; on failure re-try each window alone.
-
-        Validation rejects a whole response, so without this one unlabelable
-        window would keep every other window in its batch permanently
-        unresolved -- and the next run would re-batch them together and fail the
-        same way.
-        """
-        try:
-            results, meta = classify(batch)
-            return [(batch, results, meta)], []
-        except UsageLimitError:
-            # Isolating retries the batch window by window, which is the answer
-            # to one unlabelable window and never the answer to a limit: it
-            # would spend the same exhausted budget, or wait out the same rate,
-            # once per window instead of once.
-            raise
-        except Exception as exc:
-            if len(batch) == 1:
-                return [], [(batch, exc)]
-            counters["batches_isolated"] += 1
-            counters["windows_isolated"] += len(batch)
-            successes: list[
-                tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]
-            ] = []
-            failures: list[tuple[list[dict[str, Any]], Exception]] = []
-            for index, window in enumerate(batch):
-                single = [window]
-                try:
-                    results, meta = classify(single)
-                    successes.append((single, results, meta))
-                except UsageLimitError as inner:
-                    # Same reason as above, and it has to be caught here too:
-                    # a limit reached partway through an isolation pass would
-                    # otherwise be waited out or re-refused once per remaining
-                    # window. Stop isolating and hand the rest back unlabelled,
-                    # keeping the windows already paid for.
-                    failures.extend(([other], inner) for other in batch[index:])
-                    break
-                except Exception as inner:
-                    failures.append((single, inner))
-            counters["windows_recovered_by_isolation"] += len(successes)
-            return successes, failures
-
     # Set when a usage budget runs out. Nothing after it is submitted, but the
     # requests already in flight finish and checkpoint, so the run resumes from
-    # where the money stopped rather than from where the last batch started.
+    # where the money stopped rather than from where the last request started.
     budget_stop: BudgetExceeded | None = None
     submitted = completed_requests = failed_requests = 0
-    iterator = iter(_batched(pending(), args.batch_size))
-    futures: dict[Future[Any], list[dict[str, Any]]] = {}
+    iterator = pending()
+    futures: dict[Future[tuple[dict[str, Any], dict[str, Any]]], dict[str, Any]] = {}
     try:
         with ThreadPoolExecutor(max_workers=args.concurrency) as executor:
             while len(futures) < args.concurrency * 2:
                 try:
-                    batch = next(iterator)
+                    window = next(iterator)
                 except StopIteration:
                     break
-                futures[executor.submit(classify_isolating, batch)] = batch
+                futures[executor.submit(classify, window)] = window
                 submitted += 1
             while futures:
                 finished, _ = wait(futures, return_when=FIRST_COMPLETED)
                 for future in finished:
-                    batch = futures.pop(future)
+                    window = futures.pop(future)
                     try:
-                        successes, failures = future.result()
-                    except BudgetExceeded as exc:
-                        budget_stop = budget_stop or exc
-                        successes, failures = [], [(batch, exc)]
-                    except Exception as exc:
-                        # classify_isolating handles model errors itself, so
-                        # reaching here means the worker itself broke.
-                        successes, failures = [], [(batch, exc)]
-                    for window_group, results, meta in successes:
-                        store.record_success(window_group, results, meta)
+                        result, meta = future.result()
+                        store.record_success(window, result, meta)
                         observed_sampling = observed_sampling or meta.get(
                             "effective_sampling", {}
                         )
-                    for window_group, error in failures:
-                        # A budget reached inside an isolation pass comes back
-                        # here rather than out of future.result(), so the stop
-                        # is recognised in both places.
-                        if isinstance(error, BudgetExceeded):
-                            budget_stop = budget_stop or error
+                    except BudgetExceeded as exc:
+                        budget_stop = budget_stop or exc
                         failed_requests += 1
-                        store.record_failure(window_group, error)
+                        store.record_failure(window, exc)
+                    except Exception as exc:
+                        failed_requests += 1
+                        store.record_failure(window, exc)
                     completed_requests += 1
-                    next_batch = None
                     if budget_stop is None:
                         try:
-                            next_batch = next(iterator)
+                            window = next(iterator)
                         except StopIteration:
-                            next_batch = None
-                    if next_batch:
-                        futures[executor.submit(classify_isolating, next_batch)] = (
-                            next_batch
-                        )
-                        submitted += 1
+                            pass
+                        else:
+                            futures[executor.submit(classify, window)] = window
+                            submitted += 1
                     if completed_requests % 25 == 0:
                         complete, failed = store.counts()
                         print(
@@ -3192,11 +3051,6 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
             "requests_completed_this_invocation": completed_requests,
             "requests_failed_this_invocation": failed_requests,
             "stopped_by_usage_limit": str(budget_stop) if budget_stop else None,
-            "batches_isolated_this_invocation": counters["batches_isolated"],
-            "windows_isolated_this_invocation": counters["windows_isolated"],
-            "windows_recovered_by_isolation": counters[
-                "windows_recovered_by_isolation"
-            ],
             "effective_sampling": observed_sampling or None,
             "windows_labeled": complete,
             "unresolved_windows": failed,
@@ -4501,10 +4355,8 @@ def _sample_products(args: argparse.Namespace, output_dir: Path) -> dict[str, An
 
 
 def run_verify(args: argparse.Namespace) -> dict[str, Any]:
-    if args.batch_size < 1 or args.concurrency < 1 or args.attempts < 1:
-        raise TopicLabelingError(
-            "batch-size, concurrency, and attempts must all be positive"
-        )
+    if args.concurrency < 1 or args.attempts < 1:
+        raise TopicLabelingError("concurrency and attempts must both be positive")
     if args.max_output_tokens < 1 or args.timeout < 1:
         raise TopicLabelingError("max-output-tokens and timeout must both be positive")
     # Before the input checks below, which read every candidate and evidence
@@ -4583,7 +4435,6 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
         "corpus_validation_manifest_sha256": corpus_validation_sha256,
         "model": model,
         "api": args.api,
-        "batch_size": args.batch_size,
         **settings.fingerprint(),
     }
     run_fingerprint = sha256_bytes(canonical_json(fingerprint_inputs).encode("utf-8"))
@@ -4611,58 +4462,55 @@ def run_verify(args: argparse.Namespace) -> dict[str, Any]:
             if candidate_id not in done:
                 yield {"candidate": candidates[candidate_id], "evidence_packet": packet}
 
-    def verify_batch(
-        batch: list[dict[str, Any]],
-    ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-        return client.verify(batch, model, settings)
+    def verify_one(
+        pair: dict[str, Any],
+    ) -> tuple[dict[str, Any], dict[str, Any]]:
+        return client.verify(pair, model, settings)
 
     # See run_label: the only record of settings resolved server-side.
     observed_sampling: dict[str, Any] = {}
     # Set when a usage budget runs out. Nothing after it is submitted, but the
     # requests already in flight finish and checkpoint, so the run resumes from
-    # where the money stopped rather than from where the last batch started.
+    # where the money stopped rather than from where the last request started.
     budget_stop: BudgetExceeded | None = None
     submitted = completed_requests = failed_requests = 0
-    iterator = iter(_batched(pending(), args.batch_size))
-    futures: dict[
-        Future[tuple[list[dict[str, Any]], dict[str, Any]]], list[dict[str, Any]]
-    ] = {}
+    iterator = pending()
+    futures: dict[Future[tuple[dict[str, Any], dict[str, Any]]], dict[str, Any]] = {}
     try:
         with ThreadPoolExecutor(max_workers=args.concurrency) as executor:
             while len(futures) < args.concurrency * 2:
                 try:
-                    batch = next(iterator)
+                    pair = next(iterator)
                 except StopIteration:
                     break
-                futures[executor.submit(verify_batch, batch)] = batch
+                futures[executor.submit(verify_one, pair)] = pair
                 submitted += 1
             while futures:
                 finished, _ = wait(futures, return_when=FIRST_COMPLETED)
                 for future in finished:
-                    batch = futures.pop(future)
+                    pair = futures.pop(future)
                     try:
-                        results, meta = future.result()
-                        store.record_success(batch, results, meta)
+                        result, meta = future.result()
+                        store.record_success(pair, result, meta)
                         observed_sampling = observed_sampling or meta.get(
                             "effective_sampling", {}
                         )
                     except BudgetExceeded as exc:
                         budget_stop = budget_stop or exc
                         failed_requests += 1
-                        store.record_failure(batch, exc)
+                        store.record_failure(pair, exc)
                     except Exception as exc:
                         failed_requests += 1
-                        store.record_failure(batch, exc)
+                        store.record_failure(pair, exc)
                     completed_requests += 1
-                    next_batch = None
                     if budget_stop is None:
                         try:
-                            next_batch = next(iterator)
+                            pair = next(iterator)
                         except StopIteration:
-                            next_batch = None
-                    if next_batch:
-                        futures[executor.submit(verify_batch, next_batch)] = next_batch
-                        submitted += 1
+                            pass
+                        else:
+                            futures[executor.submit(verify_one, pair)] = pair
+                            submitted += 1
                     if completed_requests % 25 == 0:
                         complete, failed = store.counts()
                         print(
@@ -4969,7 +4817,6 @@ def build_parser() -> argparse.ArgumentParser:
         "--api-key-env",
         help="Optional environment variable for Bearer auth; omit for no auth",
     )
-    label.add_argument("--batch-size", type=int, default=8)
     label.add_argument("--concurrency", type=int, default=8)
     label.add_argument("--max-output-tokens", type=int, default=12000)
     label.add_argument("--timeout", type=int, default=600)
@@ -5115,7 +4962,6 @@ def build_parser() -> argparse.ArgumentParser:
         "--api-key-env",
         help="Optional environment variable for Bearer auth; omit for no auth",
     )
-    verify.add_argument("--batch-size", type=int, default=4)
     verify.add_argument("--concurrency", type=int, default=8)
     verify.add_argument("--max-output-tokens", type=int, default=6000)
     verify.add_argument("--timeout", type=int, default=600)

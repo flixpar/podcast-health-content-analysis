@@ -20,7 +20,7 @@ import time
 from collections import Counter
 from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
 from pathlib import Path
-from typing import Any, Callable, Iterable, Iterator, Sequence
+from typing import Any, Callable, Sequence
 
 from analysis import topic_labeling as tl
 from analysis.usage_limits import Usage
@@ -106,20 +106,11 @@ class AttemptLog:
                 handle.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
-def _batched(rows: Iterable[dict[str, Any]], size: int) -> Iterator[list[dict[str, Any]]]:
-    batch: list[dict[str, Any]] = []
-    for row in rows:
-        batch.append(row)
-        if len(batch) >= size:
-            yield batch
-            batch = []
-    if batch:
-        yield batch
-
-
 # Manifest keys that describe a run without changing what it labels. Everything
 # else in the manifest is a fingerprint input; two runs with the same
 # fingerprint are interchangeable, and a label store refuses a different one.
+# A run from before one-window requests carries a batch_size input, so its
+# recomputed fingerprint still matches the one it was stored under.
 MANIFEST_ONLY_KEYS = frozenset({
     "run_fingerprint", "items_hash", "benchmark_version", "name", "notes", "created_at",
     "validator_sha256", "git_commit", "endpoints", "provider", "experiment", "usage_limits",
@@ -145,8 +136,8 @@ def run_benchmark(
     log: Any = None,
 ) -> dict[str, Any]:
     """Label every item ``repeats`` times; writes benchmark/runs/<name>/."""
-    if args.batch_size < 1 or args.concurrency < 1 or args.attempts < 1:
-        raise tl.TopicLabelingError("batch-size, concurrency, and attempts must all be positive")
+    if args.concurrency < 1 or args.attempts < 1:
+        raise tl.TopicLabelingError("concurrency and attempts must both be positive")
     run_dir = Path(runs_dir) / name
     run_dir.mkdir(parents=True, exist_ok=True)
     api_key = tl.resolve_api_key(args)
@@ -167,7 +158,6 @@ def run_benchmark(
         "taxonomy_sha256": taxonomy["taxonomy_sha256"],
         "model": model,
         "api": args.api,
-        "batch_size": args.batch_size,
         **settings.fingerprint(),
     }
     manifest: dict[str, Any] = {
@@ -247,70 +237,40 @@ def _label_repeat(
     done = store.done_ids()
     pending = [window for window in windows if window["window_id"] not in done]
 
-    def classify(batch: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-        return client.classify(batch, taxonomy, model, settings, instructions=instructions, on_attempt=attempts)
-
-    counters: Counter[str] = Counter()
-
-    def classify_isolating(batch: list[dict[str, Any]]):
-        try:
-            results, meta = classify(batch)
-            return [(batch, results, meta)], []
-        except tl.UsageLimitError:
-            raise
-        except Exception as exc:
-            if len(batch) == 1:
-                return [], [(batch, exc)]
-            counters["batches_isolated"] += 1
-            successes, failures = [], []
-            for index, window in enumerate(batch):
-                try:
-                    results, meta = classify([window])
-                    successes.append(([window], results, meta))
-                except tl.UsageLimitError as inner:
-                    failures.extend(([other], inner) for other in batch[index:])
-                    break
-                except Exception as inner:
-                    failures.append(([window], inner))
-            counters["windows_recovered_by_isolation"] += len(successes)
-            return successes, failures
+    def classify(window: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
+        return client.classify(window, taxonomy, model, settings, instructions=instructions, on_attempt=attempts)
 
     budget_stop: tl.BudgetExceeded | None = None
-    iterator = iter(_batched(pending, args.batch_size))
-    futures: dict[Future[Any], list[dict[str, Any]]] = {}
+    iterator = iter(pending)
+    futures: dict[Future[Any], dict[str, Any]] = {}
     completed = 0
     with ThreadPoolExecutor(max_workers=args.concurrency) as executor:
         while len(futures) < args.concurrency * 2:
             try:
-                batch = next(iterator)
+                window = next(iterator)
             except StopIteration:
                 break
-            futures[executor.submit(classify_isolating, batch)] = batch
+            futures[executor.submit(classify, window)] = window
         while futures:
             finished, _ = wait(futures, return_when=FIRST_COMPLETED)
             for future in finished:
-                batch = futures.pop(future)
+                window = futures.pop(future)
                 try:
-                    successes, failures = future.result()
+                    result, meta = future.result()
+                    store.record_success(window, result, meta)
                 except tl.BudgetExceeded as exc:
                     budget_stop = budget_stop or exc
-                    successes, failures = [], [(batch, exc)]
+                    store.record_failure(window, exc)
                 except Exception as exc:
-                    successes, failures = [], [(batch, exc)]
-                for group, results, meta in successes:
-                    store.record_success(group, results, meta)
-                for group, error in failures:
-                    if isinstance(error, tl.BudgetExceeded):
-                        budget_stop = budget_stop or error
-                    store.record_failure(group, error)
+                    store.record_failure(window, exc)
                 completed += 1
                 if budget_stop is None:
                     try:
-                        next_batch = next(iterator)
+                        window = next(iterator)
                     except StopIteration:
-                        next_batch = None
-                    if next_batch:
-                        futures[executor.submit(classify_isolating, next_batch)] = next_batch
+                        pass
+                    else:
+                        futures[executor.submit(classify, window)] = window
                 if log and completed % 10 == 0:
                     complete, failed = store.counts()
                     print(f"requests={completed} windows={complete} unresolved={failed}", file=log)
@@ -320,8 +280,6 @@ def _label_repeat(
         "windows_labeled": complete,
         "unresolved_windows": failed,
         "unresolved_windows_by_kind": store.failure_kinds(),
-        "batches_isolated": counters["batches_isolated"],
-        "windows_recovered_by_isolation": counters["windows_recovered_by_isolation"],
         "exported": exported,
         "window_labels_sha256": sha,
         "stopped_by_usage_limit": str(budget_stop) if budget_stop else None,
@@ -384,7 +342,8 @@ def usage_summary(attempts: Sequence[dict[str, Any]], prices: dict[str, float] |
             totals["output_tokens"] += int(parsed.output_tokens)
         if record.get("ok"):
             totals["accepted"] += 1
-            windows_accepted += len(record.get("windows") or [])
+            # One window per request; a log from a batched run lists them.
+            windows_accepted += len(record["windows"]) if "windows" in record else 1
         else:
             totals["rejected"] += 1
             kinds[str(record.get("kind"))] += 1

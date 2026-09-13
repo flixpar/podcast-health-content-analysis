@@ -229,36 +229,59 @@ def test_runner_records_attempts_and_repeats(tmp_path, monkeypatch):
     items[1]["window_id"] = "episode_2_window_0001"
     calls = {"n": 0}
 
-    def fake_classify(self, windows, taxonomy, model, settings, instructions=None, on_attempt=None):
+    def fake_classify(self, window, taxonomy, model, settings, instructions=None, on_attempt=None):
         calls["n"] += 1
         if calls["n"] == 1:
-            on_attempt({"attempt": 0, "ok": False, "windows": [w["window_id"] for w in windows], "seconds": 0.1, "kind": "non_verbatim_quote", "message": "m", "usage": {"input_tokens": 10, "output_tokens": 5}})
+            on_attempt({"attempt": 0, "ok": False, "window_id": window["window_id"], "seconds": 0.1, "kind": "non_verbatim_quote", "message": "m", "usage": {"input_tokens": 10, "output_tokens": 5}})
             raise tl.TopicLabelingError("bad quote", kind="non_verbatim_quote")
-        on_attempt({"attempt": 0, "ok": True, "windows": [w["window_id"] for w in windows], "seconds": 0.1, "response_id": f"r{calls['n']}", "usage": {"input_tokens": 10, "output_tokens": 5}})
-        return [result(w["window_id"]) for w in windows], {"response_id": f"r{calls['n']}", "usage": {"input_tokens": 10, "output_tokens": 5}, "response_model": model, "effective_sampling": {}}
+        on_attempt({"attempt": 0, "ok": True, "window_id": window["window_id"], "seconds": 0.1, "response_id": f"r{calls['n']}", "usage": {"input_tokens": 10, "output_tokens": 5}})
+        return result(window["window_id"]), {"response_id": f"r{calls['n']}", "usage": {"input_tokens": 10, "output_tokens": 5}, "response_model": model, "effective_sampling": {}}
 
     monkeypatch.setattr(tl.ResponsesClient, "classify", fake_classify)
     monkeypatch.setattr(tl.ResponsesClient, "served_models", lambda self: {"http://x/v1": "stub-model"})
-    args = runner.label_args(["--api-base", "http://x/v1", "--model", "stub-model", "--batch-size", "2", "--concurrency", "1", "--reasoning-effort", "none"], config=None)
+    args = runner.label_args(["--api-base", "http://x/v1", "--model", "stub-model", "--concurrency", "1", "--reasoning-effort", "none"], config=None)
     manifest = runner.run_benchmark(items, TAXONOMY, args, "stub", repeats=2, runs_dir=tmp_path, log=None)
     assert manifest["repeats"] == 2 and manifest["items"] == 2
-    assert all(s["windows_labeled"] == 2 for s in manifest["repeat_summaries"])
+    assert "batch_size" not in manifest
+    # One request per window: the rejected window fails alone, and its
+    # neighbour in the same repeat is labeled regardless.
+    assert calls["n"] == 4
+    assert [s["windows_labeled"] for s in manifest["repeat_summaries"]] == [1, 2]
+    assert manifest["repeat_summaries"][0]["unresolved_windows_by_kind"] == {"non_verbatim_quote": 1}
+    assert not any("isolat" in key for s in manifest["repeat_summaries"] for key in s)
     loaded = runner.load_run(tmp_path / "stub")
-    assert len(loaded["repeats"]) == 2 and set(loaded["repeats"][0]) == {"episode_1_window_0001", "episode_2_window_0001"}
+    assert len(loaded["repeats"]) == 2 and set(loaded["repeats"][1]) == {"episode_1_window_0001", "episode_2_window_0001"}
+    assert len(loaded["repeats"][0]) == 1
     usage = runner.usage_summary(loaded["attempts"], {"input_per_mtok": 1.0, "output_per_mtok": 2.0})
     assert usage["rejected_by_kind"] == {"non_verbatim_quote": 1}
-    assert usage["windows_accepted"] == 4 and usage["cost_usd"] > 0
+    assert usage["windows_accepted"] == 3 and usage["cost_usd"] > 0
     assert manifest["validator_sha256"] and manifest["items_hash"]
+
+
+def test_usage_summary_still_reads_attempts_from_batched_runs():
+    """An attempts log written before one-window requests lists its windows."""
+    attempts = [
+        {"attempt": 0, "ok": True, "windows": ["a", "b", "c", "d"], "seconds": 1.0, "usage": {"input_tokens": 10, "output_tokens": 5}},
+        {"attempt": 0, "ok": False, "windows": ["e", "f"], "seconds": 1.0, "kind": "omitted_windows"},
+        {"attempt": 0, "ok": True, "window_id": "g", "seconds": 1.0, "usage": {"input_tokens": 10, "output_tokens": 5}},
+    ]
+    usage = runner.usage_summary(attempts, None)
+    assert usage["windows_accepted"] == 5
+    assert usage["rejected_by_kind"] == {"omitted_windows": 1}
 
 
 def test_run_fingerprint_ignores_item_set_and_bookkeeping():
     from analysis.benchmark import runner
 
-    base = {"schema_version": 1, "prompt_version": "p", "rubric_sha256": "r", "taxonomy_sha256": "t", "model": "m", "api": "responses", "batch_size": 1, "reasoning_effort": "low"}
+    base = {"schema_version": 1, "prompt_version": "p", "rubric_sha256": "r", "taxonomy_sha256": "t", "model": "m", "api": "responses", "reasoning_effort": "low"}
     grown = {**base, "items_hash": "other", "name": "x", "notes": "resumed", "repeat": 1, "items": 200}
-    changed = {**base, "batch_size": 4}
+    changed = {**base, "reasoning_effort": "high"}
     assert runner.fingerprint_from_manifest(base) == runner.fingerprint_from_manifest(grown)
     assert runner.fingerprint_from_manifest(base) != runner.fingerprint_from_manifest(changed)
+    # A manifest from a batched run keeps its batch_size input, so it still
+    # recomputes to its own fingerprint and never to a one-window run's.
+    batched = {**base, "batch_size": 4}
+    assert runner.fingerprint_from_manifest(batched) != runner.fingerprint_from_manifest(base)
 
 
 def test_adjudication_survives_an_added_annotator_and_required_is_a_count():

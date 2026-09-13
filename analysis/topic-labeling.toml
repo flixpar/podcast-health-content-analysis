@@ -48,10 +48,8 @@ model = "deepseek-ai/DeepSeek-V4-Flash-0731"
 # output tokens, and a 32000 budget truncated one request in six.
 #
 # The ceiling is the server's context. A real 900-word window measures about
-# 2,275 input tokens, so a batch of four plus the ~11.5k-token instruction prefix
-# is ~20.5k, and at max_model_len 65536 the budget must stay under ~45k. Batches
-# of eight do not leave enough room for thinking at all. Observed output at
-# batch 4 is ~13k per request, so 40000 is generous headroom.
+# 2,275 input tokens, so one window plus the ~11.5k-token instruction prefix is
+# ~14k, and at max_model_len 65536 the budget must stay under ~51k.
 # `low` (thinking without the high-effort preamble) is 1.7x faster, never
 # truncates and is accepted more often -- but on a health-dense window it
 # returns 9.3 detections against high's 13.5, at the same claim yield. Its
@@ -97,25 +95,16 @@ top_p = 0.95
 [label]
 # Concurrency: both servers pin num_requests_running at 64 (their max_num_seqs)
 # and queue beyond it, so 128 client-side keeps both fully subscribed. Measured
-# accepted throughput at batch 4, effort high, across both nodes:
+# accepted throughput when requests still carried four windows, effort high,
+# across both nodes:
 #   c=16  7.7 windows/min    c=64   25.0 windows/min
 #   c=32 13.3 windows/min    c=128  36.3 windows/min  (waiting 24-36/node)
 #
-# Measured on real corpus windows, both nodes, one attempt each:
-#
-#   setting                accepted   output tokens per window
-#   no-think, batch 8       3/12                  89
-#   no-think, batch 1      10/12                 202
-#   think-high, batch 1    12/12                7005
-#   think-high, batch 4     7/8                 3236
-#
-# Batch 8 fails mostly through omitted_windows and span_out_of_window -- the
-# model losing track across windows, which cannot happen at batch 1 and is rare
-# at 4. Batch 4 halves the per-window cost of thinking, because reasoning is
-# charged per request, without inviting that failure mode back.
-batch_size = 4
+# Every request carries one window (and `verify` one candidate). The instruction
+# prefix is prompt-cached by the server, so packing several windows into one
+# request saved little, and validation rejects a whole response: one bad
+# annotation or one truncation threw away every window in the request.
 concurrency = 128
 
 [verify]
-batch_size = 4
 concurrency = 8

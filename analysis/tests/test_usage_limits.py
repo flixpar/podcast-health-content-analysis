@@ -389,9 +389,9 @@ output_per_mtok = 6.0
         }
 
     monkeypatch.setattr(labeling.ResponsesClient, "_request", fake_request)
-    monkeypatch.setattr(labeling, "validate_response", lambda parsed, windows, axes: [])
+    monkeypatch.setattr(labeling, "validate_response", lambda parsed, window, axes: {})
     client.classify(
-        [{"window_id": "w", "units": []}], small_taxonomy(), "local-model", settings()
+        {"window_id": "w", "units": []}, small_taxonomy(), "local-model", settings()
     )
 
     used = {row["limit"]: row["used"] for row in limiter.status()}
@@ -456,7 +456,6 @@ def _label_args(tmp_path, config, **overrides):
         model=None,
         api_key_env=None,
         env_file=None,
-        batch_size=1,
         concurrency=1,
         max_output_tokens=100,
         timeout=10,
@@ -491,15 +490,12 @@ def _stub_endpoint(monkeypatch, output_tokens: int):
     monkeypatch.setattr(
         labeling,
         "validate_response",
-        lambda parsed, windows, axes: [
-            {
-                "window_id": window["window_id"],
-                "detections": [],
-                "verification_candidates": [],
-                "product_mentions": [],
-            }
-            for window in windows
-        ],
+        lambda parsed, window, axes: {
+            "window_id": window["window_id"],
+            "detections": [],
+            "verification_candidates": [],
+            "product_mentions": [],
+        },
     )
 
 

@@ -188,35 +188,31 @@ def test_responses_client_uses_strict_responses_schema_and_validates_quotes():
         ],
     }
     model_result = {
-        "results": [
+        "window_id": window["window_id"],
+        "detections": [
             {
-                "window_id": window["window_id"],
-                "detections": [
-                    {
-                        "start_unit_id": "u000001",
-                        "end_unit_id": "u000002",
-                        "label_ids": ["topic:sleep"],
-                        "relevance": "substantive",
-                        "discourse_role": "asserted_or_endorsed",
-                        "confidence": 0.9,
-                        "summary": "Sleep is discussed with a trial reference.",
-                        "evidence_quote": "clinical trial was mentioned",
-                    },
-                    {
-                        "start_unit_id": "u000002",
-                        "end_unit_id": "u000002",
-                        "label_ids": ["cross_cutting:scientific_study"],
-                        "relevance": "substantive",
-                        "discourse_role": "reported_or_quoted",
-                        "confidence": 0.85,
-                        "summary": "A clinical trial is invoked.",
-                        "evidence_quote": "clinical trial",
-                    },
-                ],
-                "verification_candidates": [],
-                "product_mentions": [],
-            }
-        ]
+                "start_unit_id": "u000001",
+                "end_unit_id": "u000002",
+                "label_ids": ["topic:sleep"],
+                "relevance": "substantive",
+                "discourse_role": "asserted_or_endorsed",
+                "confidence": 0.9,
+                "summary": "Sleep is discussed with a trial reference.",
+                "evidence_quote": "clinical trial was mentioned",
+            },
+            {
+                "start_unit_id": "u000002",
+                "end_unit_id": "u000002",
+                "label_ids": ["cross_cutting:scientific_study"],
+                "relevance": "substantive",
+                "discourse_role": "reported_or_quoted",
+                "confidence": 0.85,
+                "summary": "A clinical trial is invoked.",
+                "evidence_quote": "clinical trial",
+            },
+        ],
+        "verification_candidates": [],
+        "product_mentions": [],
     }
 
     class FakeClient(labeling.ResponsesClient):
@@ -239,8 +235,8 @@ def test_responses_client_uses_strict_responses_schema_and_validates_quotes():
             }
 
     client = FakeClient("http://localhost:8000/v1", attempts=1)
-    results, meta = client.classify(
-        [window],
+    result, meta = client.classify(
+        window,
         taxonomy,
         "local-model",
         labeling.ModelSettings(max_output_tokens=1000, reasoning_effort="none"),
@@ -253,7 +249,23 @@ def test_responses_client_uses_strict_responses_schema_and_validates_quotes():
     # Always explicit: on a thinking model an absent effort means "think".
     assert client.seen_payload["reasoning"] == {"effort": "none"}
     assert "include_reasoning" not in client.seen_payload
-    assert results[0]["detections"][0]["confidence"] == 0.9
+    # One window per request: the user message is that window's record, and
+    # the schema is its result object with no array around it.
+    user_text = client.seen_payload["input"][0]["content"][0]["text"]
+    assert user_text == labeling.window_input(window)
+    assert user_text.startswith("Label this window:\n")
+    assert json.loads(user_text.split("\n", 1)[1]) == window
+    schema = client.seen_payload["text"]["format"]["schema"]
+    assert schema == labeling.response_schema(taxonomy)
+    assert "results" not in schema["properties"]
+    assert set(schema["required"]) == {
+        "window_id",
+        "detections",
+        "verification_candidates",
+        "product_mentions",
+    }
+    assert result["window_id"] == window["window_id"]
+    assert result["detections"][0]["confidence"] == 0.9
     assert meta["response_id"] == "resp_test"
 
 
@@ -270,7 +282,7 @@ def write_config(tmp_path):
                 "top_p = 0.95",
                 "",
                 "[label]",
-                "batch_size = 3",
+                "concurrency = 3",
             ]
         )
         + "\n",
@@ -290,7 +302,7 @@ def test_config_supplies_shared_model_settings_to_label_and_verify(tmp_path):
     assert label.reasoning_effort == "high"
     assert label.api == "chat_completions"
     assert label.top_p == 0.95
-    assert label.batch_size == 3
+    assert label.concurrency == 3
 
     verify = parser.parse_args(
         labeling.expand_config_args(["verify", "--config", str(config)])
@@ -299,8 +311,8 @@ def test_config_supplies_shared_model_settings_to_label_and_verify(tmp_path):
     # [model] reaches both commands, so the API cannot drift between them.
     assert verify.api == "chat_completions"
     assert verify.top_p == 0.95
-    # [label] is not [verify]: its batch size must not leak across.
-    assert verify.batch_size == 4
+    # [label] is not [verify]: its concurrency must not leak across.
+    assert verify.concurrency == 8
 
     # A command that takes no model settings is left alone.
     assert labeling.expand_config_args(["prepare", "--config", str(config)]) == [
@@ -327,7 +339,7 @@ def test_config_fails_loudly_on_bad_input(tmp_path):
         labeling.expand_config_args(["label", "--config", str(missing)])
 
     unknown = tmp_path / "unknown.toml"
-    unknown.write_text("[labl]\nbatch_size = 2\n", encoding="utf-8")
+    unknown.write_text("[labl]\nconcurrency = 2\n", encoding="utf-8")
     with pytest.raises(labeling.TopicLabelingError, match="unknown table"):
         labeling.expand_config_args(["label", "--config", str(unknown)])
 
@@ -437,14 +449,10 @@ def test_thinking_settings_reach_the_payload_and_reasoning_output_is_ignored():
         "units": [{"unit_id": "u000001", "text": "The guest discusses sleep."}],
     }
     model_result = {
-        "results": [
-            {
-                "window_id": window["window_id"],
-                "detections": [],
-                "verification_candidates": [],
-                "product_mentions": [],
-            }
-        ]
+        "window_id": window["window_id"],
+        "detections": [],
+        "verification_candidates": [],
+        "product_mentions": [],
     }
 
     class FakeClient(labeling.ResponsesClient):
@@ -480,14 +488,14 @@ def test_thinking_settings_reach_the_payload_and_reasoning_output_is_ignored():
         top_p=0.95,
         seed=7,
     )
-    results, _ = client.classify([window], taxonomy, "local-model", settings)
+    result, _ = client.classify(window, taxonomy, "local-model", settings)
     assert client.seen_payload["reasoning"] == {"effort": "max"}
     assert client.seen_payload["include_reasoning"] is False
     assert client.seen_payload["temperature"] == 1.0
     assert client.seen_payload["top_p"] == 0.95
     assert client.seen_payload["seed"] == 7
     assert settings.fingerprint()["reasoning_effort"] == "max"
-    assert results[0]["window_id"] == window["window_id"]
+    assert result["window_id"] == window["window_id"]
 
 
 def test_chat_completions_flavor_sends_the_same_request_in_chat_shape():
@@ -500,25 +508,21 @@ def test_chat_completions_flavor_sends_the_same_request_in_chat_shape():
         ],
     }
     model_result = {
-        "results": [
+        "window_id": window["window_id"],
+        "detections": [
             {
-                "window_id": window["window_id"],
-                "detections": [
-                    {
-                        "start_unit_id": "u000001",
-                        "end_unit_id": "u000002",
-                        "label_ids": ["topic:sleep"],
-                        "relevance": "substantive",
-                        "discourse_role": "asserted_or_endorsed",
-                        "confidence": 0.9,
-                        "summary": "Sleep is discussed with a trial reference.",
-                        "evidence_quote": "clinical trial was mentioned",
-                    }
-                ],
-                "verification_candidates": [],
-                "product_mentions": [],
+                "start_unit_id": "u000001",
+                "end_unit_id": "u000002",
+                "label_ids": ["topic:sleep"],
+                "relevance": "substantive",
+                "discourse_role": "asserted_or_endorsed",
+                "confidence": 0.9,
+                "summary": "Sleep is discussed with a trial reference.",
+                "evidence_quote": "clinical trial was mentioned",
             }
-        ]
+        ],
+        "verification_candidates": [],
+        "product_mentions": [],
     }
 
     class FakeClient(labeling.ResponsesClient):
@@ -543,8 +547,8 @@ def test_chat_completions_flavor_sends_the_same_request_in_chat_shape():
             }
 
     client = FakeClient("http://localhost:8000/v1", attempts=1, api="chat_completions")
-    results, meta = client.classify(
-        [window],
+    result, meta = client.classify(
+        window,
         taxonomy,
         "local-model",
         labeling.ModelSettings(
@@ -567,7 +571,8 @@ def test_chat_completions_flavor_sends_the_same_request_in_chat_shape():
     assert "max_output_tokens" not in payload
     assert "reasoning" not in payload
     assert "include_reasoning" not in payload
-    assert results[0]["detections"][0]["confidence"] == 0.9
+    assert payload["messages"][1]["content"] == labeling.window_input(window)
+    assert result["detections"][0]["confidence"] == 0.9
     assert meta["response_id"] == "chatcmpl_test"
     # Chat Completions echoes no decoding settings, so there is nothing to read
     # back -- a run on this flavor has to pin them to know what produced it.
@@ -605,17 +610,13 @@ def test_verify_builds_its_own_request_on_either_api():
         ],
     }
     model_result = {
-        "results": [
-            {
-                "candidate_id": candidate["candidate_id"],
-                "verdict": "contradicted",
-                "confidence": 0.91,
-                "supporting_passage_ids": [],
-                "contradicting_passage_ids": ["sleep-guideline:p12"],
-                "rationale": "The evidence says sleep needs vary.",
-                "limitations": "One retrieved guideline passage.",
-            }
-        ]
+        "candidate_id": candidate["candidate_id"],
+        "verdict": "contradicted",
+        "confidence": 0.91,
+        "supporting_passage_ids": [],
+        "contradicting_passage_ids": ["sleep-guideline:p12"],
+        "rationale": "The evidence says sleep needs vary.",
+        "limitations": "One retrieved guideline passage.",
     }
     bodies = {
         "responses": {
@@ -664,8 +665,8 @@ def test_verify_builds_its_own_request_on_either_api():
         ),
     ):
         client = FakeClient("http://localhost:8000/v1", attempts=1, api=api)
-        results, meta = client.verify(
-            [{"candidate": candidate, "evidence_packet": packet}],
+        result, meta = client.verify(
+            {"candidate": candidate, "evidence_packet": packet},
             "local-model",
             labeling.ModelSettings(max_output_tokens=6000, reasoning_effort="none"),
         )
@@ -676,10 +677,14 @@ def test_verify_builds_its_own_request_on_either_api():
         # The verification rubric, not the labeling one, and the candidate
         # with its packet -- wherever this flavor carries them.
         assert rubric_at(client.seen_payload) == labeling.VERIFICATION_RUBRIC
-        assert "Verify every candidate" in input_at(client.seen_payload)
+        assert input_at(client.seen_payload).startswith("Verify this candidate:\n")
+        # One candidate per request, so the record is an object, not an array.
+        record = json.loads(input_at(client.seen_payload).split("\n", 1)[1])
+        assert record["candidate"]["candidate_id"] == candidate["candidate_id"]
+        assert "results" not in schema_at(client.seen_payload)["schema"]["properties"]
         assert candidate["claim_text"] in input_at(client.seen_payload)
         assert "sleep-guideline:p12" in input_at(client.seen_payload)
-        assert results[0]["verdict"] == "contradicted"
+        assert result["verdict"] == "contradicted"
         assert meta["response_id"] == bodies[api]["id"]
 
 
@@ -784,9 +789,9 @@ def test_detection_axis_is_derived_from_the_labels(tmp_path):
     # The model never states an axis, so it can never contradict its own labels.
     assert (
         "axis"
-        not in labeling.response_schema(taxonomy)["properties"]["results"]["items"][
+        not in labeling.response_schema(taxonomy)["properties"]["detections"]["items"][
             "properties"
-        ]["detections"]["items"]["properties"]
+        ]
     )
 
     result = {
@@ -1108,7 +1113,7 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
         "taxonomy_sha256": taxonomy["taxonomy_sha256"],
     }
     store = labeling.LabelStore(tmp_path / "labels.sqlite", run_manifest)
-    store.record_success(
+    for labeled_window, result in zip(
         windows,
         [
             {
@@ -1208,8 +1213,13 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
                 ],
             },
         ],
-        {"response_id": "resp", "response_model": "local-model", "usage": None},
-    )
+        strict=True,
+    ):
+        store.record_success(
+            labeled_window,
+            result,
+            {"response_id": "resp", "response_model": "local-model", "usage": None},
+        )
     store.close()
     label_manifest_path = tmp_path / "label_manifest.json"
     labeling.write_json(label_manifest_path, run_manifest)
@@ -1317,8 +1327,10 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
     assert all("model_label_ids" not in row for row in blind_rows)
 
 
-def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
-    """A batch that fails as a whole is retried window by window."""
+def test_each_window_is_its_own_request_so_one_bad_window_fails_alone(
+    tmp_path, monkeypatch
+):
+    """A rejected window is recorded unresolved without touching the others."""
     taxonomy = small_taxonomy()
     taxonomy_path = tmp_path / "taxonomy.json"
     labeling.write_json(taxonomy_path, taxonomy)
@@ -1343,25 +1355,21 @@ def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
     )
 
     poison = "episode_1_window_0002"
-    calls: list[list[str]] = []
+    calls: list[str] = []
 
-    def fake_classify(self, batch, taxonomy_arg, model, *rest):
-        ids = [window["window_id"] for window in batch]
-        calls.append(ids)
-        if poison in ids:
+    def fake_classify(self, window, taxonomy_arg, model, *rest):
+        calls.append(window["window_id"])
+        if window["window_id"] == poison:
             raise labeling.TopicLabelingError(
                 "evidence quote is not verbatim", kind="non_verbatim_quote"
             )
-        results = [
-            {
-                "window_id": window_id,
-                "detections": [],
-                "verification_candidates": [],
-                "product_mentions": [],
-            }
-            for window_id in ids
-        ]
-        return results, {"response_id": "r", "response_model": model, "usage": None}
+        result = {
+            "window_id": window["window_id"],
+            "detections": [],
+            "verification_candidates": [],
+            "product_mentions": [],
+        }
+        return result, {"response_id": "r", "response_model": model, "usage": None}
 
     monkeypatch.setattr(labeling.ResponsesClient, "classify", fake_classify)
     monkeypatch.setattr(
@@ -1380,7 +1388,6 @@ def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
             model="local-model",
             api_key_env=None,
             env_file=None,
-            batch_size=3,
             concurrency=1,
             max_output_tokens=100,
             timeout=10,
@@ -1395,14 +1402,15 @@ def test_one_bad_window_does_not_fail_its_whole_batch(tmp_path, monkeypatch):
             config=tmp_path / "no-config.toml",
         )
     )
-    # First the whole batch, then each window alone.
-    assert calls[0] == [window["window_id"] for window in windows]
-    assert sorted(calls[1:]) == [[window["window_id"]] for window in windows]
+    # One request per window, and no second pass over any of them.
+    assert sorted(calls) == [window["window_id"] for window in windows]
+    assert summary["requests_completed_this_invocation"] == 3
+    assert summary["requests_failed_this_invocation"] == 1
     assert summary["windows_labeled"] == 2
     assert summary["unresolved_windows"] == 1
     assert summary["unresolved_windows_by_kind"] == {"non_verbatim_quote": 1}
-    assert summary["batches_isolated_this_invocation"] == 1
-    assert summary["windows_recovered_by_isolation"] == 2
+    assert "batch_size" not in summary
+    assert not any("isolat" in key for key in summary)
 
 
 def test_verify_uses_only_validated_evidence_packets_and_checkpoints_results(
@@ -1478,20 +1486,18 @@ def test_verify_uses_only_validated_evidence_packets_and_checkpoints_results(
         def served_models(self):
             return {"http://localhost:8000/v1": "local-model"}
 
-        def verify(self, pairs, model, settings):
-            assert pairs == [{"candidate": candidate, "evidence_packet": packet}]
+        def verify(self, pair, model, settings):
+            assert pair == {"candidate": candidate, "evidence_packet": packet}
             assert model == "local-model"
-            return [
-                {
-                    "candidate_id": candidate["candidate_id"],
-                    "verdict": "contradicted",
-                    "confidence": 0.91,
-                    "supporting_passage_ids": [],
-                    "contradicting_passage_ids": ["sleep-guideline:p12"],
-                    "rationale": "The evidence says sleep needs vary.",
-                    "limitations": "One retrieved guideline passage.",
-                }
-            ], {
+            return {
+                "candidate_id": candidate["candidate_id"],
+                "verdict": "contradicted",
+                "confidence": 0.91,
+                "supporting_passage_ids": [],
+                "contradicting_passage_ids": ["sleep-guideline:p12"],
+                "rationale": "The evidence says sleep needs vary.",
+                "limitations": "One retrieved guideline passage.",
+            }, {
                 "response_id": "resp_verify",
                 "response_model": "local-model",
                 "usage": {"input_tokens": 200, "output_tokens": 50},
@@ -1511,7 +1517,6 @@ def test_verify_uses_only_validated_evidence_packets_and_checkpoints_results(
             model="local-model",
             api_key_env=None,
             env_file=None,
-            batch_size=4,
             concurrency=1,
             max_output_tokens=6000,
             timeout=60,
@@ -1540,34 +1545,158 @@ def test_verification_rejects_citations_outside_the_candidate_packet():
         "evidence_packet": {"passages": [{"passage_id": "allowed-passage"}]},
     }
     parsed = {
-        "results": [
-            {
-                "candidate_id": "candidate-1",
-                "verdict": "supported",
-                "confidence": 0.8,
-                "supporting_passage_ids": ["invented-passage"],
-                "contradicting_passage_ids": [],
-                "rationale": "The evidence supports the claim.",
-                "limitations": "",
-            }
-        ]
+        "candidate_id": "candidate-1",
+        "verdict": "supported",
+        "confidence": 0.8,
+        "supporting_passage_ids": ["invented-passage"],
+        "contradicting_passage_ids": [],
+        "rationale": "The evidence supports the claim.",
+        "limitations": "",
     }
     try:
-        labeling.validate_verification_response(parsed, [pair])
+        labeling.validate_verification_response(parsed, pair)
     except labeling.TopicLabelingError as exc:
         assert "invalid passage citations" in str(exc)
     else:
         raise AssertionError("a citation outside the evidence packet was accepted")
 
 
+def test_verification_result_must_be_one_object_for_the_candidate_asked_about():
+    pair = {
+        "candidate": {"candidate_id": "candidate-1"},
+        "evidence_packet": {"passages": [{"passage_id": "allowed-passage"}]},
+    }
+    result = {
+        "candidate_id": "candidate-1",
+        "verdict": "supported",
+        "confidence": 0.8,
+        "supporting_passage_ids": ["allowed-passage"],
+        "contradicting_passage_ids": [],
+        "rationale": "The evidence supports the claim.",
+        "limitations": "",
+    }
+    assert labeling.validate_verification_response(result, pair)["verdict"] == "supported"
+    for wrong in (
+        {"results": [result]},
+        [result],
+        {**result, "candidate_id": "candidate-2"},
+    ):
+        with pytest.raises(labeling.TopicLabelingError):
+            labeling.validate_verification_response(wrong, pair)
+
+
 def test_fenced_json_output_is_parsed_and_other_garbage_is_not():
-    parsed = labeling.parse_json_output('```json\n{"results": []}\n```')
-    assert parsed == {"results": []}
-    assert labeling.parse_json_output('{"results": []}') == {"results": []}
-    assert labeling.parse_json_output('[{"window_id": "w"}]') == {"results": [{"window_id": "w"}]}
-    assert labeling.parse_json_output('{"results": [{"a": 1,},],}') == {"results": [{"a": 1}]}
+    parsed = labeling.parse_json_output('```json\n{"detections": []}\n```')
+    assert parsed == {"detections": []}
+    assert labeling.parse_json_output('{"detections": []}') == {"detections": []}
+    assert labeling.parse_json_output('{"detections": [{"a": 1,},],}') == {"detections": [{"a": 1}]}
+    # No envelope is invented around a bare array any more: with one window per
+    # request the schema is a single object, and validation rejects the array.
+    assert labeling.parse_json_output('[{"window_id": "w"}]') == [{"window_id": "w"}]
     with pytest.raises(json.JSONDecodeError):
-        labeling.parse_json_output('Here you go:\n```json\n{"results": []}\n```')
+        labeling.parse_json_output('Here you go:\n```json\n{"detections": []}\n```')
+
+
+def test_response_is_one_result_object_for_the_one_window_sent():
+    taxonomy = small_taxonomy()
+    label_axes = {row["label_id"]: row["axis"] for row in taxonomy["labels"]}
+    window = {
+        "window_id": "episode_1_window_0001",
+        "units": [{"unit_id": "u000001", "text": "A clinical trial studied sleep."}],
+    }
+    result = {
+        "window_id": window["window_id"],
+        "detections": [
+            {
+                "start_unit_id": "u000001",
+                "end_unit_id": "u000001",
+                "label_ids": ["topic:sleep"],
+                "relevance": "substantive",
+                "discourse_role": "asserted_or_endorsed",
+                "confidence": 0.9,
+                "summary": "Sleep research is discussed.",
+                "evidence_quote": "A clinical trial studied sleep",
+            }
+        ],
+        "verification_candidates": [],
+        "product_mentions": [],
+    }
+    validated = labeling.validate_response(result, window, label_axes)
+    assert validated["window_id"] == window["window_id"]
+    assert validated["detections"][0]["axis"] == "topic"
+
+    # The batch envelope, a bare array, and a result with a missing or extra
+    # field are all the wrong shape.
+    for wrong in (
+        {"results": [result]},
+        [result],
+        {key: value for key, value in result.items() if key != "window_id"},
+        {**result, "extra": True},
+    ):
+        with pytest.raises(labeling.TopicLabelingError) as shape:
+            labeling.validate_response(wrong, window, label_axes)
+        assert shape.value.kind == "schema_shape"
+
+    # window_id stays as a check that the answer is for the window asked about.
+    with pytest.raises(labeling.TopicLabelingError) as mismatch:
+        labeling.validate_response(
+            {**result, "window_id": "episode_1_window_0002"}, window, label_axes
+        )
+    assert mismatch.value.kind == "window_id_mismatch"
+
+
+def test_a_benchmark_item_builds_a_single_window_request_and_validates():
+    """Offline shape check on a real benchmark window and the real codebook."""
+    taxonomy = labeling.load_taxonomy(ROOT / "benchmark" / "taxonomy.json")
+    label_axes = {row["label_id"]: row["axis"] for row in taxonomy["labels"]}
+    item = next(labeling.iter_jsonl(ROOT / "benchmark" / "items.jsonl"))
+    window = {key: item[key] for key in ("window_id", "units")}
+    settings = labeling.ModelSettings(max_output_tokens=1000, reasoning_effort="none")
+    for flavor in labeling.API_FLAVORS.values():
+        payload = flavor.payload(
+            labeling.taxonomy_instructions(taxonomy),
+            labeling.window_input(window),
+            "podcast_topic_clips",
+            labeling.response_schema(taxonomy),
+            settings,
+        )
+        assert labeling.canonical_json(labeling.window_input(window)) in (
+            labeling.canonical_json(payload)
+        )
+    record = json.loads(labeling.window_input(window).split("\n", 1)[1])
+    assert record == {
+        "window_id": item["window_id"],
+        "units": [
+            {"unit_id": unit["unit_id"], "text": unit["text"]} for unit in item["units"]
+        ],
+    }
+
+    first = item["units"][0]
+    topic = next(row["label_id"] for row in taxonomy["labels"] if row["axis"] == "topic")
+    response = json.dumps(
+        {
+            "window_id": item["window_id"],
+            "detections": [
+                {
+                    "start_unit_id": first["unit_id"],
+                    "end_unit_id": first["unit_id"],
+                    "label_ids": [topic],
+                    "relevance": "passing",
+                    "discourse_role": "unclear",
+                    "confidence": 0.5,
+                    "summary": "A hand-made detection for the shape check.",
+                    "evidence_quote": " ".join(first["text"].split()[:5]),
+                }
+            ],
+            "verification_candidates": [],
+            "product_mentions": [],
+        }
+    )
+    validated = labeling.validate_response(
+        labeling.parse_json_output(response), item, label_axes
+    )
+    assert validated["window_id"] == item["window_id"]
+    assert validated["detections"][0]["label_ids"] == [topic]
 
 
 def test_quotes_match_on_word_sequence_not_punctuation():

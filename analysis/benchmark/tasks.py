@@ -347,8 +347,7 @@ labeled before.
 
 def result_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
     """One result object's schema, with the benchmark's claim ``relevance``."""
-    full = tl.response_schema(taxonomy)
-    result = json.loads(json.dumps(full["properties"]["results"]["items"]))
+    result = json.loads(json.dumps(tl.response_schema(taxonomy)))
     claim = result["properties"]["verification_candidates"]["items"]
     claim["properties"]["relevance"] = {"type": "string", "enum": list(tl.ALLOWED_RELEVANCE)}
     claim["required"].append("relevance")

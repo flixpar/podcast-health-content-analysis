@@ -45,7 +45,7 @@ def scorecard(score: dict[str, Any]) -> str:
     lines.append("")
     lines.append(
         f"Model `{manifest.get('model')}` | effort `{manifest.get('reasoning_effort')}` | "
-        f"batch {manifest.get('batch_size')} | prompt `{manifest.get('prompt_version')}` | "
+        f"prompt `{manifest.get('prompt_version')}` | "
         f"repeats {len(score.get('repeats', []))} | items scored {score.get('items_scored')}"
     )
     lines.append("")

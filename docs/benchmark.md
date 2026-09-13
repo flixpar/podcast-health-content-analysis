@@ -4,7 +4,7 @@
 `analysis/topic_labeling.py`, with reference labels from several annotators
 and a scorer that reports every number next to the annotators' own
 agreement. It exists so that a change to the model, prompt, reasoning
-effort, batch size, windowing or labeling method can be read as "better" or
+effort, windowing or labeling method can be read as "better" or
 "worse" before the expert human validation sample exists, and so that the
 subjectivity of the task is measured rather than hidden.
 
