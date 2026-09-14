@@ -1,0 +1,27 @@
+# Candidate configuration for benchmark runs against the local vLLM server
+# (DeepSeek-V4-Flash-0731 on port 8222, launched by analysis/serving/serve-deepseek-v4.sh).
+# Same tables and keys as analysis/topic-labeling.toml, with its production
+# settings; typed flags after `--` win.
+#
+#   .venv/bin/python -m analysis.benchmark run --name local-high \
+#       --pipeline-config benchmark/pipeline-local.toml --repeats 2 --split dev
+
+[model]
+api_base = ["http://127.0.0.1:8222/v1"]
+# Chat Completions, because vLLM's Responses endpoint does not take
+# thinking_token_budget.
+api = "chat_completions"
+model = "deepseek-ai/DeepSeek-V4-Flash-0731"
+reasoning_effort = "high"
+# One window is ~15k input tokens (12.5k instructions + the window); the server
+# context is 98,304, so 80k leaves headroom for the largest window.
+max_output_tokens = 80000
+timeout = 7200
+attempts = 3
+temperature = 1.0
+top_p = 0.95
+
+[label]
+concurrency = 256
+validation = "lenient"
+thinking_token_budget = 24000
