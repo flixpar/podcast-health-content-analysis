@@ -345,6 +345,8 @@ def test_runner_threads_validation_and_totals_what_lenient_changed(tmp_path, mon
 
     monkeypatch.setattr(tl.ResponsesClient, "classify", fake_classify)
     monkeypatch.setattr(tl.ResponsesClient, "served_models", lambda self: {"http://x/v1": "stub-model"})
+    # Keep the repository's own topic-labeling.toml (which sets lenient) out of it.
+    monkeypatch.setattr(tl, "DEFAULT_CONFIG", tmp_path / "absent.toml")
     flags = ["--api-base", "http://x/v1", "--model", "stub-model", "--concurrency", "1", "--reasoning-effort", "none"]
     strict = runner.run_benchmark(items, TAXONOMY, runner.label_args(flags, config=None), "strict", repeats=1, runs_dir=tmp_path)
     lenient = runner.run_benchmark(

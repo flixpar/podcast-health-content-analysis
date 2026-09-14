@@ -2150,3 +2150,41 @@ def test_validation_mode_is_a_label_setting_and_part_of_the_run_fingerprint(
     # A store labeled under one mode refuses to be resumed under the other.
     with pytest.raises(labeling.TopicLabelingError, match="different run"):
         run(tmp_path / "strict", "lenient")
+
+
+def test_thinking_token_budget_is_chat_only_and_fingerprinted_only_when_set():
+    unbounded = labeling.ModelSettings(max_output_tokens=1000, reasoning_effort="high")
+    budgeted = labeling.ModelSettings(
+        max_output_tokens=1000, reasoning_effort="high", thinking_token_budget=24000
+    )
+    assert "thinking_token_budget" not in unbounded.fingerprint()
+    assert "thinking_token_budget" not in unbounded.chat_payload()
+    assert budgeted.fingerprint()["thinking_token_budget"] == 24000
+    assert budgeted.chat_payload()["thinking_token_budget"] == 24000
+    with pytest.raises(labeling.TopicLabelingError, match="chat_completions"):
+        budgeted.responses_payload()
+    args = labeling.build_parser().parse_args(
+        ["label", "--thinking-token-budget", "12000"]
+    )
+    assert labeling.ModelSettings.from_args(args).thinking_token_budget == 12000
+
+
+def test_rubric_is_the_benchmark_codebook():
+    codebook = labeling.CODEBOOK_PATH.read_text(encoding="utf-8")
+    assert labeling.SYSTEM_RUBRIC == codebook
+    # Enumerations the model has to choose from are spelled out in the prompt
+    # text, not only in the response schema it is constrained by.
+    for value in ("treatment_or_prevention", "diagnosis_or_prevalence", "other_product"):
+        assert value in labeling.SYSTEM_RUBRIC
+    taxonomy = {
+        "labels": [
+            {
+                "label_id": "topic:sleep",
+                "axis": "topic",
+                "name": "Sleep",
+                "definition": "Sleep.",
+                "concepts": ["insomnia"],
+            }
+        ]
+    }
+    assert labeling.taxonomy_instructions(taxonomy).startswith(codebook)
