@@ -25,7 +25,7 @@ METRICS = [
 def _flat(row: dict[str, Any]) -> dict[str, float]:
     out: dict[str, float] = {}
     for group, counts in row["counts"].items():
-        for key in ("tp", "fp", "fn"):
+        for key in ("tp", "required_tp", "fp", "fn"):
             out[f"{group}:{key}"] = float(counts.get(key, 0))
     return out
 
@@ -38,7 +38,8 @@ def _statistic(group: str, kind: str):
         if kind == "f1":
             return stats.f1(tp, fp, fn)
         if kind == "recall":
-            return stats.recall(tp, fn)
+            required_tp = sum(r.get(f"{group}:required_tp", 0) for r in rows)
+            return stats.recall(required_tp, fn)
         return stats.precision(tp, fp)
 
     return compute

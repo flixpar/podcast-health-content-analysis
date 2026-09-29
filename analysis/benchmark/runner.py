@@ -13,6 +13,7 @@ import argparse
 import hashlib
 import inspect
 import json
+import sqlite3
 import subprocess
 import sys
 import threading
@@ -136,6 +137,31 @@ def fingerprint_from_manifest(manifest: dict[str, Any]) -> str:
     return tl.sha256_bytes(tl.canonical_json(inputs).encode("utf-8"))
 
 
+def _validate_resume(run_dir: Path, fingerprint: str) -> None:
+    """Check all existing provenance before replacing the run manifest."""
+    manifest_path = run_dir / "run_manifest.json"
+    if manifest_path.exists():
+        existing = json.loads(manifest_path.read_text(encoding="utf-8"))
+        if existing["run_fingerprint"] != fingerprint:
+            raise tl.TopicLabelingError(
+                f"benchmark {run_dir} belongs to a different run; use a new output directory"
+            )
+    # Check even repeats outside this invocation, and stores left without a
+    # manifest by an interrupted run. Open read-only to preserve rejected runs.
+    for path in run_dir.glob("repeat_*/labels.sqlite"):
+        connection = sqlite3.connect(f"{path.resolve().as_uri()}?mode=ro", uri=True)
+        try:
+            existing = connection.execute(
+                "SELECT run_fingerprint FROM run WHERE singleton = 1"
+            ).fetchone()
+            if existing is not None and existing[0] != fingerprint:
+                raise tl.TopicLabelingError(
+                    f"label store {path} belongs to a different run; use a new output directory"
+                )
+        finally:
+            connection.close()
+
+
 def run_benchmark(
     items: Sequence[dict[str, Any]],
     taxonomy: dict[str, Any],
@@ -196,10 +222,11 @@ def run_benchmark(
         "repeats": repeats,
         "concurrency": args.concurrency,
     }
-    tl.write_json(run_dir / "run_manifest.json", manifest)
     repeat_summaries = []
     budget_stop = None
     try:
+        _validate_resume(run_dir, manifest["run_fingerprint"])
+        tl.write_json(run_dir / "run_manifest.json", manifest)
         for repeat in range(repeats):
             repeat_dir = run_dir / f"repeat_{repeat}"
             repeat_dir.mkdir(exist_ok=True)

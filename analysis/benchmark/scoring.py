@@ -74,7 +74,7 @@ def score_item(
     pred_to_gold = {i: (j, s) for i, j, s in matched}
     counts: dict[str, Counter[str]] = defaultdict(Counter)
     for group in GROUPS:
-        counts[group].update({key: 0 for key in ("tp", "fp", "fn", "unscored", "required", "gold", "pred")})
+        counts[group].update({key: 0 for key in ("tp", "required_tp", "fp", "fn", "unscored", "required", "gold", "pred")})
     per_label: dict[str, Counter[str]] = defaultdict(Counter)
     attribute_pairs: list[dict[str, Any]] = []
     calibration: list[tuple[float, bool]] = []
@@ -88,6 +88,8 @@ def score_item(
             matched_gold.add(j)
             if gold.tier in CREDIT_TIERS:
                 counts[group]["tp"] += 1
+                if gold.tier == "required":
+                    counts[group]["required_tp"] += 1
                 counts[group]["soft_tp"] += 1
                 if pred.kind == "detection":
                     per_label[pred.label]["tp"] += 1
@@ -96,6 +98,7 @@ def score_item(
                 counts[group]["unscored"] += 1
                 counts[group]["soft_tp"] += 1
             if pred.kind == "detection":
+                counts[group]["span_iou_count"] += 1
                 counts[group]["span_iou_sum"] += iou((pred.start, pred.end), gold.tight)
             for attribute in VOTED_ATTRIBUTES[pred.kind]:
                 value = pred.product_name if attribute == "product_name" else pred.attributes.get(attribute)
@@ -149,6 +152,7 @@ def score_item(
                     best = (gj, score)
             if best is not None:
                 counts[group_of(pred)]["adjacent"] += 1
+                counts[group_of(pred)][f"adjacent_{scorable[best[0]].tier}"] += 1
                 loose_gold = [(gj, g) for gj, g in loose_gold if gj != best[0]]
     for j, gold in enumerate(scorable):
         group = group_of(gold)
@@ -225,23 +229,27 @@ def _pool(rows: Sequence[dict[str, Any]], group: str) -> dict[str, Any]:
     soft_matched = sum(r["counts"].get(group, {}).get("soft_matched", 0.0) for r in rows)
     iou_sum = sum(r["counts"].get(group, {}).get("span_iou_sum", 0.0) for r in rows)
     adjacent = sum(r["counts"].get(group, {}).get("adjacent", 0) for r in rows)
+    required_tp = sum(r["counts"].get(group, {}).get("required_tp", 0) for r in rows)
+    adjacent_required = sum(r["counts"].get(group, {}).get("adjacent_required", 0) for r in rows)
+    iou_count = sum(r["counts"].get(group, {}).get("span_iou_count", 0) for r in rows)
     return {
         "pred": pred,
         "gold": gold,
         "required": required,
         "tp": tp,
+        "required_tp": required_tp,
         "fp": fp,
         "fn": fn,
         "unscored": unscored,
         "precision": round(stats.precision(tp, fp), 4) if tp + fp else None,
-        "recall_strict": round(stats.recall(tp, fn), 4) if tp + fn else None,
+        "recall_strict": round(stats.recall(required_tp, fn), 4) if required else None,
         "recall_soft": round(soft_matched / soft_gold, 4) if soft_gold else None,
         "f1_strict": round(stats.f1(tp, fp, fn), 4) if tp + fp + fn else None,
         "f1_soft": round(_soft_f1(tp, fp, soft_matched, soft_gold), 4) if soft_gold else None,
         "yield_ratio": round(pred / gold, 3) if gold else None,
-        "mean_span_iou": round(iou_sum / tp, 3) if tp and group.startswith("detection") else None,
+        "mean_span_iou": round(iou_sum / iou_count, 3) if iou_count and group.startswith("detection") else None,
         "adjacent": adjacent,
-        "f1_adjacent": round(stats.f1(tp + adjacent, fp - adjacent, fn - adjacent), 4) if group.startswith("detection") and tp + fp + fn else None,
+        "f1_adjacent": round(stats.f1(tp + adjacent, fp - adjacent, fn - adjacent_required), 4) if group.startswith("detection") and tp + fp + fn else None,
     }
 
 
