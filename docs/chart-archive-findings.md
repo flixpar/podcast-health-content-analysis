@@ -5,6 +5,10 @@ Machine and Common Crawl, parsed into **1,375,824 ranked rows** spanning
 **2008-12-23 to 2026-08-31**. Everything lives under `data/chart-archive/`;
 the harvesters and parsers are in `analysis/chart_archive/`.
 
+**Population and recovery updated 2026-09-29.** The archive collection and
+source-coverage tables retain their original September 3/4 measurement dates;
+§6 and §6a use the corrected Apple-ID policy and refreshed recovery evidence.
+
 The question this answers: *can we reconstruct historical top-podcast lists well
 enough to define a study population, and which series should define it?*
 
@@ -174,11 +178,13 @@ that charted", monthly snapshots undercount the real membership by roughly
 
 Three design choices, each forced by something the archive turned out to be.
 
-**Identity is the Apple id, resolved before counting.** 76 of these shows
+**Identity is the Apple id, resolved before counting.** 74 of these shows
 charted under more than one title (The Dave Ramsey Show → The Ramsey Show;
 Radiolab under three). A title key counts those as separate shows sharing one
-feed, so every title is mapped to an `adamId` first and observations are pooled
-across a show's titles before any threshold applies.
+feed. Numeric podcast IDs from Podbay, Apple chart pages, and iTunes RSS
+supply identity evidence. Direct IDs on observations take precedence over
+normalised-title matches; Chartable slugs and Apple episode/channel IDs never
+supply show IDs. Observations are pooled across titles before thresholding.
 
 **Exposure is weighted, because sampling density varies sevenfold.** Counting
 snapshot days measures tenure × sampling rate, not tenure:
@@ -207,112 +213,82 @@ whole period is written alongside as a sensitivity check.
 
 ### What it produces
 
-**342 shows**, 315 (92%) carrying an Apple id. Median estimated tenure 239 days
-over 26 observations. The threshold curve, under each depth policy:
+**340 shows**, 312 (92%) carrying a genuine Apple podcast ID.
+Median estimated tenure 241.5 days over 26.5 observations.
 
-| min est. days | mixed (recommended) | top-24 throughout | top-10 throughout |
+| min estimated days | mixed (recommended) | top-24 throughout | top-10 throughout |
 |---:|---:|---:|---:|
 | 30 | 621 | 340 | 148 |
-| 60 | 437 | 220 | 103 |
-| **90** | **342** | 163 | 72 |
-| 120 | 271 | 129 | 54 |
+| 60 | 437 | 219 | 103 |
+| **90** | **340** | 163 | 72 |
+| 120 | 269 | 129 | 54 |
 | 180 | 196 | 96 | 41 |
 | 365 | 121 | 62 | 26 |
 
-Composition: 249 distinct publishers (NPR 24, audiochuck 9, Gimlet 7, then a
-long tail), 93 still charting in 2025-2026, 77 last charted before 2018, 10
-qualifying purely on Apple's 24-deep era. Genre where Podbay labels it:
-society-and-culture 57, news-and-politics 50, comedy 38, arts 15, business 13,
-health 11. **77 are already in the corpus.**
+Composition: 249 publishers, 93 still charting in
+2025-2026, 76 last charted before 2018, and 10 qualifying
+solely on Apple's 24-deep era. Podbay genre counts include society-and-culture
+57, news-and-politics 50, comedy 38, arts 15, business 13, and health 11.
+**76 already match the pipeline corpus by Apple ID.**
 
 ### What changed, and why it matters
 
-Against the previous count-based rule over the 2012-2024 window (346 shows):
-**258 unchanged, 88 dropped, 84 added.**
+The September 4 exploratory run selected 342 shows and reported a comparison
+with the earlier 346-show count-based population (258 retained, 88 dropped,
+84 added). That comparison belongs to the earlier identity policy.
 
-The drops are overwhelmingly from the densely sampled years — 68 of 88 last
-charted between 2016 and 2018 — and they are shows the old rule admitted on thin
-evidence: *Worldly* (10 snapshots, 14 estimated days), *What Trump Can Teach Us
-About Con Law* (18 days), *Part-Time Genius* (19 days).
-
-The additions are the shows the old rule structurally could not see: those that
-charted during sparse windows (*Prosecuting Donald Trump*, 3 snapshots but 183
-estimated days; *The Rise and Fall of Mars Hill*, 162; *America's Test Kitchen
-Radio*, 184) and those that rose after Chartable died (**Good Hang with Amy
-Poehler** 500 days, **The Tucker Carlson Show** 338, **Candace** 275, **The
-MeidasTouch Podcast** 240, **The Weekly Show with Jon Stewart** 230, *The
-Telepathy Tapes* 148).
-
-That last group is the substantive gain. A population defined the old way
-omitted most of the current US podcast landscape, and disproportionately the
-political shows a misinformation study exists to examine.
+The corrected policy selects 340 shows from the same archive. It resolves
+`1619` to Apple ID `1476928106`, removes episode-ID evidence from shows such as
+Betrayal, and preserves IDs carried directly by chart observations. Some
+entities merge or split; this is an identity correction, not a threshold change.
+The exposure rule and 941-day snapshot schedule are unchanged.
 
 ## 6a. How much of the population can actually be collected
 
-Every one of the 342 was resolved to an RSS feed and tested: does the feed still
-exist, do its episodes reach back over the show's charting window, and does the
-audio fetch? Per-show results in `population/recoverability.csv`, method in
-`analysis/chart_archive/recoverability.py`.
+**Refreshed 2026-09-29 against the corrected population.** Lookup misses,
+newly resolved feeds, and audio samples were refreshed. Successful older
+measurements remain cached, so this is not a new measurement of every feed.
+The CSV contains 340 shows; 35 still have no resolved feed URL.
+Full method and per-show evidence are in
+`data/chart-archive/parsed/population/recoverability.csv` and
+`recoverability.md`; run `analysis/chart_archive/recoverability.py` to update them.
 
-| Verdict | Shows |
-|---|---:|
-| `fully_recoverable` — live feed spanning the window, audio fetches | 226 |
-| `recent_only` — live feed, oldest episode postdates the window | 74 |
-| `archive_only` — feed gone, Wayback captures and old enclosures resolve | 4 |
-| `transcript_only` — publisher transcripts cover the era, audio does not | 1 |
-| `not_recoverable` | 37 |
+| Verdict | Shows | Evidence |
+|---|---:|---|
+| `fully_recoverable` | 226 | live feed, working sampled audio, ≥80% window coverage and not hollow |
+| `recent_only` | 72 | live feed and working audio, but insufficient charting-window coverage |
+| `archive_only` | 5 | archived feed captures span the window and a sampled era enclosure resolves |
+| `transcript_only` | 1 | publisher transcript entries reach the era; sampled audio does not resolve |
+| `not_recoverable` | 36 | no qualifying recovery evidence in the current cache |
 
-**231 of 342 (68%) are usable for their charting era.** Requiring the feed to
-reach back only as far as the study window rather than to the show's first
-charting date: 74% from 2018 (197 of 265), 77% from 2020, 82% from 2022, 86%
-from 2024. It plateaus in the mid-eighties rather than converging.
+**232 of 340 (68%) have evidence supporting use for their charting era.**
+64 current-policy Wayback probes are complete; 50 fallback candidates
+still need a current probe (35 first need a feed URL, and
+15 have known feed URLs but no current capture-discovery result).
+Wayback CDX requests timed out during the refresh;
+known archived snapshots were replayed using saved capture metadata.
+These counts are provisional. Pending or failed requests do not establish
+that a show is unrecoverable, and a sampled enclosure does not prove that
+every episode in the era can be collected.
 
-By era of last charting:
-
-| Era | Full | Recent only | Archive | Transcript | Not rec. | Total |
+| era (`last_year`) | fully recoverable | recent only | archive only | transcript only | no qualifying evidence | total |
 |---|---:|---:|---:|---:|---:|---:|
-| pre-2018 | 28 | 33 | 0 | 0 | 16 | 77 |
-| 2018-2021 | 63 | 14 | 1 | 0 | 12 | 90 |
-| 2022-2024 | 63 | 9 | 1 | 1 | 8 | 82 |
-| 2025-2026 | 72 | 18 | 2 | 0 | 1 | 93 |
+| pre-2018 | 28 | 32 | 0 | 0 | 16 | 76 |
+| 2018-2021 | 62 | 14 | 1 | 0 | 12 | 89 |
+| 2022-2024 | 63 | 10 | 1 | 1 | 7 | 82 |
+| 2025-2026 | 73 | 16 | 3 | 0 | 1 | 93 |
 
-Four findings behind those numbers:
+Collection priorities:
 
-- **Rolling-window feeds, not decay, are the binding constraint.** Of the 68
-  failures at 2018+, 33 are live feeds whose oldest episode postdates the window
-  and 21 have no live feed. Shows publishing daily or more fail at **38%**,
-  against 12-18% at every lower frequency, because a fixed episode cap becomes a
-  short time window: Up First carries 500 episodes reaching back only to
-  2025-05, NPR Politics 1,750 back to 2020-03, The Daily 59 back to 2021-10,
-  This American Life 15.
-- **Pre-2018 is where it breaks.** Median window coverage for shows last
-  charting before 2018 is **0.00** — over half have feeds that do not reach
-  their charting window at all.
-- **Long chart tenure predicts worse recoverability.** Only 41 of the 76
-  multi-title shows (54%) are fully recoverable, against 185 of 266 single-title
-  shows (70%). The shows that charted longest have had their feeds pruned
-  hardest.
-- **The Wayback fallback mostly fails, structurally.** Wayback archived each
-  feed at the URL it uses *today*, while a 2014 show served it from a Feedburner
-  or Podtrac address Apple has since replaced. Old *enclosures* survive well —
-  35 feeds yielded a working charting-era file — so the bottleneck is finding the
-  historical feed URL, not the audio.
-
-Extending the window to 2026 paid off: of the 93 shows last charting in
-2025-2026, 72 are fully recoverable and one is unrecoverable, and nine of the
-ten that qualify solely on Apple's 24-deep era are usable. The overall usable
-fraction stayed at 68% only because the 88 shows the exposure weighting removed
-were disproportionately well-preserved ones — the two effects cancel.
-
-Six shows expose no feed by any route: three Spotify-owned (StartUp, Homecoming,
-The Clearing — RSS withdrawn after acquisition) and three still publishing in
-2026 (CounterClock, Dark History, Losing 100 Pounds), where only Apple's failure
-to expose a feed is established. Five more are video-only feeds whose enclosures
-fetch fine but which `rss.py` will drop for lacking an `audio/*` enclosure.
-
-The spot-check was calibrated against the 77 population members already in the
-corpus: 74 have audio on disk and it called 73 of those fetchable, the single
-miss being a CDN that rejects ranged requests.
+- Fixed episode caps and feeds frozen mid-run can leave parts of the
+  charting window uncovered. Check `coverage_gap`, `months_covered`,
+  `hollow_feed`, and pagination before treating a live feed as sufficient.
+- 5 feeds use video enclosures; 5 have working sampled bytes.
+  The audit handles them separately, but the downloader RSS parser still
+  requires an audio enclosure. Decide how to collect these shows explicitly.
+- Historical feed URLs remain a useful recovery route: the current feed
+  URL may have replaced the one used during the charting era.
+- Inspect pending measurements before excluding a show from the study.
 
 ## 7. Genre charts
 
@@ -385,13 +361,13 @@ background.
   explicit rank number for Podbay and Chartable.
 - **Turnover figures use one capture per day**, the deepest, rather than
   merging same-day captures.
-- `lxml` was added to `pyproject.toml`. `uv sync` now resolves pandas to 3.x;
-  the venv is pinned back to the 2.3.1 the other analysis scripts assume.
+- The locked environment includes lxml, pandas 3.0.5, and pyarrow. Population
+  and turnover generation were checked with that environment.
 
 ## 11. Recommendations
 
 **1. Define the population by estimated chart tenure, not snapshot count:
-≥90 estimated days on ≥3 observations, 2012-2026, mixed depth.** That is 342
+≥90 estimated days on ≥3 observations, 2012-2026, mixed depth.** That is 340
 shows, 92% carrying an Apple id. Counting raw snapshots confounds tenure with
 the archive's sampling rate, which varies sevenfold across the period. The depth cut matters more than the
 threshold: ranks 51-100 turn over about 50% per month, so at this archive's
@@ -401,10 +377,10 @@ top-50 retains 75-83% month over month.
 **2. Treat the threshold as a dial, not a law.** §6 has the full curve; 60
 estimated days gives 437 shows, 180 days gives 196.
 
-**2a. Plan around 231 collectable shows, not 342.** A third of the population
-cannot be obtained for its charting era (§6a), and the loss is concentrated in
-daily news shows. Decide early whether `recent_only` shows belong in the study
-as forward-looking subjects or should be dropped.
+**2a. Plan around the 232 shows with current recovery evidence, while
+reviewing the pending measurements.** The corrected population has 340 shows;
+50 still need a current Wayback probe. Decide whether `recent_only`
+shows belong as forward-looking subjects or need historical-feed recovery.
 
 **3. Use Podbay for the historical backbone.** It carries Apple ids, covers
 2012-2019 at a 4-day median gap, and includes genre charts deep enough for the

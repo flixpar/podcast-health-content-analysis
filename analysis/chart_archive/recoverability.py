@@ -12,7 +12,7 @@ rerun resumes rather than refetches:
 4. ``audio``    ranged 64 KB GET of up to three enclosures per show.
 5. ``wayback``  for shows that phases 2-4 did not settle, CDX captures of the
                 feed URL and a probe of enclosures recovered from one archived
-                snapshot near ``last_seen``.
+                known snapshot (or one near ``last_seen`` after fresh discovery).
 
 ``report`` writes recoverability.csv / recoverability.md from whatever the cache
 holds, so it is safe (and useful) to run before the later phases finish.
@@ -96,8 +96,8 @@ def save_cache(name: str, obj: dict) -> None:
 def population() -> pd.DataFrame:
     """The study population, one row per show.
 
-    ``entity`` is the identity key: the Apple id, or ``title:<key>`` for the 13
-    shows that never carried one. It is used as the sid every cache is keyed by.
+    ``entity`` is the identity key: the Apple id, or ``title:<key>`` when no
+    genuine Apple show ID is available. Every cache is keyed on it as the sid.
     """
     df = pd.read_csv(POP / "population.csv")
     # Built as an explicit object Series: ``Series.map`` returning None on a
@@ -136,12 +136,19 @@ def phase_lookup() -> dict:
     pop = population()
     s = session()
 
-    missing = [a for a in pop.apple_id if isinstance(a, str) and a not in cache]
+    missing = [a for a in pop.apple_id if isinstance(a, str)
+               and lookup_needs_retry(cache.get(a))]
     for i in range(0, len(missing), LOOKUP_BATCH):
         batch = missing[i:i + LOOKUP_BATCH]
         url = LOOKUP_URL.format(ids=",".join(batch))
         print(f"  lookup batch of {len(batch)} ids")
         r = _itunes(s, url)
+        if r is None:
+            for aid in batch:
+                cache[aid] = {"feed_url": None, "source": "lookup_error",
+                              "error": "iTunes lookup request failed"}
+            save_cache("lookup", cache)
+            continue
         found = {}
         for rec in (r or {}).get("results", []):
             cid = str(rec.get("collectionId") or "")
@@ -151,9 +158,10 @@ def phase_lookup() -> dict:
                               "publisher": rec.get("artistName"),
                               "track_count": rec.get("trackCount"),
                               "latest": rec.get("releaseDate"),
-                              "source": "lookup"}
+                              "source": "lookup", "request_ok": True}
         for aid in batch:
-            cache[aid] = found.get(aid, {"feed_url": None, "source": "lookup_missing"})
+            cache[aid] = found.get(aid, {"feed_url": None, "source": "lookup_missing",
+                                       "request_ok": True})
         save_cache("lookup", cache)
 
     # Rows with no Apple id, plus ids Apple no longer lists: search by title.
@@ -161,12 +169,17 @@ def phase_lookup() -> dict:
     # batch-lookup entry the same id already has.
     need_search = [(r.sid, r.name, r.publisher) for r in pop.itertuples()
                    if (not r.apple_id or not (cache.get(r.apple_id) or {}).get("feed_url"))
-                   and f"s:{r.sid}" not in cache]
+                   and lookup_needs_retry(cache.get(f"s:{r.sid}"))]
     print(f"  {len(need_search)} shows need a title search")
     for sid, name, publisher in need_search:
         url = SEARCH_URL.format(term=requests.utils.quote(str(name)))
         print(f"  search {name!r}")
         r = _itunes(s, url)
+        if r is None:
+            cache[f"s:{sid}"] = {"feed_url": None, "source": "search_error",
+                                  "error": "iTunes search request failed"}
+            save_cache("lookup", cache)
+            continue
         best, quality = None, "none"
         for rec in (r or {}).get("results", []):
             if norm_key(rec.get("collectionName")) == norm_key(name):
@@ -178,10 +191,17 @@ def phase_lookup() -> dict:
         cache[f"s:{sid}"] = ({"feed_url": best.get("feedUrl"), "name": best.get("collectionName"),
                        "publisher": best.get("artistName"), "track_count": best.get("trackCount"),
                        "apple_id": str(best.get("collectionId")),
-                       "source": f"search:{quality}"} if best else
-                      {"feed_url": None, "source": "search_missing"})
+                       "source": f"search:{quality}", "request_ok": True} if best else
+                      {"feed_url": None, "source": "search_missing", "request_ok": True})
         save_cache("lookup", cache)
     return cache
+
+
+def lookup_needs_retry(record: dict | None) -> bool:
+    """Old missing records cannot distinguish a failed request from an empty result."""
+    return (record is None or bool(record.get("error"))
+            or (record.get("source") in {"lookup_missing", "search_missing"}
+                and not record.get("request_ok")))
 
 
 def _itunes(s: requests.Session, url: str, attempts: int = 3) -> dict | None:
@@ -266,7 +286,7 @@ def phase_verify() -> dict:
 def _wayback_lookup_feed(apple_id: str) -> str | None:
     """A feedUrl from an archived iTunes lookup response, if Wayback kept one."""
     caps = cdx(f"https://itunes.apple.com/lookup?id={apple_id}")
-    for ts, url in caps[:3]:
+    for ts, url in (caps or [])[:3]:
         body = _wayback_body(f"https://web.archive.org/web/{ts}id_/{url}")
         try:
             results = json.loads(body or b"{}").get("results") or []
@@ -463,27 +483,38 @@ def audio_ok(probes) -> bool:
 
 # --------------------------------------------------------------------- phase 5
 
-def cdx(url: str, attempts: int = 3) -> list[list[str]]:
+def cdx(url: str, attempts: int = 3) -> list[list[str]] | None:
     """One capture per month for an exact URL. Sequential: parallel CDX drops."""
-    query = ("http://web.archive.org/cdx/search/cdx?url=" + requests.utils.quote(url, safe="")
+    query = ("https://web.archive.org/cdx/search/cdx?url=" + requests.utils.quote(url, safe="")
              + "&fl=timestamp,original&filter=statuscode:200"
                "&collapse=timestamp:6&limit=2000&output=json")
     delay = 5.0
     for _ in range(attempts):
-        proc = subprocess.run(["curl", "-s", "-A", UA, "--max-time", "120", query],
+        proc = subprocess.run(["curl", "-fsSL", "-A", UA, "--max-time", "120", query],
                               capture_output=True, text=True)
         text = (proc.stdout or "").strip()
         if proc.returncode == 0 and text:
             try:
                 rows = json.loads(text)
+                if (isinstance(rows, list) and rows
+                        and rows[0] == ["timestamp", "original"]
+                        and all(isinstance(row, list) and len(row) == 2
+                                and isinstance(row[0], str) and len(row[0]) == 14
+                                and row[0].isdigit() for row in rows[1:])):
+                    return rows[1:]
+                if rows == []:
+                    return []
             except json.JSONDecodeError:
-                rows = []
-            return rows[1:] if rows else []
-        if proc.returncode == 0 and not text:
-            return []           # genuine empty result and a dropped one look alike
+                pass
         time.sleep(delay)
         delay *= 2
-    return []
+    return None  # Empty bodies, malformed responses, and transport errors retry.
+
+
+def current_wayback(record: dict, row: dict) -> bool:
+    return (record.get("era_version") == WAYBACK_ERA_VERSION
+            and record.get("window") == [row["first_seen"], row["last_seen"]]
+            and not record.get("error"))
 
 
 def phase_wayback(budget_seconds: float, only: list[str] | None = None) -> dict:
@@ -493,7 +524,7 @@ def phase_wayback(budget_seconds: float, only: list[str] | None = None) -> dict:
     todo = {}
     for r in sorted(rows, key=lambda r: r["last_seen"]):
         if (r["needs_fallback"] and r["sid"] not in todo
-                and cache.get(r["sid"], {}).get("era_version") != WAYBACK_ERA_VERSION):
+                and not current_wayback(cache.get(r["sid"], {}), r)):
             todo[r["sid"]] = r        # renamed shows share a feed; probe it once
     todo = list(todo.values())
     if only:
@@ -506,51 +537,80 @@ def phase_wayback(budget_seconds: float, only: list[str] | None = None) -> dict:
         if time.time() - started > budget_seconds:
             print(f"  budget exhausted after {i} shows; {len(todo) - i} left unprobed")
             break
-        cache[r["sid"]] = wayback_record(r)
+        cache[r["sid"]] = wayback_record(r, previous=cache.get(r["sid"]))
         save_cache("wayback", cache)
         if (i + 1) % 10 == 0:
             print(f"    {i + 1}/{len(todo)} ({time.time() - started:.0f}s)")
     return cache
 
 
-def wayback_record(row: dict) -> dict:
-    rec = {"era_version": WAYBACK_ERA_VERSION, "urls_tried": [], "n_captures": 0,
+def wayback_record(row: dict, previous: dict | None = None) -> dict:
+    rec = {"era_version": WAYBACK_ERA_VERSION,
+           "window": [row["first_seen"], row["last_seen"]],
+           "error": None, "urls_tried": [], "n_captures": 0,
            "first_capture": None, "last_capture": None,
            "spans_window": False, "snapshot_ts": None, "snapshot_episodes": 0,
            "snapshot_min_pub": None, "snapshot_max_pub": None,
            "era_enclosures_ok": 0, "era_enclosures_tried": 0, "note": None}
     candidates = [u for u in {row.get("feed_url"), row.get("final_url")} if u]
+    # Reuse capture discovery for the same URLs, but always reparse and re-probe
+    # the snapshot under the current window. No legacy enclosure count is reused.
+    previous = previous or {}
+    reuse_captures = (previous.get("n_captures") and previous.get("snapshot_ts")
+                      and previous.get("first_capture") and previous.get("last_capture")
+                      and set(previous.get("urls_tried", [])) == set(candidates))
     stamps = []
-    for url in candidates:
+    for url in ([] if reuse_captures else candidates):
         rec["urls_tried"].append(url)
         caps = cdx(url)
+        if caps is None:
+            rec["error"] = "feed CDX request failed"
+            continue
         time.sleep(1.0)
         for ts, _orig in caps:
             stamps.append((ts, url))
-    if not stamps:
+    if not stamps and not reuse_captures:
         rec["note"] = "no wayback captures of the feed URL"
         return rec
-    stamps.sort()
-    rec["n_captures"] = len(stamps)
-    rec["first_capture"], rec["last_capture"] = stamps[0][0], stamps[-1][0]
+    if reuse_captures:
+        for field in ("n_captures", "first_capture", "last_capture", "snapshot_ts"):
+            rec[field] = previous[field]
+        rec["urls_tried"] = list(previous["urls_tried"])
+        rec["capture_source"] = "cached"
+    else:
+        stamps.sort()
+        rec["n_captures"] = len(stamps)
+        rec["first_capture"], rec["last_capture"] = stamps[0][0], stamps[-1][0]
+        rec["capture_source"] = "cdx"
 
     first_seen, last_seen = to_date(row["first_seen"]), to_date(row["last_seen"])
-    cap_first, cap_last = _stamp_date(stamps[0][0]), _stamp_date(stamps[-1][0])
+    cap_first, cap_last = _stamp_date(rec["first_capture"]), _stamp_date(rec["last_capture"])
     rec["spans_window"] = bool(cap_first and cap_last and first_seen and last_seen
                                and cap_first <= first_seen + timedelta(days=90)
                                and cap_last >= last_seen - timedelta(days=90))
 
-    # One archived snapshot as close to last_seen as the captures allow.
-    target = last_seen or cap_last
-    ts, url = min(stamps, key=lambda t: abs((_stamp_date(t[0]) - target).days))
+    # Re-fetch a known snapshot, or choose one near last_seen from a fresh listing.
+    if reuse_captures:
+        ts = previous["snapshot_ts"]
+        replay_urls = previous["urls_tried"]
+    else:
+        target = last_seen or cap_last
+        ts, url = min(stamps, key=lambda t: abs((_stamp_date(t[0]) - target).days))
+        replay_urls = [url]
     rec["snapshot_ts"] = ts
-    body = _wayback_body(f"https://web.archive.org/web/{ts}id_/{url}")
+    body = None
+    for url in replay_urls:
+        body = _wayback_body(f"https://web.archive.org/web/{ts}id_/{url}")
+        if body:
+            break
     if not body:
+        rec["error"] = "snapshot fetch failed"
         rec["note"] = "snapshot fetch failed"
         return rec
     try:
         episodes = parse_feed(body, source=url)
     except Exception as e:                                  # noqa: BLE001
+        rec["error"] = f"snapshot parse: {str(e)[:120]}"
         rec["note"] = f"snapshot parse: {str(e)[:120]}"
         return rec
     rec["snapshot_episodes"] = len(episodes)
@@ -589,7 +649,7 @@ def _wayback_body(url: str) -> bytes | None:
     for attempt in range(2):
         # --compressed matters: the ``id_`` replay hands back the original bytes,
         # gzip and all, and feedparser sees only a not-well-formed token.
-        proc = subprocess.run(["curl", "-sL", "--compressed", "-A", UA,
+        proc = subprocess.run(["curl", "-fsSL", "--compressed", "-A", UA,
                                "--max-time", "120", url], capture_output=True)
         if proc.returncode == 0 and proc.stdout.strip():
             return proc.stdout
@@ -682,12 +742,12 @@ def build_rows() -> list[dict]:
             and _stamp_date(cap_last) >= last_seen - timedelta(days=90))
         row["wb_snapshot_episodes"] = wb.get("snapshot_episodes")
         # Legacy counters may include unrelated episodes; re-probe before use.
-        current_era_probe = wb.get("era_version") == WAYBACK_ERA_VERSION
+        current_era_probe = current_wayback(wb, row)
         row["wb_era_enclosures_ok"] = (wb.get("era_enclosures_ok")
                                         if current_era_probe else None)
         row["wb_era_enclosures_tried"] = (wb.get("era_enclosures_tried")
                                            if current_era_probe else None)
-        row["wb_note"] = ("legacy enclosure counts require re-probing"
+        row["wb_note"] = (wb.get("error") or "stale enclosure counts require re-probing"
                            if wb and not current_era_probe else wb.get("note"))
         row["wb_probed"] = current_era_probe
 
@@ -775,7 +835,7 @@ def verdict(row: dict) -> str:
 # ------------------------------------------------------------------- calibration
 
 def calibration(rows: list[dict]) -> pd.DataFrame:
-    """The 63 population shows the pipeline actually downloaded, as ground truth."""
+    """Compare current members with the pipeline's recorded downloads."""
     if not DB.exists():
         return pd.DataFrame()
     con = sqlite3.connect(DB)
@@ -810,127 +870,48 @@ def calibration(rows: list[dict]) -> pd.DataFrame:
 # change stays traceable now that both population files have been replaced.
 # 373 rows: title-keyed, one row per charting *title*. 346: entity-keyed, but
 # scored on raw snapshot days and a window that stopped at 2024-12.
-RUN_373 = {"n": 373, "usable": 253, "eras": {"pre-2018": 130}}
+RUN_373 = {"n": 373}
 PRIOR = {"n": 346, "fully_recoverable": 230, "recent_only": 72, "archive_only": 3,
-         "transcript_only": 1, "not_recoverable": 40, "usable": 234,
-         "eras": {"pre-2018": 102, "2018-2021": 116, "2022-2024": 128},
-         "dropped": 88, "added": 84, "retained": 258}
+         "transcript_only": 1, "not_recoverable": 40, "usable": 234}
 
 
 def _change_section(df: pd.DataFrame) -> list[str]:
-    """How this population differs from the two the script scored before it."""
-    n = len(df)
+    """Keep historical comparisons explicitly dated and independent of current membership."""
     counts = df.verdict.value_counts()
-    usable = int(counts.get("fully_recoverable", 0) + counts.get("archive_only", 0)
-                 + counts.get("transcript_only", 0))
-    dropped = (pd.read_csv(DROPPED_SNAPSHOT) if DROPPED_SNAPSHOT.exists()
-               else pd.DataFrame())
-    recent = df[df.last_year >= 2025]
-
+    usable = sum(int(counts.get(tier, 0)) for tier in
+                 ("fully_recoverable", "archive_only", "transcript_only"))
     lines = [
-        "## Change from the earlier runs", "",
-        "This script has now scored three populations. The first "
-        f"({RUN_373['n']} rows) was keyed on charting *title*, so renamed shows "
-        "were counted several times. The second "
-        f"({PRIOR['n']} shows) fixed that by resolving each show to its Apple id, "
-        "but still selected on raw snapshot days — which measures tenure times "
-        "sampling rate — and stopped at 2024-12. This one "
-        f"({n} shows) selects on exposure-weighted estimated days and runs to "
-        "2026-08-31.",
-        "",
-        "| tier | 346-show run | this run |",
+        "## Historical comparison", "",
+        "The September 2026 exploratory runs used a title-keyed population "
+        f"of {RUN_373['n']} rows, then an Apple-ID-keyed population of "
+        f"{PRIOR['n']} shows selected by raw snapshot counts through 2024-12. "
+        "These are frozen historical measurements, not the current membership. "
+        "The current rule pools identities before applying exposure-weighted "
+        "tenure over the full archive window.", "",
+        "| tier | historical 346-show run | current cache |",
         "|---|---:|---:|",
     ]
     for tier in TIERS:
         lines.append(f"| {tier} | {PRIOR[tier]} | {int(counts.get(tier, 0))} |")
-    lines += [
-        f"| **usable** | **{PRIOR['usable']} of {PRIOR['n']} "
-        f"({PRIOR['usable'] / PRIOR['n']:.0%})** | **{usable} of {n} "
-        f"({usable / n:.0%})** |",
-        "",
-        f"**The usable fraction moved from {PRIOR['usable'] / PRIOR['n']:.0%} to "
-        f"{usable / n:.0%}**"
-        + (", so the additions did improve it, but by less than their recency "
-           "suggests." if usable / n > PRIOR["usable"] / PRIOR["n"] else
-           " — it did not improve, despite the additions skewing recent.")
-        + " The reason is that the two changes to the rule cut against each other, "
-        "and the second is the stronger:",
-        "",
-        f"- **The {PRIOR['added']} shows added** skew heavily recent, and the "
-        "extended window pulls retained shows forward too: "
-        f"{len(recent)} shows now last chart in 2025 or 2026, a stretch the old "
-        "population could not describe at all because its window closed 2024-12. "
-        "Whether added or merely extended into it, those shows' feeds are almost "
-        f"all intact — {int((recent.verdict == 'fully_recoverable').sum())} of "
-        f"{len(recent)} are `fully_recoverable`, and just "
-        f"{int((recent.verdict == 'not_recoverable').sum())} `not_recoverable`.",
-        f"- **The {PRIOR['dropped']} shows dropped** were disproportionately *easy* "
-        "ones. Of them "
-        + (f"{int((dropped.verdict == 'fully_recoverable').sum())} were "
-           f"`fully_recoverable` and only "
-           f"{int((dropped.verdict == 'not_recoverable').sum())} `not_recoverable` "
-           "— a healthier mix than the population they left."
-           if len(dropped) else "no frozen record survives.")
-        + " Weighting exposure removed shows that had looked long-lived only "
-        "because the archive happened to sample them often.",
-        "- **Every retained show was rescored, not carried over.** Windows now "
-        "extend to the show's true last appearance, which in many cases is 2026 "
-        "rather than 2024. A wider window is a harder test: a feed must reach both "
-        "further back and further forward. Verdicts were recomputed from the cached "
-        "feed measurements against the new windows; no verdict was inherited.",
-        "",
-        f"The {PRIOR['dropped']} dropped shows keep their 346-run rows in "
-        "[`recoverability_dropped.csv`](recoverability_dropped.csv) so that run's "
-        "numbers stay reproducible. Those rows are a frozen copy, not a rescoring: "
-        "there is no population row left to score them against.",
-        "",
-        "### What the earlier rules distorted", "",
-        "Two defects have now been corrected, and both had been inflating the "
-        "apparent difficulty of the older eras.",
-        "",
-        f"**Title-keying** (fixed before the {PRIOR['n']}-show run) padded the "
-        f"pre-2018 bucket with early titles of shows still charting today — "
-        "`NPR: Fresh Air Podcast` last seen 2015 is the same podcast as `Fresh Air` "
-        f"last seen 2024. Pre-2018 fell from {RUN_373['eras']['pre-2018']} rows to "
-        f"{PRIOR['eras']['pre-2018']} shows on that fix alone, and stands at "
-        f"{int((df.era == 'pre-2018').sum())} now.",
-        "",
-        "**Snapshot-day counting** (fixed here) measured how often the archive "
-        "looked, not how long a show charted. It demanded far more real tenure in "
-        "sparsely sampled years than in densely sampled ones, so it under-selected "
-        "exactly the early period whose recoverability we were most worried about. "
-        f"Pre-2018 is now {int((df.era == 'pre-2018').sum())} shows of {n} "
-        f"({int((df.era == 'pre-2018').sum()) / n:.0%}), and its recoverability is "
-        "measured on a membership that no longer depends on capture cadence.",
-        "",
-        "One measurement was not redone: for a show whose window widened, the "
-        "Wayback phase reused the snapshot it had already probed against the older, "
-        "narrower window. `wb_spans_window` is recomputed against the current "
-        "window, but `wb_era_enclosures_ok` was not re-probed. That can only affect "
-        f"whether a show reaches `archive_only`, and at "
-        f"{int((df.verdict == 'archive_only').sum())} shows the tier is marginal "
-        "either way.",
-        "",
-    ]
+    lines += [f"| usable | {PRIOR['usable']} | {usable} |", "",
+              "Current verdicts are recomputed against the current population's "
+              "windows. Legacy Wayback enclosure counts are excluded until "
+              "re-probed under the current era policy. Historical dropped-show "
+              "records, when available, remain a frozen comparison in "
+              "`recoverability_dropped.csv`.", ""]
     return lines
 
 
 def _shallow_section(df: pd.DataFrame) -> list[str]:
     """The shows that qualified only on Apple's 24-deep chart page."""
     shallow = df[df.shallow_only]
-    if not len(shallow):
+    if shallow.empty:
         return []
-    bad = shallow[~shallow.verdict.isin(["fully_recoverable", "archive_only",
-                                         "transcript_only"])]
+    usable = shallow.verdict.isin(["fully_recoverable", "archive_only", "transcript_only"])
     lines = [
         "## The shallow-era-only shows", "",
-        f"{len(shallow)} shows qualified purely on Apple's own charts page, which "
-        "is only 24 deep — they hold no observation from the 100-deep mirrors, and "
-        "exist in this population only because the window was extended past "
-        "2024-08. They are worth checking separately: if the shows the extension "
-        "was built to capture turned out to be unrecoverable, the extension would "
-        "have bought nothing.",
-        "",
+        f"{len(shallow)} shows qualified solely on Apple's 24-deep chart page; "
+        "they have no qualifying observation from the deeper mirrors.", "",
         "| show | charting window | verdict | window coverage | episodes |",
         "|---|---|---|---:|---:|",
     ]
@@ -938,23 +919,8 @@ def _shallow_section(df: pd.DataFrame) -> list[str]:
         lines.append(f"| {_cell(r.name)} | {r.first_seen} - {r.last_seen} | "
                      f"`{r.verdict}` | {r.window_coverage:.2f} | "
                      f"{'' if pd.isna(r.n_episodes) else int(r.n_episodes)} |")
-    lines += [
-        "",
-        f"**{len(shallow) - len(bad)} of {len(shallow)} are usable**, all of them "
-        "through live feeds with working audio — unsurprising for shows that "
-        "charted within the last two years, but worth confirming rather than "
-        "assuming."
-        + ("" if not len(bad) else
-           (" The exception is " if len(bad) == 1 else " The exceptions are ")
-           + ", ".join(f"*{_cell(r.name)}* (`{r.verdict}`, coverage "
-                       f"{r.window_coverage:.2f})" for r in bad.itertuples())
-           + (", which is not a dead feed" if len(bad) == 1 else
-              ", none of them a dead feed")
-           + ": live and fetchable, but starting after the charting window does. "
-             "*Digital Social Hour* serves a 200-episode page and nothing older — a "
-             "truncation a paginated fetch could work around if the show matters."),
-        "",
-    ]
+    lines += ["", f"{int(usable.sum())} of {len(shallow)} are usable for their "
+              "charting era under the measured criteria.", ""]
     return lines
 
 
@@ -965,58 +931,29 @@ def _cell(text) -> str:
 
 
 def _feedless_section(df: pd.DataFrame, lookup: dict) -> list[str]:
-    """Shows Apple lists but exposes no feed for, and what each re-check found."""
+    """Describe cached verification outcomes without inferring ownership or availability."""
     rows = [(r, lookup[f"v:{r.sid}"]) for r in df.itertuples()
             if f"v:{r.sid}" in lookup]
     if not rows:
         return []
+    unresolved = sum(not r.feed_url or pd.isna(r.feed_url) for r, _v in rows)
     lines = [
-        "## Shows Apple lists but publishes no feed for", "",
-        "An absent `feedUrl` in a 200-id batch lookup could just be the batch "
-        "dropping records, so each of these was re-checked one id at a time, then "
-        "against the `gb` and `ca` catalogues, then against an archived copy of the "
-        "lookup response in Wayback, then against the RSS URL our own pipeline "
-        f"database holds. **None of the {len(rows)} produced a feed by any route.**",
-        "",
-        "| show | publisher | episodes Apple counts | latest episode | verdict |",
-        "|---|---|---:|---|---|",
+        "## Verification of shows initially listed without a feed", "",
+        "Verification tries individual US/GB/CA lookups, an archived lookup "
+        "response, and the pipeline database where available. "
+        f"{len(rows)} current population members have a cached verification record; "
+        f"{unresolved} still have no resolved feed URL. An unresolved URL is "
+        "evidence about the routes tried, not proof that no feed exists.", "",
+        "| show | publisher | episodes Apple counts | latest episode | feed resolved | verdict |",
+        "|---|---|---:|---|---|---|",
     ]
     for r, v in sorted(rows, key=lambda t: -(t[1].get("track_count") or 0)):
+        resolved = bool(r.feed_url) and pd.notna(r.feed_url)
         lines.append(f"| {_cell(r.name)} | {_cell(v.get('publisher') or '?')} | "
                      f"{v.get('track_count') or '?'} | "
-                     f"{str(v.get('latest') or '?')[:10]} | `{r.verdict}` |")
-    spotify = [r for r, v in rows
-               if any(owner in str(v.get("publisher") or "")
-                      for owner in ("Gimlet", "Spotify", "Pineapple Street"))]
-    live = [r for r, v in rows if str(v.get("latest") or "")[:4] >= "2026"]
-    lines += [
-        "",
-        f"{len(spotify)} of the {len(rows)} are Spotify-owned catalogues — "
-        + ", ".join(f"*{_cell(r.name)}*" for r in spotify)
-        + " — where RSS was withdrawn after acquisition. Those are structurally "
-        "uncollectable for this study however they charted.",
-        "",
-        f"The other {len(rows) - len(spotify)} are a different case. "
-        + (", ".join(f"*{_cell(r.name)}*" for r in live)
-           + (" are still publishing in 2026" if len(live) != 1 else
-              " is still publishing in 2026")
-           + ", so a feed almost certainly exists somewhere; what is established is "
-           "only that **Apple exposes no path to it**, through either of its public "
-           "endpoints, through the `gb` or `ca` catalogues, through an archived "
-           "lookup response, or through our own database. Since the population is "
-           "Apple-defined they are scored as unreachable, but they are the ones "
-           "worth a manual look."
-           if live else "None of them has published since 2025."),
-        "",
-        "**A correction to the previous run.** That report named *The Ben Shapiro "
-        "Show* as the headline no-feed case. That was wrong. Apple's lookup does "
-        "omit its `feedUrl`, but the show has a working feed "
-        "(`feeds.megaphone.fm/BVDWV5370667266`, picked up from the pipeline "
-        "database) and it is `fully_recoverable`. No top-tier news podcast is "
-        "structurally uncollectable.",
-        "",
-    ]
-    return lines
+                     f"{str(v.get('latest') or '?')[:10]} | "
+                     f"{'yes' if resolved else 'no'} | `{r.verdict}` |")
+    return lines + [""]
 
 
 # The archive now runs to 2026-08-31, so the recent bucket is split: 2025-2026
@@ -1054,11 +991,22 @@ def render_md(df: pd.DataFrame, cal: pd.DataFrame) -> str:
     usable = int(counts.get("fully_recoverable", 0) + counts.get("archive_only", 0)
                  + counts.get("transcript_only", 0))
     probed = int(df[df.wb_probed].sid.nunique())
+    summary_path = POP / "summary.json"
+    rule = (json.loads(summary_path.read_text()).get("rule", {})
+            if summary_path.exists() else {})
+    selection = "The population selects on exposure-weighted days and observation count. "
+    if all(field in rule for field in ("min_est_days", "min_obs", "deep_cut", "shallow_cut")):
+        selection = (f"The population selects on **≥{rule['min_est_days']} exposure-weighted "
+                     f"days with ≥{rule['min_obs']} observations**, using rank "
+                     f"≤{rule['deep_cut']} on deep charts and ≤{rule['shallow_cut']} "
+                     "on shallow charts. ")
 
     lines = [
         f"# Recoverability of the {n}-show chart population",
         "",
-        f"Measured {datetime.now():%Y-%m-%d}. One row per show in "
+        f"Report generated {datetime.now():%Y-%m-%d} from cached measurements. "
+        "Cache entries may come from different runs; this date is not a fresh "
+        "measurement date for every show. One row per show in "
         "[`recoverability.csv`](recoverability.csv); produced by "
         "`analysis/chart_archive/recoverability.py`.",
         "",
@@ -1070,14 +1018,12 @@ def render_md(df: pd.DataFrame, cal: pd.DataFrame) -> str:
         f"or `title:<key>` for the {int(df.apple_id.isna().sum())} shows that never "
         f"carried one — so each of the {n} rows is one podcast. "
         f"{int((df.titles > 1).sum())} of them charted under more than one title "
-        "(*Fresh Air* under four, *Radiolab* under three), and each is measured "
-        "against the **union** of its charting windows: *The Dave Ramsey Show* is "
-        "scored over its whole run, not over two shorter ones.",
+        "and each is measured over its first-to-last charting span, with "
+        "observations pooled across titles before applying the inclusion rule.",
         "",
-        "The population selects on **exposure-weighted estimated days in the chart "
-        f"(≥90) with ≥3 observations**, over 2012-07-15 to 2026-08-31 — rank ≤50 "
-        "where the mirrors publish 100 deep, rank ≤24 for 2024-08 onward where only "
-        "Apple's own page survives. `est_days`, `n_obs`, `deep_obs` and "
+        selection + "Current members chart between "
+        f"{df.first_seen.min()} and {df.last_seen.max()}. "
+        "`est_days`, `n_obs`, `deep_obs` and "
         "`shallow_obs` are carried into the output so any row can be traced back to "
         "why it is in scope.",
         "",
@@ -1098,7 +1044,7 @@ def render_md(df: pd.DataFrame, cal: pd.DataFrame) -> str:
         "→ `archive_only` (Wayback "
         "holds feed captures spanning the window and a sampled charting-era "
         "enclosure still resolves) → `recent_only` (live feed and working "
-        "audio, but the episodes postdate the charting window) → "
+        "audio, but insufficient charting-window coverage) → "
         "`transcript_only` → `not_recoverable`.",
         "",
         "## By charting era (`last_year`)",
@@ -1125,7 +1071,8 @@ def render_md(df: pd.DataFrame, cal: pd.DataFrame) -> str:
         f"{int(counts.get('recent_only', 0))} of those have a live feed we could "
         "collect going forward, but it no longer carries the episodes that "
         "charted; the remaining "
-        f"{int(counts.get('not_recoverable', 0))} yield nothing.",
+        f"{int(counts.get('not_recoverable', 0))} have no qualifying recovery "
+        "evidence in the current cache.",
         "",
     ]
 
@@ -1137,20 +1084,24 @@ def render_md(df: pd.DataFrame, cal: pd.DataFrame) -> str:
                                        df[df.feed_url.isna()].apple_id)
                  if (lookup.get(str(aid)) or {}).get("name")
                  or (lookup.get(f"s:{sid}") or {}).get("name"))
+    lookup_errors = sum(bool((lookup.get(str(r.apple_id)) or {}).get("error"))
+                        or bool((lookup.get(f"s:{r.sid}") or {}).get("error"))
+                        for r in df.itertuples())
+    feeds = load_cache("feeds")
+    fetched = sum(r.sid in feeds for r in df.itertuples())
+    feed_errors = int(df.feed_error.notna().sum())
     video = int(df.video_sourced.eq(True).sum())
     unprobed = int(df[(df.verdict != "fully_recoverable") & ~df.wb_probed].sid.nunique())
     lines += [
         f"- Feed URL resolved for {n - no_feed} of {n} shows ({no_feed} unresolved). "
-        f"Two different failures hide in there: {no_feed - listed} shows Apple no "
-        f"longer lists at all, and {listed} Apple still lists but publishes no "
-        "`feedUrl` for — verified one at a time below.",
-        f"- {video} shows are **video** feeds: they return 200 with 20-148 entries "
-        "carrying only `video/*` enclosures, which `rss.py` drops. Because the "
-        "pipeline transcodes to 24 kbps Opus anyway, this script recovers those "
-        "enclosures and spot-checks them like any other; the `video_sourced` column "
-        "marks them. All five fetch (HTTP 206, `video/mp4` or `video/quicktime`), so "
-        "they are collectable — but every one of them now carries only episodes "
-        "postdating its charting window, so all five land in `recent_only`.",
+        f"Of the unresolved shows, {listed} have a cached Apple listing. "
+        f"{lookup_errors} shows have a failed lookup or search eligible for retry. "
+        "An unresolved URL alone does not establish catalogue removal.",
+        f"- {video} shows use video enclosures, which `rss.py` drops. This audit "
+        "recovers and probes those enclosures separately (`video_sourced`). "
+        f"{int(df[df.video_sourced.eq(True)].audio_ok.sum())} returned playable bytes; "
+        f"{int((df[df.video_sourced.eq(True)].verdict == 'fully_recoverable').sum())} "
+        "meet the full charting-era recovery criteria.",
         f"- {int((df.feed_source == 'search:title').sum())} feed URLs come from a "
         "title-only iTunes search with no publisher agreement, so they are the "
         "weakest identifications in the file (`feed_source` column).",
@@ -1165,26 +1116,15 @@ def render_md(df: pd.DataFrame, cal: pd.DataFrame) -> str:
         f"{int(df.has_transcript_tag.sum())}; of those, "
         f"{int(df.transcripts_cover_era.sum())} carry transcript entries reaching "
         "back into the charting window.",
-        f"- Wayback fallback run on {probed} distinct feeds — every show phases 2-4 "
-        "did not settle"
-        + ("." if not unprobed else
-           f", except **{unprobed} left unprobed when the time budget ran out**, so "
-           "the `archive_only` count is a lower bound."),
-        "",
-        "**The Wayback fallback mostly does not work, and that is a finding rather "
-        f"than a gap.** Of {probed} feeds probed, "
-        f"{int(df[df.wb_probed].groupby('sid').wb_captures.max().gt(0).sum())} have "
-        "any CDX capture at all, and only "
-        f"{int(df.wb_spans_window.eq(True).sum())} shows have "
-        "captures spanning their charting window. The reason is structural: what "
-        "Wayback archived is the feed URL *as it stands today*, and a show that "
-        "charted in 2014 usually served it from a Feedburner or Podtrac address "
-        "Apple has since replaced — so the captures start years after the show "
-        "charted. Old enclosures survive better than the feeds that listed them: "
-        "where an archived snapshot did parse, "
-        f"{int(df[df.wb_probed].groupby('sid').wb_era_enclosures_ok.max().gt(0).sum())} "
-        "feeds gave up at least one charting-era enclosure that still resolves. The "
-        "bottleneck is finding the historical feed URL, not the audio behind it.",
+        f"- Current-policy Wayback probes are cached for {probed} shows. "
+        f"{unprobed} fallback candidates still need a current probe; "
+        "legacy counts are excluded until re-probed.",
+        f"- Among current-policy probes, "
+        f"{int(df[df.wb_probed].wb_captures.gt(0).sum())} have feed captures, "
+        f"{int(df[df.wb_probed].wb_spans_window.eq(True).sum())} span the charting window, "
+        f"and {int(df[df.wb_probed].wb_era_enclosures_ok.gt(0).sum())} yield a "
+        "working charting-era enclosure. This tests the known current feed URLs; "
+        "historical feed URLs may have different archive coverage.",
         "",
     ]
 
@@ -1194,9 +1134,7 @@ def render_md(df: pd.DataFrame, cal: pd.DataFrame) -> str:
         "`window_coverage` is the fraction of `first_seen`..`last_seen` spanned by "
         "the feed's oldest-to-newest episode range. On its own it is too generous: "
         "a feed keeping a couple of legacy episodes beside its recent ones brackets "
-        "the whole window while holding nothing from the charting era. Sword and "
-        "Scale charted 2016-2022 and its feed jumps from 2014-02 straight to "
-        "2023-01, yet scores 1.00.",
+        "the whole window while holding nothing from the charting era.",
         "",
         "So two more columns qualify it. `months_covered` is the share of the "
         "window's months in which the feed actually has an episode. `hollow_feed` "
@@ -1205,14 +1143,9 @@ def render_md(df: pd.DataFrame, cal: pd.DataFrame) -> str:
         f"{int(df.hollow_feed.eq(True).sum())} shows are hollow; "
         "`fully_recoverable` requires that they are not.",
         "",
-        "The six months of lead-in matter. `months_covered == 0` alone would "
-        "condemn limited series that released everything just before they charted "
-        "— S-Town published its whole run in 2017-03 and first charted 2017-04-23, "
-        "so no episode falls inside its window even though all of its content is "
-        "there. For the same reason `months_covered` is reported but never used as "
-        "a verdict: Serial's feed carries every season and still scores 0.15, "
-        "because Serial only ever published in 24 months of a 122-month window. "
-        "Read it as a gap detector to sort by.",
+        "The six-month lead-in allows limited series released just before they "
+        "charted. `months_covered` is reported as a gap detector rather than a "
+        "verdict: seasonal and limited-run shows need not publish in every month.",
         "",
         "Among the "
         f"{len(strong)} `fully_recoverable` shows, `months_covered` is "
@@ -1221,29 +1154,26 @@ def render_md(df: pd.DataFrame, cal: pd.DataFrame) -> str:
             f"{label}"
             for lo, hi, label in [(0.0, 0.25, "under 25%"), (0.25, 0.5, "at 25-50%"),
                                   (0.5, 0.8, "at 50-80%"), (0.8, 1.01, "at 80%+")])
-        + " — the low tail is seasonal and limited-run shows, not pruned feeds.",
+        + ". Low values require interpretation alongside the show's release schedule.",
         "",
         f"`recent_only` is named for its dominant case but is not exclusively that: "
         f"{int((df[df.verdict == 'recent_only'].coverage_gap == 'start').sum())} of "
         f"{int((df.verdict == 'recent_only').sum())} such shows miss the start of the "
         "window (the feed was pruned), while "
         f"{int(df[df.verdict == 'recent_only'].coverage_gap.isin(['end', 'both']).sum())} "
-        "miss the *end* — feeds frozen mid-charting-run, like Above & Beyond: Group "
-        "Therapy, whose feed stops in 2012 for a show that charted into 2015. The "
-        "`coverage_gap` column says which end failed. Either way the charting era is "
-        "not obtainable.",
+        "miss the *end* or both ends. The `coverage_gap` column identifies the "
+        "missing boundary; these records do not meet the full-window criterion.",
         "",
     ]
     lines += _feedless_section(df, lookup)
     lines += [
         "## Completeness", "",
-        f"All five phases ran for every show: {n} shows resolved, {n - no_feed} feeds "
-        f"fetched, {int((df.audio_checked > 0).sum())} shows audio-spot-checked, and "
-        f"the Wayback fallback run on {probed} feeds"
-        + (". Nothing was left unprobed for want of time." if not unprobed else
-           f", with {unprobed} left unprobed.")
-        + " Measured over roughly three hours of wall clock across two population "
-        "revisions; the sequential Wayback phase accounts for about half of it.",
+        f"The cache holds feed-fetch records for {fetched} of {n} shows "
+        f"({feed_errors} current feed errors), audio checks for "
+        f"{int((df.audio_checked > 0).sum())}, and {probed} current-policy Wayback probes. "
+        f"{unprobed} fallback candidates remain unprobed under the current policy. "
+        "A provisional `not_recoverable` verdict can reflect missing or failed "
+        "measurements; inspect the per-show columns before excluding a show.",
         ""]
     lines += _shallow_section(df)
     lines += _change_section(df)
@@ -1262,8 +1192,8 @@ def render_md(df: pd.DataFrame, cal: pd.DataFrame) -> str:
             f"- {dl} of {len(cal)} have episodes with audio actually on disk. "
             f"My spot-check called {agree} of those fetchable — "
             f"{dl - agree} disagreement{'' if dl - agree == 1 else 's'}. "
-            "The spot-check is sound, with a small false-negative rate from CDNs "
-            "that reject a ranged request from an unfamiliar client.",
+            "These disagreements require inspection; the cached spot-check alone "
+            "does not establish their cause.",
             f"- Feed URL I resolved matches the one the pipeline used for "
             f"{int(cal.feed_url_matches_db.sum())} of {len(cal)}.",
             f"- The pipeline's own episode range covers the charting window for "

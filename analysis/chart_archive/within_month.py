@@ -9,7 +9,6 @@ against the sparse Chartable series in its few dense months.
 
 from __future__ import annotations
 
-import glob
 import itertools
 import json
 from pathlib import Path
@@ -81,7 +80,10 @@ def turnover(maps: dict, depth: int) -> pd.DataFrame:
                 continue
             row[f"retain:{band}"] = len(band_a & sb) / len(band_a)
         rows.append(row)
-    return pd.DataFrame(rows)
+    return pd.DataFrame(rows, columns=[
+        "gap", "days", "jaccard", "median_move",
+        *[f"retain:{band}" for lo, _hi, band in BANDS if lo <= depth],
+    ])
 
 
 def month_coverage(maps: dict, depth: int, min_days: int = 4) -> pd.DataFrame:
@@ -134,7 +136,8 @@ def main() -> int:
                for _lo, _hi, b in BANDS if f"retain:{b}" in t}).reset_index()
         agg.insert(0, "series", name)
         agg["gap"] = pd.Categorical(agg["gap"], [g[2] for g in GAP_BINS], ordered=True)
-        tables.append(agg.sort_values("gap"))
+        if not agg.empty:
+            tables.append(agg.sort_values("gap"))
         m = month_coverage(maps, depth)
         if len(m):
             m.insert(0, "series", name)
@@ -144,9 +147,13 @@ def main() -> int:
                 float(m["median_single_coverage"].median()), 3)
             findings[name]["median_month_union"] = float(m["union"].median())
 
-    out = pd.concat(tables, ignore_index=True)
+    out = (pd.concat(tables, ignore_index=True) if tables else pd.DataFrame(
+        columns=["series", "gap", "pairs", "jaccard", "median_move"]))
     out.to_csv(SUMMARY / "within_month_turnover.csv", index=False)
-    mm = pd.concat(months, ignore_index=True) if months else pd.DataFrame()
+    mm = (pd.concat(months, ignore_index=True) if months else pd.DataFrame(columns=[
+        "series", "month", "snapshots", "union", "median_single_coverage",
+        "first_last_jaccard",
+    ]))
     mm.to_csv(SUMMARY / "within_month_coverage.csv", index=False)
     (SUMMARY / "within_month_findings.json").write_text(
         json.dumps(findings, indent=2))
