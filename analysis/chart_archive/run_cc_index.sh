@@ -3,6 +3,7 @@
 # lets us back in, then hand off to cc_index.py (which caches per crawl).
 set -u
 cd "$(dirname "$0")/../.."
+mkdir -p data/chart-archive/cc_index || exit 1
 for attempt in $(seq 1 24); do
   if curl -sf --max-time 120 https://index.commoncrawl.org/collinfo.json \
        -o data/chart-archive/cc_index/collinfo.json; then

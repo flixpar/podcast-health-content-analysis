@@ -113,11 +113,21 @@ def chart_observations(df: pd.DataFrame, days: pd.DataFrame,
     return pd.concat(frames, ignore_index=True)
 
 
+def apple_ids(df: pd.DataFrame) -> pd.Series:
+    """Only these parsers emit Apple show IDs; Chartable emits show slugs."""
+    ids = df["entity_id"].astype("string")
+    valid = (df.source.isin(["podbay", "apple_charts_page", "itunes_rss"])
+             & df.unit.eq("podcast") & ids.str.fullmatch(r"[0-9]+", na=False))
+    return ids.where(valid)
+
+
 def resolve_entities(df: pd.DataFrame, obs: pd.DataFrame) -> pd.DataFrame:
-    ided = df[df.entity_id.astype(str).str.fullmatch(r"\d+", na=False) & df.key.notna()]
-    key_to_id = ided.groupby("key")["entity_id"].agg(lambda s: s.value_counts().idxmax())
+    ided = df.assign(apple_id=apple_ids(df)).dropna(subset=["apple_id", "key"])
+    key_to_id = ided.groupby("key")["apple_id"].agg(lambda s: s.value_counts().idxmax())
     obs = obs.copy()
-    obs["entity"] = obs["key"].map(key_to_id).fillna("title:" + obs["key"])
+    # A title match is fallback evidence, never grounds to replace a direct ID.
+    obs["entity"] = (apple_ids(obs).fillna(obs["key"].map(key_to_id))
+                     .fillna("title:" + obs["key"]))
     return obs
 
 

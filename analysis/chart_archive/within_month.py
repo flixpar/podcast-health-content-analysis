@@ -103,7 +103,9 @@ def month_coverage(maps: dict, depth: int, min_days: int = 4) -> pd.DataFrame:
                 lambda a, b: len(set(a) & set(b)) / len(set(a) | set(b))
             )(min(entries)[1], max(entries)[1]),
         })
-    return pd.DataFrame(rows).sort_values("month")
+    return pd.DataFrame(rows, columns=[
+        "month", "snapshots", "union", "median_single_coverage", "first_last_jaccard",
+    ]).sort_values("month")
 
 
 def main() -> int:

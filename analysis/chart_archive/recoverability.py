@@ -68,6 +68,7 @@ MAX_FEED_BYTES = 200 * 1024 * 1024   # one Omny feed exceeds 40MB; truncating it
 RANGE_BYTES = 65536
 NEAR_DAYS = 30              # slack allowed at each end of the charting window
 COVERAGE_OK = 0.80
+WAYBACK_ERA_VERSION = 2  # Earlier caches counted out-of-window enclosures.
 
 # Feed episode counts that are a page size rather than a catalogue.
 PAGE_SIZES = {50, 100, 200, 250, 300, 500, 1000}
@@ -294,14 +295,14 @@ def phase_feeds() -> dict:
     cache = load_cache("feeds")
     urls = feed_urls()
     todo = [(sid, u) for sid, u in urls.items()
-            if sid not in cache or "months" not in cache[sid]]
+            if sid not in cache or cache[sid].get("error") or "months" not in cache[sid]]
     print(f"  {len(todo)} feeds to fetch ({len(cache)} cached, "
           f"{population().sid.nunique() - len(urls)} distinct shows have no feed URL at all)")
     done = 0
     with ThreadPoolExecutor(FEED_WORKERS) as pool:
         for sid, rec in pool.map(lambda t: (t[0], fetch_feed_record(t[1])), todo):
             # A transient failure must not overwrite a good earlier fetch, and
-            # must leave "months" absent so the next run retries this show.
+            # failed records remain eligible for retry, including older cache entries.
             if rec.get("error") and cache.get(sid) and not cache[sid].get("error"):
                 continue
             cache[sid] = rec
@@ -318,7 +319,7 @@ def fetch_feed_record(url: str) -> dict:
            "n_entries": 0, "n_episodes": 0, "min_pub": None, "max_pub": None,
            "n_no_date": 0, "has_transcript_tag": False, "n_transcript_urls": 0,
            "transcript_min_pub": None, "transcript_max_pub": None,
-           "paginated": False, "months": [], "video_sourced": False, "samples": []}
+           "paginated": False, "video_sourced": False, "samples": []}
     s = session()
     try:
         try:
@@ -368,6 +369,7 @@ def fetch_feed_record(url: str) -> dict:
         episodes = _video_episodes(body)
         rec["video_sourced"] = bool(episodes)
 
+    rec["months"] = []  # A successfully parsed feed may have no dated episodes.
     rec["n_episodes"] = len(episodes)
     dated = [(e.published_date, e) for e in episodes if e.published_date]
     rec["n_no_date"] = len(episodes) - len(dated)
@@ -490,7 +492,8 @@ def phase_wayback(budget_seconds: float, only: list[str] | None = None) -> dict:
     rows = build_rows()
     todo = {}
     for r in sorted(rows, key=lambda r: r["last_seen"]):
-        if r["needs_fallback"] and r["sid"] not in cache and r["sid"] not in todo:
+        if (r["needs_fallback"] and r["sid"] not in todo
+                and cache.get(r["sid"], {}).get("era_version") != WAYBACK_ERA_VERSION):
             todo[r["sid"]] = r        # renamed shows share a feed; probe it once
     todo = list(todo.values())
     if only:
@@ -511,7 +514,8 @@ def phase_wayback(budget_seconds: float, only: list[str] | None = None) -> dict:
 
 
 def wayback_record(row: dict) -> dict:
-    rec = {"urls_tried": [], "n_captures": 0, "first_capture": None, "last_capture": None,
+    rec = {"era_version": WAYBACK_ERA_VERSION, "urls_tried": [], "n_captures": 0,
+           "first_capture": None, "last_capture": None,
            "spans_window": False, "snapshot_ts": None, "snapshot_episodes": 0,
            "snapshot_min_pub": None, "snapshot_max_pub": None,
            "era_enclosures_ok": 0, "era_enclosures_tried": 0, "note": None}
@@ -560,7 +564,9 @@ def wayback_record(row: dict) -> dict:
                  if first_seen and last_seen
                  and first_seen - timedelta(days=NEAR_DAYS)
                  <= to_date(e.published_date) <= last_seen + timedelta(days=NEAR_DAYS)]
-    picks = in_window or dated
+    picks = in_window
+    if not picks:
+        rec["note"] = "snapshot has no dated episodes in the charting window"
     if picks:
         idx = sorted({0, len(picks) // 2, len(picks) - 1})
         for i in idx:
@@ -675,10 +681,15 @@ def build_rows() -> list[dict]:
             and _stamp_date(cap_first) <= first_seen + timedelta(days=90)
             and _stamp_date(cap_last) >= last_seen - timedelta(days=90))
         row["wb_snapshot_episodes"] = wb.get("snapshot_episodes")
-        row["wb_era_enclosures_ok"] = wb.get("era_enclosures_ok")
-        row["wb_era_enclosures_tried"] = wb.get("era_enclosures_tried")
-        row["wb_note"] = wb.get("note")
-        row["wb_probed"] = sid in wayback
+        # Legacy counters may include unrelated episodes; re-probe before use.
+        current_era_probe = wb.get("era_version") == WAYBACK_ERA_VERSION
+        row["wb_era_enclosures_ok"] = (wb.get("era_enclosures_ok")
+                                        if current_era_probe else None)
+        row["wb_era_enclosures_tried"] = (wb.get("era_enclosures_tried")
+                                           if current_era_probe else None)
+        row["wb_note"] = ("legacy enclosure counts require re-probing"
+                           if wb and not current_era_probe else wb.get("note"))
+        row["wb_probed"] = current_era_probe
 
         row["verdict"] = verdict(row)
         # Anything not already fully recoverable is worth a Wayback attempt.
