@@ -388,6 +388,29 @@ def test_failing_source_is_recorded_others_still_captured(config, conn, fake_net
     assert [r["source"] for r in rows] == ["apple_marketing_tools"]
 
 
+def test_unexpected_payload_is_a_source_failure(config, conn, fake_net, monkeypatch):
+    fake_net(spotify={"error": "maintenance"})
+    monkeypatch.setattr(capture, "_now", at(9))
+    with pytest.raises(capture.ChartCaptureError, match="ChartSourceError"):
+        capture.run(config, conn, catalog=False)
+    # the odd response is still kept, and Apple's chart was recorded
+    assert (config.chart_capture_dir / "spotify_api" / "2026-10-02T090005Z.json").exists()
+    assert conn.execute("SELECT COUNT(*) FROM chart_snapshots").fetchone()[0] == 1
+
+
+def test_disk_error_writing_raw_file_propagates(config, conn, fake_net, monkeypatch):
+    session, _ = fake_net()
+    monkeypatch.setattr(capture, "_now", at(9))
+
+    def full_disk(*args):
+        raise OSError(28, "No space left on device")
+    monkeypatch.setattr(capture, "save_raw", full_disk)
+    with pytest.raises(OSError, match="No space left"):
+        capture.run(config, conn, catalog=False)
+    assert len(session.calls) == 1        # stopped at once, Spotify never asked
+    assert conn.execute("SELECT COUNT(*) FROM chart_snapshots").fetchone()[0] == 0
+
+
 def test_unknown_source_is_rejected(config, conn):
     with pytest.raises(ValueError, match="unknown chart source"):
         capture.run(config, conn, sources=["podbay"])

@@ -14,7 +14,7 @@ from urllib3.exceptions import NameResolutionError
 
 from podcast_pipeline.audio import MIN_AUDIO_BYTES
 from podcast_pipeline.audio.disk import DiskSpaceError, ensure_free_space
-from podcast_pipeline.audio.ffmpeg import EncodeError, encode_opus
+from podcast_pipeline.audio.ffmpeg import EncodeError, decode_pcm, encode_opus
 from podcast_pipeline.audio.naming import episode_stem, find_existing_audio, podcast_dir
 from podcast_pipeline.config import CompressionConfig
 from podcast_pipeline.http import make_session
@@ -32,6 +32,13 @@ COMPLETE_FRACTION = 0.95
 # Fallback sources (the unwrapped URL, Wayback copies) are fetched fresh into
 # their own partial file, never resumed onto bytes from another source.
 FALLBACK_PARTIAL_SUFFIX = ".fallback.part"
+
+# Audio from a fallback source must decode to at least this fraction of the
+# duration the feed declares. Archived MP3s are often truncated, and a header
+# duration says what the file should hold, not what it does.
+FALLBACK_MIN_DURATION_FRACTION = 0.9
+# Decoding to this sample rate is enough to count seconds, and cheap to hold.
+DURATION_PROBE_RATE = 1000
 
 # ``episode_sources.source`` values for audio that did not come from the enclosure URL.
 WAYBACK_AUDIO = "wayback_audio"        # the Wayback Machine's copy (ref: the archived URL)
@@ -184,14 +191,17 @@ class AudioDownloader:
         self.wayback_replay_url = wayback_replay_url
 
     def download_episode(self, audio_url: str, podcast_title: str, episode_title: str,
-                         guid: str | None, published_date: str | None = None) -> DownloadResult:
+                         guid: str | None, published_date: str | None = None,
+                         declared_duration: int | None = None) -> DownloadResult:
         """Fetch an episode, or return the file already on disk for it.
 
         With the fallback on, a dead enclosure is retried, stopping at the first
         source that yields real audio: the URL inside its tracking prefixes
         (live), then the Wayback Machine's copy (nearest ``published_date``) of
-        the original URL, then of the unwrapped one. The file is validated as
-        audio and named and converted exactly like a normal download;
+        the original URL, then of the unwrapped one. A fallback file must look
+        like audio and decode in full -- to at least 90% of
+        ``declared_duration`` when the feed declares one -- and is then named
+        and converted exactly like a normal download;
         ``fallback_source``/``fallback_url`` say where it came from.
 
         Raises DownloadError on failure and DiskSpaceError when the volume is
@@ -217,7 +227,8 @@ class AudioDownloader:
         except DownloadError as e:
             if not (self.wayback_replay_url and e.dead_link):
                 raise
-            fallback_source, fallback_url = self._fetch_fallback(audio_url, published_date, mp3_path, e)
+            fallback_source, fallback_url = self._fetch_fallback(audio_url, published_date, mp3_path, e,
+                                                                 declared_duration)
             # A partial left by earlier attempts on the dead original is now moot.
             mp3_path.with_suffix(mp3_path.suffix + PARTIAL_SUFFIX).unlink(missing_ok=True)
         original_mb = mp3_path.stat().st_size / 1024 ** 2
@@ -241,7 +252,8 @@ class AudioDownloader:
                               fallback_source=fallback_source, fallback_url=fallback_url)
 
     def _fetch_fallback(self, audio_url: str, published_date: str | None, mp3_path: Path,
-                        original_error: DownloadError) -> tuple[str, str]:
+                        original_error: DownloadError,
+                        declared_duration: int | None = None) -> tuple[str, str]:
         """Try each fallback source in turn; (source, URL that worked) for the first
         real audio, or a DownloadError listing every attempt."""
         inner = unwrap_tracking_url(audio_url)
@@ -262,8 +274,30 @@ class AudioDownloader:
             except DownloadError as e:
                 failures.append(f"{label} {url}: {e}")
                 continue
+            problem = self._truncation(mp3_path, declared_duration)
+            if problem:
+                mp3_path.unlink()
+                failures.append(f"{label} {url}: {problem}")
+                continue
             return source, served
         raise DownloadError("; ".join(failures))
+
+    @staticmethod
+    def _truncation(path: Path, declared_duration: int | None) -> str | None:
+        """Why a fallback file is not the whole episode, or None if it is.
+
+        The length is measured by decoding every sample; a header duration
+        lies about truncated MP3s.
+        """
+        try:
+            seconds = len(decode_pcm(path, sample_rate=DURATION_PROBE_RATE)) / DURATION_PROBE_RATE
+        except EncodeError as e:
+            return f"not decodable: {e}"
+        if seconds <= 0:
+            return "decodes to no audio"
+        if declared_duration and seconds < declared_duration * FALLBACK_MIN_DURATION_FRACTION:
+            return f"truncated: decodes to {seconds:.0f}s of {declared_duration}s declared"
+        return None
 
     def _fetch(self, url: str, final_path: Path, chunk_size: int = 64 * 1024, *,
                resume: bool = True, partial_suffix: str = PARTIAL_SUFFIX,

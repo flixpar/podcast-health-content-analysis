@@ -82,13 +82,16 @@ def _parse_entry(entry) -> FeedEpisode | None:
     # Feedburner feeds point every enclosure at a feedproxy.google.com redirect,
     # which Google retired, so those URLs are dead. The feed also carries the
     # publisher's own URL; archived feeds from before ~2020 are full of these.
+    # The GUID fallback keeps using the enclosure as listed, so an item without
+    # a <guid> keeps the identity it had before this rewrite existed.
+    guid = entry.get("id") or entry.get("guid") or audio_url
     original = entry.get("feedburner_origenclosurelink")
     if original and "feedproxy.google.com" in audio_url:
         audio_url = original
 
     transcript = _transcript_info(entry)
     return FeedEpisode(
-        guid=entry.get("id") or entry.get("guid") or audio_url,
+        guid=guid,
         title=entry.get("title") or "",
         audio_url=audio_url,
         description=_clean_html(entry.get("description") or ""),

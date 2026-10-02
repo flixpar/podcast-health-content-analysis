@@ -141,6 +141,9 @@ class Fetched:
     snapshot_url: str | None = None    # what Wayback actually served
     episodes: list[FeedEpisode] = field(default_factory=list)
     error: str | None = None
+    # The fetch itself failed (transport, HTTP status, bad body), as opposed to
+    # a capture that arrived but is not a feed. Worth trying again next run.
+    fetch_failed: bool = False
 
     @property
     def oldest(self) -> str | None:
@@ -161,9 +164,12 @@ def fetch_capture(client: WaybackClient, capture: Capture, feed_url: str) -> Fet
     """Worker: fetch and parse one capture. Per-capture failures are returned, not raised."""
     try:
         snapshot = client.fetch_snapshot(capture)
+    except SnapshotError as e:
+        return Fetched(capture, feed_url, error=str(e)[:500], fetch_failed=True)
+    try:
         episodes = parse_feed(snapshot.body, source=snapshot.served_url)
-    except (SnapshotError, FeedError) as e:
-        return Fetched(capture, feed_url, error=str(e)[:500])
+    except FeedError as e:
+        return Fetched(capture, feed_url, snapshot.served_url, error=str(e)[:500])
     return Fetched(capture, feed_url, snapshot.served_url, episodes)
 
 
@@ -335,8 +341,10 @@ def save_podcast(conn: sqlite3.Connection, gaps: PodcastGaps, probes: list[UrlPr
             status = "error"
         elif not probe.captures:
             status = "no_captures"
-        elif probe.fetched and not ok:
-            status = "error"          # every fetch failed: try again next run
+        elif any(f.fetch_failed for f in probe.fetched):
+            # A capture we chose could not be fetched (often a transient 429/503),
+            # so the windows were not fully searched: probe again next run.
+            status = "error"
         else:
             status = "ok"
         targeted = windows if status == "error" else sorted(set(windows) | previous.get(probe.url, set()))

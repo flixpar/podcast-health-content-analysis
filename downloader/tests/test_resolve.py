@@ -400,3 +400,67 @@ def test_rerun_is_idempotent(env, conn):
 def test_unknown_study_is_an_error(env, conn):
     with pytest.raises(ValueError, match="Unknown study"):
         resolve.run(env_config(conn), conn, "nope")
+
+
+# --- existing catalog rows are never rewritten ----------------------------------------
+
+def test_a_match_already_in_the_catalog_is_linked_not_rewritten(env, conn):
+    pid = db.upsert_podcast(conn, db.PodcastRecord(
+        source_id="spotify_abc", title="Betrayal (corpus)", publisher="Corpus Pub",
+        rss_url="https://good.example/feed", apple_podcasts_id="999", extra={"keep": True}))
+    conn.commit()
+    before = dict(conn.execute("SELECT * FROM podcasts WHERE id = ?", (pid,)).fetchone())
+    add_member(conn, "title:betrayal", "Betrayal", "iHeartPodcasts")
+    env.search.results["Betrayal"] = [itunes(999, "Betrayal", "iHeartPodcasts")]
+
+    summary = env.run()
+
+    assert dict(conn.execute("SELECT * FROM podcasts WHERE id = ?", (pid,)).fetchone()) == before
+    assert conn.execute("SELECT COUNT(*) FROM podcasts").fetchone()[0] == 1
+    assert member_podcast(conn, "title:betrayal")["podcast_id"] == pid
+    assert link(conn, "title:betrayal")["podcast_id"] == pid
+    assert ("https://feeds/999", "itunes_lookup") in [tuple(r) for r in conn.execute(
+        "SELECT url, source FROM podcast_feeds WHERE podcast_id = ?", (pid,))]
+    assert conn.execute("SELECT 1 FROM podcast_sources WHERE podcast_id = ? AND ref = 'title:betrayal'",
+                        (pid,)).fetchone()
+    assert summary["outcomes"] == {"resolved": 1}
+
+
+def test_a_listed_apple_id_in_the_catalog_only_gets_an_empty_feed_filled(env, conn):
+    pid = db.upsert_podcast(conn, db.PodcastRecord(source_id="spotify_def", title="Corpus Title",
+                                                   apple_podcasts_id="60"))
+    conn.commit()
+    add_member(conn, "apple:60", "Chart Title")
+    env.lookups["60"] = itunes(60, "Apple Title", "Apple Pub")
+    env.run()
+    row = conn.execute("SELECT podchaser_id, title, publisher, rss_url FROM podcasts WHERE id = ?",
+                       (pid,)).fetchone()
+    assert tuple(row) == ("spotify_def", "Corpus Title", None, "https://feeds/60")
+
+
+def test_a_new_apple_id_whose_feed_is_already_read_links_to_that_podcast(env, conn):
+    holder = db.upsert_podcast(conn, db.PodcastRecord(source_id="spotify_x", title="Show",
+                                                      rss_url="https://feeds/777"))
+    conn.commit()
+    add_member(conn, "title:show", "Show", "P")
+    env.search.results["Show"] = [itunes(777, "Show", "P")]
+    env.run()
+    assert member_podcast(conn, "title:show")["podcast_id"] == holder
+    assert conn.execute("SELECT COUNT(*) FROM podcasts").fetchone()[0] == 1
+    assert link(conn, "title:show")["detail"]["existing_podcast_by_feed"] == holder
+
+
+def test_a_feed_another_podcast_reads_is_not_given_to_a_second_row(env, conn):
+    holder = db.upsert_podcast(conn, db.PodcastRecord(source_id="spotify_y", title="Other",
+                                                      rss_url="https://feeds/999"))
+    held = db.upsert_podcast(conn, db.PodcastRecord(source_id="apple_111", title="Old Show",
+                                                    apple_podcasts_id="111"))
+    conn.commit()
+    add_member(conn, "apple:111", "Old Show", "Old Network")
+    env.search.results["Old Show"] = [itunes(999, "Old Show", "Old Network")]   # Apple no longer lists 111
+
+    env.run()
+
+    rss = conn.execute("SELECT id, rss_url FROM podcasts ORDER BY id").fetchall()
+    assert [tuple(r) for r in rss] == [(holder, "https://feeds/999"), (held, None)]
+    assert link(conn, "apple:111")["detail"]["feed_held_by"] == {"https://feeds/999": holder}

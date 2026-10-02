@@ -7,8 +7,9 @@ a feed. For every member that has no podcast, or whose podcast has no
 
 1. A mapping already known (``db.podcast_for_entity``) is used as is.
 2. ``apple:<id>`` (and ``podcast:<id>`` rows that carry an Apple id) go
-   through one batched iTunes lookup. A listed show is upserted under its
-   Apple id. A show Apple no longer lists -- common before 2018 -- falls back
+   through one batched iTunes lookup. A listed show the catalog lacks is
+   created under its Apple id; one it already holds is linked, never
+   rewritten (only an empty ``rss_url`` is filled). A show Apple no longer lists -- common before 2018 -- falls back
    to a title search and then to the feed the recoverability audit found.
 3. ``title:<key>`` is searched by title (``itunes_search.best_match`` holds the
    acceptance rules), then falls back to the recoverability audit.
@@ -200,35 +201,57 @@ def _podcast_by_feed(conn: sqlite3.Connection, urls: list[str]) -> int | None:
     return None
 
 
-def _upsert_itunes(conn: sqlite3.Connection, details: dict, feed_source: str) -> int:
-    """Upsert an iTunes lookup/search record under its Apple id.
+def _feed_holder(conn: sqlite3.Connection, url: str | None, other_than: int | None = None) -> int | None:
+    """Another podcast whose current ``rss_url`` is ``url``, if any."""
+    if not url:
+        return None
+    row = conn.execute("SELECT id FROM podcasts WHERE rss_url = ? AND id IS NOT ? ORDER BY id LIMIT 1",
+                       (url, other_than)).fetchone()
+    return row["id"] if row else None
 
-    An existing row's feed and Spotify id are kept when the record lacks them:
-    an Apple listing without ``feedUrl`` must not erase a feed found earlier.
+
+def _podcast_for_itunes(conn: sqlite3.Connection, details: dict, detail: dict) -> int:
+    """The catalog podcast for an iTunes lookup/search record, created only if new.
+
+    Resolve never rewrites a podcast that is already in the catalog: it may
+    only fill an empty ``rss_url`` (see ``_attach_feed``). An Apple id the
+    catalog lacks, whose feed another podcast already reads, links to that
+    podcast instead of creating a second row on the same feed -- two rows on
+    one feed make ``discover`` race GUIDs between them.
     """
-    entry = {"id": str(details["collectionId"]), "name": details.get("collectionName"),
+    apple_id = str(details["collectionId"])
+    feed = details.get("feedUrl")
+    row = conn.execute("SELECT id FROM podcasts WHERE podchaser_id = ? OR apple_podcasts_id = ? "
+                       "ORDER BY id LIMIT 1", (f"apple_{apple_id}", apple_id)).fetchone()
+    podcast_id = row["id"] if row else _podcast_by_feed(conn, [feed] if feed else [])
+    if podcast_id is not None:
+        if not row:
+            detail["existing_podcast_by_feed"] = podcast_id
+        _attach_feed(conn, podcast_id, [feed], "itunes_lookup", detail)
+        return podcast_id
+    entry = {"id": apple_id, "name": details.get("collectionName"),
              "artistName": details.get("artistName")}
-    record = _to_record(entry, details)
-    row = conn.execute("SELECT rss_url, spotify_id FROM podcasts WHERE podchaser_id = ? "
-                       "OR apple_podcasts_id = ? ORDER BY id LIMIT 1",
-                       (record.source_id, record.apple_podcasts_id)).fetchone()
-    if row:
-        record.rss_url = record.rss_url or row["rss_url"]
-        record.spotify_id = record.spotify_id or row["spotify_id"]
-    podcast_id = db.upsert_podcast(conn, record)
-    if details.get("feedUrl"):
-        db.record_feed_url(conn, podcast_id, details["feedUrl"], feed_source)
+    podcast_id = db.upsert_podcast(conn, _to_record(entry, details))
+    if feed:
+        db.record_feed_url(conn, podcast_id, feed, "itunes_lookup")
     return podcast_id
 
 
-def _attach_feed(conn: sqlite3.Connection, podcast_id: int, urls: list[str], source: str) -> None:
-    """Remember feed URLs for a podcast; the first becomes ``rss_url`` if it has none."""
+def _attach_feed(conn: sqlite3.Connection, podcast_id: int, urls: list, source: str,
+                 detail: dict) -> None:
+    """Remember feed URLs for a podcast; the first becomes ``rss_url`` only if
+    the podcast has none and no other podcast already reads it."""
     urls = [u for u in dict.fromkeys(urls) if u]
     for url in urls:
         db.record_feed_url(conn, podcast_id, url, source)
-    if urls:
-        conn.execute("UPDATE podcasts SET rss_url = ? WHERE id = ? AND (rss_url IS NULL OR rss_url = '')",
-                     (urls[0], podcast_id))
+    if not urls:
+        return
+    holder = _feed_holder(conn, urls[0], other_than=podcast_id)
+    if holder is not None:
+        detail.setdefault("feed_held_by", {})[urls[0]] = holder
+        return
+    conn.execute("UPDATE podcasts SET rss_url = ? WHERE id = ? AND (rss_url IS NULL OR rss_url = '')",
+                 (urls[0], podcast_id))
 
 
 def _create_from_recoverability(conn: sqlite3.Connection, member: Member, rec: Recovered,
@@ -302,7 +325,7 @@ def resolve_member(ctx: Context, member: Member) -> Outcome:
         steps.append({"step": "itunes_lookup", "apple_id": apple_id, "listed": listed,
                       "feed": (details or {}).get("feedUrl")})
         if details:
-            podcast_id = _upsert_itunes(conn, details, "itunes_lookup")
+            podcast_id = _podcast_for_itunes(conn, details, detail)
             method = "itunes_lookup"
 
     # 2. A title search, when Apple does not list the show at all. A listed
@@ -322,9 +345,9 @@ def resolve_member(ctx: Context, member: Member) -> Outcome:
                 # The catalog already holds this Apple id (feedless), and
                 # podcast_for_entity answers with it; give it the feed.
                 podcast_id = held
-                _attach_feed(conn, podcast_id, [match.record.get("feedUrl")], "itunes_search")
+                _attach_feed(conn, podcast_id, [match.record.get("feedUrl")], "itunes_lookup", detail)
             else:
-                podcast_id = _upsert_itunes(conn, match.record, "itunes_search")
+                podcast_id = _podcast_for_itunes(conn, match.record, detail)
             method = "itunes_search"
 
     # 3. The recoverability audit's feed URL.
@@ -345,7 +368,7 @@ def resolve_member(ctx: Context, member: Member) -> Outcome:
                     detail["recoverability"]["existing_podcast_by_feed"] = podcast_id
             if podcast_id is None:
                 podcast_id = _create_from_recoverability(conn, member, rec, rec_apple)
-            _attach_feed(conn, podcast_id, urls, "recoverability")
+            _attach_feed(conn, podcast_id, urls, "recoverability", detail)
             method = "recoverability"
 
     has_feed = _has_feed(conn, podcast_id)

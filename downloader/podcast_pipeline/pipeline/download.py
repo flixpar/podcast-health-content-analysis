@@ -23,7 +23,7 @@ from podcast_pipeline import db
 from podcast_pipeline.audio.disk import DiskSpaceError
 from podcast_pipeline.audio.download import AudioDownloader, DownloadError, DownloadResult
 from podcast_pipeline.config import Config
-from podcast_pipeline.studies.scope import episode_filter
+from podcast_pipeline.studies.scope import episode_filter, require_any_study
 
 logger = logging.getLogger(__name__)
 
@@ -55,6 +55,7 @@ def pending_episodes(conn: sqlite3.Connection, retry_errors: bool, limit: int | 
         params += charts
     study_clause, study_params = episode_filter(conn, study)
     if not study and not all_episodes:
+        require_any_study(conn)
         study_clause = "AND e.id IN (SELECT episode_id FROM study_episodes)"
     params += study_params
     order = "e.id"
@@ -67,7 +68,7 @@ def pending_episodes(conn: sqlite3.Connection, retry_errors: bool, limit: int | 
     # An error row with audio on disk failed at transcription, not download.
     return conn.execute(f"""
         SELECT e.id, e.podcast_id, e.episode_guid, e.title, e.audio_url, e.published_date,
-               p.title AS podcast_title
+               e.duration_seconds, p.title AS podcast_title
         FROM episodes e JOIN podcasts p ON p.id = e.podcast_id
         WHERE e.status IN ({",".join("?" * len(statuses))})
           AND e.audio_file_path IS NULL
@@ -116,7 +117,8 @@ def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
         if wayback_fallback:
             return downloader.download_episode(row["audio_url"], row["podcast_title"],
                                                row["title"] or "unknown", row["episode_guid"],
-                                               published_date=row["published_date"])
+                                               published_date=row["published_date"],
+                                               declared_duration=row["duration_seconds"])
         return downloader.download_episode(row["audio_url"], row["podcast_title"],
                                            row["title"] or "unknown", row["episode_guid"])
 

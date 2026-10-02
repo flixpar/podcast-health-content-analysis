@@ -8,7 +8,7 @@ podcast), ``discover`` / ``discover-archived`` (podcasts gain episodes).
 Membership is fully derived, so the member and window tables are rewritten on
 every refresh. Episode rows keep the revision that first added them, and the
 study's ``revision`` is bumped (with a ``study_revisions`` row) whenever the
-selected episode set or the definition changes, so an exported manifest can be
+selected episode set, an episode's member or window, or the definition changes, so an exported manifest can be
 tied to exactly the membership it came from.
 """
 
@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 import sqlite3
 from collections import defaultdict
 from dataclasses import dataclass
@@ -49,11 +50,17 @@ def refresh(conn: sqlite3.Connection, study: Study) -> dict:
     row = conn.execute("SELECT revision, definition_hash FROM studies WHERE name = ?",
                        (study.name,)).fetchone()
     old_revision = row["revision"] if row else 0
-    previous = {r["episode_id"]: r["added_revision"] for r in conn.execute(
-        "SELECT episode_id, added_revision FROM study_episodes WHERE study = ?", (study.name,))}
+    previous, placed = {}, {}
+    for r in conn.execute("SELECT episode_id, added_revision, entity, window_label "
+                          "FROM study_episodes WHERE study = ?", (study.name,)):
+        previous[r["episode_id"]] = r["added_revision"]
+        placed[r["episode_id"]] = (r["entity"], r["window_label"])
     added = [s for s in selected if s.episode_id not in previous]
     removed = set(previous) - {s.episode_id for s in selected}
-    changed = bool(added or removed) or row is None or row["definition_hash"] != definition_hash
+    moved = sum(1 for s in selected if s.episode_id in placed
+                and placed[s.episode_id] != (s.entity, s.window_label))
+    changed = (bool(added or removed or moved) or row is None
+               or row["definition_hash"] != definition_hash)
     revision = old_revision + 1 if changed else old_revision
 
     by_podcast: dict[int, list[str]] = defaultdict(list)
@@ -72,6 +79,7 @@ def refresh(conn: sqlite3.Connection, study: Study) -> dict:
         "episodes": len(selected),
         "episodes_added": len(added),
         "episodes_removed": len(removed),
+        "episodes_reassigned": moved,
         "excluded": excluded,
     }
 
@@ -186,7 +194,9 @@ def _podcast_episodes(conn: sqlite3.Connection, podcast_id: int, dedupe: bool,
         if r["published_date"] is None:
             best[("id", r["id"])] = r
             continue
-        key = (r["published_date"], (r["title"] or "").strip().lower())
+        # Same day and same title once case, punctuation and spacing are
+        # ignored: re-issues often shift the timestamp or retouch the title.
+        key = (r["published_date"][:10], re.sub(r"[^a-z0-9]+", "", (r["title"] or "").lower()))
         current = best.get(key)
         if current is None or (r["done"], r["has_audio"]) > (current["done"], current["has_audio"]):
             best[key] = r

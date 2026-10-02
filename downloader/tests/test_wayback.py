@@ -9,6 +9,7 @@ from email.utils import format_datetime
 from datetime import datetime, timezone
 from unittest.mock import Mock
 
+import numpy as np
 import pytest
 import requests
 
@@ -358,6 +359,22 @@ def test_failed_snapshot_fetches_try_another_capture(archive):
     detail = json.loads(conn.execute("SELECT detail FROM wayback_probes WHERE url = ?", (OLD,)).fetchone()[0])
     assert detail["capture_failures"][0]["timestamp"].startswith("20150402")
 
+    # Not every chosen capture could be fetched, so the search is not complete:
+    # the probe is an error and the next run tries again (and now succeeds).
+    status = lambda: conn.execute("SELECT status FROM wayback_probes WHERE url = ?", (OLD,)).fetchone()[0]
+    assert status() == "error"
+    fake.listed.clear()
+    fake.bodies["20150402"] = rss(("ep-0320", "2015-03-20"))
+    discover_archived.run(config, conn, "s")
+    assert (OLD, False) in fake.listed and status() == "ok"
+
+
+def test_a_capture_that_is_not_a_feed_does_not_force_a_reprobe(archive):
+    config, conn, pid, fake = archive
+    fake.bodies["20150402"] = b"<html><body>Feed moved</body></html>"
+    discover_archived.run(config, conn, "s")
+    assert conn.execute("SELECT status FROM wayback_probes WHERE url = ?", (OLD,)).fetchone()[0] == "ok"
+
 
 def three_podcasts(config, conn, monkeypatch, listing, on_list=None):
     members = []
@@ -402,6 +419,15 @@ def test_consecutive_cdx_failures_stop_the_run(config, conn, monkeypatch):
 # --- download fallback ---------------------------------------------------------------------
 
 AUDIO = b"ID3" + b"\0" * (MIN_AUDIO_BYTES + 1000)
+
+
+@pytest.fixture(autouse=True)
+def decoded_seconds(monkeypatch):
+    """What decoding a fallback file yields; the fake bodies are not real audio."""
+    seconds = {"value": 3600}
+    monkeypatch.setattr("podcast_pipeline.audio.download.decode_pcm",
+                        lambda path, sample_rate: np.zeros(int(seconds["value"] * sample_rate), np.float32))
+    return seconds
 
 
 def http_response(url: str, body: bytes = b"", status=200, content_type="audio/mpeg"):
@@ -637,3 +663,27 @@ def test_one_wayback_feed_row_per_episode_and_feed(archive):
     assert conn.execute("SELECT COUNT(*) FROM episode_sources WHERE source = 'wayback_feed'").fetchone()[0] == total
     detail = json.loads(conn.execute("SELECT detail FROM wayback_probes WHERE url = ?", (OLD,)).fetchone()[0])
     assert len(detail["captures_used"]) == 3
+
+
+def test_truncated_fallback_audio_is_rejected_and_the_next_source_tried(tmp_path, monkeypatch):
+    archived_inner = "https://web.archive.org/web/20150401id_/" + INNER
+    durations = [1000, 3500]            # the first Wayback copy is truncated, the second is whole
+    monkeypatch.setattr("podcast_pipeline.audio.download.decode_pcm",
+                        lambda path, sample_rate: np.zeros(durations.pop(0) * sample_rate, np.float32))
+    dl, session = fallback_downloader(tmp_path, {
+        "https://dts.podtrac.com/": lambda url: http_response(url, status=404),
+        INNER: lambda url: http_response(url, status=404),
+        "https://web.archive.org/": lambda url: http_response(url, AUDIO),
+    })
+    result = dl.download_episode(WRAPPED, "Show", "Ep 1", "g", published_date="2015-04-01",
+                                 declared_duration=3600)
+    assert (result.fallback_source, result.fallback_url) == ("wayback_audio", archived_inner)
+
+    durations[:] = [1000, 1000]
+    with pytest.raises(DownloadError, match="truncated: decodes to 1000s of 3600s declared"):
+        dl.download_episode(WRAPPED, "Show", "Ep 2", "g2", published_date="2015-04-01",
+                            declared_duration=3600)
+    assert not list(tmp_path.rglob("ep-2*"))
+    # Without a declared duration, any file that decodes is accepted.
+    durations[:] = [1000]
+    assert dl.download_episode(WRAPPED, "Show", "Ep 3", "g3").fallback_source == "wayback_audio"

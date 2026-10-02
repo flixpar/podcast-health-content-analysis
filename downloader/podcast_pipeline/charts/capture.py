@@ -21,8 +21,13 @@ provenance row. Spotify-only shows are not added: resolving them needs the
 throttled iTunes search (see sources/spotify.py); existing podcasts are linked
 by ``spotify_id``.
 
-A failing source is recorded and the others still run, but the command raises
-at the end so a cron job notices.
+Only per-source problems are recorded and skipped past: a network error
+(``requests.RequestException``) or a response that is not the chart we expect
+(``ChartSourceError``: bad JSON, unexpected shape, empty chart). The others
+still run, and the command raises at the end so a cron job notices. Disk,
+database and programming errors propagate at once. Every source is captured
+before any catalog work starts, so a catalog failure (e.g. the iTunes lookup
+being down) can never cost another source its day.
 """
 
 from __future__ import annotations
@@ -47,6 +52,14 @@ logger = logging.getLogger(__name__)
 
 class ChartCaptureError(RuntimeError):
     """At least one live source failed; the others were recorded."""
+
+
+class ChartSourceError(RuntimeError):
+    """A source answered, but not with the chart we expect (shape, JSON, empty)."""
+
+
+# What counts as "this source is broken today" rather than a bug or a local fault.
+SOURCE_FAILURES = (requests.RequestException, ChartSourceError)
 
 
 @dataclass
@@ -74,7 +87,7 @@ def parse_apple_marketing_tools(body: bytes) -> list[Entry]:
     for rank, r in enumerate(results, start=1):
         apple_id = str(r["id"])
         if not apple_id.isdigit():
-            raise ValueError(f"rank {rank}: Apple id {apple_id!r} is not numeric")
+            raise ChartSourceError(f"rank {rank}: Apple id {apple_id!r} is not numeric")
         entries.append(Entry(rank=rank, name=r.get("name"), publisher=r.get("artistName"),
                              apple_id=apple_id, entity_url=r.get("url"), raw=r))
     return entries
@@ -90,7 +103,7 @@ def fetch_spotify_api(session: requests.Session, config: Config) -> bytes:
 def parse_spotify_api(body: bytes) -> list[Entry]:
     shows = json.loads(body)
     if not isinstance(shows, list):
-        raise ValueError(f"expected a list of shows, got {type(shows).__name__}"
+        raise ChartSourceError(f"expected a list of shows, got {type(shows).__name__}"
                          f"{' with keys ' + str(sorted(shows)) if isinstance(shows, dict) else ''}")
     entries = []
     for rank, show in enumerate(shows, start=1):
@@ -121,21 +134,19 @@ def run(config: Config, conn: sqlite3.Connection, sources: list[str] | None = No
     for name in names:
         try:
             captured[name] = capture_source(config, conn, session, name)
-        except Exception as e:   # one dead endpoint must not cost the other its day
+        except SOURCE_FAILURES as e:   # one dead endpoint must not cost the other its day
             conn.rollback()
             logger.exception(f"Capturing {name} failed")
             failed[name] = f"capture: {type(e).__name__}: {e}"
-            continue
-        if not catalog:
-            continue
-        try:
-            captured[name]["catalog"] = update_catalog(config, conn, session, name,
-                                                       captured[name])
-            conn.commit()
-        except Exception as e:
-            conn.rollback()
-            logger.exception(f"Cataloguing {name} failed (the snapshot is kept)")
-            failed[name] = f"catalog: {type(e).__name__}: {e}"
+    if catalog:
+        for name, snapshot in captured.items():
+            try:
+                snapshot["catalog"] = update_catalog(config, conn, session, name, snapshot)
+                conn.commit()
+            except requests.RequestException as e:
+                conn.rollback()
+                logger.exception(f"Cataloguing {name} failed (the snapshot is kept)")
+                failed[name] = f"catalog: {type(e).__name__}: {e}"
     for snap in captured.values():
         snap.pop("_entries", None)
     summary = {"captured": captured, "failed": failed}
@@ -153,9 +164,13 @@ def capture_source(config: Config, conn: sqlite3.Connection, session: requests.S
     now = _now()
     body = fetch(session, config)
     raw_path = save_raw(config, name, now, body)
-    entries = parse(body)
+    try:
+        entries = parse(body)
+    except (ValueError, KeyError, TypeError, AttributeError) as e:   # incl. JSONDecodeError
+        raise ChartSourceError(f"{name}: unexpected response ({type(e).__name__}: {e}); "
+                               f"raw response kept at {raw_path}") from e
     if not entries:
-        raise ValueError(f"{name} returned an empty chart (raw response kept at {raw_path})")
+        raise ChartSourceError(f"{name} returned an empty chart (raw response kept at {raw_path})")
     snapshot = write_snapshot(conn, name, chart, now, entries,
                               str(raw_path.relative_to(config.data_path)))
     conn.commit()

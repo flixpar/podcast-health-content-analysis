@@ -27,8 +27,21 @@ def dispatch(args: argparse.Namespace, config: Config, conn: sqlite3.Connection)
                 "last_refresh": json.loads(stored[name]["summary"] or "{}") if name in stored else None,
             } for name, cls in sorted(REGISTRY.items())]}
         case "refresh":
+            # Each study refreshes on its own: one that cannot (no chart data
+            # yet) must not leave the others unmaterialized. Failures are
+            # raised after the rest have run.
             names = args.names or sorted(REGISTRY)
-            return {name: refresh(conn, get(name)) for name in names}
+            results, failures = {}, {}
+            for name in names:
+                try:
+                    results[name] = refresh(conn, get(name))
+                except Exception as e:   # re-raised below, after the other studies
+                    failures[name] = e
+            if failures:
+                raise RuntimeError(f"study refresh failed for {sorted(failures)}: "
+                                   + "; ".join(f"{n}: {e}" for n, e in failures.items())
+                                   + f" (refreshed: {sorted(results)})") from next(iter(failures.values()))
+            return results
         case "status":
             return status(config, conn, args.name, by=args.by)
         case "export":

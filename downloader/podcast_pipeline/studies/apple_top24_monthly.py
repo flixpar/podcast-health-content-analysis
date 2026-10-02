@@ -45,11 +45,15 @@ so the study grows by itself as ``capture-charts`` adds days; refresh it.
 
 from __future__ import annotations
 
+import bisect
+import logging
 import sqlite3
 from collections import Counter, defaultdict
 from datetime import date, timedelta
 
 from podcast_pipeline.studies.base import Member, Study, Window
+
+logger = logging.getLogger(__name__)
 
 CHART = "apple:us:podcast:all"
 SOURCE_PRIORITY = ("apple_marketing_tools", "apple_charts_page", "podbay", "chartable_itunes")
@@ -61,7 +65,7 @@ class AppleTop24Monthly(Study):
     name = "apple-top24-monthly"
     description = ("Apple US overall chart, top 24 per calendar month since 2016-01 "
                    "(time-weighted points); each show's episodes from its charting months.")
-    version = 1
+    version = 2   # 2: midday-centred cells; title ids chosen nearest in time
 
     def params(self) -> dict:
         return {"chart": CHART, "sources": list(SOURCE_PRIORITY), "depth": DEPTH,
@@ -93,7 +97,22 @@ def snapshot_days(conn: sqlite3.Connection) -> list[tuple[str, int, str]]:
 
 
 def entity_resolver(conn: sqlite3.Connection):
-    """entry (apple_id, title_key) -> entity string, following the rules above."""
+    """(apple_id, title_key, day) -> entity string, following the rules above.
+
+    A bare title takes the Apple id the same title carried on this chart
+    *nearest in time*: some titles changed hands (The Ezra Klein Show moved
+    from Vox to the New York Times under a new id), so the most common id
+    overall can belong to the wrong era. Titles never seen with an id on this
+    chart fall back to the most common id anywhere in the chart record.
+    """
+    on_chart: dict[str, list[tuple[str, str]]] = defaultdict(list)
+    for r in conn.execute("""
+        SELECT DISTINCT e.title_key, s.captured_on, e.apple_id
+        FROM chart_entries e JOIN chart_snapshots s ON s.id = e.snapshot_id
+        WHERE s.chart = ? AND e.apple_id IS NOT NULL AND e.title_key IS NOT NULL
+        ORDER BY e.title_key, s.captured_on, e.apple_id
+    """, (CHART,)):
+        on_chart[r["title_key"]].append((r["captured_on"], r["apple_id"]))
     key_counts: dict[str, Counter] = defaultdict(Counter)
     for r in conn.execute("""
         SELECT title_key, apple_id, COUNT(*) AS n FROM chart_entries
@@ -108,11 +127,19 @@ def entity_resolver(conn: sqlite3.Connection):
         WHERE l.entity LIKE 'title:%'
     """)}
 
-    def resolve(apple_id: str | None, title_key: str | None) -> str | None:
+    def nearest(seen: list[tuple[str, str]], day: str) -> str:
+        i = bisect.bisect_left(seen, (day, ""))
+        candidates = seen[max(0, i - 1):i + 1]
+        gap = lambda c: abs((date.fromisoformat(c[0]) - date.fromisoformat(day)).days)
+        return min(candidates, key=lambda c: (gap(c), c[0]))[1]
+
+    def resolve(apple_id: str | None, title_key: str | None, day: str) -> str | None:
         if apple_id:
             return f"apple:{apple_id}"
         if not title_key:
             return None
+        if title_key in on_chart:
+            return f"apple:{nearest(on_chart[title_key], day)}"
         if title_key in key_to_id:
             return f"apple:{key_to_id[title_key]}"
         linked = links.get(f"title:{title_key}")
@@ -128,6 +155,7 @@ def _observations(conn, days, resolve) -> dict[str, dict[str, dict]]:
     """{date: {entity: {rank, name, publisher}}}, best rank if an entity repeats."""
     by_snapshot = {snap: day for day, snap, _ in days}
     out: dict[str, dict[str, dict]] = defaultdict(dict)
+    unidentifiable = []
     ids = list(by_snapshot)
     for start in range(0, len(ids), 500):
         chunk = ids[start:start + 500]
@@ -135,22 +163,32 @@ def _observations(conn, days, resolve) -> dict[str, dict[str, dict]]:
             SELECT snapshot_id, rank, name, publisher, title_key, apple_id FROM chart_entries
             WHERE snapshot_id IN ({",".join("?" * len(chunk))}) AND rank <= ?
         """, (*chunk, DEPTH)):
-            entity = resolve(r["apple_id"], r["title_key"])
-            if entity is None:
-                continue
             day = by_snapshot[r["snapshot_id"]]
+            entity = resolve(r["apple_id"], r["title_key"], day)
+            if entity is None:
+                unidentifiable.append((day, r["rank"], r["name"]))
+                continue
             seen = out[day].get(entity)
             if seen is None or r["rank"] < seen["rank"]:
                 out[day][entity] = {"rank": r["rank"], "name": r["name"], "publisher": r["publisher"]}
+    if unidentifiable:
+        # No id and a title with no [a-z0-9] at all: nothing to key it on.
+        logger.warning(f"{len(unidentifiable)} top-{DEPTH} entries have neither an Apple id nor a "
+                       f"usable title and are left out: {unidentifiable[:10]}")
     return out
 
 
 def _cells(dates: list[date]) -> list[tuple[float, float]]:
-    """[lo, hi) per snapshot, in hours from the first snapshot: the time closer
-    to it than to either neighbour. The last snapshot covers its own day."""
-    t = [(d - dates[0]).days * 24.0 for d in dates]
+    """[lo, hi) per snapshot, in hours from midnight of the first snapshot day:
+    the time closer to it than to either neighbour.
+
+    A capture's time of day is not used (it is not the chart's publication
+    time either), so each snapshot sits at midday of its date; the first and
+    last snapshots extend half a day outward, covering their own day.
+    """
+    t = [(d - dates[0]).days * 24.0 + 12.0 for d in dates]
     mids = [(a + b) / 2 for a, b in zip(t, t[1:])]
-    return list(zip([t[0]] + mids, mids + [t[-1] + 24.0]))
+    return list(zip([t[0] - 12.0] + mids, mids + [t[-1] + 12.0]))
 
 
 def monthly_lists(days, observations) -> dict[str, list[dict]]:

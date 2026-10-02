@@ -233,7 +233,11 @@ def test_top24_month_lists_weight_by_time_not_snapshot_count(conn, monkeypatch):
     lists = top24.monthly_lists(days, obs)
     assert list(lists) == ["2017-01", "2017-02", "2017-03"]   # April not fully covered
     assert all(len(v) == 24 for v in lists.values())
-    assert {e["entity"] for e in lists["2017-02"]} == {f"apple:C{i}" for i in range(24)}
+    # B ranked for ~1.5 days, C for the other ~26.5: a union would hold 48
+    # shows; the weighted list keeps C, except where B's very top outscores C's
+    # bottom (B's #1 for 1.5 days = 36 points > C's #24 for 26.5 days).
+    feb = {e["entity"] for e in lists["2017-02"]}
+    assert sum(e.startswith("apple:C") for e in feb) == 23 and "apple:B0" in feb
     assert lists["2017-03"][0]["snapshots_in_month"] == 0
     assert lists["2017-02"][0]["monthly_rank"] == 1 and lists["2017-02"][0]["entity"] == "apple:C0"
 
@@ -265,3 +269,43 @@ def test_top24_uses_entity_links_for_titles(conn, monkeypatch):
     add_snapshot(conn, "chartable_itunes", "2020-02-10", [("No Id Show", None)] + chart("Q", 23, ids=False))
     entities = {m.entity for m in top24.AppleTop24Monthly().select(conn)}
     assert "apple:555" in entities and "title:noidshow" not in entities
+
+
+def test_top24_cells_centre_on_midday():
+    from datetime import date
+    days = [date(2017, 1, 31), date(2017, 2, 1), date(2017, 2, 2)]
+    cells = top24._cells(days)
+    # the snapshot of Feb 1 covers exactly Feb 1 (hours 24..48 from Jan 31 00:00)
+    assert cells[1] == (24.0, 48.0)
+    assert cells[0] == (0.0, 24.0) and cells[2] == (48.0, 72.0)
+
+
+def test_top24_bare_titles_take_the_id_nearest_in_time(conn, monkeypatch):
+    monkeypatch.setattr(top24, "START_MONTH", "2018-01")
+    add_snapshot(conn, "podbay", "2017-01-10", [("Same Name", "OLD")] + chart("A", 23))
+    add_snapshot(conn, "apple_charts_page", "2024-09-10", [("Same Name", "NEW")] + chart("A", 23))
+    resolve = top24.entity_resolver(conn)
+    assert resolve(None, "samename", "2018-06-01") == "apple:OLD"
+    assert resolve(None, "samename", "2024-01-01") == "apple:NEW"
+
+
+def test_reassignment_bumps_revision(conn):
+    p = add_podcast(conn, 1)
+    add_episode(conn, p, "e", "2019-01-05T00:00:00")
+    conn.commit()
+    refresh(conn, FixedStudy([Member("apple:1", None, [Window("a", "2019-01-01", "2019-02-01")])]))
+    summary = refresh(conn, FixedStudy([Member("apple:1", None, [Window("b", "2019-01-01", "2019-02-01")])]))
+    assert summary["revision"] == 2 and summary["episodes_reassigned"] == 1
+
+
+def test_default_scope_requires_a_study(conn):
+    with pytest.raises(StudyError):
+        download.pending_episodes(conn, True, None, all_episodes=False)
+
+
+def test_dedupe_ignores_time_and_punctuation_drift(conn):
+    p = add_podcast(conn, 1)
+    add_episode(conn, p, "a", "2020-01-01T05:00:00", title="Ep. 12: The Thing")
+    add_episode(conn, p, "b", "2020-01-01T09:30:00", title="Ep 12 - The Thing")
+    conn.commit()
+    assert refresh(conn, FixedStudy([Member(f"podcast:{p}")]))["excluded"]["duplicate"] == 1
