@@ -687,3 +687,12 @@ def test_truncated_fallback_audio_is_rejected_and_the_next_source_tried(tmp_path
     # Without a declared duration, any file that decodes is accepted.
     durations[:] = [1000]
     assert dl.download_episode(WRAPPED, "Show", "Ep 3", "g3").fallback_source == "wayback_audio"
+
+
+def test_dead_link_check_tolerates_string_reasons():
+    # An SSL hostname mismatch: the chain holds an exception whose ``reason``
+    # is a str. Not a dead link -- and it must not crash the classifier.
+    class Mismatch(Exception):
+        reason = "hostname 'podcast.thisamericanlife.org' doesn't match"
+    error = requests.ConnectionError(Mismatch("cert"))
+    assert not is_dead_link(error)

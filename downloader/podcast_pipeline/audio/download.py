@@ -143,8 +143,11 @@ def is_dead_link(error: requests.RequestException) -> bool:
         seen.add(id(exc))
         if isinstance(exc, (NameResolutionError, socket.gaierror, ConnectionRefusedError)):
             return True
-        stack += [exc.__cause__, exc.__context__, getattr(exc, "reason", None)]
-        stack += [a for a in exc.args if isinstance(a, BaseException)]
+        # ``reason`` is an exception on urllib3's MaxRetryError but a plain
+        # string on others (an SSL hostname mismatch carries one), so only
+        # exceptions are followed.
+        linked = [exc.__cause__, exc.__context__, getattr(exc, "reason", None), *exc.args]
+        stack += [e for e in linked if isinstance(e, BaseException)]
     return False
 
 
