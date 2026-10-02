@@ -20,6 +20,7 @@ class PodcastGaps:
     entity: str
     earliest_known: str | None                 # earliest published_date we hold, any source
     windows: list[tuple[str, str, str]] = field(default_factory=list)   # (label, start, end)
+    empty: set[str] = field(default_factory=set)   # labels with no episode at all; the rest are partial
 
     @property
     def span(self) -> tuple[str, str]:
@@ -55,4 +56,6 @@ def study_gaps(conn: sqlite3.Connection, study: str) -> list[PodcastGaps]:
         gaps = by_podcast.setdefault(r["podcast_id"], PodcastGaps(
             r["podcast_id"], r["title"], r["entity"], first))
         gaps.windows.append((r["label"], r["start_date"], r["end_date"]))
+        if r["n"] == 0:
+            gaps.empty.add(r["label"])
     return sorted(by_podcast.values(), key=lambda g: g.span[0])

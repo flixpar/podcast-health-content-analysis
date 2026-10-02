@@ -3,6 +3,11 @@
 Works straight off ``episodes.status``, so an interrupted run resumes where
 it stopped. Episodes whose feed advertises a transcript are skipped; their
 text comes from ``fetch-rss-transcripts`` instead.
+
+With ``--wayback-fallback``, an enclosure that is gone (404, dead host) is
+retried from the host URL inside its tracking prefixes and from the Wayback
+Machine's copies, recorded as an ``unwrapped_audio`` or ``wayback_audio``
+episode source.
 """
 
 from __future__ import annotations
@@ -85,6 +90,11 @@ def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
                 + (f" (charts: {', '.join(charts)})" if charts else "")
                 + (f" (study: {study})" if study else ""))
     stats = {"total": len(episodes), "downloaded": 0, "reused": 0, "failed": 0, "not_attempted": 0}
+    if wayback_fallback:
+        # Of "downloaded": dead enclosures recovered from the URL inside a
+        # tracking prefix, or from the Wayback Machine.
+        stats["unwrapped_audio"] = 0
+        stats["wayback_audio"] = 0
     if charts:
         stats["charts"] = charts
     if study:
@@ -96,12 +106,17 @@ def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
         config.audio_dir, config.audio_compression,
         timeout=config.download.timeout_seconds,
         min_free_gb=config.download.min_free_gb, pool_size=workers,
+        wayback_replay_url=config.wayback.replay_url if wayback_fallback else None,
     )
     stop = threading.Event()
 
     def fetch(row: sqlite3.Row) -> DownloadResult | None:
         if stop.is_set():
             return None
+        if wayback_fallback:
+            return downloader.download_episode(row["audio_url"], row["podcast_title"],
+                                               row["title"] or "unknown", row["episode_guid"],
+                                               published_date=row["published_date"])
         return downloader.download_episode(row["audio_url"], row["podcast_title"],
                                            row["title"] or "unknown", row["episode_guid"])
 
@@ -130,6 +145,10 @@ def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
                     continue
                 db.record_download(conn, row["id"], result.path, result.original_size_mb,
                                    result.compressed_size_mb, result.is_compressed)
+                if result.fallback_source:
+                    db.record_episode_source(conn, row["podcast_id"], row["episode_guid"],
+                                             result.fallback_source, result.fallback_url)
+                    stats[result.fallback_source] += 1
                 conn.commit()
                 stats["reused" if result.reused else "downloaded"] += 1
         except BaseException:

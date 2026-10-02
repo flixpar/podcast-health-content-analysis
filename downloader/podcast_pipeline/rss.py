@@ -79,6 +79,12 @@ def _parse_entry(entry) -> FeedEpisode | None:
             break
     if not audio_url:
         return None   # trailers/announcements without audio are not episodes
+    # Feedburner feeds point every enclosure at a feedproxy.google.com redirect,
+    # which Google retired, so those URLs are dead. The feed also carries the
+    # publisher's own URL; archived feeds from before ~2020 are full of these.
+    original = entry.get("feedburner_origenclosurelink")
+    if original and "feedproxy.google.com" in audio_url:
+        audio_url = original
 
     transcript = _transcript_info(entry)
     return FeedEpisode(

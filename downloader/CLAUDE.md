@@ -31,9 +31,16 @@ python -m podcast_pipeline stats
 python -m podcast_pipeline fetch-podcasts --limit 100              # Apple US overall
 python -m podcast_pipeline fetch-podcasts --genre 1512 --limit 50  # Apple US Health & Fitness
 python -m podcast_pipeline fetch-podcasts --source spotify --limit 100
-python -m podcast_pipeline discover
+python -m podcast_pipeline study list                     # studies: see ../docs/studies.md
+python -m podcast_pipeline study refresh apple-top24-monthly
+python -m podcast_pipeline study status apple-top24-monthly  # read-only; prints next steps
+python -m podcast_pipeline import-chart-archive          # ../data/chart-archive -> chart_snapshots
+python -m podcast_pipeline capture-charts                # daily live capture (cron)
+python -m podcast_pipeline resolve --study apple-top24-monthly
+python -m podcast_pipeline discover                      # feeds of every study's podcasts
+python -m podcast_pipeline discover-archived --study apple-top24-monthly
 python -m podcast_pipeline fetch-rss-transcripts
-python -m podcast_pipeline download            # resumable; re-run after an interruption
+python -m podcast_pipeline download            # resumable; every study's episodes (--study, --all)
 python -m podcast_pipeline transcribe
 python -m podcast_pipeline convert-audio --dry-run
 python -m podcast_pipeline audit --fix
@@ -61,6 +68,20 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
   One `fetch-podcasts` run reads one chart; the collection is the union of
   several runs, and `podcast_charts` records which chart each podcast came
   from so a subset can be selected later.
+- `podcast_pipeline/studies/` -- named selections over the shared catalog
+  (`../docs/studies.md`). `base.py` defines `Study`/`Member`/`Window`;
+  `materialize.py` writes `study_*` tables; `scope.py` is the SQL filter every
+  stage uses for `--study`; `status.py`/`export.py`/`gaps.py` read them. One
+  module per study (`corpus_2025.py`, `apple_top24_monthly.py`), registered in
+  `studies/__init__.py`.
+- `podcast_pipeline/charts/` -- chart history: `archive_import.py` (the
+  reconstructed archive), `capture.py` (daily live capture), `keys.py`
+  (canonical chart ids, `title_key`).
+- `podcast_pipeline/catalog/resolve.py` -- chart entities (Apple ids, bare
+  titles) -> catalog podcasts, recording evidence in `entity_links`.
+- `podcast_pipeline/archive/wayback.py`, `pipeline/discover_archived.py` --
+  older episodes from Wayback copies of feeds; `download --wayback-fallback`
+  fetches archived audio for dead enclosures.
 - `podcast_pipeline/audio/` -- `download.py` (resume via `.part` files),
   `naming.py` (slug + GUID hash), `ffmpeg.py` (the only module that shells out
   to ffmpeg/ffprobe), `disk.py` (`DiskSpaceError`).
@@ -124,8 +145,10 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
   403 after ~20 requests a minute and stays throttled for many minutes. The
   first Spotify run burned the quota in under 30 seconds and recorded 41
   charting shows -- The Ezra Klein Show, This American Life -- as feedless.
-  Searches are paced by `spotify.search_delay_seconds`; a throttle that
-  outlasts the retries raises `SpotifyResolveError` and stops the run.
+  Searches are paced by `spotify.search_delay_seconds` (shared by every
+  caller of `catalog/itunes_search.py`, including `resolve`); a throttle that
+  outlasts the retries raises `ITunesSearchUnavailable` (`SpotifyResolveError`
+  for the Spotify source) and stops the run.
 - **Apple's per-genre charts need the old endpoint.** The Marketing Tools feed
   (`rss.marketingtools.apple.com`) takes no genre and caps at 100. Genre charts
   come from `itunes.apple.com/{cc}/rss/toppodcasts/limit=N/genre=G/json`, whose
@@ -174,6 +197,21 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
   skipped silence is not reintroduced and transcript timestamps remain on the
   original episode timeline.
 
+## Studies and the shared catalog
+
+- **A study selects; the catalog owns.** Audio, transcripts and episode state
+  live on `episodes`/`transcripts` exactly as before. Studies only add rows to
+  `study_*` tables, so the same episode in two studies is fetched and
+  transcribed once. Never copy per-episode state into study tables.
+- **Change a study's logic -> bump its `version`.** The definition hash is what
+  ties an exported manifest to the rule that produced it.
+- **`discover` and `download` default to the union of studies.** The catalog
+  may hold every show that ever charted; only what a study asks for is
+  fetched. `--all` restores whole-catalog behaviour.
+- **Refresh after anything that changes what a study can see** (chart data,
+  `resolve`, `discover`, `discover-archived`). It rewrites only that study's
+  membership rows and bumps the revision when the episode set changes.
+
 ## Database
 
 `data/podcast_metadata.db` (`data` is a symlink to the big volume; disk space is
@@ -187,6 +225,17 @@ the binding constraint).
   `error` row *with* `audio_file_path` failed transcription; *without* it, download.
   `has_rss_transcript = 1` rows are never downloaded.
 - `transcripts.metadata.source`: `asr` or `rss`.
+- Provenance: `podcast_sources` (how a podcast entered the catalog),
+  `podcast_feeds` (every feed URL known for it, with item count and date span
+  at the last read -- a rolling feed shows its oldest item moving forward),
+  `episode_sources` (`feed`, `wayback_feed`, `wayback_audio`), `entity_links`
+  (identity decisions with evidence; NULL podcast_id = failed attempt).
+  Rows predating provenance were backfilled once (`PRAGMA user_version` 1).
+- Charts: `chart_snapshots` (one chart, one source, one day) and
+  `chart_entries`. The Apple US overall chart is `apple:us:podcast:all` across
+  Podbay, Chartable, Apple's page and live captures.
+- Studies: `studies`, `study_revisions`, `study_members`, `study_windows`,
+  `study_episodes`, plus `wayback_probes` (what archive searches found).
 
 ```bash
 sqlite3 data/podcast_metadata.db "SELECT status, COUNT(*) FROM episodes GROUP BY status;"

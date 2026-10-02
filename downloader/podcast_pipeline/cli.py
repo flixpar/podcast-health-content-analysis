@@ -47,7 +47,8 @@ def build_parser() -> argparse.ArgumentParser:
                    help="stop starting new podcasts after this long (default: wayback.budget_minutes)")
     p.add_argument("--limit", type=int, help="at most this many podcasts")
     p.add_argument("--retry", action="store_true",
-                   help="re-probe podcasts whose earlier archive search found nothing")
+                   help="re-probe every feed URL, even those an earlier search already covered "
+                        "for these windows, and re-list captures instead of using cached CDX listings")
 
     p = sub.add_parser("import-chart-archive",
                        help="load the reconstructed 2012-2026 chart archive into chart_snapshots")

@@ -101,3 +101,13 @@ def test_fetch_feed_gives_up_if_the_uncompressed_retry_also_fails():
                               requests.ConnectionError("boom")]
     with pytest.raises(FeedError, match="fetch failed"):
         fetch_feed("https://x/feed", session)
+
+
+def test_feedburner_proxy_enclosures_use_the_original_link():
+    feed = b"""<rss xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" version="2.0">
+    <channel><title>t</title><item><guid>g1</guid><title>e</title>
+    <enclosure url="http://feedproxy.google.com/~r/x/~5/abc/ep.mp3" type="audio/mpeg" length="1"/>
+    <feedburner:origEnclosureLink>http://www.podtrac.com/pts/redirect.mp3/host.com/ep.mp3</feedburner:origEnclosureLink>
+    </item></channel></rss>"""
+    [episode] = parse_feed(feed)
+    assert episode.audio_url == "http://www.podtrac.com/pts/redirect.mp3/host.com/ep.mp3"

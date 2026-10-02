@@ -177,6 +177,10 @@ class ResolveConfig:
     lookup_delay_seconds: float = 1.0
     # Failed resolutions are recorded and not retried before this many days.
     retry_after_days: float = 7.0
+    # iTunes search results considered per title. Searches are paced by
+    # spotify.search_delay_seconds / search_attempts (the same API and quota);
+    # chart-era titles are often generic, so more candidates than Spotify's.
+    search_candidates: int = 25
 
 
 @dataclass
@@ -184,12 +188,21 @@ class WaybackConfig:
     """Archived copies of feeds (and audio) from the Internet Archive."""
 
     cdx_url: str = "https://web.archive.org/cdx/search/cdx"
+    # Snapshots are replayed from <replay_url>/<timestamp>id_/<original url>.
+    replay_url: str = "https://web.archive.org/web"
     # The CDX API silently drops parallel requests (an empty body that reads as
     # "never archived"), so CDX queries are strictly sequential and paced.
     cdx_delay_seconds: float = 1.5
     cdx_attempts: int = 5
+    # A failed attempt waits this long, doubling each time, before the next.
+    cdx_backoff_seconds: float = 5.0
+    # Stop the run when this many podcasts in a row could not be listed at all:
+    # CDX is down, and carrying on would only burn the budget on retries.
+    cdx_failure_limit: int = 5
     # Snapshot fetches (/web/<ts>id_/<url>) tolerate modest parallelism.
     fetch_workers: int = 4
+    # Archived feed copies fetched per podcast per run, across all its feed URLs.
+    max_captures_per_podcast: int = 16
     timeout_seconds: int = 90
     # Stop starting new work after this long; re-running resumes.
     budget_minutes: float = 120.0
