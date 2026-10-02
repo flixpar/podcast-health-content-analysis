@@ -156,6 +156,46 @@ class BatchExportConfig:
 
 
 @dataclass
+class ChartsConfig:
+    """Chart history: the reconstructed archive and live daily captures."""
+
+    # Output of analysis/chart_archive (parsed/chart_rows*.parquet). Relative
+    # paths resolve against the project root, like data_dir.
+    archive_dir: str = "../data/chart-archive"
+    # Live sources `capture-charts` reads when none are named on the command line.
+    capture_sources: list[str] = field(default_factory=lambda: ["apple_marketing_tools", "spotify_api"])
+    country: str = "us"
+
+
+@dataclass
+class ResolveConfig:
+    """Turning chart entities (Apple ids, bare titles) into catalog podcasts."""
+
+    # The iTunes lookup API accepts many ids per request; Apple documents no
+    # limit, and 150 stays well under URL-length trouble.
+    lookup_batch_size: int = 150
+    lookup_delay_seconds: float = 1.0
+    # Failed resolutions are recorded and not retried before this many days.
+    retry_after_days: float = 7.0
+
+
+@dataclass
+class WaybackConfig:
+    """Archived copies of feeds (and audio) from the Internet Archive."""
+
+    cdx_url: str = "https://web.archive.org/cdx/search/cdx"
+    # The CDX API silently drops parallel requests (an empty body that reads as
+    # "never archived"), so CDX queries are strictly sequential and paced.
+    cdx_delay_seconds: float = 1.5
+    cdx_attempts: int = 5
+    # Snapshot fetches (/web/<ts>id_/<url>) tolerate modest parallelism.
+    fetch_workers: int = 4
+    timeout_seconds: int = 90
+    # Stop starting new work after this long; re-running resumes.
+    budget_minutes: float = 120.0
+
+
+@dataclass
 class Config:
     data_dir: str = "data"            # relative paths resolve against the project root
     fetcher: FetcherConfig = field(default_factory=FetcherConfig)
@@ -167,6 +207,9 @@ class Config:
     transcription: TranscriptionConfig = field(default_factory=TranscriptionConfig)
     storage: StorageConfig = field(default_factory=StorageConfig)
     batch_export: BatchExportConfig = field(default_factory=BatchExportConfig)
+    charts: ChartsConfig = field(default_factory=ChartsConfig)
+    resolve: ResolveConfig = field(default_factory=ResolveConfig)
+    wayback: WaybackConfig = field(default_factory=WaybackConfig)
 
     # --- derived paths -----------------------------------------------------
 
@@ -186,6 +229,25 @@ class Config:
     @property
     def db_path(self) -> Path:
         return self.data_path / "podcast_metadata.db"
+
+    @property
+    def chart_archive_path(self) -> Path:
+        path = Path(self.charts.archive_dir)
+        return path if path.is_absolute() else PROJECT_ROOT / path
+
+    @property
+    def chart_capture_dir(self) -> Path:
+        """Raw responses from live chart captures, one file per source per day."""
+        return self.data_path / "charts" / "raw"
+
+    @property
+    def wayback_cache_dir(self) -> Path:
+        """CDX listings and archived feed captures, so a re-run does not refetch."""
+        return self.data_path / "wayback"
+
+    @property
+    def study_export_dir(self) -> Path:
+        return self.data_path / "studies"
 
     @property
     def batch_export_dir(self) -> Path:

@@ -48,7 +48,7 @@ def seeded(config, conn, monkeypatch):
                                       transcript_url="https://x/3.srt")],
     }
     monkeypatch.setattr(discover, "fetch_feed", lambda url, session, timeout: feeds[url])
-    discover.run(config, conn)
+    discover.run(config, conn, all_podcasts=True)
     return config, conn
 
 
@@ -98,7 +98,7 @@ def test_discover_is_idempotent_and_marks_feed_errors(seeded, monkeypatch):
         return [FeedEpisode("g3", "Has Transcript", "https://x/3.mp3"), FeedEpisode("g4", "New", "https://x/4.mp3")]
 
     monkeypatch.setattr(discover, "fetch_feed", flaky)
-    result = discover.run(config, conn)
+    result = discover.run(config, conn, all_podcasts=True)
     assert result["feed_errors"] == 1 and result["episodes_new"] == 1
     assert conn.execute("SELECT status FROM podcasts WHERE title='Show One'").fetchone()[0] == "error"
     assert conn.execute("SELECT COUNT(*) FROM episodes").fetchone()[0] == 4

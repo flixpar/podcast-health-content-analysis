@@ -20,6 +20,7 @@ from podcast_pipeline.http import make_session
 from podcast_pipeline.models import Segment
 from podcast_pipeline.transcripts.parsers import parse_transcript
 from podcast_pipeline.transcripts.store import TranscriptStore, has_speaker_labels
+from podcast_pipeline.studies.scope import episode_filter
 
 logger = logging.getLogger(__name__)
 
@@ -55,16 +56,19 @@ def fetch_one(session: requests.Session, url: str, timeout: int, min_words: int)
 
 
 def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
-        workers: int = 8, timeout: int = 60, min_words: int = 100) -> dict:
+        workers: int = 8, timeout: int = 60, min_words: int = 100,
+        study: str | None = None) -> dict:
+    study_clause, study_params = episode_filter(conn, study, "id")
     rows = conn.execute(f"""
         SELECT id, transcript_url, title
         FROM episodes
         WHERE has_rss_transcript = 1
           AND transcript_url IS NOT NULL AND transcript_url != ''
           AND (transcript_file_path IS NULL OR transcript_file_path = '')
+          {study_clause}
         ORDER BY id
         {"LIMIT ?" if limit else ""}
-    """, (limit,) if limit else ()).fetchall()
+    """, study_params + ([limit] if limit else [])).fetchall()
     logger.info(f"Fetching {len(rows)} publisher transcripts with {workers} workers")
     stats = {"total": len(rows), "saved": 0}
     if not rows:

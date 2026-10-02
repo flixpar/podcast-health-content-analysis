@@ -68,5 +68,26 @@
     },
     "batch_export": {
         "target_size_gb": 250
+    },
+    "charts": {
+        "archive_dir": "../data/chart-archive",
+        "capture_sources": [
+            "apple_marketing_tools",
+            "spotify_api"
+        ],
+        "country": "us"
+    },
+    "resolve": {
+        "lookup_batch_size": 150,
+        "lookup_delay_seconds": 1.0,
+        "retry_after_days": 7.0
+    },
+    "wayback": {
+        "cdx_url": "https://web.archive.org/cdx/search/cdx",
+        "cdx_delay_seconds": 1.5,
+        "cdx_attempts": 5,
+        "fetch_workers": 4,
+        "timeout_seconds": 90,
+        "budget_minutes": 120.0
     }
 }

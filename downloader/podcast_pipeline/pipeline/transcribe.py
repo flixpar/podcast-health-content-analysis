@@ -18,6 +18,7 @@ from podcast_pipeline import db
 from podcast_pipeline.asr.vad import vad_metadata
 from podcast_pipeline.config import Config
 from podcast_pipeline.models import Segment
+from podcast_pipeline.studies.scope import episode_filter
 from podcast_pipeline.transcripts.store import TranscriptStore
 
 logger = logging.getLogger(__name__)
@@ -46,23 +47,26 @@ class WorkerFinished:
 _DONE = object()
 
 
-def episodes_to_transcribe(conn: sqlite3.Connection, retry_errors: bool, limit: int | None) -> list[Job]:
+def episodes_to_transcribe(conn: sqlite3.Connection, retry_errors: bool, limit: int | None,
+                           study: str | None = None) -> list[Job]:
     statuses = [db.EpisodeStatus.DOWNLOADED] + ([db.EpisodeStatus.ERROR] if retry_errors else [])
+    study_clause, study_params = episode_filter(conn, study, "id")
     rows = conn.execute(f"""
         SELECT id, title, audio_file_path
         FROM episodes
         WHERE status IN ({",".join("?" * len(statuses))})
           AND audio_file_path IS NOT NULL
           AND (transcript_file_path IS NULL OR transcript_file_path = '')
+          {study_clause}
         ORDER BY published_date DESC
         {"LIMIT ?" if limit else ""}
-    """, statuses + ([limit] if limit else [])).fetchall()
+    """, statuses + study_params + ([limit] if limit else [])).fetchall()
     return [Job(row["id"], row["title"], Path(row["audio_file_path"])) for row in rows]
 
 
 def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
-        retry_errors: bool = False) -> dict:
-    jobs = episodes_to_transcribe(conn, retry_errors, limit)
+        retry_errors: bool = False, study: str | None = None) -> dict:
+    jobs = episodes_to_transcribe(conn, retry_errors, limit, study)
     logger.info(f"Transcribing {len(jobs)} episodes on GPUs {config.transcription.gpu_ids}")
     stats = {"total": len(jobs), "transcribed": 0, "failed": 0, "missing_audio": 0}
     if not jobs:

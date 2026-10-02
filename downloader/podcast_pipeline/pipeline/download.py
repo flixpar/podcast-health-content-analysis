@@ -18,18 +18,28 @@ from podcast_pipeline import db
 from podcast_pipeline.audio.disk import DiskSpaceError
 from podcast_pipeline.audio.download import AudioDownloader, DownloadError, DownloadResult
 from podcast_pipeline.config import Config
+from podcast_pipeline.studies.scope import episode_filter
 
 logger = logging.getLogger(__name__)
 
 
 def pending_episodes(conn: sqlite3.Connection, retry_errors: bool, limit: int | None,
-                     charts: list[str] | None = None) -> list[sqlite3.Row]:
+                     charts: list[str] | None = None,
+                     study: str | None = None,
+                     all_episodes: bool = True) -> list[sqlite3.Row]:
     """Episodes still needing audio, oldest row first.
 
     ``charts`` restricts the run to podcasts that appear in those charts (see
     ``podcast_charts``). The whole queue takes days, so downloading one chart
     ahead of the rest is how a subset gets prioritised: run with the filter,
     then run again without it to pick up everything else.
+
+    ``study`` restricts it to that study's episodes, in the study's priority
+    order: round-robin across its windows, so an interrupted run (or a full
+    disk) leaves coverage spread evenly rather than front-loaded. Without a
+    study, ``all_episodes=False`` restricts it to the episodes of *any* study
+    (what the CLI does by default: the catalog holds far more episodes than
+    anyone has asked to collect).
     """
     statuses = [db.EpisodeStatus.PENDING] + ([db.EpisodeStatus.ERROR] if retry_errors else [])
     params = list(statuses)
@@ -38,32 +48,47 @@ def pending_episodes(conn: sqlite3.Connection, retry_errors: bool, limit: int | 
         chart_filter = (f"AND e.podcast_id IN (SELECT podcast_id FROM podcast_charts "
                         f"WHERE chart IN ({','.join('?' * len(charts))}))")
         params += charts
+    study_clause, study_params = episode_filter(conn, study)
+    if not study and not all_episodes:
+        study_clause = "AND e.id IN (SELECT episode_id FROM study_episodes)"
+    params += study_params
+    order = "e.id"
+    if study:
+        order = ("(SELECT priority FROM study_episodes se WHERE se.study = ? "
+                 "AND se.episode_id = e.id), e.id")
+        params.append(study)
     if limit:
         params.append(limit)
     # An error row with audio on disk failed at transcription, not download.
     return conn.execute(f"""
-        SELECT e.id, e.episode_guid, e.title, e.audio_url, p.title AS podcast_title
+        SELECT e.id, e.podcast_id, e.episode_guid, e.title, e.audio_url, e.published_date,
+               p.title AS podcast_title
         FROM episodes e JOIN podcasts p ON p.id = e.podcast_id
         WHERE e.status IN ({",".join("?" * len(statuses))})
           AND e.audio_file_path IS NULL
           AND e.has_rss_transcript = 0
           AND e.audio_url IS NOT NULL AND e.audio_url != ''
           {chart_filter}
-        ORDER BY e.id
+          {study_clause}
+        ORDER BY {order}
         {"LIMIT ?" if limit else ""}
     """, params).fetchall()
 
 
 def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
         retry_errors: bool = True, workers: int | None = None,
-        charts: list[str] | None = None) -> dict:
-    episodes = pending_episodes(conn, retry_errors, limit, charts)
+        charts: list[str] | None = None, study: str | None = None,
+        wayback_fallback: bool = False, all_episodes: bool = True) -> dict:
+    episodes = pending_episodes(conn, retry_errors, limit, charts, study, all_episodes)
     workers = workers or config.download.max_workers
     logger.info(f"Downloading {len(episodes)} episodes with {workers} workers"
-                + (f" (charts: {', '.join(charts)})" if charts else ""))
+                + (f" (charts: {', '.join(charts)})" if charts else "")
+                + (f" (study: {study})" if study else ""))
     stats = {"total": len(episodes), "downloaded": 0, "reused": 0, "failed": 0, "not_attempted": 0}
     if charts:
         stats["charts"] = charts
+    if study:
+        stats["study"] = study
     if not episodes:
         return stats
 

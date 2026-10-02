@@ -33,6 +33,9 @@ def run(config: Config, conn: sqlite3.Connection, limit: int | None = None) -> d
                                (record.source_id, record.apple_podcasts_id)).fetchone()
         podcast_id = db.upsert_podcast(conn, record)
         db.record_chart_entry(conn, podcast_id, source.chart_name, rank)
+        db.record_podcast_source(conn, podcast_id, db.SourceKind.CHART_FETCH, source.chart_name)
+        if record.rss_url:
+            db.record_feed_url(conn, podcast_id, record.rss_url, "itunes_lookup")
         stats["updated" if existed else "new"] += 1
         if not record.rss_url:
             stats["without_rss"] += 1
