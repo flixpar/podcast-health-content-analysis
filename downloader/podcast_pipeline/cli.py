@@ -32,9 +32,59 @@ def build_parser() -> argparse.ArgumentParser:
                                    "(default: fetcher.genre; Apple source only)")
     p.add_argument("--country", help="storefront / chart region (default: fetcher.country)")
 
-    p = sub.add_parser("discover", help="read every podcast feed and record its episodes (no downloads)")
+    p = sub.add_parser("discover", help="read podcast feeds and record their episodes (no downloads)")
     p.add_argument("--max-episodes", type=int,
                    help="newest episodes to record per feed (default: discovery.max_episodes_per_podcast)")
+    scope = p.add_mutually_exclusive_group()
+    scope.add_argument("--study", help="only this study's podcasts (default: every study's podcasts)")
+    scope.add_argument("--all", action="store_true", dest="all_podcasts",
+                       help="every podcast in the catalog, whether or not a study wants it")
+
+    p = sub.add_parser("discover-archived",
+                       help="recover episodes from Wayback Machine copies of a study's feeds")
+    p.add_argument("--study", required=True)
+    p.add_argument("--budget-minutes", type=float,
+                   help="stop starting new podcasts after this long (default: wayback.budget_minutes)")
+    p.add_argument("--limit", type=int, help="at most this many podcasts")
+    p.add_argument("--retry", action="store_true",
+                   help="re-probe every feed URL, even those an earlier search already covered "
+                        "for these windows, and re-list captures instead of using cached CDX listings")
+
+    p = sub.add_parser("import-chart-archive",
+                       help="load the reconstructed 2012-2026 chart archive into chart_snapshots")
+    p.add_argument("--archive-dir", type=Path, help="default: charts.archive_dir")
+
+    p = sub.add_parser("capture-charts",
+                       help="capture today's live charts (run daily; a missed day cannot be recovered)")
+    p.add_argument("--sources", type=_str_list,
+                   help="comma-separated live sources (default: charts.capture_sources)")
+    p.add_argument("--no-catalog", action="store_true",
+                   help="record the charts only; do not add newly seen podcasts to the catalog")
+
+    p = sub.add_parser("resolve", help="turn a study's chart entities into catalog podcasts with feeds")
+    p.add_argument("--study", required=True)
+    p.add_argument("--retry-failed", action="store_true",
+                   help="retry entities whose earlier resolution failed, however recent")
+    p.add_argument("--no-search", action="store_true",
+                   help="Apple-id lookups only; skip the paced title search")
+    p.add_argument("--limit", type=int, help="at most this many entities")
+
+    p = sub.add_parser("study", help="define, materialize, and inspect studies")
+    study_sub = p.add_subparsers(dest="study_command", required=True, metavar="ACTION")
+    sp = study_sub.add_parser("list", help="every defined study and its last refresh")
+    sp = study_sub.add_parser("refresh", help="(re)materialize members and episodes from the definition")
+    sp.add_argument("names", nargs="*", help="studies to refresh (default: all defined)")
+    sp = study_sub.add_parser("status", help="progress of a study through every stage")
+    sp.add_argument("name")
+    sp.add_argument("--by", choices=["year", "window", "member"], default="year",
+                    help="breakdown to include (default: year)")
+    sp = study_sub.add_parser("export", help="write the study's episode manifest for analysis")
+    sp.add_argument("name")
+    sp.add_argument("--output", type=Path,
+                    help="manifest path (default: data/studies/<name>/rev<N>/episodes.csv)")
+    sp.add_argument("--link-transcripts", type=Path,
+                    help="also fill this directory with symlinks to the study's transcripts, "
+                         "the layout topic_labeling's --transcripts reads")
 
     p = sub.add_parser("fetch-rss-transcripts", help="fetch transcripts publishers attach to their feeds")
     p.add_argument("--limit", type=int)
@@ -42,6 +92,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--timeout", type=int, default=60)
     p.add_argument("--min-words", type=int, default=100,
                    help="reject shorter transcripts as failures")
+    p.add_argument("--study", help="only this study's episodes")
 
     p = sub.add_parser("download", help="download audio for pending episodes (resumable)")
     p.add_argument("--limit", type=int, help="stop after this many episodes")
@@ -51,6 +102,13 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--charts", type=_str_list, default=[],
                    help="only podcasts in these charts, comma-separated "
                         "(e.g. apple_us_genre_1512); see the podcast_charts table")
+    scope = p.add_mutually_exclusive_group()
+    scope.add_argument("--study", help="only this study's episodes, in its priority order "
+                                       "(default: the episodes of every study)")
+    scope.add_argument("--all", action="store_true", dest="all_episodes",
+                       help="every pending episode in the catalog, whether or not a study wants it")
+    p.add_argument("--wayback-fallback", action="store_true",
+                   help="when an enclosure URL is dead, try the Wayback Machine's copy of the audio")
 
     p = sub.add_parser("transcribe", help="transcribe downloaded audio")
     p.add_argument("--limit", type=int)
@@ -59,6 +117,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--vad", action=argparse.BooleanOptionalAction, default=None,
                    help="experimental/targeted use only: run CPU-bound Silero VAD "
                         "before ASR (default: transcription.vad_enabled)")
+    p.add_argument("--study", help="only this study's episodes")
 
     p = sub.add_parser("convert-audio", help="re-encode existing MP3s to Opus/OGG")
     p.add_argument("--threshold", type=float, help="minimum file size in MB (default: from config)")
@@ -93,6 +152,7 @@ def build_parser() -> argparse.ArgumentParser:
                    help="allow episodes recorded in an earlier completed batch")
     p.add_argument("--dry-run", action="store_true",
                    help="select and report a batch without writing files")
+    p.add_argument("--study", help="only this study's episodes")
 
     p = sub.add_parser("ingest-audio-batch",
                        help="verify and prepare a transferred audio batch on a remote server")
@@ -184,17 +244,40 @@ def dispatch(args: argparse.Namespace, config: Config, conn) -> dict:
                 config.fetcher.country = args.country
             return fetch_podcasts.run(config, conn, limit=args.limit)
         case "discover":
-            return discover.run(config, conn, max_episodes=args.max_episodes)
+            return discover.run(config, conn, max_episodes=args.max_episodes,
+                                study=args.study, all_podcasts=args.all_podcasts)
+        case "discover-archived":
+            from podcast_pipeline.pipeline import discover_archived
+            return discover_archived.run(config, conn, study=args.study,
+                                         budget_minutes=args.budget_minutes, limit=args.limit,
+                                         retry=args.retry)
+        case "import-chart-archive":
+            from podcast_pipeline.charts import archive_import
+            return archive_import.run(config, conn, archive_dir=args.archive_dir)
+        case "capture-charts":
+            from podcast_pipeline.charts import capture
+            return capture.run(config, conn, sources=args.sources, catalog=not args.no_catalog)
+        case "resolve":
+            from podcast_pipeline.catalog import resolve
+            return resolve.run(config, conn, study=args.study, retry_failed=args.retry_failed,
+                               search=not args.no_search, limit=args.limit)
+        case "study":
+            from podcast_pipeline.studies import commands
+            return commands.dispatch(args, config, conn)
         case "fetch-rss-transcripts":
             return rss_transcripts.run(config, conn, limit=args.limit, workers=args.workers,
-                                       timeout=args.timeout, min_words=args.min_words)
+                                       timeout=args.timeout, min_words=args.min_words,
+                                       study=args.study)
         case "download":
             return download.run(config, conn, limit=args.limit, retry_errors=not args.skip_errors,
-                                workers=args.workers, charts=args.charts)
+                                workers=args.workers, charts=args.charts, study=args.study,
+                                wayback_fallback=args.wayback_fallback,
+                                all_episodes=args.all_episodes)
         case "transcribe":
             if args.vad is not None:
                 config.transcription.vad_enabled = args.vad
-            return transcribe.run(config, conn, limit=args.limit, retry_errors=args.retry_errors)
+            return transcribe.run(config, conn, limit=args.limit, retry_errors=args.retry_errors,
+                                  study=args.study)
         case "convert-audio":
             return convert_audio.run(config, conn, threshold_mb=args.threshold,
                                      reconcile_only=args.reconcile_only, workers=args.workers,
@@ -211,6 +294,7 @@ def dispatch(args: argparse.Namespace, config: Config, conn) -> dict:
             return export_audio_batch.run(
                 config, conn, output_dir=args.output_dir, target_gb=args.target_gb,
                 include_exported=args.include_exported, dry_run=args.dry_run,
+                study=args.study,
             )
         case "ingest-audio-batch":
             return ingest_audio_batch.run(
