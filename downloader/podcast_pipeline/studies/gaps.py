@@ -203,13 +203,16 @@ def classify(ev: Evidence, start: str, end: str, n: int) -> tuple[str, str] | No
         return "not_publishing", f"a listing spans {oldest}..{read} and has nothing in the window"
     if ev.first >= end or n > 0:
         # Before the earliest episode we know, or the window that holds it.
+        # Evidence that the feed has lost its older items outranks a launch
+        # marker: a renamed show's "Introducing ..." trailer looks like a
+        # launch but is not one (The Ramsey Show, 2022).
+        if ev.truncated or ev.skipping:
+            return "missing", f"window precedes the earliest known episode ({ev.first}): " \
+                              f"{ev.truncated or ev.skipping}"
         if ev.launch:
             if n > 0:
                 return "launch", ev.launch
             return "before_launch", f"window ends before the first episode ({ev.first}): {ev.launch}"
-        if ev.truncated or ev.skipping:
-            return "missing", f"window precedes the earliest known episode ({ev.first}): " \
-                              f"{ev.truncated or ev.skipping}"
         return "unknown", f"window precedes the earliest known episode ({ev.first}); no evidence " \
                           f"whether it was the first"
     # After the earliest episode, empty, and no listing covers it.
