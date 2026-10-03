@@ -69,6 +69,27 @@ def build_parser() -> argparse.ArgumentParser:
                    help="Apple-id lookups only; skip the paced title search")
     p.add_argument("--limit", type=int, help="at most this many entities")
 
+    p = sub.add_parser("link-entity",
+                       help="record a manual identity decision for a chart entity (overrides automatic ones)")
+    p.add_argument("entity", help="'apple:<id>' or 'title:<key>'")
+    target = p.add_mutually_exclusive_group(required=True)
+    target.add_argument("--podcast-id", type=int, help="an existing catalog podcast")
+    target.add_argument("--apple-id", help="look this Apple podcast up and link it (created if new)")
+    target.add_argument("--feed-url", help="link to the podcast with this feed (created if new)")
+    target.add_argument("--unresolvable", action="store_true",
+                        help="record that no source for this show could be found")
+    p.add_argument("--note", required=True, help="evidence for the decision (stored with the link)")
+    p.add_argument("--title", help="title for a podcast created from --feed-url")
+    p.add_argument("--publisher", help="publisher for a podcast created from --feed-url")
+
+    p = sub.add_parser("import-episodes",
+                       help="add episodes from a non-RSS source (a publisher's site, an alternate host)")
+    p.add_argument("path", type=Path, help="JSONL of episodes (see pipeline/import_episodes.py)")
+    p.add_argument("--source", required=True,
+                   help="provenance recorded in episode_sources, e.g. 'publisher_site'")
+    p.add_argument("--podcast-id", type=int, help="podcast for rows that do not name one")
+    p.add_argument("--dry-run", action="store_true", help="report what would change; write nothing")
+
     p = sub.add_parser("study", help="define, materialize, and inspect studies")
     study_sub = p.add_subparsers(dest="study_command", required=True, metavar="ACTION")
     sp = study_sub.add_parser("list", help="every defined study and its last refresh")
@@ -261,6 +282,16 @@ def dispatch(args: argparse.Namespace, config: Config, conn) -> dict:
             from podcast_pipeline.catalog import resolve
             return resolve.run(config, conn, study=args.study, retry_failed=args.retry_failed,
                                search=not args.no_search, limit=args.limit)
+        case "link-entity":
+            from podcast_pipeline.catalog import manual
+            return manual.run(config, conn, entity=args.entity, podcast_id=args.podcast_id,
+                              apple_id=args.apple_id, feed_url=args.feed_url,
+                              unresolvable=args.unresolvable, note=args.note,
+                              title=args.title, publisher=args.publisher)
+        case "import-episodes":
+            from podcast_pipeline.pipeline import import_episodes
+            return import_episodes.run(config, conn, path=args.path, source=args.source,
+                                       podcast_id=args.podcast_id, dry_run=args.dry_run)
         case "study":
             from podcast_pipeline.studies import commands
             return commands.dispatch(args, config, conn)
