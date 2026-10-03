@@ -14,7 +14,7 @@ from dataclasses import dataclass
 
 import requests
 
-from podcast_pipeline import db
+from podcast_pipeline import db, paths
 from podcast_pipeline.config import Config
 from podcast_pipeline.http import make_session
 from podcast_pipeline.models import Segment
@@ -94,7 +94,7 @@ def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
                 "source": "rss", "source_format": fetched.source_format,
                 "source_url": row["transcript_url"], "episode_title": row["title"],
             })
-            db.record_transcript(conn, row["id"], saved.path, saved.word_count,
+            db.record_transcript(conn, row["id"], paths.to_stored(config, saved.path), saved.word_count,
                                  saved.duration_seconds, saved.has_timestamps,
                                  has_speaker_labels(fetched.segments),
                                  {"source": "rss", "source_format": fetched.source_format})

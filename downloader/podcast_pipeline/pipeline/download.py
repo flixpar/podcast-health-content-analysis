@@ -19,7 +19,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from tqdm import tqdm
 
-from podcast_pipeline import db
+from podcast_pipeline import db, paths
 from podcast_pipeline.audio.disk import DiskSpaceError
 from podcast_pipeline.audio.download import AudioDownloader, DownloadError, DownloadResult
 from podcast_pipeline.config import Config
@@ -145,7 +145,8 @@ def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
                 if result is None:
                     stats["not_attempted"] += 1
                     continue
-                db.record_download(conn, row["id"], result.path, result.original_size_mb,
+                db.record_download(conn, row["id"], paths.to_stored(config, result.path),
+                                   result.original_size_mb,
                                    result.compressed_size_mb, result.is_compressed)
                 if result.fallback_source:
                     db.record_episode_source(conn, row["podcast_id"], row["episode_guid"],

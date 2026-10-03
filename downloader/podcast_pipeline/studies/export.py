@@ -2,6 +2,10 @@
 
 Analyses should read the manifest rather than re-query the live tables, so a
 result can always be traced to the exact membership it was computed on.
+
+The database stores file paths relative to the data directory; the manifest's
+``transcript_path``/``audio_path`` are those resolved to absolute real paths
+(through the ``data`` symlink), so a reader can open them directly.
 """
 
 from __future__ import annotations
@@ -12,13 +16,16 @@ import os
 import sqlite3
 from pathlib import Path
 
+from podcast_pipeline import paths
 from podcast_pipeline.config import Config
+from podcast_pipeline.studies.quality import rerun_flags
 from podcast_pipeline.studies.scope import require_refreshed
 from podcast_pipeline.studies.status import EPISODE_STATE_SQL
 
 COLUMNS = ["study", "revision", "episode_id", "episode_guid", "podcast_id", "podcast_title",
            "entity", "window_label", "published_date", "episode_title", "duration_seconds",
-           "state", "transcript_source", "transcript_path", "audio_path", "added_revision"]
+           "state", "transcript_source", "transcript_path", "audio_path", "added_revision",
+           "window_provisional", "rerun"]
 
 
 def export(config: Config, conn: sqlite3.Connection, name: str, output: Path | None = None,
@@ -34,12 +41,19 @@ def export(config: Config, conn: sqlite3.Connection, name: str, output: Path | N
                p.title AS podcast_title, se.entity, se.window_label, e.published_date,
                e.title AS episode_title, e.duration_seconds, {EPISODE_STATE_SQL} AS state,
                json_extract(t.metadata, '$.source') AS transcript_source,
-               t.file_path AS transcript_path, e.audio_file_path AS audio_path, se.added_revision
+               t.file_path AS transcript_path, e.audio_file_path AS audio_path, se.added_revision,
+               COALESCE(json_extract(w.attrs, '$.provisional'), 0) AS window_provisional
         FROM study_episodes se JOIN episodes e ON e.id = se.episode_id
         JOIN podcasts p ON p.id = e.podcast_id
         LEFT JOIN transcripts t ON t.episode_id = e.id
+        LEFT JOIN study_windows w
+               ON w.study = se.study AND w.entity = se.entity AND w.label = se.window_label
         WHERE se.study = ? ORDER BY e.podcast_id, e.published_date
     """, (revision, name)).fetchall()
+    # Reruns stay in scope (they did air that month) but are marked, with the
+    # evidence, so an analysis can choose "what aired" or "new content".
+    reruns = rerun_flags(conn, name)
+    rows = [{**_with_real_paths(config, r), "rerun": reruns.get(r["episode_id"], "")} for r in rows]
     with open(output, "w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(COLUMNS)
@@ -61,11 +75,21 @@ def export(config: Config, conn: sqlite3.Connection, name: str, output: Path | N
     }, indent=1))
 
     result = {"study": name, "revision": revision, "manifest": str(output),
-              "episodes": len(rows), "with_transcript": sum(1 for r in rows if r["transcript_path"])}
+              "episodes": len(rows), "with_transcript": sum(1 for r in rows if r["transcript_path"]),
+              "reruns_flagged": sum(1 for r in rows if r["rerun"]),
+              "in_provisional_windows": sum(1 for r in rows if r["window_provisional"])}
     if link_transcripts:
         result["linked"] = _link(rows, link_transcripts)
         result["linked_dir"] = str(link_transcripts)
     return result
+
+
+def _with_real_paths(config: Config, row: sqlite3.Row) -> dict:
+    out = dict(row)
+    for column in ("transcript_path", "audio_path"):
+        path = paths.resolve(config, row[column])
+        out[column] = str(path.resolve()) if path is not None else None
+    return out
 
 
 def _link(rows, directory: Path) -> int:
@@ -76,7 +100,7 @@ def _link(rows, directory: Path) -> int:
     wanted = {}
     for r in rows:
         if r["transcript_path"]:
-            source = Path(r["transcript_path"]).resolve()
+            source = Path(r["transcript_path"])   # already absolute and real
             wanted[source.name] = source
     for existing in directory.iterdir():
         if existing.is_symlink() and existing.name not in wanted:

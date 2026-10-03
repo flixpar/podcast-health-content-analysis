@@ -29,7 +29,8 @@ from podcast_pipeline.audio import MIN_AUDIO_BYTES
 from podcast_pipeline.batches import (AUDIO_BATCH_SCHEMA_VERSION, HashingReader,
                                       HashingWriter, add_bytes, atomic_write,
                                       tar_info)
-from podcast_pipeline.config import PROJECT_ROOT, Config
+from podcast_pipeline import paths
+from podcast_pipeline.config import Config
 from podcast_pipeline.studies.scope import episode_filter
 
 logger = logging.getLogger(__name__)
@@ -61,11 +62,6 @@ class Candidate:
 
 def _utc_now() -> datetime:
     return datetime.now(UTC)
-
-
-def _source_path(value: str) -> Path:
-    path = Path(value)
-    return path if path.is_absolute() else PROJECT_ROOT / path
 
 
 def _already_exported_episode_ids(manifest_dir: Path) -> set[int]:
@@ -113,7 +109,7 @@ def eligible_candidates(config: Config, conn: sqlite3.Connection,
         if episode_id in exported_ids:
             rejected["already_exported"] += 1
             continue
-        source = _source_path(row["audio_file_path"])
+        source = paths.resolve(config, row["audio_file_path"])
         try:
             stat = source.stat()
         except FileNotFoundError:

@@ -99,7 +99,7 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
   export_transcript_batch,import_transcript_batch}.py` -- the verified remote
   transcription round trip. The audio manifest is the immutable identity
   contract; the remote machine never receives or constructs the source DB.
-- `tests/` -- pytest; fakes are injected at module boundaries (`monkeypatch.setattr(discover, "fetch_feed", ...)`).
+- `tests/` -- pytest; fakes are injected at module boundaries (`monkeypatch.setattr(discover, "read_feed", ...)`).
 - `tools/ab_format_test.py` -- the MP3-vs-Opus measurement behind the storage policy.
 
 ## Rules That Exist Because Something Broke
@@ -168,6 +168,14 @@ Every command prints a JSON summary and logs to `logs/pipeline.log`.
   complete episode over an empty tail. `_encode_flac_chunk` reads volumedetect's
   `n_samples` (taking the max; it also logs a zero at filter init) and an empty
   span becomes a `NO_AUDIO` omission instead of an ASR request.
+- **File paths in the database are relative to the data directory.** Absolute
+  paths broke when the repository moved: all 133k transcript paths and 119k
+  audio paths named `/home/felix/projects/podcast-misinfo/downloader/data/...`,
+  and 6.6k more named a worktree that would be deleted. Writers store
+  `paths.to_stored(config, file)` (the `db.record_*` helpers reject anything
+  absolute); readers open `paths.resolve(config, value)`. Nothing else joins
+  or splits these paths. `migrate-paths` converted the old rows (2026-10-03;
+  old values in `path_migration_backup`).
 
 ## Transcription
 
@@ -225,6 +233,10 @@ the binding constraint).
   `error` row *with* `audio_file_path` failed transcription; *without* it, download.
   `has_rss_transcript = 1` rows are never downloaded.
 - `transcripts.metadata.source`: `asr` or `rss`.
+- `episodes.audio_file_path`, `episodes.transcript_file_path`,
+  `transcripts.file_path` are relative to `data/` (`audio/<show>/<file>.ogg`,
+  `transcripts/episode_<id>.jsonl.zst`); join them onto the data directory
+  (`paths.resolve`), including in code outside the pipeline.
 - Provenance: `podcast_sources` (how a podcast entered the catalog),
   `podcast_feeds` (every feed URL known for it, with item count and date span
   at the last read -- a rolling feed shows its oldest item moving forward),

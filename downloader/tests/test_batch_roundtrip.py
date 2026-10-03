@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from podcast_pipeline import db
+from podcast_pipeline import db, paths
 from podcast_pipeline.audio import MIN_AUDIO_BYTES
 from podcast_pipeline.batches import BatchFormatError, sha256_file
 from podcast_pipeline.models import FeedEpisode, PodcastRecord, Segment
@@ -33,7 +33,7 @@ def _source_batch(config, conn, tmp_path, count=2):
         audio = config.audio_dir / "remote-show" / f"episode-{index}.ogg"
         audio.parent.mkdir(parents=True, exist_ok=True)
         audio.write_bytes(bytes([index]) * (MIN_AUDIO_BYTES + index * 100))
-        db.record_download(conn, episode_id, audio, 1.0, 1.0, True)
+        db.record_download(conn, episode_id, paths.to_stored(config, audio), 1.0, 1.0, True)
         episode_ids.append(episode_id)
     conn.commit()
     transfer = tmp_path / "outbound"
@@ -110,7 +110,7 @@ def test_complete_remote_roundtrip_is_verified_resumable_and_idempotent(
         assert row["status"] == "transcribed"
         metadata = json.loads(row["metadata"])
         assert metadata["source_audio_batch_id"] == outbound["batch_id"]
-        loaded = TranscriptStore(config.transcript_dir).load(Path(row["transcript_file_path"]))
+        loaded = TranscriptStore(config.transcript_dir).load(paths.resolve(config, row["transcript_file_path"]))
         assert loaded.text == "Remote words here."
 
     repeated = import_transcript_batch.run(

@@ -59,9 +59,15 @@ class SpotifyConfig:
 
 @dataclass
 class DiscoveryConfig:
-    max_episodes_per_podcast: int = 5000  # newest N episodes of each feed are recorded
+    max_episodes_per_podcast: int = 5000  # newest N episodes of each feed are recorded (all pages)
     max_parallel_feeds: int = 8
     feed_timeout_seconds: int = 60
+    # Paged feeds (rel="next"/"prev-archive"; Megaphone's limit/offset): at most
+    # this many documents per feed. The Moth needs 6 pages of 195; Dan Le
+    # Batard's Megaphone feed over 5 pages of 1000.
+    max_feed_pages: int = 50
+    feed_page_size: int = 1000            # items per page where the host takes a size (Megaphone)
+    feed_page_delay_seconds: float = 1.0  # between pages of one feed
 
 
 @dataclass

@@ -20,9 +20,11 @@ import re
 import sqlite3
 from collections import defaultdict
 from dataclasses import dataclass
+from datetime import date
 
 from podcast_pipeline import db
 from podcast_pipeline.studies.base import Member, Study
+from podcast_pipeline.studies.quality import exclusion_reason
 
 logger = logging.getLogger(__name__)
 
@@ -146,7 +148,7 @@ def _select_episodes(conn: sqlite3.Connection, study: Study, members: list[Membe
     and, elsewhere, under a bare title) share the podcast's episodes: each
     episode is assigned once, to the first entity whose scope takes it.
     """
-    excluded = {"undated": 0, "duplicate": 0, "over_window_cap": 0}
+    excluded = {"undated": 0, "duplicate": 0, "over_window_cap": 0, "trailer_or_promo": 0}
     per_podcast: dict[int, list[Member]] = defaultdict(list)
     for m in members:
         if resolved[m.entity] is not None:
@@ -156,6 +158,11 @@ def _select_episodes(conn: sqlite3.Connection, study: Study, members: list[Membe
     taken: set[int] = set()
     for podcast_id, podcast_members in per_podcast.items():
         episodes = _podcast_episodes(conn, podcast_id, study.dedupe, excluded)
+        if study.exclude_trailers:
+            title = conn.execute("SELECT title FROM podcasts WHERE id = ?", (podcast_id,)).fetchone()[0]
+            kept = [ep for ep in episodes if exclusion_reason(ep, title) is None]
+            excluded["trailer_or_promo"] += len(episodes) - len(kept)
+            episodes = kept
         for m in podcast_members:
             if m.windows is None:
                 for ep in episodes:
@@ -180,7 +187,8 @@ def _select_episodes(conn: sqlite3.Connection, study: Study, members: list[Membe
 def _podcast_episodes(conn: sqlite3.Connection, podcast_id: int, dedupe: bool,
                       excluded: dict) -> list[sqlite3.Row]:
     rows = conn.execute("""
-        SELECT id, published_date, title,
+        SELECT id, published_date, title, duration_seconds,
+               json_extract(metadata, '$.episode_type') AS episode_type,
                (transcript_file_path IS NOT NULL AND transcript_file_path != '') AS done,
                (audio_file_path IS NOT NULL AND audio_file_path != '') AS has_audio
         FROM episodes WHERE podcast_id = ?
@@ -188,20 +196,43 @@ def _podcast_episodes(conn: sqlite3.Connection, podcast_id: int, dedupe: bool,
     """, (podcast_id,)).fetchall()
     if not dedupe:
         return rows
-    # Keep the copy with the most work already done, then the oldest row.
-    best: dict[tuple, sqlite3.Row] = {}
+    kept = [r for r in rows if r["published_date"] is None]
+    by_title: dict[str, list[sqlite3.Row]] = defaultdict(list)
     for r in rows:
-        if r["published_date"] is None:
-            best[("id", r["id"])] = r
-            continue
-        # Same day and same title once case, punctuation and spacing are
-        # ignored: re-issues often shift the timestamp or retouch the title.
-        key = (r["published_date"][:10], re.sub(r"[^a-z0-9]+", "", (r["title"] or "").lower()))
-        current = best.get(key)
-        if current is None or (r["done"], r["has_audio"]) > (current["done"], current["has_audio"]):
-            best[key] = r
-    excluded["duplicate"] += len(rows) - len(best)
-    return sorted(best.values(), key=lambda r: r["id"])
+        if r["published_date"] is not None:
+            # Case, punctuation and spacing are ignored: re-issues retouch titles.
+            by_title[re.sub(r"[^a-z0-9]+", "", (r["title"] or "").lower())].append(r)
+    for group in by_title.values():
+        group.sort(key=lambda r: r["published_date"])
+        cluster = [group[0]]
+        for r in group[1:]:
+            if _same_airing(cluster[-1], r):
+                cluster.append(r)
+                continue
+            kept.append(_best_copy(cluster))
+            cluster = [r]
+        kept.append(_best_copy(cluster))
+    excluded["duplicate"] += len(rows) - len(kept)
+    return sorted(kept, key=lambda r: r["id"])
+
+
+def _same_airing(a: sqlite3.Row, b: sqlite3.Row) -> bool:
+    """Same title, and either the same UTC day or adjacent days with matching
+    durations. A re-issue under a new GUID keeps its day, except across UTC
+    midnight (a feed migration can list one airing at 23:00 and 01:00); a show
+    that reuses one title for every daily episode is kept apart by duration."""
+    day_a, day_b = date.fromisoformat(a["published_date"][:10]), date.fromisoformat(b["published_date"][:10])
+    if day_a == day_b:
+        return True
+    if (day_b - day_a).days != 1:
+        return False
+    da, db_ = a["duration_seconds"], b["duration_seconds"]
+    return bool(da and db_ and abs(da - db_) <= 0.05 * max(da, db_))
+
+
+def _best_copy(copies: list[sqlite3.Row]) -> sqlite3.Row:
+    """The copy with the most work already done, then the oldest row."""
+    return min(copies, key=lambda r: (-r["done"], -r["has_audio"], r["id"]))
 
 
 def _cap(episodes: list[sqlite3.Row], cap: int | None) -> list[sqlite3.Row]:

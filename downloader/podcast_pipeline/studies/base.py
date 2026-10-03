@@ -62,10 +62,13 @@ class Study:
     #: the window and prefer episodes that already have a transcript, so a cap
     #: reuses finished work before asking for new downloads.
     max_per_window: ClassVar[int | None] = None
-    #: Drop episodes that repeat another's (podcast, published_date, title)
-    #: under a different GUID: publishers re-issue items, and each copy would
-    #: otherwise be downloaded and counted separately.
+    #: Drop episodes that repeat another's normalized title under a different
+    #: GUID on the same day (or the next, with a matching duration): publishers
+    #: re-issue items, and each copy would otherwise be downloaded and counted.
     dedupe: ClassVar[bool] = True
+    #: Leave out trailers, other shows' promos dropped into a feed, and items
+    #: shorter than ``quality.MIN_EPISODE_SECONDS`` (see ``quality.exclusion_reason``).
+    exclude_trailers: ClassVar[bool] = False
 
     def select(self, conn: sqlite3.Connection) -> list[Member]:
         raise NotImplementedError
@@ -81,6 +84,7 @@ class Study:
             "version": self.version,
             "max_per_window": self.max_per_window,
             "dedupe": self.dedupe,
+            "exclude_trailers": self.exclude_trailers,
             "params": self.params(),
         }
 

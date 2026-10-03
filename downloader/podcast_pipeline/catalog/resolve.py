@@ -441,11 +441,14 @@ def run(config: Config, conn: sqlite3.Connection, study: str, retry_failed: bool
             todo.append(m)
     conn.commit()
 
-    skipped_recent, no_route, attempt = [], [], []
+    manual = {r["entity"] for r in conn.execute("SELECT entity FROM entity_links WHERE method = 'manual'")}
+    skipped_recent, no_route, decided, attempt = [], [], [], []
     for m in todo:
         if m.kind not in ("podcast", "apple", "title"):
             raise ValueError(f"Unknown entity kind in study {study!r}: {m.entity!r}")
-        if m.kind == "podcast" and not _apple_id_of(conn, m.podcast_id):
+        if m.entity in manual:
+            decided.append(m)       # a link-entity decision is final; never re-resolved
+        elif m.kind == "podcast" and not _apple_id_of(conn, m.podcast_id):
             no_route.append(m)      # a catalog podcast with no Apple id: nothing to look up
         elif not retry_failed and _recently_failed(conn, m, search, config.resolve.retry_after_days):
             skipped_recent.append(m)
@@ -518,6 +521,7 @@ def run(config: Config, conn: sqlite3.Connection, study: str, retry_failed: bool
         "attempted": len(attempt),
         "skipped_recent_failure": len(skipped_recent),
         "no_route": len(no_route),
+        "manual_decisions": len(decided),
         "outcomes": dict(outcomes),
         "methods": dict(methods),
         "searches": searcher.requests if searcher else 0,

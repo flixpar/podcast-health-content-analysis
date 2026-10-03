@@ -14,7 +14,7 @@ import threading
 from dataclasses import dataclass
 from pathlib import Path
 
-from podcast_pipeline import db
+from podcast_pipeline import db, paths
 from podcast_pipeline.asr.vad import vad_metadata
 from podcast_pipeline.config import Config
 from podcast_pipeline.models import Segment
@@ -47,7 +47,8 @@ class WorkerFinished:
 _DONE = object()
 
 
-def episodes_to_transcribe(conn: sqlite3.Connection, retry_errors: bool, limit: int | None,
+def episodes_to_transcribe(config: Config, conn: sqlite3.Connection, retry_errors: bool,
+                           limit: int | None,
                            study: str | None = None) -> list[Job]:
     statuses = [db.EpisodeStatus.DOWNLOADED] + ([db.EpisodeStatus.ERROR] if retry_errors else [])
     study_clause, study_params = episode_filter(conn, study, "id")
@@ -61,12 +62,12 @@ def episodes_to_transcribe(conn: sqlite3.Connection, retry_errors: bool, limit: 
         ORDER BY published_date DESC
         {"LIMIT ?" if limit else ""}
     """, statuses + study_params + ([limit] if limit else [])).fetchall()
-    return [Job(row["id"], row["title"], Path(row["audio_file_path"])) for row in rows]
+    return [Job(row["id"], row["title"], paths.resolve(config, row["audio_file_path"])) for row in rows]
 
 
 def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
         retry_errors: bool = False, study: str | None = None) -> dict:
-    jobs = episodes_to_transcribe(conn, retry_errors, limit, study)
+    jobs = episodes_to_transcribe(config, conn, retry_errors, limit, study)
     logger.info(f"Transcribing {len(jobs)} episodes on GPUs {config.transcription.gpu_ids}")
     stats = {"total": len(jobs), "transcribed": 0, "failed": 0, "missing_audio": 0}
     if not jobs:
@@ -120,7 +121,8 @@ def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
             "rtf": round(result.rtf, 4), "episode_title": outcome.job.title,
             **detection_metadata,
         })
-        db.record_transcript(conn, outcome.job.episode_id, saved.path, saved.word_count,
+        db.record_transcript(conn, outcome.job.episode_id, paths.to_stored(config, saved.path),
+                             saved.word_count,
                              saved.duration_seconds, has_timestamps=saved.has_timestamps,
                              has_speakers=False,
                              metadata={"source": "asr", "model": config.transcription.model_name,

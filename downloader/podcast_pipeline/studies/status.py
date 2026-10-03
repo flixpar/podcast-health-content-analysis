@@ -10,7 +10,7 @@ import shutil
 import sqlite3
 
 from podcast_pipeline.config import Config
-from podcast_pipeline.studies.gaps import study_gaps
+from podcast_pipeline.studies.gaps import GAP_CLASSES, TARGET_CLASSES, classify_study
 from podcast_pipeline.studies.scope import require_refreshed
 
 # Episode state, from the shared catalog's point of view. The order is the
@@ -86,19 +86,28 @@ def status(config: Config, conn: sqlite3.Connection, name: str, by: str = "year"
                               out["episodes"].get("awaiting_download", 0))
 
     windowed = conn.execute("SELECT COUNT(*) FROM study_windows WHERE study = ?", (name,)).fetchone()[0]
+    classified = classify_study(conn, name) if windowed else []
     if windowed:
         out["windows"] = _window_coverage(conn, name)
-        gaps = study_gaps(conn, name)
-        out["windows"]["gap_windows"] = sum(len(g.windows) for g in gaps)
-        out["windows"]["gap_windows_empty"] = sum(len(g.empty) for g in gaps)
-        out["windows"]["podcasts_with_gaps"] = len(gaps)
+        gap_windows = [w for g in classified for w in g.classified]
+        out["windows"]["gap_windows"] = len(gap_windows)
+        out["windows"]["gap_windows_empty"] = sum(w.empty for w in gap_windows)
+        out["windows"]["podcasts_with_gaps"] = sum(1 for g in classified if g.classified)
+        # Why each gap is empty: only missing/unknown are worth an archive search.
+        out["windows"]["gap_classes"] = {c: sum(w.gap_class == c for w in gap_windows) for c in GAP_CLASSES}
+        out["windows"]["gap_classes_empty"] = {c: sum(w.gap_class == c and w.empty for w in gap_windows)
+                                               for c in GAP_CLASSES}
+        out["windows"]["launch_windows"] = sum(len(g.launch_windows) for g in classified)
+        targets = [g for g in classified if any(w.gap_class in TARGET_CLASSES for w in g.classified)]
+        out["windows"]["archive_targets"] = sum(w.gap_class in TARGET_CLASSES for w in gap_windows)
+        out["windows"]["podcasts_with_archive_targets"] = len(targets)
     out["wayback_probes"] = {r["status"]: r["n"] for r in conn.execute("""
         SELECT w.status, COUNT(*) AS n FROM wayback_probes w
         WHERE w.podcast_id IN (SELECT podcast_id FROM study_members WHERE study = ?)
         GROUP BY w.status
     """, (name,))}
 
-    out[f"by_{by}"] = _breakdown(conn, name, by)
+    out[f"by_{by}"] = _breakdown(conn, name, by, classified)
     out["next_steps"] = _next_steps(name, out)
     return out
 
@@ -149,7 +158,47 @@ def _window_coverage(conn, name: str) -> dict:
     return {k: r[k] or 0 for k in r.keys()}
 
 
-def _breakdown(conn, name: str, by: str) -> list[dict]:
+def _breakdown(conn, name: str, by: str, classified: list) -> list[dict]:
+    if by == "window" and classified:
+        return _window_breakdown(conn, name, classified)
+    rows = _episode_breakdown(conn, name, by)
+    if by == "member" and classified:
+        # Gap classes are per podcast; a member shows its podcast's.
+        podcast_of = dict(conn.execute("SELECT entity, podcast_id FROM study_members WHERE study = ?",
+                                       (name,)).fetchall())
+        by_podcast = {g.podcast_id: g for g in classified}
+        for r in rows:
+            g = by_podcast.get(podcast_of.get(r["key"]))
+            if g is not None:
+                r["gap_classes"] = {c: [w.label for w in g.classified if w.gap_class == c]
+                                    for c in GAP_CLASSES if any(w.gap_class == c for w in g.classified)}
+    return rows
+
+
+def _window_breakdown(conn, name: str, classified: list) -> list[dict]:
+    """One row per window label: episodes, plus how many members have a gap there, by class."""
+    rows = {r["key"]: dict(r) for r in _episode_breakdown(conn, name, "window")}
+    members = dict(conn.execute("""
+        SELECT label, COUNT(*) FROM study_windows WHERE study = ? GROUP BY label
+    """, (name,)).fetchall())
+    gaps: dict[str, dict] = {}
+    for g in classified:
+        for w in g.classified:
+            entry = gaps.setdefault(w.label, {c: 0 for c in GAP_CLASSES})
+            entry[w.gap_class] += 1
+        for label in g.launch_windows:
+            gaps.setdefault(label, {c: 0 for c in GAP_CLASSES})
+    out = []
+    for label in sorted(set(members) | set(rows)):
+        row = rows.get(label, {"key": label, "label": label, "episodes": 0, "transcribed": 0,
+                               "awaiting_asr": 0, "needs_audio": 0})
+        row["members"] = members.get(label, 0)
+        row["gap_classes"] = gaps.get(label, {c: 0 for c in GAP_CLASSES})
+        out.append(row)
+    return out
+
+
+def _episode_breakdown(conn, name: str, by: str) -> list[dict]:
     if by == "member":
         group, label = "sm.entity", "sm.name"
     elif by == "window":
@@ -191,11 +240,17 @@ def _next_steps(name: str, s: dict) -> list[str]:
     if members["feed_never_read"]:
         steps.append(f"discover --study {name}   # {members['feed_never_read']} resolved podcasts "
                      f"never had their feed read; then `study refresh {name}`")
-    if s.get("windows", {}).get("gap_windows"):
+    if s.get("windows", {}).get("archive_targets"):
         w = s["windows"]
-        steps.append(f"discover-archived --study {name}   # {w['gap_windows']} windows across "
-                     f"{w['podcasts_with_gaps']} podcasts that live feeds do not fully reach "
-                     f"({w['gap_windows_empty']} empty); then `study refresh {name}`")
+        c = w["gap_classes"]
+        steps.append(f"discover-archived --study {name}   # {w['archive_targets']} windows across "
+                     f"{w['podcasts_with_archive_targets']} podcasts that live feeds do not reach "
+                     f"({c['missing']} missing, {c['unknown']} unknown; {c['not_publishing']} more "
+                     f"where the show was not publishing are skipped); then `study refresh {name}`")
+    if s.get("windows", {}).get("gap_classes", {}).get("before_launch"):
+        steps.append(f"review {s['windows']['gap_classes']['before_launch']} windows that precede "
+                     f"their show's first episode (chart identity or archive errors): "
+                     f"`study status {name} --by member`")
     if episodes.get("awaiting_rss_transcript"):
         steps.append(f"fetch-rss-transcripts --study {name}   # {episodes['awaiting_rss_transcript']} "
                      f"publisher transcripts to fetch")

@@ -3,7 +3,7 @@ from unittest.mock import Mock
 import pytest
 import requests
 
-from podcast_pipeline.rss import FeedError, _duration_seconds, fetch_feed, parse_feed
+from podcast_pipeline.rss import FeedError, _duration_seconds, fetch_feed, parse_feed, read_feed
 
 FEED = b"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
@@ -111,3 +111,106 @@ def test_feedburner_proxy_enclosures_use_the_original_link():
     </item></channel></rss>"""
     [episode] = parse_feed(feed)
     assert episode.audio_url == "http://www.podtrac.com/pts/redirect.mp3/host.com/ep.mp3"
+
+
+# --- paged feeds -----------------------------------------------------------------
+
+def page(guids, next_href=None, rel="next"):
+    """A feed document listing ``guids``, optionally linking to an older page."""
+    link = f'<atom:link rel="{rel}" href="{next_href}"/>' if next_href else ""
+    items = "".join(f"<item><guid>{g}</guid><title>{g}</title>"
+                    f'<enclosure url="https://a/{g}.mp3" type="audio/mpeg"/></item>' for g in guids)
+    return (f'<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>t</title>'
+            f'<atom:link rel="self" href="https://x/feed"/>{link}{items}</channel></rss>').encode()
+
+
+class Pages:
+    """A fake session serving fixed documents by URL; anything else is a 404."""
+
+    def __init__(self, docs):
+        self.docs = docs
+        self.requested = []
+
+    def get(self, url, timeout=None, headers=None):
+        self.requested.append(url)
+        if url not in self.docs:
+            raise requests.HTTPError(f"404 for {url}")
+        return Mock(content=self.docs[url], url=url, raise_for_status=Mock())
+
+
+def test_unpaged_feed_reads_exactly_as_before():
+    session = Pages({"https://x/feed": FEED})
+    read = read_feed("https://x/feed", session, max_pages=10)
+    assert [e.guid for e in read.episodes] == [e.guid for e in parse_feed(FEED)]
+    assert (read.pages, read.stopped, read.partial) == (1, "complete", False)
+
+
+def test_follows_next_links_and_merges_pages_newest_first():
+    session = Pages({
+        "https://x/feed": page(["e5", "e4"], "https://x/feed?page=2"),
+        "https://x/feed?page=2": page(["e4", "e3", "e2"], "?page=3"),     # overlap; relative link
+        "https://x/feed?page=3": page(["e1"]),
+    })
+    read = read_feed("https://x/feed", session, max_pages=10)
+    assert [e.guid for e in read.episodes] == ["e5", "e4", "e3", "e2", "e1"]
+    assert (read.pages, read.stopped) == (3, "complete")
+
+
+def test_prev_archive_links_are_followed():
+    session = Pages({"https://x/feed": page(["new"], "https://x/archive/1", rel="prev-archive"),
+                     "https://x/archive/1": page(["old"])})
+    assert [e.guid for e in read_feed("https://x/feed", session, max_pages=5).episodes] == ["new", "old"]
+
+
+def test_paging_stops_on_a_loop_and_on_a_page_with_nothing_new():
+    loop = Pages({"https://x/feed": page(["a"], "https://x/p2"),
+                  "https://x/p2": page(["b"], "https://x/feed")})
+    read = read_feed("https://x/feed", loop, max_pages=10)
+    assert ([e.guid for e in read.episodes], read.stopped) == (["a", "b"], "loop")
+
+    stale = Pages({"https://x/feed": page(["a"], "https://x/p2"),
+                   "https://x/p2": page(["a"], "https://x/p3"),
+                   "https://x/p3": page(["z"])})
+    read = read_feed("https://x/feed", stale, max_pages=10)
+    assert ([e.guid for e in read.episodes], read.stopped) == (["a"], "no_new_items")
+    assert "https://x/p3" not in stale.requested
+
+
+def test_paging_is_bounded_and_a_cut_short_read_says_so():
+    docs = {f"https://x/p{i}": page([f"e{i}"], f"https://x/p{i + 1}") for i in range(1, 10)}
+    read = read_feed("https://x/p1", Pages(docs), max_pages=3)
+    assert [e.guid for e in read.episodes] == ["e1", "e2", "e3"]
+    assert read.partial and read.stopped == "max_pages" and "https://x/p4" in read.error
+
+
+def test_a_failed_later_page_keeps_the_earlier_ones():
+    session = Pages({"https://x/feed": page(["a"], "https://x/gone")})
+    read = read_feed("https://x/feed", session, max_pages=5)
+    assert [e.guid for e in read.episodes] == ["a"]
+    assert read.partial and read.stopped == "page_error" and "404" in read.error
+
+
+def test_a_failed_first_page_is_a_feed_error():
+    with pytest.raises(FeedError, match="fetch failed"):
+        read_feed("https://x/feed", Pages({}), max_pages=5)
+    with pytest.raises(FeedError, match="unparseable"):
+        read_feed("https://x/feed", Pages({"https://x/feed": b"not a feed"}), max_pages=5)
+
+
+def test_megaphone_feeds_are_read_with_limit_and_offset():
+    """Megaphone caps a feed at a per-show default (ESPN: 200) unless asked
+    for more; it publishes no next link, so full pages are followed by offset."""
+    base = "https://feeds.megaphone.fm/ESP123"
+    session = Pages({
+        f"{base}?limit=2": page(["e5", "e4"]),
+        f"{base}?limit=2&offset=2": page(["e3", "e2"]),
+        f"{base}?limit=2&offset=4": page(["e1"]),
+    })
+    read = read_feed(base, session, max_pages=10, page_size=2)
+    assert [e.guid for e in read.episodes] == ["e5", "e4", "e3", "e2", "e1"]
+    assert (read.pages, read.stopped) == (3, "complete")
+
+    # A proxy in front of Megaphone drops the query, so only Megaphone's own host is paged.
+    proxied = Pages({"https://rss.pdrl.fm/abc/feeds.megaphone.fm/ESP123": page(["e5", "e4"])})
+    assert read_feed("https://rss.pdrl.fm/abc/feeds.megaphone.fm/ESP123", proxied,
+                     max_pages=10, page_size=2).pages == 1

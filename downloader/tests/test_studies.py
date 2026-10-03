@@ -5,6 +5,7 @@ import pytest
 from podcast_pipeline import db
 from podcast_pipeline.models import FeedEpisode, PodcastRecord
 from podcast_pipeline.pipeline import discover, download
+from podcast_pipeline.rss import FeedRead
 from podcast_pipeline.studies import apple_top24_monthly as top24
 from podcast_pipeline.studies.base import Member, Study, Window
 from podcast_pipeline.studies.corpus_2025 import Corpus2025
@@ -28,9 +29,9 @@ def add_episode(conn, podcast_id, guid, date, title=None, transcript=False, audi
     eid = conn.execute("SELECT id FROM episodes WHERE episode_guid = ?", (guid,)).fetchone()[0]
     if audio or transcript:
         conn.execute("UPDATE episodes SET audio_file_path = ?, status = 'downloaded' WHERE id = ?",
-                     (f"/audio/{guid}.ogg", eid))
+                     (f"audio/show/{guid}.ogg", eid))
     if transcript:
-        db.record_transcript(conn, eid, f"/t/episode_{eid}.jsonl.zst", 10, 60.0, True, False,
+        db.record_transcript(conn, eid, f"transcripts/episode_{eid}.jsonl.zst", 10, 60.0, True, False,
                              {"source": "asr"})
     return eid
 
@@ -147,9 +148,9 @@ def test_discover_defaults_to_study_podcasts(conn, config, monkeypatch):
     conn.commit()
     refresh(conn, FixedStudy([Member(f"podcast:{p1}")]))
     read = []
-    monkeypatch.setattr(discover, "fetch_feed", lambda url, *a: read.append(url) or [
+    monkeypatch.setattr(discover, "read_feed", lambda url, *a: read.append(url) or FeedRead([
         FeedEpisode(guid=f"{url}#1", title="t", audio_url="https://a/1.mp3",
-                    published_date="2026-01-01T00:00:00")])
+                    published_date="2026-01-01T00:00:00")], 1, "complete"))
     discover.run(config, conn)
     assert read == ["https://feeds.example/1"]
     feed = conn.execute("SELECT item_count, oldest_item FROM podcast_feeds WHERE podcast_id = ?",
@@ -188,10 +189,9 @@ def test_status_gaps_and_export(conn, config, tmp_path):
     assert s["windows"]["imputed_from_neighbouring_snapshots"] == 1
     assert any(step.startswith("discover-archived") for step in s["next_steps"])
 
-    transcript = tmp_path / f"episode_{done}.jsonl.zst"
+    transcript = config.transcript_dir / f"episode_{done}.jsonl.zst"
+    transcript.parent.mkdir(parents=True, exist_ok=True)
     transcript.write_bytes(b"x")
-    conn.execute("UPDATE transcripts SET file_path = ? WHERE episode_id = ?", (str(transcript), done))
-    conn.commit()
     links = tmp_path / "links"
     result = export(config, conn, "fixed", output=tmp_path / "m" / "episodes.csv", link_transcripts=links)
     assert result["episodes"] == 2 and result["linked"] == 1
@@ -309,3 +309,155 @@ def test_dedupe_ignores_time_and_punctuation_drift(conn):
     add_episode(conn, p, "b", "2020-01-01T09:30:00", title="Ep 12 - The Thing")
     conn.commit()
     assert refresh(conn, FixedStudy([Member(f"podcast:{p}")]))["excluded"]["duplicate"] == 1
+
+
+# --- gap classes ------------------------------------------------------------------
+
+def month(label):
+    y, m = map(int, label.split("-"))
+    end = f"{y + (m == 12)}-{m % 12 + 1:02d}-01"
+    return Window(label, f"{label}-01", end)
+
+
+def weekly(conn, podcast_id, prefix, first, last, **kw):
+    """One episode a week from ``first`` to ``last`` (ISO days)."""
+    from datetime import date, timedelta
+    day, n = date.fromisoformat(first), 0
+    while day <= date.fromisoformat(last):
+        n += 1
+        db.insert_episode(conn, podcast_id, FeedEpisode(
+            f"{prefix}-{n}", kw.get("title", "{prefix} {n}").format(prefix=prefix, n=n),
+            f"https://a/{prefix}{n}.mp3", published_date=f"{day}T00:00:00"))
+        day += timedelta(days=7)
+
+
+def live_read(conn, podcast_id, oldest, read_on, items, status="ok"):
+    url = conn.execute("SELECT rss_url FROM podcasts WHERE id = ?", (podcast_id,)).fetchone()[0]
+    db.record_feed_read(conn, podcast_id, url, status)
+    conn.execute("UPDATE podcast_feeds SET oldest_item = ?, last_read_at = ?, item_count = ? "
+                 "WHERE podcast_id = ? AND url = ?", (oldest, read_on, items, podcast_id, url))
+
+
+def classes_of(conn, study="fixed"):
+    from podcast_pipeline.studies.gaps import GAP_CLASSES
+    return {(g.podcast_id, w.label): w.gap_class
+            for g in study_gaps(conn, study, classes=GAP_CLASSES) for w in g.classified}
+
+
+def test_a_finished_series_is_not_publishing_and_not_an_archive_target(conn, config):
+    """S-Town: seven episodes in March 2017, then years of back-catalog charting."""
+    p = add_podcast(conn, 1)
+    db.insert_episode(conn, p, FeedEpisode("t", "Introducing S-Town", "https://a/t.mp3",
+                                           published_date="2017-03-05T00:00:00", episode_type="trailer"))
+    for n in range(1, 8):
+        add_episode(conn, p, f"s{n}", "2017-03-28T00:00:00", title=f"Chapter {n}")
+    live_read(conn, p, "2017-03-05T00:00:00", "2026-10-02 12:00:00", 8)
+    conn.commit()
+    refresh(conn, FixedStudy([Member("apple:1", "S-Town", [month("2017-02"), month("2017-03"),
+                                                           month("2017-05"), month("2018-01")])]))
+    assert classes_of(conn) == {(p, "2017-02"): "before_launch",      # charted before it existed
+                                (p, "2017-05"): "not_publishing",
+                                (p, "2018-01"): "not_publishing"}
+    assert study_gaps(conn, "fixed") == []                 # nothing for discover-archived
+    s = status(config, conn, "fixed")
+    w = s["windows"]
+    assert w["gap_classes"] == {"missing": 0, "unknown": 0, "not_publishing": 2, "before_launch": 1}
+    assert w["launch_windows"] == 1 and w["archive_targets"] == 0
+    assert not any(step.startswith("discover-archived") for step in s["next_steps"])
+    assert any("precede their show's first episode" in step for step in s["next_steps"])
+
+    by_window = {r["label"]: r for r in status(config, conn, "fixed", by="window")["by_window"]}
+    assert by_window["2017-05"]["gap_classes"]["not_publishing"] == 1 and by_window["2017-05"]["episodes"] == 0
+    assert by_window["2017-03"]["episodes"] == 8
+    by_member = status(config, conn, "fixed", by="member")["by_member"]
+    assert by_member[0]["gap_classes"] == {"not_publishing": ["2017-05", "2018-01"], "before_launch": ["2017-02"]}
+
+
+def test_a_rolling_feed_leaves_missing_windows_for_the_archive(conn):
+    """A weekly show whose live feed keeps only recent items: Wayback gave us
+    2016, the feed reaches back to 2020, and 2018 is in neither."""
+    p = add_podcast(conn, 1)
+    weekly(conn, p, "old", "2016-01-04", "2016-12-26", title="Ep. {n}0")   # numbered from 10
+    weekly(conn, p, "new", "2020-01-06", "2026-09-28")
+    live_read(conn, p, "2020-01-06T00:00:00", "2026-10-02 12:00:00", 300)
+    conn.execute("INSERT INTO wayback_probes (podcast_id, url, status, detail) VALUES (?, 'u', 'ok', ?)",
+                 (p, json.dumps({"captures_used": [{"timestamp": "20170101000000", "episodes": 52,
+                                                    "oldest": "2016-01-04"}]})))
+    conn.commit()
+    windows = [month("2015-11"), month("2016-06"), month("2018-03"), month("2023-05")]
+    refresh(conn, FixedStudy([Member("apple:1", "Show 1", windows)]))
+    classes = classes_of(conn)
+    assert classes == {(p, "2015-11"): "missing", (p, "2018-03"): "missing"}
+    [gaps] = study_gaps(conn, "fixed")
+    assert [w[0] for w in gaps.windows] == ["2015-11", "2018-03"] and gaps.empty == {"2015-11", "2018-03"}
+    reasons = {w.label: w.reason for w in gaps.classified}
+    assert "numbered from 10" in reasons["2015-11"] and "no listing covers it" in reasons["2018-03"]
+
+
+def test_a_feed_that_skips_items_covers_nothing(conn):
+    """The Daily's public feed lists 63 items: the last few weeks plus a few
+    re-surfaced old episodes. Its date span is not coverage."""
+    p = add_podcast(conn, 1)
+    weekly(conn, p, "o", "2021-10-04", "2021-11-08")       # held from earlier reads
+    weekly(conn, p, "w", "2024-01-01", "2026-09-28")
+    live_read(conn, p, "2021-10-04T00:00:00", "2026-10-02 12:00:00", 20)
+    conn.commit()
+    refresh(conn, FixedStudy([Member("apple:1", "Show 1", [month("2019-05"), month("2023-03")])]))
+    [gaps] = study_gaps(conn, "fixed")
+    reasons = {w.label: (w.gap_class, w.reason) for w in gaps.classified}
+    assert reasons["2019-05"][0] == "missing" and "skips some" in reasons["2019-05"][1]
+    assert reasons["2023-03"][0] == "unknown"           # a year-long hole, and no rolling evidence
+
+
+def test_without_evidence_a_gap_is_unknown(conn):
+    p = add_podcast(conn, 1)
+    add_episode(conn, p, "a", "2020-06-10T00:00:00", title="On the economy")
+    add_episode(conn, p, "b", "2020-06-17T00:00:00", title="On the weather")
+    p2 = add_podcast(conn, 2)                                # resolved, but no episodes at all
+    conn.commit()
+    refresh(conn, FixedStudy([Member("apple:1", "Show 1", [month("2020-04"), month("2020-06")]),
+                              Member("apple:2", "Show 2", [month("2020-04")])]))
+    assert classes_of(conn) == {(p, "2020-04"): "unknown", (p, "2020-06"): "unknown",
+                                (p2, "2020-04"): "unknown"}
+
+
+def test_manual_identity_links_are_never_before_launch(conn):
+    p = add_podcast(conn, 1)
+    add_episode(conn, p, "late", "2021-06-01T00:00:00")
+    db.link_entity(conn, "title:renamed", p, "manual", {"note": "renamed show"})
+    conn.commit()
+    w = [Window("2019-03", "2019-03-01", "2019-04-01")]
+    refresh(conn, FixedStudy([Member("title:renamed", "Renamed", w)]))
+    [g] = study_gaps(conn, "fixed")
+    assert [c.gap_class for c in g.classified] == ["unknown"]
+
+
+def test_dedupe_across_utc_midnight_needs_matching_duration(conn):
+    p = add_podcast(conn, 1)
+    for guid, when in (("a", "2018-01-07T23:30:00"), ("b", "2018-01-08T00:30:00")):
+        add_episode(conn, p, guid, when, title="550: Three Miles")
+    conn.execute("UPDATE episodes SET duration_seconds = 3600")
+    # a daily show reusing one title: adjacent days, different lengths
+    for guid, when, secs in (("c", "2018-02-01T06:00:00", 1500), ("d", "2018-02-02T06:00:00", 2400)):
+        add_episode(conn, p, guid, when, title="Morning Briefing")
+        conn.execute("UPDATE episodes SET duration_seconds = ? WHERE episode_guid = ?", (secs, guid))
+    conn.commit()
+    summary = refresh(conn, FixedStudy([Member(f"podcast:{p}")]))
+    assert summary["excluded"]["duplicate"] == 1 and summary["episodes"] == 3
+
+
+class NoTrailers(FixedStudy):
+    exclude_trailers = True
+
+
+def test_trailers_promos_and_clips_are_excluded_when_asked(conn):
+    p = add_podcast(conn, 1)
+    keep = add_episode(conn, p, "real", "2020-01-02T00:00:00", title="Episode 1: The Start")
+    add_episode(conn, p, "promo", "2020-01-03T00:00:00", title="Introducing: Some Other Show")
+    clip = add_episode(conn, p, "clip", "2020-01-04T00:00:00", title="A quick note")
+    conn.execute("UPDATE episodes SET duration_seconds = 40 WHERE id = ?", (clip,))
+    conn.execute("UPDATE episodes SET duration_seconds = 3000 WHERE id != ?", (clip,))
+    conn.commit()
+    summary = refresh(conn, NoTrailers([Member(f"podcast:{p}")]))
+    assert list(episodes_of(conn, "fixed")) == [keep]
+    assert summary["excluded"]["trailer_or_promo"] == 2

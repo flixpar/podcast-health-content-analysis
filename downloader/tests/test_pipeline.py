@@ -4,10 +4,12 @@ network and GPU replaced by fakes at the module boundary."""
 import sys
 import types
 from pathlib import Path
+from unittest.mock import Mock
 
 import pytest
+import requests
 
-from podcast_pipeline import db
+from podcast_pipeline import db, paths
 from podcast_pipeline.audio import MIN_AUDIO_BYTES
 from podcast_pipeline.audio.download import DownloadError, DownloadResult
 from podcast_pipeline.audio.ffmpeg import EncodeError
@@ -16,7 +18,7 @@ from podcast_pipeline.pipeline import (audit, convert_audio, discover, download,
                                        fetch_podcasts, reset_transcripts, rss_transcripts,
                                        stats, transcribe)
 from podcast_pipeline.pipeline.rss_transcripts import FetchedTranscript, RssTranscriptError
-from podcast_pipeline.rss import FeedError
+from podcast_pipeline.rss import FeedError, FeedRead
 from podcast_pipeline.transcripts.store import TranscriptStore
 
 REAL_AUDIO = b"\0" * (MIN_AUDIO_BYTES + 1)
@@ -47,7 +49,7 @@ def seeded(config, conn, monkeypatch):
         "https://x/two": [FeedEpisode("g3", "Has Transcript", "https://x/3.mp3",
                                       transcript_url="https://x/3.srt")],
     }
-    monkeypatch.setattr(discover, "fetch_feed", lambda url, session, timeout: feeds[url])
+    monkeypatch.setattr(discover, "read_feed", lambda url, session, *a: FeedRead(feeds[url], 1, "complete"))
     discover.run(config, conn, all_podcasts=True)
     return config, conn
 
@@ -92,12 +94,13 @@ def test_refetching_a_chart_updates_rank_without_duplicating(seeded, config, mon
 def test_discover_is_idempotent_and_marks_feed_errors(seeded, monkeypatch):
     config, conn = seeded
 
-    def flaky(url, session, timeout):
+    def flaky(url, session, *a):
         if url == "https://x/one":
             raise FeedError("404")
-        return [FeedEpisode("g3", "Has Transcript", "https://x/3.mp3"), FeedEpisode("g4", "New", "https://x/4.mp3")]
+        return FeedRead([FeedEpisode("g3", "Has Transcript", "https://x/3.mp3"),
+                         FeedEpisode("g4", "New", "https://x/4.mp3")], 1, "complete")
 
-    monkeypatch.setattr(discover, "fetch_feed", flaky)
+    monkeypatch.setattr(discover, "read_feed", flaky)
     result = discover.run(config, conn, all_podcasts=True)
     assert result["feed_errors"] == 1 and result["episodes_new"] == 1
     assert conn.execute("SELECT status FROM podcasts WHERE title='Show One'").fetchone()[0] == "error"
@@ -106,7 +109,7 @@ def test_discover_is_idempotent_and_marks_feed_errors(seeded, monkeypatch):
 
 def test_download_records_results_and_errors(seeded, monkeypatch):
     config, conn = seeded
-    outcomes = {"https://x/1.mp3": DownloadResult(Path("/audio/1.ogg"), 100.0, 20.0, True),
+    outcomes = {"https://x/1.mp3": DownloadResult(config.audio_dir / "1.ogg", 100.0, 20.0, True),
                 "https://x/2.mp3": DownloadError("HTTP 404")}
 
     class FakeDownloader:
@@ -124,12 +127,12 @@ def test_download_records_results_and_errors(seeded, monkeypatch):
     assert result == {"total": 2, "downloaded": 1, "reused": 0, "failed": 1, "not_attempted": 0}
 
     rows = {r["episode_guid"]: r for r in conn.execute("SELECT * FROM episodes")}
-    assert rows["g1"]["status"] == "downloaded" and rows["g1"]["audio_file_path"] == "/audio/1.ogg"
+    assert rows["g1"]["status"] == "downloaded" and rows["g1"]["audio_file_path"] == "audio/1.ogg"
     assert rows["g2"]["status"] == "error" and rows["g2"]["error_message"] == "HTTP 404"
     assert rows["g3"]["status"] == "pending"   # publisher transcript: never downloaded
 
     # A second pass retries the failure only.
-    outcomes["https://x/2.mp3"] = DownloadResult(Path("/audio/2.mp3"), 10.0, 10.0, False)
+    outcomes["https://x/2.mp3"] = DownloadResult(config.audio_dir / "2.mp3", 10.0, 10.0, False)
     assert download.run(config, conn)["downloaded"] == 1
     assert download.run(config, conn)["total"] == 0
 
@@ -145,8 +148,11 @@ def test_rss_transcripts(seeded, monkeypatch):
     row = conn.execute("SELECT e.status, t.has_speakers, t.duration_seconds, t.metadata "
                        "FROM episodes e JOIN transcripts t ON t.episode_id = e.id").fetchone()
     assert row[0] == "transcribed" and row[1] == 1 and row[2] == 9.5 and '"source": "rss"' in row[3]
-    assert TranscriptStore(config.transcript_dir).load(Path(conn.execute(
-        "SELECT transcript_file_path FROM episodes WHERE status='transcribed'").fetchone()[0])).segments[1].text.startswith("Bob")
+    eid, stored = conn.execute(
+        "SELECT id, transcript_file_path FROM episodes WHERE status='transcribed'").fetchone()
+    assert stored == f"transcripts/episode_{eid}.jsonl.zst"
+    assert TranscriptStore(config.transcript_dir).load(
+        paths.resolve(config, stored)).segments[1].text.startswith("Bob")
 
     monkeypatch.setattr(rss_transcripts, "fetch_one",
                         lambda *a: (_ for _ in ()).throw(RssTranscriptError("too_short", "3 words")))
@@ -159,8 +165,8 @@ def test_transcribe_with_fake_model(seeded, monkeypatch):
     audio.parent.mkdir(parents=True)
     audio.write_bytes(REAL_AUDIO)
     ids = {r[0]: r[1] for r in conn.execute("SELECT episode_guid, id FROM episodes")}
-    db.record_download(conn, ids["g1"], audio, 1.0, 1.0, False)
-    db.record_download(conn, ids["g2"], Path("/missing.mp3"), 1.0, 1.0, False)
+    db.record_download(conn, ids["g1"], paths.to_stored(config, audio), 1.0, 1.0, False)
+    db.record_download(conn, ids["g2"], "audio/missing.mp3", 1.0, 1.0, False)
     conn.commit()
 
     class FakeResult:
@@ -188,13 +194,14 @@ def test_transcribe_with_fake_model(seeded, monkeypatch):
     assert result == {"total": 2, "transcribed": 1, "failed": 0, "missing_audio": 1}
     row = conn.execute("SELECT status, transcript_file_path FROM episodes WHERE id = ?", (ids["g1"],)).fetchone()
     assert row[0] == "transcribed"
-    loaded = TranscriptStore(config.transcript_dir).load(Path(row[1]))
+    assert not row[1].startswith("/")
+    loaded = TranscriptStore(config.transcript_dir).load(paths.resolve(config, row[1]))
     assert loaded.text == "Hello world. Bye." and loaded.metadata["source"] == "asr"
     assert conn.execute("SELECT status FROM episodes WHERE id = ?", (ids["g2"],)).fetchone()[0] == "error"
 
     # reset-transcripts puts it back for another pass; RSS transcripts are untouched.
     assert reset_transcripts.run(config, conn, everything=True)["reset"] == 1
-    assert not Path(row[1]).exists()
+    assert not paths.resolve(config, row[1]).exists()
     assert conn.execute("SELECT status FROM episodes WHERE id = ?", (ids["g1"],)).fetchone()[0] == "downloaded"
 
 
@@ -206,7 +213,7 @@ def test_transcribe_propagates_worker_initialization_failure(seeded, monkeypatch
     episode_id = conn.execute(
         "SELECT id FROM episodes WHERE episode_guid='g1'"
     ).fetchone()[0]
-    db.record_download(conn, episode_id, audio, 1.0, 1.0, False)
+    db.record_download(conn, episode_id, paths.to_stored(config, audio), 1.0, 1.0, False)
     conn.commit()
 
     class BrokenTranscriber:
@@ -232,7 +239,7 @@ def test_convert_audio_commits_before_deleting(seeded, monkeypatch):
     big.parent.mkdir(parents=True)
     big.write_bytes(REAL_AUDIO)
     ids = {r[0]: r[1] for r in conn.execute("SELECT episode_guid, id FROM episodes")}
-    db.record_download(conn, ids["g1"], big, 5.0, 5.0, False)
+    db.record_download(conn, ids["g1"], paths.to_stored(config, big), 5.0, 5.0, False)
     conn.commit()
 
     def fake_encode(source, target, bitrate):
@@ -248,11 +255,11 @@ def test_convert_audio_commits_before_deleting(seeded, monkeypatch):
     assert result["converted"] == 1 and result["failed"] == 0
     assert not big.exists() and big.with_suffix(".ogg").exists()
     row = conn.execute("SELECT audio_file_path, is_compressed FROM episodes WHERE id = ?", (ids["g1"],)).fetchone()
-    assert row[0] == str(big.with_suffix(".ogg")) and row[1] == 1
+    assert row[0] == "audio/show-one/ep-one.ogg" and row[1] == 1
     assert convert_audio.run(config, conn, threshold_mb=0)["total"] == 0
 
     # An encode failure leaves the source alone.
-    db.record_conversion(conn, ids["g1"], big, 5.0, 5.0)
+    db.record_conversion(conn, ids["g1"], paths.to_stored(config, big), 5.0, 5.0)
     conn.execute("UPDATE episodes SET is_compressed = 0 WHERE id = ?", (ids["g1"],))
     conn.commit()
     big.write_bytes(REAL_AUDIO)
@@ -269,8 +276,8 @@ def test_audit_and_fix(seeded, monkeypatch):
     present.write_bytes(REAL_AUDIO)
     (config.audio_dir / "show-one" / "orphan.mp3").write_bytes(REAL_AUDIO)
     ids = {r[0]: r[1] for r in conn.execute("SELECT episode_guid, id FROM episodes")}
-    db.record_download(conn, ids["g1"], present, 1.0, 1.0, False)
-    db.record_download(conn, ids["g2"], Path("/gone.mp3"), 1.0, 1.0, False)
+    db.record_download(conn, ids["g1"], paths.to_stored(config, present), 1.0, 1.0, False)
+    db.record_download(conn, ids["g2"], "audio/show-one/gone.mp3", 1.0, 1.0, False)
     conn.commit()
 
     result = audit.run(config, conn, skip_probe=True, report=config.data_path / "report.json")
@@ -310,3 +317,42 @@ def test_download_charts_filter_restricts_to_that_chart(seeded, monkeypatch):
     assert len(download.pending_episodes(conn, retry_errors=True, limit=None)) == 3
     assert len(download.pending_episodes(conn, retry_errors=True, limit=None, charts=["health"])) == 2
     assert download.pending_episodes(conn, retry_errors=True, limit=None, charts=["absent"]) == []
+
+
+def test_discover_reads_every_page_of_a_paged_feed(config, conn, monkeypatch):
+    """The merged pages are one feed: the cap keeps the newest, and the
+    recorded retention spans every page. A walk cut short is recorded."""
+    def doc(items, next_href=None):
+        link = f'<atom:link rel="next" href="{next_href}"/>' if next_href else ""
+        body = "".join(f"<item><guid>{g}</guid><title>{g}</title><pubDate>{d}</pubDate>"
+                       f'<enclosure url="https://a/{g}.mp3" type="audio/mpeg"/></item>' for g, d in items)
+        return (f'<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>t</title>'
+                f"{link}{body}</channel></rss>").encode()
+
+    docs = {
+        "https://x/paged": doc([("p3", "Wed, 03 Jan 2024 00:00:00 GMT"), ("p2", "Tue, 02 Jan 2024 00:00:00 GMT")],
+                               "https://x/paged?page=2"),
+        "https://x/paged?page=2": doc([("p1", "Mon, 01 Jan 2024 00:00:00 GMT")]),
+        "https://x/cut": doc([("c2", "Tue, 02 Jan 2024 00:00:00 GMT")], "https://x/cut?page=2"),
+    }
+    def get(url, **kw):
+        if url not in docs:
+            raise requests.ConnectionError("down")
+        return Mock(content=docs[url], url=url, raise_for_status=Mock())
+
+    monkeypatch.setattr(discover, "make_session", lambda pool_size: Mock(get=get))
+    config.discovery.feed_page_delay_seconds = 0
+    paged = db.upsert_podcast(conn, PodcastRecord("apple_7", "Paged", rss_url="https://x/paged", apple_podcasts_id="7"))
+    cut = db.upsert_podcast(conn, PodcastRecord("apple_8", "Cut", rss_url="https://x/cut", apple_podcasts_id="8"))
+    conn.commit()
+
+    result = discover.run(config, conn, max_episodes=2, all_podcasts=True)
+
+    assert result["paged_feeds"] == 1 and result["extra_pages"] == 1 and result["feeds_paged_partially"] == 1
+    assert {r[0] for r in conn.execute("SELECT episode_guid FROM episodes WHERE podcast_id = ?", (paged,))} \
+        == {"p3", "p2"}                                    # the cap applies to the merged list
+    feeds = {r["podcast_id"]: r for r in conn.execute("SELECT * FROM podcast_feeds")}
+    assert feeds[paged]["item_count"] == 3 and feeds[paged]["oldest_item"].startswith("2024-01-01")
+    assert feeds[paged]["last_status"] == "ok"
+    assert feeds[cut]["last_status"].startswith("ok, partial: page 2 failed")
+    assert conn.execute("SELECT status FROM podcasts WHERE id = ?", (cut,)).fetchone()[0] == "discovered"

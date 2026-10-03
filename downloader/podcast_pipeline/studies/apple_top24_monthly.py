@@ -21,7 +21,8 @@ Why this construction
   month's list is the 24 highest scorers (ties: best rank). Every month then
   contributes the same 24 slots, weighted by how high and how long a show
   charted.
-* **Months without a snapshot are filled from their neighbours.** 16 months
+* **Months without a snapshot are filled from their neighbours** (and marked
+  ``provisional`` when those neighbours come from different sources). 16 months
   since 2016 have no archived snapshot inside them; the partition assigns
   them to the nearest snapshots on either side. Such windows carry
   ``snapshots_in_month = 0`` and ``in_month_coverage = 0`` so an analysis can
@@ -65,7 +66,8 @@ class AppleTop24Monthly(Study):
     name = "apple-top24-monthly"
     description = ("Apple US overall chart, top 24 per calendar month since 2016-01 "
                    "(time-weighted points); each show's episodes from its charting months.")
-    version = 2   # 2: midday-centred cells; title ids chosen nearest in time
+    version = 3   # 2: midday-centred cells, nearest-in-time title ids; 3: no trailers, provisional months
+    exclude_trailers = True
 
     def params(self) -> dict:
         return {"chart": CHART, "sources": list(SOURCE_PRIORITY), "depth": DEPTH,
@@ -239,6 +241,11 @@ def monthly_lists(days, observations) -> dict[str, list[dict]]:
             "snapshots_in_month": snaps_in_month,
             "in_month_coverage": round(in_month_hours / (b - a), 3),
             "sources": sorted(contributing),
+            # No snapshot inside the month, and the snapshots either side come
+            # from different sources: the list rests on an untested assumption
+            # that the two sources are the same chart (2026-09: Apple's page on
+            # Aug 31, the Marketing Tools feed from Oct 2).
+            "provisional": snaps_in_month == 0 and len(contributing) > 1,
             "start": m_start.isoformat(), "end": m_end.isoformat(),
         } for i, e in enumerate(ranked)]
     return lists

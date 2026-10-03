@@ -461,20 +461,25 @@ def link_entity(conn: sqlite3.Connection, entity: str, podcast_id: int | None, m
 def podcast_for_entity(conn: sqlite3.Connection, entity: str) -> int | None:
     """The catalog podcast an entity refers to, or None if it is not resolved.
 
-    'podcast:<id>' is the id itself; 'apple:<id>' matches the podcast's Apple
-    id; anything else (or an Apple id the catalog lacks) goes through
-    ``entity_links``.
+    'podcast:<id>' is the id itself. A manual ``entity_links`` decision
+    (``link-entity``) wins over everything else, including a NULL decision
+    ("unresolvable"): it exists to correct the automatic rules. Otherwise
+    'apple:<id>' matches the podcast's Apple id, and anything else (or an
+    Apple id the catalog lacks) goes through ``entity_links``.
     """
     kind, _, value = entity.partition(":")
     if kind == "podcast":
         return int(value)
+    link = conn.execute("SELECT podcast_id, method FROM entity_links WHERE entity = ?",
+                        (entity,)).fetchone()
+    if link is not None and link["method"] == "manual":
+        return link["podcast_id"]
     if kind == "apple":
         row = conn.execute("SELECT id FROM podcasts WHERE apple_podcasts_id = ? ORDER BY id LIMIT 1",
                            (value,)).fetchone()
         if row:
             return row["id"]
-    row = conn.execute("SELECT podcast_id FROM entity_links WHERE entity = ?", (entity,)).fetchone()
-    return row["podcast_id"] if row else None
+    return link["podcast_id"] if link else None
 
 
 def set_podcast_status(conn: sqlite3.Connection, podcast_id: int, status: str) -> None:
@@ -508,9 +513,19 @@ def record_episode_source(conn: sqlite3.Connection, podcast_id: int, guid: str,
     """, (source, ref, guid, podcast_id))
 
 
-def record_download(conn: sqlite3.Connection, episode_id: int, path: Path,
+def _require_stored(value: str) -> str:
+    """File paths are stored relative to the data directory (``paths.to_stored``)."""
+    if (not isinstance(value, str) or not value or Path(value).is_absolute()
+            or ".." in Path(value).parts):
+        raise ValueError(f"expected a path relative to the data directory "
+                         f"(paths.to_stored), got {value!r}")
+    return value
+
+
+def record_download(conn: sqlite3.Connection, episode_id: int, stored_path: str,
                     original_size_mb: float, compressed_size_mb: float,
                     is_compressed: bool) -> None:
+    """``stored_path`` is ``paths.to_stored(config, file)``."""
     ratio = original_size_mb / compressed_size_mb if compressed_size_mb > 0 else 1.0
     conn.execute("""
         UPDATE episodes
@@ -518,20 +533,20 @@ def record_download(conn: sqlite3.Connection, episode_id: int, path: Path,
             original_file_size_mb = ?, compressed_file_size_mb = ?,
             compression_ratio = ?, is_compressed = ?
         WHERE id = ?
-    """, (str(path), EpisodeStatus.DOWNLOADED, original_size_mb, compressed_size_mb,
+    """, (_require_stored(stored_path), EpisodeStatus.DOWNLOADED, original_size_mb, compressed_size_mb,
           ratio, is_compressed, episode_id))
 
 
-def record_conversion(conn: sqlite3.Connection, episode_id: int, path: Path,
+def record_conversion(conn: sqlite3.Connection, episode_id: int, stored_path: str,
                       original_size_mb: float, compressed_size_mb: float) -> None:
-    """Point an episode at its re-encoded file. Status is untouched."""
+    """Point an episode at its re-encoded file (``paths.to_stored``). Status is untouched."""
     ratio = original_size_mb / compressed_size_mb if compressed_size_mb > 0 else 1.0
     conn.execute("""
         UPDATE episodes
         SET audio_file_path = ?, original_file_size_mb = ?, compressed_file_size_mb = ?,
             compression_ratio = ?, is_compressed = 1
         WHERE id = ?
-    """, (str(path), original_size_mb, compressed_size_mb, ratio, episode_id))
+    """, (_require_stored(stored_path), original_size_mb, compressed_size_mb, ratio, episode_id))
 
 
 def mark_episode_error(conn: sqlite3.Connection, episode_id: int, message: str) -> None:
@@ -559,16 +574,18 @@ def reset_episode_for_download(conn: sqlite3.Connection, episode_id: int) -> boo
 
 # --- transcripts -------------------------------------------------------------
 
-def record_transcript(conn: sqlite3.Connection, episode_id: int, file_path: Path,
+def record_transcript(conn: sqlite3.Connection, episode_id: int, stored_path: str,
                       word_count: int, duration_seconds: float | None,
                       has_timestamps: bool, has_speakers: bool, metadata: dict) -> None:
     """Register a transcript file and mark the episode transcribed.
 
-    ``metadata`` must carry ``source`` ("asr" or "rss") so the two provenances
-    stay distinguishable downstream.
+    ``stored_path`` is ``paths.to_stored(config, file)``. ``metadata`` must
+    carry ``source`` ("asr" or "rss") so the two provenances stay
+    distinguishable downstream.
     """
     if "source" not in metadata:
         raise ValueError("transcript metadata must include 'source'")
+    stored_path = _require_stored(stored_path)
     conn.execute("""
         INSERT INTO transcripts
             (episode_id, format, compression, file_path, word_count, duration_seconds,
@@ -579,14 +596,14 @@ def record_transcript(conn: sqlite3.Connection, episode_id: int, file_path: Path
             duration_seconds = excluded.duration_seconds,
             has_timestamps = excluded.has_timestamps, has_speakers = excluded.has_speakers,
             metadata = excluded.metadata, created_at = CURRENT_TIMESTAMP
-    """, (episode_id, str(file_path), word_count, duration_seconds,
+    """, (episode_id, stored_path, word_count, duration_seconds,
           int(has_timestamps), int(has_speakers), json.dumps(metadata)))
     conn.execute("""
         UPDATE episodes
         SET transcript_file_path = ?, transcribed_at = CURRENT_TIMESTAMP,
             status = ?, error_message = NULL
         WHERE id = ?
-    """, (str(file_path), EpisodeStatus.TRANSCRIBED, episode_id))
+    """, (stored_path, EpisodeStatus.TRANSCRIBED, episode_id))
 
 
 def delete_transcript(conn: sqlite3.Connection, episode_id: int) -> None:

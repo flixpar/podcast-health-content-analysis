@@ -215,6 +215,10 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--dry-run", action="store_true",
                    help="fully validate without copying transcripts or writing SQLite")
 
+    p = sub.add_parser("migrate-paths",
+                       help="rewrite absolute audio/transcript paths relative to the data dir")
+    p.add_argument("--dry-run", action="store_true", help="report what would change; write nothing")
+
     sub.add_parser("stats", help="show database and storage counts")
     return parser
 
@@ -354,6 +358,9 @@ def dispatch(args: argparse.Namespace, config: Config, conn) -> dict:
                 config, conn, args.archive, checksum_path=args.checksum,
                 skip_archive_checksum=args.skip_archive_checksum, dry_run=args.dry_run,
             )
+        case "migrate-paths":
+            from podcast_pipeline.pipeline import migrate_paths
+            return migrate_paths.run(config, conn, dry_run=args.dry_run)
         case "stats":
             return stats.run(config, conn)
     raise ValueError(f"unhandled command {args.command}")
