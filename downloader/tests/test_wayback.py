@@ -696,3 +696,32 @@ def test_dead_link_check_tolerates_string_reasons():
         reason = "hostname 'podcast.thisamericanlife.org' doesn't match"
     error = requests.ConnectionError(Mismatch("cert"))
     assert not is_dead_link(error)
+
+
+@pytest.mark.parametrize("wrapped, inner", [
+    ("https://claritaspod.com/measure/dts.podtrac.com/redirect.mp3/mgln.ai/e/1124/prfx.byspotify.com/e/"
+     "arttrk.com/p/MRWRK/pscrb.fm/rss/p/traffic.libsyn.com/secure/show/371.mp3",
+     "https://traffic.libsyn.com/secure/show/371.mp3"),
+    ("https://arttrk.com/p/ABMA5/clrtpod.com/m/pscrb.fm/rss/p/prfx.byspotify.com/e/dts.podtrac.com/"
+     "redirect.mp3/audioboom.com/posts/8565991.mp3?modified=1&source=rss",
+     "https://audioboom.com/posts/8565991.mp3?modified=1&source=rss"),
+    ("https://dts.podtrac.com/redirect.mp3/pdrl.fm/c52dde/tracking.swap.fm/track/sblTq/mgln.ai/e/48/"
+     "dovetail.prxu.org/59/x/1307_A.mp3", "https://dovetail.prxu.org/59/x/1307_A.mp3"),
+    ("https://dts.podtrac.com/redirect.mp3/media.blubrry.com/reveal/tracking.swap.fm/track/sbl/"
+     "dovetail.prxu.org/149/y/1123_Reveal.mp3", "https://dovetail.prxu.org/149/y/1123_Reveal.mp3"),
+    ("https://chrt.fm/track/53A61E/pdst.fm/e/dts.podtrac.com/pts/redirect.mp3/waaa.wnyc.org/e/128/default.mp3?aid=rss",
+     "https://waaa.wnyc.org/e/128/default.mp3?aid=rss"),
+    ("https://p.podderapp.com/1226842767/pscrb.fm/rss/p/prefix.up.audio/s/stitcher.simplecastaudio.com/e/default.mp3",
+     "https://stitcher.simplecastaudio.com/e/default.mp3"),
+    ("https://pdst.fm/e/pscrb.fm/rss/p/s.gum.fm/s-5fe37a10f0786e0025359373/traffic.megaphone.fm/LEW1.mp3?updated=1",
+     "https://traffic.megaphone.fm/LEW1.mp3?updated=1"),
+    ("https://www.claritaspod.com/measure/op3.dev/e/rss.art19.com/episodes/abc.mp3?rss_browser=x",
+     "https://rss.art19.com/episodes/abc.mp3?rss_browser=x"),
+    ("https://op3.dev/e,pg=f00/https://cdn.example.org/ep.mp3", "https://cdn.example.org/ep.mp3"),
+    ("https://pdcn.co/e/afp-973833-injected.calisto.simplecastaudio.com/x/default.mp3?aid=rss",
+     "https://afp-973833-injected.calisto.simplecastaudio.com/x/default.mp3?aid=rss"),
+    ("https://verifi.podscribe.com/rss/p/traffic.libsyn.com/secure/jbpod/01.mp3?dest-id=1",
+     "https://traffic.libsyn.com/secure/jbpod/01.mp3?dest-id=1"),
+])
+def test_unwrap_handles_prefixes_found_in_the_study(wrapped, inner):
+    assert unwrap_tracking_url(wrapped) == inner

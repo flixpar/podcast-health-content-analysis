@@ -50,7 +50,7 @@ UNWRAPPED_AUDIO = "unwrapped_audio"    # the host URL inside a tracking prefix (
 # feedproxy.google.com/~r/... is not here: its target is not in the URL.
 TRACKING_PREFIXES = [
     (re.compile(host), re.compile(prefix)) for host, prefix in [
-        (r"dts\.podtrac\.com", r"/redirect\.[a-z0-9]+/"),
+        (r"dts\.podtrac\.com", r"/(pts/)?redirect\.[a-z0-9]+/"),
         (r"(www\.)?podtrac\.com", r"/pts/redirect\.[a-z0-9]+/"),
         (r"play\.podtrac\.com", r"/[^/]+/"),
         (r"(www\.)?chtbl\.com", r"/track/[^/]+/"),
@@ -62,6 +62,19 @@ TRACKING_PREFIXES = [
         # Seen nested in the Moth's 2026 feed: pdst.fm -> swap.fm -> podscribe -> castfire.
         (r"tracking\.swap\.fm", r"/track/[^/]+/"),
         (r"pscrb\.fm", r"/rss/p/"),
+        (r"verifi\.podscribe\.com", r"/rss/p/"),
+        # Found wrapping study enclosures (gapfill-dead-links.md); claritaspod
+        # alone wraps ~57k catalog URLs, usually around several others.
+        (r"(www\.)?claritaspod\.com", r"/measure/"),
+        (r"clrtpod\.com", r"/m/"),
+        (r"prfx\.byspotify\.com", r"/e/"),
+        (r"pdrl\.fm", r"/[0-9a-f]+/"),
+        (r"pdcn\.co", r"/e/"),
+        (r"prefix\.up\.audio", r"/s/"),
+        (r"p\.podderapp\.com", r"/[0-9]+/"),
+        (r"s\.gum\.fm", r"/s-[0-9a-f]+/"),
+        (r"op3\.dev", r"/e(,[^/]*)?/"),
+        (r"media\.blubrry\.com", r"/[^/]+/"),
     ]
 ]
 
