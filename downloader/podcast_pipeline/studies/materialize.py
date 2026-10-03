@@ -20,7 +20,7 @@ import re
 import sqlite3
 from collections import defaultdict
 from dataclasses import dataclass
-from datetime import date
+from datetime import datetime, timedelta
 
 from podcast_pipeline import db
 from podcast_pipeline.studies.base import Member, Study
@@ -31,6 +31,10 @@ logger = logging.getLogger(__name__)
 #: Earlier publication dates are parse failures (an unset pubDate becomes the
 #: 1970 epoch), not real episodes; a windowed study cannot place them.
 MIN_PLAUSIBLE_DATE = "1995"
+
+#: How far apart two listings of one airing can be when they fall either side
+#: of UTC midnight (the same release, timestamped by two different feeds).
+ACROSS_MIDNIGHT = timedelta(hours=6)
 
 
 @dataclass
@@ -206,7 +210,7 @@ def _podcast_episodes(conn: sqlite3.Connection, podcast_id: int, dedupe: bool,
         group.sort(key=lambda r: r["published_date"])
         cluster = [group[0]]
         for r in group[1:]:
-            if _same_airing(cluster[-1], r):
+            if _same_airing(cluster[0], r):
                 cluster.append(r)
                 continue
             kept.append(_best_copy(cluster))
@@ -217,17 +221,18 @@ def _podcast_episodes(conn: sqlite3.Connection, podcast_id: int, dedupe: bool,
 
 
 def _same_airing(a: sqlite3.Row, b: sqlite3.Row) -> bool:
-    """Same title, and either the same UTC day or adjacent days with matching
-    durations. A re-issue under a new GUID keeps its day, except across UTC
-    midnight (a feed migration can list one airing at 23:00 and 01:00); a show
-    that reuses one title for every daily episode is kept apart by duration."""
-    day_a, day_b = date.fromisoformat(a["published_date"][:10]), date.fromisoformat(b["published_date"][:10])
-    if day_a == day_b:
+    """Same title, and either the same UTC day, or within a few hours across UTC
+    midnight with a near-identical duration. A re-issue under a new GUID keeps
+    its day, except across midnight (a feed migration can list one airing at
+    23:00 and 01:00); a show reusing one title for every daily episode is kept
+    apart by the hours between them and by duration."""
+    if a["published_date"][:10] == b["published_date"][:10]:
         return True
-    if (day_b - day_a).days != 1:
+    ta, tb = datetime.fromisoformat(a["published_date"]), datetime.fromisoformat(b["published_date"])
+    if abs(tb - ta) > ACROSS_MIDNIGHT:
         return False
     da, db_ = a["duration_seconds"], b["duration_seconds"]
-    return bool(da and db_ and abs(da - db_) <= 0.05 * max(da, db_))
+    return bool(da and db_ and abs(da - db_) <= max(2, 0.01 * max(da, db_)))
 
 
 def _best_copy(copies: list[sqlite3.Row]) -> sqlite3.Row:

@@ -103,11 +103,22 @@ def run(config: Config, conn: sqlite3.Connection, limit: int | None = None,
     if not episodes:
         return stats
 
+    # Which episode already owns each stored audio file, so a legacy
+    # title-named file shared by a rerun is never reused as the rerun's audio.
+    owners = {r[0]: r[1] for r in conn.execute(
+        "SELECT audio_file_path, episode_guid FROM episodes "
+        "WHERE audio_file_path IS NOT NULL AND audio_file_path != ''")}
+
+    def claimed_by_other(path, guid) -> bool:
+        owner = owners.get(paths.to_stored(config, path))
+        return owner is not None and owner != guid
+
     downloader = AudioDownloader(
         config.audio_dir, config.audio_compression,
         timeout=config.download.timeout_seconds,
         min_free_gb=config.download.min_free_gb, pool_size=workers,
         wayback_replay_url=config.wayback.replay_url if wayback_fallback else None,
+        claimed_by_other=claimed_by_other,
     )
     stop = threading.Event()
 

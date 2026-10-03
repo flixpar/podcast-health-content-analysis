@@ -11,7 +11,7 @@ def ep(title, duration=1800, episode_type="full"):
 
 
 def test_trailers_promos_and_short_items_are_excluded():
-    assert exclusion_reason(ep("Season 2 is coming", episode_type="trailer"), "Show") == "trailer"
+    assert exclusion_reason(ep("Season 2 is coming", episode_type="trailer", duration=120), "Show") == "trailer"
     assert exclusion_reason(ep("Introducing: Harsh Reality", 271), "Suspect") == "promo: introducing"
     assert exclusion_reason(ep("What to Listen to Next: Operator", 355), "Over My Dead Body") \
         == "promo: what to listen to next"
@@ -101,3 +101,19 @@ def test_a_series_reposted_by_another_feed_flags_only_the_later_copy(conn):
     flags = rerun_flags(conn, "s")
     assert flags[repost] == f"repost_of_other_podcast: {original} in podcast {series} (2023-03-14)"
     assert original not in flags and unrelated not in flags
+
+
+def test_old_number_rule_ignores_years_and_hyphenated_words():
+    from podcast_pipeline.studies.quality import LEADING_NUMBER
+    assert LEADING_NUMBER.match("542: Act One").group(1) == "542"
+    assert LEADING_NUMBER.match("2020: The Year in Review") is None
+    assert LEADING_NUMBER.match("80-Year-Old Man Loses War") is None
+
+
+def test_long_feed_tagged_trailers_are_episodes():
+    from podcast_pipeline.studies.quality import exclusion_reason
+    interview = {"title": "E138 Interview with Shahn Ellis", "duration_seconds": 4075,
+                 "episode_type": "trailer"}
+    teaser = {"title": "Season 2 is coming", "duration_seconds": 95, "episode_type": "trailer"}
+    assert exclusion_reason(interview, "15 Minutes to Freedom") is None
+    assert exclusion_reason(teaser, "Some Show") == "trailer"

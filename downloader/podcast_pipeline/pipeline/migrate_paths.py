@@ -151,7 +151,7 @@ def converted_sibling(config: Config, relative: str, original_mb: float | None) 
 
 
 def _plan(config: Config, table: str, column: str, rows: list[sqlite3.Row],
-          report: ColumnReport) -> list[Change]:
+          report: ColumnReport, taken: set[str] = frozenset()) -> list[Change]:
     changes = []
     for row in rows:
         value = row["value"]
@@ -166,7 +166,10 @@ def _plan(config: Config, table: str, column: str, rows: list[sqlite3.Row],
             continue
         if column == "audio_file_path":
             ogg, evidence = converted_sibling(config, relative, row["original_file_size_mb"])
+            if ogg is not None and ogg in taken:
+                ogg, evidence = None, {**evidence, "reason": "the .ogg belongs to another episode"}
             if ogg is not None:
+                taken.add(ogg)
                 compressed_mb = evidence["ogg_bytes"] / 1024 ** 2
                 original_mb = row["original_file_size_mb"] or compressed_mb
                 changes.append(Change(row["row_id"], value, ogg, evidence=evidence, extra={
@@ -227,6 +230,14 @@ def migrate_column(config: Config, conn: sqlite3.Connection, table: str, column:
     report = ColumnReport()
     report.absolute_before, report.relative_before = _counts(conn, table, column)
     extra = ", original_file_size_mb" if column == "audio_file_path" else ""
+    # Every file some row already points at (in either form). A converted
+    # sibling that another row owns is that row's audio, not this one's: legacy
+    # title-only names are shared by reruns, which once linked 37 episodes to
+    # another episode's file.
+    taken = set()
+    if column == "audio_file_path":
+        for (value,) in conn.execute(f"SELECT {column} FROM {table} WHERE {column} IS NOT NULL AND {column} != ''"):
+            taken.add(relative_form(config, value) if value.startswith("/") else value)
     last = 0
     while True:
         rows = conn.execute(f"""
@@ -236,7 +247,7 @@ def migrate_column(config: Config, conn: sqlite3.Connection, table: str, column:
         if not rows:
             break
         last = rows[-1]["row_id"]
-        changes = _plan(config, table, column, rows, report)
+        changes = _plan(config, table, column, rows, report, taken)
         if dry_run:
             for change in changes:
                 _count(change, report)

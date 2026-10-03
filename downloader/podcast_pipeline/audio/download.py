@@ -8,6 +8,7 @@ import re
 import socket
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Callable
 
 import requests
 from urllib3.exceptions import NameResolutionError
@@ -133,8 +134,13 @@ def unwrap_tracking_url(url: str) -> str:
                 inner = path[prefix.end():] + rest
                 if not re.match(r"https?://", inner, re.IGNORECASE):
                     inner = f"{scheme}://{inner}"
-                inner_host = re.match(r"https?://([^/?#]*)", inner, re.IGNORECASE).group(1)
-                if "." in inner_host and " " not in inner_host:
+                inner_match = re.match(r"https?://([^/?#]*)(/[^?#]*)?", inner, re.IGNORECASE)
+                inner_host, inner_path = inner_match.group(1), inner_match.group(2) or ""
+                # A real wrapped URL names a host and a file on it; a prefix that
+                # matched a plain path ("media.blubrry.com/show/ep-12.mp3") yields
+                # a "host" that is really a file name.
+                if ("." in inner_host and " " not in inner_host and len(inner_path) > 1
+                        and not re.search(r"\.(mp3|m4a|mp4|ogg|opus|aac|wav)$", inner_host, re.IGNORECASE)):
                     url = inner
                     break
         else:
@@ -195,7 +201,8 @@ class AudioDownloader:
     def __init__(self, audio_dir: Path, compression: CompressionConfig,
                  timeout: int = 600, min_free_gb: float = 100.0, pool_size: int = 8,
                  session: requests.Session | None = None,
-                 wayback_replay_url: str | None = None):
+                 wayback_replay_url: str | None = None,
+                 claimed_by_other: Callable[[Path, str | None], bool] = lambda path, guid: False):
         """``wayback_replay_url`` (e.g. https://web.archive.org/web) turns on the
         fallback to archived audio for dead enclosures; None leaves it off."""
         self.audio_dir = Path(audio_dir)
@@ -205,6 +212,9 @@ class AudioDownloader:
         self.min_free_gb = min_free_gb
         self.session = session or make_session(pool_size=pool_size)
         self.wayback_replay_url = wayback_replay_url
+        # (path, guid) -> True when another episode's row already points at
+        # ``path``; such a legacy title-named file is not this episode's audio.
+        self.claimed_by_other = claimed_by_other
 
     def download_episode(self, audio_url: str, podcast_title: str, episode_title: str,
                          guid: str | None, published_date: str | None = None,
@@ -223,7 +233,8 @@ class AudioDownloader:
         Raises DownloadError on failure and DiskSpaceError when the volume is
         too full to continue.
         """
-        existing = find_existing_audio(self.audio_dir, podcast_title, episode_title, guid)
+        existing = find_existing_audio(self.audio_dir, podcast_title, episode_title, guid,
+                                       lambda path: self.claimed_by_other(path, guid))
         if existing:
             size_mb = existing.stat().st_size / 1024 ** 2
             return DownloadResult(existing, size_mb, size_mb,

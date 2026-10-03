@@ -725,3 +725,11 @@ def test_dead_link_check_tolerates_string_reasons():
 ])
 def test_unwrap_handles_prefixes_found_in_the_study(wrapped, inner):
     assert unwrap_tracking_url(wrapped) == inner
+
+
+@pytest.mark.parametrize("url", [
+    "https://media.blubrry.com/show/episode-12.mp3",
+    "https://pdrl.fm/abc123/ep.mp3",
+])
+def test_unwrap_never_turns_a_file_name_into_a_host(url):
+    assert unwrap_tracking_url(url) == url

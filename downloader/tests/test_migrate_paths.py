@@ -155,8 +155,8 @@ def test_migration_batches_and_skips_a_row_changed_underneath(legacy, monkeypatc
     monkeypatch.setattr(migrate_paths, "BATCH_ROWS", 2)
     real_plan = migrate_paths._plan
 
-    def plan_then_concurrent_write(config, table, column, rows, report):
-        changes = real_plan(config, table, column, rows, report)
+    def plan_then_concurrent_write(config, table, column, rows, report, taken=frozenset()):
+        changes = real_plan(config, table, column, rows, report, taken)
         if column == "audio_file_path" and any(r["row_id"] == ids["old"] for r in rows):
             conn.execute("UPDATE episodes SET audio_file_path = 'audio/show/other.ogg' WHERE id = ?",
                          (ids["old"],))
@@ -194,3 +194,14 @@ def test_convert_audio_never_treats_an_ogg_as_its_own_source(linked):
     _file(config, "audio/show/x.ogg")
     _episode(conn, "x", "audio/show/x.ogg")   # is_compressed = 0, but already Opus
     assert convert_audio.candidates(config, conn, 0, False) == []
+
+
+def test_a_sibling_another_episode_owns_is_not_taken(legacy):
+    config, conn, ids = legacy
+    # a rerun whose legacy name collides with the first airing's converted file
+    owner = _episode(conn, "owner", OLD + "audio/show/shared.ogg")
+    _file(config, "audio/show/shared.ogg")
+    rerun = _episode(conn, "rerun", OLD + "audio/show/shared.mp3", original_mb=54.97)
+    migrate_paths.run(config, conn)
+    assert _audio(conn, owner) == "audio/show/shared.ogg"
+    assert _audio(conn, rerun) == OLD + "audio/show/shared.mp3"   # left for a re-download

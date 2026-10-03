@@ -30,6 +30,8 @@ from typing import Mapping
 
 #: Items shorter than this (declared duration) are announcements, not episodes.
 MIN_EPISODE_SECONDS = 75
+#: A feed-tagged trailer longer than this is treated as an episode.
+MAX_TRAILER_SECONDS = 15 * 60
 #: Cross-feed and same-feed content matching only considers episodes longer than
 #: this: short items (promos, updates) share durations by coincidence.
 RERUN_MIN_SECONDS = 600
@@ -54,7 +56,9 @@ RERUN_MARKER = re.compile(
 #: Episode numbers, but not "Part N": multi-part stories are distinct episodes.
 EPISODE_NUMBER = re.compile(r"\b(ep(isode)?|no)\.?\s*#?\d+\b|^\s*#?\d+\s*[:.\-|]|\|\s*#?\d+\s*$|#\d+|"
                             r"\bs\d+\s*e\d+\b|\bseason \d+,? episode \d+\b", re.I)
-LEADING_NUMBER = re.compile(r"^\s*#?(\d{1,4})\s*[:.|\-]")
+# An episode number leading the title ("542: Act One"), not a year ("2020: The
+# Year in Review") and not a hyphenated word ("80-Year-Old Man").
+LEADING_NUMBER = re.compile(r"^\s*#?(?!(?:19|20)\d\d\b)(\d{1,4})\s*[:.|\-](?=\s)")
 #: GUID suffix ``tools/tal_archive.py`` gives a This American Life rerun airing.
 RERUN_GUID = "#rerun-"
 
@@ -87,7 +91,10 @@ def exclusion_reason(episode: Mapping, podcast_title: str | None) -> str | None:
     promo that is the show introducing itself ("Introducing: Skimm This" in
     Skimm This) is kept; an unknown duration never excludes.
     """
-    if _episode_type(episode) == "trailer":
+    duration = episode["duration_seconds"]
+    # Some feeds tag whole interviews as trailers (15 Minutes to Freedom tags
+    # half its catalog); a long "trailer" is an episode.
+    if _episode_type(episode) == "trailer" and not (duration and duration >= MAX_TRAILER_SECONDS):
         return "trailer"
     title = episode["title"] or ""
     m = FEED_DROP.search(title)

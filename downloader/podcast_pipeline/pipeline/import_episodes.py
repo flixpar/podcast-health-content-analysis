@@ -17,8 +17,9 @@ Input: one JSON object per line.
 
 Each row is matched against the podcast's existing episodes: by ``guid`` (the
 given one, or the one this command would generate), else by an explicit
-``replaces_episode_id``, else by the same UTC day plus normalized title (the
-key ``studies/materialize.py`` dedupes on).
+``replaces_episode_id``, else by normalized title on the same UTC day (or an
+adjacent day, for titles of at least ``MIN_ADJACENT_TITLE`` characters, since
+a publisher's local date and a feed's UTC timestamp can differ by one).
 
 * **Matched, and the episode is stuck** -- its download failed without
   leaving audio (``status = 'error'``, no ``audio_file_path``), or it is
@@ -50,7 +51,7 @@ import logging
 import re
 import sqlite3
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 from podcast_pipeline import db
@@ -65,6 +66,8 @@ logger = logging.getLogger(__name__)
 PREVIOUS_AUDIO_URL_SOURCE = "previous_audio_url"
 
 REQUIRED_FIELDS = ("title", "published_date", "audio_url")
+#: Normalized title length from which a row may match an episode a day apart.
+MIN_ADJACENT_TITLE = 12
 OPTIONAL_FIELDS = ("podcast_id", "guid", "duration_seconds", "description", "transcript_url",
                    "evidence", "replaces_episode_id")
 
@@ -265,7 +268,16 @@ def plan(conn: sqlite3.Connection, rows: list[tuple[int, dict]], source: str,
                 continue
             target, explicit = named, True
         if target is None:
-            same_day = eps["by_key"].get((row.published_date[:10], title_key(row.title)), [])
+            key = title_key(row.title)
+            same_day = list(eps["by_key"].get((row.published_date[:10], key), []))
+            if not same_day and len(key) >= MIN_ADJACENT_TITLE:
+                # A publisher's page gives a local date; the feed's UTC timestamp
+                # of an evening release falls on the next day. Only distinctive
+                # titles match across days, so a show reusing one title daily
+                # is not merged.
+                day = date.fromisoformat(row.published_date[:10])
+                for other in (day - timedelta(days=1), day + timedelta(days=1)):
+                    same_day += eps["by_key"].get((other.isoformat(), key), [])
             if same_day:
                 # Prefer the copy with work done: it needs nothing, so the row is provenance.
                 target = max(same_day, key=lambda r: (_has_work(r), -r["id"]))

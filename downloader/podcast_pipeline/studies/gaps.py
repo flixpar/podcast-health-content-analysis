@@ -157,7 +157,10 @@ def classify_study(conn: sqlite3.Connection, study: str,
     """, (study, study)).fetchall()
     by_podcast: dict[int, PodcastGaps] = {}
     evidence: dict[int, Evidence] = {}
-    manual = {r[0] for r in conn.execute("SELECT entity FROM entity_links WHERE method = 'manual'")}
+    # Keyed by podcast: a study rewrites a manually linked 'title:K' member into
+    # the 'apple:'/'podcast:' entity of the podcast it resolves to.
+    manual = {r[0] for r in conn.execute(
+        "SELECT podcast_id FROM entity_links WHERE method = 'manual' AND podcast_id IS NOT NULL")}
     for r in rows:
         pid = r["podcast_id"]
         if pid not in evidence:
@@ -168,7 +171,7 @@ def classify_study(conn: sqlite3.Connection, study: str,
         if verdict is None:
             continue
         gap_class, reason = verdict
-        if gap_class == "before_launch" and r["entity"] in manual:
+        if gap_class == "before_launch" and pid in manual:
             # A hand-made identity link usually means the show was renamed or
             # re-hosted, so the matched feed's "first episode" is that feed's,
             # not the show's: its older episodes may exist under an older URL.
@@ -255,6 +258,7 @@ def podcast_evidence(conn: sqlite3.Connection, podcast_id: int) -> Evidence:
             spans.append((oldest, read))
     live = [(oldest, count) for kind, oldest, _read, count in listings if kind == "live feed"]
     partial = [oldest for kind, oldest, _read, _count in listings if kind == "partial live feed"]
+    capped = [oldest for kind, oldest, _read, _count in listings if kind == "capped live feed"]
 
     first = min(dates[:1] + [o for _k, o, _r, _c in listings], default=None)
     launch = truncated = None
@@ -265,6 +269,8 @@ def podcast_evidence(conn: sqlite3.Connection, podcast_id: int) -> Evidence:
         truncated = _truncation(earliest, dates, live, first)
         if truncated is None and partial and min(partial) <= first:
             truncated = "the feed's read stopped before its last page"
+        if truncated is None and capped and min(capped) <= first:
+            truncated = "the feed lists older items than discovery kept (discovery.max_episodes_per_podcast)"
         if launch is None and truncated is None and not skipping:
             launch = _complete_feed(live, first)
     return Evidence(dates, merge(spans), first, launch, truncated, skipping[0] if skipping else None)
@@ -284,9 +290,24 @@ def _listings(conn: sqlite3.Connection, podcast_id: int) -> list[tuple[str, str,
                 SELECT MIN(e.published_date) FROM episodes e JOIN episode_sources es ON es.episode_id = e.id
                 WHERE e.podcast_id = ? AND es.source = 'feed' AND es.ref = ? AND e.published_date >= ?
             """, (podcast_id, f["url"], EARLIEST_PLAUSIBLE_DATE)).fetchone()[0]
+        held_count, held_oldest = conn.execute("""
+            SELECT COUNT(*), MIN(e.published_date) FROM episodes e
+            JOIN episode_sources es ON es.episode_id = e.id
+            WHERE e.podcast_id = ? AND es.source = 'feed' AND es.ref = ? AND e.published_date >= ?
+        """, (podcast_id, f["url"], EARLIEST_PLAUSIBLE_DATE)).fetchone()
+        if oldest and f["item_count"] and 0 < held_count < f["item_count"]:
+            # discover keeps only the newest max_episodes_per_podcast items of a
+            # feed, so the span we actually hold starts later than the feed's
+            # oldest item; months between were listed but not kept, and are
+            # missing, not "not publishing".
+            oldest, capped = held_oldest, True
+        else:
+            capped = False
         if oldest:
             # A read cut short ("ok, partial: ...") is still contiguous, but not the whole feed.
             kind = "live feed" if f["last_status"] == "ok" else "partial live feed"
+            if capped:
+                kind = "capped live feed"
             out.append((kind, oldest[:10], f["last_read_at"][:10], f["item_count"]))
     for p in conn.execute("SELECT detail FROM wayback_probes WHERE podcast_id = ? AND detail IS NOT NULL",
                           (podcast_id,)):

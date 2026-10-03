@@ -200,3 +200,15 @@ def test_tal_coverage_reports_what_no_capture_reaches():
     assert tal.uncovered("2016-02-01", "2016-04-01", spans) == [
         ("2016-02-01", "2016-02-08"), ("2016-03-02", "2016-03-07"), ("2016-03-21", "2016-04-01")]
     assert tal.uncovered("2016-03-01", "2016-03-15", [("2016-02-20", "2016-03-30")]) == []
+
+
+def test_a_local_publisher_date_matches_the_feeds_utc_next_day(config, conn, tmp_path, show):
+    pid, eps = show
+    # the feed has 2018-03-04T23:00 UTC; the publisher's page says "March 3" (US evening)
+    path = write_jsonl(tmp_path / "in.jsonl", [{
+        "title": "600: Failed One", "published_date": "2018-03-03",
+        "audio_url": "https://good.host/600.mp3",
+    }])
+    out = import_episodes.run(config, conn, path, "publisher_site", podcast_id=pid)
+    assert (out["inserted"], out["updated"]) == (0, 1)
+    assert episode(conn, eps["failed"])["audio_url"] == "https://good.host/600.mp3"

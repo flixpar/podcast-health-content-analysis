@@ -461,3 +461,31 @@ def test_trailers_promos_and_clips_are_excluded_when_asked(conn):
     summary = refresh(conn, NoTrailers([Member(f"podcast:{p}")]))
     assert list(episodes_of(conn, "fixed")) == [keep]
     assert summary["excluded"]["trailer_or_promo"] == 2
+
+
+def test_feed_items_beyond_the_discovery_cap_are_missing_not_quiet(conn):
+    p = add_podcast(conn, 1)
+    url = "https://feeds.example/1"
+    for d in ("2025-03-01", "2025-04-01"):
+        add_episode(conn, p, d, f"{d}T00:00:00")
+        db.record_episode_source(conn, p, d, "feed", url)
+    # the feed listed 12,000 items back to 2022, but discover kept only the newest
+    conn.execute("""INSERT OR REPLACE INTO podcast_feeds (podcast_id, url, source, last_read_at, last_status,
+                    item_count, oldest_item, newest_item)
+                    VALUES (?, ?, 'itunes_lookup', '2026-10-03', 'ok', 12000, '2022-12-01T00:00:00',
+                            '2025-04-01T00:00:00')""", (p, url))
+    conn.commit()
+    refresh(conn, FixedStudy([Member(f"podcast:{p}", None, [Window("2023-01", "2023-01-01", "2023-02-01")])]))
+    from podcast_pipeline.studies.gaps import classify_study
+    [g] = classify_study(conn, "fixed", ("missing", "unknown"))
+    assert [c.gap_class for c in g.classified] == ["missing"]
+
+
+def test_dedupe_never_chains_consecutive_daily_episodes(conn):
+    p = add_podcast(conn, 1)
+    for i, (when, secs) in enumerate((("2020-03-01T23:00:00", 3093), ("2020-03-02T23:00:00", 2969),
+                                      ("2020-03-03T23:00:00", 3085))):
+        add_episode(conn, p, f"d{i}", when, title="The Best of Stugotz")
+        conn.execute("UPDATE episodes SET duration_seconds = ? WHERE episode_guid = ?", (secs, f"d{i}"))
+    conn.commit()
+    assert refresh(conn, FixedStudy([Member(f"podcast:{p}")]))["episodes"] == 3
