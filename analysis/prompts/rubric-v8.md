@@ -11,7 +11,7 @@ those measurements possible: a vague or missing label is lost data, and an
 invented one is noise in every count it lands in.
 
 Read the whole codebook. It is long because the label set is specific: about
-360 topic subtopics under 60 parent topics, about 140 named narratives,
+370 topic subtopics under 60 parent topics, about 145 named narratives,
 and frame, evidence and population labels. The definitions, boundary notes and
 co-labeling rules are the task; the examples in the tables only illustrate.
 
@@ -22,9 +22,16 @@ the JSON, and write the JSON only once.
 
 1. **Read the whole window.** Mark each stretch of health content and each
    stretch that is not health content. Apply section 3 of the codebook:
-   idioms, insults, jokes about body parts, bare crime words ("murdered") and
-   ads that fail the ad test get nothing; passing factual mentions get
-   `passing` labels. Mark where any delimited ad read starts and ends.
+   idioms, insults, jokes about body parts and ads that fail the ad test get
+   nothing; passing factual mentions get `passing` labels. Check the
+   high-volume boundary tests in 3.2 before labeling: COVID as a time marker,
+   crime and war narration (wounds and causes of death told as story),
+   "healthy" meaning available to play, a drink or joint as scenery,
+   psychiatric words as insults and emotions in a story, political issue
+   lists, self-help metaphor, and a death named with no cause. Mark where any
+   delimited ad read starts and ends: a read ends after its last line of ad
+   copy even when no "back to the show" follows, and back-to-back spots are
+   separate reads (4.1).
 2. **Topics.** For each health stretch, find the parent topic, then the most
    specific subtopic(s) under it. Look up the definitions of the candidate
    subtopics, and of the neighbours their boundary notes name, in the label
@@ -58,7 +65,7 @@ the JSON, and write the JSON only once.
 5. **Population.** Note where the health content is specifically about a
    group (infants, children, teens, young adults, midlife, older adults,
    pregnant people, women, men, LGBTQ people, athletes, military and
-   veterans), not where one person's own case is described or a member of the
+   veterans, racial and ethnic groups), not where one person's own case is described or a member of the
    group merely appears.
 6. **Claims.** Go through the health stretches sentence by sentence and
    extract every checkable, material factual proposition, including those
@@ -609,7 +616,8 @@ The result:
 ```
 
 A window with no health content, such as sports talk containing "that loss
-was a gut punch, I'm sick about it", returns:
+was a gut punch, I'm sick about it" or "he'll get a full workload after
+training camp", returns:
 
 ```json
 {"window_id": "<its window_id>", "detections": [], "verification_candidates": [], "product_mentions": []}

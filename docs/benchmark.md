@@ -579,7 +579,7 @@ export BENCHMARK_DIR=benchmark/v2
 A v7 run uses the production v7 prompt (rubric, codebook, label tables;
 about 45k tokens, cached). `--rubric-file` replaces only the rubric, so a
 prompt variant is still measured against the same codebook. On a local vLLM
-server serve with `--max-model-len 131072` or more.
+server serve with `--max-model-len 131072` or more (196608 or more for the v8 prompt).
 
 ### What is in `benchmark/v2/`
 

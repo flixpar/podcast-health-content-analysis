@@ -1,0 +1,65 @@
+# Group B decisions: 03-supplements-peptides
+
+Patch: `patch-B.jsonl` (14 changes, 2 parent edits, 0 adds, 0 removes). It applies cleanly to both `taxonomy/health-v8.md` and `merged-partial.md`, and `compile_taxonomy` passes on both results. Every backticked reference resolves in both.
+
+## Proposed edits
+
+ACCEPT  topic:supplements.other_vitamins_minerals (MODIFIED)  The electrolyte split by product form fits codebook §8 (powders count as supplements, drinks as food_or_beverage). Electrolyte brands appear in 3,688 episodes across 161 podcasts, and samples 203168/0 and 180006/0 are ambiguous under the current wording. Prenatal vitamins are added. I did not adopt the IV-drip part of the proposal: `alt_medicine.iv_ozone_therapies` already covers non-oncology IV vitamin drips and the Myers cocktail, so the row points there instead.
+ACCEPT  topic:supplements.greens_whole_food  The all-in-one "takes this label alone" sentence is accepted. AG1, IM8, Balance of Nature and Ka'Chava reads run to about 4,600 episodes, and their copy always lists ingredient classes (1321/9, 194639/1). I dropped "creatine" from the ingredient list and Huel from the scope, because a meal-replacement shake is food.
+ACCEPT  topic:supplements.herbal_adaptogens (MODIFIED)  Accepted: colostrum moves out (it is bovine), and the examples gain tongkat ali, fadogia, maca, milk thistle, mushroom coffee and ACV gummies (functional mushrooms: 1,634 episodes across 130 podcasts; ACV: 725 episodes across 89). The functional-food vehicle is now added only "when the vehicle itself is discussed", which matches the narrowed `stimulants.caffeine` in merged-partial. Psilocybin is routed to the real ID `psychoactives.psychedelic_therapy`. I dropped "digestive bitters" because no counts were given.
+ACCEPT  topic:supplements.organ_glandular  Colostrum and ARMRA are added (1,172 episodes across 85 podcasts). Prescription NDT is routed to `endocrine.thyroid`, whose examples already include Armour thyroid (190935/64).
+ACCEPT  topic:supplements.other_compounds (MODIFIED)  Accepted: the NAD+/NADH/NMN/NR pointer (StrongCell 38815/1, Qualia 13310/4), exogenous ketones (301 episodes across 35 podcasts) and nattokinase, the last of which also matches group E's spike-protein boundary. I spelled PEA out as palmitoylethanolamide to avoid the pea-protein ambiguity and added a `diets.low_carb_keto` boundary for ketosis from eating. Resveratrol is not named, because `longevity.nad_sirtuins` already lists it.
+ACCEPT  topic:supplements.sleep_mood_supplements (MODIFIED)  The label is redefined by substance, with an ID-stable rename to "Melatonin, calming compounds & sleep formulas". In the sample, about a third of melatonin hits were about melatonin the body makes (190691/67, 190799/100). I made the substance list closed (L-theanine, GABA, 5-HTP, tryptophan, apigenin) so that L-tyrosine stays in `protein_powders`, which keeps the codebook's rule 8 example intact. Two additions: the body's melatonin goes to `sleep.circadian_light` when light or timing is involved and to `endocrine.other_hormones` otherwise, and magnesium is routed to `supplements.magnesium`. Valerian, saffron and kava are removed as examples because they are botanicals.
+ACCEPT  topic:supplements.industry_quality  The label is restricted to the industry or quality as a subject. About 10 of 14 samples were ad selling points or the FDA disclaimer (63750/4, 63109/9, 189244/1). The row names `evidence:strength_assertion` and `frame:disclaimer` as the homes for those, and merged-partial's `frame:disclaimer` already names the supplement FDA statement. "Third-party tested" is removed as an example, and "expensive pee" is added.
+ACCEPT  topic:supplements.omega3  The dietary omega-6:omega-3 ratio is routed to `food.fats_oils` (182365/3).
+ACCEPT  topic:supplements.protein_powders (MODIFIED)  Accepted: topical collagen goes to skincare, collagen peptides stay here rather than under `peptides`, and HMB and glutamine are added (63109/9, 51827/4). I added the reverse pointer for L-theanine, GABA, 5-HTP and tryptophan so that the redefined `sleep_mood_supplements` and this amino-acid label do not both claim them.
+ACCEPT  topic:supplements.b_vitamins_methylation (MODIFIED)  Accepted: homocysteine, B12 shots and B12 status (177177/2, 190324/117). I folded in group A's cross-slice note mirroring the MTHFR tiebreak with `genetics.genetic_testing` (both labels when both apply). "Related gene variants" is now carried by the tiebreak sentence and not listed separately.
+ACCEPT  topic:peptides.healing_peptides  "Named stacks" is added to the definition, and the examples gain the ASR form "BPC one fifty seven", TB-4 Frag, the Wolverine stack and the Glow stack (609 episodes across 68 podcasts; 192532/4, 78428/11). The ASR variant is listed as a separate example so the cell has no nested quotes.
+ACCEPT  topic:peptides.gh_secretagogues  The growth-hormone and PED boundary is added (23585/4), and the examples gain GHRP-6, hexarelin and ibutamoren. 277 episodes across 47 podcasts.
+ACCEPT  topic:peptides.other_peptides (MODIFIED)  Accepted: bioregulators (436 episodes across 28 podcasts, though 322 of them are one show), the purpose families (sexual, tanning, fat-loss, cognitive, immune) with PT-141, melanotan and AOD-9604, and the cosmetic-cream boundary (156816/2, 195456/5, 80989/3). I dropped "(code the outcome too)", because co-labeling rule 1 already says it. "GHK copper" is added as an ASR example.
+ACCEPT  topic:peptides.peptide_sourcing_regulation (MODIFIED)  Accepted: the policy story, purity and endotoxin, clinic and telehealth access with the `health_system.dtc_telehealth` sentence modelled on `glp1.access_compounding`, about 490 episodes across 65 podcasts (178178/1, 175605/2, 89920/4, 9068/15). Retatrutide is not forced into `glp1.access_compounding`: an unapproved agent may belong in `glp1.new_offlabel_uses`, so the row says "`glp1` subtopics" and adds this label only when the research-peptide market itself is discussed. The definition is shortened to two sentences.
+ACCEPT  topic:supplements (parent; report verdict "parent needs boundary notes")  Added one sentence listing the homes outside the parent: NAD+ → `longevity.nad_sirtuins`; probiotic, prebiotic and fiber supplements → `gut.probiotics_fermented`; THC and CBD gummies → `psychoactives.cannabis`; IV drips → `alt_medicine.iv_ozone_therapies`; prescription hormones → `endocrine`. This comes from report note 2 and is a label boundary, not a scope rule, so it belongs in the table where coders look first. The remaining items in note 2 are already stated in the subtopic rows.
+ACCEPT  topic:peptides (parent; report verdict "parent description needs boundaries")  Added the boundaries for GLP-1s described as peptides (190426/112), collagen peptides (Bubs) and cosmetic-cream peptides (GHK-Cu creams, OS-01). The bare-word-in-a-trend-list rule goes to the codebook instead (see below).
+REJECT  ADD functional_mushrooms  The report itself does not recommend it: the subject meets the frequency bar (1,634 episodes across 130 podcasts) but is not distinct in misinformation terms. It is absorbed by the `herbal_adaptogens` examples.
+REJECT  ADD iv_nutrient_drips  `alt_medicine.iv_ozone_therapies` already exists for this, and the evidence was noisy (721 episodes).
+REJECT  ADD exogenous_ketones  Absorbed by `other_compounds` (301 episodes across 35 podcasts).
+REJECT  ADD fiber_supplements  Routed to `gut.probiotics_fermented` through the parent sentence (402 episodes across 82 podcasts).
+REJECT  ADD acv_gummies  Absorbed by `herbal_adaptogens` (725 episodes across 89 podcasts).
+REJECT  ADD hangover_products  ZBiotics takes `gut.probiotics_fermented` plus `alcohol.health_effects`. No new label is needed.
+REJECT  ADD prenatal_vitamins  Absorbed by `other_vitamins_minerals` plus `population:pregnant_postpartum` (127 episodes).
+
+## Codebook
+
+1. **§4.1 multi-ingredient rule** (report note 1). Sound. A product made of several substances takes its category's subtopic once (`greens_whole_food`, `sleep_mood_supplements`). With no category, it takes the subtopic of the substance it is named or sold on (StrongCell NADH → `longevity.nad_sirtuins`; Vitamin DKE → `supplements.vitamin_d`). Another ingredient's subtopic is added only when the read makes a separate claim about that ingredient. Evidence: 1321/9, 194639/1, 168594/0, 38815/1, 26219/27. The rows for `greens_whole_food` and `sleep_mood_supplements` already carry the label-level half of this.
+2. **§5.1 rule 8: homes outside `supplements`** (note 2). Sound, and partly carried by the new parent sentence. The codebook list should also name these:
+   - melatonin made by the body → `sleep.circadian_light` or `endocrine.other_hormones`;
+   - NDT → `endocrine.thyroid`;
+   - kava drinks → `alcohol.alternatives`;
+   - fluoride supplements → `oral.fluoride_products`;
+   - collagen or peptides in creams → `skin_beauty.skincare`.
+3. **§5.1 functional foods** (note 3). Sound, with one change: the food or drink takes the ingredient's supplement subtopic, and the vehicle's subtopic only when the vehicle itself is discussed (mushroom coffee adds `stimulants.caffeine` only when caffeine is discussed, which matches merged-partial's narrowed caffeine row). Evidence: 599000/6, 185554/3, 84011/3.
+4. **§5.1 general talk** (note 4). Sound. A retailer or subscription read with no specific product (iHerb, 189137/0) takes bare `topic:supplements`. The bare word "peptides" in a wellness-trend list (57014/0) or a clinic's service list (33397/1) takes bare `topic:peptides`.
+5. **§5.3/§5.4 supplement-ad boilerplate** (note 5). Sound. The "not evaluated by the FDA" statement is `frame:disclaimer` (merged-partial's disclaimer row already says so), and it is not `supplements.industry_quality` (now in that row). "NSF certified for sport" and "clinically studied" should be added to the `evidence:strength_assertion` list in §5.4.
+6. **Ad-pass patterns** (note 6). Sound:
+   - host testimonials are `evidence:personal_anecdote`, not claims;
+   - volume testimonials are puffery;
+   - "do your own research" inside ad copy is not a frame by itself;
+   - self-hedging copy is not a claim;
+   - "nutrient gap" lead-ins are not `narrative:soil_depletion_supplements` unless soil is invoked;
+   - in clinic and telehealth reads, each named treatment with a stated effect takes its own subtopic and outcome, while a bare service list takes only the clinic's subject. This refines the §4.1 "list of subjects inside one read" sentence (24859/5).
+7. **Dynamic ad insertion** (note 7). Sound as an analysis note, not a labeling rule. Back-catalog episodes carry current ads (71801/6, 70860/3), so ad detections should not be dated by episode date.
+8. **ASR variants and keyword noise** (note 8). Sound for the prompt or lexicon:
+   - ASR variants: BPC "one fifty seven"/"BBC one five seven", Thymazin, Epitilon, GHK copper/GHKCU, pinealine, Katchava, Armura, "A G one", Gator Light, "lippie polysaccharide", "tonga ali";
+   - keyword noise to warn analysts about: `\bepa\b`, `\bpea\b`, `ghk` (Poughkeepsie), "category two", goli, reta.
+9. **Possible narrative "natural or unpatentable treatments are suppressed for profit"** (note 9). Passed to the narrative reviewers and not patched: it is outside this slice. Evidence: "can't be patented" appears in 161 episodes across 55 podcasts (175605/2, 190647/4). Until then, code it as `narrative:unlisted_narrative` plus `frame:big_pharma`.
+10. **Supplement-routine lists** (note 10). Sound. "X's 5 daily supplements" takes `biohacking.stacks_protocols`, and list items get their own subtopic only when a claim is attached (rule 6). A worked example in rule 6 would help.
+
+## Cross-slice notes
+
+- `gut.probiotics_fermented` (gut slice): the new supplements parent sentence routes fiber supplements here (psyllium, Metamucil, inulin; 402 episodes across 82 podcasts). Its examples should gain "fiber supplements; psyllium" so coders can find it. The ZBiotics hangover probiotic also lands here.
+- `food.beverages_hydration` (food slice): its current wording ("electrolytes in drinks … electrolyte powders to `supplements.other_vitamins_minerals`") is consistent with the new form-based split. Adding "ready-to-drink sports drinks (Gatorade, BodyArmor)" as an example would make the mirror explicit.
+- `endocrine.thyroid`: could add "desiccated thyroid (NDT)" as an example to mirror the `organ_glandular` boundary. Its existing "Armour thyroid" example already supports the routing.
+- `skin_beauty.skincare`: could add "peptide creams; GHK-Cu cream; topical collagen" to mirror the `other_peptides`, `protein_powders` and peptides-parent boundaries.
+- `endocrine.other_hormones` / `sleep.circadian_light`: both already mention melatonin as a hormone or melatonin affected by light, so no change is needed.
+- `glp1.new_offlabel_uses` / `glp1.access_compounding`: the glp1 slice should confirm where research-chemical retatrutide goes. My row defers to "`glp1` subtopics".
+- Narrative reviewers: see Codebook item 9 (the unpatentable-remedies suppression narrative).
