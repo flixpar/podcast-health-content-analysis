@@ -76,7 +76,7 @@ def build_instructions(taxonomy: dict[str, Any], rubric_file: Path | None) -> tu
     codebook and label tables are appended as in production.
     """
     if tl.is_hierarchical(taxonomy):
-        rubric_path = Path(rubric_file) if rubric_file is not None else tl.DEFAULT_V7_RUBRIC
+        rubric_path = Path(rubric_file) if rubric_file is not None else tl.prompt_files(taxonomy)[0]
         instructions = tl.hierarchical_instructions(taxonomy, rubric_path)
         version = tl.prompt_version(taxonomy, instructions)
         if rubric_file is not None:

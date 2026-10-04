@@ -761,3 +761,28 @@ The attribute disagreement in `agreement.json` is concentrated in these
 places, so a candidate's errors there should be read against the reference
 alpha. Adopting the proposal is a new benchmark version (v3): the codebook
 defines the gold.
+
+## Version 3: the v8 revision (reference labels pending)
+
+`benchmark/v3/` holds the same 320 items as v2 with the v8 label set
+(`taxonomy.json` compiled from `taxonomy/health-v8.md`) and `codebook-v8.md`.
+It has no references or gold yet: the codebook changed, so the v2 references
+do not carry over. To build it, repeat the v2 procedure with
+`BENCHMARK_DIR=benchmark/v3`:
+
+```bash
+export BENCHMARK_DIR=benchmark/v3
+for a in opus-a opus-b opus-c; do
+  .venv/bin/python -m analysis.benchmark reference tasks --annotator $a --run-id v3r1 --bundle-size 4
+  .venv/bin/python -m analysis.benchmark reference tasks --annotator $a --run-id v3r1c --strata contrast
+done
+# one Opus agent per bundle; then per annotator:
+.venv/bin/python -m analysis.benchmark reference ingest ../podcast-misinfo-benchmark-tasks/reference/<a>-v3r1 --annotator <a> --model claude-opus-5-5
+.venv/bin/python -m analysis.benchmark aggregate
+.venv/bin/python -m analysis.benchmark adjudicate tasks --run-id v3-adj1
+.venv/bin/python -m analysis.benchmark adjudicate ingest ../podcast-misinfo-benchmark-tasks/adjudicate/v3-adj1
+.venv/bin/python -m analysis.benchmark aggregate
+```
+
+The v2 pass took 222 reference bundles and 32 adjudication bundles of Opus
+agents.
