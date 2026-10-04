@@ -1,0 +1,296 @@
+{
+  "annotator_id": "opus-b",
+  "benchmark_version": "v2",
+  "item_id": "c40166w0011",
+  "provenance": {
+    "bundle": "bundle_062",
+    "ingested_at": "2026-10-04T11:47:04.989938+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-b-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000688",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters",
+        "label_ids": [
+          "topic:vaccines",
+          "topic:health_system.pharma_industry"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000682",
+        "summary": "Guest casts vaccines given every six months as rent-seeking recurring revenue for Big Pharma and the investment funds that own it."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "They want to pick our pocket not once, they want to pick it every month, or in the case of these vaccines, every six months.",
+        "label_ids": [
+          "narrative:pharma_creates_customers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000682",
+        "summary": "Vaccines framed as a subscription-style product designed to extract repeat payments from people."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma",
+        "label_ids": [
+          "frame:big_pharma"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "summary": "Big Pharma cast as extracting rent from the public through vaccines."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000688",
+        "evidence_quote": "these huge investment funds that also control the media and control Big Tech, and it goes on and on and on",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "summary": "Investment funds alleged to control pharma, the media and Big Tech together in a stranglehold."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "also control the media and control Big Tech",
+        "label_ids": [
+          "frame:media_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "summary": "Media and Big Tech said to be controlled by the same funds behind Big Pharma."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000623",
+        "evidence_quote": "the fact checkers that have not even undergraduate degrees in biology write their little nasties, right? Because they're all paid to do this.",
+        "label_ids": [
+          "frame:media_distrust"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000622",
+        "summary": "Guest dismisses the Atlantic and fact-checkers lacking biology degrees as paid to attack him."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "Something here is not right, and when you have that feeling, I suggest you listen to it, because it's usually right.",
+        "label_ids": [
+          "frame:anti_expert_populist"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000689",
+        "summary": "Listeners urged to trust their gut feeling that something is wrong, since instinct is usually right."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Vaccine makers use vaccines given every six months as rent-seeking, recurring revenue extracted from the public.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "And so, what we've got now is vaccines. Vaccines as rent-seeking behavior from Big Pharma and their corporate masters",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:big_pharma"
+        ],
+        "narrative_ids": [
+          "narrative:pharma_creates_customers"
+        ],
+        "rationale": "Claim about pharmaceutical industry motives behind vaccine schedules that shapes vaccine trust.",
+        "relevance": "substantive",
+        "start_unit_id": "u000682",
+        "topic_ids": [
+          "topic:vaccines",
+          "topic:health_system.pharma_industry"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The large investment funds that control the pharmaceutical industry also control the media and Big Tech.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Big Pharma and their corporate masters, which are these huge investment funds that also control the media and control Big Tech",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:conspiracy_cover_up",
+          "frame:media_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "Checkable ownership and control claim used to discredit vaccine information sources.",
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "topic_ids": [
+          "topic:health_system.pharma_industry"
+        ]
+      }
+    ],
+    "window_id": "episode_40166_window_0011"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000688",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters",
+        "label_ids": [
+          "topic:health_system.pharma_industry",
+          "topic:vaccines"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000682",
+        "summary": "Guest casts vaccines given every six months as rent-seeking recurring revenue for Big Pharma and the investment funds that own it."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "They want to pick our pocket not once, they want to pick it every month, or in the case of these vaccines, every six months",
+        "label_ids": [
+          "narrative:pharma_creates_customers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000682",
+        "summary": "Vaccines framed as a subscription-style product designed to extract repeat payments from people."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma",
+        "label_ids": [
+          "frame:big_pharma"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "summary": "Big Pharma cast as extracting rent from the public through vaccines."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000688",
+        "evidence_quote": "these huge investment funds that also control the media and control Big Tech, and it goes on and on and on",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "summary": "Investment funds alleged to control pharma, the media and Big Tech together in a stranglehold."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "also control the media and control Big Tech",
+        "label_ids": [
+          "frame:media_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "summary": "Media and Big Tech said to be controlled by the same funds behind Big Pharma."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000623",
+        "evidence_quote": "the fact checkers that have not even undergraduate degrees in biology write their little nasties, right? Because they're all paid to do this",
+        "label_ids": [
+          "frame:media_distrust"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000622",
+        "summary": "Guest dismisses the Atlantic and fact-checkers lacking biology degrees as paid to attack him."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "Something here is not right, and when you have that feeling, I suggest you listen to it, because it's usually right",
+        "label_ids": [
+          "frame:anti_expert_populist"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000689",
+        "summary": "Listeners urged to trust their gut feeling that something is wrong, since instinct is usually right."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Vaccine makers use vaccines given every six months as rent-seeking, recurring revenue extracted from the public.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "And so, what we've got now is vaccines. Vaccines as rent-seeking behavior from Big Pharma and their corporate masters",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:big_pharma"
+        ],
+        "narrative_ids": [
+          "narrative:pharma_creates_customers"
+        ],
+        "rationale": "Claim about pharmaceutical industry motives behind vaccine schedules that shapes vaccine trust.",
+        "relevance": "substantive",
+        "start_unit_id": "u000682",
+        "topic_ids": [
+          "topic:health_system.pharma_industry",
+          "topic:vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The large investment funds that control the pharmaceutical industry also control the media and Big Tech.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Big Pharma and their corporate masters, which are these huge investment funds that also control the media and control Big Tech",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:conspiracy_cover_up",
+          "frame:media_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "Checkable ownership and control claim used to discredit vaccine information sources.",
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "topic_ids": [
+          "topic:health_system.pharma_industry"
+        ]
+      }
+    ],
+    "window_id": "episode_40166_window_0011"
+  },
+  "stored_at": "2026-10-04T11:47:04.989955+00:00"
+}

@@ -1,0 +1,660 @@
+{
+  "annotator_id": "opus-b",
+  "benchmark_version": "v2",
+  "item_id": "c26443w0005",
+  "provenance": {
+    "bundle": "bundle_012",
+    "ingested_at": "2026-10-04T11:47:02.916996+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-b-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "It's something I can jump in for 15 minutes instead of going somewhere to go sit in the sauna, wait for the sauna to warm.",
+        "label_ids": [
+          "topic:recovery.heat_sauna"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000199",
+        "summary": "Host reads a sponsor spot for an at-home sauna, describing 15-20 minute sessions four to six times a week and its claimed benefits."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000199",
+        "evidence_quote": "Struggling with weight loss, rashes",
+        "label_ids": [
+          "topic:weight.weight_loss_methods",
+          "topic:skin_beauty.skin_conditions"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000199",
+        "summary": "In the sauna ad the host says he was struggling with weight loss and rashes when he added the sauna to his routine."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "it helps detox your body, it boosts circulation, it improves recovery, and of course, it supports brain and mitochondrial health",
+        "label_ids": [
+          "topic:detox.toxic_load_general",
+          "topic:cardiovascular.blood_circulation",
+          "topic:cognition",
+          "topic:longevity.cellular_ageing"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "summary": "Ad copy claims the sauna detoxes the body, boosts circulation, improves recovery and supports brain and mitochondrial health."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000205",
+        "evidence_quote": "six times a week, even for only 20 minutes, has been proven to extend your lifespan",
+        "label_ids": [
+          "topic:longevity.ageing_science"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000205",
+        "summary": "Ad claims sauna use six times a week for 20 minutes has been proven to extend lifespan."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "it helps detox your body",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "summary": "The sauna is pitched as detoxing the body."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000205",
+        "evidence_quote": "has been proven to extend your lifespan",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000205",
+        "summary": "Ad asserts the lifespan benefit has been proven."
+      },
+      {
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "Listeners of this podcast get $100 off by using my personal code BGHEAL at healingsauna.com.",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000206",
+        "summary": "Host gives a personal discount code for Healing Sauna and notes purchases support his work."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000223",
+        "evidence_quote": "people in the population, especially in the United States, are receiving childhood inputs that are actually antagonistic to the development of these brain pattern types",
+        "label_ids": [
+          "topic:mental.pop_psychology"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000211",
+        "summary": "Host introduces his 'brain pattern spectrum', saying childhood inputs hinder healthy brain patterns and that rewiring them reduces self-deception and self-sabotage."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000226",
+        "evidence_quote": "why the mental health establishment has treated this word of self-deception like such a taboo concept",
+        "label_ids": [
+          "topic:mental"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000224",
+        "summary": "Host argues the mental health establishment treats self-deception as taboo and will not acknowledge it as the root of mental illness."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000226",
+        "evidence_quote": "the mental health establishment has treated this word of self-deception like such a taboo concept",
+        "label_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000224",
+        "summary": "The mental health establishment is portrayed as avoiding the real cause of mental illness."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000226",
+        "evidence_quote": "this is the root of mental illness",
+        "label_ids": [
+          "frame:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000226",
+        "summary": "Self-deception is presented as the underlying root of mental illness."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "to solve the substance use disorder crisis using technology",
+        "label_ids": [
+          "topic:drugs_addiction.addiction_recovery",
+          "topic:digital_health.health_apps"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "summary": "Host describes pitching a technology-based brain pattern mapping intervention for substance use disorder at a Johns Hopkins event."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "the academics and the professors who don't actually work in the field, could be so disconnected from the needs of the people on the",
+        "label_ids": [
+          "frame:anti_expert_populist"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000234",
+        "summary": "Host casts academic decision makers who don't work in the field as disconnected gatekeepers blocking solutions for people with lived experience."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000210",
+        "evidence_quote": "go head over to Healing Saunas",
+        "mention_role": "advertised",
+        "product_name": "Healing Sauna",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000199"
+      },
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000232",
+        "evidence_quote": "every person that I spoke to for days was extremely excited about brain pattern mapping",
+        "mention_role": "own_product",
+        "product_name": "brain pattern mapping",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000231"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Using the Healing Sauna helps detox the body.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "it helps detox your body",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "Ad claim that sauna use removes toxins is a checkable physiological claim.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:recovery.heat_sauna",
+          "topic:detox.toxic_load_general"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Using the Healing Sauna boosts circulation.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "it boosts circulation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Ad claim of a circulatory effect from sauna use can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:recovery.heat_sauna",
+          "topic:cardiovascular.blood_circulation"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Using the Healing Sauna improves recovery.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "it improves recovery",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Ad claim that sauna use aids physical recovery can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:recovery.heat_sauna"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "of course"
+        ],
+        "claim_text": "Using the Healing Sauna supports brain and mitochondrial health.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "and of course, it supports brain and mitochondrial health",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Ad claim of brain and mitochondrial benefits from sauna use needs evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:recovery.heat_sauna",
+          "topic:cognition",
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "proven"
+        ],
+        "claim_text": "Using a sauna six times a week, even for only 20 minutes, has been proven to extend lifespan.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000205",
+        "evidence_quote": "six times a week, even for only 20 minutes, has been proven to extend your lifespan",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific dose-response lifespan claim asserted as proven in an ad.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000204",
+        "topic_ids": [
+          "topic:recovery.heat_sauna",
+          "topic:longevity.ageing_science"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Self-deception is the root of mental illness.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000226",
+        "evidence_quote": "Not acknowledge that this is the root of mental illness.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:root_cause_framing",
+          "frame:anti_mainstream_medicine"
+        ],
+        "narrative_ids": [],
+        "rationale": "A sweeping causal claim about the origin of mental illness that contradicts mainstream psychiatry.",
+        "relevance": "substantive",
+        "start_unit_id": "u000224",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      }
+    ],
+    "window_id": "episode_26443_window_0005"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "It's something I can jump in for 15 minutes instead of going somewhere to go sit in the sauna, wait for the sauna to warm",
+        "label_ids": [
+          "topic:recovery.heat_sauna"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000199",
+        "summary": "Host reads a sponsor spot for an at-home sauna, describing 15-20 minute sessions four to six times a week and its claimed benefits."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000199",
+        "evidence_quote": "Struggling with weight loss, rashes",
+        "label_ids": [
+          "topic:skin_beauty.skin_conditions",
+          "topic:weight.weight_loss_methods"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000199",
+        "summary": "In the sauna ad the host says he was struggling with weight loss and rashes when he added the sauna to his routine."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "it helps detox your body, it boosts circulation, it improves recovery, and of course, it supports brain and mitochondrial health",
+        "label_ids": [
+          "topic:cardiovascular.blood_circulation",
+          "topic:cognition",
+          "topic:detox.toxic_load_general",
+          "topic:longevity.cellular_ageing"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "summary": "Ad copy claims the sauna detoxes the body, boosts circulation, improves recovery and supports brain and mitochondrial health."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000205",
+        "evidence_quote": "six times a week, even for only 20 minutes, has been proven to extend your lifespan",
+        "label_ids": [
+          "topic:longevity.ageing_science"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000205",
+        "summary": "Ad claims sauna use six times a week for 20 minutes has been proven to extend lifespan."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "it helps detox your body",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "summary": "The sauna is pitched as detoxing the body."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000205",
+        "evidence_quote": "has been proven to extend your lifespan",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000205",
+        "summary": "Ad asserts the lifespan benefit has been proven."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "Listeners of this podcast get $100 off by using my personal code BGHEAL at healingsauna.com",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000206",
+        "summary": "Host gives a personal discount code for Healing Sauna and notes purchases support his work."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000223",
+        "evidence_quote": "people in the population, especially in the United States, are receiving childhood inputs that are actually antagonistic to the development of these brain pattern types",
+        "label_ids": [
+          "topic:mental.pop_psychology"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000211",
+        "summary": "Host introduces his 'brain pattern spectrum', saying childhood inputs hinder healthy brain patterns and that rewiring them reduces self-deception and self-sabotage."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000226",
+        "evidence_quote": "why the mental health establishment has treated this word of self-deception like such a taboo concept",
+        "label_ids": [
+          "topic:mental"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000224",
+        "summary": "Host argues the mental health establishment treats self-deception as taboo and will not acknowledge it as the root of mental illness."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000226",
+        "evidence_quote": "the mental health establishment has treated this word of self-deception like such a taboo concept",
+        "label_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000224",
+        "summary": "The mental health establishment is portrayed as avoiding the real cause of mental illness."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000226",
+        "evidence_quote": "this is the root of mental illness",
+        "label_ids": [
+          "frame:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000226",
+        "summary": "Self-deception is presented as the underlying root of mental illness."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "to solve the substance use disorder crisis using technology",
+        "label_ids": [
+          "topic:digital_health.health_apps",
+          "topic:drugs_addiction.addiction_recovery"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "summary": "Host describes pitching a technology-based brain pattern mapping intervention for substance use disorder at a Johns Hopkins event."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "the academics and the professors who don't actually work in the field, could be so disconnected from the needs of the people on the",
+        "label_ids": [
+          "frame:anti_expert_populist"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000234",
+        "summary": "Host casts academic decision makers who don't work in the field as disconnected gatekeepers blocking solutions for people with lived experience."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000210",
+        "evidence_quote": "go head over to Healing Saunas",
+        "mention_role": "advertised",
+        "product_name": "Healing Sauna",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000199"
+      },
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000232",
+        "evidence_quote": "every person that I spoke to for days was extremely excited about brain pattern mapping",
+        "mention_role": "own_product",
+        "product_name": "brain pattern mapping",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000231"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Using the Healing Sauna helps detox the body.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "it helps detox your body",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "Ad claim that sauna use removes toxins is a checkable physiological claim.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:detox.toxic_load_general",
+          "topic:recovery.heat_sauna"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Using the Healing Sauna boosts circulation.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "it boosts circulation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Ad claim of a circulatory effect from sauna use can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:cardiovascular.blood_circulation",
+          "topic:recovery.heat_sauna"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Using the Healing Sauna improves recovery.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "it improves recovery",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Ad claim that sauna use aids physical recovery can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:recovery.heat_sauna"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "of course"
+        ],
+        "claim_text": "Using the Healing Sauna supports brain and mitochondrial health.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "and of course, it supports brain and mitochondrial health",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Ad claim of brain and mitochondrial benefits from sauna use needs evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:cognition",
+          "topic:longevity.cellular_ageing",
+          "topic:recovery.heat_sauna"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "proven"
+        ],
+        "claim_text": "Using a sauna six times a week, even for only 20 minutes, has been proven to extend lifespan.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000205",
+        "evidence_quote": "six times a week, even for only 20 minutes, has been proven to extend your lifespan",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific dose-response lifespan claim asserted as proven in an ad.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000204",
+        "topic_ids": [
+          "topic:longevity.ageing_science",
+          "topic:recovery.heat_sauna"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Self-deception is the root of mental illness.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000226",
+        "evidence_quote": "Not acknowledge that this is the root of mental illness",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:anti_mainstream_medicine",
+          "frame:root_cause_framing"
+        ],
+        "narrative_ids": [],
+        "rationale": "A sweeping causal claim about the origin of mental illness that contradicts mainstream psychiatry.",
+        "relevance": "substantive",
+        "start_unit_id": "u000224",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      }
+    ],
+    "window_id": "episode_26443_window_0005"
+  },
+  "stored_at": "2026-10-04T11:47:02.917031+00:00"
+}

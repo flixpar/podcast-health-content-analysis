@@ -1,0 +1,434 @@
+{
+  "annotator_id": "opus-c",
+  "benchmark_version": "v2",
+  "item_id": "c73880w0014",
+  "provenance": {
+    "bundle": "bundle_032",
+    "ingested_at": "2026-10-04T11:47:07.097870+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-c-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001108",
+        "evidence_quote": "Yeah, you totally blackout. Yeah, you have to do the G training maneuver, where like you're breathing in a specific way",
+        "label_ids": [
+          "topic:other"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001099",
+        "summary": "Guest describes pulling 9.3 Gs in a jet: blacking out, the anti-G breathing maneuver and G-suit, and feeling nauseous without throwing up."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001125",
+        "evidence_quote": "I'm like, \"Please don't have a stroke right now.\"",
+        "label_ids": [
+          "topic:neuro.stroke"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001122",
+        "summary": "Joking about a ride-along with an elderly Mario Andretti, the speaker recalls hoping he would not have a stroke at the wheel."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001206",
+        "evidence_quote": "Do you think that's the number one place where you see disinformation? It's probably the most common on social media.",
+        "label_ids": [
+          "topic:digital_health.online_health_information"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001199",
+        "summary": "Host opens a debunking segment, asking whether nutrition and diet is where science is most exaggerated; guest says it is probably the most common misinformation on social media, along with vaccine hesitancy."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001205",
+        "evidence_quote": "Yeah, or like vaccine hesitancy.",
+        "label_ids": [
+          "topic:vaccines.uptake_hesitancy"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001205",
+        "summary": "Vaccine hesitancy is named as another major area of online misinformation."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001220",
+        "evidence_quote": "Statistically significant, which does not mean the same as practically significant.",
+        "label_ids": [
+          "topic:health_system.research_system"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001207",
+        "summary": "Guest blames nutrition science's confusion on media science illiteracy: confounded epidemiology, such as a nut study, reported as causal, and statistical significance confused with practical significance."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001216",
+        "evidence_quote": "one epidemiological study showed that people who ate nuts lived on average 12 years longer.",
+        "label_ids": [
+          "topic:food.plant_foods_fiber"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001211",
+        "summary": "Example: an epidemiological study linked eating nuts to living 12 years longer without adjusting for wealth or exercise, and the media turned it into 'nuts make you live 12 years longer'."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001211",
+        "evidence_quote": "one epidemiological study showed that people who ate nuts lived on average 12 years longer.",
+        "label_ids": [
+          "evidence:specific_study",
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001211",
+        "summary": "Cites a decades-old epidemiological study that associated eating nuts with 12 more years of life."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001212",
+        "evidence_quote": "They didn't account for like wealth, they didn't account for exercise or any of these things.",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001212",
+        "summary": "Notes the nut study did not control for wealth, exercise or other confounders."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001211",
+        "evidence_quote": "I actually think media messed it up for all of us because they're really. Terrible with their science literacy",
+        "label_ids": [
+          "frame:media_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001210",
+        "summary": "Media are blamed for distorting nutrition science through poor science literacy."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001216",
+        "evidence_quote": "And then they write an article like nuts make you live 12 years longer. That's not what the study said.",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001215",
+        "summary": "Corrects the headline that nuts make you live 12 years longer: the study did not say that."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001220",
+        "evidence_quote": "Statistically significant, which does not mean the same as practically significant.",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001219",
+        "summary": "Corrects media use of 'significant': statistical significance is not practical significance."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "An epidemiological study from about 40 years ago found that people who ate nuts lived on average 12 years longer.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001211",
+        "evidence_quote": "one epidemiological study showed that people who ate nuts lived on average 12 years longer.",
+        "evidence_signal_ids": [
+          "evidence:specific_study",
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific study finding about nuts and longevity that can be checked against the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u001211",
+        "topic_ids": [
+          "topic:food.plant_foods_fiber"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The epidemiological study linking nuts to 12 more years of life did not adjust for wealth, exercise or similar factors.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001212",
+        "evidence_quote": "They didn't account for like wealth, they didn't account for exercise or any of these things.",
+        "evidence_signal_ids": [
+          "evidence:evidence_limits"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about a study's methods that shapes how far its finding should be trusted.",
+        "relevance": "substantive",
+        "start_unit_id": "u001212",
+        "topic_ids": [
+          "topic:health_system.research_system",
+          "topic:food.plant_foods_fiber"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Eating nuts makes you live 12 years longer.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u001216",
+        "evidence_quote": "And then they write an article like nuts make you live 12 years longer.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "A causal longevity claim from media coverage that the speaker rebuts; worth checking against the evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u001215",
+        "topic_ids": [
+          "topic:food.plant_foods_fiber"
+        ]
+      }
+    ],
+    "window_id": "episode_73880_window_0014"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001108",
+        "evidence_quote": "Yeah, you totally blackout. Yeah, you have to do the G training maneuver, where like you're breathing in a specific way",
+        "label_ids": [
+          "topic:other"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001099",
+        "summary": "Guest describes pulling 9.3 Gs in a jet: blacking out, the anti-G breathing maneuver and G-suit, and feeling nauseous without throwing up."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001125",
+        "evidence_quote": "I'm like, \"Please don't have a stroke right now",
+        "label_ids": [
+          "topic:neuro.stroke"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001122",
+        "summary": "Joking about a ride-along with an elderly Mario Andretti, the speaker recalls hoping he would not have a stroke at the wheel."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001206",
+        "evidence_quote": "Do you think that's the number one place where you see disinformation? It's probably the most common on social media",
+        "label_ids": [
+          "topic:digital_health.online_health_information"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001199",
+        "summary": "Host opens a debunking segment, asking whether nutrition and diet is where science is most exaggerated; guest says it is probably the most common misinformation on social media, along with vaccine hesitancy."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001205",
+        "evidence_quote": "Yeah, or like vaccine hesitancy",
+        "label_ids": [
+          "topic:vaccines.uptake_hesitancy"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001205",
+        "summary": "Vaccine hesitancy is named as another major area of online misinformation."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001220",
+        "evidence_quote": "Statistically significant, which does not mean the same as practically significant",
+        "label_ids": [
+          "topic:health_system.research_system"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001207",
+        "summary": "Guest blames nutrition science's confusion on media science illiteracy: confounded epidemiology, such as a nut study, reported as causal, and statistical significance confused with practical significance."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001216",
+        "evidence_quote": "one epidemiological study showed that people who ate nuts lived on average 12 years longer",
+        "label_ids": [
+          "topic:food.plant_foods_fiber"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001211",
+        "summary": "Example: an epidemiological study linked eating nuts to living 12 years longer without adjusting for wealth or exercise, and the media turned it into 'nuts make you live 12 years longer'."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001211",
+        "evidence_quote": "one epidemiological study showed that people who ate nuts lived on average 12 years longer",
+        "label_ids": [
+          "evidence:specific_study",
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001211",
+        "summary": "Cites a decades-old epidemiological study that associated eating nuts with 12 more years of life."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001212",
+        "evidence_quote": "They didn't account for like wealth, they didn't account for exercise or any of these things",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001212",
+        "summary": "Notes the nut study did not control for wealth, exercise or other confounders."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001211",
+        "evidence_quote": "I actually think media messed it up for all of us because they're really. Terrible with their science literacy",
+        "label_ids": [
+          "frame:media_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001210",
+        "summary": "Media are blamed for distorting nutrition science through poor science literacy."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001216",
+        "evidence_quote": "And then they write an article like nuts make you live 12 years longer. That's not what the study said",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001215",
+        "summary": "Corrects the headline that nuts make you live 12 years longer: the study did not say that."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001220",
+        "evidence_quote": "Statistically significant, which does not mean the same as practically significant",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001219",
+        "summary": "Corrects media use of 'significant': statistical significance is not practical significance."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "An epidemiological study from about 40 years ago found that people who ate nuts lived on average 12 years longer.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001211",
+        "evidence_quote": "one epidemiological study showed that people who ate nuts lived on average 12 years longer",
+        "evidence_signal_ids": [
+          "evidence:specific_study",
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific study finding about nuts and longevity that can be checked against the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u001211",
+        "topic_ids": [
+          "topic:food.plant_foods_fiber"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The epidemiological study linking nuts to 12 more years of life did not adjust for wealth, exercise or similar factors.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001212",
+        "evidence_quote": "They didn't account for like wealth, they didn't account for exercise or any of these things",
+        "evidence_signal_ids": [
+          "evidence:evidence_limits"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about a study's methods that shapes how far its finding should be trusted.",
+        "relevance": "substantive",
+        "start_unit_id": "u001212",
+        "topic_ids": [
+          "topic:food.plant_foods_fiber",
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Eating nuts makes you live 12 years longer.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u001216",
+        "evidence_quote": "And then they write an article like nuts make you live 12 years longer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "A causal longevity claim from media coverage that the speaker rebuts; worth checking against the evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u001215",
+        "topic_ids": [
+          "topic:food.plant_foods_fiber"
+        ]
+      }
+    ],
+    "window_id": "episode_73880_window_0014"
+  },
+  "stored_at": "2026-10-04T11:47:07.097891+00:00"
+}

@@ -1,0 +1,120 @@
+{
+  "annotator_id": "opus-a",
+  "benchmark_version": "v2",
+  "item_id": "c29218w0006",
+  "provenance": {
+    "bundle": "bundle_034",
+    "ingested_at": "2026-10-04T11:47:00.517921+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-a-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000414",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified.",
+        "label_ids": [
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000399",
+        "summary": "BetterHelp sponsor read tied to World Mental Health Day promoting online therapist matching and a first-month discount."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000414",
+        "evidence_quote": "Our listeners get 10% off their first month at BetterHelp.",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000399",
+        "summary": "Paid BetterHelp ad with a 10% off listener URL."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "unclear",
+        "end_unit_id": "u000466",
+        "evidence_quote": "No, that is that is a good way to avoid seasickness. Get drunk, be drunk.",
+        "label_ids": [
+          "topic:alcohol.health_effects"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000455",
+        "summary": "Comic banter about drunk sea captains, drunk driving reaction time and getting drunk to avoid seasickness."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000414",
+        "evidence_quote": "This is an ad by BetterHelp.",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000399"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_29218_window_0006"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000414",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified",
+        "label_ids": [
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000399",
+        "summary": "BetterHelp sponsor read tied to World Mental Health Day promoting online therapist matching and a first-month discount."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000414",
+        "evidence_quote": "Our listeners get 10% off their first month at BetterHelp",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000399",
+        "summary": "Paid BetterHelp ad with a 10% off listener URL."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "unclear",
+        "end_unit_id": "u000466",
+        "evidence_quote": "No, that is that is a good way to avoid seasickness. Get drunk, be drunk",
+        "label_ids": [
+          "topic:alcohol.health_effects"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000455",
+        "summary": "Comic banter about drunk sea captains, drunk driving reaction time and getting drunk to avoid seasickness."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000414",
+        "evidence_quote": "This is an ad by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000399"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_29218_window_0006"
+  },
+  "stored_at": "2026-10-04T11:47:00.517950+00:00"
+}

@@ -1,0 +1,950 @@
+{
+  "annotator_id": "opus-b",
+  "benchmark_version": "v2",
+  "item_id": "c190168w0014",
+  "provenance": {
+    "bundle": "bundle_037",
+    "ingested_at": "2026-10-04T11:47:03.961751+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-b-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000935",
+        "evidence_quote": "methyl and blue hyperbaric oxygen, IV vitamin C, IV ozone therapy.",
+        "label_ids": [
+          "topic:medications.repurposed_offlabel",
+          "topic:recovery.hyperbaric",
+          "topic:supplements.vitamin_c",
+          "topic:alt_medicine.iv_ozone_therapies"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000930",
+        "summary": "Guest lists methylene blue, hyperbaric oxygen, IV vitamin C and IV ozone as helpful preconditioning agents."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000956",
+        "evidence_quote": "But the heart function of the rats who did ozone therapy was almost normal.",
+        "label_ids": [
+          "topic:alt_medicine.iv_ozone_therapies",
+          "topic:cardiovascular.heart_disease"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000936",
+        "summary": "Guest says ozone raises antioxidant enzymes and describes a rat study where ozone-pretreated rats kept near-normal heart function after induced heart attacks."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000937",
+        "evidence_quote": "since we're getting that increase in endogenous antioxidant enzymes, that preconditions you for trauma.",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000936",
+        "summary": "Raised endogenous antioxidant enzymes are offered as how ozone preconditions the body for trauma."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000953",
+        "evidence_quote": "So they did a study where they had these rats. And they had three different groups.",
+        "label_ids": [
+          "evidence:specific_study",
+          "evidence:preclinical_extrapolation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000938",
+        "summary": "A rat study with far-infrared, ozone and sham groups and induced heart attacks is described as support for ozone preconditioning in people."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000962",
+        "evidence_quote": "And that could be chemotherapy. That could even be something just like a car accident",
+        "label_ids": [
+          "topic:cancer.conventional_treatment",
+          "topic:acute_care.trauma_fractures"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000957",
+        "summary": "These treatments are said to precondition the body for traumas such as chemotherapy or a car accident."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000968",
+        "evidence_quote": "if you exercise, you're more capable of handling stress and trauma and different things as opposed to if you don't.",
+        "label_ids": [
+          "topic:fitness.exercise_general"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000963",
+        "summary": "Host compares the preconditioning idea with exercise making people better able to handle stress and trauma."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001015",
+        "evidence_quote": "And so now on the back end of that, I'm trying to explain to them, oh, but it's really good.",
+        "label_ids": [
+          "topic:medications.repurposed_offlabel"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000969",
+        "summary": "Host tells of her father drinking methylene blue by mistake and turning blue, and of her claims that it is antimicrobial and good for mitochondria."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001006",
+        "evidence_quote": "it's anti microbial and blah, blah, blah. And great for your for your mitochondria.",
+        "label_ids": [
+          "narrative:methylene_blue_miracle"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001003",
+        "summary": "Methylene blue is promoted as antimicrobial and great for mitochondria."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001027",
+        "evidence_quote": "But I mean, even high vitamin C, like there are millions of treatments have been done with that.",
+        "label_ids": [
+          "topic:medications.repurposed_offlabel",
+          "topic:supplements.vitamin_c"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001018",
+        "summary": "Guest says methylene blue is a newer trend needing more work, but high-dose vitamin C has millions of treatments and good research and should be adopted."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001020",
+        "evidence_quote": "I think there's still a lot of work that needs to be done on that front.",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001018",
+        "summary": "Guest acknowledges methylene blue still needs more research."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001024",
+        "evidence_quote": "There's a lot of really great research on it.",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001021",
+        "summary": "Unspecified research and millions of treatments are cited for high-dose vitamin C."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001038",
+        "evidence_quote": "Hey, guys, we interrupt this program for very brief but very important message.",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001028",
+        "summary": "Sponsor break for Level Up Health and its flagship product."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001035",
+        "evidence_quote": "I tried a few of his life changing formulations and the rest as they say is history.",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001034",
+        "summary": "Host's testimonial of trying the founder's 'life changing' formulations."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001041",
+        "evidence_quote": "Ultimate GI repair combines the best natural botanicals and nutritional nutritional with powerful orally of bioavailable peptides",
+        "label_ids": [
+          "topic:supplements.herbal_adaptogens",
+          "topic:peptides.healing_peptides"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001036",
+        "summary": "Ad describes Ultimate GI Repair as combining botanicals with orally bioavailable peptides used in functional medicine."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001039",
+        "evidence_quote": "combines the best natural botanicals",
+        "label_ids": [
+          "frame:naturalness_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001039",
+        "summary": "Product pitched on its natural botanicals."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001043",
+        "evidence_quote": "Whether that's gut health and healing, liver detoxification, reducing inflammation, supporting brain function or biohacking and optimizing your health.",
+        "label_ids": [
+          "topic:gut",
+          "topic:detox.toxic_load_general",
+          "topic:immune.inflammation",
+          "topic:cognition",
+          "topic:biohacking.practice_culture"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001042",
+        "summary": "Ad lists the goals the products serve: gut healing, liver detoxification, reducing inflammation, brain function and biohacking."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001043",
+        "evidence_quote": "biohacking and optimizing your health.",
+        "label_ids": [
+          "frame:optimization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001043",
+        "summary": "Ad frames health as something to biohack and optimize."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u001038",
+        "evidence_quote": "I became aware of level up health.",
+        "mention_role": "advertised",
+        "product_name": "Level Up Health",
+        "product_type": "supplement",
+        "start_unit_id": "u001030"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u001043",
+        "evidence_quote": "Ultimate GI repair combines the best natural botanicals",
+        "mention_role": "advertised",
+        "product_name": "Ultimate GI Repair",
+        "product_type": "supplement",
+        "start_unit_id": "u001039"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Methylene blue, hyperbaric oxygen, IV vitamin C and IV ozone therapy are helpful as preconditioning agents.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000935",
+        "evidence_quote": "stuff you can do that is really helpful in that. And essentially what they're doing is they're preconditioning agent.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Efficacy claim for several alternative therapies.",
+        "relevance": "passing",
+        "start_unit_id": "u000930",
+        "topic_ids": [
+          "topic:medications.repurposed_offlabel",
+          "topic:recovery.hyperbaric",
+          "topic:supplements.vitamin_c",
+          "topic:alt_medicine.iv_ozone_therapies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ozone therapy increases endogenous antioxidant enzymes, which preconditions the body for trauma.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000937",
+        "evidence_quote": "since we're getting that increase in endogenous antioxidant enzymes, that preconditions you for trauma.",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic claim supporting ozone therapy use.",
+        "relevance": "substantive",
+        "start_unit_id": "u000936",
+        "topic_ids": [
+          "topic:alt_medicine.iv_ozone_therapies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In a rat study, rats given ozone therapy before induced heart attacks had almost normal heart function afterwards, unlike far-infrared and sham groups.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000953",
+        "evidence_quote": "But the heart function of the rats who did ozone therapy was almost normal.",
+        "evidence_signal_ids": [
+          "evidence:specific_study",
+          "evidence:preclinical_extrapolation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Study finding offered as support for ozone therapy; checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000938",
+        "topic_ids": [
+          "topic:alt_medicine.iv_ozone_therapies",
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "These treatments precondition the body to better handle traumas such as chemotherapy or a car accident.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000962",
+        "evidence_quote": "what some of these treatments can do as a preconditioning agent to help you go through different traumas. And that could be chemotherapy.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim that alternative therapies protect against chemotherapy and injury.",
+        "relevance": "substantive",
+        "start_unit_id": "u000957",
+        "topic_ids": [
+          "topic:alt_medicine.iv_ozone_therapies",
+          "topic:cancer.conventional_treatment",
+          "topic:acute_care.trauma_fractures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People who exercise are more capable of handling stress and trauma than people who do not.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000965",
+        "evidence_quote": "if you exercise, you're more capable of handling stress and trauma and different things as opposed to if you don't.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "General exercise-resilience claim used as an analogy.",
+        "relevance": "passing",
+        "start_unit_id": "u000963",
+        "topic_ids": [
+          "topic:fitness.exercise_general"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Methylene blue is antibacterial and antimicrobial.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001004",
+        "evidence_quote": "And it's anti bacteria on top of like it's anti microbial and blah, blah, blah.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:methylene_blue_miracle"
+        ],
+        "rationale": "Pharmacological claim promoting methylene blue use.",
+        "relevance": "substantive",
+        "start_unit_id": "u001003",
+        "topic_ids": [
+          "topic:medications.repurposed_offlabel"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Methylene blue is great for your mitochondria.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001006",
+        "evidence_quote": "And great for your for your mitochondria.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:methylene_blue_miracle"
+        ],
+        "rationale": "Mitochondrial-benefit claim central to the methylene blue narrative.",
+        "relevance": "substantive",
+        "start_unit_id": "u001005",
+        "topic_ids": [
+          "topic:medications.repurposed_offlabel",
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "Millions of high-dose vitamin C treatments have been given and there is a lot of good research supporting it.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001024",
+        "evidence_quote": "even high vitamin C, like there are millions of treatments have been done with that. There's a lot of really great research on it.",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim about the volume and quality of evidence for high-dose vitamin C.",
+        "relevance": "substantive",
+        "start_unit_id": "u001021",
+        "topic_ids": [
+          "topic:supplements.vitamin_c"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "the best"
+        ],
+        "claim_text": "Ultimate GI Repair combines the best natural botanicals and nutrients with orally bioavailable peptides.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001040",
+        "evidence_quote": "Ultimate GI repair combines the best natural botanicals and nutritional nutritional with powerful orally of bioavailable peptides",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:naturalness_appeal"
+        ],
+        "narrative_ids": [],
+        "rationale": "Composition claim, including oral bioavailability of peptides, in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001039",
+        "topic_ids": [
+          "topic:supplements.herbal_adaptogens",
+          "topic:peptides.healing_peptides"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Level Up Health's products actually work to support gut healing, liver detoxification, reduced inflammation and brain function.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001043",
+        "evidence_quote": "products that actually work and help you achieve your health goals. Whether that's gut health and healing, liver detoxification, reducing inflammation, supporting",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Ad efficacy claims across several health outcomes.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001041",
+        "topic_ids": [
+          "topic:gut",
+          "topic:detox.toxic_load_general",
+          "topic:immune.inflammation",
+          "topic:cognition"
+        ]
+      }
+    ],
+    "window_id": "episode_190168_window_0014"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000935",
+        "evidence_quote": "methyl and blue hyperbaric oxygen, IV vitamin C, IV ozone therapy",
+        "label_ids": [
+          "topic:alt_medicine.iv_ozone_therapies",
+          "topic:medications.repurposed_offlabel",
+          "topic:recovery.hyperbaric",
+          "topic:supplements.vitamin_c"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000930",
+        "summary": "Guest lists methylene blue, hyperbaric oxygen, IV vitamin C and IV ozone as helpful preconditioning agents."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000956",
+        "evidence_quote": "But the heart function of the rats who did ozone therapy was almost normal",
+        "label_ids": [
+          "topic:alt_medicine.iv_ozone_therapies",
+          "topic:cardiovascular.heart_disease"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000936",
+        "summary": "Guest says ozone raises antioxidant enzymes and describes a rat study where ozone-pretreated rats kept near-normal heart function after induced heart attacks."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000937",
+        "evidence_quote": "since we're getting that increase in endogenous antioxidant enzymes, that preconditions you for trauma",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000936",
+        "summary": "Raised endogenous antioxidant enzymes are offered as how ozone preconditions the body for trauma."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000953",
+        "evidence_quote": "So they did a study where they had these rats. And they had three different groups",
+        "label_ids": [
+          "evidence:preclinical_extrapolation",
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000938",
+        "summary": "A rat study with far-infrared, ozone and sham groups and induced heart attacks is described as support for ozone preconditioning in people."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000962",
+        "evidence_quote": "And that could be chemotherapy. That could even be something just like a car accident",
+        "label_ids": [
+          "topic:acute_care.trauma_fractures",
+          "topic:cancer.conventional_treatment"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000957",
+        "summary": "These treatments are said to precondition the body for traumas such as chemotherapy or a car accident."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000968",
+        "evidence_quote": "if you exercise, you're more capable of handling stress and trauma and different things as opposed to if you don't",
+        "label_ids": [
+          "topic:fitness.exercise_general"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000963",
+        "summary": "Host compares the preconditioning idea with exercise making people better able to handle stress and trauma."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001015",
+        "evidence_quote": "And so now on the back end of that, I'm trying to explain to them, oh, but it's really good",
+        "label_ids": [
+          "topic:medications.repurposed_offlabel"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000969",
+        "summary": "Host tells of her father drinking methylene blue by mistake and turning blue, and of her claims that it is antimicrobial and good for mitochondria."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001006",
+        "evidence_quote": "it's anti microbial and blah, blah, blah. And great for your for your mitochondria",
+        "label_ids": [
+          "narrative:methylene_blue_miracle"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001003",
+        "summary": "Methylene blue is promoted as antimicrobial and great for mitochondria."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001027",
+        "evidence_quote": "But I mean, even high vitamin C, like there are millions of treatments have been done with that",
+        "label_ids": [
+          "topic:medications.repurposed_offlabel",
+          "topic:supplements.vitamin_c"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001018",
+        "summary": "Guest says methylene blue is a newer trend needing more work, but high-dose vitamin C has millions of treatments and good research and should be adopted."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001020",
+        "evidence_quote": "I think there's still a lot of work that needs to be done on that front",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001018",
+        "summary": "Guest acknowledges methylene blue still needs more research."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001024",
+        "evidence_quote": "There's a lot of really great research on it",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001021",
+        "summary": "Unspecified research and millions of treatments are cited for high-dose vitamin C."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001038",
+        "evidence_quote": "Hey, guys, we interrupt this program for very brief but very important message",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001028",
+        "summary": "Sponsor break for Level Up Health and its flagship product."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001035",
+        "evidence_quote": "I tried a few of his life changing formulations and the rest as they say is history",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001034",
+        "summary": "Host's testimonial of trying the founder's 'life changing' formulations."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001041",
+        "evidence_quote": "Ultimate GI repair combines the best natural botanicals and nutritional nutritional with powerful orally of bioavailable peptides",
+        "label_ids": [
+          "topic:peptides.healing_peptides",
+          "topic:supplements.herbal_adaptogens"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001036",
+        "summary": "Ad describes Ultimate GI Repair as combining botanicals with orally bioavailable peptides used in functional medicine."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001039",
+        "evidence_quote": "combines the best natural botanicals",
+        "label_ids": [
+          "frame:naturalness_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001039",
+        "summary": "Product pitched on its natural botanicals."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001043",
+        "evidence_quote": "Whether that's gut health and healing, liver detoxification, reducing inflammation, supporting brain function or biohacking and optimizing your health",
+        "label_ids": [
+          "topic:biohacking.practice_culture",
+          "topic:cognition",
+          "topic:detox.toxic_load_general",
+          "topic:gut",
+          "topic:immune.inflammation"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001042",
+        "summary": "Ad lists the goals the products serve: gut healing, liver detoxification, reducing inflammation, brain function and biohacking."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001043",
+        "evidence_quote": "biohacking and optimizing your health",
+        "label_ids": [
+          "frame:optimization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001043",
+        "summary": "Ad frames health as something to biohack and optimize."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u001038",
+        "evidence_quote": "I became aware of level up health",
+        "mention_role": "advertised",
+        "product_name": "Level Up Health",
+        "product_type": "supplement",
+        "start_unit_id": "u001030"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u001043",
+        "evidence_quote": "Ultimate GI repair combines the best natural botanicals",
+        "mention_role": "advertised",
+        "product_name": "Ultimate GI Repair",
+        "product_type": "supplement",
+        "start_unit_id": "u001039"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Methylene blue, hyperbaric oxygen, IV vitamin C and IV ozone therapy are helpful as preconditioning agents.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000935",
+        "evidence_quote": "stuff you can do that is really helpful in that. And essentially what they're doing is they're preconditioning agent",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Efficacy claim for several alternative therapies.",
+        "relevance": "passing",
+        "start_unit_id": "u000930",
+        "topic_ids": [
+          "topic:alt_medicine.iv_ozone_therapies",
+          "topic:medications.repurposed_offlabel",
+          "topic:recovery.hyperbaric",
+          "topic:supplements.vitamin_c"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ozone therapy increases endogenous antioxidant enzymes, which preconditions the body for trauma.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000937",
+        "evidence_quote": "since we're getting that increase in endogenous antioxidant enzymes, that preconditions you for trauma",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic claim supporting ozone therapy use.",
+        "relevance": "substantive",
+        "start_unit_id": "u000936",
+        "topic_ids": [
+          "topic:alt_medicine.iv_ozone_therapies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In a rat study, rats given ozone therapy before induced heart attacks had almost normal heart function afterwards, unlike far-infrared and sham groups.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000953",
+        "evidence_quote": "But the heart function of the rats who did ozone therapy was almost normal",
+        "evidence_signal_ids": [
+          "evidence:preclinical_extrapolation",
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Study finding offered as support for ozone therapy; checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000938",
+        "topic_ids": [
+          "topic:alt_medicine.iv_ozone_therapies",
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "These treatments precondition the body to better handle traumas such as chemotherapy or a car accident.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000962",
+        "evidence_quote": "what some of these treatments can do as a preconditioning agent to help you go through different traumas. And that could be chemotherapy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim that alternative therapies protect against chemotherapy and injury.",
+        "relevance": "substantive",
+        "start_unit_id": "u000957",
+        "topic_ids": [
+          "topic:acute_care.trauma_fractures",
+          "topic:alt_medicine.iv_ozone_therapies",
+          "topic:cancer.conventional_treatment"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People who exercise are more capable of handling stress and trauma than people who do not.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000965",
+        "evidence_quote": "if you exercise, you're more capable of handling stress and trauma and different things as opposed to if you don't",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "General exercise-resilience claim used as an analogy.",
+        "relevance": "passing",
+        "start_unit_id": "u000963",
+        "topic_ids": [
+          "topic:fitness.exercise_general"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Methylene blue is antibacterial and antimicrobial.",
+        "claim_type": "mechanism",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001004",
+        "evidence_quote": "And it's anti bacteria on top of like it's anti microbial and blah, blah, blah",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:methylene_blue_miracle"
+        ],
+        "rationale": "Pharmacological claim promoting methylene blue use.",
+        "relevance": "substantive",
+        "start_unit_id": "u001003",
+        "topic_ids": [
+          "topic:medications.repurposed_offlabel"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Methylene blue is great for your mitochondria.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001006",
+        "evidence_quote": "And great for your for your mitochondria",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:methylene_blue_miracle"
+        ],
+        "rationale": "Mitochondrial-benefit claim central to the methylene blue narrative.",
+        "relevance": "substantive",
+        "start_unit_id": "u001005",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing",
+          "topic:medications.repurposed_offlabel"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "Millions of high-dose vitamin C treatments have been given and there is a lot of good research supporting it.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001024",
+        "evidence_quote": "even high vitamin C, like there are millions of treatments have been done with that. There's a lot of really great research on it",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim about the volume and quality of evidence for high-dose vitamin C.",
+        "relevance": "substantive",
+        "start_unit_id": "u001021",
+        "topic_ids": [
+          "topic:supplements.vitamin_c"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "the best"
+        ],
+        "claim_text": "Ultimate GI Repair combines the best natural botanicals and nutrients with orally bioavailable peptides.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001040",
+        "evidence_quote": "Ultimate GI repair combines the best natural botanicals and nutritional nutritional with powerful orally of bioavailable peptides",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:naturalness_appeal"
+        ],
+        "narrative_ids": [],
+        "rationale": "Composition claim, including oral bioavailability of peptides, in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001039",
+        "topic_ids": [
+          "topic:peptides.healing_peptides",
+          "topic:supplements.herbal_adaptogens"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Level Up Health's products actually work to support gut healing, liver detoxification, reduced inflammation and brain function.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001043",
+        "evidence_quote": "products that actually work and help you achieve your health goals. Whether that's gut health and healing, liver detoxification, reducing inflammation, supporting",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Ad efficacy claims across several health outcomes.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001041",
+        "topic_ids": [
+          "topic:cognition",
+          "topic:detox.toxic_load_general",
+          "topic:gut",
+          "topic:immune.inflammation"
+        ]
+      }
+    ],
+    "window_id": "episode_190168_window_0014"
+  },
+  "stored_at": "2026-10-04T11:47:03.961771+00:00"
+}

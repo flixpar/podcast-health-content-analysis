@@ -1,0 +1,443 @@
+{
+  "annotator_id": "opus-c",
+  "benchmark_version": "v2",
+  "item_id": "t-c128911w0034--decoy_hedge_reported",
+  "provenance": {
+    "bundle": "bundle_022",
+    "ingested_at": "2026-10-04T11:47:06.678899+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-c-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003026",
+        "evidence_quote": "My firefest is my back hurts. I fucked up my back.",
+        "label_ids": [
+          "topic:musculoskeletal.back_neck_posture"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002957",
+        "summary": "Host describes a lower-back injury with shooting leg pain, and co-hosts suggest a bulging disc and say stretching, exercise and core work are the only fix."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002968",
+        "evidence_quote": "I'm starting to get the shooting pain down my right leg.",
+        "label_ids": [
+          "topic:neuro.nerve_spinal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002968",
+        "summary": "Host reports shooting pain starting down his right leg from the back injury."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003023",
+        "evidence_quote": "No, the disc, a bulging disc, like basically hits the nerve.",
+        "label_ids": [
+          "topic:neuro.nerve_spinal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u003018",
+        "summary": "Hosts argue whether the pain is muscular or skeletal and explain that a bulging disc hits the sciatic nerve."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003023",
+        "evidence_quote": "a bulging disc, like basically hits the nerve.",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u003023",
+        "summary": "Co-host explains the leg pain as a bulging disc pressing on the nerve."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "unclear",
+        "end_unit_id": "u002971",
+        "evidence_quote": "every doctor is busy shooting people up with 5G.",
+        "label_ids": [
+          "topic:vaccines.covid_vaccines"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002971",
+        "summary": "Host jokes he can't see a doctor because every doctor is busy injecting people with 5G, mocking vaccine-5G conspiracy talk."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002975",
+        "evidence_quote": "I've been taking muscle relaxers at night.",
+        "label_ids": [
+          "topic:medications.other_drugs"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002975",
+        "summary": "Host says he has been taking muscle relaxers at night for his back."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003014",
+        "evidence_quote": "Just rubbing CBD on my spine.",
+        "label_ids": [
+          "topic:psychoactives.cannabis"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003014",
+        "summary": "Host mentions rubbing CBD on his spine for back pain."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003039",
+        "evidence_quote": "Some HGH. Okay. For my back.",
+        "label_ids": [
+          "topic:endocrine.other_hormones"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003032",
+        "summary": "Hosts joke about taking HGH for the back injury."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003074",
+        "evidence_quote": "Billy convinced me I had COVID on Sunday.",
+        "label_ids": [
+          "topic:covid.illness_severity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u003042",
+        "summary": "Host recounts a co-host convincing him he had COVID based on vomiting, forgetfulness and aches, leading him to check his temperature all week."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003053",
+        "evidence_quote": "I had I had food poisoning, and I told them I had food poisoning.",
+        "label_ids": [
+          "topic:infectious.foodborne"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003046",
+        "summary": "Host says he actually had food poisoning from Chinese food and vomited twice."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "It seems"
+        ],
+        "claim_text": "Recovering from a lower-back injury and preventing it from recurring seems to require stretching and exercise rather than a pill or patch.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002998",
+        "evidence_quote": "It seems that, in order to make yourself feel better and have this not happen again, you have to do a lot of work.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A treatment claim about back-pain management that affects what listeners do.",
+        "relevance": "substantive",
+        "start_unit_id": "u002995",
+        "topic_ids": [
+          "topic:musculoskeletal.back_neck_posture"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A bulging disc presses on the nerve, causing sciatic pain.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003023",
+        "evidence_quote": "No, the disc, a bulging disc, like basically hits the nerve.",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanism claim about the cause of sciatic pain.",
+        "relevance": "substantive",
+        "start_unit_id": "u003023",
+        "topic_ids": [
+          "topic:neuro.nerve_spinal",
+          "topic:musculoskeletal.back_neck_posture"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "With stretches a bulging disc slowly goes down, but it stays with you for the rest of your life.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003026",
+        "evidence_quote": "It will slowly go down, and then it will be with you for the rest.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A prognosis claim about disc injuries that could shape treatment expectations.",
+        "relevance": "substantive",
+        "start_unit_id": "u003025",
+        "topic_ids": [
+          "topic:musculoskeletal.back_neck_posture"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Muscle aches and back aches are probably a sign of COVID.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u003071",
+        "evidence_quote": "Billy also said muscle aches and back aches are probably a sign of COVID.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A symptom-recognition claim about COVID relayed from a co-host and mocked.",
+        "relevance": "substantive",
+        "start_unit_id": "u003069",
+        "topic_ids": [
+          "topic:covid.illness_severity"
+        ]
+      }
+    ],
+    "window_id": "episode_128911_window_0034_decoy_hedge_reported"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003026",
+        "evidence_quote": "My firefest is my back hurts. I fucked up my back",
+        "label_ids": [
+          "topic:musculoskeletal.back_neck_posture"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002957",
+        "summary": "Host describes a lower-back injury with shooting leg pain, and co-hosts suggest a bulging disc and say stretching, exercise and core work are the only fix."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002968",
+        "evidence_quote": "I'm starting to get the shooting pain down my right leg",
+        "label_ids": [
+          "topic:neuro.nerve_spinal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002968",
+        "summary": "Host reports shooting pain starting down his right leg from the back injury."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003023",
+        "evidence_quote": "No, the disc, a bulging disc, like basically hits the nerve",
+        "label_ids": [
+          "topic:neuro.nerve_spinal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u003018",
+        "summary": "Hosts argue whether the pain is muscular or skeletal and explain that a bulging disc hits the sciatic nerve."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003023",
+        "evidence_quote": "a bulging disc, like basically hits the nerve",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u003023",
+        "summary": "Co-host explains the leg pain as a bulging disc pressing on the nerve."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "unclear",
+        "end_unit_id": "u002971",
+        "evidence_quote": "every doctor is busy shooting people up with 5G",
+        "label_ids": [
+          "topic:vaccines.covid_vaccines"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002971",
+        "summary": "Host jokes he can't see a doctor because every doctor is busy injecting people with 5G, mocking vaccine-5G conspiracy talk."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002975",
+        "evidence_quote": "I've been taking muscle relaxers at night",
+        "label_ids": [
+          "topic:medications.other_drugs"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002975",
+        "summary": "Host says he has been taking muscle relaxers at night for his back."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003014",
+        "evidence_quote": "Just rubbing CBD on my spine",
+        "label_ids": [
+          "topic:psychoactives.cannabis"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003014",
+        "summary": "Host mentions rubbing CBD on his spine for back pain."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003039",
+        "evidence_quote": "Some HGH. Okay. For my back",
+        "label_ids": [
+          "topic:endocrine.other_hormones"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003032",
+        "summary": "Hosts joke about taking HGH for the back injury."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003074",
+        "evidence_quote": "Billy convinced me I had COVID on Sunday",
+        "label_ids": [
+          "topic:covid.illness_severity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u003042",
+        "summary": "Host recounts a co-host convincing him he had COVID based on vomiting, forgetfulness and aches, leading him to check his temperature all week."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003053",
+        "evidence_quote": "I had I had food poisoning, and I told them I had food poisoning",
+        "label_ids": [
+          "topic:infectious.foodborne"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003046",
+        "summary": "Host says he actually had food poisoning from Chinese food and vomited twice."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "It seems"
+        ],
+        "claim_text": "Recovering from a lower-back injury and preventing it from recurring seems to require stretching and exercise rather than a pill or patch.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002998",
+        "evidence_quote": "It seems that, in order to make yourself feel better and have this not happen again, you have to do a lot of work",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A treatment claim about back-pain management that affects what listeners do.",
+        "relevance": "substantive",
+        "start_unit_id": "u002995",
+        "topic_ids": [
+          "topic:musculoskeletal.back_neck_posture"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A bulging disc presses on the nerve, causing sciatic pain.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003023",
+        "evidence_quote": "No, the disc, a bulging disc, like basically hits the nerve",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanism claim about the cause of sciatic pain.",
+        "relevance": "substantive",
+        "start_unit_id": "u003023",
+        "topic_ids": [
+          "topic:musculoskeletal.back_neck_posture",
+          "topic:neuro.nerve_spinal"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "With stretches a bulging disc slowly goes down, but it stays with you for the rest of your life.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003026",
+        "evidence_quote": "It will slowly go down, and then it will be with you for the rest",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A prognosis claim about disc injuries that could shape treatment expectations.",
+        "relevance": "substantive",
+        "start_unit_id": "u003025",
+        "topic_ids": [
+          "topic:musculoskeletal.back_neck_posture"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Muscle aches and back aches are probably a sign of COVID.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u003071",
+        "evidence_quote": "Billy also said muscle aches and back aches are probably a sign of COVID",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A symptom-recognition claim about COVID relayed from a co-host and mocked.",
+        "relevance": "substantive",
+        "start_unit_id": "u003069",
+        "topic_ids": [
+          "topic:covid.illness_severity"
+        ]
+      }
+    ],
+    "window_id": "episode_128911_window_0034_decoy_hedge_reported"
+  },
+  "stored_at": "2026-10-04T11:47:06.678917+00:00"
+}

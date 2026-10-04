@@ -1,0 +1,1040 @@
+{
+  "annotator_id": "opus-c",
+  "benchmark_version": "v2",
+  "item_id": "c177172w0006",
+  "provenance": {
+    "bundle": "bundle_010",
+    "ingested_at": "2026-10-04T11:47:06.173471+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-c-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000299",
+        "evidence_quote": "you raise your insulin, now your body can't burn fat, but you have high amounts of fat in your diet",
+        "label_ids": [
+          "topic:diets.low_carb_keto",
+          "topic:metabolic.insulin_glucose",
+          "topic:cardiovascular.cholesterol_lipids"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000295",
+        "summary": "Speaker warns that raising glucose and insulin on a high-fat keto diet stops fat burning and makes triglycerides and VLDL skyrocket, so keto must be done strictly."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000298",
+        "evidence_quote": "you raise your insulin, now your body can't burn fat",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000295",
+        "summary": "Insulin blocking fat burning offered as the mechanism for lipid spikes on a mixed high-fat, high-glucose diet."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000316",
+        "evidence_quote": "you don't need a lot of white flour, white rice, white bread, white pasta.",
+        "label_ids": [
+          "topic:food.grains_carbs_gluten"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000302",
+        "summary": "Host says she eats clean and limits white flour, rice, bread and pasta, choosing versions that are not enriched or fortified."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000336",
+        "evidence_quote": "what I found is that at lunch I wouldn't be craving a Snickers bar, and at dinner, after I ate dinner, I wasn't craving Haagen-Dazs.",
+        "label_ids": [
+          "topic:food.sugar_sweeteners",
+          "topic:food.eating_behavior"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000317",
+        "summary": "Host describes quitting sugar by accident, losing sugar cravings after a seven-to-ten-day withdrawal, then craving salty snacks instead."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000329",
+        "evidence_quote": "it's a period where you go through the withdrawal and then you're fine.",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000327",
+        "summary": "Host's own sugar-quitting experience is generalized into a claim that sugar withdrawal lasts about a week and then passes."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000345",
+        "evidence_quote": "But they didn't have seed oils. It was like avocado oil.",
+        "label_ids": [
+          "topic:food.fats_oils"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000337",
+        "summary": "Speakers avoid chips made with seed oils and praise a brand fried in avocado oil instead."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000344",
+        "evidence_quote": "Chips, the seed oils, yeah.",
+        "label_ids": [
+          "narrative:seed_oils_toxic"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000337",
+        "summary": "Seed oils are treated as the reason chips are unhealthy, implying seed oils are harmful."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000362",
+        "evidence_quote": "you make really healthy salads with lots of stuff in them.",
+        "label_ids": [
+          "topic:food.plant_foods_fiber"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000349",
+        "summary": "Host describes making large meal salads with chicken, avocado, nuts and hemp seeds, called really healthy."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000392",
+        "evidence_quote": "no amount of alcohol is good for you.",
+        "label_ids": [
+          "topic:alcohol.health_effects"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000370",
+        "summary": "Guest explains that no amount of alcohol is good, that alcohol becomes toxic acetaldehyde and acidifies blood, and ranks tequila as the least harmful drink."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000372",
+        "evidence_quote": "we know now through peer-reviewed, published clinical studies that no amount of alcohol is good for you",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000372",
+        "summary": "Unidentified peer-reviewed clinical studies cited as showing no amount of alcohol is good for you."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000375",
+        "evidence_quote": "A glass of wine a day keeps the doctor away. It's absolutely not true.",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000373",
+        "summary": "Guest debunks the saying that a daily glass of wine keeps the doctor away."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000375",
+        "evidence_quote": "A glass of wine a day keeps the doctor away.",
+        "label_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000373",
+        "summary": "Rebuts the recurring proposition that moderate daily drinking (a glass of wine a day) is good for health."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000376",
+        "evidence_quote": "you can get resveratrol through supplementation now in much higher concentrations and much more bioavailable",
+        "label_ids": [
+          "topic:longevity.nad_sirtuins"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000376",
+        "summary": "Guest says resveratrol is better obtained from supplements, at higher and more bioavailable doses, than from wine."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000382",
+        "evidence_quote": "alcohol converts into something called acetaldehyde, which is a poison and poisons your brain.",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000377",
+        "summary": "Alcohol's conversion to acetaldehyde and its acidifying effect on blood pH are offered as the mechanism of harm."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000378",
+        "evidence_quote": "which is a poison and poisons your brain.",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000378",
+        "summary": "Acetaldehyde from alcohol described as a poison that poisons the brain."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000382",
+        "evidence_quote": "It makes your body acidic, so it actually can move the pH.",
+        "label_ids": [
+          "narrative:alkaline_ph"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000379",
+        "summary": "Guest says alcohol makes the body acidic and shifts blood pH, and that an acidic state is why people feel unwell."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000387",
+        "evidence_quote": "Yeah, you have to skip the sugar part.",
+        "label_ids": [
+          "topic:food.sugar_sweeteners"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000384",
+        "summary": "Sugar in margaritas singled out as the part to skip and a cause of hangovers."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000345",
+        "evidence_quote": "I think it literally is called Boulder chips.",
+        "mention_role": "recommended",
+        "product_name": "Boulder chips",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000341"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Raising blood glucose and insulin while eating a high-fat diet stops the body from burning fat and is dangerous.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000296",
+        "evidence_quote": "you raise your insulin, now your body can't burn fat, but you have high amounts of fat in your diet",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic claim about insulin and fat metabolism that guides keto dieting.",
+        "relevance": "substantive",
+        "start_unit_id": "u000295",
+        "topic_ids": [
+          "topic:diets.low_carb_keto",
+          "topic:metabolic.insulin_glucose"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Eating a high-fat diet while raising blood glucose and insulin makes triglycerides and VLDL cholesterol skyrocket.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000298",
+        "evidence_quote": "Your triglycerides skyrocket.",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable claim about lipid effects of combining fat with carbohydrate on a keto diet.",
+        "relevance": "substantive",
+        "start_unit_id": "u000295",
+        "topic_ids": [
+          "topic:diets.low_carb_keto",
+          "topic:cardiovascular.cholesterol_lipids"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Cutting out sugar brings a withdrawal period of about seven to ten days, after which sugar cravings stop.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000329",
+        "evidence_quote": "Oh yeah, it's a period where you go through the withdrawal and then you're fine.",
+        "evidence_signal_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Generalized claim of sugar withdrawal and its duration that shapes dieting expectations.",
+        "relevance": "substantive",
+        "start_unit_id": "u000328",
+        "topic_ids": [
+          "topic:food.sugar_sweeteners",
+          "topic:food.eating_behavior"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "we know now",
+          "no amount"
+        ],
+        "claim_text": "Peer-reviewed clinical studies show that no amount of alcohol is good for you.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000372",
+        "evidence_quote": "we know now through peer-reviewed, published clinical studies that no amount of alcohol is good for you",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Safety claim about any level of alcohol consumption, attributed to research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000372",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Drinking a glass of wine a day keeps people healthy.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000375",
+        "evidence_quote": "A glass of wine a day keeps the doctor away.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "Rebutted claim that moderate daily wine is protective, a common belief about drinking.",
+        "relevance": "substantive",
+        "start_unit_id": "u000373",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Resveratrol supplements provide much higher concentrations of resveratrol, in a much more bioavailable form, than wine.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000376",
+        "evidence_quote": "you can get resveratrol through supplementation now in much higher concentrations and much more bioavailable",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Comparative bioavailability claim that steers listeners toward supplements.",
+        "relevance": "passing",
+        "start_unit_id": "u000376",
+        "topic_ids": [
+          "topic:longevity.nad_sirtuins"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Alcohol is converted in the body into acetaldehyde, a poison that poisons the brain.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000378",
+        "evidence_quote": "alcohol converts into something called acetaldehyde, which is a poison and poisons your brain.",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "Mechanistic claim about alcohol metabolism and brain toxicity.",
+        "relevance": "substantive",
+        "start_unit_id": "u000377",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Alcohol makes the body acidic and can shift blood pH by several tenths of a point.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000380",
+        "evidence_quote": "It makes your body acidic, so it actually can move the pH. Of your blood, several tenths of a point.",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:alkaline_ph"
+        ],
+        "rationale": "Specific physiological claim about alcohol and blood pH that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000379",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The normal pH range of blood is very narrow, only about four or five tenths of a point.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000381",
+        "evidence_quote": "the pH range of the blood is very narrow; it's only about four or five tenths of a point.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Physiological figure used to support the alcohol-acidity claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000381",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "When the blood shifts slightly toward acidic, people feel unwell.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000382",
+        "evidence_quote": "when we shift slightly to becoming more acidic, this is the state where we don't feel well.",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:alkaline_ph"
+        ],
+        "rationale": "Acid-body claim linking small blood pH shifts to feeling unwell.",
+        "relevance": "substantive",
+        "start_unit_id": "u000382",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "by far",
+          "the number one"
+        ],
+        "claim_text": "Agave-based alcohols such as tequila convert to sugar and acetaldehyde more slowly than any other alcohol.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000392",
+        "evidence_quote": "agave-based alcohols, tequila, are way out in front.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Comparative metabolic claim that steers drink choice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000383",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Clear alcohols such as vodka and gin convert to sugar and acetaldehyde more slowly than red wines, which convert more slowly than white wines, proseccos and high-sugar wines.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000391",
+        "evidence_quote": "then you get the clear alcohols, like vodka and like vodkas and gins, and then there's another gap",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Ranking of drinks by metabolic harm that guides drinking choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u000383",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The sugar in margaritas makes them a recipe for a hangover.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000387",
+        "evidence_quote": "No, that's like a recipe for a hangover.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Causal claim about sugary mixed drinks and hangovers.",
+        "relevance": "passing",
+        "start_unit_id": "u000384",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:food.sugar_sweeteners"
+        ]
+      }
+    ],
+    "window_id": "episode_177172_window_0006"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000299",
+        "evidence_quote": "you raise your insulin, now your body can't burn fat, but you have high amounts of fat in your diet",
+        "label_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:diets.low_carb_keto",
+          "topic:metabolic.insulin_glucose"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000295",
+        "summary": "Speaker warns that raising glucose and insulin on a high-fat keto diet stops fat burning and makes triglycerides and VLDL skyrocket, so keto must be done strictly."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000298",
+        "evidence_quote": "you raise your insulin, now your body can't burn fat",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000295",
+        "summary": "Insulin blocking fat burning offered as the mechanism for lipid spikes on a mixed high-fat, high-glucose diet."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000316",
+        "evidence_quote": "you don't need a lot of white flour, white rice, white bread, white pasta",
+        "label_ids": [
+          "topic:food.grains_carbs_gluten"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000302",
+        "summary": "Host says she eats clean and limits white flour, rice, bread and pasta, choosing versions that are not enriched or fortified."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000336",
+        "evidence_quote": "what I found is that at lunch I wouldn't be craving a Snickers bar, and at dinner, after I ate dinner, I wasn't craving Haagen-Dazs",
+        "label_ids": [
+          "topic:food.eating_behavior",
+          "topic:food.sugar_sweeteners"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000317",
+        "summary": "Host describes quitting sugar by accident, losing sugar cravings after a seven-to-ten-day withdrawal, then craving salty snacks instead."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000329",
+        "evidence_quote": "it's a period where you go through the withdrawal and then you're fine",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000327",
+        "summary": "Host's own sugar-quitting experience is generalized into a claim that sugar withdrawal lasts about a week and then passes."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000345",
+        "evidence_quote": "But they didn't have seed oils. It was like avocado oil",
+        "label_ids": [
+          "topic:food.fats_oils"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000337",
+        "summary": "Speakers avoid chips made with seed oils and praise a brand fried in avocado oil instead."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000344",
+        "evidence_quote": "Chips, the seed oils, yeah",
+        "label_ids": [
+          "narrative:seed_oils_toxic"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000337",
+        "summary": "Seed oils are treated as the reason chips are unhealthy, implying seed oils are harmful."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000362",
+        "evidence_quote": "you make really healthy salads with lots of stuff in them",
+        "label_ids": [
+          "topic:food.plant_foods_fiber"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000349",
+        "summary": "Host describes making large meal salads with chicken, avocado, nuts and hemp seeds, called really healthy."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000392",
+        "evidence_quote": "no amount of alcohol is good for you",
+        "label_ids": [
+          "topic:alcohol.health_effects"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000370",
+        "summary": "Guest explains that no amount of alcohol is good, that alcohol becomes toxic acetaldehyde and acidifies blood, and ranks tequila as the least harmful drink."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000372",
+        "evidence_quote": "we know now through peer-reviewed, published clinical studies that no amount of alcohol is good for you",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000372",
+        "summary": "Unidentified peer-reviewed clinical studies cited as showing no amount of alcohol is good for you."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000375",
+        "evidence_quote": "A glass of wine a day keeps the doctor away. It's absolutely not true",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000373",
+        "summary": "Guest debunks the saying that a daily glass of wine keeps the doctor away."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.55,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000375",
+        "evidence_quote": "A glass of wine a day keeps the doctor away",
+        "label_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000373",
+        "summary": "Rebuts the recurring proposition that moderate daily drinking (a glass of wine a day) is good for health."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000376",
+        "evidence_quote": "you can get resveratrol through supplementation now in much higher concentrations and much more bioavailable",
+        "label_ids": [
+          "topic:longevity.nad_sirtuins"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000376",
+        "summary": "Guest says resveratrol is better obtained from supplements, at higher and more bioavailable doses, than from wine."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000382",
+        "evidence_quote": "alcohol converts into something called acetaldehyde, which is a poison and poisons your brain",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000377",
+        "summary": "Alcohol's conversion to acetaldehyde and its acidifying effect on blood pH are offered as the mechanism of harm."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000378",
+        "evidence_quote": "which is a poison and poisons your brain",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000378",
+        "summary": "Acetaldehyde from alcohol described as a poison that poisons the brain."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000382",
+        "evidence_quote": "It makes your body acidic, so it actually can move the pH",
+        "label_ids": [
+          "narrative:alkaline_ph"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000379",
+        "summary": "Guest says alcohol makes the body acidic and shifts blood pH, and that an acidic state is why people feel unwell."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000387",
+        "evidence_quote": "Yeah, you have to skip the sugar part",
+        "label_ids": [
+          "topic:food.sugar_sweeteners"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000384",
+        "summary": "Sugar in margaritas singled out as the part to skip and a cause of hangovers."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000345",
+        "evidence_quote": "I think it literally is called Boulder chips",
+        "mention_role": "recommended",
+        "product_name": "Boulder chips",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000341"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Raising blood glucose and insulin while eating a high-fat diet stops the body from burning fat and is dangerous.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000296",
+        "evidence_quote": "you raise your insulin, now your body can't burn fat, but you have high amounts of fat in your diet",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic claim about insulin and fat metabolism that guides keto dieting.",
+        "relevance": "substantive",
+        "start_unit_id": "u000295",
+        "topic_ids": [
+          "topic:diets.low_carb_keto",
+          "topic:metabolic.insulin_glucose"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Eating a high-fat diet while raising blood glucose and insulin makes triglycerides and VLDL cholesterol skyrocket.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000298",
+        "evidence_quote": "Your triglycerides skyrocket",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable claim about lipid effects of combining fat with carbohydrate on a keto diet.",
+        "relevance": "substantive",
+        "start_unit_id": "u000295",
+        "topic_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:diets.low_carb_keto"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Cutting out sugar brings a withdrawal period of about seven to ten days, after which sugar cravings stop.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000329",
+        "evidence_quote": "Oh yeah, it's a period where you go through the withdrawal and then you're fine",
+        "evidence_signal_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Generalized claim of sugar withdrawal and its duration that shapes dieting expectations.",
+        "relevance": "substantive",
+        "start_unit_id": "u000328",
+        "topic_ids": [
+          "topic:food.eating_behavior",
+          "topic:food.sugar_sweeteners"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "we know now",
+          "no amount"
+        ],
+        "claim_text": "Peer-reviewed clinical studies show that no amount of alcohol is good for you.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000372",
+        "evidence_quote": "we know now through peer-reviewed, published clinical studies that no amount of alcohol is good for you",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Safety claim about any level of alcohol consumption, attributed to research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000372",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Drinking a glass of wine a day keeps people healthy.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000375",
+        "evidence_quote": "A glass of wine a day keeps the doctor away",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "Rebutted claim that moderate daily wine is protective, a common belief about drinking.",
+        "relevance": "substantive",
+        "start_unit_id": "u000373",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Resveratrol supplements provide much higher concentrations of resveratrol, in a much more bioavailable form, than wine.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000376",
+        "evidence_quote": "you can get resveratrol through supplementation now in much higher concentrations and much more bioavailable",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Comparative bioavailability claim that steers listeners toward supplements.",
+        "relevance": "passing",
+        "start_unit_id": "u000376",
+        "topic_ids": [
+          "topic:longevity.nad_sirtuins"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Alcohol is converted in the body into acetaldehyde, a poison that poisons the brain.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000378",
+        "evidence_quote": "alcohol converts into something called acetaldehyde, which is a poison and poisons your brain",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "Mechanistic claim about alcohol metabolism and brain toxicity.",
+        "relevance": "substantive",
+        "start_unit_id": "u000377",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Alcohol makes the body acidic and can shift blood pH by several tenths of a point.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000380",
+        "evidence_quote": "It makes your body acidic, so it actually can move the pH. Of your blood, several tenths of a point",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:alkaline_ph"
+        ],
+        "rationale": "Specific physiological claim about alcohol and blood pH that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000379",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The normal pH range of blood is very narrow, only about four or five tenths of a point.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000381",
+        "evidence_quote": "the pH range of the blood is very narrow; it's only about four or five tenths of a point",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Physiological figure used to support the alcohol-acidity claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000381",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "When the blood shifts slightly toward acidic, people feel unwell.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000382",
+        "evidence_quote": "when we shift slightly to becoming more acidic, this is the state where we don't feel well",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:alkaline_ph"
+        ],
+        "rationale": "Acid-body claim linking small blood pH shifts to feeling unwell.",
+        "relevance": "substantive",
+        "start_unit_id": "u000382",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "by far",
+          "the number one"
+        ],
+        "claim_text": "Agave-based alcohols such as tequila convert to sugar and acetaldehyde more slowly than any other alcohol.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000392",
+        "evidence_quote": "agave-based alcohols, tequila, are way out in front",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Comparative metabolic claim that steers drink choice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000383",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Clear alcohols such as vodka and gin convert to sugar and acetaldehyde more slowly than red wines, which convert more slowly than white wines, proseccos and high-sugar wines.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000391",
+        "evidence_quote": "then you get the clear alcohols, like vodka and like vodkas and gins, and then there's another gap",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Ranking of drinks by metabolic harm that guides drinking choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u000383",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The sugar in margaritas makes them a recipe for a hangover.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000387",
+        "evidence_quote": "No, that's like a recipe for a hangover",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Causal claim about sugary mixed drinks and hangovers.",
+        "relevance": "passing",
+        "start_unit_id": "u000384",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:food.sugar_sweeteners"
+        ]
+      }
+    ],
+    "window_id": "episode_177172_window_0006"
+  },
+  "stored_at": "2026-10-04T11:47:06.173506+00:00"
+}

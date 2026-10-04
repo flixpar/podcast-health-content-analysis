@@ -1,0 +1,95 @@
+{
+  "annotator_id": "opus-a",
+  "benchmark_version": "v2",
+  "item_id": "c388820w0004",
+  "provenance": {
+    "bundle": "bundle_067",
+    "ingested_at": "2026-10-04T11:47:01.844220+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-a-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000240",
+        "evidence_quote": "Helix harnesses years of extensive mattress expertise and offers a truly elevated sleep experience.",
+        "label_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000218",
+        "summary": "Host reads a Helix Sleep mattress ad promising an elevated sleep experience and a great night's sleep."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000236",
+        "evidence_quote": "Go to HelixSleep.com/ben. Use code HelixPartner25.",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000233",
+        "summary": "Sponsor read with a discount, listener URL and promo code for Helix mattresses."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000240",
+        "evidence_quote": "I've been talking about my Helix Sleep mattress for years.",
+        "mention_role": "advertised",
+        "product_name": "Helix Sleep mattress",
+        "product_type": "household_or_home",
+        "start_unit_id": "u000218"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_388820_window_0004"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000240",
+        "evidence_quote": "Helix harnesses years of extensive mattress expertise and offers a truly elevated sleep experience",
+        "label_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000218",
+        "summary": "Host reads a Helix Sleep mattress ad promising an elevated sleep experience and a great night's sleep."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000236",
+        "evidence_quote": "Go to HelixSleep.com/ben. Use code HelixPartner25",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000233",
+        "summary": "Sponsor read with a discount, listener URL and promo code for Helix mattresses."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000240",
+        "evidence_quote": "I've been talking about my Helix Sleep mattress for years",
+        "mention_role": "advertised",
+        "product_name": "Helix Sleep mattress",
+        "product_type": "household_or_home",
+        "start_unit_id": "u000218"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_388820_window_0004"
+  },
+  "stored_at": "2026-10-04T11:47:01.844251+00:00"
+}

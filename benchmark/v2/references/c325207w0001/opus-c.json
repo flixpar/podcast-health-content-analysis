@@ -1,0 +1,230 @@
+{
+  "annotator_id": "opus-c",
+  "benchmark_version": "v2",
+  "item_id": "c325207w0001",
+  "provenance": {
+    "bundle": "bundle_024",
+    "ingested_at": "2026-10-04T11:47:06.759266+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-c-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "Insight Tracker for biological data, Eight Sleep for naps, and AG1 for delicious health.",
+        "label_ids": [
+          "topic:self_tracking.consumer_lab_tests",
+          "topic:sleep.sleep_hygiene_environment",
+          "topic:supplements.greens_whole_food"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000016",
+        "summary": "Sponsor list names InsideTracker for biological data, Eight Sleep for naps and AG1 for health."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "And now, a quick few second mention of each sponsor. Check them out in the description.",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000012",
+        "summary": "Host runs through the episode's sponsors, including health products, and asks listeners to check them out."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000062",
+        "evidence_quote": "a service I use to track data from my body, biological data, blood tests that give you information on all kinds of things going on inside your body",
+        "label_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000062",
+        "summary": "InsideTracker ad: blood tests that track the host's biological data to guide lifestyle decisions."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000069",
+        "evidence_quote": "as a doctor and as a patient, to understand the particular maladies going on inside your body.",
+        "label_ids": [
+          "topic:digital_health.ai_advice",
+          "topic:digital_health.ai_in_medicine"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000065",
+        "summary": "Within the InsideTracker read, host muses about using AI and LLMs on body data to help doctors and patients understand maladies."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000062",
+        "evidence_quote": "This show is also brought to you by Inside Tracker",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000062",
+        "summary": "Sponsor read for InsideTracker begins."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000016",
+        "evidence_quote": "Insight Tracker for biological data",
+        "mention_role": "advertised",
+        "product_name": "InsideTracker",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000016"
+      },
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000016",
+        "evidence_quote": "Eight Sleep for naps",
+        "mention_role": "advertised",
+        "product_name": "Eight Sleep",
+        "product_type": "household_or_home",
+        "start_unit_id": "u000016"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000016",
+        "evidence_quote": "AG1 for delicious health",
+        "mention_role": "advertised",
+        "product_name": "AG1",
+        "product_type": "supplement",
+        "start_unit_id": "u000016"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000071",
+        "evidence_quote": "This show is also brought to you by Inside Tracker",
+        "mention_role": "advertised",
+        "product_name": "InsideTracker",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000062"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_325207_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "Insight Tracker for biological data, Eight Sleep for naps, and AG1 for delicious health",
+        "label_ids": [
+          "topic:self_tracking.consumer_lab_tests",
+          "topic:sleep.sleep_hygiene_environment",
+          "topic:supplements.greens_whole_food"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000016",
+        "summary": "Sponsor list names InsideTracker for biological data, Eight Sleep for naps and AG1 for health."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "And now, a quick few second mention of each sponsor. Check them out in the description",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000012",
+        "summary": "Host runs through the episode's sponsors, including health products, and asks listeners to check them out."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000062",
+        "evidence_quote": "a service I use to track data from my body, biological data, blood tests that give you information on all kinds of things going on inside your body",
+        "label_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000062",
+        "summary": "InsideTracker ad: blood tests that track the host's biological data to guide lifestyle decisions."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000069",
+        "evidence_quote": "as a doctor and as a patient, to understand the particular maladies going on inside your body",
+        "label_ids": [
+          "topic:digital_health.ai_advice",
+          "topic:digital_health.ai_in_medicine"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000065",
+        "summary": "Within the InsideTracker read, host muses about using AI and LLMs on body data to help doctors and patients understand maladies."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000062",
+        "evidence_quote": "This show is also brought to you by Inside Tracker",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000062",
+        "summary": "Sponsor read for InsideTracker begins."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000016",
+        "evidence_quote": "Insight Tracker for biological data",
+        "mention_role": "advertised",
+        "product_name": "InsideTracker",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000016"
+      },
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000016",
+        "evidence_quote": "Eight Sleep for naps",
+        "mention_role": "advertised",
+        "product_name": "Eight Sleep",
+        "product_type": "household_or_home",
+        "start_unit_id": "u000016"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000016",
+        "evidence_quote": "AG1 for delicious health",
+        "mention_role": "advertised",
+        "product_name": "AG1",
+        "product_type": "supplement",
+        "start_unit_id": "u000016"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000071",
+        "evidence_quote": "This show is also brought to you by Inside Tracker",
+        "mention_role": "advertised",
+        "product_name": "InsideTracker",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000062"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_325207_window_0001"
+  },
+  "stored_at": "2026-10-04T11:47:06.759285+00:00"
+}

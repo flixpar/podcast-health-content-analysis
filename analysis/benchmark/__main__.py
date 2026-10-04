@@ -381,7 +381,7 @@ def cmd_aggregate(args: argparse.Namespace) -> int:
             "pairwise": level_agreement["pairwise"],
             "leave_one_out": refs_mod.leave_one_out(items, references, annotators, overlay, level_aliases),
         }
-    plants = refs_mod.check_plants(items, records)
+    plants = refs_mod.check_plants(items, records, hierarchy_aliases(taxonomy, "parent") if tl.is_hierarchical(taxonomy) else None)
     agreement["synthetic_plants"] = {
         "checked": len(plants),
         "ok": sum(1 for p in plants if p["ok"]),

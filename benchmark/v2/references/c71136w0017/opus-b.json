@@ -1,0 +1,742 @@
+{
+  "annotator_id": "opus-b",
+  "benchmark_version": "v2",
+  "item_id": "c71136w0017",
+  "provenance": {
+    "bundle": "bundle_007",
+    "ingested_at": "2026-10-04T11:47:02.721704+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-b-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001311",
+        "evidence_quote": "so my shoulder was pretty fucked, and I got stem cells, and it's fucking fantastic now.",
+        "label_ids": [
+          "topic:procedures.regenerative_medicine",
+          "topic:musculoskeletal.sports_injuries"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001299",
+        "summary": "Host says stem cells fixed his badly injured shoulder despite advice against anecdotal evidence, and that pro athletes use them to heal without long layoffs or surgery."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001300",
+        "evidence_quote": "Strongly not to go with anecdotal evidence.",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001299",
+        "summary": "Quoted advice warns people not to rely on anecdotal evidence (about stem cells)."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001308",
+        "evidence_quote": "It's helped me a lot.",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001302",
+        "summary": "Host offers his own shoulder recovery after stem cells as support for the treatment."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001311",
+        "evidence_quote": "they're they're doing it a lot on pro athletes now.",
+        "label_ids": [
+          "population:athletes"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001309",
+        "summary": "Stem-cell treatment described as common among pro athletes to heal injuries without long time off."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001322",
+        "evidence_quote": "My all my joints hurt. My elbows are sore as shit right now.",
+        "label_ids": [
+          "topic:musculoskeletal.joints_arthritis",
+          "topic:musculoskeletal.sports_injuries"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001312",
+        "summary": "Guest lists the joint pain in elbows, knuckles, hands and neck and a lingering chest injury from a tournament that come with his sport."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001344",
+        "evidence_quote": "it would swell up like a fucking tennis ball, and then that would pinch off all the nerves running down my arm.",
+        "label_ids": [
+          "topic:musculoskeletal.sports_injuries",
+          "topic:neuro.nerve_spinal",
+          "topic:procedures.surgery_hospital"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001323",
+        "summary": "Guest describes a swelling hematoma between rib cartilage after a possible broken sternum that pinches nerves down his arm and would need surgical removal."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001330",
+        "evidence_quote": "Did you ever get an MRI? I got an MRI. I did injections.",
+        "label_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001328",
+        "summary": "Guest says he had an MRI and injections for the chest injury."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001368",
+        "evidence_quote": "He's taking 800 milligrams in the morning, 800 milligrams at night.",
+        "label_ids": [
+          "topic:medications.pain_relievers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001345",
+        "summary": "Host warns about daily NSAID use, citing an ultramarathoner friend on 800 mg ibuprofen twice daily, Rhonda Patrick's account of NSAID dangers, and the friend's aches vanishing after stopping."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001355",
+        "evidence_quote": "They cause high blood pressure. They can cause strokes in some people",
+        "label_ids": [
+          "topic:cardiovascular.blood_pressure",
+          "topic:neuro.stroke"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001353",
+        "summary": "NSAIDs said to cause high blood pressure and, with daily use, strokes in some people."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001359",
+        "evidence_quote": "it actually causes it causes inflammation because it fucks with the gut flora in your body",
+        "label_ids": [
+          "topic:gut.microbiome",
+          "topic:immune.inflammation",
+          "topic:musculoskeletal.joints_arthritis"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001356",
+        "summary": "Host describes a loop in which NSAIDs disrupt gut flora, causing the inflammation and joint pain they are taken for."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001353",
+        "evidence_quote": "I had this woman on who's a doctor, Dr. Rhonda Patrick. She's a clinical researcher",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001351",
+        "summary": "Host grounds the NSAID warning in Rhonda Patrick being a doctor and clinical researcher."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001357",
+        "evidence_quote": "it actually causes it causes inflammation because it fucks with the gut flora in your body, especially if you take it on a regular basis, which in turn causes inflammation",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001356",
+        "summary": "Gut-flora disruption offered as the mechanism by which NSAIDs cause inflammation."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001368",
+        "evidence_quote": "It's all the aches and pains that I was taking ibuprofen for they all went away.",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001359",
+        "summary": "Friend Cam Haines's aches disappearing after quitting ibuprofen offered as support for the NSAID warning."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001365",
+        "evidence_quote": "He's going to run two hundred miles in forty eight hours.",
+        "label_ids": [
+          "topic:fitness.cardio_endurance"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001360",
+        "summary": "Friend runs a half marathon daily and ran 102 miles while training for a 200-mile race."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001390",
+        "evidence_quote": "He's just eating healthy.",
+        "label_ids": [
+          "topic:food"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001369",
+        "summary": "Healthy eating mentioned as the friend's replacement for painkillers, then the guest's diet and his healthy prepared meals."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001382",
+        "evidence_quote": "Can we just stop with the cigarettes?",
+        "label_ids": [
+          "topic:stimulants.smoking"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001378",
+        "summary": "One speaker urges the other to stop smoking cigarettes."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001407",
+        "evidence_quote": "Look up the the Meal Plan Man.",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001399",
+        "summary": "Guest plugs his meal-prep sponsor and tells listeners how to find him."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u001407",
+        "evidence_quote": "Chef Raoul, the Meal Plan Man.",
+        "mention_role": "advertised",
+        "product_name": "Chef Raoul, the Meal Plan Man",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u001384"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "a lot"
+        ],
+        "claim_text": "Stem-cell treatments are being used a lot on professional athletes.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001309",
+        "evidence_quote": "they're they're doing it a lot on pro athletes now.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Prevalence of stem-cell use among athletes lends the treatment credibility and is checkable.",
+        "relevance": "passing",
+        "start_unit_id": "u001309",
+        "topic_ids": [
+          "topic:procedures.regenerative_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Stem-cell treatment lets certain injured areas heal that otherwise could only heal with massive time off or surgery.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001311",
+        "evidence_quote": "there's it's very little way to get certain areas to heal without taking just massive amounts time off. Or surgery",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Efficacy claim for stem-cell therapy as an alternative to rest or surgery could change treatment choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u001310",
+        "topic_ids": [
+          "topic:procedures.regenerative_medicine",
+          "topic:musculoskeletal.sports_injuries"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Non-steroidal anti-inflammatory drugs cause high blood pressure.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001354",
+        "evidence_quote": "She's a clinical researcher, and she was talking about the dangers of non-steroidal anti-inflammatories. They cause high blood pressure.",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Adverse-effect claim about widely used painkillers.",
+        "relevance": "substantive",
+        "start_unit_id": "u001353",
+        "topic_ids": [
+          "topic:medications.pain_relievers",
+          "topic:cardiovascular.blood_pressure"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Non-steroidal anti-inflammatory drugs can cause strokes in some people, especially when used daily.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001356",
+        "evidence_quote": "They can cause strokes in some people, especially when you're using them on a. Daily basis",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Serious adverse-effect claim about common painkillers.",
+        "relevance": "substantive",
+        "start_unit_id": "u001355",
+        "topic_ids": [
+          "topic:medications.pain_relievers",
+          "topic:neuro.stroke"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Regular use of non-steroidal anti-inflammatory drugs disrupts the gut flora, which in turn causes inflammation.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001357",
+        "evidence_quote": "it actually causes it causes inflammation because it fucks with the gut flora in your body, especially if you take it on a regular basis",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic claim that anti-inflammatories paradoxically cause inflammation via the microbiome.",
+        "relevance": "substantive",
+        "start_unit_id": "u001356",
+        "topic_ids": [
+          "topic:medications.pain_relievers",
+          "topic:gut.microbiome",
+          "topic:immune.inflammation"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "some. Times"
+        ],
+        "claim_text": "The pills people take for joint pain sometimes cause joint pain.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001359",
+        "evidence_quote": "So the the pills that you're taking to deal with joint pain, some. Times are causing joint pain",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim that NSAIDs worsen the joint pain they treat could lead listeners to stop or change medication.",
+        "relevance": "substantive",
+        "start_unit_id": "u001358",
+        "topic_ids": [
+          "topic:medications.pain_relievers",
+          "topic:musculoskeletal.joints_arthritis"
+        ]
+      }
+    ],
+    "window_id": "episode_71136_window_0017"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001311",
+        "evidence_quote": "so my shoulder was pretty fucked, and I got stem cells, and it's fucking fantastic now",
+        "label_ids": [
+          "topic:musculoskeletal.sports_injuries",
+          "topic:procedures.regenerative_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001299",
+        "summary": "Host says stem cells fixed his badly injured shoulder despite advice against anecdotal evidence, and that pro athletes use them to heal without long layoffs or surgery."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001300",
+        "evidence_quote": "Strongly not to go with anecdotal evidence",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001299",
+        "summary": "Quoted advice warns people not to rely on anecdotal evidence (about stem cells)."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001308",
+        "evidence_quote": "It's helped me a lot",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001302",
+        "summary": "Host offers his own shoulder recovery after stem cells as support for the treatment."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001311",
+        "evidence_quote": "they're they're doing it a lot on pro athletes now",
+        "label_ids": [
+          "population:athletes"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001309",
+        "summary": "Stem-cell treatment described as common among pro athletes to heal injuries without long time off."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001322",
+        "evidence_quote": "My all my joints hurt. My elbows are sore as shit right now",
+        "label_ids": [
+          "topic:musculoskeletal.joints_arthritis",
+          "topic:musculoskeletal.sports_injuries"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001312",
+        "summary": "Guest lists the joint pain in elbows, knuckles, hands and neck and a lingering chest injury from a tournament that come with his sport."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001344",
+        "evidence_quote": "it would swell up like a fucking tennis ball, and then that would pinch off all the nerves running down my arm",
+        "label_ids": [
+          "topic:musculoskeletal.sports_injuries",
+          "topic:neuro.nerve_spinal",
+          "topic:procedures.surgery_hospital"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001323",
+        "summary": "Guest describes a swelling hematoma between rib cartilage after a possible broken sternum that pinches nerves down his arm and would need surgical removal."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001330",
+        "evidence_quote": "Did you ever get an MRI? I got an MRI. I did injections",
+        "label_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001328",
+        "summary": "Guest says he had an MRI and injections for the chest injury."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001368",
+        "evidence_quote": "He's taking 800 milligrams in the morning, 800 milligrams at night",
+        "label_ids": [
+          "topic:medications.pain_relievers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001345",
+        "summary": "Host warns about daily NSAID use, citing an ultramarathoner friend on 800 mg ibuprofen twice daily, Rhonda Patrick's account of NSAID dangers, and the friend's aches vanishing after stopping."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001355",
+        "evidence_quote": "They cause high blood pressure. They can cause strokes in some people",
+        "label_ids": [
+          "topic:cardiovascular.blood_pressure",
+          "topic:neuro.stroke"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001353",
+        "summary": "NSAIDs said to cause high blood pressure and, with daily use, strokes in some people."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001359",
+        "evidence_quote": "it actually causes it causes inflammation because it fucks with the gut flora in your body",
+        "label_ids": [
+          "topic:gut.microbiome",
+          "topic:immune.inflammation",
+          "topic:musculoskeletal.joints_arthritis"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001356",
+        "summary": "Host describes a loop in which NSAIDs disrupt gut flora, causing the inflammation and joint pain they are taken for."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001353",
+        "evidence_quote": "I had this woman on who's a doctor, Dr. Rhonda Patrick. She's a clinical researcher",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001351",
+        "summary": "Host grounds the NSAID warning in Rhonda Patrick being a doctor and clinical researcher."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001357",
+        "evidence_quote": "it actually causes it causes inflammation because it fucks with the gut flora in your body, especially if you take it on a regular basis, which in turn causes inflammation",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001356",
+        "summary": "Gut-flora disruption offered as the mechanism by which NSAIDs cause inflammation."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001368",
+        "evidence_quote": "It's all the aches and pains that I was taking ibuprofen for they all went away",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001359",
+        "summary": "Friend Cam Haines's aches disappearing after quitting ibuprofen offered as support for the NSAID warning."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001365",
+        "evidence_quote": "He's going to run two hundred miles in forty eight hours",
+        "label_ids": [
+          "topic:fitness.cardio_endurance"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001360",
+        "summary": "Friend runs a half marathon daily and ran 102 miles while training for a 200-mile race."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001390",
+        "evidence_quote": "He's just eating healthy",
+        "label_ids": [
+          "topic:food"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001369",
+        "summary": "Healthy eating mentioned as the friend's replacement for painkillers, then the guest's diet and his healthy prepared meals."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001382",
+        "evidence_quote": "Can we just stop with the cigarettes",
+        "label_ids": [
+          "topic:stimulants.smoking"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001378",
+        "summary": "One speaker urges the other to stop smoking cigarettes."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001407",
+        "evidence_quote": "Look up the the Meal Plan Man",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001399",
+        "summary": "Guest plugs his meal-prep sponsor and tells listeners how to find him."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u001407",
+        "evidence_quote": "Chef Raoul, the Meal Plan Man",
+        "mention_role": "advertised",
+        "product_name": "Chef Raoul, the Meal Plan Man",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u001384"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "a lot"
+        ],
+        "claim_text": "Stem-cell treatments are being used a lot on professional athletes.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001309",
+        "evidence_quote": "they're they're doing it a lot on pro athletes now",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Prevalence of stem-cell use among athletes lends the treatment credibility and is checkable.",
+        "relevance": "passing",
+        "start_unit_id": "u001309",
+        "topic_ids": [
+          "topic:procedures.regenerative_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Stem-cell treatment lets certain injured areas heal that otherwise could only heal with massive time off or surgery.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001311",
+        "evidence_quote": "there's it's very little way to get certain areas to heal without taking just massive amounts time off. Or surgery",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Efficacy claim for stem-cell therapy as an alternative to rest or surgery could change treatment choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u001310",
+        "topic_ids": [
+          "topic:musculoskeletal.sports_injuries",
+          "topic:procedures.regenerative_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Non-steroidal anti-inflammatory drugs cause high blood pressure.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001354",
+        "evidence_quote": "She's a clinical researcher, and she was talking about the dangers of non-steroidal anti-inflammatories. They cause high blood pressure",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Adverse-effect claim about widely used painkillers.",
+        "relevance": "substantive",
+        "start_unit_id": "u001353",
+        "topic_ids": [
+          "topic:cardiovascular.blood_pressure",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Non-steroidal anti-inflammatory drugs can cause strokes in some people, especially when used daily.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001356",
+        "evidence_quote": "They can cause strokes in some people, especially when you're using them on a. Daily basis",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Serious adverse-effect claim about common painkillers.",
+        "relevance": "substantive",
+        "start_unit_id": "u001355",
+        "topic_ids": [
+          "topic:medications.pain_relievers",
+          "topic:neuro.stroke"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Regular use of non-steroidal anti-inflammatory drugs disrupts the gut flora, which in turn causes inflammation.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001357",
+        "evidence_quote": "it actually causes it causes inflammation because it fucks with the gut flora in your body, especially if you take it on a regular basis",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic claim that anti-inflammatories paradoxically cause inflammation via the microbiome.",
+        "relevance": "substantive",
+        "start_unit_id": "u001356",
+        "topic_ids": [
+          "topic:gut.microbiome",
+          "topic:immune.inflammation",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "some. Times"
+        ],
+        "claim_text": "The pills people take for joint pain sometimes cause joint pain.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001359",
+        "evidence_quote": "So the the pills that you're taking to deal with joint pain, some. Times are causing joint pain",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim that NSAIDs worsen the joint pain they treat could lead listeners to stop or change medication.",
+        "relevance": "substantive",
+        "start_unit_id": "u001358",
+        "topic_ids": [
+          "topic:medications.pain_relievers",
+          "topic:musculoskeletal.joints_arthritis"
+        ]
+      }
+    ],
+    "window_id": "episode_71136_window_0017"
+  },
+  "stored_at": "2026-10-04T11:47:02.721722+00:00"
+}

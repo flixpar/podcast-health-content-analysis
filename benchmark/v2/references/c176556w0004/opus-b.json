@@ -1,0 +1,962 @@
+{
+  "annotator_id": "opus-b",
+  "benchmark_version": "v2",
+  "item_id": "c176556w0004",
+  "provenance": {
+    "bundle": "bundle_006",
+    "ingested_at": "2026-10-04T11:47:02.673038+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-b-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000177",
+        "evidence_quote": "whether or not taking this vitamin D prevents me from ever heart attack, I know that it's definitely helping me to get sick less.",
+        "label_ids": [
+          "topic:supplements.vitamin_d"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000168",
+        "summary": "Speaker argues vitamin D has benefits (fewer illnesses, weight, muscle) beyond what a big heart-attack study captured, and that vitamin studies are too short to prove them."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000170",
+        "evidence_quote": "whether or not like this big study shows I'm going to prevent a heart attack or not.",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000168",
+        "summary": "Whether vitamin D prevents heart attacks, as tested by a big study, is raised and set aside."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000169",
+        "evidence_quote": "definitely helping me to get sick less. You know, definitely helping me to keep my weight off, keep muscle mass up.",
+        "label_ids": [
+          "topic:immune.immune_function",
+          "topic:weight.body_composition",
+          "topic:musculoskeletal.muscle_loss"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000168",
+        "summary": "Speaker credits vitamin D with helping him get sick less, keep weight off and keep muscle mass up."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000169",
+        "evidence_quote": "I know that it's definitely helping me to get sick less.",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000168",
+        "summary": "Speaker's own experience of getting sick less on vitamin D is offered against the big study's null finding."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000177",
+        "evidence_quote": "who has the money to to put tens, if not hundreds of millions of dollars into this kind of study",
+        "label_ids": [
+          "topic:health_system.research_system"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "summary": "Speaker says vitamin studies are too short, long trials of generic vitamins are too expensive for anyone to fund, so many studies are flawed."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000176",
+        "evidence_quote": "And a lot of those studies, they they're not long enough to prove these benefits.",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "summary": "Speaker points to short study durations as a limit on the evidence for vitamin D's benefits."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000185",
+        "evidence_quote": "I think the same thing applies to anti-aging and to longevity medicine.",
+        "label_ids": [
+          "topic:longevity.ageing_science"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000180",
+        "summary": "Host asks the guest about the fundamentals of anti-aging and longevity medicine; guest frames them as basic pillars."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000194",
+        "evidence_quote": "Exercise is king, diet is queen. Put them together, and you have a kingdom.",
+        "label_ids": [
+          "topic:wellness.lifestyle_pillars"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000183",
+        "summary": "Guest names exercise and diet, quoting Jack LaLanne, plus supplements as the foundational pillars of longevity."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000190",
+        "evidence_quote": "I think Jack Lalanne, he was you know a fitness, yeah, one of the first fitness gurus.",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000186",
+        "summary": "Jack LaLanne's status as one of the first fitness gurus is invoked to support the diet-and-exercise maxim."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000194",
+        "evidence_quote": "I think most of us are helped by taking some nutritional supplements.",
+        "label_ids": [
+          "topic:supplements"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000194",
+        "summary": "Guest says most people are helped by taking some nutritional supplements."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000215",
+        "evidence_quote": "So we need to do a more extensive series of testing.",
+        "label_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000195",
+        "summary": "Guest says conventional testing is not enough and his clinic does a more extensive series of tests, including hormones, before optimizing."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000197",
+        "evidence_quote": "the type of testing that is done in conventional medicine is it's good, but the philosophy that we have in",
+        "label_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000195",
+        "summary": "Conventional medicine's testing is cast as inadequate compared with the clinic's philosophy."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000208",
+        "evidence_quote": "they go to endocrinologists and gynecologists. They don't test their hormones.",
+        "label_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000207",
+        "summary": "Endocrinologists and gynecologists are portrayed as failing to test patients' hormones."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000199",
+        "evidence_quote": "Good is not good enough. I know that what our patients that are in the wellness space want is optimal health.",
+        "label_ids": [
+          "frame:optimization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000197",
+        "summary": "Wellness patients are said to want optimal rather than merely good health."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000213",
+        "evidence_quote": "then we can start to optimize.",
+        "label_ids": [
+          "frame:optimization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000213",
+        "summary": "After testing, the clinic starts to optimize patients."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000212",
+        "evidence_quote": "They've never had their hormone levels tested.",
+        "label_ids": [
+          "topic:endocrine.hormone_balance"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000202",
+        "summary": "Host and guest say many patients have never had their hormone levels tested and the clinic tests them first."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000212",
+        "evidence_quote": "Ask people, what's your testosterone? Never had it tested",
+        "label_ids": [
+          "topic:mens.testosterone"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000210",
+        "summary": "People in their forties or fifties are said never to have had their testosterone tested."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000208",
+        "evidence_quote": "How many patients come in? They've never had their hormone levels tested.",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000203",
+        "summary": "Patients arriving at the clinic untested are offered as evidence that specialists do not test hormones."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000215",
+        "evidence_quote": "the hormone spaces, the detox spaces—in addition, you know, to all of the other things that we offer.",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000196",
+        "summary": "Guest describes his own clinic's testing, hormone and detox services as the way to begin."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000214",
+        "evidence_quote": "the detox spaces",
+        "label_ids": [
+          "topic:detox.toxic_load_general"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000214",
+        "summary": "Detox is named among the clinic's service areas."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000238",
+        "evidence_quote": "More and more of us are looking at HIT training, high-intensity interval training.",
+        "label_ids": [
+          "topic:fitness.cardio_endurance"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000218",
+        "summary": "Host recalls when cardio was king; guest says long cardio sessions have given way to HIIT that achieves in twenty minutes what took ninety."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000223",
+        "evidence_quote": "Calories in, calories out. Right. Work those calories off.",
+        "label_ids": [
+          "topic:diets.calorie_counting"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000220",
+        "summary": "Host recalls the older calories-in, calories-out idea of working calories off."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000229",
+        "evidence_quote": "by doing genomics testing, you can find out: Do you need more strengthening training, or do you need more cardio training?",
+        "label_ids": [
+          "topic:genetics.genetic_testing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000226",
+        "summary": "Guest says genomics testing tells whether a person needs more strength or more cardio training."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "the three types of exercise are cardio training, strength training, and flexibility.",
+        "label_ids": [
+          "topic:fitness.strength_training"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000227",
+        "summary": "Strength training is named as one of the exercise types everybody needs."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "cardio training, strength training, and flexibility. So everybody needs to do those three things",
+        "label_ids": [
+          "topic:fitness.mobility_flexibility"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000231",
+        "summary": "Flexibility is listed as the third type of exercise everybody needs."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "Vitamin D has a lot of other benefits beyond heart attack prevention, such as helping people get sick less, that a big study did not capture.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "There's a lot of other side benefits, and whether or not like this big study shows I'm going to prevent a heart attack or not.",
+        "evidence_signal_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general efficacy claim for vitamin D that a listener may act on.",
+        "relevance": "substantive",
+        "start_unit_id": "u000168",
+        "topic_ids": [
+          "topic:supplements.vitamin_d",
+          "topic:immune.immune_function"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "A lot of the studies of vitamin D are not long enough to prove its benefits.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000172",
+        "evidence_quote": "And a lot of those studies, they they're not long enough to prove these benefits.",
+        "evidence_signal_ids": [
+          "evidence:evidence_limits"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Characterizes the evidence base for vitamin D in a way that can be checked against trial durations.",
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "topic_ids": [
+          "topic:health_system.research_system",
+          "topic:supplements.vitamin_d"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A multi-year study of a generic vitamin in a thousand people costs tens if not hundreds of millions of dollars, so no one funds it.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000174",
+        "evidence_quote": "to do a study for several years, I mean, it it's incredibly expensive, and to look at things like a generic vitamin, yeah, who has the money",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about trial costs and funding used to explain away null findings.",
+        "relevance": "substantive",
+        "start_unit_id": "u000173",
+        "topic_ids": [
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think",
+          "most"
+        ],
+        "claim_text": "Most people are helped by taking some nutritional supplements.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000194",
+        "evidence_quote": "I think most of us are helped by taking some nutritional supplements.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A broad claim about supplement benefit that could drive purchases.",
+        "relevance": "passing",
+        "start_unit_id": "u000194",
+        "topic_ids": [
+          "topic:supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Endocrinologists and gynecologists do not test their patients' hormone levels.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000208",
+        "evidence_quote": "they go to endocrinologists and gynecologists. They don't test their hormones.",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "narrative_ids": [],
+        "rationale": "A claim about specialist practice that may steer patients toward private testing.",
+        "relevance": "substantive",
+        "start_unit_id": "u000207",
+        "topic_ids": [
+          "topic:endocrine.hormone_balance",
+          "topic:health_system.doctors_profession"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Genomics testing can show whether a person needs more strength training or more cardio training.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000227",
+        "evidence_quote": "by doing genomics testing, you can find out: Do you need more strengthening training, or do you need more cardio training?",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about the predictive value of genetic testing for exercise prescription.",
+        "relevance": "substantive",
+        "start_unit_id": "u000226",
+        "topic_ids": [
+          "topic:genetics.genetic_testing",
+          "topic:fitness.strength_training",
+          "topic:fitness.cardio_endurance"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "High-intensity interval training accomplishes in twenty minutes what used to take an hour and a half of exercise.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000238",
+        "evidence_quote": "That we can accomplish in twenty minutes what used to take us an hour and a half to do.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A quantified equivalence claim about exercise efficiency.",
+        "relevance": "substantive",
+        "start_unit_id": "u000237",
+        "topic_ids": [
+          "topic:fitness.cardio_endurance"
+        ]
+      }
+    ],
+    "window_id": "episode_176556_window_0004"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000177",
+        "evidence_quote": "whether or not taking this vitamin D prevents me from ever heart attack, I know that it's definitely helping me to get sick less",
+        "label_ids": [
+          "topic:supplements.vitamin_d"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000168",
+        "summary": "Speaker argues vitamin D has benefits (fewer illnesses, weight, muscle) beyond what a big heart-attack study captured, and that vitamin studies are too short to prove them."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000170",
+        "evidence_quote": "whether or not like this big study shows I'm going to prevent a heart attack or not",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000168",
+        "summary": "Whether vitamin D prevents heart attacks, as tested by a big study, is raised and set aside."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000169",
+        "evidence_quote": "definitely helping me to get sick less. You know, definitely helping me to keep my weight off, keep muscle mass up",
+        "label_ids": [
+          "topic:immune.immune_function",
+          "topic:musculoskeletal.muscle_loss",
+          "topic:weight.body_composition"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000168",
+        "summary": "Speaker credits vitamin D with helping him get sick less, keep weight off and keep muscle mass up."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000169",
+        "evidence_quote": "I know that it's definitely helping me to get sick less",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000168",
+        "summary": "Speaker's own experience of getting sick less on vitamin D is offered against the big study's null finding."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000177",
+        "evidence_quote": "who has the money to to put tens, if not hundreds of millions of dollars into this kind of study",
+        "label_ids": [
+          "topic:health_system.research_system"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "summary": "Speaker says vitamin studies are too short, long trials of generic vitamins are too expensive for anyone to fund, so many studies are flawed."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000176",
+        "evidence_quote": "And a lot of those studies, they they're not long enough to prove these benefits",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "summary": "Speaker points to short study durations as a limit on the evidence for vitamin D's benefits."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000185",
+        "evidence_quote": "I think the same thing applies to anti-aging and to longevity medicine",
+        "label_ids": [
+          "topic:longevity.ageing_science"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000180",
+        "summary": "Host asks the guest about the fundamentals of anti-aging and longevity medicine; guest frames them as basic pillars."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000194",
+        "evidence_quote": "Exercise is king, diet is queen. Put them together, and you have a kingdom",
+        "label_ids": [
+          "topic:wellness.lifestyle_pillars"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000183",
+        "summary": "Guest names exercise and diet, quoting Jack LaLanne, plus supplements as the foundational pillars of longevity."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000190",
+        "evidence_quote": "I think Jack Lalanne, he was you know a fitness, yeah, one of the first fitness gurus",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000186",
+        "summary": "Jack LaLanne's status as one of the first fitness gurus is invoked to support the diet-and-exercise maxim."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000194",
+        "evidence_quote": "I think most of us are helped by taking some nutritional supplements",
+        "label_ids": [
+          "topic:supplements"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000194",
+        "summary": "Guest says most people are helped by taking some nutritional supplements."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000215",
+        "evidence_quote": "So we need to do a more extensive series of testing",
+        "label_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000195",
+        "summary": "Guest says conventional testing is not enough and his clinic does a more extensive series of tests, including hormones, before optimizing."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000197",
+        "evidence_quote": "the type of testing that is done in conventional medicine is it's good, but the philosophy that we have in",
+        "label_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000195",
+        "summary": "Conventional medicine's testing is cast as inadequate compared with the clinic's philosophy."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000208",
+        "evidence_quote": "they go to endocrinologists and gynecologists. They don't test their hormones",
+        "label_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000207",
+        "summary": "Endocrinologists and gynecologists are portrayed as failing to test patients' hormones."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000199",
+        "evidence_quote": "Good is not good enough. I know that what our patients that are in the wellness space want is optimal health",
+        "label_ids": [
+          "frame:optimization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000197",
+        "summary": "Wellness patients are said to want optimal rather than merely good health."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000213",
+        "evidence_quote": "then we can start to optimize",
+        "label_ids": [
+          "frame:optimization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000213",
+        "summary": "After testing, the clinic starts to optimize patients."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000212",
+        "evidence_quote": "They've never had their hormone levels tested",
+        "label_ids": [
+          "topic:endocrine.hormone_balance"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000202",
+        "summary": "Host and guest say many patients have never had their hormone levels tested and the clinic tests them first."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000212",
+        "evidence_quote": "Ask people, what's your testosterone? Never had it tested",
+        "label_ids": [
+          "topic:mens.testosterone"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000210",
+        "summary": "People in their forties or fifties are said never to have had their testosterone tested."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000208",
+        "evidence_quote": "How many patients come in? They've never had their hormone levels tested",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000203",
+        "summary": "Patients arriving at the clinic untested are offered as evidence that specialists do not test hormones."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000215",
+        "evidence_quote": "the hormone spaces, the detox spaces—in addition, you know, to all of the other things that we offer",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000196",
+        "summary": "Guest describes his own clinic's testing, hormone and detox services as the way to begin."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000214",
+        "evidence_quote": "the detox spaces",
+        "label_ids": [
+          "topic:detox.toxic_load_general"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000214",
+        "summary": "Detox is named among the clinic's service areas."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000238",
+        "evidence_quote": "More and more of us are looking at HIT training, high-intensity interval training",
+        "label_ids": [
+          "topic:fitness.cardio_endurance"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000218",
+        "summary": "Host recalls when cardio was king; guest says long cardio sessions have given way to HIIT that achieves in twenty minutes what took ninety."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000223",
+        "evidence_quote": "Calories in, calories out. Right. Work those calories off",
+        "label_ids": [
+          "topic:diets.calorie_counting"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000220",
+        "summary": "Host recalls the older calories-in, calories-out idea of working calories off."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000229",
+        "evidence_quote": "by doing genomics testing, you can find out: Do you need more strengthening training, or do you need more cardio training",
+        "label_ids": [
+          "topic:genetics.genetic_testing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000226",
+        "summary": "Guest says genomics testing tells whether a person needs more strength or more cardio training."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "the three types of exercise are cardio training, strength training, and flexibility",
+        "label_ids": [
+          "topic:fitness.strength_training"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000227",
+        "summary": "Strength training is named as one of the exercise types everybody needs."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "cardio training, strength training, and flexibility. So everybody needs to do those three things",
+        "label_ids": [
+          "topic:fitness.mobility_flexibility"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000231",
+        "summary": "Flexibility is listed as the third type of exercise everybody needs."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "Vitamin D has a lot of other benefits beyond heart attack prevention, such as helping people get sick less, that a big study did not capture.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "There's a lot of other side benefits, and whether or not like this big study shows I'm going to prevent a heart attack or not",
+        "evidence_signal_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general efficacy claim for vitamin D that a listener may act on.",
+        "relevance": "substantive",
+        "start_unit_id": "u000168",
+        "topic_ids": [
+          "topic:immune.immune_function",
+          "topic:supplements.vitamin_d"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "A lot of the studies of vitamin D are not long enough to prove its benefits.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000172",
+        "evidence_quote": "And a lot of those studies, they they're not long enough to prove these benefits",
+        "evidence_signal_ids": [
+          "evidence:evidence_limits"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Characterizes the evidence base for vitamin D in a way that can be checked against trial durations.",
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "topic_ids": [
+          "topic:health_system.research_system",
+          "topic:supplements.vitamin_d"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A multi-year study of a generic vitamin in a thousand people costs tens if not hundreds of millions of dollars, so no one funds it.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000174",
+        "evidence_quote": "to do a study for several years, I mean, it it's incredibly expensive, and to look at things like a generic vitamin, yeah, who has the money",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about trial costs and funding used to explain away null findings.",
+        "relevance": "substantive",
+        "start_unit_id": "u000173",
+        "topic_ids": [
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think",
+          "most"
+        ],
+        "claim_text": "Most people are helped by taking some nutritional supplements.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000194",
+        "evidence_quote": "I think most of us are helped by taking some nutritional supplements",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A broad claim about supplement benefit that could drive purchases.",
+        "relevance": "passing",
+        "start_unit_id": "u000194",
+        "topic_ids": [
+          "topic:supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Endocrinologists and gynecologists do not test their patients' hormone levels.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000208",
+        "evidence_quote": "they go to endocrinologists and gynecologists. They don't test their hormones",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "narrative_ids": [],
+        "rationale": "A claim about specialist practice that may steer patients toward private testing.",
+        "relevance": "substantive",
+        "start_unit_id": "u000207",
+        "topic_ids": [
+          "topic:endocrine.hormone_balance",
+          "topic:health_system.doctors_profession"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Genomics testing can show whether a person needs more strength training or more cardio training.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000227",
+        "evidence_quote": "by doing genomics testing, you can find out: Do you need more strengthening training, or do you need more cardio training",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about the predictive value of genetic testing for exercise prescription.",
+        "relevance": "substantive",
+        "start_unit_id": "u000226",
+        "topic_ids": [
+          "topic:fitness.cardio_endurance",
+          "topic:fitness.strength_training",
+          "topic:genetics.genetic_testing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "High-intensity interval training accomplishes in twenty minutes what used to take an hour and a half of exercise.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000238",
+        "evidence_quote": "That we can accomplish in twenty minutes what used to take us an hour and a half to do",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A quantified equivalence claim about exercise efficiency.",
+        "relevance": "substantive",
+        "start_unit_id": "u000237",
+        "topic_ids": [
+          "topic:fitness.cardio_endurance"
+        ]
+      }
+    ],
+    "window_id": "episode_176556_window_0004"
+  },
+  "stored_at": "2026-10-04T11:47:02.673064+00:00"
+}

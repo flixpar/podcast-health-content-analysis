@@ -1,0 +1,1023 @@
+{
+  "annotator_id": "opus-a",
+  "benchmark_version": "v2",
+  "item_id": "c178291w0010",
+  "provenance": {
+    "bundle": "bundle_032",
+    "ingested_at": "2026-10-04T11:47:00.445474+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-a-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000521",
+        "evidence_quote": "These people in the studies are called \"sick quitters.\"",
+        "label_ids": [
+          "topic:alcohol.health_effects",
+          "topic:health_system.research_system"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000509",
+        "summary": "Hosts explain that former drinkers with drink-caused damage are counted as nondrinkers in alcohol studies ('sick quitters'), biasing comparisons."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000511",
+        "evidence_quote": "But you show up on the surveys as a nondrinker.",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000509",
+        "summary": "Surveys only snapshot current drinking, so quitters with past damage appear as nondrinkers."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000534",
+        "evidence_quote": "nondrinkers are distinct from moderate drinkers in a million other ways, too.",
+        "label_ids": [
+          "topic:alcohol.drinking_culture"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000522",
+        "summary": "Hosts list demographic differences of nondrinkers (race, insurance, employment, income) and note that abstaining is a health behavior of less privileged groups."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "Nondrinkers, it turns out, includes a disproportionate number of people with fairly serious preexisting conditions.",
+        "label_ids": [
+          "topic:health_system.research_system",
+          "topic:alcohol.health_effects"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000535",
+        "summary": "Hosts argue moderate-drinker vs nondrinker comparisons are confounded by illness, poverty and age, never-drinker samples are unrepresentative, and self-reported drinking (including red wine) is unreliable."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000544",
+        "evidence_quote": "it's also really hard to make comparisons between these two groups",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000535",
+        "summary": "Confounding between drinker groups and unrepresentative never-drinker comparison groups acknowledged."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000548",
+        "evidence_quote": "all of these surveys of drinking behavior are based on self-reported data.",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000545",
+        "summary": "Drinking surveys rely on self-report and lump very different drinkers together as moderate."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "I just don't know how much you can actually really say about this stuff",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000556",
+        "summary": "Host doubts how much can be concluded given unreliable answers on culturally loaded behaviors."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000538",
+        "evidence_quote": "All of those groups have higher mortality rates, but they don't have anything to do with drinking.",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000535",
+        "summary": "Hosts debunk apparent drinking benefits by attributing nondrinkers' higher mortality to non-drinking factors."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000555",
+        "evidence_quote": "it doesn't really come up in the literature about the French paradox",
+        "label_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000535",
+        "summary": "Rebuts the recurring proposition that moderate drinking (red wine, the 'French paradox') protects health, attributing the association to confounding and self-report bias."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000555",
+        "evidence_quote": "Do people who go to the opera have lower rates of heart attacks?",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000550",
+        "summary": "Opera-goers' lower heart attack rates used as an analogy for confounding in red wine and heart studies."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000568",
+        "evidence_quote": "Our whole office went out for drinks, and I got totally plastered.",
+        "label_ids": [
+          "topic:alcohol.drinking_culture"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000557",
+        "summary": "Hosts contrast UK office drinking norms, getting plastered and calling in hungover, with US expectations."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000574",
+        "evidence_quote": "There's been various attempts to like create antioxidants in a lab and turn them into vitamin supplements.",
+        "label_ids": [
+          "topic:supplements.other_compounds",
+          "topic:supplements.industry_quality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000569",
+        "summary": "Hosts say lab-made antioxidant supplements have no evidence of doing anything, joking that Americans have the most expensive pee."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000572",
+        "evidence_quote": "the next sort of debunkery is the antioxidants stuff.",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000569",
+        "summary": "Host introduces the antioxidant claim as the next item to debunk."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "you get a spike of it for roughly 30 minutes.",
+        "label_ids": [
+          "topic:longevity.nad_sirtuins"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000575",
+        "summary": "Host says studies since the 1990s show resveratrol is barely absorbed, giving only a 30-minute spike."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "Basically, all of the studies on resveratrol, since the 1990s have found",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000577",
+        "summary": "Unspecified body of resveratrol studies since the 1990s invoked."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "you don't really absorb it",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000577",
+        "summary": "Resveratrol benefits debunked on absorption grounds."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "People who have quit drinking still carry the liver damage and other health effects of past drinking but are counted as nondrinkers in surveys.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000510",
+        "evidence_quote": "But you show up on the surveys as a nondrinker.",
+        "evidence_signal_ids": [
+          "evidence:evidence_limits"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Methodological claim about alcohol studies that shapes beliefs about moderate drinking benefits.",
+        "relevance": "substantive",
+        "start_unit_id": "u000509",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Black people are twice as likely to be nondrinkers as white people.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "So black people are twice as likely to be nondrinkers as white people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific demographic statistic underlying the confounding argument.",
+        "relevance": "substantive",
+        "start_unit_id": "u000523",
+        "topic_ids": [
+          "topic:alcohol.drinking_culture"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People without health insurance are 1.5 times more likely to be nondrinkers.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "people without health insurance are 1.5 times more likely to be nondrinkers.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific demographic statistic underlying the confounding argument.",
+        "relevance": "substantive",
+        "start_unit_id": "u000523",
+        "topic_ids": [
+          "topic:alcohol.drinking_culture"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Unemployed people are 25% more likely to be nondrinkers.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000524",
+        "evidence_quote": "Unemployed people 25% more likely to be nondrinkers.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific demographic statistic underlying the confounding argument.",
+        "relevance": "substantive",
+        "start_unit_id": "u000524",
+        "topic_ids": [
+          "topic:alcohol.drinking_culture"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People who earn less than $25,000 a year are three times more likely to be nondrinkers.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000525",
+        "evidence_quote": "People who earn less than $25,000 a year are three times more likely to be nondrinkers.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific demographic statistic underlying the confounding argument.",
+        "relevance": "substantive",
+        "start_unit_id": "u000525",
+        "topic_ids": [
+          "topic:alcohol.drinking_culture"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nondrinkers include a disproportionate number of people with fairly serious preexisting conditions, as well as many poor people, ethnic minorities, unemployed people and older people.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000537",
+        "evidence_quote": "Nondrinkers, it turns out, includes a disproportionate number of people with fairly serious preexisting conditions.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Composition claim central to whether moderate drinking appears protective.",
+        "relevance": "substantive",
+        "start_unit_id": "u000536",
+        "topic_ids": [
+          "topic:health_system.research_system",
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "All"
+        ],
+        "claim_text": "Poor people, ethnic minorities, unemployed people and older people have higher mortality rates for reasons unrelated to drinking.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000538",
+        "evidence_quote": "All of those groups have higher mortality rates, but they don't have anything to do with drinking.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "Confounding claim that undercuts the apparent mortality benefit of moderate drinking.",
+        "relevance": "substantive",
+        "start_unit_id": "u000538",
+        "topic_ids": [
+          "topic:health_system.research_system",
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "mostly"
+        ],
+        "claim_text": "Lifetime never-drinkers used as a comparison group in alcohol studies are mostly religious people and not a representative sample.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000543",
+        "evidence_quote": "That's mostly religious people.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim about the composition of study comparison groups.",
+        "relevance": "substantive",
+        "start_unit_id": "u000541",
+        "topic_ids": [
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "all"
+        ],
+        "claim_text": "All of these surveys of drinking behavior are based on self-reported data.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000545",
+        "evidence_quote": "all of these surveys of drinking behavior are based on self-reported data.",
+        "evidence_signal_ids": [
+          "evidence:evidence_limits"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Methodological claim about the alcohol evidence base.",
+        "relevance": "substantive",
+        "start_unit_id": "u000545",
+        "topic_ids": [
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The 'moderate drinker' category in surveys includes people who have one drink a year as well as people who have two drinks a night.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000546",
+        "evidence_quote": "Moderate drinkers encompasses people who have one drink a year, and people who have to drinks at night.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim about how drinking categories are defined in studies.",
+        "relevance": "substantive",
+        "start_unit_id": "u000546",
+        "topic_ids": [
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "A lot of people"
+        ],
+        "claim_text": "Many people who drink very rarely still describe themselves as moderate drinkers.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000548",
+        "evidence_quote": "A lot of people who drink very rarely, still call themselves moderate drinkers",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Self-report misclassification claim affecting alcohol study results.",
+        "relevance": "substantive",
+        "start_unit_id": "u000548",
+        "topic_ids": [
+          "topic:alcohol.drinking_culture",
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "seems off to me"
+        ],
+        "claim_text": "Self-reported red wine consumption is likely biased because red wine is associated with being a sophisticated person.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000551",
+        "evidence_quote": "there's something about the self-reporting of a red wine consumption, that also seems off to me, because red wine",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim about reporting bias in French paradox research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000550",
+        "topic_ids": [
+          "topic:health_system.research_system",
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Antioxidant vitamin supplements made in a lab provide health benefits.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000572",
+        "evidence_quote": "There's no evidence that they do anything.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "Efficacy claim for antioxidant supplements that the hosts debunk.",
+        "relevance": "substantive",
+        "start_unit_id": "u000569",
+        "topic_ids": [
+          "topic:supplements.other_compounds"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "all"
+        ],
+        "claim_text": "Studies on resveratrol since the 1990s have found that it is barely absorbed, producing only a spike lasting roughly 30 minutes.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "all of the studies on resveratrol, since the 1990s have found, you don't really absorb it, you get a spike of it for roughly 30 minutes.",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "Pharmacokinetic claim about resveratrol that bears on supplement and red-wine benefit claims.",
+        "relevance": "substantive",
+        "start_unit_id": "u000577",
+        "topic_ids": [
+          "topic:longevity.nad_sirtuins"
+        ]
+      }
+    ],
+    "window_id": "episode_178291_window_0010"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000521",
+        "evidence_quote": "These people in the studies are called \"sick quitters",
+        "label_ids": [
+          "topic:alcohol.health_effects",
+          "topic:health_system.research_system"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000509",
+        "summary": "Hosts explain that former drinkers with drink-caused damage are counted as nondrinkers in alcohol studies ('sick quitters'), biasing comparisons."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000511",
+        "evidence_quote": "But you show up on the surveys as a nondrinker",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000509",
+        "summary": "Surveys only snapshot current drinking, so quitters with past damage appear as nondrinkers."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000534",
+        "evidence_quote": "nondrinkers are distinct from moderate drinkers in a million other ways, too",
+        "label_ids": [
+          "topic:alcohol.drinking_culture"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000522",
+        "summary": "Hosts list demographic differences of nondrinkers (race, insurance, employment, income) and note that abstaining is a health behavior of less privileged groups."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "Nondrinkers, it turns out, includes a disproportionate number of people with fairly serious preexisting conditions",
+        "label_ids": [
+          "topic:alcohol.health_effects",
+          "topic:health_system.research_system"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000535",
+        "summary": "Hosts argue moderate-drinker vs nondrinker comparisons are confounded by illness, poverty and age, never-drinker samples are unrepresentative, and self-reported drinking (including red wine) is unreliable."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000544",
+        "evidence_quote": "it's also really hard to make comparisons between these two groups",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000535",
+        "summary": "Confounding between drinker groups and unrepresentative never-drinker comparison groups acknowledged."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000548",
+        "evidence_quote": "all of these surveys of drinking behavior are based on self-reported data",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000545",
+        "summary": "Drinking surveys rely on self-report and lump very different drinkers together as moderate."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "I just don't know how much you can actually really say about this stuff",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000556",
+        "summary": "Host doubts how much can be concluded given unreliable answers on culturally loaded behaviors."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000538",
+        "evidence_quote": "All of those groups have higher mortality rates, but they don't have anything to do with drinking",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000535",
+        "summary": "Hosts debunk apparent drinking benefits by attributing nondrinkers' higher mortality to non-drinking factors."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.5,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000555",
+        "evidence_quote": "it doesn't really come up in the literature about the French paradox",
+        "label_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000535",
+        "summary": "Rebuts the recurring proposition that moderate drinking (red wine, the 'French paradox') protects health, attributing the association to confounding and self-report bias."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000555",
+        "evidence_quote": "Do people who go to the opera have lower rates of heart attacks",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000550",
+        "summary": "Opera-goers' lower heart attack rates used as an analogy for confounding in red wine and heart studies."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000568",
+        "evidence_quote": "Our whole office went out for drinks, and I got totally plastered",
+        "label_ids": [
+          "topic:alcohol.drinking_culture"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000557",
+        "summary": "Hosts contrast UK office drinking norms, getting plastered and calling in hungover, with US expectations."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000574",
+        "evidence_quote": "There's been various attempts to like create antioxidants in a lab and turn them into vitamin supplements",
+        "label_ids": [
+          "topic:supplements.industry_quality",
+          "topic:supplements.other_compounds"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000569",
+        "summary": "Hosts say lab-made antioxidant supplements have no evidence of doing anything, joking that Americans have the most expensive pee."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000572",
+        "evidence_quote": "the next sort of debunkery is the antioxidants stuff",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000569",
+        "summary": "Host introduces the antioxidant claim as the next item to debunk."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "you get a spike of it for roughly 30 minutes",
+        "label_ids": [
+          "topic:longevity.nad_sirtuins"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000575",
+        "summary": "Host says studies since the 1990s show resveratrol is barely absorbed, giving only a 30-minute spike."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "Basically, all of the studies on resveratrol, since the 1990s have found",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000577",
+        "summary": "Unspecified body of resveratrol studies since the 1990s invoked."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "you don't really absorb it",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000577",
+        "summary": "Resveratrol benefits debunked on absorption grounds."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "People who have quit drinking still carry the liver damage and other health effects of past drinking but are counted as nondrinkers in surveys.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000510",
+        "evidence_quote": "But you show up on the surveys as a nondrinker",
+        "evidence_signal_ids": [
+          "evidence:evidence_limits"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Methodological claim about alcohol studies that shapes beliefs about moderate drinking benefits.",
+        "relevance": "substantive",
+        "start_unit_id": "u000509",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Black people are twice as likely to be nondrinkers as white people.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "So black people are twice as likely to be nondrinkers as white people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific demographic statistic underlying the confounding argument.",
+        "relevance": "substantive",
+        "start_unit_id": "u000523",
+        "topic_ids": [
+          "topic:alcohol.drinking_culture"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People without health insurance are 1.5 times more likely to be nondrinkers.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "people without health insurance are 1.5 times more likely to be nondrinkers",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific demographic statistic underlying the confounding argument.",
+        "relevance": "substantive",
+        "start_unit_id": "u000523",
+        "topic_ids": [
+          "topic:alcohol.drinking_culture"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Unemployed people are 25% more likely to be nondrinkers.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000524",
+        "evidence_quote": "Unemployed people 25% more likely to be nondrinkers",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific demographic statistic underlying the confounding argument.",
+        "relevance": "substantive",
+        "start_unit_id": "u000524",
+        "topic_ids": [
+          "topic:alcohol.drinking_culture"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People who earn less than $25,000 a year are three times more likely to be nondrinkers.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000525",
+        "evidence_quote": "People who earn less than $25,000 a year are three times more likely to be nondrinkers",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific demographic statistic underlying the confounding argument.",
+        "relevance": "substantive",
+        "start_unit_id": "u000525",
+        "topic_ids": [
+          "topic:alcohol.drinking_culture"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nondrinkers include a disproportionate number of people with fairly serious preexisting conditions, as well as many poor people, ethnic minorities, unemployed people and older people.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000537",
+        "evidence_quote": "Nondrinkers, it turns out, includes a disproportionate number of people with fairly serious preexisting conditions",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Composition claim central to whether moderate drinking appears protective.",
+        "relevance": "substantive",
+        "start_unit_id": "u000536",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "All"
+        ],
+        "claim_text": "Poor people, ethnic minorities, unemployed people and older people have higher mortality rates for reasons unrelated to drinking.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000538",
+        "evidence_quote": "All of those groups have higher mortality rates, but they don't have anything to do with drinking",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "Confounding claim that undercuts the apparent mortality benefit of moderate drinking.",
+        "relevance": "substantive",
+        "start_unit_id": "u000538",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "mostly"
+        ],
+        "claim_text": "Lifetime never-drinkers used as a comparison group in alcohol studies are mostly religious people and not a representative sample.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000543",
+        "evidence_quote": "That's mostly religious people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim about the composition of study comparison groups.",
+        "relevance": "substantive",
+        "start_unit_id": "u000541",
+        "topic_ids": [
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "all"
+        ],
+        "claim_text": "All of these surveys of drinking behavior are based on self-reported data.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000545",
+        "evidence_quote": "all of these surveys of drinking behavior are based on self-reported data",
+        "evidence_signal_ids": [
+          "evidence:evidence_limits"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Methodological claim about the alcohol evidence base.",
+        "relevance": "substantive",
+        "start_unit_id": "u000545",
+        "topic_ids": [
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The 'moderate drinker' category in surveys includes people who have one drink a year as well as people who have two drinks a night.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000546",
+        "evidence_quote": "Moderate drinkers encompasses people who have one drink a year, and people who have to drinks at night",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim about how drinking categories are defined in studies.",
+        "relevance": "substantive",
+        "start_unit_id": "u000546",
+        "topic_ids": [
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "A lot of people"
+        ],
+        "claim_text": "Many people who drink very rarely still describe themselves as moderate drinkers.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000548",
+        "evidence_quote": "A lot of people who drink very rarely, still call themselves moderate drinkers",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Self-report misclassification claim affecting alcohol study results.",
+        "relevance": "substantive",
+        "start_unit_id": "u000548",
+        "topic_ids": [
+          "topic:alcohol.drinking_culture",
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "seems off to me"
+        ],
+        "claim_text": "Self-reported red wine consumption is likely biased because red wine is associated with being a sophisticated person.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000551",
+        "evidence_quote": "there's something about the self-reporting of a red wine consumption, that also seems off to me, because red wine",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim about reporting bias in French paradox research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000550",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Antioxidant vitamin supplements made in a lab provide health benefits.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000572",
+        "evidence_quote": "There's no evidence that they do anything",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "Efficacy claim for antioxidant supplements that the hosts debunk.",
+        "relevance": "substantive",
+        "start_unit_id": "u000569",
+        "topic_ids": [
+          "topic:supplements.other_compounds"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "all"
+        ],
+        "claim_text": "Studies on resveratrol since the 1990s have found that it is barely absorbed, producing only a spike lasting roughly 30 minutes.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "all of the studies on resveratrol, since the 1990s have found, you don't really absorb it, you get a spike of it for roughly 30 minutes",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "Pharmacokinetic claim about resveratrol that bears on supplement and red-wine benefit claims.",
+        "relevance": "substantive",
+        "start_unit_id": "u000577",
+        "topic_ids": [
+          "topic:longevity.nad_sirtuins"
+        ]
+      }
+    ],
+    "window_id": "episode_178291_window_0010"
+  },
+  "stored_at": "2026-10-04T11:47:00.445541+00:00"
+}

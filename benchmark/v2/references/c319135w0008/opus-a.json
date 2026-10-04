@@ -1,0 +1,383 @@
+{
+  "annotator_id": "opus-a",
+  "benchmark_version": "v2",
+  "item_id": "c319135w0008",
+  "provenance": {
+    "bundle": "bundle_019",
+    "ingested_at": "2026-10-04T11:46:59.927937+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-a-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000487",
+        "evidence_quote": "he died while I was editing. Yeah, and he didn't he didn't hint that he was sick",
+        "label_ids": [
+          "topic:acute_care.death_dying"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000480",
+        "summary": "Filmmaker says his documentary subject David died, without having hinted he was sick, two months after filming."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000489",
+        "evidence_quote": "he might have had some cancer, but that he cured it with by drinking baking soda",
+        "label_ids": [
+          "topic:cancer_alt.natural_remedies"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000488",
+        "summary": "David believed he had cured a possible cancer by drinking baking soda after a YouTube video said alkalizing the body cures cancer."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000489",
+        "evidence_quote": "you can cure your cancer by if you make your body alkaline enough",
+        "label_ids": [
+          "narrative:natural_remedy_cures_cancer",
+          "narrative:alkaline_ph"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000488",
+        "summary": "Relays David's belief that baking soda and making the body alkaline cure cancer."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000489",
+        "evidence_quote": "Is you had read on YouTube or watched a YouTube video",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000489",
+        "summary": "The alkaline cancer-cure idea is sourced to a YouTube video David watched."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000490",
+        "evidence_quote": "And so he just he never went to the doctor",
+        "label_ids": [
+          "topic:cancer_alt.refusing_standard_care"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000490",
+        "summary": "David never went to the doctor about his suspected cancer."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000513",
+        "evidence_quote": "It's called the Rife machine, and it basically works on the principle that every like virus and bacteria and parasite operates on a certain frequency",
+        "label_ids": [
+          "topic:alt_medicine.energy_spiritual_healing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000490",
+        "summary": "Description of David's Rife frequency machine, claimed to kill pathogens by frequency, which he was sold ten of and went into debt over; hosts call it a bogus machine."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000511",
+        "evidence_quote": "if you like tune another frequency into that frequency, then it kills it all in your body",
+        "label_ids": [
+          "narrative:energy_frequency_healing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000493",
+        "summary": "The Rife machine's claim to kill pathogens by frequency is relayed and then dismissed as a 'bullshit machine' with nothing to it."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000493",
+        "evidence_quote": "every like virus and bacteria and parasite operates on a certain frequency, and if you like tune another frequency into that frequency, then it kills it all",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000493",
+        "summary": "Relays the Rife machine's claimed mechanism of matching pathogens' frequencies to kill them."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000511",
+        "evidence_quote": "They're just bullshit machines. I I mean, I would say so.",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000503",
+        "summary": "Hosts and guest dismiss Rife machines as bogus devices with nothing to them."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000517",
+        "evidence_quote": "Is this something like he found on YouTube or like Reddit? Likely.",
+        "label_ids": [
+          "topic:digital_health.online_health_information"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000515",
+        "summary": "Host asks whether David learned about the Rife machine from YouTube or Reddit; guest says likely."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Cancer can be cured by drinking baking soda to make the body alkaline enough.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000489",
+        "evidence_quote": "watched a YouTube video that was like you can cure your cancer by if you make your body alkaline enough",
+        "evidence_signal_ids": [
+          "evidence:media_source"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:natural_remedy_cures_cancer",
+          "narrative:alkaline_ph"
+        ],
+        "rationale": "An alkaline cancer cure is a checkable treatment claim that led someone to forgo medical care.",
+        "relevance": "substantive",
+        "start_unit_id": "u000488",
+        "topic_ids": [
+          "topic:cancer_alt.natural_remedies"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "every",
+          "all"
+        ],
+        "claim_text": "The Rife machine kills every virus, bacterium and parasite in the body by tuning to the frequency each one operates on.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000511",
+        "evidence_quote": "every like virus and bacteria and parasite operates on a certain frequency, and if you like tune another frequency into that frequency, then it kills it all in your body",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:energy_frequency_healing"
+        ],
+        "rationale": "Efficacy of frequency devices against pathogens is checkable and drives costly purchases.",
+        "relevance": "substantive",
+        "start_unit_id": "u000493",
+        "topic_ids": [
+          "topic:alt_medicine.energy_spiritual_healing"
+        ]
+      }
+    ],
+    "window_id": "episode_319135_window_0008"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000487",
+        "evidence_quote": "he died while I was editing. Yeah, and he didn't he didn't hint that he was sick",
+        "label_ids": [
+          "topic:acute_care.death_dying"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000480",
+        "summary": "Filmmaker says his documentary subject David died, without having hinted he was sick, two months after filming."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000489",
+        "evidence_quote": "he might have had some cancer, but that he cured it with by drinking baking soda",
+        "label_ids": [
+          "topic:cancer_alt.natural_remedies"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000488",
+        "summary": "David believed he had cured a possible cancer by drinking baking soda after a YouTube video said alkalizing the body cures cancer."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000489",
+        "evidence_quote": "you can cure your cancer by if you make your body alkaline enough",
+        "label_ids": [
+          "narrative:alkaline_ph",
+          "narrative:natural_remedy_cures_cancer"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000488",
+        "summary": "Relays David's belief that baking soda and making the body alkaline cure cancer."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000489",
+        "evidence_quote": "Is you had read on YouTube or watched a YouTube video",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000489",
+        "summary": "The alkaline cancer-cure idea is sourced to a YouTube video David watched."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000490",
+        "evidence_quote": "And so he just he never went to the doctor",
+        "label_ids": [
+          "topic:cancer_alt.refusing_standard_care"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000490",
+        "summary": "David never went to the doctor about his suspected cancer."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000513",
+        "evidence_quote": "It's called the Rife machine, and it basically works on the principle that every like virus and bacteria and parasite operates on a certain frequency",
+        "label_ids": [
+          "topic:alt_medicine.energy_spiritual_healing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000490",
+        "summary": "Description of David's Rife frequency machine, claimed to kill pathogens by frequency, which he was sold ten of and went into debt over; hosts call it a bogus machine."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000511",
+        "evidence_quote": "if you like tune another frequency into that frequency, then it kills it all in your body",
+        "label_ids": [
+          "narrative:energy_frequency_healing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000493",
+        "summary": "The Rife machine's claim to kill pathogens by frequency is relayed and then dismissed as a 'bullshit machine' with nothing to it."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.5,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000493",
+        "evidence_quote": "every like virus and bacteria and parasite operates on a certain frequency, and if you like tune another frequency into that frequency, then it kills it all",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000493",
+        "summary": "Relays the Rife machine's claimed mechanism of matching pathogens' frequencies to kill them."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000511",
+        "evidence_quote": "They're just bullshit machines. I I mean, I would say so",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000503",
+        "summary": "Hosts and guest dismiss Rife machines as bogus devices with nothing to them."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000517",
+        "evidence_quote": "Is this something like he found on YouTube or like Reddit? Likely",
+        "label_ids": [
+          "topic:digital_health.online_health_information"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000515",
+        "summary": "Host asks whether David learned about the Rife machine from YouTube or Reddit; guest says likely."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Cancer can be cured by drinking baking soda to make the body alkaline enough.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000489",
+        "evidence_quote": "watched a YouTube video that was like you can cure your cancer by if you make your body alkaline enough",
+        "evidence_signal_ids": [
+          "evidence:media_source"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:alkaline_ph",
+          "narrative:natural_remedy_cures_cancer"
+        ],
+        "rationale": "An alkaline cancer cure is a checkable treatment claim that led someone to forgo medical care.",
+        "relevance": "substantive",
+        "start_unit_id": "u000488",
+        "topic_ids": [
+          "topic:cancer_alt.natural_remedies"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "every",
+          "all"
+        ],
+        "claim_text": "The Rife machine kills every virus, bacterium and parasite in the body by tuning to the frequency each one operates on.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000511",
+        "evidence_quote": "every like virus and bacteria and parasite operates on a certain frequency, and if you like tune another frequency into that frequency, then it kills it all in your body",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:energy_frequency_healing"
+        ],
+        "rationale": "Efficacy of frequency devices against pathogens is checkable and drives costly purchases.",
+        "relevance": "substantive",
+        "start_unit_id": "u000493",
+        "topic_ids": [
+          "topic:alt_medicine.energy_spiritual_healing"
+        ]
+      }
+    ],
+    "window_id": "episode_319135_window_0008"
+  },
+  "stored_at": "2026-10-04T11:46:59.927968+00:00"
+}

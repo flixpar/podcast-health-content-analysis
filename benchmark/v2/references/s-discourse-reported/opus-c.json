@@ -1,0 +1,148 @@
+{
+  "annotator_id": "opus-c",
+  "benchmark_version": "v2",
+  "item_id": "s-discourse-reported",
+  "provenance": {
+    "bundle": "bundle_019",
+    "ingested_at": "2026-10-04T11:47:06.554574+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-c-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000025",
+        "evidence_quote": "so she was talking about semaglutide and she said it causes significant muscle loss in most people who take it",
+        "label_ids": [
+          "topic:glp1.side_effects"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000009",
+        "summary": "Speaker relays a podcast doctor's statement that semaglutide causes significant muscle loss in most users, notes the host did not push back, and says she does not know enough to judge."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000019",
+        "evidence_quote": "she said it causes significant muscle loss in most people who take it",
+        "label_ids": [
+          "narrative:glp1_dangers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Relayed claim that semaglutide causes significant muscle loss in most people invokes the GLP-1-dangers narrative, neither endorsed nor rejected."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000009",
+        "evidence_quote": "i was listening to this podcast the other day and there was a doctor on named dr sarah kline",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000009",
+        "summary": "The claim is sourced to a doctor heard on another podcast."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Semaglutide causes significant muscle loss in most people who take it.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000019",
+        "evidence_quote": "she said it causes significant muscle loss in most people who take it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:glp1_dangers"
+        ],
+        "rationale": "A specific adverse-effect claim about a widely used drug that could shape whether listeners take it.",
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:glp1.side_effects"
+        ]
+      }
+    ],
+    "window_id": "synthetic_discourse_reported_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000025",
+        "evidence_quote": "so she was talking about semaglutide and she said it causes significant muscle loss in most people who take it",
+        "label_ids": [
+          "topic:glp1.side_effects"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000009",
+        "summary": "Speaker relays a podcast doctor's statement that semaglutide causes significant muscle loss in most users, notes the host did not push back, and says she does not know enough to judge."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000019",
+        "evidence_quote": "she said it causes significant muscle loss in most people who take it",
+        "label_ids": [
+          "narrative:glp1_dangers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Relayed claim that semaglutide causes significant muscle loss in most people invokes the GLP-1-dangers narrative, neither endorsed nor rejected."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000009",
+        "evidence_quote": "i was listening to this podcast the other day and there was a doctor on named dr sarah kline",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000009",
+        "summary": "The claim is sourced to a doctor heard on another podcast."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Semaglutide causes significant muscle loss in most people who take it.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000019",
+        "evidence_quote": "she said it causes significant muscle loss in most people who take it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:glp1_dangers"
+        ],
+        "rationale": "A specific adverse-effect claim about a widely used drug that could shape whether listeners take it.",
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:glp1.side_effects"
+        ]
+      }
+    ],
+    "window_id": "synthetic_discourse_reported_window_0001"
+  },
+  "stored_at": "2026-10-04T11:47:06.554599+00:00"
+}

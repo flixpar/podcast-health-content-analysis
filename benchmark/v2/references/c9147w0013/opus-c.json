@@ -1,0 +1,292 @@
+{
+  "annotator_id": "opus-c",
+  "benchmark_version": "v2",
+  "item_id": "c9147w0013",
+  "provenance": {
+    "bundle": "bundle_041",
+    "ingested_at": "2026-10-04T11:47:07.438108+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-c-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "And deaths, and the the insurance data of the all cause mortality rate on the vaccines, and the cycle rate on the PCR tests, and all of the the the ivermectin",
+        "label_ids": [
+          "topic:covid.testing_counting",
+          "topic:vaccines.covid_vaccines",
+          "topic:covid.treatments"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000919",
+        "summary": "Host lists COVID topics his show covered (case and death reporting, PCR cycle thresholds, insurance all-cause mortality data on the vaccines, ivermectin) and says it was all 'bullshit' nobody noticed."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "How many times did we show the the the reality of how they were reporting cases?",
+        "label_ids": [
+          "narrative:covid_deaths_inflated"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000921",
+        "summary": "Host implies the reporting of COVID cases and deaths and PCR cycle thresholds was misleading ('bullshit')."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "the insurance data of the all cause mortality rate on the vaccines",
+        "label_ids": [
+          "narrative:covid_vaccine_deaths"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000922",
+        "summary": "Host alludes to insurance all-cause mortality data 'on the vaccines' as something people failed to see, implying vaccine-linked deaths."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "all of the the the ivermectin, the the hydrocortisone, everything",
+        "label_ids": [
+          "narrative:ivermectin_covid",
+          "narrative:hcq_covid"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000922",
+        "summary": "Host lists ivermectin and 'hydrocortisone' (apparently hydroxychloroquine) among COVID matters the official story got wrong."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "nobody nobody realized that it was bullshit",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000921",
+        "summary": "Official COVID reporting is cast as something that was 'bullshit' and only later recognized as such."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "the insurance data of the all cause mortality rate on the vaccines",
+        "label_ids": [
+          "evidence:official_data_documents"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000922",
+        "summary": "Host invokes insurance all-cause mortality data and says they discussed COVID 'with data'."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000931",
+        "evidence_quote": "Men who have been paralyzed, who are now finding some joy and some relief, and some ability to live a normal life",
+        "label_ids": [
+          "topic:neuro.nerve_spinal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000929",
+        "summary": "Host acknowledges that paralyzed men using the Elon Musk-linked technology are regaining relief and some ability to live normally."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The way COVID cases and deaths were reported, including the PCR test cycle thresholds used, was false ('bullshit').",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "How many times did we show the the the reality of how they were reporting cases?",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [
+          "narrative:covid_deaths_inflated"
+        ],
+        "rationale": "An allegation that official COVID case and death counts were misreported is checkable against surveillance methodology.",
+        "relevance": "passing",
+        "start_unit_id": "u000921",
+        "topic_ids": [
+          "topic:covid.testing_counting"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Paralyzed men using the Elon Musk-backed technology being discussed are now finding relief and some ability to live a normal life.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000930",
+        "evidence_quote": "Men who have been paralyzed, who are now finding some joy and some relief, and some ability to live a normal life",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The benefit of the implant technology for paralyzed patients is checkable against trial reports.",
+        "relevance": "passing",
+        "start_unit_id": "u000929",
+        "topic_ids": [
+          "topic:neuro.nerve_spinal"
+        ]
+      }
+    ],
+    "window_id": "episode_9147_window_0013"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "And deaths, and the the insurance data of the all cause mortality rate on the vaccines, and the cycle rate on the PCR tests, and all of the the the ivermectin",
+        "label_ids": [
+          "topic:covid.testing_counting",
+          "topic:covid.treatments",
+          "topic:vaccines.covid_vaccines"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000919",
+        "summary": "Host lists COVID topics his show covered (case and death reporting, PCR cycle thresholds, insurance all-cause mortality data on the vaccines, ivermectin) and says it was all 'bullshit' nobody noticed."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "How many times did we show the the the reality of how they were reporting cases",
+        "label_ids": [
+          "narrative:covid_deaths_inflated"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000921",
+        "summary": "Host implies the reporting of COVID cases and deaths and PCR cycle thresholds was misleading ('bullshit')."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "the insurance data of the all cause mortality rate on the vaccines",
+        "label_ids": [
+          "narrative:covid_vaccine_deaths"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000922",
+        "summary": "Host alludes to insurance all-cause mortality data 'on the vaccines' as something people failed to see, implying vaccine-linked deaths."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "all of the the the ivermectin, the the hydrocortisone, everything",
+        "label_ids": [
+          "narrative:hcq_covid",
+          "narrative:ivermectin_covid"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000922",
+        "summary": "Host lists ivermectin and 'hydrocortisone' (apparently hydroxychloroquine) among COVID matters the official story got wrong."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "nobody nobody realized that it was bullshit",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000921",
+        "summary": "Official COVID reporting is cast as something that was 'bullshit' and only later recognized as such."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "the insurance data of the all cause mortality rate on the vaccines",
+        "label_ids": [
+          "evidence:official_data_documents"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000922",
+        "summary": "Host invokes insurance all-cause mortality data and says they discussed COVID 'with data'."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000931",
+        "evidence_quote": "Men who have been paralyzed, who are now finding some joy and some relief, and some ability to live a normal life",
+        "label_ids": [
+          "topic:neuro.nerve_spinal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000929",
+        "summary": "Host acknowledges that paralyzed men using the Elon Musk-linked technology are regaining relief and some ability to live normally."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The way COVID cases and deaths were reported, including the PCR test cycle thresholds used, was false ('bullshit').",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "How many times did we show the the the reality of how they were reporting cases",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [
+          "narrative:covid_deaths_inflated"
+        ],
+        "rationale": "An allegation that official COVID case and death counts were misreported is checkable against surveillance methodology.",
+        "relevance": "passing",
+        "start_unit_id": "u000921",
+        "topic_ids": [
+          "topic:covid.testing_counting"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Paralyzed men using the Elon Musk-backed technology being discussed are now finding relief and some ability to live a normal life.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000930",
+        "evidence_quote": "Men who have been paralyzed, who are now finding some joy and some relief, and some ability to live a normal life",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The benefit of the implant technology for paralyzed patients is checkable against trial reports.",
+        "relevance": "passing",
+        "start_unit_id": "u000929",
+        "topic_ids": [
+          "topic:neuro.nerve_spinal"
+        ]
+      }
+    ],
+    "window_id": "episode_9147_window_0013"
+  },
+  "stored_at": "2026-10-04T11:47:07.438128+00:00"
+}

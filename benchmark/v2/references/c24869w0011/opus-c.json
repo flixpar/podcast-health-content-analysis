@@ -1,0 +1,300 @@
+{
+  "annotator_id": "opus-c",
+  "benchmark_version": "v2",
+  "item_id": "c24869w0011",
+  "provenance": {
+    "bundle": "bundle_013",
+    "ingested_at": "2026-10-04T11:47:06.318805+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-c-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000815",
+        "evidence_quote": "He joined in, and after six days, Walter died of dehydration.",
+        "label_ids": [
+          "topic:alt_medicine.energy_spiritual_healing",
+          "topic:acute_care.death_dying"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000812",
+        "summary": "Hosts recount an exorcism in which Walter was strapped to a chair, denied food and water and prayed over, dying of dehydration after six days."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000856",
+        "evidence_quote": "Like, no, you just killed a boy. Like, you just killed a little boy. Gotta give him some water.",
+        "label_ids": [
+          "topic:acute_care.death_dying"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000851",
+        "summary": "Hosts condemn the parents and church who believed Walter's dehydration death returned him to Jesus, saying they simply killed a boy who needed water."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000851",
+        "evidence_quote": "they believed that Walter's death returned him to Jesus.",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000851",
+        "summary": "The parents and church framed the boy's death as returning him to Jesus."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000893",
+        "evidence_quote": "an eight-year-old autistic boy named Terrence Cotrell died during church when members of his congregation attempted to all heal him at the same time.",
+        "label_ids": [
+          "topic:neurodevelopment.autism_treatment",
+          "topic:alt_medicine.energy_spiritual_healing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000867",
+        "summary": "Hosts recount the 2003 Milwaukee case of an eight-year-old autistic boy whose parents were told a church could heal his autism, and who died when congregants tried to expel an evil spirit from him."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000868",
+        "evidence_quote": "an eight-year-old autistic boy named Terrence Cotrell died during church",
+        "label_ids": [
+          "topic:acute_care.death_dying"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000868",
+        "summary": "The boy died during the church healing attempt."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000875",
+        "evidence_quote": "Tragically, though, exorcism is not just something performed on adults.",
+        "label_ids": [
+          "population:children"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000867",
+        "summary": "Hosts note exorcism is also performed on children, describing a young autistic boy."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000869",
+        "evidence_quote": "I was reading an interesting article on this story.",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000869",
+        "summary": "Host cites an article as the source for the case details."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000893",
+        "evidence_quote": "And so their idea is that you physically make it impossible for the demon to exist inside this body, so it has to come out.",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000890",
+        "summary": "The church framed the boy's autism as an evil spirit that must be physically forced out of his body, citing a biblical verse."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000900",
+        "evidence_quote": "Well, this is the whole concept of laying hands.",
+        "label_ids": [
+          "topic:alt_medicine.energy_spiritual_healing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000894",
+        "summary": "Host connects the case to laying on of hands in his childhood Foursquare church and recalls being pushed over."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A church's congregation can fix and heal a child's autism.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000881",
+        "evidence_quote": "We can fix him. Not like the women searching for you, Kissel. Sure, like we can go and like you, we will heal his autism.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:spiritual_religious"
+        ],
+        "narrative_ids": [],
+        "rationale": "A relayed claim that faith healing cures autism, which led to a child's death.",
+        "relevance": "substantive",
+        "start_unit_id": "u000878",
+        "topic_ids": [
+          "topic:neurodevelopment.autism_treatment",
+          "topic:alt_medicine.energy_spiritual_healing"
+        ]
+      }
+    ],
+    "window_id": "episode_24869_window_0011"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000815",
+        "evidence_quote": "He joined in, and after six days, Walter died of dehydration",
+        "label_ids": [
+          "topic:acute_care.death_dying",
+          "topic:alt_medicine.energy_spiritual_healing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000812",
+        "summary": "Hosts recount an exorcism in which Walter was strapped to a chair, denied food and water and prayed over, dying of dehydration after six days."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000856",
+        "evidence_quote": "Like, no, you just killed a boy. Like, you just killed a little boy. Gotta give him some water",
+        "label_ids": [
+          "topic:acute_care.death_dying"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000851",
+        "summary": "Hosts condemn the parents and church who believed Walter's dehydration death returned him to Jesus, saying they simply killed a boy who needed water."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000851",
+        "evidence_quote": "they believed that Walter's death returned him to Jesus",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000851",
+        "summary": "The parents and church framed the boy's death as returning him to Jesus."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000893",
+        "evidence_quote": "an eight-year-old autistic boy named Terrence Cotrell died during church when members of his congregation attempted to all heal him at the same time",
+        "label_ids": [
+          "topic:alt_medicine.energy_spiritual_healing",
+          "topic:neurodevelopment.autism_treatment"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000867",
+        "summary": "Hosts recount the 2003 Milwaukee case of an eight-year-old autistic boy whose parents were told a church could heal his autism, and who died when congregants tried to expel an evil spirit from him."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000868",
+        "evidence_quote": "an eight-year-old autistic boy named Terrence Cotrell died during church",
+        "label_ids": [
+          "topic:acute_care.death_dying"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000868",
+        "summary": "The boy died during the church healing attempt."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000875",
+        "evidence_quote": "Tragically, though, exorcism is not just something performed on adults",
+        "label_ids": [
+          "population:children"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000867",
+        "summary": "Hosts note exorcism is also performed on children, describing a young autistic boy."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000869",
+        "evidence_quote": "I was reading an interesting article on this story",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000869",
+        "summary": "Host cites an article as the source for the case details."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000893",
+        "evidence_quote": "And so their idea is that you physically make it impossible for the demon to exist inside this body, so it has to come out",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000890",
+        "summary": "The church framed the boy's autism as an evil spirit that must be physically forced out of his body, citing a biblical verse."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000900",
+        "evidence_quote": "Well, this is the whole concept of laying hands",
+        "label_ids": [
+          "topic:alt_medicine.energy_spiritual_healing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000894",
+        "summary": "Host connects the case to laying on of hands in his childhood Foursquare church and recalls being pushed over."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A church's congregation can fix and heal a child's autism.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000881",
+        "evidence_quote": "We can fix him. Not like the women searching for you, Kissel. Sure, like we can go and like you, we will heal his autism",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:spiritual_religious"
+        ],
+        "narrative_ids": [],
+        "rationale": "A relayed claim that faith healing cures autism, which led to a child's death.",
+        "relevance": "substantive",
+        "start_unit_id": "u000878",
+        "topic_ids": [
+          "topic:alt_medicine.energy_spiritual_healing",
+          "topic:neurodevelopment.autism_treatment"
+        ]
+      }
+    ],
+    "window_id": "episode_24869_window_0011"
+  },
+  "stored_at": "2026-10-04T11:47:06.318827+00:00"
+}

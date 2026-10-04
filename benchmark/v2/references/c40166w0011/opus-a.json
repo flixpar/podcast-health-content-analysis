@@ -1,0 +1,277 @@
+{
+  "annotator_id": "opus-a",
+  "benchmark_version": "v2",
+  "item_id": "c40166w0011",
+  "provenance": {
+    "bundle": "bundle_066",
+    "ingested_at": "2026-10-04T11:47:01.805449+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-a-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000628",
+        "evidence_quote": "the fact checkers that have not even undergraduate degrees in biology write their little nasties, right?",
+        "label_ids": [
+          "topic:digital_health.online_health_information"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000622",
+        "summary": "Physician guest dismisses an Atlantic article and fact-checkers who challenged his scientific claims, saying he was later proven right."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000622",
+        "evidence_quote": "when the Atlantic, you know, writes their nasty little piece about me, that was intended to take me down",
+        "label_ids": [
+          "frame:media_distrust"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000622",
+        "summary": "Media outlet and fact-checkers portrayed as running hit pieces to take him down."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000623",
+        "evidence_quote": "Because they're all paid to do this.",
+        "label_ids": [
+          "frame:conflict_of_interest"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000623",
+        "summary": "Fact-checkers discounted because they are paid to attack him."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000688",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters",
+        "label_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:health_system.pharma_industry"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000682",
+        "summary": "Guest and host describe vaccines given every six months as a rent-seeking revenue model for Big Pharma and the investment funds behind it."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "rent-seeking behavior from Big Pharma and their corporate masters",
+        "label_ids": [
+          "frame:big_pharma"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "summary": "Big Pharma cast as extracting recurring payments through vaccines."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "these huge investment funds that also control the media and control Big Tech",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "summary": "Alleges the same investment funds control pharma, the media and Big Tech."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "They want to pick our pocket not once, they want to pick it every month, or in the case of these vaccines, every six months.",
+        "label_ids": [
+          "narrative:pharma_creates_customers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000681",
+        "summary": "Vaccines framed as a recurring-payment model designed to make people lifelong customers."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "when you have that feeling, I suggest you listen to it, because it's usually right.",
+        "label_ids": [
+          "frame:anti_expert_populist"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000690",
+        "summary": "Listeners urged to trust their instinct that something is wrong, called common sense."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Vaccines given every six months are a rent-seeking scheme by which Big Pharma and the investment funds behind it extract recurring payments.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "And so, what we've got now is vaccines. Vaccines as rent-seeking behavior from Big Pharma and their corporate masters",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:big_pharma"
+        ],
+        "narrative_ids": [
+          "narrative:pharma_creates_customers"
+        ],
+        "rationale": "Claim about the motive behind vaccine booster schedules that could shape vaccine decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000682",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:health_system.pharma_industry"
+        ]
+      }
+    ],
+    "window_id": "episode_40166_window_0011"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000628",
+        "evidence_quote": "the fact checkers that have not even undergraduate degrees in biology write their little nasties, right",
+        "label_ids": [
+          "topic:digital_health.online_health_information"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000622",
+        "summary": "Physician guest dismisses an Atlantic article and fact-checkers who challenged his scientific claims, saying he was later proven right."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000622",
+        "evidence_quote": "when the Atlantic, you know, writes their nasty little piece about me, that was intended to take me down",
+        "label_ids": [
+          "frame:media_distrust"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000622",
+        "summary": "Media outlet and fact-checkers portrayed as running hit pieces to take him down."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000623",
+        "evidence_quote": "Because they're all paid to do this",
+        "label_ids": [
+          "frame:conflict_of_interest"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000623",
+        "summary": "Fact-checkers discounted because they are paid to attack him."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000688",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters",
+        "label_ids": [
+          "topic:health_system.pharma_industry",
+          "topic:vaccines.covid_vaccines"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000682",
+        "summary": "Guest and host describe vaccines given every six months as a rent-seeking revenue model for Big Pharma and the investment funds behind it."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "rent-seeking behavior from Big Pharma and their corporate masters",
+        "label_ids": [
+          "frame:big_pharma"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "summary": "Big Pharma cast as extracting recurring payments through vaccines."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "these huge investment funds that also control the media and control Big Tech",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "summary": "Alleges the same investment funds control pharma, the media and Big Tech."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "They want to pick our pocket not once, they want to pick it every month, or in the case of these vaccines, every six months",
+        "label_ids": [
+          "narrative:pharma_creates_customers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000681",
+        "summary": "Vaccines framed as a recurring-payment model designed to make people lifelong customers."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "when you have that feeling, I suggest you listen to it, because it's usually right",
+        "label_ids": [
+          "frame:anti_expert_populist"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000690",
+        "summary": "Listeners urged to trust their instinct that something is wrong, called common sense."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Vaccines given every six months are a rent-seeking scheme by which Big Pharma and the investment funds behind it extract recurring payments.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "And so, what we've got now is vaccines. Vaccines as rent-seeking behavior from Big Pharma and their corporate masters",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:big_pharma"
+        ],
+        "narrative_ids": [
+          "narrative:pharma_creates_customers"
+        ],
+        "rationale": "Claim about the motive behind vaccine booster schedules that could shape vaccine decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000682",
+        "topic_ids": [
+          "topic:health_system.pharma_industry",
+          "topic:vaccines.covid_vaccines"
+        ]
+      }
+    ],
+    "window_id": "episode_40166_window_0011"
+  },
+  "stored_at": "2026-10-04T11:47:01.805478+00:00"
+}

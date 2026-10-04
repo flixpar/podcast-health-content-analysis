@@ -1,0 +1,113 @@
+{
+  "annotator_id": "opus-b",
+  "benchmark_version": "v2",
+  "item_id": "c193307w0006",
+  "provenance": {
+    "bundle": "bundle_007",
+    "ingested_at": "2026-10-04T11:47:02.740834+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-b-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states. Wegovy is a registered trademark of Novo Nordisk AS.",
+        "label_ids": [
+          "topic:glp1.access_compounding"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "summary": "Closing disclosures of a Hers telehealth weight-loss ad offering Wegovy: state availability, trademark and safety information."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "To get started and learn more, including important safety information.",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000308",
+        "summary": "Ad directs listeners to forhers.com to get started."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states.",
+        "mention_role": "advertised",
+        "product_name": "Hers",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000306"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000309",
+        "evidence_quote": "Wegovy is a registered trademark of Novo Nordisk AS.",
+        "mention_role": "advertised",
+        "product_name": "Wegovy",
+        "product_type": "medication",
+        "start_unit_id": "u000307"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_193307_window_0006"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states. Wegovy is a registered trademark of Novo Nordisk AS",
+        "label_ids": [
+          "topic:glp1.access_compounding"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "summary": "Closing disclosures of a Hers telehealth weight-loss ad offering Wegovy: state availability, trademark and safety information."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "To get started and learn more, including important safety information",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000308",
+        "summary": "Ad directs listeners to forhers.com to get started."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states",
+        "mention_role": "advertised",
+        "product_name": "Hers",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000306"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000309",
+        "evidence_quote": "Wegovy is a registered trademark of Novo Nordisk AS",
+        "mention_role": "advertised",
+        "product_name": "Wegovy",
+        "product_type": "medication",
+        "start_unit_id": "u000307"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_193307_window_0006"
+  },
+  "stored_at": "2026-10-04T11:47:02.740852+00:00"
+}

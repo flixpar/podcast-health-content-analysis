@@ -1,0 +1,604 @@
+{
+  "annotator_id": "opus-a",
+  "benchmark_version": "v2",
+  "item_id": "c321996w0007",
+  "provenance": {
+    "bundle": "bundle_050",
+    "ingested_at": "2026-10-04T11:47:01.172140+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-a-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "People have allergies too to like some of the stuff in the vaccine, so they can't get it.",
+        "label_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:immune.allergies"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000572",
+        "summary": "Hosts note the COVID vaccine may be mRNA and that some people are allergic to its components and cannot get it."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000622",
+        "evidence_quote": "But then with the like vaccine requirement, there's no caveat for people that can't get vaccinated",
+        "label_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000576",
+        "summary": "Hosts debate vaccine requirements for jobs and businesses, whether policy should accommodate the small share who cannot be vaccinated, and NYC's lack of exemptions with a negative-test alternative."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000585",
+        "evidence_quote": "we're getting everyone vax with certain things like Hep C and all that type of shit before you can start certain jobs",
+        "label_ids": [
+          "topic:vaccines.other_vaccines",
+          "topic:infectious.other_infections"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000584",
+        "summary": "Host says some jobs require a hepatitis C shot every 10 years even though hep C is not really killing people now."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000605",
+        "evidence_quote": "Every place of business is mandated to have some sort of access way for people that wheelchair.",
+        "label_ids": [
+          "topic:other"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000597",
+        "summary": "Analogy to disability accessibility: wheelchair users are a small share yet ADA rules mandate accessible bathrooms and entrances."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000619",
+        "evidence_quote": "Because a negative COVID test gets you an excusal.",
+        "label_ids": [
+          "topic:covid.testing_counting"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000615",
+        "summary": "Hosts believe a negative COVID test or antigen test can substitute for vaccination."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000641",
+        "evidence_quote": "We're going to shut down businesses because we want our old people.",
+        "label_ids": [
+          "topic:covid.lockdowns_closures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "Hosts say society shut down businesses to keep old people from dying of COVID because they are a large enough share of the population."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000641",
+        "evidence_quote": "We can't let old. People die.",
+        "label_ids": [
+          "population:older_adults"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "Pandemic policy discussed as protecting old people from dying."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000651",
+        "evidence_quote": "And I think that's the big pharma. I think big pharma has enough.",
+        "label_ids": [
+          "topic:health_system.pharma_industry"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000648",
+        "summary": "Hosts suggest big pharma is the powerful corporation that benefits enough to drive vaccine policy."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000651",
+        "evidence_quote": "we're not going to change it unless there is a massive financial benefit. Yes. For an incredibly powerful corporation in America. Yeah, I don't know. And I think that's the big pharma.",
+        "label_ids": [
+          "frame:big_pharma"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000646",
+        "summary": "Policy said to change only when it brings a massive financial benefit to a powerful corporation, identified as big pharma."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000655",
+        "evidence_quote": "there's a lot of people that are getting richer from COVID and lockdowns and restrictions in general",
+        "label_ids": [
+          "topic:covid.lockdowns_closures"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000653",
+        "summary": "Relays the claim that COVID and lockdowns were the biggest wealth transfer in history, making many people richer."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Some people are allergic to components of the COVID vaccine and therefore cannot get vaccinated.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "People have allergies too to like some of the stuff in the vaccine, so they can't get it.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Contraindication claim about vaccine components.",
+        "relevance": "substantive",
+        "start_unit_id": "u000575",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:immune.allergies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Certain jobs require workers to be vaccinated against hepatitis C, repeated every 10 years.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000586",
+        "evidence_quote": "we're getting everyone vax with certain things like Hep C and all that type of shit before you can start certain jobs",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable claim about a vaccine and an occupational requirement that may not exist.",
+        "relevance": "passing",
+        "start_unit_id": "u000584",
+        "topic_ids": [
+          "topic:vaccines.other_vaccines",
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Hepatitis C is not really killing people nowadays.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000585",
+        "evidence_quote": "And that's not really killing people nowadays",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mortality claim about an infection that could downplay its risk.",
+        "relevance": "passing",
+        "start_unit_id": "u000585",
+        "topic_ids": [
+          "topic:infectious.other_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vaccination for teachers is mandated by the state.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000589",
+        "evidence_quote": "It's also mandated by the state.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable claim about a vaccination mandate.",
+        "relevance": "passing",
+        "start_unit_id": "u000586",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Probably",
+          "probably"
+        ],
+        "claim_text": "People who cannot get vaccinated make up about one percent of the population, probably less.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "we cannot bend all of legislation to one percent of the population. Probably less.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Prevalence of vaccine contraindications used to argue about exemption policy.",
+        "relevance": "substantive",
+        "start_unit_id": "u000591",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Wheelchair users are probably less than one percent of the population.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000604",
+        "evidence_quote": "This is probably less than one percent of the population",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Disability prevalence figure used in the policy analogy.",
+        "relevance": "passing",
+        "start_unit_id": "u000604",
+        "topic_ids": [
+          "topic:other"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The vaccine requirement for entering businesses has no exemption for people who cannot get vaccinated for a legitimate medical reason.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000607",
+        "evidence_quote": "with the like vaccine requirement, there's no caveat for people that can't get vaccinated, so it's actually disbaring them from.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable claim about the terms of a vaccine mandate, which the co-host disputes.",
+        "relevance": "substantive",
+        "start_unit_id": "u000606",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I'm pretty sure"
+        ],
+        "claim_text": "People who cannot get the vaccine can be excused from the requirement by showing a negative COVID test.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000618",
+        "evidence_quote": "Because I'm pretty sure like if you're not allowed to get the vaccine due to you just have to show like negative COVID.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable claim about mandate exemptions via testing.",
+        "relevance": "substantive",
+        "start_unit_id": "u000615",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions",
+          "topic:covid.testing_counting"
+        ]
+      }
+    ],
+    "window_id": "episode_321996_window_0007"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "People have allergies too to like some of the stuff in the vaccine, so they can't get it",
+        "label_ids": [
+          "topic:immune.allergies",
+          "topic:vaccines.covid_vaccines"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000572",
+        "summary": "Hosts note the COVID vaccine may be mRNA and that some people are allergic to its components and cannot get it."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000622",
+        "evidence_quote": "But then with the like vaccine requirement, there's no caveat for people that can't get vaccinated",
+        "label_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000576",
+        "summary": "Hosts debate vaccine requirements for jobs and businesses, whether policy should accommodate the small share who cannot be vaccinated, and NYC's lack of exemptions with a negative-test alternative."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000585",
+        "evidence_quote": "we're getting everyone vax with certain things like Hep C and all that type of shit before you can start certain jobs",
+        "label_ids": [
+          "topic:infectious.other_infections",
+          "topic:vaccines.other_vaccines"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000584",
+        "summary": "Host says some jobs require a hepatitis C shot every 10 years even though hep C is not really killing people now."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000605",
+        "evidence_quote": "Every place of business is mandated to have some sort of access way for people that wheelchair",
+        "label_ids": [
+          "topic:other"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000597",
+        "summary": "Analogy to disability accessibility: wheelchair users are a small share yet ADA rules mandate accessible bathrooms and entrances."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000619",
+        "evidence_quote": "Because a negative COVID test gets you an excusal",
+        "label_ids": [
+          "topic:covid.testing_counting"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000615",
+        "summary": "Hosts believe a negative COVID test or antigen test can substitute for vaccination."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000641",
+        "evidence_quote": "We're going to shut down businesses because we want our old people",
+        "label_ids": [
+          "topic:covid.lockdowns_closures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "Hosts say society shut down businesses to keep old people from dying of COVID because they are a large enough share of the population."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000641",
+        "evidence_quote": "We can't let old. People die",
+        "label_ids": [
+          "population:older_adults"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "Pandemic policy discussed as protecting old people from dying."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000651",
+        "evidence_quote": "And I think that's the big pharma. I think big pharma has enough",
+        "label_ids": [
+          "topic:health_system.pharma_industry"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000648",
+        "summary": "Hosts suggest big pharma is the powerful corporation that benefits enough to drive vaccine policy."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000651",
+        "evidence_quote": "we're not going to change it unless there is a massive financial benefit. Yes. For an incredibly powerful corporation in America. Yeah, I don't know. And I think that's the big pharma",
+        "label_ids": [
+          "frame:big_pharma"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000646",
+        "summary": "Policy said to change only when it brings a massive financial benefit to a powerful corporation, identified as big pharma."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000655",
+        "evidence_quote": "there's a lot of people that are getting richer from COVID and lockdowns and restrictions in general",
+        "label_ids": [
+          "topic:covid.lockdowns_closures"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000653",
+        "summary": "Relays the claim that COVID and lockdowns were the biggest wealth transfer in history, making many people richer."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Some people are allergic to components of the COVID vaccine and therefore cannot get vaccinated.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "People have allergies too to like some of the stuff in the vaccine, so they can't get it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Contraindication claim about vaccine components.",
+        "relevance": "substantive",
+        "start_unit_id": "u000575",
+        "topic_ids": [
+          "topic:immune.allergies",
+          "topic:vaccines.covid_vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Certain jobs require workers to be vaccinated against hepatitis C, repeated every 10 years.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000586",
+        "evidence_quote": "we're getting everyone vax with certain things like Hep C and all that type of shit before you can start certain jobs",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable claim about a vaccine and an occupational requirement that may not exist.",
+        "relevance": "passing",
+        "start_unit_id": "u000584",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions",
+          "topic:vaccines.other_vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Hepatitis C is not really killing people nowadays.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000585",
+        "evidence_quote": "And that's not really killing people nowadays",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mortality claim about an infection that could downplay its risk.",
+        "relevance": "passing",
+        "start_unit_id": "u000585",
+        "topic_ids": [
+          "topic:infectious.other_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vaccination for teachers is mandated by the state.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000589",
+        "evidence_quote": "It's also mandated by the state",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable claim about a vaccination mandate.",
+        "relevance": "passing",
+        "start_unit_id": "u000586",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Probably"
+        ],
+        "claim_text": "People who cannot get vaccinated make up about one percent of the population, probably less.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "we cannot bend all of legislation to one percent of the population. Probably less",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Prevalence of vaccine contraindications used to argue about exemption policy.",
+        "relevance": "substantive",
+        "start_unit_id": "u000591",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Wheelchair users are probably less than one percent of the population.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000604",
+        "evidence_quote": "This is probably less than one percent of the population",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Disability prevalence figure used in the policy analogy.",
+        "relevance": "passing",
+        "start_unit_id": "u000604",
+        "topic_ids": [
+          "topic:other"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The vaccine requirement for entering businesses has no exemption for people who cannot get vaccinated for a legitimate medical reason.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000607",
+        "evidence_quote": "with the like vaccine requirement, there's no caveat for people that can't get vaccinated, so it's actually disbaring them from",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable claim about the terms of a vaccine mandate, which the co-host disputes.",
+        "relevance": "substantive",
+        "start_unit_id": "u000606",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I'm pretty sure"
+        ],
+        "claim_text": "People who cannot get the vaccine can be excused from the requirement by showing a negative COVID test.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000618",
+        "evidence_quote": "Because I'm pretty sure like if you're not allowed to get the vaccine due to you just have to show like negative COVID",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable claim about mandate exemptions via testing.",
+        "relevance": "substantive",
+        "start_unit_id": "u000615",
+        "topic_ids": [
+          "topic:covid.testing_counting",
+          "topic:vaccines.mandates_exemptions"
+        ]
+      }
+    ],
+    "window_id": "episode_321996_window_0007"
+  },
+  "stored_at": "2026-10-04T11:47:01.172178+00:00"
+}

@@ -503,16 +503,23 @@ PLANT_ATTRIBUTES = {
 }
 
 
-def check_plants(items: Sequence[dict[str, Any]], records: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
+def check_plants(
+    items: Sequence[dict[str, Any]],
+    records: Sequence[dict[str, Any]],
+    aliases: dict[str, str] | None = None,
+) -> list[dict[str, Any]]:
     """Compare each synthetic item's planted annotations with its gold.
 
     A plant is *found* when a gold atom of the same kind (and label, for
-    detections) overlaps its span; it is *supported* when that atom is
+    detections, compared through ``aliases``) overlaps its span. Under the
+    v7 tree the plants name parent topics and ``aliases`` maps each gold
+    subtopic to its parent; it is *supported* when that atom is
     ``required``; each planted attribute is checked against the plurality
     vote. A plant that is missing or contradicted means either the passage is
     ambiguous or the codebook reading behind the plant is not shared, and the
     item should be fixed or dropped before it is trusted.
     """
+    aliases = aliases or {}
     by_item: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for record in records:
         by_item[record["item_id"]].append(record)
@@ -531,7 +538,7 @@ def check_plants(items: Sequence[dict[str, Any]], records: Sequence[dict[str, An
                     candidates = [
                         g for g in golds
                         if g["kind"] == kind
-                        and (kind != "detection" or g.get("label") == label)
+                        and (kind != "detection" or aliases.get(g.get("label"), g.get("label")) == aliases.get(label, label))
                         and g["envelope_index"][0] <= end and start <= g["envelope_index"][1]
                     ]
                     best = max(candidates, key=lambda g: (g["tier"] == "required", g["support"]), default=None)

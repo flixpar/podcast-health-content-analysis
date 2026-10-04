@@ -1,0 +1,1400 @@
+{
+  "annotator_id": "opus-c",
+  "benchmark_version": "v2",
+  "item_id": "c182420w0016",
+  "provenance": {
+    "bundle": "bundle_028",
+    "ingested_at": "2026-10-04T11:47:06.924546+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-c-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001058",
+        "evidence_quote": "Twenty percent of muscle is branched-chain amino acids.",
+        "label_ids": [
+          "topic:food.protein_intake",
+          "topic:supplements.protein_powders"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001050",
+        "summary": "Guest explains leucine, isoleucine and valine are essential amino acids making up 20% of muscle, which is why bodybuilders add protein powder."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001070",
+        "evidence_quote": "And they end up making liver fat, and that liver fat ends up causing insulin resistance, also.",
+        "label_ids": [
+          "topic:food.protein_intake",
+          "topic:metabolic.fatty_liver",
+          "topic:metabolic.insulin_glucose"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001059",
+        "summary": "Guest says excess BCAAs in non-exercisers are processed by the liver, overwhelm the Krebs cycle, create liver fat and cause insulin resistance."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001070",
+        "evidence_quote": "The liver deamidates them; it takes the amino group off, and now they've become instead of branched-chain amino acids, now they're branched-chain organic acids.",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001064",
+        "summary": "Step-by-step biochemical account: liver deaminates BCAAs to organic acids that flood the TCA cycle and make liver fat."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001069",
+        "evidence_quote": "They overwhelm the Krebs cycle, just like fructose did, just like alcohol did.",
+        "label_ids": [
+          "topic:food.sugar_sweeteners",
+          "topic:alcohol.health_effects"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001069",
+        "summary": "Guest compares BCAA overload to fructose and alcohol overwhelming the Krebs cycle."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001076",
+        "evidence_quote": "If you're building muscle, if you're building muscle, but if you're not, then no.",
+        "label_ids": [
+          "topic:supplements.protein_powders"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001071",
+        "summary": "Host asks whether BCAAs help muscle synthesis; guest says only when building muscle, so take them only after exercise."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001081",
+        "evidence_quote": "And the answer is corn-fed beef, chicken, or fish, because corn is very, very high in branched chain amino acids.",
+        "label_ids": [
+          "topic:food.meat_animal_foods",
+          "topic:food.organic_gmo",
+          "topic:food.protein_intake"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001077",
+        "summary": "Guest says most BCAAs come from corn-fed beef, chicken and fish, while regenerative or wild meat has a healthier amino acid profile."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001085",
+        "evidence_quote": "Yeah, trans fats are pretty bad, and they're still on the marketplace",
+        "label_ids": [
+          "topic:food.fats_oils"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001082",
+        "summary": "Host says trans fats are bad and still sold despite the government declaring them unsafe in 2015, calling such foods poison."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001082",
+        "evidence_quote": "in 2015, seven years ago, the government said they weren't safe to eat",
+        "label_ids": [
+          "evidence:expert_consensus"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001082",
+        "summary": "Host cites the government's 2015 determination that trans fats were not safe to eat."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001084",
+        "evidence_quote": "the Food and Drug is insane",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001084",
+        "summary": "Host calls the FDA insane for leaving trans fats on the market."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001085",
+        "evidence_quote": "These bad, bad foods are really like poison medicines for the body",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001085",
+        "summary": "Host describes bad foods as poison medicines for the body."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001104",
+        "evidence_quote": "the Food and Drug Administration in 1958 codified 170 items in food as being safe.",
+        "label_ids": [
+          "topic:food.additives_dyes",
+          "topic:health_system.regulators"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001088",
+        "summary": "Guest recounts the GRAS list growing from 170 items in 1958 to 10,000 and says the FDA handed decisions to food companies."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001095",
+        "evidence_quote": "How many items are on that list now? Ten thousand.",
+        "label_ids": [
+          "evidence:official_data_documents"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001088",
+        "summary": "Guest cites regulatory record counts of GRAS items (170 in 1958, ten thousand now)."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001100",
+        "evidence_quote": "You really think there are ten thousand things you can put in your body that won't make you sick?",
+        "label_ids": [
+          "frame:insinuating_questions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001099",
+        "summary": "Guest uses a rhetorical question to imply many GRAS substances make people sick."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001104",
+        "evidence_quote": "So basically, any food company can put any damn thing they want and say it's okay, and that is just not true.",
+        "label_ids": [
+          "frame:government_distrust",
+          "frame:big_food"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001102",
+        "summary": "Guest says the FDA farmed GRAS decisions out to food companies, letting them add anything and call it safe."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001104",
+        "evidence_quote": "They basically farmed it out to the food companies to decide what should be on that list.",
+        "label_ids": [
+          "narrative:fda_captured"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001102",
+        "summary": "Guest presents the FDA as having handed its food-safety listing to the industry it regulates."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001120",
+        "evidence_quote": "But I want to close by talking about how to fix the food system",
+        "label_ids": [
+          "topic:food.food_system_access"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001112",
+        "summary": "Host frames the food supply as a preventable swamp of toxic foods that only government policy can fix and mentions his food-policy nonprofit."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001113",
+        "evidence_quote": "we're living in a swamp. Of toxic foods that make us sick, that cause disease and kill us prematurely",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001112",
+        "summary": "Host describes living in a swamp of toxic foods that make us sick and kill us prematurely."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001130",
+        "evidence_quote": "So, bottom line is, the FDA is not doing anything.",
+        "label_ids": [
+          "topic:food.food_system_access",
+          "topic:health_system.regulators"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001121",
+        "summary": "Host asks what USDA, FDA and Congress can do about the food system; guest says the FDA does nothing and acts like a medicines association."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001130",
+        "evidence_quote": "The FDA really has become more. Of the FMA, the Federal Medicines Association",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001127",
+        "summary": "Guest dismisses the FDA as doing nothing and acting as a 'Federal Medicines Association'."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001130",
+        "evidence_quote": "the Federal Medicines Association, than they are the the Food and Drug Food and Drug Administration",
+        "label_ids": [
+          "narrative:fda_captured"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001129",
+        "summary": "Guest implies the FDA now serves medicine interests rather than regulating food."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001111",
+        "evidence_quote": "So, Robert, this book Metabolical is so fantastic. Everybody needs to read it.",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001106",
+        "summary": "Host plugs the guest's book Metabolical and tells everyone to read it."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u001111",
+        "evidence_quote": "So, Robert, this book Metabolical is so fantastic.",
+        "mention_role": "own_product",
+        "product_name": "Metabolical",
+        "product_type": "book_or_media",
+        "start_unit_id": "u001106"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Leucine, isoleucine and valine are essential amino acids that the body does not make and must be consumed.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001053",
+        "evidence_quote": "Amino acids—you have to consume them. Your body does not make them.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Basic nutritional physiology claim underpinning the BCAA argument.",
+        "relevance": "substantive",
+        "start_unit_id": "u001050",
+        "topic_ids": [
+          "topic:food.protein_intake"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "About twenty percent of muscle is made up of branched-chain amino acids.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001055",
+        "evidence_quote": "Twenty percent of muscle is branched-chain amino acids.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific compositional figure used to justify protein supplementation.",
+        "relevance": "substantive",
+        "start_unit_id": "u001055",
+        "topic_ids": [
+          "topic:food.protein_intake"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Without exercise, extra branched-chain amino acids cannot be used to lay down more muscle.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001064",
+        "evidence_quote": "What's happening is you're not able to lay down more muscle because you need the exercise to do that.",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic claim about muscle protein synthesis that affects protein and BCAA intake decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u001064",
+        "topic_ids": [
+          "topic:food.protein_intake"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Excess branched-chain amino acids go to the liver, which removes their amino group, turning them into branched-chain organic acids that enter the Krebs cycle.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001068",
+        "evidence_quote": "So those extra branched-chain amino acids are going to your liver. The liver is going to turn them into energy.",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Biochemical mechanism claim that can be checked against metabolism literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u001065",
+        "topic_ids": [
+          "topic:food.protein_intake",
+          "topic:metabolic.fatty_liver"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Excess branched-chain amino acids overwhelm the liver's Krebs cycle and end up producing liver fat.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001070",
+        "evidence_quote": "They overwhelm the Krebs cycle, just like fructose did, just like alcohol did. And they end up making liver fat",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Causal claim linking dietary BCAA excess to fatty liver.",
+        "relevance": "substantive",
+        "start_unit_id": "u001069",
+        "topic_ids": [
+          "topic:food.protein_intake",
+          "topic:metabolic.fatty_liver"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Liver fat causes insulin resistance.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001070",
+        "evidence_quote": "that liver fat ends up causing insulin resistance, also.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Causal metabolic claim checkable against clinical evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u001070",
+        "topic_ids": [
+          "topic:metabolic.fatty_liver",
+          "topic:metabolic.insulin_glucose"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fructose and alcohol overwhelm the liver's Krebs cycle.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001069",
+        "evidence_quote": "They overwhelm the Krebs cycle, just like fructose did, just like alcohol did.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic claim about fructose and alcohol metabolism made in passing by analogy.",
+        "relevance": "passing",
+        "start_unit_id": "u001069",
+        "topic_ids": [
+          "topic:food.sugar_sweeteners",
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "only"
+        ],
+        "claim_text": "Branched-chain amino acids help muscle synthesis only in people who are exercising to build muscle.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001076",
+        "evidence_quote": "Yeah, and that and that's fine, but only if you after you exercise.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Efficacy claim about BCAA supplementation that affects supplement use.",
+        "relevance": "substantive",
+        "start_unit_id": "u001071",
+        "topic_ids": [
+          "topic:supplements.protein_powders"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People get most of their branched-chain amino acids from corn-fed beef, chicken or fish, because corn is very high in branched-chain amino acids.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001078",
+        "evidence_quote": "And the answer is corn-fed beef, chicken, or fish, because corn is very, very high in branched chain amino acids.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Dietary-source and composition claim that could shape meat choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u001077",
+        "topic_ids": [
+          "topic:food.meat_animal_foods",
+          "topic:food.organic_gmo"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Regenerative or wild meat has a healthier amino acid profile than corn-fed meat.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001081",
+        "evidence_quote": "you're having wild meat, you're not. Seeing that, that's right. That is, shall we say, healthier amino acid, a healthier amino acid profile.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Comparative nutrition claim about farming practices that could steer food purchases.",
+        "relevance": "substantive",
+        "start_unit_id": "u001079",
+        "topic_ids": [
+          "topic:food.meat_animal_foods",
+          "topic:food.organic_gmo"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Trans fats are bad for health.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001082",
+        "evidence_quote": "Yeah, trans fats are pretty bad",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Safety claim about a dietary fat.",
+        "relevance": "substantive",
+        "start_unit_id": "u001082",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In 2015 the US government declared that trans fats were not safe to eat.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001082",
+        "evidence_quote": "in 2015, seven years ago, the government said they weren't safe to eat",
+        "evidence_signal_ids": [
+          "evidence:expert_consensus"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable regulatory-history claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u001082",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Trans fats are still sold in the US food supply despite having been declared unsafe.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001085",
+        "evidence_quote": "and they're still on the marketplace, which is shocking to me",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "Checkable claim about the current food supply that affects consumer vigilance.",
+        "relevance": "substantive",
+        "start_unit_id": "u001082",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In 1958 the FDA codified 170 food substances as generally recognized as safe (GRAS), starting the GRAS list.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001090",
+        "evidence_quote": "Once upon a time, the Food and Drug Administration in 1958 codified 170 items in food as being safe.",
+        "evidence_signal_ids": [
+          "evidence:official_data_documents"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific regulatory-history figure that is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001088",
+        "topic_ids": [
+          "topic:food.additives_dyes"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The list of substances considered generally recognized as safe in food now contains about ten thousand items.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001097",
+        "evidence_quote": "How many items are on that list now? Ten thousand.",
+        "evidence_signal_ids": [
+          "evidence:official_data_documents"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific count of food additives deemed safe, checkable against regulatory data.",
+        "relevance": "substantive",
+        "start_unit_id": "u001092",
+        "topic_ids": [
+          "topic:food.additives_dyes"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The FDA privatized the GRAS list, delegating to food companies the decision of what substances go on it.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001103",
+        "evidence_quote": "Okay, and in fact, the Food and Drug Administration privatized that list. They basically farmed it out to the food companies to decide what should be on that list.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:government_distrust",
+          "frame:big_food"
+        ],
+        "narrative_ids": [
+          "narrative:fda_captured"
+        ],
+        "rationale": "Claim about the regulatory arrangement for food additives, checkable against GRAS rules.",
+        "relevance": "substantive",
+        "start_unit_id": "u001102",
+        "topic_ids": [
+          "topic:food.additives_dyes",
+          "topic:health_system.regulators"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "any food company",
+          "any damn thing"
+        ],
+        "claim_text": "Any food company can put any substance it wants into food and declare it safe.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001104",
+        "evidence_quote": "So basically, any food company can put any damn thing they want and say it's okay",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:big_food"
+        ],
+        "narrative_ids": [
+          "narrative:fda_captured"
+        ],
+        "rationale": "Sweeping claim about food additive oversight that affects trust in the food supply.",
+        "relevance": "substantive",
+        "start_unit_id": "u001104",
+        "topic_ids": [
+          "topic:food.additives_dyes"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a hundred percent"
+        ],
+        "claim_text": "The disease and premature death caused by toxic foods in the current food supply is one hundred percent preventable.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001113",
+        "evidence_quote": "kill us prematurely, and that it's a hundred percent preventable",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "Absolute claim about the preventability of diet-related disease.",
+        "relevance": "substantive",
+        "start_unit_id": "u001112",
+        "topic_ids": [
+          "topic:food"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "not doing anything"
+        ],
+        "claim_text": "The FDA is not doing anything to fix the food system.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001128",
+        "evidence_quote": "So, bottom line is, the FDA is not doing anything.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "Claim about regulator inaction on food that is checkable against FDA actions.",
+        "relevance": "substantive",
+        "start_unit_id": "u001127",
+        "topic_ids": [
+          "topic:health_system.regulators",
+          "topic:food.food_system_access"
+        ]
+      }
+    ],
+    "window_id": "episode_182420_window_0016"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001058",
+        "evidence_quote": "Twenty percent of muscle is branched-chain amino acids",
+        "label_ids": [
+          "topic:food.protein_intake",
+          "topic:supplements.protein_powders"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001050",
+        "summary": "Guest explains leucine, isoleucine and valine are essential amino acids making up 20% of muscle, which is why bodybuilders add protein powder."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001070",
+        "evidence_quote": "And they end up making liver fat, and that liver fat ends up causing insulin resistance, also",
+        "label_ids": [
+          "topic:food.protein_intake",
+          "topic:metabolic.fatty_liver",
+          "topic:metabolic.insulin_glucose"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001059",
+        "summary": "Guest says excess BCAAs in non-exercisers are processed by the liver, overwhelm the Krebs cycle, create liver fat and cause insulin resistance."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001070",
+        "evidence_quote": "The liver deamidates them; it takes the amino group off, and now they've become instead of branched-chain amino acids, now they're branched-chain organic acids",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001064",
+        "summary": "Step-by-step biochemical account: liver deaminates BCAAs to organic acids that flood the TCA cycle and make liver fat."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001069",
+        "evidence_quote": "They overwhelm the Krebs cycle, just like fructose did, just like alcohol did",
+        "label_ids": [
+          "topic:alcohol.health_effects",
+          "topic:food.sugar_sweeteners"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001069",
+        "summary": "Guest compares BCAA overload to fructose and alcohol overwhelming the Krebs cycle."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001076",
+        "evidence_quote": "If you're building muscle, if you're building muscle, but if you're not, then no",
+        "label_ids": [
+          "topic:supplements.protein_powders"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001071",
+        "summary": "Host asks whether BCAAs help muscle synthesis; guest says only when building muscle, so take them only after exercise."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001081",
+        "evidence_quote": "And the answer is corn-fed beef, chicken, or fish, because corn is very, very high in branched chain amino acids",
+        "label_ids": [
+          "topic:food.meat_animal_foods",
+          "topic:food.organic_gmo",
+          "topic:food.protein_intake"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001077",
+        "summary": "Guest says most BCAAs come from corn-fed beef, chicken and fish, while regenerative or wild meat has a healthier amino acid profile."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001085",
+        "evidence_quote": "Yeah, trans fats are pretty bad, and they're still on the marketplace",
+        "label_ids": [
+          "topic:food.fats_oils"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001082",
+        "summary": "Host says trans fats are bad and still sold despite the government declaring them unsafe in 2015, calling such foods poison."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001082",
+        "evidence_quote": "in 2015, seven years ago, the government said they weren't safe to eat",
+        "label_ids": [
+          "evidence:expert_consensus"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001082",
+        "summary": "Host cites the government's 2015 determination that trans fats were not safe to eat."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001084",
+        "evidence_quote": "the Food and Drug is insane",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001084",
+        "summary": "Host calls the FDA insane for leaving trans fats on the market."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001085",
+        "evidence_quote": "These bad, bad foods are really like poison medicines for the body",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001085",
+        "summary": "Host describes bad foods as poison medicines for the body."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001104",
+        "evidence_quote": "the Food and Drug Administration in 1958 codified 170 items in food as being safe",
+        "label_ids": [
+          "topic:food.additives_dyes",
+          "topic:health_system.regulators"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001088",
+        "summary": "Guest recounts the GRAS list growing from 170 items in 1958 to 10,000 and says the FDA handed decisions to food companies."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001095",
+        "evidence_quote": "How many items are on that list now? Ten thousand",
+        "label_ids": [
+          "evidence:official_data_documents"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001088",
+        "summary": "Guest cites regulatory record counts of GRAS items (170 in 1958, ten thousand now)."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001100",
+        "evidence_quote": "You really think there are ten thousand things you can put in your body that won't make you sick",
+        "label_ids": [
+          "frame:insinuating_questions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001099",
+        "summary": "Guest uses a rhetorical question to imply many GRAS substances make people sick."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001104",
+        "evidence_quote": "So basically, any food company can put any damn thing they want and say it's okay, and that is just not true",
+        "label_ids": [
+          "frame:big_food",
+          "frame:government_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001102",
+        "summary": "Guest says the FDA farmed GRAS decisions out to food companies, letting them add anything and call it safe."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001104",
+        "evidence_quote": "They basically farmed it out to the food companies to decide what should be on that list",
+        "label_ids": [
+          "narrative:fda_captured"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001102",
+        "summary": "Guest presents the FDA as having handed its food-safety listing to the industry it regulates."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001120",
+        "evidence_quote": "But I want to close by talking about how to fix the food system",
+        "label_ids": [
+          "topic:food.food_system_access"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001112",
+        "summary": "Host frames the food supply as a preventable swamp of toxic foods that only government policy can fix and mentions his food-policy nonprofit."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001113",
+        "evidence_quote": "we're living in a swamp. Of toxic foods that make us sick, that cause disease and kill us prematurely",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001112",
+        "summary": "Host describes living in a swamp of toxic foods that make us sick and kill us prematurely."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001130",
+        "evidence_quote": "So, bottom line is, the FDA is not doing anything",
+        "label_ids": [
+          "topic:food.food_system_access",
+          "topic:health_system.regulators"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001121",
+        "summary": "Host asks what USDA, FDA and Congress can do about the food system; guest says the FDA does nothing and acts like a medicines association."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001130",
+        "evidence_quote": "The FDA really has become more. Of the FMA, the Federal Medicines Association",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001127",
+        "summary": "Guest dismisses the FDA as doing nothing and acting as a 'Federal Medicines Association'."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001130",
+        "evidence_quote": "the Federal Medicines Association, than they are the the Food and Drug Food and Drug Administration",
+        "label_ids": [
+          "narrative:fda_captured"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001129",
+        "summary": "Guest implies the FDA now serves medicine interests rather than regulating food."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001111",
+        "evidence_quote": "So, Robert, this book Metabolical is so fantastic. Everybody needs to read it",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001106",
+        "summary": "Host plugs the guest's book Metabolical and tells everyone to read it."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u001111",
+        "evidence_quote": "So, Robert, this book Metabolical is so fantastic",
+        "mention_role": "own_product",
+        "product_name": "Metabolical",
+        "product_type": "book_or_media",
+        "start_unit_id": "u001106"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Leucine, isoleucine and valine are essential amino acids that the body does not make and must be consumed.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001053",
+        "evidence_quote": "Amino acids—you have to consume them. Your body does not make them",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Basic nutritional physiology claim underpinning the BCAA argument.",
+        "relevance": "substantive",
+        "start_unit_id": "u001050",
+        "topic_ids": [
+          "topic:food.protein_intake"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "About twenty percent of muscle is made up of branched-chain amino acids.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001055",
+        "evidence_quote": "Twenty percent of muscle is branched-chain amino acids",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific compositional figure used to justify protein supplementation.",
+        "relevance": "substantive",
+        "start_unit_id": "u001055",
+        "topic_ids": [
+          "topic:food.protein_intake"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Without exercise, extra branched-chain amino acids cannot be used to lay down more muscle.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001064",
+        "evidence_quote": "What's happening is you're not able to lay down more muscle because you need the exercise to do that",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic claim about muscle protein synthesis that affects protein and BCAA intake decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u001064",
+        "topic_ids": [
+          "topic:food.protein_intake"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Excess branched-chain amino acids go to the liver, which removes their amino group, turning them into branched-chain organic acids that enter the Krebs cycle.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001068",
+        "evidence_quote": "So those extra branched-chain amino acids are going to your liver. The liver is going to turn them into energy",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Biochemical mechanism claim that can be checked against metabolism literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u001065",
+        "topic_ids": [
+          "topic:food.protein_intake",
+          "topic:metabolic.fatty_liver"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Excess branched-chain amino acids overwhelm the liver's Krebs cycle and end up producing liver fat.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001070",
+        "evidence_quote": "They overwhelm the Krebs cycle, just like fructose did, just like alcohol did. And they end up making liver fat",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Causal claim linking dietary BCAA excess to fatty liver.",
+        "relevance": "substantive",
+        "start_unit_id": "u001069",
+        "topic_ids": [
+          "topic:food.protein_intake",
+          "topic:metabolic.fatty_liver"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Liver fat causes insulin resistance.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001070",
+        "evidence_quote": "that liver fat ends up causing insulin resistance, also",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Causal metabolic claim checkable against clinical evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u001070",
+        "topic_ids": [
+          "topic:metabolic.fatty_liver",
+          "topic:metabolic.insulin_glucose"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fructose and alcohol overwhelm the liver's Krebs cycle.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001069",
+        "evidence_quote": "They overwhelm the Krebs cycle, just like fructose did, just like alcohol did",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic claim about fructose and alcohol metabolism made in passing by analogy.",
+        "relevance": "passing",
+        "start_unit_id": "u001069",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:food.sugar_sweeteners"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "only"
+        ],
+        "claim_text": "Branched-chain amino acids help muscle synthesis only in people who are exercising to build muscle.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001076",
+        "evidence_quote": "Yeah, and that and that's fine, but only if you after you exercise",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Efficacy claim about BCAA supplementation that affects supplement use.",
+        "relevance": "substantive",
+        "start_unit_id": "u001071",
+        "topic_ids": [
+          "topic:supplements.protein_powders"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People get most of their branched-chain amino acids from corn-fed beef, chicken or fish, because corn is very high in branched-chain amino acids.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001078",
+        "evidence_quote": "And the answer is corn-fed beef, chicken, or fish, because corn is very, very high in branched chain amino acids",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Dietary-source and composition claim that could shape meat choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u001077",
+        "topic_ids": [
+          "topic:food.meat_animal_foods",
+          "topic:food.organic_gmo"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Regenerative or wild meat has a healthier amino acid profile than corn-fed meat.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001081",
+        "evidence_quote": "you're having wild meat, you're not. Seeing that, that's right. That is, shall we say, healthier amino acid, a healthier amino acid profile",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Comparative nutrition claim about farming practices that could steer food purchases.",
+        "relevance": "substantive",
+        "start_unit_id": "u001079",
+        "topic_ids": [
+          "topic:food.meat_animal_foods",
+          "topic:food.organic_gmo"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Trans fats are bad for health.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001082",
+        "evidence_quote": "Yeah, trans fats are pretty bad",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Safety claim about a dietary fat.",
+        "relevance": "substantive",
+        "start_unit_id": "u001082",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In 2015 the US government declared that trans fats were not safe to eat.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001082",
+        "evidence_quote": "in 2015, seven years ago, the government said they weren't safe to eat",
+        "evidence_signal_ids": [
+          "evidence:expert_consensus"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable regulatory-history claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u001082",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Trans fats are still sold in the US food supply despite having been declared unsafe.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001085",
+        "evidence_quote": "and they're still on the marketplace, which is shocking to me",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "Checkable claim about the current food supply that affects consumer vigilance.",
+        "relevance": "substantive",
+        "start_unit_id": "u001082",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In 1958 the FDA codified 170 food substances as generally recognized as safe (GRAS), starting the GRAS list.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001090",
+        "evidence_quote": "Once upon a time, the Food and Drug Administration in 1958 codified 170 items in food as being safe",
+        "evidence_signal_ids": [
+          "evidence:official_data_documents"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific regulatory-history figure that is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001088",
+        "topic_ids": [
+          "topic:food.additives_dyes"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The list of substances considered generally recognized as safe in food now contains about ten thousand items.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001097",
+        "evidence_quote": "How many items are on that list now? Ten thousand",
+        "evidence_signal_ids": [
+          "evidence:official_data_documents"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific count of food additives deemed safe, checkable against regulatory data.",
+        "relevance": "substantive",
+        "start_unit_id": "u001092",
+        "topic_ids": [
+          "topic:food.additives_dyes"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The FDA privatized the GRAS list, delegating to food companies the decision of what substances go on it.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001103",
+        "evidence_quote": "Okay, and in fact, the Food and Drug Administration privatized that list. They basically farmed it out to the food companies to decide what should be on that list",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:big_food",
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [
+          "narrative:fda_captured"
+        ],
+        "rationale": "Claim about the regulatory arrangement for food additives, checkable against GRAS rules.",
+        "relevance": "substantive",
+        "start_unit_id": "u001102",
+        "topic_ids": [
+          "topic:food.additives_dyes",
+          "topic:health_system.regulators"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "any food company",
+          "any damn thing"
+        ],
+        "claim_text": "Any food company can put any substance it wants into food and declare it safe.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001104",
+        "evidence_quote": "So basically, any food company can put any damn thing they want and say it's okay",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:big_food"
+        ],
+        "narrative_ids": [
+          "narrative:fda_captured"
+        ],
+        "rationale": "Sweeping claim about food additive oversight that affects trust in the food supply.",
+        "relevance": "substantive",
+        "start_unit_id": "u001104",
+        "topic_ids": [
+          "topic:food.additives_dyes"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a hundred percent"
+        ],
+        "claim_text": "The disease and premature death caused by toxic foods in the current food supply is one hundred percent preventable.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001113",
+        "evidence_quote": "kill us prematurely, and that it's a hundred percent preventable",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "Absolute claim about the preventability of diet-related disease.",
+        "relevance": "substantive",
+        "start_unit_id": "u001112",
+        "topic_ids": [
+          "topic:food"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "not doing anything"
+        ],
+        "claim_text": "The FDA is not doing anything to fix the food system.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001128",
+        "evidence_quote": "So, bottom line is, the FDA is not doing anything",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "Claim about regulator inaction on food that is checkable against FDA actions.",
+        "relevance": "substantive",
+        "start_unit_id": "u001127",
+        "topic_ids": [
+          "topic:food.food_system_access",
+          "topic:health_system.regulators"
+        ]
+      }
+    ],
+    "window_id": "episode_182420_window_0016"
+  },
+  "stored_at": "2026-10-04T11:47:06.924565+00:00"
+}

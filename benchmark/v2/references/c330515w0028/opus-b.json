@@ -1,0 +1,547 @@
+{
+  "annotator_id": "opus-b",
+  "benchmark_version": "v2",
+  "item_id": "c330515w0028",
+  "provenance": {
+    "bundle": "bundle_060",
+    "ingested_at": "2026-10-04T11:47:04.909627+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-b-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001387",
+        "evidence_quote": "the more likely cause is the shoddy lab that was doing a bola research in Sierra Leone",
+        "label_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001362",
+        "summary": "Host and author discuss his book arguing the official bat-spillover account of the West African Ebola outbreak is baseless and that a biodefense research lab in Sierra Leone is the more likely origin, and call for disclosure for the victims."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001362",
+        "evidence_quote": "multinational, corporate and colonial involvement in medical research in Africa",
+        "label_ids": [
+          "topic:health_system.global_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001362",
+        "summary": "Host describes the book as covering the history of multinational, corporate and colonial involvement in medical research in Africa."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001380",
+        "evidence_quote": "There has been some kind of congressional discussion, some kind of White House conversation around COVID",
+        "label_ids": [
+          "topic:covid.origins"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001379",
+        "summary": "Guest contrasts the congressional and White House discussion of COVID's causes with the absence of any such inquiry for the Ebola epidemic."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001370",
+        "evidence_quote": "the story that we're told about how the Ebola outbreak happened is ludicrous as no evidentiary basis, and that the more likely cause is the shoddy lab",
+        "label_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "summary": "Unlisted narrative: the 2014 West African Ebola outbreak originated from a (US) biodefense research lab in Sierra Leone rather than a natural bat spillover in Guinea, which is endorsed."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001364",
+        "evidence_quote": "the story that we're told about how the Ebola outbreak happened is ludicrous as no evidentiary basis",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "summary": "Host dismisses the official account of the Ebola outbreak's origin as ludicrous and baseless."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001370",
+        "evidence_quote": "my book challenge is that what we call the official narrative",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001370",
+        "summary": "Guest says his book challenges the 'official narrative' of the outbreak and points to a biodefense research operation."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001372",
+        "evidence_quote": "any attempt to have a conversation that challenged the dominant narrative as we called it then, was considered a conspiracy theory.",
+        "label_ids": [
+          "frame:censorship_suppression"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001371",
+        "summary": "Guest says challenging the dominant Ebola narrative was dismissed as a conspiracy theory, so few would discuss it."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001387",
+        "evidence_quote": "We need the truth, We need some kind of a disclosure of information around what corporations we are doing, what universities and the research scientists",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001384",
+        "summary": "Guest demands disclosure of what corporations, universities and scientists were doing, saying the same institutions and individuals involved with COVID were involved in West Africa."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001399",
+        "evidence_quote": "what was your reaction when you saw the you know, the cuts to the U S A I D.",
+        "label_ids": [
+          "topic:health_system.global_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001395",
+        "summary": "Host frames the foreign-aid debate through individuals needing HIV treatment and asks about the fallout of USAID cuts in Africa."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001395",
+        "evidence_quote": "somebody who is getting you know, access to HIV HIV treatment like they need that treatment",
+        "label_ids": [
+          "topic:sexual.stis_hiv"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001395",
+        "summary": "Host notes an individual getting access to HIV treatment needs that treatment."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "more likely"
+        ],
+        "claim_text": "The more likely cause of the West African Ebola outbreak was a shoddy lab doing Ebola research in Sierra Leone.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001364",
+        "evidence_quote": "the more likely cause is the shoddy lab that was doing a bola research in Sierra Leone",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "Contested origin claim for a deadly outbreak that evidence on the outbreak's epidemiology can support or contradict.",
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The official account of how the Ebola outbreak started has no evidentiary basis.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001364",
+        "evidence_quote": "the story that we're told about how the Ebola outbreak happened is ludicrous as no evidentiary basis",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "Asserts the absence of evidence for the accepted outbreak origin, which the published investigations can confirm or refute.",
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "They alleged"
+        ],
+        "claim_text": "The Ebola outbreak started in Guinea, with a child under two years old as the index case, who had participated in hunting and grilling a bat.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u001369",
+        "evidence_quote": "The official narrative was that the outbreak started in Guinea, and they identified Emily woman way two years old or less than two year old child",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "The accepted origin account, relayed in order to be challenged, is checkable against the epidemiological investigation.",
+        "relevance": "substantive",
+        "start_unit_id": "u001368",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A biodefense research operation was taking place in eastern Sierra Leone from 2004, ten years before the Ebola outbreak.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001370",
+        "evidence_quote": "the biodefense research operation that was happening in eastern Syrallian dating back to two thousand and four, ten years before the outbreak.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "Claim about the existence of biodefense research at the outbreak's location, offered as grounds for a lab origin.",
+        "relevance": "substantive",
+        "start_unit_id": "u001370",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Ebola outbreak killed thousands of people in West Africa and still has lingering socio-economic and psychological impact on the population.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001377",
+        "evidence_quote": "the outbreak that killed thousands of people in West Africa and still has a lingering socio economic impact",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Death-toll and impact claim for an epidemic, checkable against official counts.",
+        "relevance": "passing",
+        "start_unit_id": "u001376",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The same institutions and individuals involved with COVID were involved in the West African Ebola outbreak.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001387",
+        "evidence_quote": "we're talking about the same institution, same individuals who are involved with COVID where the ones who get involved",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "narrative_ids": [],
+        "rationale": "Links research institutions to two outbreaks, implying culpability; checkable against who conducted research in each case.",
+        "relevance": "substantive",
+        "start_unit_id": "u001386",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks",
+          "topic:covid.origins"
+        ]
+      }
+    ],
+    "window_id": "episode_330515_window_0028"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001387",
+        "evidence_quote": "the more likely cause is the shoddy lab that was doing a bola research in Sierra Leone",
+        "label_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001362",
+        "summary": "Host and author discuss his book arguing the official bat-spillover account of the West African Ebola outbreak is baseless and that a biodefense research lab in Sierra Leone is the more likely origin, and call for disclosure for the victims."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001362",
+        "evidence_quote": "multinational, corporate and colonial involvement in medical research in Africa",
+        "label_ids": [
+          "topic:health_system.global_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001362",
+        "summary": "Host describes the book as covering the history of multinational, corporate and colonial involvement in medical research in Africa."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001380",
+        "evidence_quote": "There has been some kind of congressional discussion, some kind of White House conversation around COVID",
+        "label_ids": [
+          "topic:covid.origins"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001379",
+        "summary": "Guest contrasts the congressional and White House discussion of COVID's causes with the absence of any such inquiry for the Ebola epidemic."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001370",
+        "evidence_quote": "the story that we're told about how the Ebola outbreak happened is ludicrous as no evidentiary basis, and that the more likely cause is the shoddy lab",
+        "label_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "summary": "Unlisted narrative: the 2014 West African Ebola outbreak originated from a (US) biodefense research lab in Sierra Leone rather than a natural bat spillover in Guinea, which is endorsed."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001364",
+        "evidence_quote": "the story that we're told about how the Ebola outbreak happened is ludicrous as no evidentiary basis",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "summary": "Host dismisses the official account of the Ebola outbreak's origin as ludicrous and baseless."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001370",
+        "evidence_quote": "my book challenge is that what we call the official narrative",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001370",
+        "summary": "Guest says his book challenges the 'official narrative' of the outbreak and points to a biodefense research operation."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001372",
+        "evidence_quote": "any attempt to have a conversation that challenged the dominant narrative as we called it then, was considered a conspiracy theory",
+        "label_ids": [
+          "frame:censorship_suppression"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001371",
+        "summary": "Guest says challenging the dominant Ebola narrative was dismissed as a conspiracy theory, so few would discuss it."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001387",
+        "evidence_quote": "We need the truth, We need some kind of a disclosure of information around what corporations we are doing, what universities and the research scientists",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001384",
+        "summary": "Guest demands disclosure of what corporations, universities and scientists were doing, saying the same institutions and individuals involved with COVID were involved in West Africa."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001399",
+        "evidence_quote": "what was your reaction when you saw the you know, the cuts to the U S A I D",
+        "label_ids": [
+          "topic:health_system.global_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001395",
+        "summary": "Host frames the foreign-aid debate through individuals needing HIV treatment and asks about the fallout of USAID cuts in Africa."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001395",
+        "evidence_quote": "somebody who is getting you know, access to HIV HIV treatment like they need that treatment",
+        "label_ids": [
+          "topic:sexual.stis_hiv"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001395",
+        "summary": "Host notes an individual getting access to HIV treatment needs that treatment."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "more likely"
+        ],
+        "claim_text": "The more likely cause of the West African Ebola outbreak was a shoddy lab doing Ebola research in Sierra Leone.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001364",
+        "evidence_quote": "the more likely cause is the shoddy lab that was doing a bola research in Sierra Leone",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "Contested origin claim for a deadly outbreak that evidence on the outbreak's epidemiology can support or contradict.",
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The official account of how the Ebola outbreak started has no evidentiary basis.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001364",
+        "evidence_quote": "the story that we're told about how the Ebola outbreak happened is ludicrous as no evidentiary basis",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "Asserts the absence of evidence for the accepted outbreak origin, which the published investigations can confirm or refute.",
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "They alleged"
+        ],
+        "claim_text": "The Ebola outbreak started in Guinea, with a child under two years old as the index case, who had participated in hunting and grilling a bat.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u001369",
+        "evidence_quote": "The official narrative was that the outbreak started in Guinea, and they identified Emily woman way two years old or less than two year old child",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "The accepted origin account, relayed in order to be challenged, is checkable against the epidemiological investigation.",
+        "relevance": "substantive",
+        "start_unit_id": "u001368",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A biodefense research operation was taking place in eastern Sierra Leone from 2004, ten years before the Ebola outbreak.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001370",
+        "evidence_quote": "the biodefense research operation that was happening in eastern Syrallian dating back to two thousand and four, ten years before the outbreak",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "Claim about the existence of biodefense research at the outbreak's location, offered as grounds for a lab origin.",
+        "relevance": "substantive",
+        "start_unit_id": "u001370",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Ebola outbreak killed thousands of people in West Africa and still has lingering socio-economic and psychological impact on the population.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001377",
+        "evidence_quote": "the outbreak that killed thousands of people in West Africa and still has a lingering socio economic impact",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Death-toll and impact claim for an epidemic, checkable against official counts.",
+        "relevance": "passing",
+        "start_unit_id": "u001376",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The same institutions and individuals involved with COVID were involved in the West African Ebola outbreak.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001387",
+        "evidence_quote": "we're talking about the same institution, same individuals who are involved with COVID where the ones who get involved",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "narrative_ids": [],
+        "rationale": "Links research institutions to two outbreaks, implying culpability; checkable against who conducted research in each case.",
+        "relevance": "substantive",
+        "start_unit_id": "u001386",
+        "topic_ids": [
+          "topic:covid.origins",
+          "topic:infectious.emerging_outbreaks"
+        ]
+      }
+    ],
+    "window_id": "episode_330515_window_0028"
+  },
+  "stored_at": "2026-10-04T11:47:04.909647+00:00"
+}

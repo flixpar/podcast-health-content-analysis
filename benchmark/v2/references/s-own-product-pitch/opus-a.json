@@ -1,0 +1,427 @@
+{
+  "annotator_id": "opus-a",
+  "benchmark_version": "v2",
+  "item_id": "s-own-product-pitch",
+  "provenance": {
+    "bundle": "bundle_022",
+    "ingested_at": "2026-10-04T11:47:00.045899+00:00",
+    "run_dir": "../podcast-misinfo-benchmark-tasks/reference/opus-a-v2r1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "it's a supplement line but the first thing i built was a magnesium and l theanine combo for evening wind down",
+        "label_ids": [
+          "topic:supplements.magnesium",
+          "topic:supplements.sleep_mood_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "summary": "Host describes his new supplement line Vitalyx, starting with a magnesium and L-theanine evening wind-down product he takes nightly."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "it's this whole thing i've been building called vitalyx",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "summary": "Host announces and pitches his own supplement line, Vitalyx, outside any ad read."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "most of the stuff on the shelf either underdoses the magnesium or loads it with a bunch of filler i don't care about",
+        "label_ids": [
+          "topic:supplements.industry_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000018",
+        "summary": "Host says shelf magnesium products underdose magnesium or add filler."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "i pair it with dimming the lights and putting my phone away which probably matters just as much",
+        "label_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000022",
+        "summary": "Host pairs the supplement with dimming lights and putting his phone away, which he says matters as much."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000031",
+        "evidence_quote": "we're working on a protein blend next just because so many people asked for it",
+        "label_ids": [
+          "topic:supplements.protein_powders"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000030",
+        "summary": "Host says a protein blend is the next product in development."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "half of it is probably in there at doses too small to matter anyway",
+        "label_ids": [
+          "topic:supplements.industry_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000032",
+        "summary": "Hosts criticize brands that pad labels with many ingredients at doses too small to matter."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "it's just on the vitalyx website right now we kept it direct instead of going through retailers",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000035",
+        "summary": "Host tells listeners where to buy Vitalyx, direct from its website."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000046",
+        "evidence_quote": "my back has not hurt once since i switched",
+        "label_ids": [
+          "topic:musculoskeletal.back_neck_posture"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000044",
+        "summary": "Co-host says his back has not hurt since switching to a new office chair."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000036",
+        "evidence_quote": "called vitalyx",
+        "mention_role": "own_product",
+        "product_name": "Vitalyx",
+        "product_type": "supplement",
+        "start_unit_id": "u000015"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The first Vitalyx product is a magnesium and L-theanine combination for evening wind-down.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "the first thing i built was a magnesium and l theanine combo for evening wind down",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Stated composition and purpose of the host's own product.",
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "topic_ids": [
+          "topic:supplements.magnesium",
+          "topic:supplements.sleep_mood_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most magnesium supplements on store shelves either underdose magnesium or contain a lot of unnecessary filler.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "most of the stuff on the shelf either underdoses the magnesium or loads it with a bunch of filler",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A market-wide quality claim used to justify the host's own product.",
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:supplements.magnesium",
+          "topic:supplements.industry_quality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Dimming the lights and putting the phone away probably matter as much as the supplement for winding down at night.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000023",
+        "evidence_quote": "dimming the lights and putting my phone away which probably matters just as much",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Compares sleep-hygiene habits with a supplement's effect on winding down.",
+        "relevance": "substantive",
+        "start_unit_id": "u000023",
+        "topic_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of",
+          "probably"
+        ],
+        "claim_text": "Many supplement brands include many ingredients at doses too small to matter, to make the label look impressive.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "half of it is probably in there at doses too small to matter anyway",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable claim about under-dosed ingredients in multi-ingredient supplements.",
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "topic_ids": [
+          "topic:supplements.industry_quality"
+        ]
+      }
+    ],
+    "window_id": "synthetic_own_product_pitch_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "it's a supplement line but the first thing i built was a magnesium and l theanine combo for evening wind down",
+        "label_ids": [
+          "topic:supplements.magnesium",
+          "topic:supplements.sleep_mood_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "summary": "Host describes his new supplement line Vitalyx, starting with a magnesium and L-theanine evening wind-down product he takes nightly."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "it's this whole thing i've been building called vitalyx",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "summary": "Host announces and pitches his own supplement line, Vitalyx, outside any ad read."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "most of the stuff on the shelf either underdoses the magnesium or loads it with a bunch of filler i don't care about",
+        "label_ids": [
+          "topic:supplements.industry_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000018",
+        "summary": "Host says shelf magnesium products underdose magnesium or add filler."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "i pair it with dimming the lights and putting my phone away which probably matters just as much",
+        "label_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000022",
+        "summary": "Host pairs the supplement with dimming lights and putting his phone away, which he says matters as much."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000031",
+        "evidence_quote": "we're working on a protein blend next just because so many people asked for it",
+        "label_ids": [
+          "topic:supplements.protein_powders"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000030",
+        "summary": "Host says a protein blend is the next product in development."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "half of it is probably in there at doses too small to matter anyway",
+        "label_ids": [
+          "topic:supplements.industry_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000032",
+        "summary": "Hosts criticize brands that pad labels with many ingredients at doses too small to matter."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "it's just on the vitalyx website right now we kept it direct instead of going through retailers",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000035",
+        "summary": "Host tells listeners where to buy Vitalyx, direct from its website."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000046",
+        "evidence_quote": "my back has not hurt once since i switched",
+        "label_ids": [
+          "topic:musculoskeletal.back_neck_posture"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000044",
+        "summary": "Co-host says his back has not hurt since switching to a new office chair."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000036",
+        "evidence_quote": "called vitalyx",
+        "mention_role": "own_product",
+        "product_name": "Vitalyx",
+        "product_type": "supplement",
+        "start_unit_id": "u000015"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The first Vitalyx product is a magnesium and L-theanine combination for evening wind-down.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "the first thing i built was a magnesium and l theanine combo for evening wind down",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Stated composition and purpose of the host's own product.",
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "topic_ids": [
+          "topic:supplements.magnesium",
+          "topic:supplements.sleep_mood_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most magnesium supplements on store shelves either underdose magnesium or contain a lot of unnecessary filler.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "most of the stuff on the shelf either underdoses the magnesium or loads it with a bunch of filler",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A market-wide quality claim used to justify the host's own product.",
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:supplements.industry_quality",
+          "topic:supplements.magnesium"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Dimming the lights and putting the phone away probably matter as much as the supplement for winding down at night.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000023",
+        "evidence_quote": "dimming the lights and putting my phone away which probably matters just as much",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Compares sleep-hygiene habits with a supplement's effect on winding down.",
+        "relevance": "substantive",
+        "start_unit_id": "u000023",
+        "topic_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of",
+          "probably"
+        ],
+        "claim_text": "Many supplement brands include many ingredients at doses too small to matter, to make the label look impressive.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "half of it is probably in there at doses too small to matter anyway",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable claim about under-dosed ingredients in multi-ingredient supplements.",
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "topic_ids": [
+          "topic:supplements.industry_quality"
+        ]
+      }
+    ],
+    "window_id": "synthetic_own_product_pitch_window_0001"
+  },
+  "stored_at": "2026-10-04T11:47:00.045932+00:00"
+}
