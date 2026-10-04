@@ -57,7 +57,9 @@ wellness practices, drugs, health products and health policy.
   character's hospital stay;
 - health named in a list or teaser ("today: sleep, testosterone and creatine"):
   one `passing` detection per topic;
-- sponsor reads for health products and health claims inside ads.
+- sponsor reads for health products and health claims inside ads;
+- an analogy to a health subject ("as bad as smoking fifteen cigarettes a
+  day"): a `passing` detection of that subject.
 
 **Exclude** (no annotation at all):
 
@@ -74,7 +76,14 @@ wellness practices, drugs, health products and health policy.
   health claim (a mattress ad promising better sleep makes one);
 - food talked about purely as taste, cooking or restaurants, with no health
   dimension; sports talked about purely as competition, with no injury,
-  training-physiology or health dimension.
+  training-physiology or health dimension;
+- ads for alcohol, nicotine, cannabis or food that make no health claim ("enjoy
+  responsibly" is not a health claim);
+- animal and veterinary health;
+- the conditions, emotions or injuries of fictional characters discussed as
+  plot or character description (a film review calling a character lonely). A
+  work of fiction discussed for what it says about a real health issue is
+  health content.
 
 When unsure whether a mention reaches health content, ask whether a health
 researcher would want this stretch counted. A passing factual mention: yes, as
@@ -113,8 +122,12 @@ Fields:
   - `advertisement`: inside a delimited advertising read (a sponsor read, a
     host reading ad copy, a promo code, "back to the show"). A host's own
     product pitched inside such a read is `advertisement`; the same pitch
-    outside an ad break is `substantive` or `passing` with
-    `frame:commercialization`.
+    outside an ad break, with no read delimiting it, is `substantive` or
+    `passing` with `frame:commercialization`. Health subjects an ad names or
+    discusses get their own topic detections with `relevance: advertisement`
+    (a lab-testing ad listing cholesterol and testosterone panels takes
+    `self_tracking.consumer_lab_tests`, and the listed subjects when the ad
+    says something about them).
 - `discourse_role`: what the speakers do with the labeled material (see
   section 6).
 - `confidence`: how sure you are of this coding, not of the truth of anything
@@ -204,6 +217,21 @@ handle inconsistently. Apply them every time:
 7. **Specific named boundaries in the tables win.** Many subtopic definitions
    say where a neighbouring subject goes ("Sunscreen goes to
    `skin_beauty.sunscreen`"). Follow them.
+8. **Substances keep their own home.** A supplement's subtopic follows the
+   substance, not the purpose (L-tyrosine is `supplements.protein_powders`,
+   the amino-acid subtopic, whether taken for mood or weight); the purpose is
+   coded by rule 1. A hormone used as a drug takes the hormone's subtopic
+   (oxytocin cream → `endocrine.other_hormones`). Mechanism talk about a
+   condition goes under that condition's subtopic.
+9. **Population-specific subtopics plus the condition.** A subtopic defined by
+   a group (`gender.lgbtq_health`, `pediatrics.*`) is co-labeled with the
+   condition's own subtopic when the condition is discussed (trans suicide
+   statistics → `gender.lgbtq_health` + `mental.suicide_self_harm`).
+
+**General talk takes the parent.** "Heart health" with nothing more specific
+is `topic:cardiovascular`; "brain health" is `topic:cognition`; "supplements"
+in general is `topic:supplements.industry_quality` only when the industry or
+category is discussed, otherwise `topic:supplements`.
 
 `topic:other` is for substantive health content that no parent fits; never
 put it beside a listed topic on the same span.
@@ -228,7 +256,15 @@ a proposition.
   vaccine safety data that never says or implies vaccines cause autism does
   not take `narrative:vaccines_cause_autism`. A strong implicature counts
   ("my son was fine until his 18-month shots, then he stopped talking" invokes
-  it); a bare topic word does not.
+  it); a bare topic word does not. The implicature must be readable from the
+  window itself: do not supply the proposition from what you know about the
+  speaker or the news story ("studies of a link" with autism never named does
+  not invoke the autism narrative).
+- **One proposition per narrative.** Each narrative states one direction;
+  where a debate has two sides, each side is its own narrative
+  (`hrt_dangerous` and `hrt_fears_overblown`; `gender_care_harmful_youth` and
+  `gender_care_lifesaving`). Code the side whose proposition is invoked, with
+  the stance toward that proposition.
 - **Contested, not false.** Some narratives are partly supported or genuinely
   open (lab leak, natural immunity, youth gender care in both directions).
   Labeling one says nothing about its truth.
@@ -255,13 +291,27 @@ the speaker or on people named.
 - `frame:conspiracy_cover_up` requires an allegation of coordination or
   concealment. "They know what they're doing" alone is
   `frame:government_distrust` (or another distrust frame), not conspiracy.
+- Distrust frames by target: agencies, regulators and official science →
+  `frame:government_distrust`; doctors and conventional medicine as a practice
+  → `frame:anti_mainstream_medicine`; drug companies → `frame:big_pharma`; the
+  food industry → `frame:big_food`; media and platforms →
+  `frame:media_distrust`. A finding discounted because of who profits from it
+  is `frame:conflict_of_interest` in addition. "Women have been lied to" with
+  no target named is `frame:anti_mainstream_medicine` when the context is
+  medical care.
+- Frames in relayed or quoted speech are coded where the framing occurs, with
+  `discourse_role: reported_or_quoted`.
+- `frame:optimization` needs framing of health as performance to maximize;
+  "optimal range" in lab talk alone is not it.
 - `frame:insinuating_questions` is for suspicion advanced through leading
   questions ("Why won't they study the unvaccinated? Makes you wonder"). A
   genuine open question with no insinuation is `discourse_role: questioned`
   without this frame.
 - `frame:commercialization` applies to sponsor reads, discount codes,
-  affiliate links and a speaker's own products, clinics, programmes and books.
-  It does not apply to an unpaid personal recommendation of a brand.
+  affiliate links and a speaker's own products, clinics, programmes, coaching,
+  consultations and books, including free lead magnets (a free guide, quiz or
+  newsletter that funnels to the speaker's offering). It does not apply to an
+  unpaid personal recommendation of someone else's brand.
 - `frame:disclaimer` is for the speaker disclaiming medical authority or
   advising professional consultation; boilerplate legal disclaimers in an
   episode intro count.
@@ -285,10 +335,28 @@ opinion of it.
   `evidence:prestige_institution`; a speaker's or guest's title is
   `evidence:credential_appeal`; "doctor recommended" or "clinically proven" is
   `evidence:strength_assertion`.
-- `evidence:clinical_experience` is a practitioner's patients offered as
-  evidence; `evidence:personal_anecdote` is personal or second-hand experience
-  offered as grounds for a general conclusion. A story told for its own sake,
-  or explicitly disclaimed as evidence, takes neither.
+- `evidence:clinical_experience` is a health practitioner's patients offered
+  as evidence; `evidence:personal_anecdote` is personal, second-hand, eyewitness
+  or non-clinical professional experience offered as grounds for a general
+  conclusion. A story told for its own sake, or explicitly disclaimed as
+  evidence, takes neither.
+- `evidence:official_data_documents` is data, records and documents (VAERS
+  counts, a package insert, CDC statistics); an official recommendation,
+  guideline, advisory or classification (the Surgeon General's advisory, a
+  society's guideline, the DSM) is `evidence:expert_consensus`. A named body
+  cited for its recommendation is `evidence:expert_consensus`, and also
+  `evidence:prestige_institution` only when the name itself is used for
+  authority. A university named as the source of a specific study is part of
+  `evidence:specific_study`, not prestige.
+- A single-subject or case study that is identifiable takes both
+  `evidence:specific_study` and `evidence:weak_human_evidence`.
+- "I saw a quote / a video / an article" is `evidence:media_source`; add
+  `evidence:credential_appeal` only if the person's title is used as grounds.
+- `evidence:strength_assertion` needs an explicit claim about proof or
+  evidence ("proven", "science-backed", "clinically shown", "FDA approved");
+  certainty boosters such as "we know" or "clearly" are certainty markers only.
+- `evidence:mechanistic_explanation` needs a causal biological account (X does
+  Y in the body, which leads to Z), not just a technical term.
 - `evidence:preclinical_extrapolation` and `evidence:weak_human_evidence` code
   the kind of evidence offered (mice, cells; association, pilot, case report).
   A plain randomized-trial citation is `evidence:specific_study` or
@@ -400,8 +468,9 @@ Fields:
     recognized or diagnosed.
   - `mechanism`: how something works in the body.
   - `institutional_or_conspiracy`: that an agency, company, profession or
-    government hid, falsified, suppressed or was paid for something.
-    Inaction, legal arrangements and grant funding are `other_factual`.
+    government hid, falsified, suppressed or was paid for something, or runs a
+    hidden programme (chemtrails, depopulation). Inaction, legal arrangements
+    and grant funding are `other_factual`.
   - `other_factual`: checkable but none of the above, including a product's
     stated composition or dose.
 
@@ -422,15 +491,32 @@ Fields:
     "maybe", "possibly", "I wonder if", "some people say", "I've heard", "I'm
     not sure but".
 
-  Marker rules: bare "can" as capacity ("magnesium can help", "it can kill
-  you") is not a marker; "could", "might" and "may" as possibility are
-  `speculative`. Approximators and filler ("like forty minutes", "basically",
-  "kind of", "about", "up to") are not markers. Statistical idioms ("twice as
-  likely", "more likely to") are not hedges. "Very good evidence that" is an
-  evidence signal, not a booster. With mixed markers, a hedge beats a booster,
-  and a speculative marker beats a hedge. For a quoted, questioned or rebutted
-  claim, code how the original proposition is rendered, not the speaker's
-  attitude to it; that is `discourse_role`.
+  Marker rules:
+  - Bare "can" as capacity ("magnesium can help", "it can kill you") is not a
+    marker; "could", "might" and "may" as possibility are `speculative`.
+  - Approximators and filler ("like forty minutes", "basically", "kind of",
+    "about", "up to") are not markers; nor are intensifiers ("literally",
+    "really", "actually", "honestly"); nor is a stated range or list of example
+    values ("it could be 17, it could be 410"); nor is "if" introducing a
+    condition (code the main clause's own markers).
+  - Quantifier hedges are `hedged`: "a lot of" (people, men, clinics...),
+    "many", "most", "often", "usually", "largely", "mostly", "tends to".
+  - Universal and superlative boosters are `absolute`: "always", "never",
+    "every", "all", "none", "nothing", "no risk", "only", "the best", "the
+    strongest", "the most effective", "number one", "we know that",
+    "clearly", "there is no doubt", "proven", "guaranteed".
+  - Attribution: a claim attributed to unnamed others or hearsay ("some people
+    say", "people think", "they say", "I've heard", "supposedly") is
+    `speculative`, with the attribution phrase as the marker. A claim
+    attributed to a named source ("the CDC says", "a study found", "it's
+    estimated that") is not marked by the attribution.
+  - Statistical idioms ("twice as likely", "more likely to") are not hedges.
+    "Very good evidence that" is an evidence signal, not a booster.
+  - With mixed markers, a hedge beats a booster, and a speculative marker beats
+    a hedge.
+  - For a quoted, questioned or rebutted claim, code how the original
+    proposition is rendered, not the speaker's attitude to it; that is
+    `discourse_role`.
 - `certainty_markers`: the verbatim marker words or phrases inside the span, at
   most 6. Required for `absolute`, `hedged` and `speculative`; empty for
   `unhedged`.
@@ -449,7 +535,10 @@ fitness, beauty or medical offering, or when any named product is presented
 with a health claim. Do not record:
 
 - generic substances, categories and practices ("magnesium", "semaglutide",
-  "a probiotic", "red light therapy", "cold plunges");
+  "a probiotic", "red light therapy", "cold plunges"), including named
+  compounds and peptides that are not brands ("BPC-157", "NMN") and classic
+  named methods that are not sold as a branded offering ("Gerson therapy",
+  "Wim Hof breathing"), though a clinic or programme selling one is a product;
 - a company named only as an actor ("Pfizer lied"), though its named product
   is a mention ("the Pfizer vaccine", "Comirnaty");
 - retail venues, social platforms, hospitals or agencies as institutions,
@@ -475,9 +564,10 @@ Fields:
   books or shows is `book_or_media`.
 - `mention_role`:
   - `advertised`: a paid or sponsor read, discount code or affiliate offer.
-  - `own_product`: the host's or guest's own product, clinic, programme or
-    book (also inside a delimited read, where `relevance` of the surrounding
-    detections is `advertisement`).
+  - `own_product`: the host's or guest's own product, clinic, programme,
+    coaching, book or free lead magnet (also inside a delimited read, where
+    `relevance` of the surrounding detections is `advertisement`). Calling
+    something "my top supplement" does not by itself make it the speaker's own.
   - `recommended`: endorsed or suggested with no sign of payment.
   - `neutral`: named without a stance, as an example, in passing, or as a
     brand the speaker uses without pushing it.

@@ -102,7 +102,7 @@ Foods, drinks and nutrients as eaten, and the quality and safety of the food sup
 | protein_intake | Protein intake | How much protein people need and where they get it from food. Protein powders go to `supplements.protein_powders`. | protein targets; grams per pound; protein-maxxing; amino acids from food; leucine threshold |
 | plant_foods_fiber | Fruits, vegetables, fiber & plant compounds | Produce, legumes, nuts and seeds, fiber, soy, and plant compounds said to help or harm. | vegetables; fruit; fiber; fibermaxxing; legumes; soy; oxalates; lectins; polyphenols; cruciferous |
 | additives_dyes | Additives, dyes & preservatives | Food additives as such, including their regulation and bans. | food dyes; Red 40; titanium dioxide; preservatives; emulsifiers; MSG; GRAS; "banned in Europe" ingredients |
-| organic_gmo | Organic, GMO & farming practices | How food is produced as a health question: organic versus conventional, GMOs, regenerative agriculture, pesticide residue on food. | organic; GMO; regenerative farming; pesticide residue on produce; grass-fed vs grain-fed; bioengineered |
+| organic_gmo | Organic, GMO & farming practices | How food is produced as a health question: organic versus conventional, GMOs, regenerative agriculture, soil quality, pesticide residue on food. | organic; GMO; regenerative farming; soil depletion; pesticide residue on produce; grass-fed vs grain-fed; bioengineered |
 | beverages_hydration | Water, hydration & beverages | Drinking water as hydration, electrolytes in drinks, soda, juice, and "wellness waters". Caffeine goes to `stimulants`; alcohol to `alcohol`; electrolyte powders to `supplements.other_vitamins_minerals`. | hydration; how much water; soda; juice; alkaline water; structured water; hydrogen water; mineral water |
 | micronutrients_food | Vitamins & minerals from food | Vitamins and minerals as obtained from food, nutrient density, and deficiency diseases explained through diet. | vitamin C in fruit; scurvy; iron-rich foods; nutrient density; bioavailability |
 | eating_behavior | Eating behavior, appetite & cravings | When and how people eat: meal timing, breakfast, snacking, cravings, food addiction, mindful or intuitive eating. Named fasting regimens go to `diets.fasting`. | skipping breakfast; cravings; food addiction; satiety; snacking; intuitive eating |
@@ -122,9 +122,10 @@ Named dietary patterns, protocols and the identities around them. A single food 
 | mediterranean_whole_food | Mediterranean & whole-food patterns | Mediterranean, DASH, Blue Zones and generic "whole foods" eating patterns. | Mediterranean diet; DASH; Blue Zones diet; whole-food diet |
 | elimination_therapeutic | Elimination & therapeutic diets | Diets that remove foods to treat symptoms or conditions. | elimination diet; low-FODMAP; AIP; gluten-free (as a regimen); anti-inflammatory diet; low-histamine; GAPS |
 | calorie_counting | Calorie & macro counting | Dieting by calories or macronutrient targets. | calories in calories out; macro tracking; calorie deficit; counting points |
+| raw_food_juicing | Raw-food & juicing diets | Diets built on raw foods or juices, and the "living food" ideas behind them. | raw vegan; raw food diet; juice fasting as a diet; fruitarian; living foods |
 
 #### Supplements, Vitamins & Nutraceuticals `supplements`
-Products taken as pills, powders, drinks or doses: what they contain, what they are claimed to do, dosing and quality. Code the outcome the supplement is used for as well when the passage discusses that outcome (e.g. melatonin for sleep also takes `sleep`).
+Products taken as pills, powders, drinks or doses: what they contain, what they are claimed to do, dosing and quality. The subtopic follows the substance (L-tyrosine is an amino acid wherever it is taken for); code the outcome it is used for as well when the passage discusses that outcome (e.g. melatonin for sleep also takes `sleep`).
 
 | id | name | definition | examples |
 | --- | --- | --- | --- |
@@ -135,17 +136,18 @@ Products taken as pills, powders, drinks or doses: what they contain, what they 
 | other_vitamins_minerals | Other vitamins, minerals & electrolytes | Any other vitamin or mineral supplement, multivitamins and electrolyte products. | zinc; iron; iodine; selenium; vitamin A; vitamin K2; multivitamin; electrolyte powder; LMNT; potassium |
 | omega3 | Omega-3 & fish oil | Fish oil, krill oil and omega-3 supplements. | fish oil; EPA/DHA; krill oil; omega-3 index |
 | creatine | Creatine | Creatine supplementation for any purpose. | creatine monohydrate; loading phase; creatine for the brain |
-| protein_powders | Protein powders, collagen & amino acids | Protein powders, collagen supplements and amino-acid products. | whey; collagen peptides; BCAAs; EAAs; glycine; protein bars |
+| protein_powders | Protein powders, collagen & amino acids | Protein powders, collagen supplements and amino-acid products, including single amino acids taken as supplements. | whey; collagen peptides; BCAAs; EAAs; glycine; L-tyrosine; L-theanine (as amino acid); taurine; protein bars |
 | greens_whole_food | Greens & whole-food powders | Greens powders and encapsulated fruit-and-vegetable products. | AG1; greens powder; Balance of Nature; superfood blends |
 | herbal_adaptogens | Herbal supplements & adaptogens | Botanical and fungal supplements. | ashwagandha; turmeric/curcumin; berberine; medicinal mushrooms; lion's mane; sea moss; rhodiola; black seed oil; colostrum; shilajit |
 | organ_glandular | Organ & glandular supplements | Desiccated organ and glandular products. | beef liver capsules; desiccated organs; glandulars; Heart & Soil |
+| other_compounds | Other compounds & enzymes | Non-botanical supplement compounds not covered above: antioxidants, phospholipids, enzymes. | glutathione; NAC; CoQ10; alpha-lipoic acid; PQQ; quercetin; phosphatidylcholine; digestive enzymes; proteolytic enzymes; serrapeptase |
 | sleep_mood_supplements | Sleep, calm & mood supplements | Supplements taken for sleep, calm or mood. | melatonin; L-theanine; GABA; 5-HTP; valerian; saffron; kava |
 | industry_quality | Supplement industry, quality & regulation | Supplements as a category or industry: whether they work in general, third-party testing, contamination, labeling, regulation, multi-level marketing. | supplement regulation; DSHEA; third-party tested; proprietary blend; MLM supplements |
 
 ### Domain: Body systems & chronic conditions `conditions`
 
 #### Heart, Blood Pressure & Lipids `cardiovascular`
-Cardiovascular disease and its markers and drugs. Diabetes and insulin go to `metabolic`; stroke to `neuro.stroke`.
+Cardiovascular and blood health, their markers and drugs. General "heart health" or "cardiovascular health" takes this parent. Diabetes and insulin go to `metabolic`; stroke to `neuro.stroke`.
 
 | id | name | definition | examples |
 | --- | --- | --- | --- |
@@ -153,6 +155,7 @@ Cardiovascular disease and its markers and drugs. Diabetes and insulin go to `me
 | statins_lipid_drugs | Statins & lipid-lowering drugs | Statins and other cholesterol-lowering drugs: benefits, side effects, who should take them. | statins; Lipitor; Crestor; ezetimibe; Zetia; PCSK9 inhibitors |
 | blood_pressure | Blood pressure | Hypertension and blood pressure control. | high blood pressure; hypertension; BP medication; salt and blood pressure |
 | heart_disease | Heart disease & cardiac events | Heart disease and cardiac events and their testing. | heart attack; coronary artery disease; plaque; calcium score; heart failure; AFib; arrhythmia; myocarditis (not vaccine-linked); sudden cardiac arrest; stents |
+| blood_circulation | Blood, clots & circulation | Blood clots, circulation and blood disorders. | DVT; pulmonary embolism; blood clots; circulation; varicose veins; anemia; bleeding disorders; blood thinning |
 
 #### Blood Sugar, Diabetes & Metabolic Health `metabolic`
 Glucose regulation, insulin, diabetes and metabolic dysfunction. Body weight as such goes to `weight`; GLP-1 drugs to `glp1`.
@@ -169,8 +172,9 @@ Body weight, fat and body composition. Weight-loss drugs go to `glp1`; named die
 | id | name | definition | examples |
 | --- | --- | --- | --- |
 | obesity_rates | Obesity & its prevalence | Obesity as a condition and a population trend, and how it is measured. | obesity epidemic; BMI; childhood obesity; obesity rates |
+| weight_gain_causes | Causes of weight gain | Why people gain weight or cannot lose it: hormones, stress, sleep, medications, metabolism blamed for weight gain. | weight gain; can't lose weight; weight-loss resistance; stubborn belly fat |
 | weight_loss_methods | Weight-loss methods (non-drug) | Losing fat or weight without drugs or surgery: strategies, programmes, coaching, results. | fat loss; cutting; weight-loss plan; losing 30 pounds; Noom; WeightWatchers |
-| body_composition | Metabolism & body composition | Metabolic rate, body fat distribution, visceral fat, muscle-to-fat ratio and their measurement. | slow metabolism; visceral fat; body fat percentage; DEXA scan; set point; metabolic adaptation |
+| body_composition | Metabolism & body composition | Metabolic rate and energy expenditure, body fat distribution, visceral fat, muscle-to-fat ratio and their measurement. | slow metabolism; energy expenditure; thermic effect of food; visceral fat; body fat percentage; DEXA scan; set point; metabolic adaptation |
 | body_image_stigma | Body image & weight stigma | How bodies are judged: body positivity, fatphobia, weight stigma, Health at Every Size. Eating disorders go to `mental.eating_disorders`. | body positivity; fat acceptance; HAES; weight stigma |
 | weight_loss_surgery | Bariatric surgery | Surgical weight-loss procedures. | gastric sleeve; gastric bypass; lap band; bariatric surgery |
 | diet_pills_fat_burners | Diet pills, fat burners & teas | Non-GLP-1 weight-loss pills and products. | fat burners; phentermine; skinny tea; detox tea for weight; Hydroxycut; forskolin |
@@ -282,7 +286,7 @@ Musculoskeletal pain, injury and rehabilitation. Acute trauma goes to `acute_car
 | sports_injuries | Sports & overuse injuries | Injuries from sport and training and their rehabilitation. | ACL tear; Achilles; tendonitis; rotator cuff; tennis elbow; hamstring pull |
 | chronic_pain | Chronic pain & pain management | Persistent pain and how it is managed, other than opioids. | chronic pain; pain science; NSAIDs for pain; pain management; fascia pain |
 | rehab_manual_therapy | Physical therapy & rehabilitation | Physical therapy, rehabilitation and conventional manual therapy. Chiropractic goes to `alt_medicine.chiropractic`. | physical therapy; rehab; massage therapy; dry needling; mobility rehab |
-| muscle_loss | Muscle mass & sarcopenia | Muscle loss with age or disuse, and muscle as an organ of health. | sarcopenia; muscle loss with age; "muscle is the organ of longevity" |
+| muscle_loss | Muscle mass & sarcopenia | Losing, keeping or building muscle mass as a health matter (with age, disuse, fasting or drugs), and muscle as an organ of health. | sarcopenia; muscle loss with age; "muscle is the organ of longevity" |
 
 #### Injuries, Emergencies & End of Life `acute_care`
 Acute injury and emergency care, and death and dying.
@@ -290,7 +294,8 @@ Acute injury and emergency care, and death and dying.
 | id | name | definition | examples |
 | --- | --- | --- | --- |
 | wounds_first_aid | Wounds, burns & first aid | Cuts, burns, bites and what is done about them immediately. | stitches; burns; dog bite; first aid; tourniquet; CPR; Heimlich |
-| trauma_fractures | Trauma & fractures | Serious physical trauma: broken bones, crash injuries, gunshot wounds. | broken leg; car crash injuries; gunshot wound; trauma surgery |
+| trauma_fractures | Injuries & trauma | Physical injuries not specific to sport: broken bones, crash injuries, falls, gunshot and stab wounds, an unspecified injury. | broken leg; car crash injuries; gunshot wound; trauma surgery; "I got injured" |
+| violence_abuse | Violence & abuse | Interpersonal violence and abuse as health and safety issues: sexual assault, domestic violence, child abuse and neglect, gun violence as a public-health matter, strangulation, elder abuse. | sexual assault; domestic violence; child abuse; gun violence epidemic; intimate partner violence |
 | emergency_critical_care | Emergency & critical care | Emergency departments, ICUs, sepsis, shock, resuscitation, organ failure. | ER; ICU; sepsis; septic shock; intubation; code blue |
 | poisoning_environmental_injury | Poisoning & environmental injury | Poisoning, overdoses of non-drugs-of-abuse, heat stroke, hypothermia, drowning, choking. | poisoning; carbon monoxide; heat stroke; hypothermia; drowning |
 | death_dying | Death, dying & end-of-life care | How people die and end-of-life care: causes of death as medical fact, autopsies, hospice, euthanasia and assisted dying. | cause of death; autopsy; hospice; palliative care; MAID; assisted suicide; sudden death |
@@ -304,6 +309,7 @@ Operations and clinical procedures that are not cosmetic, weight-loss or cancer-
 | anesthesia | Anesthesia | Anesthesia and sedation. | general anesthesia; epidural (outside birth); sedation; waking up during surgery |
 | transplants_donation | Transplants & donation | Organ and tissue transplant and blood or organ donation. | kidney transplant; organ donor; blood donation; bone marrow |
 | imaging_diagnostics | Imaging & diagnostic procedures | Medical imaging and diagnostic procedures outside cancer screening, and radiation dose from them. | MRI; CT scan; X-ray; endoscopy; ultrasound; blood work |
+| regenerative_medicine | Regenerative medicine (non-cosmetic) | Stem-cell, platelet, exosome and similar therapies used for healing, orthopedic or systemic disease rather than appearance. | stem cell therapy for joints; PRP for tendons; exosomes for recovery; stem cells in Mexico or Panama |
 
 #### Eyes, Ears & Senses `sensory`
 The senses and their loss, correction and aids.
@@ -401,7 +407,7 @@ Sleep quality, duration, timing and disorders, and products and practices aimed 
 | sleep_hygiene_environment | Sleep hygiene & sleep environment | Bedtime routines and the bedroom: mattresses, temperature, darkness, noise, devices in bed, sleep products. | sleep hygiene; bedroom temperature; mattress; blackout curtains; cooling sheets; Eight Sleep |
 
 #### Cognitive Performance & Brain Optimization `cognition`
-Focus, memory and brain performance in healthy people, and the substances and routines aimed at them.
+Focus, memory and brain performance in healthy people, and the substances and routines aimed at them. General "brain health" takes this parent.
 
 | id | name | definition | examples |
 | --- | --- | --- | --- |
@@ -420,7 +426,8 @@ Female reproductive endocrinology and gynecology across the life course. Pregnan
 | id | name | definition | examples |
 | --- | --- | --- | --- |
 | menstrual_cycle | Menstrual cycle & periods | The cycle and its problems. | menstrual cycle; PMS; PMDD; cycle syncing; irregular periods; heavy bleeding; period pain |
-| menopause | Perimenopause & menopause | The menopausal transition and its symptoms. | perimenopause; menopause; hot flashes; menopause brain fog |
+| female_hormones | Female sex hormones | Estrogen, progesterone and testosterone in women, their levels, ratios and testing, outside the cycle, menopause and hormone therapy. | estrogen dominance; low progesterone; testosterone in women; hormone ratios; DUTCH test (as hormone testing) |
+| menopause | Perimenopause & menopause | The menopausal transition and its symptoms, including genitourinary symptoms. | perimenopause; menopause; hot flashes; menopause brain fog; vaginal atrophy; vaginal dryness; GSM |
 | hormone_therapy | Menopausal hormone therapy | Hormone therapy for women, including bioidentical and testosterone for women. | HRT; MHT; estrogen patch; progesterone; bioidentical hormones; WHI study; black-box warning |
 | pcos | PCOS | Polycystic ovary syndrome. | PCOS; polycystic ovaries |
 | gynecological_conditions | Gynecological conditions & care | Other gynecological conditions and care. | endometriosis; fibroids; ovarian cysts; yeast infection; vaginal microbiome; Pap smear (routine care); pelvic pain |
@@ -486,7 +493,7 @@ Gender-affirming care, transgender health and debates over them.
 | adult_transition | Adult transition care | Hormones and surgery for transgender adults. | HRT for trans adults; top surgery; bottom surgery |
 | detransition | Detransition & regret | Detransition and regret after transition. | detransitioners; regret rates |
 | gender_identity_science | Gender identity & dysphoria (explanations) | What gender dysphoria is, why it occurs, its prevalence and diagnosis. | gender dysphoria; ROGD; social contagion; intersex; brain sex |
-| lgbtq_health | LGBTQ health & disparities | Health issues and disparities of LGBTQ people outside transition care. | LGBTQ mental health; conversion therapy; trans suicide statistics |
+| lgbtq_health | LGBTQ health & disparities | Health issues and disparities of LGBTQ people outside transition care. A specific condition (suicide, HIV) also takes its own subtopic. | LGBTQ mental health; conversion therapy; trans suicide statistics |
 
 ### Domain: Substances `substances`
 
@@ -499,7 +506,7 @@ Drugs of misuse other than alcohol, nicotine, caffeine, cannabis and psychedelic
 | stimulants_illicit | Cocaine & methamphetamine | Illicit stimulant use. | meth; cocaine; crack |
 | addiction_recovery | Addiction & recovery | Addiction as a condition and its treatment, from any substance. | addiction; rehab; AA; 12 steps; Suboxone; methadone; relapse; sobriety (drugs) |
 | harm_reduction | Harm reduction | Reducing the harms of ongoing drug use. | Narcan; naloxone; safe supply; needle exchange; fentanyl test strips; safe injection site |
-| drug_policy | Drug policy & overdose crisis | Drug laws and the overdose crisis as policy. | overdose deaths; decriminalization; war on drugs; Measure 110; border fentanyl |
+| drug_policy | Drug policy, supply & overdose crisis | Drug laws, enforcement, trafficking and supply, and the overdose crisis as policy. The drugs' effects go to the drug's own subtopic. | overdose deaths; decriminalization; war on drugs; Measure 110; cartels; precursor chemicals; border fentanyl |
 
 #### Cannabis, Psychedelics & Novel Psychoactives `psychoactives`
 Cannabis, psychedelics and other psychoactive substances, therapeutic or recreational.
@@ -731,7 +738,7 @@ Skin, hair and cosmetic concerns and the products and procedures aimed at them. 
 | hair_loss_hair | Hair loss & hair care | Hair loss in any sex and hair care. | balding; finasteride; minoxidil; hair transplant; thinning hair; shampoo |
 | skin_ageing | Skin ageing & appearance | Wrinkles, collagen and the look of ageing skin. | wrinkles; collagen loss; anti-aging skincare; skin elasticity |
 | cosmetic_procedures | Cosmetic surgery & injectables | Cosmetic surgery and injectables. | Botox; fillers; facelift; BBL; breast implants; buccal fat removal; lip filler |
-| regenerative_aesthetics | Regenerative & aesthetic injections | Platelet, stem-cell, exosome and related injections for appearance or tissue repair. | PRP; PRF; exosomes; salmon sperm/PDRN; polynucleotides; microneedling; stem cell injections |
+| regenerative_aesthetics | Regenerative & aesthetic injections | Platelet, stem-cell, exosome and related injections for appearance (skin, hair, face). The same therapies for healing or disease go to `procedures.regenerative_medicine`. | PRP; PRF; exosomes; salmon sperm/PDRN; polynucleotides; microneedling; stem cell injections |
 
 ### Domain: Children's health `children_domain`
 
@@ -847,12 +854,14 @@ without the proposition is a topic, not a narrative.
 | us_food_banned_elsewhere | US food contains ingredients banned abroad | American foods contain additives that Europe or other countries ban, proving they are dangerous. | banned in Europe; same cereal, different ingredients | food |
 | carnivore_cures | Carnivore cures disease | An all-meat diet cures autoimmune disease, depression, diabetes or other chronic disease. | carnivore healed me; plants are toxic | diets |
 | plants_are_toxic | Plants and vegetables are toxic | Vegetables, plant compounds (oxalates, lectins) or fiber are harmful or unnecessary. | oxalates; lectins; plant defense chemicals; fiber is unnecessary | food |
-| fasting_cures | Fasting or keto cures chronic disease | Fasting or ketogenic diets cure or reverse diabetes, autoimmunity, dementia or other chronic disease. | fasting heals everything; reverse diabetes with keto | diets |
+| fasting_cures | Fasting or keto cures disease | Fasting or ketogenic diets cure or reverse diabetes, autoimmunity, dementia, cancer or chronic disease generally. The specific "sugar feeds cancer" mechanism is `sugar_feeds_cancer`. | fasting heals everything; reverse diabetes with keto; fasting eats tumors | diets |
 | alkaline_ph | Alkaline diet or water changes body pH | Alkaline foods or water change blood pH and prevent disease, or disease thrives in an acidic body. | alkaline water; acidic body causes cancer | food |
 | wellness_waters | Structured, hydrogen or raw water | Structured, hydrogen-rich, raw or "living" water has special health properties. | structured water; EZ water; hydrogen water; raw water | food |
 | soy_feminizes | Soy feminizes men | Soy or phytoestrogens lower testosterone or feminize men. | soy boys; phytoestrogens | food |
 | beef_tallow_healthier | Animal fats are healthier than plant oils | Beef tallow, lard or butter are healthier replacements for seed oils (as food or skincare). | cook in tallow; tallow fries | food |
+| red_meat_healthy | Red meat is healthy | Red meat is healthy or essential, and warnings that it causes heart disease, cancer or early death are wrong. | red meat is not the enemy; meat causes cancer is a myth | food |
 | microwave_radiation_food | Microwaving destroys food or is dangerous | Microwaving destroys nutrients or makes food dangerous. | microwave kills nutrients | food |
+| soil_depletion_supplements | Depleted soil means everyone needs supplements | Modern soil is depleted, so food no longer supplies enough nutrients and supplementation is necessary. | soil has no minerals anymore; you can't get it from food | food |
 
 ### Pharmaceuticals & conventional medicine `pharma_narratives`
 
@@ -865,7 +874,8 @@ without the proposition is a topic, not a narrative.
 | leucovorin_autism_treatment | Leucovorin treats autism | Leucovorin (folinic acid) treats or reverses autism. | folinic acid autism; cerebral folate deficiency | neurodevelopment |
 | birth_control_harms | Hormonal birth control causes serious harm | The pill or hormonal contraception causes infertility, depression, cancer, personality change or partner-choice change. | the pill made me depressed; birth control infertility | fertility |
 | abortion_pill_dangerous | The abortion pill is dangerous | Medication abortion is dangerous or causes breast cancer, infertility or depression. | mifepristone dangerous; abortion breast cancer link | fertility |
-| hrt_cancer_scare | HRT fears were overblown / HRT is dangerous | Either that menopausal hormone therapy causes cancer and should be avoided, or that the WHI scare was false and HRT is broadly protective. Code whichever is invoked. | WHI study; HRT causes breast cancer; black box removed | womens |
+| hrt_dangerous | Menopausal hormone therapy is dangerous | Menopausal hormone therapy causes breast cancer, heart disease or other serious harm and should be avoided. | HRT causes breast cancer; WHI showed harm | womens |
+| hrt_fears_overblown | HRT fears were overblown | The WHI-era scare about menopausal hormone therapy was wrong or exaggerated, and HRT is safe or broadly protective. | WHI was misread; black box removed; estrogen's undeserved bad rep | womens |
 | glp1_dangers | GLP-1 drugs are dangerous | GLP-1 drugs cause serious harm (muscle wasting, blindness, suicide, cancer) or must be taken for life. | Ozempic eats your muscle; on it for life; NAION | glp1 |
 | adhd_meds_harmful | ADHD drugs are harmful or overprescribed | ADHD stimulants harm children, are speed, or are given to normal kids for convenience. | drugging boys; Adderall is meth | neurodevelopment |
 | pharma_creates_customers | Medicine keeps people sick for profit | Drugs and doctors deliberately treat symptoms to create lifelong customers rather than cures. | customers for life; sick care; no money in cures | health_system |
@@ -915,6 +925,7 @@ without the proposition is a topic, not a narrative.
 | endocrine_disruptors_feminizing | Chemicals are feminizing men or children | Endocrine disruptors or atrazine are feminizing men, changing children's sex characteristics or causing transgender identity. | atrazine frogs; chemicals turning kids trans | environment |
 | gender_care_harmful_youth | Youth gender care is harmful and unsupported | Puberty blockers or transition for minors are irreversible harms with no supporting evidence; dysphoria resolves on its own; or ROGD is a social contagion. (Contested.) | Cass Review; puberty blockers sterilize; social contagion | gender |
 | gender_care_lifesaving | Youth gender care is lifesaving | Gender-affirming care for minors prevents suicide and is well supported; withholding it kills. (Contested.) | affirm or suicide; lifesaving care | gender |
+| trans_identity_disorder | Transgender identity is a disorder or contagion | Transgender identity is a mental illness, delusion or social contagion rather than a real or legitimate identity. (Contested; code rebuttals too.) | gender ideology; trans is a mental illness; social contagion of trans identity | gender |
 
 ### Health system, policy & society `system_narratives`
 
@@ -967,19 +978,19 @@ without the proposition is a topic, not a narrative.
 | --- | --- | --- | --- |
 | specific_study | Specific study citation | An identifiable study, trial or paper is invoked: the speaker gives enough to find it (author, journal, institution with a specific finding, year, design or named dataset). | a 2019 JAMA study; the Minnesota Coronary Experiment; Dr. Smith's trial found; the WHI trial |
 | vague_research | Vague research appeal | Research is invoked without anything identifying it. | studies show; research says; science has proven; there's data on this |
-| official_data_documents | Official data & documents | Government or official data, records or documents are invoked as evidence. | VAERS data; CDC numbers; package insert; FDA label; FOIA emails; court documents; insurance data |
-| expert_consensus | Consensus & guideline appeal | The consensus of experts or official guidelines is invoked as support. | scientific consensus; the guidelines say; the AAP recommends; most doctors agree |
+| official_data_documents | Official data & documents | Government or official data, records or documents are invoked as evidence: numbers, databases, labels, filings. An official recommendation or advisory is `expert_consensus`. | VAERS data; CDC numbers; package insert; FDA label; FOIA emails; court documents; insurance data |
+| expert_consensus | Consensus, guideline & official-recommendation appeal | Expert consensus, a guideline, an official recommendation or advisory, or a classification decision is invoked as support. | scientific consensus; the guidelines say; the AAP recommends; Surgeon General's advisory; IOM recommended; DSM removed it; most doctors agree |
 | prestige_institution | Prestige-institution invocation | A prestigious institution, journal or award is named to lend authority rather than a finding discussed on its content. | Harvard; Stanford; Mayo Clinic; NEJM; Nobel Prize |
 | credential_appeal | Credential appeal | A person's title, training or professional identity is invoked as grounds for believing a claim. | as a physician; he's an MD; a Harvard-trained doctor; I'm a nutritionist |
-| clinical_experience | Clinical experience | A practitioner's experience with patients is offered as evidence. | in my practice; my patients; I've treated thousands; we see this all the time in clinic |
+| clinical_experience | Clinical experience | A health practitioner's experience with patients or clients is offered as evidence. Other professional or eyewitness experience is `personal_anecdote`. | in my practice; my patients; I've treated thousands; we see this all the time in clinic |
 | personal_anecdote | Personal anecdote & testimonial | Personal or second-hand experience is offered as grounds for a general conclusion. | this worked for me; my friend's son; I healed myself; testimonials; before and after |
 | mechanistic_explanation | Mechanistic explanation | A biological mechanism is used to explain a claim or make it plausible, without a study being cited. | it blocks the receptor; spikes insulin; mitochondria; crosses the blood-brain barrier |
-| strength_assertion | Evidence-strength assertion | An explicit assertion of how well established something is. | proven; clinically proven; science-backed; FDA approved; doctor recommended; gold standard |
+| strength_assertion | Evidence-strength assertion | An explicit assertion about the evidence or proof behind something: proven, science-backed, FDA approved. Certainty boosters alone ("we know", "clearly") are not this label. | proven; clinically proven; science-backed; FDA approved; doctor recommended; gold standard |
 | preclinical_extrapolation | Preclinical extrapolation | Animal, cell or lab evidence is offered as support for a claim about humans. | in mice; rat study; in a petri dish; cell culture; in vitro |
 | weak_human_evidence | Preliminary or observational human evidence | Preliminary, observational or single-case human evidence is offered: association, small pilot, case report, preprint, survey. Code the kind offered, not your opinion of a plain citation. | observational study; associated with; small pilot; case report; preprint; a survey found |
 | traditional_use | Traditional-use appeal | Long or traditional use is offered as evidence. | used for thousands of years; ancient medicine; our grandmothers knew |
 | foreign_comparison | Foreign-comparison appeal | Other countries' rules, practices or outcomes are offered as evidence. | banned in Europe; other countries don't vaccinate newborns; Japan doesn't allow |
-| media_source | Media or social source | A book, documentary, news report, video, podcast or social-media post is offered as the source. | I saw a video; a documentary showed; I read in a book; a post on X |
+| media_source | Media or social source | A book, documentary, news report, video, podcast, quote or social-media post is offered as the source. | I saw a video; a documentary showed; I read in a book; a post on X |
 | evidence_limits | Evidence limitations acknowledged | The speaker acknowledges limits or uncertainty in the evidence. | more research is needed; it was a small study; we don't know yet; correlation not causation |
 
 ## Population axis
