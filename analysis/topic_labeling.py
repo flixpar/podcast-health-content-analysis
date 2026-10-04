@@ -2899,7 +2899,13 @@ class TypeSafeClient(ResponsesClient):
         provider: str | None = None,
         policy: typesafe.Policy | None = None,
     ) -> None:
-        if not api_key:
+        bases = [api_base] if isinstance(api_base, str) else list(api_base)
+        # A local System One server (analysis/serving/clef_server.py) takes no key.
+        local = all(
+            urllib.parse.urlparse(base).hostname in ("127.0.0.1", "localhost", "::1")
+            for base in bases
+        )
+        if not api_key and not local:
             raise TopicLabelingError(
                 "--api typesafe needs --api-key-env naming the variable that holds "
                 "the TypeSafe key (TYPESAFE_API_KEY)"

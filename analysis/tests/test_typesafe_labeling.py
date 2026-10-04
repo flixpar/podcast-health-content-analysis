@@ -535,3 +535,83 @@ def test_label_runs_the_typesafe_method_end_to_end_and_merge_reads_its_output(
     assert [[topic["label_id"] for topic in clip["topics"]] for clip in clips] == [["topic:sleep"]]
     candidates = list(labeling.iter_jsonl(tmp_path / "verification_candidates.jsonl"))
     assert [row["claim_text"] for row in candidates] == [UNITS[2]]
+
+
+def test_short_ids_and_short_noul_options_change_the_wire_not_the_answers():
+    sent = []
+
+    def ask(state, questions):
+        sent.append(questions)
+        return {
+            "model": "clef-test",
+            "answers": {key: {"type": "noul", "noul": number / 10} for number, key in enumerate(questions)},
+            "usage": {"input_tokens": 1},
+        }
+
+    policy = typesafe.Policy.from_mapping({"short_ids": True, "noul_options": "short"})
+    session = typesafe._Session(ask, policy)
+    questions = {
+        "topic:sleep|p001": {"type": "noul", "instructions": "Is it about sleep?"},
+        "gate|health": typesafe.GATE_QUESTIONS["health"],
+    }
+    answers = session.answers({"transcript": "x"}, questions, "screen")
+    assert list(sent[0]) == ["q0000", "q0001"]
+    assert sent[0]["q0000"]["criteria"] == {"true": "Yes.", "false": "No."}
+    # A question that brings its own options keeps them.
+    assert sent[0]["q0001"]["criteria"] == typesafe.GATE_QUESTIONS["health"]["criteria"]
+    assert answers == {
+        "topic:sleep|p001": {"type": "noul", "noul": 0.0},
+        "gate|health": {"type": "noul", "noul": 0.1},
+    }
+    assert "criteria" not in questions["topic:sleep|p001"]
+
+
+def test_the_pregate_stops_an_empty_window_after_one_small_request():
+    fake = FakeJev({"gate|health": 0.05, "label|topic:sleep": 0.9})
+    policy = typesafe.Policy.from_mapping({"pregate": True})
+    result, judgments = typesafe.label_window(window(), taxonomy(), policy, fake)
+    assert len(fake.requests) == 1
+    assert set(fake.requests[0][1]) == {"gate|health", "gate|claim", "gate|product"}
+    assert result["detections"] == [] and judgments["window"]["topic:sleep"] == 0.0
+
+    fake = FakeJev(health_window_answers())
+    policy = typesafe.Policy.from_mapping({"pregate": True, "passage_units": 1})
+    result, judgments = typesafe.label_window(window(), taxonomy(), policy, fake)
+    screen = fake.requests[1][1]
+    assert all(key.startswith("label|") for key in screen) and len(screen) == 3
+    assert {row["label_ids"][0] for row in result["detections"]} == {
+        "topic:sleep", "cross_cutting:scientific_study"
+    }
+
+
+def test_later_policy_keys_leave_existing_fingerprints_alone():
+    assert not typesafe.LATER_POLICY_KEYS & set(typesafe.Policy().fingerprint())
+    set_one = typesafe.Policy.from_mapping({"pregate": True}).fingerprint()
+    assert set_one["pregate"] is True and typesafe.LATER_POLICY_KEYS <= set(set_one)
+    with pytest.raises(typesafe.TypeSafeMethodError, match="noul_options"):
+        typesafe.Policy.from_mapping({"noul_options": "terse"})
+
+
+def test_refine_asks_units_only_inside_coarse_passages_that_found_something():
+    # Six units: coarse passages p000 (units 0-2) and p001 (units 3-5).
+    coarse = {"claim|p000": 0.9, "claim|p001": 0.05, "cross_cutting:scientific_study|p000": 0.8}
+    fine = {"claim|p002": 0.95, "cross_cutting:scientific_study|p002": 0.9}
+    asked = []
+
+    def ask(state, questions):
+        is_coarse = len(state.get("passages", {})) == 2
+        asked.append((is_coarse, set(questions)))
+        nouls = {**health_window_answers(), **(coarse if is_coarse else fine)}
+        if not is_coarse:
+            nouls = {key: value for key, value in nouls.items() if not key.startswith(("claim|", "cross_cutting:"))} | fine
+        return FakeJev(nouls)(state, questions)
+
+    policy = typesafe.Policy.from_mapping({"passage_units": {"topic": 1}, "refine": True})
+    result, judgments = typesafe.label_window(window(), taxonomy(), policy, ask)
+    fine_questions = next(questions for is_coarse, questions in asked if not is_coarse and "claim|p000" in questions)
+    assert {key for key in fine_questions if key.startswith("claim|")} == {"claim|p000", "claim|p001", "claim|p002"}
+    assert judgments["units"]["claim"][2] == 0.95 and judgments["units"]["claim"][3:] == [0.05] * 3
+    assert judgments["coarse"]["claim"] == [0.9, 0.05]
+    assert [(row["start_unit_id"], row["end_unit_id"]) for row in result["verification_candidates"]] == [
+        ("u000002", "u000002")
+    ]

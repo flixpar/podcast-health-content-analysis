@@ -206,6 +206,23 @@ class Policy:
     gate_threshold: float = 0.1
     # Units of context shown on each side of a span in the attribute request.
     context_units: int = 2
+    # Ask the window gates alone first and stop below the health gate, instead
+    # of asking them beside every label's screening question. A Jev request is
+    # billed per token either way; on a local model (docs/clef-labeling.md) the
+    # screen is most of what an empty window costs, and most windows are empty.
+    pregate: bool = False
+    # Send question ids as q0000... and map the answers back. Clef reads each
+    # id as part of the prompt, so a long one costs tokens in every question.
+    short_ids: bool = False
+    # Options of a noul question: "model" leaves the model's defaults (Clef adds
+    # a sentence each to "true" and "false"); "short" sends "Yes." and "No.".
+    noul_options: str = "model"
+    # Coarse-to-fine localization of the unit-level axes (frames, evidence,
+    # claims, products): ask over `refine_units`-unit passages, then unit by
+    # unit only inside passages at `refine_threshold` or above.
+    refine: bool = False
+    refine_units: int = 3
+    refine_threshold: float = 0.2
 
     # -- how answers become annotations -------------------------------------
     # The screening probability a label needs for any of its spans to be kept.
@@ -277,10 +294,31 @@ class Policy:
                 "typesafe policy: passage_units and max_claim_units must be positive",
                 kind="invalid_policy",
             )
+        if policy.noul_options not in NOUL_OPTIONS:
+            raise TypeSafeMethodError(
+                f"typesafe policy noul_options must be one of {sorted(NOUL_OPTIONS)}",
+                kind="invalid_policy",
+            )
         return policy
 
     def fingerprint(self) -> dict[str, Any]:
-        return asdict(self)
+        # Keys added after the first Jev runs are left out while every one of
+        # them is at its default, so a run made before they existed keeps the
+        # fingerprint it was stored under; once any is set, all are recorded.
+        values = asdict(self)
+        defaults = asdict(Policy())
+        if all(values[key] == defaults[key] for key in LATER_POLICY_KEYS):
+            return {key: value for key, value in values.items() if key not in LATER_POLICY_KEYS}
+        return values
+
+
+LATER_POLICY_KEYS = frozenset(
+    {"pregate", "short_ids", "noul_options", "refine", "refine_units", "refine_threshold"}
+)
+NOUL_OPTIONS: dict[str, dict[str, str] | None] = {
+    "model": None,
+    "short": {"true": "Yes.", "false": "No."},
+}
 
 
 # --------------------------------------------------------------------------
@@ -462,24 +500,40 @@ def pack_questions(state: Any, questions: Mapping[str, Any]) -> list[dict[str, A
 class _Session:
     """Sends packed requests for one window and adds up what they cost."""
 
-    def __init__(self, ask: Ask) -> None:
+    def __init__(self, ask: Ask, policy: Policy | None = None) -> None:
         self.ask = ask
+        self.policy = policy or Policy()
         self.usage: dict[str, Any] = {"input_tokens": 0, "output_tokens": 0, "requests": 0}
         # Input tokens by stage: what a window costs is decided by which stage
         # dominates, and that differs between a null window and a dense one.
         self.by_stage: dict[str, int] = {}
         self.model: str | None = None
 
+    def _wire(self, batch: Mapping[str, Any]) -> tuple[dict[str, Any], dict[str, str]]:
+        """``batch`` as sent, and sent id -> the method's id."""
+        options = NOUL_OPTIONS[self.policy.noul_options]
+        sent: dict[str, Any] = {}
+        names: dict[str, str] = {}
+        for number, (key, question) in enumerate(batch.items()):
+            if options is not None and question["type"] == "noul" and "criteria" not in question:
+                question = {**question, "criteria": options}
+            wire_key = f"q{number:04d}" if self.policy.short_ids else key
+            sent[wire_key] = question
+            names[wire_key] = key
+        return sent, names
+
     def answers(self, state: Any, questions: Mapping[str, Any], stage: str) -> dict[str, Any]:
         merged: dict[str, Any] = {}
         for batch in pack_questions(state, questions):
-            response = self.ask(state, batch)
+            sent, names = self._wire(batch)
+            response = self.ask(state, sent)
             answers = response.get("answers")
-            if not isinstance(answers, dict) or set(answers) != set(batch):
+            if not isinstance(answers, dict) or set(answers) != set(sent):
                 raise TypeSafeMethodError(
                     "response does not answer exactly the questions asked",
                     kind="typesafe_answers_mismatch",
                 )
+            answers = {names[key]: value for key, value in answers.items()}
             usage = response.get("usage") or {}
             self.usage["input_tokens"] += int(usage.get("input_tokens") or 0)
             self.usage["output_tokens"] += int(usage.get("output_tokens") or 0)
@@ -538,12 +592,21 @@ def judge_window(
     """Screen the window and localize whatever cleared the fan-out threshold."""
     labels = {label["label_id"]: label for label in taxonomy["labels"]}
     transcript = {"transcript": " ".join(unit["text"] for unit in window["units"])}
-    screen = {
-        **{f"label|{label_id}": screen_question(label, policy.screen_examples) for label_id, label in labels.items()},
-        **{f"gate|{name}": question for name, question in GATE_QUESTIONS.items()},
+    gate_questions = {f"gate|{name}": question for name, question in GATE_QUESTIONS.items()}
+    label_questions = {
+        f"label|{label_id}": screen_question(label, policy.screen_examples) for label_id, label in labels.items()
     }
-    answers = session.answers(transcript, screen, "screen")
-    window_probs = {label_id: _noul(answers[f"label|{label_id}"]) for label_id in labels}
+    if policy.pregate:
+        answers = session.answers(transcript, gate_questions, "gate")
+        if _noul(answers["gate|health"]) >= policy.health_gate_threshold:
+            answers.update(session.answers(transcript, label_questions, "screen"))
+    else:
+        answers = session.answers(transcript, {**label_questions, **gate_questions}, "screen")
+    # A label the pre-gate stopped before screening was never asked: 0.
+    window_probs = {
+        label_id: _noul(answers[f"label|{label_id}"]) if f"label|{label_id}" in answers else 0.0
+        for label_id in labels
+    }
     gates = {name: _noul(answers[f"gate|{name}"]) for name in GATE_QUESTIONS}
 
     healthy = gates["health"] >= policy.health_gate_threshold
@@ -584,6 +647,9 @@ def judge_window(
         subjects["product"] = ("product", PRODUCT_SUBJECT)
         grids.setdefault(1, {})["product"] = lambda key: passage_question("product", key, "product")
     for size, builders in grids.items():
+        if policy.refine and size == 1:
+            _localize_coarse_to_fine(window, builders, subjects, policy, session, judgments)
+            continue
         passages = _passages(window, size)
         # Passages first, subjects last. The order is not cosmetic: answers moved
         # by 0.07 on average when the two were swapped, against 0.02 between two
@@ -600,6 +666,61 @@ def judge_window(
             probs = [_noul(answers[f"{name}|{key}"]) for key, _ in passages]
             judgments["units" if name in ("claim", "product") else "labels"][name] = probs
     return judgments
+
+
+def _localize_coarse_to_fine(
+    window: Mapping[str, Any],
+    builders: Mapping[str, Callable[[str], dict[str, Any]]],
+    subjects: Mapping[str, tuple[str, dict[str, Any]]],
+    policy: Policy,
+    session: _Session,
+    judgments: dict[str, Any],
+) -> None:
+    """Unit-level localization asked only where a coarser pass found something.
+
+    Frames, evidence signals, claims and products are localized unit by unit,
+    which on a local model is most of what a health window costs, while each
+    of them covers under a tenth of the units. So they are asked over
+    ``refine_units``-unit passages first, and unit by unit only inside the
+    passages that reach ``refine_threshold``. A unit not refined keeps its
+    passage's probability, which is under the threshold and so under any seed.
+    """
+    units = window["units"]
+
+    def ask(passages: Sequence[tuple[str, list[int]]], wanted: Mapping[str, set[str]], stage: str) -> dict[str, Any]:
+        state = {
+            "note": PASSAGE_NOTE,
+            **_passage_state(window, passages),
+            "subjects": {subjects[name][0]: subjects[name][1] for name in wanted if name in subjects},
+        }
+        questions = {
+            f"{name}|{key}": builders[name](key) for name, keys in wanted.items() for key, _ in passages if key in keys
+        }
+        return session.answers(state, questions, stage) if questions else {}
+
+    coarse = _passages(window, policy.refine_units)
+    answers = ask(coarse, {name: {key for key, _ in coarse} for name in builders}, "localize_coarse")
+    fine = _passages(window, 1)
+    unit_probs: dict[str, list[float]] = {}
+    wanted: dict[str, set[str]] = {}
+    for name in builders:
+        probs = [0.0] * len(units)
+        for key, indexes in coarse:
+            p = _noul(answers[f"{name}|{key}"])
+            for index in indexes:
+                probs[index] = p
+            if p >= policy.refine_threshold:
+                wanted.setdefault(name, set()).update(fine[index][0] for index in indexes)
+        unit_probs[name] = probs
+        judgments.setdefault("coarse", {})[name] = [
+            _noul(answers[f"{name}|{key}"]) for key, _ in coarse
+        ]
+    answers = ask(fine, wanted, "localize_1")
+    for name, probs in unit_probs.items():
+        for index, (key, _) in enumerate(fine):
+            if f"{name}|{key}" in answers:
+                probs[index] = _noul(answers[f"{name}|{key}"])
+        judgments["units" if name in ("claim", "product") else "labels"][name] = probs
 
 
 # --------------------------------------------------------------------------
@@ -1053,7 +1174,7 @@ def label_window(
     """(result, judgments) for one window. ``judgments`` carries ``usage`` and ``model``."""
     if not window.get("units"):
         raise TypeSafeMethodError(f"window {window.get('window_id')} has no units", kind="empty_window")
-    session = _Session(ask)
+    session = _Session(ask, policy)
     judgments = judge_window(window, taxonomy, policy, session)
     draft = draft_annotations(window, taxonomy, judgments, policy)
     judgments["attributes"] = judge_attributes(window, taxonomy, draft, policy, session)
