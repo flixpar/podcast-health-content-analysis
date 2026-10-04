@@ -29,11 +29,12 @@ output_dir = "analysis/output/topic-labeling"
 api_base = ["http://127.0.0.1:8222/v1", "http://gpu312:8222/v1"]
 # Which OpenAI-compatible API those endpoints speak: "responses" (the default)
 # or "chat_completions". vLLM serves both; some hosted providers only the
-# second. Prefer "responses" where there is a choice -- it reports truncation
-# explicitly and echoes back the sampling settings the server resolved, and on
-# chat_completions `effective_sampling` in the manifest is empty for that
-# reason, so pin temperature and top_p below if you switch.
-# api = "chat_completions"
+# second. Responses reports truncation explicitly and echoes back the sampling
+# settings the server resolved, but only Chat Completions accepts vLLM's
+# thinking_token_budget (see [label]), so this run uses it; temperature and
+# top_p are pinned below because effective_sampling is empty on this API.
+# Benchmarked on the dev split, the two APIs label indistinguishably.
+api = "chat_completions"
 # Drop this line to discover the served model from /v1/models instead.
 model = "deepseek-ai/DeepSeek-V4-Flash-0731"
 
@@ -48,8 +49,10 @@ model = "deepseek-ai/DeepSeek-V4-Flash-0731"
 # output tokens, and a 32000 budget truncated one request in six.
 #
 # The ceiling is the server's context. A real 900-word window measures about
-# 2,275 input tokens, so one window plus the ~11.5k-token instruction prefix is
-# ~14k, and at max_model_len 65536 the budget must stay under ~51k.
+# 2,275 input tokens, so one window plus the ~12.5k-token codebook prefix is
+# ~15k, and at max_model_len 98304 (96K) the budget must stay under ~82k. With a
+# 44k budget, dense windows truncated and retried a full reasoning pass; 80k
+# almost never truncates.
 # `low` (thinking without the high-effort preamble) is 1.7x faster, never
 # truncates and is accepted more often -- but on a health-dense window it
 # returns 9.3 detections against high's 13.5, at the same claim yield. Its
@@ -59,8 +62,11 @@ model = "deepseek-ai/DeepSeek-V4-Flash-0731"
 # extra detections are recall or false positives is a question for the blinded
 # validation sample, not for the throughput numbers.
 reasoning_effort = "high"
-max_output_tokens = 44000
-timeout = 1800
+max_output_tokens = 80000
+# A dense window can think for 30-40k tokens; at a few hundred concurrent
+# requests that takes well over half an hour, and a client timeout abandons the
+# request while the server finishes generating it anyway.
+timeout = 7200
 attempts = 3
 
 # DeepSeek's recommended sampling for this checkpoint.
@@ -93,23 +99,32 @@ top_p = 0.95
 # experiment = "topic-pilot-a"
 
 [label]
-# Concurrency: both servers pin num_requests_running at 64 (their max_num_seqs)
-# and queue beyond it, so 128 client-side keeps both fully subscribed. Measured
-# accepted throughput when requests still carried four windows, effort high,
-# across both nodes:
-#   c=16  7.7 windows/min    c=64   25.0 windows/min
-#   c=32 13.3 windows/min    c=128  36.3 windows/min  (waiting 24-36/node)
+# Concurrency: per node, launched by analysis/serving/serve-deepseek-v4.sh with
+# its reasoning-parser plugin (without it the server is CPU-bound near 1-2k
+# tokens/s) and MAX_NUM_SEQS=512. Aggregate decode on one node, high effort:
+#   c=64  3.4k tok/s    c=192  6.3k tok/s    c=512  10.3k tok/s
+#   c=128 5.3k tok/s    c=256  7.3k tok/s    (KV cache 92% at c=512, 32k outputs)
+# About 384 per node keeps long dense outputs clear of KV preemption, so 768
+# across the two endpoints above. On 1,859 real corpus windows one node labeled
+# ~3,900 windows/hour at c=384 without a thinking budget.
 #
 # Every request carries one window (and `verify` one candidate). The instruction
 # prefix is prompt-cached by the server, so packing several windows into one
 # request saved little, and validation rejects a whole response: one bad
 # annotation or one truncation threw away every window in the request.
-concurrency = 128
-# One bad annotation still rejects the whole response and repeats a full
-# reasoning pass. "lenient" repairs an annotation where the fix is unambiguous
-# (a quote just outside its span widens the span) and drops it where it is not,
-# counting both; "strict" is the default. See docs/topic-labeling-method.md.
-# validation = "lenient"
+concurrency = 768
+# One bad annotation would otherwise reject the whole response and repeat a
+# full reasoning pass. "lenient" repairs an annotation where the fix is
+# unambiguous (a quote just outside its span widens the span) and drops it where
+# it is not, counting both. On the benchmark it cut output tokens per accepted
+# window by 27% with no significant change in agreement. See
+# docs/topic-labeling-method.md.
+validation = "lenient"
+# vLLM forces the end of thinking after this many reasoning tokens (Chat
+# Completions only). On the benchmark dev split, 24k cut output tokens 15% with
+# no loss against unbounded thinking; 16k cost frame F1 (-0.07) and claim recall
+# (-0.06), all of it on the dense windows that think past the cap.
+thinking_token_budget = 24000
 
 [verify]
 concurrency = 8
