@@ -30,6 +30,10 @@ Run everything from the repository root with the project venv:
 | `runs/` (gitignored) | candidate runs, each with `run_manifest.json`, per-repeat `labels.sqlite` and `attempts.jsonl`, `score.json`, `scorecard.md` |
 | `pool/` (gitignored) | the candidate pool and screening verdicts the items were selected from |
 
+`benchmark/v2/` holds a second benchmark for the granular v7 taxonomy,
+selected with `BENCHMARK_DIR=benchmark/v2`; see
+[Version 2](#version-2-2026-10-04-the-granular-v7-taxonomy).
+
 `analysis/benchmark/codebook.md` is the task definition the references are
 anchored to. Prompts are attempts to make a model do that task; the codebook
 is what "right" means. Changing the codebook is a new benchmark version.
@@ -551,3 +555,175 @@ against the reference alpha, not as plain mistakes.
   extracted depending on the annotator.
 - **ASR damage.** Brand names garbled beyond the "A G one" repair rule are
   included at low confidence, left as transcribed, or dropped.
+
+## Version 2 (2026-10-04): the granular v7 taxonomy
+
+`benchmark/v2/` is a separate benchmark built on the v7 scheme
+(`taxonomy/health-v7.md`, `taxonomy/codebook-v7.md`; design in
+`docs/labeling-v7.md`): a two-level topic tree of 60 parents and 349
+subtopics, 121 named narratives, 22 frames, 16 evidence signals and 9
+populations, 577 labels in all. The v1 benchmark in `benchmark/` is
+unchanged and still scores flat-taxonomy runs; the two never mix, since a
+label set is a benchmark version.
+
+Every command takes the benchmark directory from `BENCHMARK_DIR`:
+
+```bash
+export BENCHMARK_DIR=benchmark/v2
+.venv/bin/python -m analysis.benchmark run --name v7-ds-high \
+    --pipeline-config benchmark/pipeline-deepseek.toml -- --reasoning-effort high
+.venv/bin/python -m analysis.benchmark score benchmark/v2/runs/v7-ds-high
+.venv/bin/python -m analysis.benchmark compare <run> <run> --level parent
+```
+
+A v7 run uses the production v7 prompt (rubric, codebook, label tables;
+about 45k tokens, cached). `--rubric-file` replaces only the rubric, so a
+prompt variant is still measured against the same codebook. On a local vLLM
+server serve with `--max-model-len 131072` or more.
+
+### What is in `benchmark/v2/`
+
+| file | what |
+| --- | --- |
+| `config.toml` | v2 quotas, the narrative stratum's target list, `[paths] codebook` |
+| `config-grow-narrative.toml` | the config the narrative stratum was drawn with |
+| `taxonomy.json` | the frozen v7 label set (577 labels) |
+| `items.jsonl` | 320 items: v1's 260 plus 60 narrative windows |
+| `screening-narrative.jsonl` | Sonnet screening verdicts for the narrative pool |
+| `references/<item_id>/opus-{a,b,c}.json` | three independent Opus 5.5 passes |
+| `gold.jsonl`, `gold-parent.jsonl`, `gold-domain.jsonl` | gold at each level of the topic tree |
+| `adjudication.jsonl` | Opus verdicts on every singleton |
+| `agreement.json` | pairwise agreement, alpha, leave-one-out at each level, plants, adjacency |
+
+### Items
+
+The 260 v1 items are kept as they are, with their splits, so v1 and v2
+results on the same windows can be read side by side. A new **narrative**
+stratum (60 windows, 53 narratives) fills the gap the v1 items left: they
+covered only 32 of the 80 lexicon narratives the fast scan validated.
+Windows were drawn from the corpus by narrative lexicon hits (at most ten
+per show), screened by six Sonnet agents (133 kept, 17 dropped, mostly for
+the narrative being only named, not discussed) and selected to quota. Like
+rare-label items, narrative items are reported separately, not in the
+headline. The fifteen synthetic plants were translated to v7 labels (frames
+and evidence one to one, topics to the v7 parent, since the passages were
+written against broad topics; `check_plants` compares topics at the parent
+level).
+
+### Scoring at three levels
+
+The topic axis is scored at the **subtopic** level (the label applied), the
+**parent** level (`topic:vaccines.hep_b` counts as `topic:vaccines`) and the
+**domain** level. Each coarser level re-clusters the references with the
+alias map rather than coarsening the leaf gold, so two annotators who chose
+sibling subtopics agree at the parent level and the parent gold there is
+`required`. Adjudication verdicts follow the atom's original label (`Atom.origin_label`),
+so a subtopic verdict still applies at the parent. The scorecard gains a
+"Topic F1 by level" table with each level's own leave-one-out ceiling, and
+`compare --level parent|domain` compares runs at a coarser level. Narrative,
+population, frame and evidence are scored as their own groups.
+
+### The reference set
+
+Three Opus 5.5 agents (`opus-a`, `opus-b`, `opus-c`; different bundle
+groupings) labeled all 320 items independently, writing one file per window
+and validating with `assemble-result`. Every result validated (0 problems).
+`aggregate` built the gold; 1,702 singletons were then adjudicated by Opus
+agents in 32 bundles (1,596 acceptable, 106 rejected, 94% acceptable).
+
+| | v1 (round 2) | v2 |
+| --- | --- | --- |
+| labels | 91 | 577 |
+| items | 260 | 320 |
+| annotators per item | 4 (2 Opus, 2 Sonnet) | 3 (Opus 5.5) |
+| gold atoms | 6,786 | 10,121 |
+| required | 5,061 | 8,419 |
+| adjudicated acceptable / rejected | 1,572 / 153 | 1,596 / 106 |
+| labels with gold | | 512 of 577 |
+| labels with twenty or more required atoms | 53 | 72 |
+
+Gold atoms by kind (required plus acceptable): topic 3,997, claim 2,851,
+evidence 1,115, frame 1,033, narrative 421, product 345, population 253.
+324 of the 349 subtopics and 105 of the 121 narratives have gold.
+
+**Agreement.** Pairwise F1 between the three passes (all three pairs within
+0.01 of each other on every axis except population):
+
+| axis | pairwise F1 | leave-one-out F1 (strict) |
+| --- | --- | --- |
+| topic, subtopic level | 0.863 | 0.920 to 0.925 |
+| topic, parent level | 0.871 to 0.876 | 0.926 to 0.934 |
+| topic, domain level | 0.870 to 0.875 | 0.922 to 0.933 |
+| narrative | 0.873 to 0.875 | 0.908 to 0.941 |
+| frame | 0.864 to 0.869 | 0.914 to 0.934 |
+| evidence | 0.862 to 0.865 | 0.930 to 0.941 |
+| population | 0.869 to 0.891 | 0.904 to 0.946 |
+| claim | 0.885 to 0.893 | 0.936 to 0.943 |
+| product | 0.937 to 0.946 | 0.954 to 0.978 |
+
+Krippendorff's alpha on matched atoms: claim certainty 0.91, claim type
+0.87, claim discourse role 0.86, detection discourse role 0.83, detection
+relevance 0.79, product type 0.99, mention role 0.97.
+
+The headline finding is the one the granular design was built on: with six
+times as many labels, agreement went up, not down. On v1's 91 labels the
+best pair (two Opus 5 passes) reached topic F1 0.81; on 349 subtopics three
+Opus 5.5 passes reach 0.86 with each other, and 0.87 at the parent level.
+The comparison is suggestive rather than controlled (a newer model, a new
+codebook, 60 added items), but the direction is clear. Moving from subtopic
+to parent adds only about 0.01, so choosing between sibling subtopics is a
+small share of the disagreement; the rest is whether a subject is coded at
+all. The weakest attribute is still detection relevance (passing vs
+substantive), as in v1.
+
+The leave-one-out column is the ceiling to read a candidate against: what a
+fourth labeler of reference quality would score on the scorecard. It is
+higher than pairwise F1 because the gold is a two-of-three consensus.
+
+**Adjudication.** The 106 rejections are mostly topic (45) and claim (40):
+a bare parent ID where a listed subtopic fits (the codebook's
+specific-beats-general rule), `topic:other` where a parent fits, spans
+that do not carry the labeled subject, and puffery, value judgements,
+capture rhetoric or political statements extracted as claims; the rest are
+generic or incidental products and a few frames applied without the
+rhetoric.
+
+**Synthetic plants.** 43 of 67 plants are confirmed by required gold, one is
+missing (a passing callback to the sponsor's drink, which nobody coded as a
+topic) and one is a singleton. The 22 `contradicted` or `split` plants are
+attribute disagreements with the plant author, not missed phenomena: claim
+type (`mechanism` planted, `other_factual` or `causal` coded), certainty on
+"supposedly" and "probably", an electrolyte mix coded as a `supplement`
+rather than `food_or_beverage`, and the topic detection in a rebuttal coded
+`asserted_or_endorsed` (the codebook's reading: the speaker asserts the
+correction; the rebutted claim carries `rebutted`). The plants are a check on
+the items and are left as written.
+
+### Label coverage
+
+577 labels on 320 windows is thin per label: 77 labels have no required gold
+and 201 have fewer than five atoms. Per-label precision and recall are
+therefore only meaningful for the 72 labels with twenty or more atoms, or
+at the parent level; the narrative and rare-label strata exist to raise
+coverage where it matters most. `narrative:unlisted_narrative` has 43 gold
+atoms and the bare parent IDs (which mean "no listed subtopic fits") have
+155 (of 3,997 topic atoms). Both are gap detectors, and their summaries are the input to the
+next taxonomy revision.
+
+### What is not yet validated
+
+- **No candidate has been run on v2.** The DeepSeek and TypeSafe accounts
+  are out of credit, so the scorecard has only been exercised end to end
+  with references standing in as a candidate. The first real runs fill
+  every number above for a labeler.
+- **All references are one model.** Three Opus 5.5 passes with different
+  bundle groupings, adjudicated by Opus: agreement measures how
+  consistently Opus applies the codebook, not whether the codebook reading
+  is right. A Sonnet or non-Anthropic pass, and the human expert sample,
+  would make the ceiling less of an Opus-consistency measure. A candidate
+  of another family that disagrees with Opus in a systematic way will look
+  worse than it is; read its pairwise rows per annotator.
+- **The adjudicator is generous by design** ("prefer acceptable"): 94% of
+  singletons became acceptable, which a candidate gets credit for producing
+  and is not penalised for missing. Strict recall is over `required` atoms
+  only, so this makes precision forgiving without inflating recall.
