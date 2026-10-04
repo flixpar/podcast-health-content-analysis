@@ -1,0 +1,117 @@
+{
+  "api": "chat_completions",
+  "benchmark_version": "v3",
+  "completed_at": "2026-10-04T22:24:51.940245+00:00",
+  "concurrency": 256,
+  "config": "benchmark/pipeline-local.toml",
+  "created_at": "2026-10-04T19:19:28.334661+00:00",
+  "endpoints": {
+    "http://127.0.0.1:8222/v1": "deepseek-ai/DeepSeek-V4-Flash-0731"
+  },
+  "experiment": null,
+  "git_commit": "9339305ef8cfe76869b8f1a89166885cb4106f99",
+  "items": 320,
+  "items_hash": "44b9fa900dffd792bb695f88c8fbf4d6b646073a7c603bcf83fa51f3818ef6d8",
+  "max_output_tokens": 30000,
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "name": "v8-none",
+  "no_auth": true,
+  "notes": null,
+  "prompt_version": "granular-v8:445123e19aed0c47",
+  "provider": null,
+  "reasoning_effort": "none",
+  "repeat_summaries": [
+    {
+      "attempts": {
+        "accepted": 320,
+        "attempts": 320
+      },
+      "exported": 320,
+      "repeat": 0,
+      "stopped_by_usage_limit": null,
+      "unresolved_windows": 0,
+      "unresolved_windows_by_kind": {},
+      "validation_changes": {
+        "dropped": {
+          "certainty_markers_mismatch": 86,
+          "duplicate_annotation": 81,
+          "invalid_field": 1,
+          "mixed_or_unknown_labels": 67,
+          "non_verbatim_quote": 153,
+          "reversed_span": 31,
+          "span_out_of_window": 35
+        },
+        "repaired": {
+          "certainty_set_unhedged": 31,
+          "span_widened_for_certainty_marker": 58,
+          "span_widened_for_quote": 299
+        }
+      },
+      "wall_seconds": 5468.2,
+      "window_labels_sha256": "a58558f1ad9b29a95c29ab48ca0259c22a44756f3e199a96358040715fc56b4c",
+      "windows_labeled": 320
+    },
+    {
+      "attempts": {
+        "accepted": 320,
+        "attempts": 320
+      },
+      "exported": 320,
+      "repeat": 1,
+      "stopped_by_usage_limit": null,
+      "unresolved_windows": 0,
+      "unresolved_windows_by_kind": {},
+      "validation_changes": {
+        "dropped": {
+          "certainty_markers_mismatch": 83,
+          "duplicate_annotation": 76,
+          "invalid_field": 3,
+          "mixed_or_unknown_labels": 72,
+          "non_verbatim_quote": 162,
+          "reversed_span": 53,
+          "span_out_of_window": 67
+        },
+        "repaired": {
+          "certainty_marker_dropped": 2,
+          "certainty_set_unhedged": 17,
+          "span_widened_for_certainty_marker": 58,
+          "span_widened_for_quote": 329
+        }
+      },
+      "wall_seconds": 5655.3,
+      "window_labels_sha256": "ba012d4ca598ce1beb1a0f70fe8896bdbe2d8a5d0dc1fff7cd058f48a273f84c",
+      "windows_labeled": 320
+    }
+  ],
+  "repeats": 2,
+  "rubric_file": null,
+  "rubric_sha256": "c2996aaabcb2202b22871e6b378de4d4be7107bb22b58872df7e3c7e2cb957dc",
+  "run_fingerprint": "84f010ac507fecbccc41362684edac7dc2e16cda1a7cf51f8fd9f8919daeb399",
+  "schema_version": "topic-labeling-v5",
+  "seed": null,
+  "stopped_by_usage_limit": null,
+  "taxonomy_sha256": "4ebb17a50b2179e8549d773aa5a3d52d51536b8fec12cac193887556e75c6182",
+  "temperature": 1.0,
+  "thinking_token_budget": 24000,
+  "top_p": 0.95,
+  "usage_limits": null,
+  "validation": "lenient",
+  "validation_changes": {
+    "dropped": {
+      "certainty_markers_mismatch": 169,
+      "duplicate_annotation": 157,
+      "invalid_field": 4,
+      "mixed_or_unknown_labels": 139,
+      "non_verbatim_quote": 315,
+      "reversed_span": 84,
+      "span_out_of_window": 102
+    },
+    "repaired": {
+      "certainty_marker_dropped": 2,
+      "certainty_set_unhedged": 48,
+      "span_widened_for_certainty_marker": 116,
+      "span_widened_for_quote": 628
+    }
+  },
+  "validator_sha256": "e74161b4d1980b357a06e1d7e7eed1b8f05de441c5b106a923b76497c581a929"
+}

@@ -1,0 +1,700 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c177018w0009",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000488",
+        "evidence_quote": "because we're obviously trying, she then puts me on progesterone",
+        "label_ids": [
+          "topic:fertility.conception_general"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000488",
+        "summary": "Speaker describes being put on progesterone while trying to conceive."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000493",
+        "evidence_quote": "that whole study that came out that women in their 60s should not be on hormone replacement therapy was a lie",
+        "label_ids": [
+          "topic:womens.hormone_therapy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000489",
+        "summary": "Women were told not to take HRT but research shows they should; the study saying women in their 60s should avoid it was a lie."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000493",
+        "evidence_quote": "women in their 60s should not be on hormone replacement therapy",
+        "label_ids": [
+          "population:midlife",
+          "population:women"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000489",
+        "summary": "The HRT discussion is specifically about women, including women in their 60s."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000492",
+        "evidence_quote": "that whole study that came out that women in their 60s should not be on hormone replacement therapy was a lie",
+        "label_ids": [
+          "narrative:hrt_fears_overblown"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000489",
+        "summary": "The HRT scare is presented as a lie; women are actually supposed to take it."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000492",
+        "evidence_quote": "women in their 60s should not be on hormone replacement therapy",
+        "label_ids": [
+          "narrative:hrt_dangerous"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000492",
+        "summary": "The claim that women in their 60s should not take HRT is stated and dismissed as a lie."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000492",
+        "evidence_quote": "that whole study that came out that women in their 60s should not be on hormone replacement therapy was a lie",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000492",
+        "summary": "Speaker debunks the WHI-era claim that women in their 60s should not take HRT."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000492",
+        "evidence_quote": "that whole study that came out that women in their 60s should not be on hormone replacement therapy",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000489",
+        "summary": "An unnamed study is cited as the source of the HRT warning and dismissed as a lie."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000503",
+        "evidence_quote": "It turns out that they dispelled all of those myths for for men",
+        "label_ids": [
+          "topic:mens.testosterone"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000495",
+        "summary": "Men's testosterone guidelines dispelled cardiovascular-risk myths about testosterone therapy."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000503",
+        "evidence_quote": "Men, same thing",
+        "label_ids": [
+          "population:men"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000495",
+        "summary": "The testosterone discussion is specifically about men."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000499",
+        "evidence_quote": "in 2018, the Journal of American Urology. Updated their testosterone guidelines",
+        "label_ids": [
+          "evidence:expert_consensus"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000496",
+        "summary": "A journal's updated testosterone guidelines are invoked as the source that dispelled the myths."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000521",
+        "evidence_quote": "in range for a woman could be 17 for estrogen",
+        "label_ids": [
+          "topic:womens.female_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000504",
+        "summary": "Discussion of estrogen reference ranges and why standard panels miss hormone problems."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000521",
+        "evidence_quote": "functional doctors have tighter ranges",
+        "label_ids": [
+          "narrative:normal_labs_miss_disease"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000504",
+        "summary": "Standard ranges are so wide that 'in range' can still mean unhealthy; functional doctors use tighter ranges."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000516",
+        "evidence_quote": "General practitioners have really big ranges because they're not looking at healthy, optimized people",
+        "label_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000514",
+        "summary": "General practitioners are portrayed as having low standards, aiming only to avoid disease."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000511",
+        "evidence_quote": "Do you recommend Dutch test",
+        "label_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000511",
+        "summary": "Host asks whether to recommend the DUTCH hormone test."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000535",
+        "evidence_quote": "what do you have to do to remove toxins from your body",
+        "label_ids": [
+          "topic:detox.toxic_load_general"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000522",
+        "summary": "Removing toxins from the body; people are described as toxic soup in a toxic environment."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000535",
+        "evidence_quote": "a lot of us, like you said in your personal journey, are walking around like a toxic soup and don't even realize it",
+        "label_ids": [
+          "narrative:detox_needed"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000522",
+        "summary": "The body is said to accumulate toxins it cannot clear, so cleansing is needed."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000531",
+        "evidence_quote": "just because of our environment is so toxic",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000522",
+        "summary": "Health problems are framed in terms of toxins, toxic soup and a toxic environment."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000528",
+        "evidence_quote": "you have chemtrails in the",
+        "label_ids": [
+          "topic:environment.geoengineering"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000528",
+        "summary": "Chemtrails are named as part of the toxic environment."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000528",
+        "evidence_quote": "you have chemtrails in the",
+        "label_ids": [
+          "narrative:chemtrails"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000528",
+        "summary": "The claim that chemtrails are sprayed in the sky is stated."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000535",
+        "evidence_quote": "Figure out your inflammation levels",
+        "label_ids": [
+          "topic:immune.inflammation"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000535",
+        "summary": "Inflammation levels are mentioned as something to check before the fertility journey."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000540",
+        "evidence_quote": "every month when you're doing these rounds of IVF",
+        "label_ids": [
+          "topic:fertility.infertility_treatment"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000537",
+        "summary": "IVF rounds and the importance of egg quality for embryos."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000544",
+        "evidence_quote": "fifty percent of infertility is caused by men",
+        "label_ids": [
+          "topic:fertility.infertility_treatment",
+          "topic:fertility.male_fertility"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000541",
+        "summary": "Half of infertility is male-factor, yet clinics often don't test men; both partners should be tested."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000561",
+        "evidence_quote": "losing a lot of like visceral body fat",
+        "label_ids": [
+          "topic:mens.testosterone",
+          "topic:weight.body_composition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000554",
+        "summary": "Men should lose visceral fat and gain muscle mass, which raises testosterone."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000567",
+        "evidence_quote": "How about on the male side",
+        "label_ids": [
+          "population:men"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000552",
+        "summary": "The meal prep and testosterone discussion is specifically about men."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000567",
+        "evidence_quote": "a lot of men are also really low on testosterone",
+        "label_ids": [
+          "topic:fitness.strength_training",
+          "topic:food.meat_animal_foods",
+          "topic:mens.testosterone"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000562",
+        "summary": "Men are low on testosterone because they don't lift or eat enough red meat, which is actually good for them."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000567",
+        "evidence_quote": "High quality red meat is actually incredible for you",
+        "label_ids": [
+          "narrative:red_meat_healthy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000564",
+        "summary": "The fear around red meat is dismissed and red meat is asserted to be healthy."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000567",
+        "evidence_quote": "I just want to correct this",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000565",
+        "summary": "Speaker corrects the fear around red meat."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000523",
+        "evidence_quote": "I'm a big fan of body biopc",
+        "mention_role": "recommended",
+        "product_name": "BodyBio PC",
+        "product_type": "supplement",
+        "start_unit_id": "u000523"
+      },
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000511",
+        "evidence_quote": "Do you recommend Dutch test",
+        "mention_role": "neutral",
+        "product_name": "DUTCH test",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000511"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Women in their 60s should not be on hormone replacement therapy.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000492",
+        "evidence_quote": "women in their 60s should not be on hormone replacement therapy",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:hrt_dangerous"
+        ],
+        "rationale": "The study's recommendation is checkable against the WHI-era evidence and matters to whether women take HRT.",
+        "relevance": "substantive",
+        "start_unit_id": "u000492",
+        "topic_ids": [
+          "topic:womens.hormone_therapy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Women are actually supposed to take hormone replacement therapy.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000492",
+        "evidence_quote": "you are actually supposed to take it",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:hrt_fears_overblown"
+        ],
+        "rationale": "A recommendation about HRT use that contradicts the WHI-era guidance; it can be checked against current guidelines.",
+        "relevance": "substantive",
+        "start_unit_id": "u000491",
+        "topic_ids": [
+          "topic:womens.hormone_therapy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Testosterone therapy increases the risk of cardiovascular disease, heart attack, stroke, embolism, DVT, or clotting events.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000499",
+        "evidence_quote": "if you start hormone therapy, you're you're going to increase your risk of cardiovascular disease, heart attack, stroke, yeah, um, an embolism, a a DVT",
+        "evidence_signal_ids": [
+          "evidence:expert_consensus"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The cardiovascular risk of testosterone therapy is checkable and affects whether men start TRT.",
+        "relevance": "substantive",
+        "start_unit_id": "u000497",
+        "topic_ids": [
+          "topic:mens.testosterone"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The 2018 Journal of American Urology testosterone guidelines dispelled the myths that hormone therapy increases cardiovascular risk.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000499",
+        "evidence_quote": "they dispelled all of those myths for for men",
+        "evidence_signal_ids": [
+          "evidence:expert_consensus"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The content of the 2018 testosterone guideline update can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000496",
+        "topic_ids": [
+          "topic:mens.testosterone"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Normal estrogen levels for a woman can range from 17 to 410.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000509",
+        "evidence_quote": "in range for a woman could be 17 for estrogen",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:normal_labs_miss_disease"
+        ],
+        "rationale": "The reference range quoted is checkable against lab standards.",
+        "relevance": "substantive",
+        "start_unit_id": "u000507",
+        "topic_ids": [
+          "topic:womens.female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Functional doctors use tighter reference ranges than general practitioners.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000515",
+        "evidence_quote": "functional doctors have tighter ranges",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "narrative_ids": [
+          "narrative:normal_labs_miss_disease"
+        ],
+        "rationale": "How the two groups set reference ranges is a checkable factual claim that shapes testing advice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000514",
+        "topic_ids": [
+          "topic:womens.female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of us"
+        ],
+        "claim_text": "Many people are walking around with toxic bodies without realizing it.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000524",
+        "evidence_quote": "a lot of us, like you said in your personal journey, are walking around like a toxic soup and don't even realize it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [
+          "narrative:detox_needed"
+        ],
+        "rationale": "The claim that most people carry an unnoticed toxic burden is checkable in principle and drives detox product use.",
+        "relevance": "substantive",
+        "start_unit_id": "u000524",
+        "topic_ids": [
+          "topic:detox.toxic_load_general"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The soil no longer contains minerals.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000531",
+        "evidence_quote": "Our soil doesn't have minerals in it anymore",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "Soil mineral depletion is a checkable empirical claim invoked as part of the toxicity narrative.",
+        "relevance": "substantive",
+        "start_unit_id": "u000531",
+        "topic_ids": [
+          "topic:detox.toxic_load_general"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Strong eggs are necessary to create strong embryos.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000539",
+        "evidence_quote": "if you don't have strong eggs, how are you going to create strong embryos",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Egg quality as a determinant of embryo quality is checkable in fertility medicine.",
+        "relevance": "substantive",
+        "start_unit_id": "u000539",
+        "topic_ids": [
+          "topic:fertility.infertility_treatment"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fifty percent of infertility is caused by men.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000541",
+        "evidence_quote": "fifty percent of infertility is caused by men",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The male contribution to infertility is a checkable statistic that affects testing practice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000541",
+        "topic_ids": [
+          "topic:fertility.male_fertility"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "Many fertility clinics do not test men.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000542",
+        "evidence_quote": "a lot of clinics are not testing men",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Clinic testing practices are checkable and bear on whether male infertility is missed.",
+        "relevance": "substantive",
+        "start_unit_id": "u000542",
+        "topic_ids": [
+          "topic:fertility.male_fertility"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Having more muscle mass increases testosterone.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000559",
+        "evidence_quote": "more muscle mass, you have the more testosterone you'll have",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The muscle-testosterone relationship is checkable and underlies training advice for men.",
+        "relevance": "substantive",
+        "start_unit_id": "u000559",
+        "topic_ids": [
+          "topic:mens.testosterone",
+          "topic:weight.body_composition"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "Many men have low testosterone.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000562",
+        "evidence_quote": "a lot of men are also really low on testosterone",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The prevalence of low testosterone in men is a checkable claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000562",
+        "topic_ids": [
+          "topic:mens.testosterone"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "High-quality red meat is good for you.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000567",
+        "evidence_quote": "High quality red meat is actually incredible for you",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:red_meat_healthy"
+        ],
+        "rationale": "The healthfulness of red meat is checkable and contradicts common warnings.",
+        "relevance": "substantive",
+        "start_unit_id": "u000567",
+        "topic_ids": [
+          "topic:food.meat_animal_foods"
+        ]
+      }
+    ],
+    "window_id": "episode_177018_window_0009"
+  },
+  "stored_at": "2026-10-04T22:36:30.356482+00:00"
+}

@@ -1,0 +1,210 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c185811w0024",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001440",
+        "evidence_quote": "all the stuff from Sally Fallon Morell and and all of the wise tradition stuff",
+        "label_ids": [
+          "topic:diets.ancestral_paleo"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001429",
+        "summary": "Hosts bond over Weston A. Price, Sally Fallon Morell and the traditional-foods movement and its magazine."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001452",
+        "evidence_quote": "Cancer is a metabolic disease",
+        "label_ids": [
+          "topic:cancer.causes_rates"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001442",
+        "summary": "Guest and host discuss the claim that cancer is a metabolic disease driven by environmental triggers acting on cancer cells everyone carries."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001451",
+        "evidence_quote": "Cancer is a metabolic disease",
+        "label_ids": [
+          "narrative:cancer_metabolic_disease"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001444",
+        "summary": "The claim that cancer is fundamentally a metabolic disease is asserted and endorsed."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001455",
+        "evidence_quote": "You believe in viruses? No",
+        "label_ids": [
+          "topic:infectious.germ_theory_hygiene"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001453",
+        "summary": "Guest says she does not believe in viruses."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001455",
+        "evidence_quote": "You believe in viruses? No",
+        "label_ids": [
+          "narrative:germ_theory_denial"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001453",
+        "summary": "Guest denies the existence of viruses."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001504",
+        "evidence_quote": "not just about COVID and vaccines and not complying with that",
+        "label_ids": [
+          "topic:covid",
+          "topic:vaccines.mandates_exemptions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001504",
+        "summary": "Guest describes his book as touching on not complying with COVID and vaccine requirements."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001519",
+        "evidence_quote": "you're overweight and you're you're lassitudical in your mind because of all the bad food that you've been eating",
+        "label_ids": [
+          "topic:cognition",
+          "topic:environment",
+          "topic:food.general_nutrition",
+          "topic:weight"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001513",
+        "summary": "Host argues that bad food and environmental exposures make people unhealthy, overweight and mentally sluggish, so health is needed to fight tyranny."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001519",
+        "evidence_quote": "If you have bad health, you are not going to be able to fight against a tyrannical government",
+        "label_ids": [
+          "frame:political_partisan"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001513",
+        "summary": "Health is framed through an anti-government, patriotic political lens."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Cancer is a metabolic disease.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001444",
+        "evidence_quote": "Cancer is a metabolic disease",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:cancer_metabolic_disease"
+        ],
+        "rationale": "The metabolic theory of cancer is a contested causal characterization that affects what listeners believe about how cancer arises and is treated.",
+        "relevance": "substantive",
+        "start_unit_id": "u001444",
+        "topic_ids": [
+          "topic:cancer.causes_rates"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "I think your body naturally has cancer cells in it; everybody's body already has cancer cells within it.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001449",
+        "evidence_quote": "I think your body naturally has cancer cells in it, right",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A factual claim about cancer cells being present in every body that could be checked against cancer biology.",
+        "relevance": "substantive",
+        "start_unit_id": "u001448",
+        "topic_ids": [
+          "topic:cancer.causes_rates"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Things that come from your environment can express those cells to fight your own body.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001451",
+        "evidence_quote": "It's about the things that come from your environment that can actually express those cells to",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim that environmental factors activate cancer cells, relevant to cancer risk beliefs.",
+        "relevance": "substantive",
+        "start_unit_id": "u001450",
+        "topic_ids": [
+          "topic:cancer.causes_rates"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Viruses do not exist.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001455",
+        "evidence_quote": "You believe in viruses? No",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:germ_theory_denial"
+        ],
+        "rationale": "A falsifiable existence claim about viruses that underpins rejection of germ theory.",
+        "relevance": "passing",
+        "start_unit_id": "u001453",
+        "topic_ids": [
+          "topic:infectious.germ_theory_hygiene"
+        ]
+      }
+    ],
+    "window_id": "episode_185811_window_0024"
+  },
+  "stored_at": "2026-10-04T22:36:32.763566+00:00"
+}

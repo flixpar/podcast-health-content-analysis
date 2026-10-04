@@ -1,0 +1,86 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c40166w0011",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters",
+        "label_ids": [
+          "topic:health_system.pharma_industry",
+          "topic:vaccines"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000681",
+        "summary": "Speaker argues vaccines are a recurring profit stream and calls them rent-seeking behavior by Big Pharma and investment funds."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000686",
+        "evidence_quote": "They want to pick our pocket not once, they want to pick it every month, or in the case of these vaccines, every six months",
+        "label_ids": [
+          "narrative:pharma_creates_customers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000681",
+        "summary": "Invokes the idea that pharma profits from repeat customers, with vaccines given every six months as a recurring payment."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters, which are these huge investment funds that also control the media and control Big Tech",
+        "label_ids": [
+          "frame:big_pharma",
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000686",
+        "summary": "Big Pharma is cast as self-interested and its investment-fund owners as secretly controlling media and Big Tech."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Vaccines are rent-seeking behavior from Big Pharma and their corporate masters, which are huge investment funds.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:big_pharma",
+          "frame:conspiracy_cover_up"
+        ],
+        "narrative_ids": [
+          "narrative:pharma_creates_customers"
+        ],
+        "rationale": "A motive-and-control claim about vaccine manufacturers that can be checked against ownership and profit incentives.",
+        "relevance": "substantive",
+        "start_unit_id": "u000686",
+        "topic_ids": [
+          "topic:health_system.pharma_industry",
+          "topic:vaccines"
+        ]
+      }
+    ],
+    "window_id": "episode_40166_window_0011"
+  },
+  "stored_at": "2026-10-04T22:13:53.630626+00:00"
+}

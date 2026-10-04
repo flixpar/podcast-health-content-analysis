@@ -42,8 +42,9 @@ REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
 from analysis import topic_labeling as tl  # noqa: E402
 from analysis import typesafe_labeling as ts  # noqa: E402
+from analysis.benchmark.clef_screen import HEALTH_BROAD  # noqa: E402
 
-METHOD = "typesafe-hier-v1"
+METHOD = "typesafe-hier-v2"
 AXES5 = ("topic", "narrative", "frame", "evidence", "population")
 
 # The flat method's tables, extended to the two new axes.
@@ -81,6 +82,7 @@ def make_policy(**overrides: Any) -> ts.Policy:
         product_name_threshold=0.5,
         fanout_threshold=0.3,
         max_fanout_labels=30,
+        health_gate_threshold=0.5,
     )
     return replace(base, **overrides)
 
@@ -107,9 +109,13 @@ def tree(taxonomy: Mapping[str, Any]) -> dict[str, Any]:
 def screen(window: Mapping[str, Any], t: dict[str, Any], policy: ts.Policy, session: ts._Session) -> dict[str, Any]:
     labels = t["labels"]
     transcript = {"transcript": " ".join(unit["text"] for unit in window["units"])}
-    gate_q = {f"gate|{name}": q for name, q in ts.GATE_QUESTIONS.items()}
+    # The broad gate (analysis/benchmark/clef_screen.py) decides whether the window
+    # is labeled at all: the method's own health gate is precise rather than
+    # exhaustive and drops ~13% of substantive content on real windows.
+    gate_q = {f"gate|{name}": q for name, q in {**ts.GATE_QUESTIONS, "broad": HEALTH_BROAD}.items()}
     answers = session.answers(transcript, gate_q, "gate")
-    gates = {name: ts._noul(answers[f"gate|{name}"]) for name in ts.GATE_QUESTIONS}
+    gates = {name: ts._noul(answers[f"gate|{name}"]) for name in [*ts.GATE_QUESTIONS, "broad"]}
+    gates["health_precise"], gates["health"] = gates["health"], gates["broad"]
     probs: dict[str, float] = {}
     level1: dict[str, float] = {}
     if gates["health"] >= policy.health_gate_threshold:
@@ -212,13 +218,13 @@ def label_window(window, taxonomy, t, policy, ask) -> tuple[dict[str, Any], dict
     return compose(window, taxonomy, judgments, policy), judgments
 
 
-def make_ask(apis: list[str]):
+def make_ask(apis: list[str], model: str = "clef"):
     counter = itertools.count()
     opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
 
     def ask(state, questions):
         api = apis[next(counter) % len(apis)]
-        body = json.dumps({"state": state, "model": "clef", "questions": questions}).encode()
+        body = json.dumps({"state": state, "model": model, "questions": questions}).encode()
         for attempt in range(4):
             try:
                 request = urllib.request.Request(api + ts.ROUTE, data=body, headers={"Content-Type": "application/json"})
@@ -247,7 +253,7 @@ def cmd_run(args) -> int:
     t = tree(taxonomy)
     policy = make_policy()
     HIER.update({k: getattr(args, k) for k in HIER if getattr(args, k, None) is not None})
-    ask = make_ask(args.api)
+    ask = make_ask(args.api, args.model)
     axes = {label["label_id"]: label["axis"] for label in taxonomy["labels"]}
     run_dir = Path(args.out_dir) if args.out_dir else REPO / f"benchmark/{args.bench}/runs/{args.name}"
     repeat = run_dir / "repeat_0"

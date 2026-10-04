@@ -1,0 +1,253 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c4171w0010",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000537",
+        "evidence_quote": "we had this deposition of Anthony Fauci",
+        "label_ids": [
+          "topic:covid.pandemic_institutions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000536",
+        "summary": "The host mentions taking a deposition from Anthony Fauci at NIH."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000604",
+        "evidence_quote": "he said, I don't remember recall like one hundred and seventy four times",
+        "label_ids": [
+          "topic:covid.pandemic_institutions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000600",
+        "summary": "The host recounts Fauci's deposition, his repeated failure to remember, and his early COVID actions."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000610",
+        "evidence_quote": "it was pretty obvious that this came from a Chinese lab called the Wuhan Institute of Virology",
+        "label_ids": [
+          "topic:covid.origins"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "summary": "The host asserts the COVID-19 virus came from the Wuhan Institute of Virology and mocks natural-origin alternatives."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000606",
+        "evidence_quote": "it was pretty obvious that this came from a Chinese lab called the Wuhan Institute of Virology",
+        "label_ids": [
+          "narrative:covid_lab_leak"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "summary": "The lab-leak origin proposition is asserted as obvious."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000605",
+        "evidence_quote": "a guy who proclaimed to be the science and knew everything",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000601",
+        "summary": "Fauci is portrayed as falsely claiming authority as science and evading accountability."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000562",
+        "evidence_quote": "uses precision temperature control to regulate your body's sleep cycles",
+        "label_ids": [
+          "topic:sleep.apnea_breathing",
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000542",
+        "summary": "Sponsor read for Eight Sleep's Pod Five claims temperature-controlled sleep, better sleep, and snoring reduction."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000562",
+        "evidence_quote": "Use the code tucker to get three hundred and fifty bucks off",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000542",
+        "summary": "The Eight Sleep read is a paid sponsor segment with a discount code."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "Everybody who works here will tell you, because they all use it",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000555",
+        "summary": "The ad invokes employees' testimonials as support for the product's benefits."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000540",
+        "evidence_quote": "RFK Jr.'s \"The Real Anthony Fauci",
+        "mention_role": "neutral",
+        "product_name": "The Real Anthony Fauci",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000540"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000562",
+        "evidence_quote": "It's called the Pod Five",
+        "mention_role": "advertised",
+        "product_name": "Eight Sleep Pod 5",
+        "product_type": "household_or_home",
+        "start_unit_id": "u000542"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Fauci said 'I don't remember' or 'I don't recall' about 174 times during the deposition.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000602",
+        "evidence_quote": "he said, I don't remember recall like one hundred and seventy four times",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "The number of 'I don't recall' answers in Fauci's deposition can be checked against the transcript.",
+        "relevance": "substantive",
+        "start_unit_id": "u000601",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "pretty obvious"
+        ],
+        "claim_text": "SARS-CoV-2 came from a Chinese lab called the Wuhan Institute of Virology.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000606",
+        "evidence_quote": "it was pretty obvious that this came from a Chinese lab called the Wuhan Institute of Virology",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:covid_lab_leak"
+        ],
+        "rationale": "A specific origin claim for SARS-CoV-2 that can be checked against scientific investigations.",
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "topic_ids": [
+          "topic:covid.origins"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Pod Five uses precision temperature control to regulate your body's sleep cycles.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000547",
+        "evidence_quote": "uses precision temperature control to regulate your body's sleep cycles",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product efficacy claim about sleep regulation made in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000547",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Pod Five detects snoring and adjusts your bed position to reduce or completely stop it.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000553",
+        "evidence_quote": "it also detects snoring, and then it adjusts your bed position to reduce or completely stop it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about the product's snoring-detection and anti-snoring features.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000553",
+        "topic_ids": [
+          "topic:sleep.apnea_breathing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Temperature has a massive effect on the way you sleep.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000552",
+        "evidence_quote": "Temperature has a massive effect on the way you sleep",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A general causal claim about temperature and sleep, used to support the product.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000552",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      }
+    ],
+    "window_id": "episode_4171_window_0010"
+  },
+  "stored_at": "2026-10-04T22:13:48.698130+00:00"
+}

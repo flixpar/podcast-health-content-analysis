@@ -1,0 +1,67 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c321803w0028",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003216",
+        "evidence_quote": "wiping from booty hole through pussy",
+        "label_ids": [
+          "topic:womens.gynecological_conditions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003211",
+        "summary": "Hosts joke that a woman wiping from anus to vagina gives herself a yeast infection."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003216",
+        "evidence_quote": "her. Pussy, which is a guaranteed yeast infection",
+        "label_ids": [
+          "population:women"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003211",
+        "summary": "The yeast infection comment concerns female genital hygiene."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "guaranteed"
+        ],
+        "claim_text": "Wiping from the anus through the vagina is a guaranteed yeast infection.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003213",
+        "evidence_quote": "wiping her asshole through her. Pussy, which is a guaranteed yeast infection",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A hygiene claim about anus-to-vagina wiping causing yeast infection that could be checked against gynecological guidance.",
+        "relevance": "passing",
+        "start_unit_id": "u003212",
+        "topic_ids": [
+          "topic:womens.gynecological_conditions"
+        ]
+      }
+    ],
+    "window_id": "episode_321803_window_0028"
+  },
+  "stored_at": "2026-10-04T22:13:47.705196+00:00"
+}

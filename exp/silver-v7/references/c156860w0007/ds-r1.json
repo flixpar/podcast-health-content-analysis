@@ -1,0 +1,131 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c156860w0007",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000532",
+        "evidence_quote": "With Nutrafol, give the gift of stronger and faster-growing hair",
+        "label_ids": [
+          "topic:skin_beauty.hair_loss_hair",
+          "topic:supplements.other_vitamins_minerals"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000521",
+        "summary": "Sponsor read for Nutrafol hair growth supplement claiming thicker, stronger hair with less shedding."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000532",
+        "evidence_quote": "use promo code Giggly",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000520",
+        "summary": "Nutrafol sponsor read with a discount code."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "science-backed support",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000522",
+        "summary": "Ad asserts science-backed support and dermatologist recommendation."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000544",
+        "evidence_quote": "as someone with social anxiety, this is incredible",
+        "label_ids": [
+          "topic:mental.anxiety"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000543",
+        "summary": "Waymo ad references the speaker's social anxiety as a reason she likes driverless rides."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000532",
+        "evidence_quote": "With Nutrafol",
+        "mention_role": "advertised",
+        "product_name": "Nutrafol",
+        "product_type": "supplement",
+        "start_unit_id": "u000521"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "number one"
+        ],
+        "claim_text": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A market and endorsement ranking claim that can be checked against brand surveys or marketing materials.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000523",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair",
+          "topic:supplements.other_vitamins_minerals"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nutrafol produces thicker, stronger, faster-growing hair with less shedding in just three to six months.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000524",
+        "evidence_quote": "See thicker, stronger, faster-growing hair with less shedding in just three to six months",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product efficacy claim with a specific timeframe, checkable against clinical evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000524",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair",
+          "topic:supplements.other_vitamins_minerals"
+        ]
+      }
+    ],
+    "window_id": "episode_156860_window_0007"
+  },
+  "stored_at": "2026-10-04T22:13:52.482924+00:00"
+}

@@ -1,0 +1,242 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c38259w0005",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000351",
+        "evidence_quote": "the amount of heavy metals, microplastics, and other toxins we are all exposed to has only increased",
+        "label_ids": [
+          "topic:environment.heavy_metals",
+          "topic:environment.microplastics"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000350",
+        "summary": "Ad lead-in says heavy metals, microplastics and other toxins people are exposed to have increased."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000361",
+        "evidence_quote": "click the link in the description below and use the code Kirk to save ten percent",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000350",
+        "summary": "Sponsor read for Ascent Nutrition with a discount code and link."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000351",
+        "evidence_quote": "the amount of heavy metals, microplastics, and other toxins we are all exposed to has only increased",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000350",
+        "summary": "The ad frames rising environmental contaminants as a toxin exposure problem."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000357",
+        "evidence_quote": "their pine pollen tincture, which contains 200 nutrients and important components like glutathione and DHEA",
+        "label_ids": [
+          "topic:supplements.herbal_adaptogens"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000355",
+        "summary": "Ad describes the pine pollen tincture, its nutrients, and its phytohormone content."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000356",
+        "evidence_quote": "Glutathione is known for healthy detoxification and immune support, while DHEA is known as the happiness hormone and supports mood and brain health",
+        "label_ids": [
+          "topic:endocrine.other_hormones",
+          "topic:supplements.other_compounds"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000356",
+        "summary": "Ad makes separate claims about the tincture's glutathione and DHEA ingredients."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000357",
+        "evidence_quote": "Pine pollen is also nature's highest source of special phytohormones",
+        "label_ids": [
+          "frame:naturalness_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000357",
+        "summary": "Pine pollen is described as nature's highest source of phytohormones."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000371",
+        "evidence_quote": "I have chronic Lyme disease",
+        "label_ids": [
+          "topic:chronic_complex.chronic_lyme"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000366",
+        "summary": "Caller says he has chronic Lyme and was bedridden; host responds with sympathy."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000361",
+        "evidence_quote": "One I've been using is their pine pollen tincture",
+        "mention_role": "advertised",
+        "product_name": "Ascent Nutrition pine pollen tincture",
+        "product_type": "supplement",
+        "start_unit_id": "u000353"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The amount of heavy metals, microplastics, and other toxins people are exposed to has only increased over the past few years.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000350",
+        "evidence_quote": "the amount of heavy metals, microplastics, and other toxins we are all exposed to has only increased",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable trend claim about environmental exposures used to sell the product.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000350",
+        "topic_ids": [
+          "topic:environment.heavy_metals",
+          "topic:environment.microplastics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ascent Nutrition's pine pollen tincture contains 200 nutrients and components such as glutathione and DHEA.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000355",
+        "evidence_quote": "their pine pollen tincture, which contains 200 nutrients and important components like glutathione and DHEA",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Product composition claim that can be checked against the label.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000355",
+        "topic_ids": [
+          "topic:supplements.herbal_adaptogens"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Glutathione supports healthy detoxification and immune support.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000356",
+        "evidence_quote": "Glutathione is known for healthy detoxification and immune support",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "An ingredient efficacy claim in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000356",
+        "topic_ids": [
+          "topic:supplements.other_compounds"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "DHEA supports mood and brain health.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000356",
+        "evidence_quote": "DHEA is known as the happiness hormone and supports mood and brain health",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "An ingredient efficacy claim in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000356",
+        "topic_ids": [
+          "topic:endocrine.other_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Special phytohormones in pine pollen support hormone function, libido, and adrenal health.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000357",
+        "evidence_quote": "which support hormone function, libido, and adrenal",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "An ingredient efficacy claim in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000357",
+        "topic_ids": [
+          "topic:supplements.herbal_adaptogens"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Pine pollen is nature's highest source of special phytohormones.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000357",
+        "evidence_quote": "Pine pollen is also nature's highest source of special phytohormones",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:naturalness_appeal"
+        ],
+        "narrative_ids": [],
+        "rationale": "A superlative composition claim that can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000357",
+        "topic_ids": [
+          "topic:supplements.herbal_adaptogens"
+        ]
+      }
+    ],
+    "window_id": "episode_38259_window_0005"
+  },
+  "stored_at": "2026-10-04T22:36:28.898606+00:00"
+}

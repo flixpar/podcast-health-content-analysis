@@ -1,0 +1,398 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c190235w0011",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000930",
+        "evidence_quote": "like a super highway and that's what finasteride blocks",
+        "label_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000811",
+        "summary": "Doctors discuss DHT, finasteride, minoxidil, PRP, laser and peptide treatments for male pattern baldness."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000901",
+        "evidence_quote": "Could we use red light therapy, laser light therapy or PRP treatments",
+        "label_ids": [
+          "topic:recovery.red_light",
+          "topic:skin_beauty.regenerative_aesthetics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000897",
+        "summary": "Lists red light/laser therapy and PRP as non-chemical options for early hair loss."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000816",
+        "evidence_quote": "you're inhibiting the enzyme that's producing the DHT and your DHT levels in the serum go down about 60 percent",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000812",
+        "summary": "Explains the DHT synthesis pathway and finasteride's enzyme-blocking mechanism."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000833",
+        "evidence_quote": "Because you're blocking that breakdown",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000829",
+        "summary": "Explains why testosterone can rise when DHT breakdown is blocked."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000919",
+        "evidence_quote": "I have young patients on finasteride. I have old patients on finasteride",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000908",
+        "summary": "The doctor cites his own patients and practice outcomes for finasteride and PRP."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000930",
+        "evidence_quote": "90 percent of men on finasteride will have a positive result",
+        "label_ids": [
+          "population:men"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000811",
+        "summary": "The discussion concerns male pattern baldness and treatments in men."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "kind of"
+        ],
+        "claim_text": "The type 2 isoenzyme is kind of the main route to DHT.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000812",
+        "evidence_quote": "the type two type is kind of the the main road to DHT",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The identity of the enzyme that produces DHT is checkable and central to finasteride's rationale.",
+        "relevance": "substantive",
+        "start_unit_id": "u000812",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Finasteride blocks the enzyme that produces DHT.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000816",
+        "evidence_quote": "that's what finasteride blocks",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The mechanism of finasteride is checkable in drug references.",
+        "relevance": "substantive",
+        "start_unit_id": "u000814",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Finasteride reduces serum DHT levels by about 60 percent.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000816",
+        "evidence_quote": "your DHT levels in the serum go down about 60 percent",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The degree of DHT suppression is a checkable trial outcome.",
+        "relevance": "substantive",
+        "start_unit_id": "u000816",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "90 percent of men on finasteride will have a positive result.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000821",
+        "evidence_quote": "90 percent of men on finasteride will have a positive result",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This efficacy claim is checkable against clinical trials and would affect treatment decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000819",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Two out of three men on finasteride get some regrowth.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000824",
+        "evidence_quote": "two out of three are get some regrowth",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific regrowth rate that can be checked against finasteride trial data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000823",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Five out of six men on finasteride basically stop losing hair for the long run.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000824",
+        "evidence_quote": "five out of six are going to basically stop losing hair for the long run",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The stabilization rate is checkable and distinct from the regrowth claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000824",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "we know that"
+        ],
+        "claim_text": "Finasteride does not affect regular testosterone levels.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000829",
+        "evidence_quote": "we know that it doesn't affect the regular testosterone levels",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The effect of finasteride on testosterone is a checkable pharmacological claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000829",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Testosterone can actually bump a little bit when taking finasteride.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000831",
+        "evidence_quote": "testosterone can actually bump a little bit",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A small testosterone rise is a checkable pharmacological effect of 5-alpha-reductase inhibition.",
+        "relevance": "substantive",
+        "start_unit_id": "u000830",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Lowering DHT affects sexual functioning in 2 percent of patients, with decreased libido, sex drive, difficulty maintaining erections, and decreased ejaculatory function.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000837",
+        "evidence_quote": "lowering the DHT has an effect on the sexual functioning in men in 2 percent of patients",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The incidence of sexual side effects is checkable in finasteride trials and is central to the risk-benefit discussion.",
+        "relevance": "substantive",
+        "start_unit_id": "u000834",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Finasteride is out of your system within a week of stopping.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000841",
+        "evidence_quote": "the medication is going to be out of your system in a week",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The washout period of finasteride is checkable from pharmacokinetics.",
+        "relevance": "substantive",
+        "start_unit_id": "u000840",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "98 percent of folks on finasteride have no reported side effects.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000844",
+        "evidence_quote": "98 percent of folks have no reported side effects",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A safety-rate claim that would reassure or alarm listeners and is checkable against trial reporting.",
+        "relevance": "substantive",
+        "start_unit_id": "u000844",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "in my opinion"
+        ],
+        "claim_text": "Topical finasteride works almost as good as the oral version.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000864",
+        "evidence_quote": "which works almost in my opinion, almost as good as the oral version",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Comparative efficacy of topical versus oral finasteride is checkable in studies and important to treatment choice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000863",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "virtually"
+        ],
+        "claim_text": "Topical finasteride virtually eliminates the risk of systemic side effects.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000870",
+        "evidence_quote": "It virtually eliminates the risk of systemic side effects when you do it topical",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The systemic absorption and side-effect profile of topical finasteride is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000869",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Minoxidil is the other FDA approved medication for hair loss.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000866",
+        "evidence_quote": "Menoxidil, which is the other FDA approved medication",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Minoxidil's FDA approval status for hair loss is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000865",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Minoxidil is a direct stimulator.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000930",
+        "evidence_quote": "the other FDA approved drug monoxidil is a direct stimulator",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Minoxidil's mechanism of action is a checkable pharmacological claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000930",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      }
+    ],
+    "window_id": "episode_190235_window_0011"
+  },
+  "stored_at": "2026-10-04T22:13:55.268643+00:00"
+}

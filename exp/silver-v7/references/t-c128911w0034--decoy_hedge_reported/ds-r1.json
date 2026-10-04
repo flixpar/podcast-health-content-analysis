@@ -1,0 +1,161 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "t-c128911w0034--decoy_hedge_reported",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003027",
+        "evidence_quote": "I woke up on Wednesday morning and couldn't really stand up",
+        "label_ids": [
+          "topic:musculoskeletal.back_neck_posture",
+          "topic:neuro.nerve_spinal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002957",
+        "summary": "Host describes acute lower back pain, shooting leg pain and a suspected bulging disc; co-hosts advise stretching."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002975",
+        "evidence_quote": "I've been taking muscle relaxers at night",
+        "label_ids": [
+          "topic:medications.other_drugs"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002975",
+        "summary": "He mentions taking muscle relaxers at night for his back."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003014",
+        "evidence_quote": "Just rubbing CBD on my spine",
+        "label_ids": [
+          "topic:psychoactives.cannabis"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003014",
+        "summary": "He mentions rubbing CBD on his spine for his back."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003047",
+        "evidence_quote": "Billy convinced me I had COVID on Sunday",
+        "label_ids": [
+          "topic:covid.illness_severity",
+          "topic:infectious.foodborne"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003042",
+        "summary": "Host says Billy convinced him he had COVID, but he actually had food poisoning and vomited twice."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u003069",
+        "evidence_quote": "Billy also said muscle aches and back aches are probably a sign of COVID",
+        "label_ids": [
+          "topic:covid.illness_severity"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003069",
+        "summary": "Billy's claim that muscle and back aches are probably a sign of COVID is relayed."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002971",
+        "evidence_quote": "every doctor is busy shooting people up with 5G",
+        "label_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002971",
+        "summary": "He jokes that doctors are too busy injecting people with 5G to be seen."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A bulging disc basically hits the nerve.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003023",
+        "evidence_quote": "a bulging disc, like basically hits the nerve",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanism claim about disc herniation and sciatica that listeners could act on.",
+        "relevance": "substantive",
+        "start_unit_id": "u003023",
+        "topic_ids": [
+          "topic:musculoskeletal.back_neck_posture",
+          "topic:neuro.nerve_spinal"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Muscle aches and back aches are probably a sign of COVID.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u003069",
+        "evidence_quote": "muscle aches and back aches are probably a sign of COVID",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A symptom claim that could encourage COVID testing or isolation.",
+        "relevance": "passing",
+        "start_unit_id": "u003069",
+        "topic_ids": [
+          "topic:covid.illness_severity"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A bulging disc will slowly go down, but it will be with you for the rest of your life.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003026",
+        "evidence_quote": "It will slowly go down, and then it will be with you for the rest",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A prognosis claim about disc injuries that could shape expectations about recovery.",
+        "relevance": "substantive",
+        "start_unit_id": "u003026",
+        "topic_ids": [
+          "topic:musculoskeletal.back_neck_posture",
+          "topic:neuro.nerve_spinal"
+        ]
+      }
+    ],
+    "window_id": "episode_128911_window_0034_decoy_hedge_reported"
+  },
+  "stored_at": "2026-10-04T22:13:53.976272+00:00"
+}

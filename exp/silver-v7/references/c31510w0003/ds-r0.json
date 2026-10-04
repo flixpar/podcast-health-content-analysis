@@ -1,0 +1,359 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c31510w0003",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000151",
+        "evidence_quote": "the trauma center had a huge hyperbaric facility in the basement",
+        "label_ids": [
+          "topic:recovery.hyperbaric"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000118",
+        "summary": "Speaker recounts discovering hyperbaric oxygen therapy in a trauma center, its clinical uses, mechanism, and its comparison to altitude training."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000119",
+        "evidence_quote": "They were using it for soft tissue injury, traumatic wounds, for burns, carbon monoxide poisoning, necrotizing fasciitis",
+        "label_ids": [
+          "topic:acute_care.poisoning_environmental_injury",
+          "topic:acute_care.trauma_fractures",
+          "topic:acute_care.wounds_first_aid",
+          "topic:infectious.other_infections"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000119",
+        "summary": "Speaker lists conditions treated with hyperbaric oxygen: soft tissue injury, traumatic wounds, burns, carbon monoxide poisoning, and necrotizing fasciitis."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000158",
+        "evidence_quote": "it increases your body's oxygen carrying capacity, and it does that by stimulating the production of something called epigen or EPO for short",
+        "label_ids": [
+          "topic:fitness.cardio_endurance"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000152",
+        "summary": "Speaker explains how altitude training raises oxygen-carrying capacity through EPO and red blood cells, and notes EPO can be injected."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000152",
+        "evidence_quote": "commonly used for for people that are doing elite athlete kind of sports",
+        "label_ids": [
+          "population:athletes"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000152",
+        "summary": "Altitude training is described as commonly used by elite athletes."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000146",
+        "evidence_quote": "allowing just the accelerated ability for healing, recovery, optimization",
+        "label_ids": [
+          "frame:optimization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000138",
+        "summary": "Recovery and treatment are framed in optimization terms, including optimizing around the chamber."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000121",
+        "evidence_quote": "go down into the chamber and come back dramatically better from all these different various things",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000121",
+        "summary": "Speaker cites observing his patients improve dramatically in the hyperbaric chamber."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000122",
+        "evidence_quote": "it was just oxygen and pressure combined to drive more oxygen into circulation",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000122",
+        "summary": "The therapy is explained as oxygen and pressure driving more oxygen into circulation."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000140",
+        "evidence_quote": "actually regenerating the architecture of tissue, revitalizing the architecture of tissue, and doing it with this shift in epigenetics",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000138",
+        "summary": "The speaker explains HBOT's healing and tissue-regeneration effects through increased oxygen and epigenetic shifts."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000156",
+        "evidence_quote": "it increases your body's oxygen carrying capacity, and it does that by stimulating the production of something called epigen or EPO for short",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000152",
+        "summary": "The speaker explains altitude training's effects via EPO, red blood cells, and mitochondrial ATP production."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Hyperbaric oxygen therapy is used for soft tissue injury, traumatic wounds, burns, carbon monoxide poisoning, and necrotizing fasciitis.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000119",
+        "evidence_quote": "They were using it for soft tissue injury, traumatic wounds, for burns, carbon monoxide poisoning, necrotizing fasciitis",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The approved clinical indications for hyperbaric oxygen can be checked against treatment guidelines.",
+        "relevance": "substantive",
+        "start_unit_id": "u000119",
+        "topic_ids": [
+          "topic:acute_care.poisoning_environmental_injury",
+          "topic:acute_care.trauma_fractures",
+          "topic:acute_care.wounds_first_aid",
+          "topic:infectious.other_infections",
+          "topic:recovery.hyperbaric"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Hyperbaric oxygen therapy combines oxygen and pressure to drive more oxygen into circulation.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000122",
+        "evidence_quote": "it was just oxygen and pressure combined to drive more oxygen into circulation",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The physiological mechanism of HBOT is checkable, though the phrasing oversimplifies it.",
+        "relevance": "substantive",
+        "start_unit_id": "u000122",
+        "topic_ids": [
+          "topic:recovery.hyperbaric"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Increasing oxygen in circulation through hyperbaric therapy accelerates healing and recovery.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "allowing just the accelerated ability for healing, recovery, optimization",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:optimization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Claims about HBOT accelerating healing can be checked against clinical evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000138",
+        "topic_ids": [
+          "topic:recovery.hyperbaric"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Hyperbaric oxygen therapy regenerates and revitalizes tissue architecture in people with injuries.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "actually regenerating the architecture of tissue, revitalizing the architecture of tissue",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:optimization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Tissue regeneration from HBOT is a strong, checkable claim beyond its accepted indications.",
+        "relevance": "substantive",
+        "start_unit_id": "u000139",
+        "topic_ids": [
+          "topic:recovery.hyperbaric"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Being in the hyperbaric chamber causes a shift in epigenetics and in how genes are transcribed from DNA.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000140",
+        "evidence_quote": "doing it with this shift in epigenetics and the way that the genes are being transcribed by the DNA as a result of being in the chamber",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:optimization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claimed epigenetic effects of HBOT are checkable against the research literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000140",
+        "topic_ids": [
+          "topic:recovery.hyperbaric"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "High altitude training reduces oxygen in circulation, while a hyperbaric environment increases it.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000149",
+        "evidence_quote": "if you're high altitude training, you're getting less oxygen in circulation. In a hyperbaric environment, you're getting more oxygen in circulation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The oxygen effects of altitude versus hyperbaric exposure are checkable physiology.",
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "topic_ids": [
+          "topic:fitness.cardio_endurance",
+          "topic:recovery.hyperbaric"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Altitude training increases the body's oxygen-carrying capacity by stimulating the production of EPO.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000153",
+        "evidence_quote": "it increases your body's oxygen carrying capacity, and it does that by stimulating the production of something called epigen or EPO for short",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The EPO mechanism of altitude training is checkable and affects training and doping beliefs.",
+        "relevance": "substantive",
+        "start_unit_id": "u000152",
+        "topic_ids": [
+          "topic:fitness.cardio_endurance"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "EPO is a hormone that increases the number of red blood cells in circulation.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000154",
+        "evidence_quote": "EPO is a hormone that, when produced, increases the number of red blood cells in circulation",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "EPO's function is checkable and central to the speaker's explanation of altitude training.",
+        "relevance": "substantive",
+        "start_unit_id": "u000154",
+        "topic_ids": [
+          "topic:fitness.cardio_endurance"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Oxygen becomes the final electron acceptor in the mitochondria, making energy ATP.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000156",
+        "evidence_quote": "it becomes what's called the final electron acceptor in your mitochondria, making energy ATP",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The role of oxygen in mitochondrial ATP production is checkable physiology.",
+        "relevance": "substantive",
+        "start_unit_id": "u000155",
+        "topic_ids": [
+          "topic:fitness.cardio_endurance"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "typically"
+        ],
+        "claim_text": "Oxygen-carrying capacity is typically determined by the number of red blood cells in circulation.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000157",
+        "evidence_quote": "typically we make our oxygen carrying capacity is preordained by how many red blood cells you have in circulation",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The relationship between red blood cell count and oxygen-carrying capacity is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000156",
+        "topic_ids": [
+          "topic:fitness.cardio_endurance"
+        ]
+      }
+    ],
+    "window_id": "episode_31510_window_0003"
+  },
+  "stored_at": "2026-10-04T22:13:47.556559+00:00"
+}

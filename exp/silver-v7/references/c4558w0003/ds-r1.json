@@ -1,0 +1,309 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c4558w0003",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000120",
+        "evidence_quote": "We're getting the data from the Vaccine Safety Data Link, which is the biggest repository for HMO health records",
+        "label_ids": [
+          "topic:vaccines.safety_injury"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "Speaker describes plans to open vaccine safety databases, fund independent studies, and investigate a possible link between vaccination and later health claims."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000115",
+        "evidence_quote": "make the databases public for the first time",
+        "label_ids": [
+          "narrative:vaccine_injury_hidden"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000107",
+        "summary": "Speaker implies vaccine-safety data and real studies have been withheld until now."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000106",
+        "evidence_quote": "the Institute of Medicine originally recommended",
+        "label_ids": [
+          "evidence:expert_consensus"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "The Institute of Medicine's prior recommendation is invoked as the basis for the planned studies."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000110",
+        "evidence_quote": "We've gotten the data from CMS, which is Medicaid and Medicare",
+        "label_ids": [
+          "evidence:official_data_documents"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000108",
+        "summary": "CDC, CMS, and Vaccine Safety Data Link records are cited as the data sources."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "unlike the rest of this country's corrupted food supply, masa chips have no seed oils whatsoever",
+        "label_ids": [
+          "topic:food.fats_oils",
+          "topic:food.ultra_processed"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000121",
+        "summary": "Sponsor read contrasts typical processed chips with Masa chips, claiming Masa is free of seed oils and better for you."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "chemically-laced, seed oil-infused crap",
+        "label_ids": [
+          "narrative:seed_oils_toxic"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000125",
+        "summary": "The ad treats seed oils in chips as harmful and presents Masa's lack of them as a virtue."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "chemically-laced, seed oil-infused crap",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000125",
+        "summary": "The ad frames ordinary chips as chemically laced and corrupted, and Masa as clean."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "unlike the rest of this country's corrupted food supply",
+        "label_ids": [
+          "frame:big_food"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000134",
+        "summary": "The rest of the country's food supply is described as corrupted."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "Use the code Tucker for twenty five percent off your first order",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000121",
+        "summary": "The Masa chips segment is a sponsor read with a discount code."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "endorsed by nutrition experts around the country",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000139",
+        "summary": "The ad claims nutrition experts endorse the product."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000145",
+        "evidence_quote": "It's called masa chips",
+        "mention_role": "advertised",
+        "product_name": "Masa Chips",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000129"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "indicate"
+        ],
+        "claim_text": "There are indications that there is a link between vaccination and subsequent health claims.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000111",
+        "evidence_quote": "There indicate that there is a link",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The existence of a vaccine-health-outcome link is the empirical question driving the promised studies and is checkable against the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "topic_ids": [
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Vaccine Safety Data Link is the biggest repository for HMO health records.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000110",
+        "evidence_quote": "the biggest repository for HMO health records",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The scope of the VSD Link can be checked and affects how much confidence to place in the planned analyses.",
+        "relevance": "substantive",
+        "start_unit_id": "u000110",
+        "topic_ids": [
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Typical American chip brands are chemically laced and infused with seed oils.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000125",
+        "evidence_quote": "chemically-laced, seed oil-infused crap",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [
+          "narrative:seed_oils_toxic"
+        ],
+        "rationale": "The composition of mass-market chips is checkable and the claim is used to steer listeners away from them.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000125",
+        "topic_ids": [
+          "topic:food.fats_oils",
+          "topic:food.ultra_processed"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "whatsoever"
+        ],
+        "claim_text": "Masa chips have no seed oils whatsoever.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "masa chips have no seed oils whatsoever",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [
+          "narrative:seed_oils_toxic"
+        ],
+        "rationale": "A specific product-composition claim that can be checked on the label and is the ad's central health appeal.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000134",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Masa chips contain almost nothing except a few basic ingredients.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000135",
+        "evidence_quote": "they have almost nothing in them except a few basic ingredients",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The ingredient count is checkable and supports the clean-product claim.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000135",
+        "topic_ids": [
+          "topic:food.ultra_processed"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Masa chips are not bad for you.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "they're not bad for you",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "An explicit safety claim about a food product that can be evaluated against its ingredients and nutrition profile.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000137",
+        "topic_ids": [
+          "topic:food"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Masa chips are endorsed by nutrition experts around the country.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "endorsed by nutrition experts around the country",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether nutrition experts endorse the product is checkable and is offered as third-party validation.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000139",
+        "topic_ids": [
+          "topic:food"
+        ]
+      }
+    ],
+    "window_id": "episode_4558_window_0003"
+  },
+  "stored_at": "2026-10-04T22:13:53.667128+00:00"
+}

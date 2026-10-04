@@ -1,0 +1,78 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c163138w0005",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000370",
+        "evidence_quote": "he has this back surgery",
+        "label_ids": [
+          "topic:procedures.surgery_hospital"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000370",
+        "summary": "Luigi Mangione's back surgery is mentioned as a reason he could not travel to Maryland."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000375",
+        "evidence_quote": "the inequity in the healthcare system and the evil depravity of our healthcare system",
+        "label_ids": [
+          "topic:health_system.costs_insurance"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000372",
+        "summary": "The speaker references healthcare-system inequity, Medicare coverage fights, and anger at American insurance companies."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000373",
+        "evidence_quote": "My mother was in a public institution until she died, and we used to have to fight with Medicare to cover things",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000373",
+        "summary": "The speaker offers his mother's Medicare experience as anecdotal support for anger at the healthcare system."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Luigi Mangione had back surgery.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000370",
+        "evidence_quote": "he has this back surgery",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific surgical fact about a public figure that is checkable in news reports and used to explain his later behavior.",
+        "relevance": "passing",
+        "start_unit_id": "u000370",
+        "topic_ids": [
+          "topic:procedures.surgery_hospital"
+        ]
+      }
+    ],
+    "window_id": "episode_163138_window_0005"
+  },
+  "stored_at": "2026-10-04T22:13:44.368574+00:00"
+}

@@ -1,0 +1,90 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c331158w0017",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000701",
+        "evidence_quote": "Also, he's very elderly. He's old to an infirm and has had major health issue",
+        "label_ids": [
+          "topic:dementia_ageing.elder_care"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000700",
+        "summary": "Murdoch's age and infirmity are noted as context for the legal fight."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000711",
+        "evidence_quote": "Murdoch has suffered a broken back, seizures, two bounds of pneumonia, atrial fibrillation, and a torn achilles tendon, as well as a terrible bout with COVID nineteen",
+        "label_ids": [
+          "topic:acute_care.trauma_fractures",
+          "topic:cardiovascular.heart_disease",
+          "topic:covid.illness_severity",
+          "topic:infectious.respiratory_common",
+          "topic:musculoskeletal.sports_injuries",
+          "topic:neuro.seizures_epilepsy"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000710",
+        "summary": "A Vanity Fair profile is quoted listing Murdoch's health history: broken back, seizures, pneumonia, atrial fibrillation, torn Achilles, and COVID-19."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000704",
+        "evidence_quote": "This is from a Gabe Sherman over at Vanity Fair who has this in depth profile of Rupert Murdoch",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000704",
+        "summary": "The health history is introduced as coming from a Vanity Fair profile by Gabriel Sherman."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Rupert Murdoch has suffered a broken back, seizures, two bouts of pneumonia, atrial fibrillation, a torn achilles tendon, and a terrible bout with COVID-19.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000711",
+        "evidence_quote": "Murdoch has suffered a broken back, seizures, two bounds of pneumonia, atrial fibrillation, and a torn achilles tendon, as well as a terrible bout with COVID nineteen",
+        "evidence_signal_ids": [
+          "evidence:media_source"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A public figure's stated medical history is checkable against reporting and records.",
+        "relevance": "passing",
+        "start_unit_id": "u000710",
+        "topic_ids": [
+          "topic:acute_care.trauma_fractures",
+          "topic:cardiovascular.heart_disease",
+          "topic:covid.illness_severity",
+          "topic:infectious.respiratory_common",
+          "topic:musculoskeletal.sports_injuries",
+          "topic:neuro.seizures_epilepsy"
+        ]
+      }
+    ],
+    "window_id": "episode_331158_window_0017"
+  },
+  "stored_at": "2026-10-04T22:13:48.052795+00:00"
+}

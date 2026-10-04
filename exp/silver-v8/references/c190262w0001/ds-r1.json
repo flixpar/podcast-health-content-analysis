@@ -1,0 +1,175 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c190262w0001",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000013",
+        "evidence_quote": "the benefits of hyperbaric oxygen therapy",
+        "label_ids": [
+          "topic:recovery.hyperbaric"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000012",
+        "summary": "Host mentions hyperbaric oxygen therapy as the subject of a previous episode."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "primarily they started with methylene blue trokeys",
+        "label_ids": [
+          "topic:medications.repurposed_offlabel"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000014",
+        "summary": "Guest's company makes methylene blue troches; host previews the methylene blue discussion and the fish-tank-cleaner misconception."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "no medical advice, no diagnosing, no treatments suggested here",
+        "label_ids": [
+          "frame:disclaimer"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000030",
+        "summary": "Host reads the show's disclaimer that no medical advice is given and listeners should check with their provider."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000053",
+        "evidence_quote": "hyperbaric oxygen therapy and all of the amazing things it can do for you",
+        "label_ids": [
+          "topic:recovery.hyperbaric"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000048",
+        "summary": "Host describes episode 69 as covering hyperbaric oxygen therapy."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000065",
+        "evidence_quote": "I had to take a little bit of trocom to take the edge off the caffeine",
+        "label_ids": [
+          "topic:medications.repurposed_offlabel",
+          "topic:stimulants.caffeine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000060",
+        "summary": "Host notes her blue tongue from a methylene blue troche and mentions caffeine and ingredient amplification effects."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000077",
+        "evidence_quote": "Some people say it's a mitochondrial optimizer, other people say, oh my god, it's fish tank cleaner",
+        "label_ids": [
+          "topic:medications.repurposed_offlabel",
+          "topic:metabolic.mitochondria_energy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000067",
+        "summary": "Host introduces methylene blue, contrasting 'mitochondrial optimizer' claims with the fish-tank-cleaner poison caricature and calling for nuance."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000068",
+        "evidence_quote": "Some people say it's a mitochondrial optimizer",
+        "label_ids": [
+          "narrative:methylene_blue_miracle"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000067",
+        "summary": "Host reports the claim that methylene blue is a mitochondrial optimizer."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000089",
+        "evidence_quote": "we were using it in a way to see if it would increase her performance times",
+        "label_ids": [
+          "topic:fitness.sports_performance",
+          "topic:medications.repurposed_offlabel",
+          "topic:mental.wellbeing_grief_loneliness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000082",
+        "summary": "Host recounts a runner client's use of methylene blue for performance and her improved mood."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000089",
+        "evidence_quote": "what she initially noticed is that it was helping her mood",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000083",
+        "summary": "The runner's experience is offered as an example of methylene blue's benefits."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000015",
+        "evidence_quote": "primarily they started with methylene blue trokeys",
+        "mention_role": "neutral",
+        "product_name": "electro-striptions methylene blue troches",
+        "product_type": "supplement",
+        "start_unit_id": "u000014"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "Some people say"
+        ],
+        "claim_text": "Methylene blue is a mitochondrial optimizer.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000068",
+        "evidence_quote": "Some people say it's a mitochondrial optimizer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:methylene_blue_miracle"
+        ],
+        "rationale": "A functional claim about what methylene blue does, attributed to unnamed sources but checkable against evidence on mitochondrial effects.",
+        "relevance": "substantive",
+        "start_unit_id": "u000067",
+        "topic_ids": [
+          "topic:medications.repurposed_offlabel",
+          "topic:metabolic.mitochondria_energy"
+        ]
+      }
+    ],
+    "window_id": "episode_190262_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:30.683422+00:00"
+}

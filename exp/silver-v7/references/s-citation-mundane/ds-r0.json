@@ -1,0 +1,212 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "s-citation-mundane",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "drinking a glass of water about twenty minutes before lunch",
+        "label_ids": [
+          "topic:food.beverages_hydration",
+          "topic:food.eating_behavior"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000009",
+        "summary": "Hosts discuss a study of drinking water before lunch reducing appetite and calorie intake."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "does it matter if the water is cold or room temperature",
+        "label_ids": [
+          "topic:food.beverages_hydration",
+          "topic:food.eating_behavior"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Hosts follow up on the water tip, noting the study did not test temperature or sparkling water, then give the takeaway."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "kind of like flossing every night",
+        "label_ids": [
+          "topic:oral.oral_hygiene"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000028",
+        "summary": "Flossing is used as an analogy for a small health habit."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000035",
+        "evidence_quote": "get into the sleep stuff after this",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000035",
+        "summary": "Host teases an upcoming sleep segment."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000014",
+        "evidence_quote": "There was a study out of Ohio State that looked at people drinking a glass of water about twenty minutes before lunch",
+        "label_ids": [
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "summary": "Cites an identifiable Ohio State study on water before lunch."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000014",
+        "evidence_quote": "The researchers followed a few hundred adults over a couple of months and just tracked what they normally ate at that meal",
+        "label_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000013",
+        "summary": "Describes the study as observational tracking rather than an experimental trial."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "filling your stomach a little with water takes the edge off your hunger before the food arrives",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000012",
+        "summary": "Offers a stomach-filling mechanism for why water reduces hunger."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "the study did not really separate that out, they just had people drink a glass of water, that is it",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "Acknowledges the study did not address water temperature or sparkling water."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "In the study, people who drank a glass of water about twenty minutes before lunch ate about 50 to 100 fewer calories at the meal on average.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000011",
+        "evidence_quote": "The people who did that ended up eating a bit less at the meal, something like fifty to a hundred fewer calories on average",
+        "evidence_signal_ids": [
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A concrete effect size from the cited study that listeners could act on.",
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "topic_ids": [
+          "topic:food.beverages_hydration",
+          "topic:food.eating_behavior"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Drinking water before a meal reduces hunger by filling the stomach a little before food arrives.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "filling your stomach a little with water takes the edge off your hunger before the food arrives",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The proposed mechanism for the water effect is checkable and shapes why listeners would try it.",
+        "relevance": "substantive",
+        "start_unit_id": "u000012",
+        "topic_ids": [
+          "topic:food.beverages_hydration",
+          "topic:food.eating_behavior"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Drinking water before meals might curb some snacking over time.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000027",
+        "evidence_quote": "it might curb some snacking over time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A hedged behavioral benefit that could be checked against studies of premeal water.",
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "topic_ids": [
+          "topic:food.beverages_hydration",
+          "topic:food.eating_behavior"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Drinking a glass of water before a meal is not going to hurt you.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000027",
+        "evidence_quote": "it is not going to hurt you",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A categorical safety reassurance that could influence whether listeners adopt the habit.",
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "topic_ids": [
+          "topic:food.beverages_hydration",
+          "topic:food.eating_behavior"
+        ]
+      }
+    ],
+    "window_id": "synthetic_citation_mundane_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:49.712600+00:00"
+}

@@ -1,0 +1,97 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "s-discourse-questioned",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000027",
+        "evidence_quote": "magnesium glycinate adds like 40 minutes of deep sleep",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:supplements.magnesium"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "Hosts question an online claim that magnesium glycinate adds about 40 minutes of deep sleep and note that their own sleep habits are uncontrolled."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "obsessed with my deep sleep numbers",
+        "label_ids": [
+          "topic:self_tracking.wearables"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000020",
+        "summary": "One host mentions being obsessed with deep sleep numbers from a sleep tracker."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000022",
+        "evidence_quote": "i keep seeing this thing online",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000022",
+        "summary": "The magnesium claim is attributed to posts the host keeps seeing online."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000049",
+        "evidence_quote": "someone posts a number it sounds official and suddenly it's everywhere",
+        "label_ids": [
+          "topic:digital_health.online_health_information"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000045",
+        "summary": "Hosts reflect that unverified health numbers spread online without anyone checking their origin."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "i keep seeing this thing online"
+        ],
+        "claim_text": "Magnesium glycinate adds like 40 minutes of deep sleep.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000022",
+        "evidence_quote": "magnesium glycinate adds like 40 minutes of deep sleep",
+        "evidence_signal_ids": [
+          "evidence:media_source"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific quantified supplement efficacy claim circulating online; checkable against research on magnesium and deep sleep.",
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:supplements.magnesium"
+        ]
+      }
+    ],
+    "window_id": "synthetic_discourse_questioned_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:49.719989+00:00"
+}

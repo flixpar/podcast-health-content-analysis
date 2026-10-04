@@ -1,0 +1,408 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c185658w0010",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000749",
+        "evidence_quote": "when we give kids Tylenol and Motrin or any fever reducer, whatever homeopathic things you want to do? When you lower the temperature, the body's immune system slows down",
+        "label_ids": [
+          "topic:immune.immune_function",
+          "topic:medications.pain_relievers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000685",
+        "summary": "The doctor explains fever as a beneficial immune response and argues that fever reducers slow immunity and prolong illness."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000749",
+        "evidence_quote": "your child is exposed to influenza",
+        "label_ids": [
+          "population:children"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000685",
+        "summary": "The fever advice is specifically about children's fevers and how parents should handle them."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000749",
+        "evidence_quote": "When you lower the temperature, the body's immune system slows down",
+        "label_ids": [
+          "narrative:fever_suppression_harmful"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000742",
+        "summary": "The doctor asserts that fever reducers slow the immune response and make children sick longer."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000737",
+        "evidence_quote": "They wouldn't let me leave the office until I gave him Tylenol",
+        "label_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000734",
+        "summary": "The pediatrician recounts being pressured by her own clinic to give Tylenol, portraying conventional medical practice as reflexively pushing fever reducers."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000725",
+        "evidence_quote": "not because of brain damage, not because of organ damage, because the parents can't deal anymore",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000725",
+        "summary": "The doctor corrects the idea that a high fever itself causes brain or organ damage."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000712",
+        "evidence_quote": "When it raises the thermostat, the child gets shivery and starts shaking",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000686",
+        "summary": "A mechanistic account explains fever as raising the body's thermostat to stop viral replication and produce antibodies."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000768",
+        "evidence_quote": "the hepatitis B vaccination at birth should be a discussion rather than auto like an automatic thing",
+        "label_ids": [
+          "topic:vaccines.hep_b"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000750",
+        "summary": "The doctor discusses CDC changes to the hepatitis B birth dose and defends the vaccine's history and rationale."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000755",
+        "evidence_quote": "hepatitis B leads to liver cancer",
+        "label_ids": [
+          "topic:cancer.other_specific_cancers"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000754",
+        "summary": "The doctor notes hepatitis B can lead to liver cancer, making the vaccine an anti-cancer vaccine."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000761",
+        "evidence_quote": "they gave it to the babies, newborns",
+        "label_ids": [
+          "population:infants"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000752",
+        "summary": "The vaccine discussion concerns newborns and why the hepatitis B birth dose was given."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000768",
+        "evidence_quote": "screening moms for hepatitis B when they come in, when they're pregnant",
+        "label_ids": [
+          "population:pregnant_postpartum"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000767",
+        "summary": "Maternal hepatitis B screening is mentioned as part of the birth-dose rationale."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000765",
+        "evidence_quote": "the rates of getting hepatitis B from a blood transfusion was like one in three",
+        "label_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000762",
+        "summary": "Historical hepatitis B transfusion risk figures are cited without attribution."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000742",
+        "evidence_quote": "They wouldn't let me leave the office until I gave him Tylenol",
+        "mention_role": "criticized",
+        "product_name": "Tylenol",
+        "product_type": "medication",
+        "start_unit_id": "u000685"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000743",
+        "evidence_quote": "when we give kids Tylenol and Motrin or any fever reducer",
+        "mention_role": "criticized",
+        "product_name": "Motrin",
+        "product_type": "medication",
+        "start_unit_id": "u000685"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Fever makes the body's immune response more efficient and effective.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000688",
+        "evidence_quote": "The body mounts an immune response. It's more efficient, more effective when we're doing fever",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim that fever improves immune function is checkable and affects whether parents treat fever.",
+        "relevance": "substantive",
+        "start_unit_id": "u000686",
+        "topic_ids": [
+          "topic:immune.immune_function"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "At a temperature of 103, the flu virus can no longer replicate itself.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000710",
+        "evidence_quote": "Now the flu virus cannot replicate itself anymore",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific temperature threshold for viral replication is checkable and underpins the fever advice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000709",
+        "topic_ids": [
+          "topic:immune.immune_function"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A fever of 105 does not cause brain or organ damage.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000725",
+        "evidence_quote": "not because of brain damage, not because of organ damage, because the parents can't deal anymore",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "This corrects a common fear about fever and justifies not treating it.",
+        "relevance": "substantive",
+        "start_unit_id": "u000725",
+        "topic_ids": [
+          "topic:immune.immune_function",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Lowering a fever with Tylenol, Motrin, or other fever reducers slows the body's immune system.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000744",
+        "evidence_quote": "When you lower the temperature, the body's immune system slows down",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:fever_suppression_harmful"
+        ],
+        "rationale": "The claimed immune-slowing effect of fever reducers is checkable and central to the advice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000742",
+        "topic_ids": [
+          "topic:immune.immune_function",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Children given fever reducers stay sick for two weeks, while children allowed to let the fever run are sick for less time.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000750",
+        "evidence_quote": "If you let the fever do its thing, the kids are going to be sicker for less",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:fever_suppression_harmful"
+        ],
+        "rationale": "The claim that treating fever lengthens illness is checkable and affects parents' decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000748",
+        "topic_ids": [
+          "topic:immune.immune_function",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Hepatitis B infection leads to liver cancer.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000755",
+        "evidence_quote": "hepatitis B leads to liver cancer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable causal claim used to justify the hepatitis B vaccine.",
+        "relevance": "substantive",
+        "start_unit_id": "u000754",
+        "topic_ids": [
+          "topic:cancer.other_specific_cancers",
+          "topic:vaccines.hep_b"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The hepatitis B vaccine was started in 1996 during a massive hepatitis B epidemic.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000754",
+        "evidence_quote": "the hepatitis B vaccine was started in the 1996",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The historical origin of the vaccine program can be checked and frames the birth-dose debate.",
+        "relevance": "substantive",
+        "start_unit_id": "u000753",
+        "topic_ids": [
+          "topic:vaccines.hep_b"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Giving the hepatitis B vaccine to babies and newborns decreased hepatitis B rates.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000761",
+        "evidence_quote": "they gave it to the babies, newborns, because that's they were able to decrease the rates",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The effectiveness of the newborn vaccine program is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000760",
+        "topic_ids": [
+          "topic:vaccines.hep_b"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The risk of getting hepatitis B from a blood transfusion fell from about one in three in the 1980s to about one in 65,000.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000765",
+        "evidence_quote": "the rates of getting hepatitis B from a blood transfusion was like one in three",
+        "evidence_signal_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The historical and current transfusion risk figures are checkable and support the vaccine rationale.",
+        "relevance": "substantive",
+        "start_unit_id": "u000762",
+        "topic_ids": [
+          "topic:vaccines.hep_b"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Pregnant women and women arriving at the hospital are screened for hepatitis B so their status is known.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000768",
+        "evidence_quote": "Now we're screening moms for hepatitis B when they come in, when they're pregnant, or when they're coming to the hospital",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The current maternal screening practice is checkable and explains the birth-dose policy.",
+        "relevance": "substantive",
+        "start_unit_id": "u000767",
+        "topic_ids": [
+          "topic:vaccines.hep_b"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The CDC changed the hepatitis B vaccination at birth to a discussion rather than an automatic procedure.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000753",
+        "evidence_quote": "the hepatitis B vaccination at birth should be a discussion rather than auto like an automatic thing",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The reported policy change can be checked against CDC actions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000752",
+        "topic_ids": [
+          "topic:vaccines.hep_b"
+        ]
+      }
+    ],
+    "window_id": "episode_185658_window_0010"
+  },
+  "stored_at": "2026-10-04T22:36:30.604429+00:00"
+}

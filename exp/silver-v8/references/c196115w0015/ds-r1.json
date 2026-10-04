@@ -1,0 +1,206 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c196115w0015",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001266",
+        "evidence_quote": "you should not have any metal, even metal crowns in your mouth",
+        "label_ids": [
+          "topic:oral.dental_procedures",
+          "topic:procedures.imaging_diagnostics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001222",
+        "summary": "Hosts discuss MRI safety with metal, including dental crowns and fillings, ferromagnetic materials, and alternative imaging."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001241",
+        "evidence_quote": "it takes your atoms and it makes them all point in one direction",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001240",
+        "summary": "Speaker offers a mechanistic account of MRI as aligning atoms."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001257",
+        "evidence_quote": "the vibration can dislodge, bend, and break the dental restoration just from the magnets",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001257",
+        "summary": "Speaker explains that MRI magnets vibrate dental restorations."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "An MRI works by taking the body's atoms and making them all point in one direction.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001241",
+        "evidence_quote": "I think it takes your atoms and it makes them all point in one direction",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "How MRI works is checkable and the speaker's explanation could mislead about the technology.",
+        "relevance": "substantive",
+        "start_unit_id": "u001240",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "It is dangerous to have metal on or in the body, including metal crowns in the mouth, during an MRI.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001255",
+        "evidence_quote": "you should not have any metal, even metal crowns in your mouth",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The safety of metal in an MRI is a checkable clinical safety claim that affects patient behavior.",
+        "relevance": "substantive",
+        "start_unit_id": "u001255",
+        "topic_ids": [
+          "topic:oral.dental_procedures",
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "MRI magnets can cause vibration that dislodges, bends, or breaks dental restorations.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001257",
+        "evidence_quote": "the vibration can dislodge, bend, and break the dental restoration just from the magnets",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether MRI magnets can damage dental work is checkable and could affect whether patients disclose dental metal.",
+        "relevance": "substantive",
+        "start_unit_id": "u001257",
+        "topic_ids": [
+          "topic:oral.dental_procedures",
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Loose metal objects can injure a person during an MRI.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001259",
+        "evidence_quote": "loose metal objects can injure you as that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The risk of loose metal in an MRI is a checkable safety claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u001259",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I would think"
+        ],
+        "claim_text": "People with a metal plate in the head or dental fillings are bad candidates for an MRI.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001263",
+        "evidence_quote": "I would think if you have a metal plate in your head or you got fillings in your teeth, then you would be a bad candidate",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Contraindications to MRI with metal implants are checkable and affect clinical decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u001262",
+        "topic_ids": [
+          "topic:oral.dental_procedures",
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Some kinds of metal are more responsive to MRI magnets than others.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001264",
+        "evidence_quote": "I think there's certain kinds of metals too that are more responsive to it than others",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Which metals interact with MRI magnets is checkable and bears on MRI safety advice.",
+        "relevance": "substantive",
+        "start_unit_id": "u001263",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ferromagnetic materials include iron, cobalt, manganese, and nickel.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001265",
+        "evidence_quote": "they call ferromagnetic materials—iron, cobalt, manganese, nickel",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The list of ferromagnetic metals is checkable and relevant to MRI safety.",
+        "relevance": "substantive",
+        "start_unit_id": "u001264",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      }
+    ],
+    "window_id": "episode_196115_window_0015"
+  },
+  "stored_at": "2026-10-04T22:36:30.850676+00:00"
+}

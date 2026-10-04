@@ -1,0 +1,146 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c183926w0013",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000843",
+        "evidence_quote": "they've realized there maybe there's narcissistic traits, or that's a full-on narcissist that they're in a relationship with",
+        "label_ids": [
+          "topic:mental.ocd_personality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000838",
+        "summary": "Host asks whether someone with narcissistic traits or a diagnosed narcissist can be changed in a relationship."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000871",
+        "evidence_quote": "This episode is sponsored by BetterHelp",
+        "label_ids": [
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000858",
+        "summary": "Sponsor read for the BetterHelp therapy service, emphasizing customer reviews, session ratings, and therapist experience."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000871",
+        "evidence_quote": "This episode is sponsored by BetterHelp",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000858",
+        "summary": "Sponsored read with a specific therapy service promoted and a URL given."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000918",
+        "evidence_quote": "someone who has narcissistic traits generally doesn't come to therapy because they don't think they have a problem",
+        "label_ids": [
+          "topic:mental.ocd_personality",
+          "topic:mental.therapy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000872",
+        "summary": "Therapist explains that people with narcissistic traits rarely seek therapy on their own and often attend couples therapy only because their partner insists."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000871",
+        "evidence_quote": "This episode is sponsored by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000858"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A person with narcissistic traits will not change no matter what you do.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000843",
+        "evidence_quote": "No matter what you do, the person's not going to change, right",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about whether people with narcissistic traits can change could affect relationship decisions and is checkable against clinical knowledge.",
+        "relevance": "substantive",
+        "start_unit_id": "u000843",
+        "topic_ids": [
+          "topic:mental.ocd_personality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "generally"
+        ],
+        "claim_text": "People with narcissistic traits generally do not come to therapy because they do not think they have a problem.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000874",
+        "evidence_quote": "someone who has narcissistic traits generally doesn't come to therapy because they don't think they have a problem",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claims about treatment-seeking behavior in narcissistic personality disorder can be checked against clinical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000874",
+        "topic_ids": [
+          "topic:mental.ocd_personality",
+          "topic:mental.therapy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "tend"
+        ],
+        "claim_text": "People with narcissistic traits tend not to come to therapy on their own; they agree to couples therapy only because their partner makes them come.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000902",
+        "evidence_quote": "they tend not to come on their own to therapy unless they actually agree to come in couples, and they're coming because their partner is making them come",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A distinct claim that people with narcissistic traits only attend therapy when their partner insists, checkable against clinical accounts.",
+        "relevance": "substantive",
+        "start_unit_id": "u000901",
+        "topic_ids": [
+          "topic:mental.ocd_personality",
+          "topic:mental.therapy"
+        ]
+      }
+    ],
+    "window_id": "episode_183926_window_0013"
+  },
+  "stored_at": "2026-10-04T22:36:32.717716+00:00"
+}

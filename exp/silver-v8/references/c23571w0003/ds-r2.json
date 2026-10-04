@@ -1,0 +1,230 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c23571w0003",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000148",
+        "evidence_quote": "But for some of the pathological liars, it's not so clear that they're trying to",
+        "label_ids": [
+          "topic:mental.ocd_personality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000111",
+        "summary": "Guest psychologist discusses pathological lying, its definition, and research on lie frequency."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000127",
+        "evidence_quote": "If someone believes something that's not honest or truthful matches with reality, then we would refer to that as delusional",
+        "label_ids": [
+          "topic:mental.serious_mental_illness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000124",
+        "summary": "Guest explains the clinical distinction between lying and delusional belief."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "When looking at the research on lie frequency, most people tell zero lies within a 24-hour period",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000133",
+        "summary": "Speaker cites research on lie frequency to support the claim that most people tell zero lies a day."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000148",
+        "evidence_quote": "some of the work of Kim Saroda and Timothy Levine, and they looked at lie distribution and lie frequency",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000145",
+        "summary": "Guest invokes named researchers Kim Saroda and Timothy Levine and Levine's truth default theory without citing a specific study."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000151",
+        "evidence_quote": "author of the book *Big Liars",
+        "mention_role": "neutral",
+        "product_name": "Big Liars",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000151"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "most people"
+        ],
+        "claim_text": "Most people tell zero lies within a 24-hour period.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "most people tell zero lies within a 24-hour period",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A falsifiable empirical claim about daily lie frequency that can be checked against deception research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "topic_ids": [
+          "topic:mental.ocd_personality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People tell, on average, two lies a day.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000146",
+        "evidence_quote": "people tell, on average, two lies a day",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A widely cited statistic about lie frequency that the speaker accepts; checkable against the underlying research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000146",
+        "topic_ids": [
+          "topic:mental.ocd_personality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The most common number of lies people tell in a day is zero.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "the mode or the most lies told, it's zero",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A precise statistical claim about the distribution of daily lying.",
+        "relevance": "substantive",
+        "start_unit_id": "u000147",
+        "topic_ids": [
+          "topic:mental.ocd_personality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most people",
+          "most of the time"
+        ],
+        "claim_text": "Most people are honest most of the time.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000148",
+        "evidence_quote": "most people are honest most of the time",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general empirical claim about human honesty that is part of truth default theory.",
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "topic_ids": [
+          "topic:mental.ocd_personality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People lie only in instances where they think the truth will not work.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000148",
+        "evidence_quote": "it's only those instances where we think the truth won't work that we lie",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A core proposition of truth default theory that can be examined against deception research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "topic_ids": [
+          "topic:mental.ocd_personality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "If someone believes something that does not match reality, it is referred to as delusional.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000124",
+        "evidence_quote": "If someone believes something that's not honest or truthful matches with reality, then we would refer to that as delusional",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A clinical labeling claim that can be checked against psychiatric definitions of delusion.",
+        "relevance": "substantive",
+        "start_unit_id": "u000124",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Pathological liars' lying does not give them an advantage but severs their relationships and causes distress.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "pathological liars where their lying is not giving them an advantage, but clearly severing their relationships and causing distress",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A clinical characterization of the consequences of pathological lying.",
+        "relevance": "substantive",
+        "start_unit_id": "u000138",
+        "topic_ids": [
+          "topic:mental.ocd_personality"
+        ]
+      }
+    ],
+    "window_id": "episode_23571_window_0003"
+  },
+  "stored_at": "2026-10-04T22:36:33.099207+00:00"
+}

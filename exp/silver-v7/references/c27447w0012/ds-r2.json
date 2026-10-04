@@ -1,0 +1,155 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c27447w0012",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000919",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified",
+        "label_ids": [
+          "topic:health_system.dtc_telehealth",
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000906",
+        "summary": "Sponsor read for BetterHelp online therapy, framed around World Mental Health Day."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000919",
+        "evidence_quote": "Our listeners get 10 off their first month at BetterHelp.com/lastpod",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000908",
+        "summary": "Paid sponsor read with a discount code for BetterHelp."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000911",
+        "evidence_quote": "work according to a strict code of conduct and are fully qualified",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000911",
+        "summary": "Ad appeals to therapists' qualifications and code of conduct."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000968",
+        "evidence_quote": "damn near ripped the head off Birdella's penis",
+        "label_ids": [
+          "topic:acute_care.trauma_fractures"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000961",
+        "summary": "True-crime recounting of a near-complete penile amputation from a bite."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000993",
+        "evidence_quote": "he beat Pearson with a stick until he was unconscious",
+        "label_ids": [
+          "topic:acute_care.emergency_critical_care"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000985",
+        "summary": "True-crime recounting of a beating that left the victim unconscious and a hospital visit."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000995",
+        "evidence_quote": "put a plastic bag over Pearson's head, and suffocated him to death",
+        "label_ids": [
+          "topic:acute_care.death_dying"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000994",
+        "summary": "True-crime recounting of a suffocation murder."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000919",
+        "evidence_quote": "But that's where BetterHelp comes in",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000908"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp therapists work according to a strict code of conduct and are fully qualified.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000911",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A factual claim about therapist qualifications and conduct that could be checked against BetterHelp's standards.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000911",
+        "topic_ids": [
+          "topic:health_system.dtc_telehealth",
+          "topic:mental.therapy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp therapists have helped millions of people take a step forward.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000916",
+        "evidence_quote": "Celebrating the therapists who've helped millions of people take a step forward",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A marketing effectiveness statistic that could be checked against BetterHelp's reported outcomes.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000916",
+        "topic_ids": [
+          "topic:health_system.dtc_telehealth",
+          "topic:mental.therapy"
+        ]
+      }
+    ],
+    "window_id": "episode_27447_window_0012"
+  },
+  "stored_at": "2026-10-04T22:13:55.583959+00:00"
+}

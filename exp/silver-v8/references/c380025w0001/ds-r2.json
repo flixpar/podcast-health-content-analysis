@@ -1,0 +1,187 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c380025w0001",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "today's episode is all about understanding delusion and psychosis",
+        "label_ids": [
+          "topic:mental.serious_mental_illness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000001",
+        "summary": "Host explains delusion and psychosis, their closed-loop logic, definitions and distinctions."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000033",
+        "evidence_quote": "Someone has an intrusive thought about doing something horrific",
+        "label_ids": [
+          "topic:mental.ocd_personality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "Host distinguishes intrusive thoughts from psychosis and promises a framework for telling them apart."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "reality testing questions being labeled as narcissistic and gaslighting",
+        "label_ids": [
+          "topic:mental.pop_psychology"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000044",
+        "summary": "Host discusses social-media mislabeling of reality testing as narcissism and gaslighting, and gray rocking."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "these things are not interchangeable",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "Host corrects the interchangeability of intrusive thoughts and psychosis."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "This is the first misconception: people believe things every single day that are inaccurate",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "summary": "Host corrects the misconception that believing inaccurate things is psychosis."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Having an intrusive thought about doing something horrific is not the same as being in psychosis.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "these things are not interchangeable",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "A common clinical distinction that affects whether intrusive thoughts are treated as psychosis.",
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "topic_ids": [
+          "topic:mental.ocd_personality",
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A delusion involves a belief held with conviction that is resistant to contradictory evidence and disconnected from consensual reality.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000043",
+        "evidence_quote": "Held with a level of conviction that is resistant to contradictory evidence and is disconnected from consensual reality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A definitional claim about delusion that can be checked against clinical criteria.",
+        "relevance": "substantive",
+        "start_unit_id": "u000042",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Reality testing someone who is in delusion will make them more angry or emotionally aroused.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000055",
+        "evidence_quote": "reality testing to somebody who is in delusion will actually make them more angry",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A clinical-interaction claim that affects how people respond to someone in psychosis.",
+        "relevance": "substantive",
+        "start_unit_id": "u000054",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "so many"
+        ],
+        "claim_text": "In many cases, the person who believes they are being gaslit is the one gaslighting the person trying to ask the right questions.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000051",
+        "evidence_quote": "the person who believes they're being gaslit is the one gaslighting the person who is desperately trying to ask the right questions",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A strong claim about gaslighting dynamics that could be examined or challenged.",
+        "relevance": "substantive",
+        "start_unit_id": "u000050",
+        "topic_ids": [
+          "topic:mental.pop_psychology"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could eventually"
+        ],
+        "claim_text": "Repeatedly misinterpreting others' words or expressions in a sustained manner could eventually lead to psychosis.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "although repeatedly in a sustained manner, that could eventually lead to psychosis",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim about progression from ordinary misperception to psychosis.",
+        "relevance": "substantive",
+        "start_unit_id": "u000040",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      }
+    ],
+    "window_id": "episode_380025_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:33.265903+00:00"
+}

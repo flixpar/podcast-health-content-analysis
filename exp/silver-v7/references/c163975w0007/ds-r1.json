@@ -1,0 +1,113 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c163975w0007",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000545",
+        "evidence_quote": "With LabCorp On Demand, you can purchase the health tests",
+        "label_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000538",
+        "summary": "Sponsor read promotes LabCorp On Demand consumer lab tests for cholesterol, testosterone, and micronutrient levels."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000545",
+        "evidence_quote": "use the code football to save up to 15",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000538",
+        "summary": "Sponsor read includes a promo URL and discount code."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000542",
+        "evidence_quote": "science-backed lab tests",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000541",
+        "summary": "Ad asserts scientific backing for LabCorp tests and that doctors trust the lab."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000545",
+        "evidence_quote": "LabCorp On Demand",
+        "mention_role": "advertised",
+        "product_name": "LabCorp On Demand",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000538"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "LabCorp On Demand lets people buy health tests without scheduling a doctor's appointment.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000540",
+        "evidence_quote": "you can purchase the health tests. That you need without having to schedule a doctor's appointment",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The advertised service model is checkable and could change how listeners access lab testing.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000539",
+        "topic_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "LabCorp On Demand offers more than a hundred science-backed lab tests.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000541",
+        "evidence_quote": "a suite of more than a hundred science-backed lab tests",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The number of available tests and the claim they are science-backed are checkable product claims in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000541",
+        "topic_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ]
+      }
+    ],
+    "window_id": "episode_163975_window_0007"
+  },
+  "stored_at": "2026-10-04T22:13:52.563806+00:00"
+}

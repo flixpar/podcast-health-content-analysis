@@ -1,0 +1,90 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c77624w0013",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000788",
+        "evidence_quote": "get that man in a detox, and he needs to take care of himself",
+        "label_ids": [
+          "topic:drugs_addiction.addiction_recovery"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000769",
+        "summary": "Host advises that Laura's man needs a meeting, a professional, and detox, and that Laura needs Al-Anon or codependency support."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000796",
+        "evidence_quote": "one of my best friends growing up had Down syndrome",
+        "label_ids": [
+          "topic:genetics.genetic_conditions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000795",
+        "summary": "Host mentions that a childhood friend had Down syndrome."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000820",
+        "evidence_quote": "if those two people make a child, that child, the chances of that child being comfortable and well in its own skin, probably not super great",
+        "label_ids": [
+          "topic:other"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000813",
+        "summary": "Host argues that two intellectually disabled people should probably not have a child together because the child would likely not be well."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000776",
+        "evidence_quote": "she needs to get to some Al-Anon meetings",
+        "mention_role": "recommended",
+        "product_name": "Al-Anon",
+        "product_type": "program_or_course",
+        "start_unit_id": "u000776"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "If two mentally challenged people make a child, the chances of that child being comfortable and well in its own skin are probably not super great.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000813",
+        "evidence_quote": "if those two people make a child, that child, the chances of that child being comfortable and well in its own skin, probably not super great",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about the likely wellbeing of children born to intellectually disabled parents, used here to argue against their reproducing.",
+        "relevance": "substantive",
+        "start_unit_id": "u000813",
+        "topic_ids": [
+          "topic:other"
+        ]
+      }
+    ],
+    "window_id": "episode_77624_window_0013"
+  },
+  "stored_at": "2026-10-04T22:13:55.943672+00:00"
+}

@@ -1,0 +1,570 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "s-topic-boundary-vaccine-covid",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "questions is about the covid vaccines themselves, like the actual shots",
+        "label_ids": [
+          "topic:vaccines.covid_vaccines"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000003",
+        "summary": "Hosts answer listener questions on updated booster effectiveness and myocarditis risk from mRNA shots."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "the myocarditis risk from actually catching covid itself",
+        "label_ids": [
+          "topic:covid.illness_severity"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000009",
+        "summary": "COVID infection myocarditis risk is cited as a comparison to vaccine risk."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000006",
+        "evidence_quote": "the data still shows it lowers the odds of ending up hospitalized",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000006",
+        "summary": "Host invokes unspecified data for booster hospitalization benefit."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000006",
+        "evidence_quote": "For older adults and people with underlying conditions",
+        "label_ids": [
+          "population:older_adults"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000006",
+        "summary": "Booster benefit is discussed specifically for older adults and people with underlying conditions."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "myocarditis risk with the mRNA shots in young men specifically",
+        "label_ids": [
+          "population:men"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000008",
+        "summary": "Myocarditis risk is discussed specifically for young men."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000009",
+        "evidence_quote": "That risk is real but it is small",
+        "label_ids": [
+          "narrative:covid_vaccine_myocarditis"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000008",
+        "summary": "The widespread myocarditis concern is addressed by saying the risk is real but small and lower than COVID infection risk."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000011",
+        "evidence_quote": "my arm was sore for like a day",
+        "label_ids": [
+          "topic:vaccines.covid_vaccines"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000010",
+        "summary": "Personal anecdotes of minor side effects after the booster."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000013",
+        "evidence_quote": "whether it is fine to get the flu shot and the covid booster on the same day at the same appointment",
+        "label_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.flu_vaccine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000012",
+        "summary": "Coadministration of the flu shot and COVID booster is described as generally fine with minor side effects."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000013",
+        "evidence_quote": "From what pharmacists have told me that is generally considered fine",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000013",
+        "summary": "Pharmacists' professional input is cited for the coadministration answer."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000015",
+        "evidence_quote": "whether the covid vaccine schedule for younger children has changed much since it first rolled out",
+        "label_ids": [
+          "topic:vaccines.covid_vaccines"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000014",
+        "summary": "Pediatric COVID vaccine schedule is described as simplified and folded into well-child visits."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000015",
+        "evidence_quote": "kids specifically, whether the covid vaccine schedule for younger children",
+        "label_ids": [
+          "population:children"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000014",
+        "summary": "The vaccine schedule discussion concerns younger children."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "keeping kids out of school that long clearly hurt a lot of them academically and socially",
+        "label_ids": [
+          "topic:covid.lockdowns_closures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "School closures are described as having mixed early benefit but clear harms to children."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "keeping kids out of school that long",
+        "label_ids": [
+          "population:children"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "The school-closure discussion concerns children."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "keeping kids out of school that long clearly hurt a lot of them",
+        "label_ids": [
+          "narrative:lockdowns_worse_than_virus"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "Speaker endorses that school closures caused substantial harm even if early help was slight."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "that particular distance was kind of a rough guess carried over from older flu guidance",
+        "label_ids": [
+          "topic:covid.masks_distancing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000023",
+        "summary": "The six-foot distancing rule is described as a rough guess carried over from older flu guidance."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "not something freshly tested for this",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Host notes the six-foot rule was not freshly tested."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000031",
+        "evidence_quote": "a lot of the restrictions probably went on longer than the evidence at the time really supported",
+        "label_ids": [
+          "topic:covid.lockdowns_closures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "summary": "Remote schooling and business closures are judged to have lasted longer than evidence supported."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "remote schooling and whether it should have ended sooner",
+        "label_ids": [
+          "population:children"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "summary": "The remote-schooling discussion concerns children and districts serving them."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000031",
+        "evidence_quote": "a lot of the restrictions probably went on longer than the evidence at the time really supported",
+        "label_ids": [
+          "narrative:lockdowns_worse_than_virus"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "summary": "Speaker endorses that restrictions, remote schooling and closures continued longer than evidence supported."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000031",
+        "evidence_quote": "the evidence at the time really supported",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000031",
+        "summary": "Speaker invokes the evidence base for restrictions without specifying it."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "From what I have read",
+          "somewhat"
+        ],
+        "claim_text": "The newer COVID boosters are matched to recently circulating strains and are somewhat updated each year.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000005",
+        "evidence_quote": "the newer boosters are matched to the strains that were circulating recently, so they are somewhat updated each year",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Vaccine strain matching and the annual update process can be checked against FDA and WHO strain selection.",
+        "relevance": "substantive",
+        "start_unit_id": "u000005",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "For older adults and people with underlying conditions, the updated booster lowers the odds of ending up hospitalized.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000006",
+        "evidence_quote": "the data still shows it lowers the odds of ending up hospitalized",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Booster effectiveness against hospitalization for high-risk groups is checkable against surveillance data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000006",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The myocarditis risk from the mRNA shots is real but small.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "That risk is real but it is small",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Rates of vaccine-associated myocarditis can be compared with published surveillance estimates.",
+        "relevance": "substantive",
+        "start_unit_id": "u000009",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The myocarditis risk from the mRNA shots is lower than the myocarditis risk from catching COVID.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "it is also lower than the myocarditis risk from actually catching covid itself",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The relative myocarditis risk of vaccination versus infection is a checkable comparative-safety claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000009",
+        "topic_ids": [
+          "topic:covid.illness_severity",
+          "topic:vaccines.covid_vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "From what pharmacists have told me",
+          "generally"
+        ],
+        "claim_text": "Getting the flu shot and the COVID booster on the same day is generally considered fine.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000013",
+        "evidence_quote": "From what pharmacists have told me that is generally considered fine",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Coadministration safety is addressed in vaccine guidance and can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000013",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.flu_vaccine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might",
+          "slightly",
+          "a bit"
+        ],
+        "claim_text": "You might get a slightly more sore arm or feel a bit more run down that evening after same-day flu and COVID shots.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000013",
+        "evidence_quote": "you might just get a slightly more sore arm or feel a bit more run down that evening",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Expected side effects of coadministered vaccines are described in clinical guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000013",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.flu_vaccine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "some"
+        ],
+        "claim_text": "The COVID vaccine schedule for younger children has been simplified, with fewer separate doses than the first version.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000015",
+        "evidence_quote": "It has been simplified some over time, fewer separate doses than the very first version",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The pediatric COVID vaccine schedule and dose counts can be checked against CDC recommendations.",
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "mostly"
+        ],
+        "claim_text": "Pediatricians mostly fold the COVID vaccine into regular well-child visits now.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000015",
+        "evidence_quote": "pediatricians mostly fold it into the regular well child visits now",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "How pediatric COVID vaccination is delivered is checkable in practice and guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Closing schools probably helped a little in the very early months of the pandemic.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "closing schools probably helped a little in the very early months",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Early school-closure effects on transmission are studied and can be compared.",
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "topic_ids": [
+          "topic:covid.lockdowns_closures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "clearly",
+          "not really in dispute"
+        ],
+        "claim_text": "Keeping kids out of school that long clearly hurt a lot of them academically and socially.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "keeping kids out of school that long clearly hurt a lot of them academically and socially, that part is not really in dispute",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:lockdowns_worse_than_virus"
+        ],
+        "rationale": "The educational and social harms of prolonged school closures are empirically assessed in the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "topic_ids": [
+          "topic:covid.lockdowns_closures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "From what I understand",
+          "kind of"
+        ],
+        "claim_text": "The six-foot distancing rule was a rough guess carried over from older flu guidance, not something freshly tested for COVID.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "that particular distance was kind of a rough guess carried over from older flu guidance, not something freshly tested for this",
+        "evidence_signal_ids": [
+          "evidence:evidence_limits"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The derivation of the six-foot rule can be checked against public health guidance and the scientific record.",
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "topic_ids": [
+          "topic:covid.masks_distancing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "A lot of"
+        ],
+        "claim_text": "A lot of districts kept schools remote well past the point where local case numbers had come down.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "A lot of districts kept things remote well past the point where local case numbers had come down",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "District-level remote schooling decisions relative to case trends can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000028",
+        "topic_ids": [
+          "topic:covid.lockdowns_closures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of",
+          "probably"
+        ],
+        "claim_text": "A lot of the restrictions probably went on longer than the evidence at the time supported.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000031",
+        "evidence_quote": "a lot of the restrictions probably went on longer than the evidence at the time really supported",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:lockdowns_worse_than_virus"
+        ],
+        "rationale": "The alignment of restriction timing with contemporaneous evidence is a checkable policy claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000031",
+        "topic_ids": [
+          "topic:covid.lockdowns_closures"
+        ]
+      }
+    ],
+    "window_id": "synthetic_topic_boundary_vaccine_covid_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:53.972770+00:00"
+}

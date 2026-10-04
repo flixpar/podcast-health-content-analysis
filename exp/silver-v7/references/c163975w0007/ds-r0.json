@@ -1,0 +1,158 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c163975w0007",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000544",
+        "evidence_quote": "With LabCorp On Demand, you can purchase the health tests",
+        "label_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:mens.testosterone",
+          "topic:self_tracking.consumer_lab_tests",
+          "topic:supplements.other_vitamins_minerals"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000538",
+        "summary": "Sponsor read for LabCorp On Demand consumer lab tests, naming cholesterol, testosterone, and micronutrient panels."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000544",
+        "evidence_quote": "use the code football to save up to 15% on select tests",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000538",
+        "summary": "The LabCorp On Demand segment is a sponsor read with a discount code."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000542",
+        "evidence_quote": "more than a hundred science-backed lab tests",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000541",
+        "summary": "The ad asserts that LabCorp On Demand tests are science-backed."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000544",
+        "evidence_quote": "With LabCorp On Demand, you can purchase the health tests",
+        "mention_role": "advertised",
+        "product_name": "LabCorp On Demand",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000538"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "LabCorp On Demand allows people to purchase health tests without scheduling a doctor's appointment.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000540",
+        "evidence_quote": "you can purchase the health tests. That you need without having to schedule a doctor's appointment",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The service feature is checkable and affects whether listeners will seek the tests.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000539",
+        "topic_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "LabCorp On Demand offers a suite of more than a hundred science-backed lab tests.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000541",
+        "evidence_quote": "choose from a suite of more than a hundred science-backed lab tests",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The number and scientific backing of available tests are factual claims made in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000541",
+        "topic_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "LabCorp On Demand returns test results in just days.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000542",
+        "evidence_quote": "In just days, you will get results",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The turnaround time is a checkable product claim.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000542",
+        "topic_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "LabCorp On Demand test results are accurate and easy to understand.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000542",
+        "evidence_quote": "results that are accurate, easy to understand",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The ad makes a quality claim about the tests that could be checked against lab performance.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000542",
+        "topic_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ]
+      }
+    ],
+    "window_id": "episode_163975_window_0007"
+  },
+  "stored_at": "2026-10-04T22:13:44.377487+00:00"
+}

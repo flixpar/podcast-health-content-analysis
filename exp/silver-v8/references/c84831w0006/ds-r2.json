@@ -1,0 +1,397 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c84831w0006",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000331",
+        "evidence_quote": "get matched with a therapist based on your needs",
+        "label_ids": [
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000325",
+        "summary": "Sponsor read for BetterHelp online therapy matching."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000331",
+        "evidence_quote": "Visit BetterHelp.com/jays-top-three",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000325",
+        "summary": "Paid sponsor read with a URL call to action."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000346",
+        "evidence_quote": "they're not getting nutrients because they're not eating as much anymore",
+        "label_ids": [
+          "topic:glp1.side_effects"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000343",
+        "summary": "Host and doctor note that GLP-1 users eat less and may miss nutrients."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000353",
+        "evidence_quote": "I'm talking right now about my PCOS patients",
+        "label_ids": [
+          "topic:glp1.new_offlabel_uses",
+          "topic:womens.pcos"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000347",
+        "summary": "Doctor narrows the GLP-1 discussion to PCOS patients rather than casual weight loss."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000360",
+        "evidence_quote": "insulin resistance, metabolic health is is not a one size fits all",
+        "label_ids": [
+          "topic:glp1.use_results",
+          "topic:metabolic.insulin_glucose"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000354",
+        "summary": "Doctor describes GLP-1 use, weight-loss duration, and the chronic nature of insulin resistance."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000389",
+        "evidence_quote": "But there are patients, my PCOS patients, who want who I I don't know they lose thirty pounds, forty pounds, fifty pounds on these GLP ones",
+        "label_ids": [
+          "topic:glp1.use_results",
+          "topic:medications.repurposed_offlabel",
+          "topic:metabolic.insulin_glucose",
+          "topic:womens.pcos"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000361",
+        "summary": "Doctor explains her PCOS protocol: GLP-1s with later metformin and an OV supplement so patients can stop without regaining weight."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000402",
+        "evidence_quote": "the insulin resistant stimulates your ovaries to secrete androgen",
+        "label_ids": [
+          "topic:fertility.contraception",
+          "topic:womens.female_hormones",
+          "topic:womens.pcos"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000390",
+        "summary": "Doctor explains the androgen/GnRH/LH cycle in PCOS and the role of birth control pills."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000407",
+        "evidence_quote": "These poor PCOS patients have chronic inflammation in their body",
+        "label_ids": [
+          "topic:immune.inflammation",
+          "topic:metabolic.insulin_glucose",
+          "topic:womens.pcos"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000403",
+        "summary": "Doctor names chronic inflammation as a third pillar and says the liver turns sugar into visceral fat."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000386",
+        "evidence_quote": "Because you did not address the underlying",
+        "label_ids": [
+          "frame:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000374",
+        "summary": "Doctor frames GLP-1 treatment as addressing symptoms and insists the underlying insulin resistance must be treated."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000399",
+        "evidence_quote": "the insulin resistant stimulates your ovaries to secrete androgen",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000391",
+        "summary": "Doctor explains the hormonal mechanism by which insulin resistance drives androgen excess in PCOS."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000407",
+        "evidence_quote": "the liver takes this sugar and turn it turns it into a visceral fat",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000406",
+        "summary": "Doctor says the liver turns sugar into visceral fat."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000407",
+        "evidence_quote": "my PCOS patients",
+        "label_ids": [
+          "population:women"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000347",
+        "summary": "The whole PCOS treatment discussion concerns women's health."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000331",
+        "evidence_quote": "Visit BetterHelp.com/jays-top-three",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000325"
+      },
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000383",
+        "evidence_quote": "I have them take the OV supplement",
+        "mention_role": "recommended",
+        "product_name": "OV supplement",
+        "product_type": "supplement",
+        "start_unit_id": "u000362"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "A person who loses 100 to 150 pounds on GLP-1 medications is probably never going to be able to stop taking them.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000361",
+        "evidence_quote": "Someone who loses one hundred, one hundred and fifty pounds with GLP ones is probably never going to get off of these meds",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Long-term dependence on GLP-1s is checkable and affects patient expectations.",
+        "relevance": "substantive",
+        "start_unit_id": "u000360",
+        "topic_ids": [
+          "topic:glp1.use_results",
+          "topic:metabolic.insulin_glucose"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "For someone who wants to lose 100 pounds, they might have to stay on GLP-1s for two to two and a half years.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000359",
+        "evidence_quote": "they might have to stay on it for two, two and a half years",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The expected duration of GLP-1 treatment is checkable against clinical guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000359",
+        "topic_ids": [
+          "topic:glp1.use_results"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "If a person with insulin resistance stops GLP-1s after losing weight, they will regain the weight because the underlying condition was not addressed.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000367",
+        "evidence_quote": "So, if someone has insulin resistance, you give them GLP-1s, and you stop it. What's going to happen? They shoot back up, right",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether stopping GLP-1s leads to weight regain is a checkable claim that affects treatment decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000364",
+        "topic_ids": [
+          "topic:glp1.use_results",
+          "topic:metabolic.insulin_glucose"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "GLP-1s improve insulin sensitivity and regulate insulin in PCOS.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000369",
+        "evidence_quote": "You give her GLP-1, you address her insulin sensitivity, you regulate her insulin",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about GLP-1 effects on insulin in PCOS can be checked against clinical studies.",
+        "relevance": "substantive",
+        "start_unit_id": "u000368",
+        "topic_ids": [
+          "topic:glp1.new_offlabel_uses",
+          "topic:metabolic.insulin_glucose",
+          "topic:womens.pcos"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In PCOS, insulin resistance stimulates the ovaries to secrete androgens.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000392",
+        "evidence_quote": "the insulin resistant stimulates your ovaries to secrete androgen",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The hormonal mechanism linking insulin resistance to androgen secretion in PCOS is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000391",
+        "topic_ids": [
+          "topic:womens.female_hormones",
+          "topic:womens.pcos"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The androgens in PCOS block ovulation and cause facial hair, irregular periods, acne, and oily skin.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000400",
+        "evidence_quote": "You have these androgens that block ovulation, and you have these androgens that are free-floating in the system, causing facial hair, body. Irregular period, acne, oily skin",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim that androgen excess drives PCOS symptoms is a checkable physiological explanation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000399",
+        "topic_ids": [
+          "topic:womens.female_hormones",
+          "topic:womens.pcos"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Birth control pills help regulate the hormonal cycle in PCOS.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000402",
+        "evidence_quote": "birth control pills help help regulate this vicious cycle",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The effect of oral contraceptives on PCOS symptoms can be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000401",
+        "topic_ids": [
+          "topic:fertility.contraception",
+          "topic:womens.pcos"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "PCOS patients have chronic inflammation.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000405",
+        "evidence_quote": "These poor PCOS patients have chronic inflammation in their body",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim that PCOS is accompanied by chronic inflammation is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000404",
+        "topic_ids": [
+          "topic:immune.inflammation",
+          "topic:womens.pcos"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The liver converts sugar to visceral fat.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000407",
+        "evidence_quote": "the liver takes this sugar and turn it turns it into a visceral fat",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The metabolic claim about sugar being turned into visceral fat is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000407",
+        "topic_ids": [
+          "topic:metabolic.insulin_glucose"
+        ]
+      }
+    ],
+    "window_id": "episode_84831_window_0006"
+  },
+  "stored_at": "2026-10-04T22:36:33.500147+00:00"
+}

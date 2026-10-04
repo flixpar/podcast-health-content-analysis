@@ -1,0 +1,179 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c7217w0011",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000588",
+        "evidence_quote": "if you are fully vaccinated, your risk is really very low, not only outdoors but also indoors",
+        "label_ids": [
+          "topic:covid.masks_distancing",
+          "topic:vaccines.covid_vaccines"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000545",
+        "summary": "Fauci explains the updated CDC mask guidance: vaccinated people are at low risk indoors, mask wearing is not mandated, and businesses may still require masks."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000611",
+        "evidence_quote": "United States senators spreading misinformation",
+        "label_ids": [
+          "topic:digital_health.online_health_information",
+          "topic:vaccines.uptake_hesitancy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000589",
+        "summary": "The hosts discuss COVID misinformation spread by senators and how to counter it so that reluctance does not hurt vaccination."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000560",
+        "evidence_quote": "It's not a mandate to take your mask off",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000551",
+        "summary": "Fauci corrects the misinterpretation that the new CDC guidance is a mandate to stop wearing masks."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000608",
+        "evidence_quote": "how to combat right-wing information",
+        "label_ids": [
+          "frame:political_partisan"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000598",
+        "summary": "The interviewer frames health misinformation and vaccine reluctance as right-wing information spread by senators."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000558",
+        "evidence_quote": "the very fact that the CDC says that we want people who are vaccinated to know that they are really safe",
+        "label_ids": [
+          "evidence:expert_consensus"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000550",
+        "summary": "CDC guidance is cited as the basis for vaccinated people's low risk and unchanged recommendations for unvaccinated people."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000570",
+        "evidence_quote": "we don't have a vaccine passport",
+        "label_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000561",
+        "summary": "Fauci notes there is no vaccine passport, so businesses cannot verify vaccination and may require masks."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Fully vaccinated people's risk of COVID-19 is very low both outdoors and indoors.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "if you are fully vaccinated, your risk is really very low, not only outdoors but also indoors",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific risk statement about vaccinated people that could be checked against COVID outcome data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000556",
+        "topic_ids": [
+          "topic:covid.masks_distancing",
+          "topic:vaccines.covid_vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The new CDC guidance is not a mandate to remove masks.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000554",
+        "evidence_quote": "It's not a mandate to take your mask off",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "A factual claim about the nature of CDC guidance that could be checked against the guidance text.",
+        "relevance": "substantive",
+        "start_unit_id": "u000554",
+        "topic_ids": [
+          "topic:covid.masks_distancing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "For unvaccinated people, all COVID recommendations remain the same.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000558",
+        "evidence_quote": "For the people who are not vaccinated, all the recommendations remain the same",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about official guidance for unvaccinated people.",
+        "relevance": "substantive",
+        "start_unit_id": "u000558",
+        "topic_ids": [
+          "topic:covid.masks_distancing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "COVID-19 vaccines are highly protective.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000585",
+        "evidence_quote": "the vaccines are highly, highly protective",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A vaccine efficacy claim that bears on whether vaccinated people can shed masks.",
+        "relevance": "substantive",
+        "start_unit_id": "u000585",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines"
+        ]
+      }
+    ],
+    "window_id": "episode_7217_window_0011"
+  },
+  "stored_at": "2026-10-04T22:36:29.101749+00:00"
+}

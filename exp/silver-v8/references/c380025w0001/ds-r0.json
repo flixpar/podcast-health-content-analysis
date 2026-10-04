@@ -1,0 +1,221 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c380025w0001",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "every contradiction also confirms the belief",
+        "label_ids": [
+          "topic:mental.serious_mental_illness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000001",
+        "summary": "Cold open describes how delusion turns doubt into confirmation and closes a loop."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "today's episode is all about understanding delusion and psychosis",
+        "label_ids": [
+          "topic:mental.serious_mental_illness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000014",
+        "summary": "Host explains delusion and psychosis, their definitions, reality testing, and how to distinguish intrusive thoughts from psychosis."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000033",
+        "evidence_quote": "Someone has an intrusive thought about doing something horrific",
+        "label_ids": [
+          "topic:mental.ocd_personality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "summary": "Distinguishes intrusive thoughts from psychosis and frames them as a separate clinical category."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "some of the reality testing questions being labeled as narcissistic and gaslighting",
+        "label_ids": [
+          "topic:mental.pop_psychology"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000049",
+        "summary": "Discusses reality-testing questions being mislabeled as gaslighting and narcissistic abuse, recommending gray rocking."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "these things are not interchangeable",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "Corrects the conflation of intrusive thoughts with psychosis."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "This is the first misconception: people believe things every single day that are inaccurate",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "summary": "Labels everyday inaccurate beliefs as a misconception about psychosis and delusion."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "In a delusion, every contradiction also confirms the belief.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "every contradiction also confirms the belief",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claims about how delusions process disconfirming evidence are checkable and central to the episode's thesis.",
+        "relevance": "substantive",
+        "start_unit_id": "u000009",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Having an intrusive thought about doing something horrific is not the same as being in psychosis.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "these things are not interchangeable",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "Distinguishes intrusive thoughts from psychosis, correcting a common conflation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "topic_ids": [
+          "topic:mental.ocd_personality",
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "not necessarily"
+        ],
+        "claim_text": "Believing inaccurate things is not necessarily psychosis.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "That is not necessarily psychosis",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "The host corrects a misconception by separating everyday inaccurate beliefs from psychosis.",
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could"
+        ],
+        "claim_text": "Repeatedly misinterpreting things in a sustained manner could eventually lead to psychosis.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "although repeatedly in a sustained manner, that could eventually lead to psychosis",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim about sustained misperception progressing toward psychosis.",
+        "relevance": "substantive",
+        "start_unit_id": "u000040",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A delusion is a belief held with conviction that is resistant to contradictory evidence and disconnected from consensual reality.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000043",
+        "evidence_quote": "A delusion involves a belief that is. Held with a level of conviction that is resistant to contradictory evidence and is disconnected from consensual reality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Definitional claim about delusion that can be checked against clinical diagnostic criteria.",
+        "relevance": "substantive",
+        "start_unit_id": "u000042",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Anything you do to try to pull someone out of a delusion or correct the record will make the escalation happen.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "anything that you do will only make the escalation happen",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about intervention in delusion that underlies the gray-rocking advice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000056",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      }
+    ],
+    "window_id": "episode_380025_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:28.882360+00:00"
+}

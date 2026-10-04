@@ -1,0 +1,54 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c60301w0007",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000501",
+        "evidence_quote": "if you're 350, 400 pounds, and you want to lose weight, you have to shock your system by doing extreme things",
+        "label_ids": [
+          "topic:weight.weight_loss_methods"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000498",
+        "summary": "Hosts use a weight-loss analogy: a very overweight person who wants to lose weight must go to extreme dietary lengths, eliminating all junk food, before later returning to a more normal eating pattern."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "have to"
+        ],
+        "claim_text": "A person who is 350 to 400 pounds and wants to lose weight has to shock their system by doing extreme things.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000498",
+        "evidence_quote": "if you're 350, 400 pounds, and you want to lose weight, you have to shock your system by doing extreme things",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This asserts that extreme measures are necessary for weight loss at high body weight, which evidence on weight-loss methods could support or contradict.",
+        "relevance": "substantive",
+        "start_unit_id": "u000498",
+        "topic_ids": [
+          "topic:weight.weight_loss_methods"
+        ]
+      }
+    ],
+    "window_id": "episode_60301_window_0007"
+  },
+  "stored_at": "2026-10-04T22:36:33.358798+00:00"
+}

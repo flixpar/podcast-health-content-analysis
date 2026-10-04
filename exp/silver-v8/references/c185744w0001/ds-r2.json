@@ -1,0 +1,413 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c185744w0001",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000002",
+        "evidence_quote": "Should we stop wearing sunglasses? Yes, except we should be wearing them indoors and at night",
+        "label_ids": [
+          "topic:radiation_light.sunlight_uv",
+          "topic:sleep.circadian_light"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000001",
+        "summary": "Teaser asks whether to stop wearing sunglasses and recommends wearing them indoors and at night."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000007",
+        "evidence_quote": "this eight hours of sleep a night, I think, is bull",
+        "label_ids": [
+          "topic:sleep.circadian_light",
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000003",
+        "summary": "Teaser introduces circadian rhythm expertise and claims eight-hour sleep is unnecessary and sleep needs vary by season."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000010",
+        "evidence_quote": "tools that promote deep, restorative sleep",
+        "label_ids": [
+          "topic:sleep.circadian_light",
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000008",
+        "summary": "Promo introduces a biohacker guest and his sleep tools."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "we should be wearing them indoors and at night",
+        "label_ids": [
+          "topic:radiation_light.sunlight_uv",
+          "topic:sleep.circadian_light"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Interview opens with the recommendation to skip sunglasses outdoors but wear them indoors and at night."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000061",
+        "evidence_quote": "our eyes have receptors to read the ultraviolet light",
+        "label_ids": [
+          "topic:cardiovascular.blood_pressure",
+          "topic:radiation_light.sunlight_uv",
+          "topic:supplements.vitamin_d"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "summary": "Guest explains why sunglasses block UV, preventing eyes from reading UV and the body from making melanin and vitamin D and nitric oxide that lowers blood pressure, and why covering up makes people less healthy."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000072",
+        "evidence_quote": "I wake up with the sun",
+        "label_ids": [
+          "topic:sleep.circadian_light",
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000062",
+        "summary": "Guest says he wakes with the sun, recommends sleeping as much as possible, and claims people need less sleep in summer and more in winter."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000061",
+        "evidence_quote": "Beautiful benefits from the sun, but we don't get it if we cover our eyes with sunglasses",
+        "label_ids": [
+          "narrative:sun_exposure_cures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000031",
+        "summary": "Guest argues that sunlight is healing and that blocking it with sunglasses makes people less healthy."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000061",
+        "evidence_quote": "when we wear sunglasses, and sunscreen, and clothes, and hats, it's like if you cover an orange tree with a tarp",
+        "label_ids": [
+          "narrative:sunscreen_harmful"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000052",
+        "summary": "Guest implies that sunscreen, along with other coverings, blocks the sun and contributes to worse health."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000060",
+        "evidence_quote": "It was designed perfectly, and it was designed to work with nature and the sun",
+        "label_ids": [
+          "frame:naturalness_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000041",
+        "summary": "Guest frames the body as designed to work with nature and the sun."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "our eyes have receptors to read the ultraviolet light",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000032",
+        "summary": "Guest explains a mechanism by which eyes read UV, triggering melanin, vitamin D and nitric oxide."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000072",
+        "evidence_quote": "from everything I've studied",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000071",
+        "summary": "Guest appeals to everything he has studied to support seasonal sleep needs."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000010",
+        "evidence_quote": "As the co-founder of Dreamwalkers",
+        "mention_role": "own_product",
+        "product_name": "Dreamwalkers",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000010"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Most people find sunlight too bright because they do not see the sunrise; seeing the sunrise would adjust their eyes so they would not need sunglasses.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000031",
+        "evidence_quote": "the reason things are too bright for most people is because they don't get out at dawn to see the sunrise",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A testable causal explanation for light sensitivity and the need for sunglasses.",
+        "relevance": "substantive",
+        "start_unit_id": "u000031",
+        "topic_ids": [
+          "topic:radiation_light.sunlight_uv"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Human eyes have receptors that detect ultraviolet light.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000033",
+        "evidence_quote": "our eyes have receptors to read the ultraviolet light",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable physiological claim about UV perception through the eyes.",
+        "relevance": "substantive",
+        "start_unit_id": "u000032",
+        "topic_ids": [
+          "topic:radiation_light.sunlight_uv"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Wearing sunglasses blocks the eyes' ability to read UV and causes sunburn.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "when we cover them with sunglasses, we cannot read how much UV is in the sun, and so we get sunburned",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim connecting sunglasses to sunburn that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "topic_ids": [
+          "topic:radiation_light.sunlight_uv"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "When the eyes can read UV, the body creates melanin in the skin to absorb ultraviolet, which creates vitamin D.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000035",
+        "evidence_quote": "we can create melanin on our skin to absorb the ultraviolet, which creates vitamin D or hormone D in the body",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanistic claim about how UV exposure through the eyes leads to melanin and vitamin D.",
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "topic_ids": [
+          "topic:radiation_light.sunlight_uv",
+          "topic:supplements.vitamin_d"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Sun exposure increases nitric oxide, which lowers blood pressure.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "It increases nitric oxide, which lowers blood pressure",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific physiological claim about sun exposure, nitric oxide and blood pressure.",
+        "relevance": "substantive",
+        "start_unit_id": "u000036",
+        "topic_ids": [
+          "topic:cardiovascular.blood_pressure",
+          "topic:radiation_light.sunlight_uv"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Creating melanin prevents sunburn.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000046",
+        "evidence_quote": "when you create the melanin, you don't get sunburned",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about melanin's protective role against sunburn.",
+        "relevance": "substantive",
+        "start_unit_id": "u000045",
+        "topic_ids": [
+          "topic:radiation_light.sunlight_uv"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Covering the body from the sun with sunglasses, sunscreen, clothes and hats makes people less healthy.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000061",
+        "evidence_quote": "when we cover up, we become less healthy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:sun_exposure_cures",
+          "narrative:sunscreen_harmful"
+        ],
+        "rationale": "A broad causal claim that avoiding sun exposure harms health.",
+        "relevance": "substantive",
+        "start_unit_id": "u000052",
+        "topic_ids": [
+          "topic:radiation_light.sunlight_uv"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "The idea that people need eight hours of sleep a night is wrong.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000005",
+        "evidence_quote": "this eight hours of sleep a night, I think, is bull",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about sleep recommendations that could be checked against sleep research.",
+        "relevance": "passing",
+        "start_unit_id": "u000005",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Humans need less sleep in summer and more in winter.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000007",
+        "evidence_quote": "need to sleep less in the summer and more in the winter",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about seasonal variation in human sleep need.",
+        "relevance": "passing",
+        "start_unit_id": "u000007",
+        "topic_ids": [
+          "topic:sleep.circadian_light",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "in my opinion",
+          "from everything I've studied"
+        ],
+        "claim_text": "People need less sleep in summer than in winter.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000072",
+        "evidence_quote": "you don't need to sleep as much, in my opinion, and from everything I've studied, in the summer",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The guest restates the seasonal-sleep claim with an appeal to his studies.",
+        "relevance": "substantive",
+        "start_unit_id": "u000071",
+        "topic_ids": [
+          "topic:sleep.circadian_light",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The more sleep people get, the healthier they are.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000071",
+        "evidence_quote": "the more sleep we get, the healthier we are",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A dose-response health claim about sleep that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000070",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      }
+    ],
+    "window_id": "episode_185744_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:32.760064+00:00"
+}

@@ -1,0 +1,259 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c190168w0014",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001027",
+        "evidence_quote": "methyl and blue hyperbaric oxygen, IV vitamin C, IV ozone therapy",
+        "label_ids": [
+          "topic:alt_medicine.iv_ozone_therapies",
+          "topic:medications.repurposed_offlabel",
+          "topic:metabolic.mitochondria_energy",
+          "topic:recovery.hyperbaric",
+          "topic:supplements.vitamin_c"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000931",
+        "summary": "Guest discusses methylene blue, hyperbaric oxygen, IV vitamin C, and IV ozone as preconditioning agents that build resilience to trauma, citing a rat heart-attack study and describing methylene blue as antimicrobial and mitochondrial-supporting."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000956",
+        "evidence_quote": "So they did a study where they had these rats",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000938",
+        "summary": "A rat study is described with three groups, induced heart attacks, and an autopsy comparison."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000956",
+        "evidence_quote": "these rats",
+        "label_ids": [
+          "evidence:preclinical_extrapolation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000938",
+        "summary": "The cited study used rats, so its evidence is preclinical."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000937",
+        "evidence_quote": "since we're getting that increase in endogenous antioxidant enzymes, that preconditions you for trauma",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000936",
+        "summary": "A mechanistic explanation is offered for how ozone therapy preconditions the body for trauma."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001024",
+        "evidence_quote": "There's a lot of really great research on it",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001023",
+        "summary": "Speaker invokes a lot of great research behind vitamin C treatments."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001006",
+        "evidence_quote": "And it's anti bacteria on top of like it's anti microbial and blah, blah, blah. And great for your for your mitochondria",
+        "label_ids": [
+          "narrative:methylene_blue_miracle"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001003",
+        "summary": "Speaker endorses methylene blue as antimicrobial and good for mitochondria."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001044",
+        "evidence_quote": "we interrupt this program for very brief but very important message",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001028",
+        "summary": "Sponsor-style read for Level Up Health and its Ultimate GI Repair supplement."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001043",
+        "evidence_quote": "biohacking and optimizing your health",
+        "label_ids": [
+          "frame:optimization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001042",
+        "summary": "The ad lists biohacking and optimizing health as goals the product supports."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001043",
+        "evidence_quote": "Ultimate GI repair combines the best natural botanicals",
+        "label_ids": [
+          "topic:supplements"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001039",
+        "summary": "Advertisement for the Ultimate GI Repair supplement, described as combining botanicals and peptides for gut health, liver detoxification, inflammation, brain function, and biohacking goals."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001039",
+        "evidence_quote": "Ultimate GI repair combines the best natural botanicals",
+        "mention_role": "advertised",
+        "product_name": "Ultimate GI Repair",
+        "product_type": "supplement",
+        "start_unit_id": "u001039"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "These treatments can act as preconditioning agents that build resilience and help the body handle traumas such as chemotherapy or a car accident.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000962",
+        "evidence_quote": "it's really impressive what some of these treatments can do as a preconditioning agent to help you go through different traumas",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A central efficacy claim that these interventions prepare the body to withstand major physical stressors.",
+        "relevance": "substantive",
+        "start_unit_id": "u000957",
+        "topic_ids": [
+          "topic:alt_medicine.iv_ozone_therapies",
+          "topic:medications.repurposed_offlabel",
+          "topic:recovery.hyperbaric",
+          "topic:supplements.vitamin_c"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ozone therapy increases endogenous antioxidant enzymes, which preconditions the body for trauma.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000937",
+        "evidence_quote": "since we're getting that increase in endogenous antioxidant enzymes, that preconditions you for trauma",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific mechanistic claim about ozone therapy that can be checked against the physiological literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000936",
+        "topic_ids": [
+          "topic:alt_medicine.iv_ozone_therapies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In a rat study, rats that received ozone therapy had nearly normal heart function after induced heart attacks, while the other groups' hearts looked exploded.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000953",
+        "evidence_quote": "the heart function of the rats who did ozone therapy was almost normal. And as opposed to the other ones looking exploded",
+        "evidence_signal_ids": [
+          "evidence:preclinical_extrapolation",
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A described animal-study result offered as evidence for ozone preconditioning, checkable if the study is identified.",
+        "relevance": "substantive",
+        "start_unit_id": "u000950",
+        "topic_ids": [
+          "topic:alt_medicine.iv_ozone_therapies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Methylene blue is antibacterial and antimicrobial.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001004",
+        "evidence_quote": "it's anti bacteria on top of like it's anti microbial",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:methylene_blue_miracle"
+        ],
+        "rationale": "A checkable claim about methylene blue's biological properties that supports its promoted use.",
+        "relevance": "substantive",
+        "start_unit_id": "u001004",
+        "topic_ids": [
+          "topic:medications.repurposed_offlabel"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Methylene blue is good for your mitochondria.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001006",
+        "evidence_quote": "And great for your for your mitochondria",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:methylene_blue_miracle"
+        ],
+        "rationale": "A mitochondrial health benefit is claimed for methylene blue, checkable against mechanistic and clinical research.",
+        "relevance": "substantive",
+        "start_unit_id": "u001005",
+        "topic_ids": [
+          "topic:medications.repurposed_offlabel",
+          "topic:metabolic.mitochondria_energy"
+        ]
+      }
+    ],
+    "window_id": "episode_190168_window_0014"
+  },
+  "stored_at": "2026-10-04T22:36:30.666679+00:00"
+}

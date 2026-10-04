@@ -1,0 +1,315 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c162700w0016",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001013",
+        "evidence_quote": "I've been doing these cool peels, and they're like little baby fraxels",
+        "label_ids": [
+          "topic:skin_beauty.cosmetic_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001001",
+        "summary": "Guest describes her skin routine: a hardcore facialist and light fraxel-style peels."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001029",
+        "evidence_quote": "I've been using the exosomes on my skin and hair for a while",
+        "label_ids": [
+          "topic:skin_beauty.hair_loss_hair",
+          "topic:skin_beauty.regenerative_aesthetics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001015",
+        "summary": "Guest discusses exosome treatments for skin and hair, including after microneedling and peels."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001016",
+        "evidence_quote": "I'm really into functional medicine",
+        "label_ids": [
+          "topic:alt_medicine.functional_medicine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001015",
+        "summary": "Guest mentions being into functional medicine."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001036",
+        "evidence_quote": "Botox, I don't do because you know what, I'm in a sauna four days a week",
+        "label_ids": [
+          "topic:recovery.heat_sauna",
+          "topic:skin_beauty.cosmetic_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001032",
+        "summary": "Guest says she avoids Botox because sauna sweating supposedly sweats it out, and mentions treatments to stave off lifts."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001055",
+        "evidence_quote": "We can't possibly process all of the toxins that we take into our system",
+        "label_ids": [
+          "topic:detox.toxic_load_general",
+          "topic:recovery.heat_sauna"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001037",
+        "summary": "Guest explains her frequent sauna use as necessary to clear toxins and clean the liver, also citing longevity benefits."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001047",
+        "evidence_quote": "We can't possibly process all of the toxins that we take into our system",
+        "label_ids": [
+          "narrative:detox_needed"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001041",
+        "summary": "Guest asserts the body cannot clear accumulated toxins on its own, so sauna is needed to clean the liver."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001047",
+        "evidence_quote": "We can't possibly process all of the toxins that we take into our system",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001041",
+        "summary": "Toxins are framed as accumulating beyond the body's capacity, requiring a sauna liver cleanse."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001055",
+        "evidence_quote": "it cleans you from the inside out",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001054",
+        "summary": "Guest frames sauna as cleansing the body from the inside out."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001049",
+        "evidence_quote": "there's been proven studies",
+        "label_ids": [
+          "evidence:strength_assertion",
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001047",
+        "summary": "Guest cites 'proven studies' for the claim that sauna adds years to life."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u001011",
+        "evidence_quote": "Christine Monaco at Bespoke Aesthetics in West Palm",
+        "mention_role": "recommended",
+        "product_name": "Bespoke Aesthetics",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u001011"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001035",
+        "evidence_quote": "Botox",
+        "mention_role": "neutral",
+        "product_name": "Botox",
+        "product_type": "medication",
+        "start_unit_id": "u001034"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "can't possibly"
+        ],
+        "claim_text": "The body cannot possibly process or expel all of the toxins it takes in.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001043",
+        "evidence_quote": "We can't possibly process all of the toxins that we take into our system",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [
+          "narrative:detox_needed"
+        ],
+        "rationale": "A physiological claim about the body's ability to clear toxins that underpins the detox/sauna rationale.",
+        "relevance": "substantive",
+        "start_unit_id": "u001041",
+        "topic_ids": [
+          "topic:detox.toxic_load_general"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I feel"
+        ],
+        "claim_text": "Sauna is really the only way to clean the liver.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001047",
+        "evidence_quote": "it's really the only way to clean the liver, I feel",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [
+          "narrative:detox_needed"
+        ],
+        "rationale": "A checkable claim about sauna's necessity for liver detoxification.",
+        "relevance": "substantive",
+        "start_unit_id": "u001046",
+        "topic_ids": [
+          "topic:detox.toxic_load_general",
+          "topic:recovery.heat_sauna"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "20 minutes of sauna can add years to your life.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001050",
+        "evidence_quote": "20 minutes, you know, can add years to your life",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion",
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A longevity claim about sauna use that can be checked against studies.",
+        "relevance": "substantive",
+        "start_unit_id": "u001049",
+        "topic_ids": [
+          "topic:recovery.heat_sauna"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "at all"
+        ],
+        "claim_text": "Exosomes are not FDA approved at all.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001024",
+        "evidence_quote": "it's not FDA approved at all",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A regulatory status claim about a product the listener could buy or seek out.",
+        "relevance": "substantive",
+        "start_unit_id": "u001023",
+        "topic_ids": [
+          "topic:skin_beauty.regenerative_aesthetics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Exosomes stem from the amniotic fluid of a healthy pregnancy.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001022",
+        "evidence_quote": "it's this stems from the amniotic fluid of a healthy pregnancy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A product-origin claim that could be checked against manufacturer information.",
+        "relevance": "substantive",
+        "start_unit_id": "u001021",
+        "topic_ids": [
+          "topic:skin_beauty.regenerative_aesthetics"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "working miracles"
+        ],
+        "claim_text": "Exosomes have been working miracles with hair growth.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001027",
+        "evidence_quote": "they've been doing working miracles with hair growth",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "An efficacy claim about exosomes for hair growth, despite the hyperbolic wording.",
+        "relevance": "substantive",
+        "start_unit_id": "u001026",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair",
+          "topic:skin_beauty.regenerative_aesthetics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Sweating from sauna use immediately sweats out Botox.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001035",
+        "evidence_quote": "you sweat it out immediately",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about Botox and sauna that could affect listener behavior.",
+        "relevance": "substantive",
+        "start_unit_id": "u001034",
+        "topic_ids": [
+          "topic:recovery.heat_sauna",
+          "topic:skin_beauty.cosmetic_procedures"
+        ]
+      }
+    ],
+    "window_id": "episode_162700_window_0016"
+  },
+  "stored_at": "2026-10-04T22:36:32.319127+00:00"
+}

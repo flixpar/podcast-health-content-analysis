@@ -1,0 +1,268 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c185811w0024",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001440",
+        "evidence_quote": "I'm obsessed with Westin A. Price",
+        "label_ids": [
+          "topic:diets.ancestral_paleo"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001429",
+        "summary": "Host and guest talk about following the Weston A. Price / wise traditions food movement, its magazine and its figures. The"
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001452",
+        "evidence_quote": "Cancer is a metabolic disease",
+        "label_ids": [
+          "topic:cancer.causes_rates"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001442",
+        "summary": "Guest says cancer is a metabolic disease and that everyone has cancer cells that environmental factors can activate to attack the body."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001458",
+        "evidence_quote": "You believe in viruses? No",
+        "label_ids": [
+          "topic:infectious.germ_theory_hygiene"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001453",
+        "summary": "Guest says he does not believe in viruses and the host approves."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001519",
+        "evidence_quote": "you're overweight and you're you're lassitudical in your mind because of all the bad food that you've been eating",
+        "label_ids": [
+          "topic:food.general_nutrition",
+          "topic:weight.weight_gain_causes"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001513",
+        "summary": "Speaker argues bad food makes people overweight and mentally sluggish, so bad health prevents fighting a tyrannical government."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001447",
+        "evidence_quote": "Cancer is a metabolic disease",
+        "label_ids": [
+          "narrative:cancer_metabolic_disease"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001444",
+        "summary": "The metabolic-disease theory of cancer is stated and endorsed."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001457",
+        "evidence_quote": "You believe in viruses? No",
+        "label_ids": [
+          "narrative:germ_theory_denial"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001453",
+        "summary": "Guest denies the existence of viruses."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001519",
+        "evidence_quote": "fight against a tyrannical government",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001518",
+        "summary": "Bad health is said to prevent people from fighting a tyrannical government."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001452",
+        "evidence_quote": "the things that come from your environment that can actually express those cells to. Fight your own body",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001450",
+        "summary": "Environment is said to express cancer cells to fight the body, attributed to epigenetics."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Cancer is a metabolic disease.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001444",
+        "evidence_quote": "Cancer is a metabolic disease",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:cancer_metabolic_disease"
+        ],
+        "rationale": "The metabolic theory of cancer is checkable against the scientific literature and shapes treatment choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u001444",
+        "topic_ids": [
+          "topic:cancer.causes_rates"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Everybody's body already has cancer cells within it.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001449",
+        "evidence_quote": "I think your body naturally has cancer cells in it, right? Everybody's body already has cancer cells that are within it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether healthy bodies harbor cancer cells is a checkable biological claim that affects how listeners understand cancer risk.",
+        "relevance": "substantive",
+        "start_unit_id": "u001448",
+        "topic_ids": [
+          "topic:cancer.causes_rates"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Environmental factors can activate the cancer cells in everyone's body to attack it.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001451",
+        "evidence_quote": "the things that come from your environment that can actually express those cells to. Fight your own body",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim about how the environment triggers cancer that can be checked against cancer biology.",
+        "relevance": "substantive",
+        "start_unit_id": "u001450",
+        "topic_ids": [
+          "topic:cancer.causes_rates"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Viruses do not exist.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001455",
+        "evidence_quote": "You believe in viruses? No",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:germ_theory_denial"
+        ],
+        "rationale": "Denial of the existence of viruses is a checkable proposition and the core of the germ-theory-denial narrative.",
+        "relevance": "passing",
+        "start_unit_id": "u001453",
+        "topic_ids": [
+          "topic:infectious.germ_theory_hygiene"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Eating bad food makes people overweight.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001516",
+        "evidence_quote": "you're overweight and you're you're lassitudical in your mind because of all the bad food that you've been eating",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim about diet and weight that bears on what listeners eat.",
+        "relevance": "passing",
+        "start_unit_id": "u001516",
+        "topic_ids": [
+          "topic:food.general_nutrition",
+          "topic:weight.weight_gain_causes"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Eating bad food makes people mentally sluggish.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001516",
+        "evidence_quote": "you're you're lassitudical in your mind because of all the bad food that you've been eating",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claims a diet-to-cognition link that listeners could act on.",
+        "relevance": "passing",
+        "start_unit_id": "u001516",
+        "topic_ids": [
+          "topic:cognition.focus_productivity",
+          "topic:food.general_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "What people eat and take in from the environment causes bad relationships.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001516",
+        "evidence_quote": "you have bad relationships because of what you eat and what you take in from the environment",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim linking diet and environmental intake to relationship quality, stated as part of a health argument.",
+        "relevance": "passing",
+        "start_unit_id": "u001516",
+        "topic_ids": [
+          "topic:food.general_nutrition"
+        ]
+      }
+    ],
+    "window_id": "episode_185811_window_0024"
+  },
+  "stored_at": "2026-10-04T22:36:30.619181+00:00"
+}

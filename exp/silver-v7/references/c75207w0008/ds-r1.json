@@ -1,0 +1,165 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c75207w0008",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000442",
+        "evidence_quote": "talking about people who are either happy or unhappy at the end of their life",
+        "label_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000379",
+        "summary": "Host and guest discuss happiness and fulfillment at the end of life, including the Strivers' Curse and examples from Darwin and Bach."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000402",
+        "evidence_quote": "after age seventy, gets happier and happier all the way to the end",
+        "label_ids": [
+          "population:older_adults"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000379",
+        "summary": "The discussion concerns happiness trajectories in later life, with explicit claims about ages seventy and eighty."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000426",
+        "evidence_quote": "he was very depressed",
+        "label_ids": [
+          "topic:mental.depression"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000423",
+        "summary": "Darwin is described as very depressed and without joy in the last years of his life."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000380",
+        "evidence_quote": "I've studied a lot of biography to see this question",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000380",
+        "summary": "The speaker cites his study of biographies as the basis for claims about whether famous people were happy."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000412",
+        "evidence_quote": "I'm working with people in the back half of their career",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000410",
+        "summary": "The speaker cites his coaching work with executives in the back half of their careers as firsthand experience."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "Many very successful people died unhappy.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000391",
+        "evidence_quote": "a lot of really successful people, a lot of them died very unhappy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general claim about the end-of-life happiness of successful people that could be checked against biographical or survey evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000391",
+        "topic_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "About half of people after age seventy get happier all the way to the end of life, and the other half get unhappier.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000393",
+        "evidence_quote": "about half of the population, after age seventy, gets happier and happier all the way to the end, and the other half gets unhappier all the way to the end",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific population-level claim about happiness trajectories in later life that can be checked against longitudinal wellbeing data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000393",
+        "topic_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "tend to"
+        ],
+        "claim_text": "People who are most successful in worldly terms tend to be on the lower happiness branch in later life.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000396",
+        "evidence_quote": "the people who are most successful in worldly terms they tend to be on the lower branch",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A correlation between worldly success and later-life unhappiness that could be tested against data on life satisfaction.",
+        "relevance": "substantive",
+        "start_unit_id": "u000395",
+        "topic_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People identified as high performers before age twenty are more likely to be disappointed with their life after age eighty.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000403",
+        "evidence_quote": "you're more likely to be. Disappointed with your life after eighty",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific predictive claim about early high performance and late-life disappointment that could be checked against longitudinal or retrospective data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000402",
+        "topic_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ]
+      }
+    ],
+    "window_id": "episode_75207_window_0008"
+  },
+  "stored_at": "2026-10-04T22:13:53.803582+00:00"
+}

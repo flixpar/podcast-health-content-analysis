@@ -1,0 +1,193 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c95062w0004",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000193",
+        "evidence_quote": "With LSD, you're you're smoking cigarettes, you're you're drinking scotch",
+        "label_ids": [
+          "topic:alcohol",
+          "topic:psychoactives.psychedelic_therapy",
+          "topic:stimulants.smoking"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000191",
+        "summary": "Host asks about the guest's past use of LSD, cigarettes, and scotch while in medical school."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000207",
+        "evidence_quote": "all the American doctors were in Vietnam, and there was a big shortage of physicians",
+        "label_ids": [
+          "topic:health_system.doctors_profession"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000195",
+        "summary": "Guest describes being recruited as a foreign medical graduate during a physician shortage and working in an under-resourced community hospital."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000207",
+        "evidence_quote": "we had gunshot wounds",
+        "label_ids": [
+          "topic:acute_care.trauma_fractures"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000205",
+        "summary": "Guest mentions the hospital saw gunshot wounds."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000223",
+        "evidence_quote": "molecules of emotion",
+        "label_ids": [
+          "topic:cognition.neurochemistry_talk"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000208",
+        "summary": "Guest recounts endocrinology and neuroendocrinology training and early neuropeptide research behind 'molecules of emotion'."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000227",
+        "evidence_quote": "Got me hooked to the so-called mind-body connection",
+        "label_ids": [
+          "topic:other"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000224",
+        "summary": "Guest says the 'molecules of emotion' idea hooked him on the mind-body connection, and he puzzled over different outcomes from identical treatments."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000233",
+        "evidence_quote": "they're too anecdotal. There's not enough research",
+        "label_ids": [
+          "topic:health_system.research_system"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000228",
+        "summary": "Guest says medical journals rejected his patient stories as too anecdotal and publishers rejected them as too New Age."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000244",
+        "evidence_quote": "I had given up alcohol and I had given up every experiment. I was meditating, and",
+        "label_ids": [
+          "topic:alcohol",
+          "topic:psychoactives.psychedelic_therapy",
+          "topic:stress.meditation_mindfulness"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000242",
+        "summary": "Guest says he gave up alcohol and drug experimentation and began meditating."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "all"
+        ],
+        "claim_text": "The scholarship was an excuse to bring foreign doctors into the United States because all the American doctors were in Vietnam and there was a big shortage of physicians.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000199",
+        "evidence_quote": "all the American doctors were in Vietnam, and there was a big shortage of physicians",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable historical claim about the US physician workforce and the recruitment of foreign medical graduates.",
+        "relevance": "substantive",
+        "start_unit_id": "u000198",
+        "topic_ids": [
+          "topic:health_system.doctors_profession"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The prestigious posts went to university hospitals for American graduates, while foreign graduates were relegated to community hospitals that offered no education but lots of work.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000200",
+        "evidence_quote": "The prestigious posts went to university hospitals for American graduates, and the foreign graduates were then relegated to community hospitals",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about how foreign medical graduates were assigned to hospitals.",
+        "relevance": "substantive",
+        "start_unit_id": "u000200",
+        "topic_ids": [
+          "topic:health_system.doctors_profession"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Two patients with the same illness who see the same doctor and get the same treatment can have completely different outcomes.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000227",
+        "evidence_quote": "two patients who had the same illness could see the same doctor, get the same treatment, and have completely different outcomes",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general claim about treatment-response variability that shapes expectations of medicine.",
+        "relevance": "substantive",
+        "start_unit_id": "u000225",
+        "topic_ids": [
+          "topic:other"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Medical journals rejected the patient stories because they were too anecdotal and there was not enough research.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000231",
+        "evidence_quote": "they're too anecdotal. There's not enough research",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about journal editorial standards for anecdotal evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "topic_ids": [
+          "topic:health_system.research_system"
+        ]
+      }
+    ],
+    "window_id": "episode_95062_window_0004"
+  },
+  "stored_at": "2026-10-04T22:13:56.056566+00:00"
+}

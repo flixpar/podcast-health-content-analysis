@@ -1,0 +1,421 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c179429w0018",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000848",
+        "evidence_quote": "Somewhere between seven to nine hours for adult",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000840",
+        "summary": "Hosts discuss how to tell if you are getting enough sleep and the recommended seven to nine hours for adults."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000858",
+        "evidence_quote": "that you've been building up all of this healthy sleepiness, and then you take a nap in the afternoon",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000850",
+        "summary": "Guest explains that afternoon naps release sleepiness and can make falling asleep at night harder."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000869",
+        "evidence_quote": "it latches onto the receptors of adenosine, and it hijacks those receptors, and it essentially hits the mute button on the sleepiness signal",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:stimulants.caffeine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000859",
+        "summary": "Guest explains how caffeine blocks adenosine receptors, masks sleepiness, and can damage sleep."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000890",
+        "evidence_quote": "The first-line recommended treatment for insomnia must not be sleep. It must be something called cognitive behavioural therapy for insomnia, or CBTI",
+        "label_ids": [
+          "topic:mental.therapy",
+          "topic:sleep.insomnia"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000870",
+        "summary": "Discussion of insomnia and the ACP recommendation that CBTI, not sleeping pills, is the first-line treatment."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000885",
+        "evidence_quote": "it's a little bit like with THC",
+        "label_ids": [
+          "topic:psychoactives.cannabis"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000885",
+        "summary": "Sleeping-pill withdrawal is compared to THC withdrawal as an analogy."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000899",
+        "evidence_quote": "It's called the Aura Ring, O U R A Ring",
+        "label_ids": [
+          "topic:self_tracking.wearables"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000893",
+        "summary": "Host mentions he got an Oura Ring and notes there are many sleep trackers."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000847",
+        "evidence_quote": "based on the data",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000847",
+        "summary": "Guest invokes unspecified data for the claim that no one can function on under seven hours of sleep."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000876",
+        "evidence_quote": "a landmark recommendation by the American College of Physicians",
+        "label_ids": [
+          "evidence:expert_consensus"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000874",
+        "summary": "The ACP's 2016 guideline is cited as the basis for recommending CBTI first."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000884",
+        "evidence_quote": "the last study showed",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000882",
+        "summary": "A study is cited for CBTI's maintained five-year benefit, without identification."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000895",
+        "evidence_quote": "It's called the Aura Ring, O U R A Ring",
+        "mention_role": "neutral",
+        "product_name": "Oura Ring",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000893"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "clearly"
+        ],
+        "claim_text": "If you would sleep past your normal alarm time, you are not getting enough sleep.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000842",
+        "evidence_quote": "if the answer is yes, you're clearly not getting enough sleep",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A diagnostic rule for insufficient sleep that can be checked against sleep research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000840",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Adults should aim for between seven and nine hours of sleep.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000846",
+        "evidence_quote": "Somewhere between seven to nine hours for adult",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Sleep duration recommendations are checkable against guidelines.",
+        "relevance": "substantive",
+        "start_unit_id": "u000846",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Zero percent of the population can survive on less than seven hours of sleep without showing impairment.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000848",
+        "evidence_quote": "that can survive on less than seven hours of sleep without showing impairment, rounded to a whole number, and expressed as a percent of the population. is zero",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A strong population claim about sleep need that can be checked against sleep research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000847",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Taking an afternoon nap releases sleepiness and can make it harder to fall asleep at bedtime.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000854",
+        "evidence_quote": "when it comes time to fall asleep at your normal bedtime, it's a struggle because you don't have that same amount of healthy sleepiness",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim about naps and nighttime sleep that can be checked against sleep research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000852",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Caffeine blocks adenosine receptors in the brain and suppresses the sleepiness signal.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000864",
+        "evidence_quote": "it latches onto the receptors of adenosine, and it hijacks those receptors, and it essentially hits the mute button on the sleepiness signal",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanism claim about caffeine's mode of action that can be checked against pharmacology.",
+        "relevance": "substantive",
+        "start_unit_id": "u000860",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:stimulants.caffeine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Caffeine can be damaging to sleep.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000869",
+        "evidence_quote": "that's why caffeine can be damaging to sleep",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A risk claim about caffeine and sleep quality.",
+        "relevance": "substantive",
+        "start_unit_id": "u000869",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:stimulants.caffeine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In 2016, the American College of Physicians recommended cognitive behavioral therapy for insomnia, not sleeping pills, as the first-line treatment for insomnia.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000878",
+        "evidence_quote": "The first-line recommended treatment for insomnia must not be sleep. It must be something called cognitive behavioural therapy for insomnia, or CBTI",
+        "evidence_signal_ids": [
+          "evidence:expert_consensus"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The existence and content of a published guideline can be verified.",
+        "relevance": "substantive",
+        "start_unit_id": "u000874",
+        "topic_ids": [
+          "topic:mental.therapy",
+          "topic:sleep.insomnia"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Sleeping pills have only nominal benefit above placebo for most people.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000876",
+        "evidence_quote": "the nominal benefit above and beyond placebo for most people",
+        "evidence_signal_ids": [
+          "evidence:expert_consensus"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about drug efficacy relative to placebo that can be checked against meta-analyses.",
+        "relevance": "substantive",
+        "start_unit_id": "u000875",
+        "topic_ids": [
+          "topic:sleep.insomnia"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "CBTI is as efficacious as sleeping pills in the short term.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000881",
+        "evidence_quote": "across several weeks, it ends up being just as efficacious as sleeping pills in the short term",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Comparative efficacy of CBTI and sleep medication is checkable in trials.",
+        "relevance": "substantive",
+        "start_unit_id": "u000879",
+        "topic_ids": [
+          "topic:mental.therapy",
+          "topic:sleep.insomnia"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "CBTI benefits can be maintained for up to five years.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000884",
+        "evidence_quote": "I think the last study showed a. Up to a five-year benefit that was maintained",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A long-term follow-up claim that can be checked against the cited study.",
+        "relevance": "substantive",
+        "start_unit_id": "u000882",
+        "topic_ids": [
+          "topic:mental.therapy",
+          "topic:sleep.insomnia"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "typically"
+        ],
+        "claim_text": "After stopping sleeping pills, sleep is typically worse than before.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000886",
+        "evidence_quote": "typically your sleep is even worse when you come off those sleeping pills",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A withdrawal/rebound claim about sleeping pills that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000885",
+        "topic_ids": [
+          "topic:sleep.insomnia"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "A lot of people deal with insomnia.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000871",
+        "evidence_quote": "a lot of people deal with it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A prevalence claim about insomnia that can be checked against epidemiological data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000870",
+        "topic_ids": [
+          "topic:sleep.insomnia"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "typically",
+          "many"
+        ],
+        "claim_text": "CBTI is typically reimbursed by many health insurance policies in the United States.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000889",
+        "evidence_quote": "It is typically reimbursed. Here in the United States, under many health insurance policies, increasingly so",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about insurance coverage of CBTI that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000888",
+        "topic_ids": [
+          "topic:mental.therapy",
+          "topic:sleep.insomnia"
+        ]
+      }
+    ],
+    "window_id": "episode_179429_window_0018"
+  },
+  "stored_at": "2026-10-04T22:36:32.540821+00:00"
+}

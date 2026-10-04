@@ -1,0 +1,326 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c190223w0004",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000291",
+        "evidence_quote": "Mitochondria are the central hub of the wheel of metabolism",
+        "label_ids": [
+          "topic:longevity.cellular_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000206",
+        "summary": "Guest explains the cell danger response: mitochondria act as environmental sensors and shift from energy production to defense under stress, resulting in fatigue."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "kind of framed as like these mindless energy generators",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000206",
+        "summary": "The speaker corrects the simplistic framing of mitochondria as mere energy generators."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "what we now know through research, especially in the last decade",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000208",
+        "summary": "The speaker appeals to recent research and a named framework without identifying a specific study."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "There's a whole field of research called mitochondrial psychobiology now",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000231",
+        "summary": "The speaker invokes a whole field of research on mitochondrial psychobiology."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000263",
+        "evidence_quote": "almost every type of stress when in excess of what the body can handle will result in increased levels of oxidative damage",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000236",
+        "summary": "The speaker lays out the biological mechanism linking stress, cellular damage, danger signaling, and the cell danger response."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000286",
+        "evidence_quote": "think of the last time you got a cold or a flu or a COVID, what's one of the classic symptoms",
+        "label_ids": [
+          "topic:covid.illness_severity",
+          "topic:infectious.influenza_avian",
+          "topic:infectious.respiratory_common"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000283",
+        "summary": "Cold, flu and COVID are named as illnesses whose classic symptom is fatigue."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000275",
+        "evidence_quote": "not just corrected by giving B vitamins and co-Q10 and alpha-lipoac acid and acetylol carnitine",
+        "label_ids": [
+          "topic:supplements.b_vitamins_methylation",
+          "topic:supplements.other_compounds"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000273",
+        "summary": "The speaker notes that mitochondrial dysfunction is not corrected simply with B vitamins, CoQ10, alpha-lipoic acid and acetyl-L-carnitine."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Mitochondria have a second role beyond generating energy: they act as environmental sensors.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "have a second role beyond their role as energy generators and that is as environmental sensors",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "A core biological claim about mitochondrial function that is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000206",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "basically every type"
+        ],
+        "claim_text": "Mitochondria can detect basically every type of threat, danger signal or stress imaginable, including poor diet, leaky gut, infections, overtraining, injury, trauma, environmental toxins and psychological stress.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000231",
+        "evidence_quote": "Mitochondria can detect basically every type of threat or danger signal or stress imaginable from poor diet to leaky gut",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A broad checkable claim about the range of stressors mitochondria sense.",
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "almost"
+        ],
+        "claim_text": "Almost every type of stress, when in excess of what the body can handle, results in increased oxidative damage, inflammatory cytokines, or cellular damage.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000238",
+        "evidence_quote": "almost every type of stress when in excess of what the body can handle will result in increased levels of oxidative damage",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanistic claim about stress and cellular damage that can be checked against stress physiology research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000236",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "If there is enough cellular damage, ATP, ADP and mitochondrial DNA leak from inside cells into the bloodstream.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000246",
+        "evidence_quote": "ATP and ADP leaking outside the cell into the extracellular space into the bloodstream and mitochondrial DNA leaking into the bloodstream",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about cellular leakage under damage.",
+        "relevance": "substantive",
+        "start_unit_id": "u000239",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Leaked energy molecules and mitochondrial DNA serve as danger signaling molecules detected by receptors on other cells.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000252",
+        "evidence_quote": "those molecules, energy molecules, mitochondrial DNA actually serve as danger signaling molecules",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanistic claim central to the cell danger response framework.",
+        "relevance": "substantive",
+        "start_unit_id": "u000246",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "If stress is within the mitochondria's resilience threshold, the body can maintain health, homeostasis and high energy levels.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000258",
+        "evidence_quote": "if it's within their capacity, then your body can maintain health and homeostasis and high energy levels",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A conditional claim about the resilience threshold that structures the explanation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000256",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "If stress exceeds the resilience threshold, mitochondria shift into the cell danger response and redirect resources away from energy production toward cellular defense.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000262",
+        "evidence_quote": "the mitochondria shift into the cell danger response, where they are redirecting resources away from energy production towards cellular defense",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A central causal claim about the cell danger response.",
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "When mitochondria sense a high level of stress or danger signal, they turn down energy production and shift resources toward cellular defense.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000271",
+        "evidence_quote": "they are turning down the dial on energy production and shifting resources towards cellular defense",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable statement of the trade-off between energy production and defense.",
+        "relevance": "substantive",
+        "start_unit_id": "u000267",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fatigue is a classic symptom of colds, flu, and COVID.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000286",
+        "evidence_quote": "think of the last time you got a cold or a flu or a COVID, what's one of the classic symptoms",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general medical claim about symptoms of common infections.",
+        "relevance": "passing",
+        "start_unit_id": "u000283",
+        "topic_ids": [
+          "topic:covid.illness_severity",
+          "topic:infectious.influenza_avian",
+          "topic:infectious.respiratory_common"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "After extreme overexercising, a person will be fatigued and run down for a day or two.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000291",
+        "evidence_quote": "You're going to be fatigued and run down for a day or two",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about post-exercise fatigue and recovery.",
+        "relevance": "substantive",
+        "start_unit_id": "u000287",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      }
+    ],
+    "window_id": "episode_190223_window_0004"
+  },
+  "stored_at": "2026-10-04T22:13:53.112242+00:00"
+}

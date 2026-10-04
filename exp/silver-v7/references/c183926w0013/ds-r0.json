@@ -1,0 +1,232 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c183926w0013",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000836",
+        "evidence_quote": "if you could take a videotape of a scene from your childhood and you take a videotape of how you're acting now with your own child, you would be stunned",
+        "label_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000836",
+        "summary": "Speaker observes that people repeat childhood patterns in how they act with their own child."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000843",
+        "evidence_quote": "What are the next steps they should take? Is there a way to actually? I mean, you can't really change someone in a relationship",
+        "label_ids": [
+          "topic:mental.ocd_personality",
+          "topic:mental.therapy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000838",
+        "summary": "Host asks what to do when in a relationship with someone who has narcissistic traits, and whether such a person can change."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000871",
+        "evidence_quote": "This episode is sponsored by BetterHelp",
+        "label_ids": [
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000858",
+        "summary": "Sponsor read for BetterHelp online therapy, citing ratings, user counts, and therapist qualifications."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000871",
+        "evidence_quote": "Visit BetterHelp.com/greatness",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000858",
+        "summary": "Paid sponsor read with a branded call to action."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000871",
+        "evidence_quote": "BetterHelp therapists have at least three years and 1,000 hours of hands-on experience",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000858",
+        "summary": "Ad invokes BetterHelp therapists' minimum experience as a qualification."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000918",
+        "evidence_quote": "someone who has narcissistic traits generally doesn't come to therapy because they don't think they have a problem",
+        "label_ids": [
+          "topic:mental.ocd_personality",
+          "topic:mental.therapy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000872",
+        "summary": "Guest explains that people with narcissistic traits usually enter therapy only when a partner forces it, and gives a clinical example."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000913",
+        "evidence_quote": "When I talk about him, he's this guy who's in his forties. He's married. He has some kids, and he is incredibly insulting to me",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000908",
+        "summary": "Therapist describes a client in his forties who is insulting and sees everyone else as the problem."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000871",
+        "evidence_quote": "This episode is sponsored by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000858"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp has an average live therapy session rating of 4.9 out of 5, based on over 1.7 million client session reviews.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000865",
+        "evidence_quote": "BetterHelp has an average live therapy session rating of 4.9 out of 5, based on over 1.7 million client session reviews",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The rating and review count are specific, checkable marketing claims that could affect whether listeners sign up.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000865",
+        "topic_ids": [
+          "topic:mental.therapy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "More than 6 million people have used BetterHelp globally.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000866",
+        "evidence_quote": "It's no wonder more than 6 million people have used BetterHelp globally",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Adoption count is a checkable factual claim used to imply credibility.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000866",
+        "topic_ids": [
+          "topic:mental.therapy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp therapists have at least three years and 1,000 hours of hands-on experience.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000868",
+        "evidence_quote": "BetterHelp therapists have at least three years and 1,000 hours of hands-on experience",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Therapist qualification standard is checkable and used to establish competence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000868",
+        "topic_ids": [
+          "topic:mental.therapy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "generally"
+        ],
+        "claim_text": "Someone who has narcissistic traits generally doesn't come to therapy because they don't think they have a problem.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000874",
+        "evidence_quote": "someone who has narcissistic traits generally doesn't come to therapy because they don't think they have a problem",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general claim about help-seeking in people with narcissistic traits that could be compared with clinical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000874",
+        "topic_ids": [
+          "topic:mental.ocd_personality",
+          "topic:mental.therapy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "tend"
+        ],
+        "claim_text": "People with narcissistic traits tend not to come to therapy on their own; they come only when their partner makes them.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000902",
+        "evidence_quote": "they tend not to come on their own to therapy unless they actually agree to come in couples, and they're coming because their partner is making them come",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A clinical generalization about treatment engagement in narcissistic patients, relevant to partners deciding whether to seek therapy.",
+        "relevance": "substantive",
+        "start_unit_id": "u000900",
+        "topic_ids": [
+          "topic:mental.ocd_personality",
+          "topic:mental.therapy"
+        ]
+      }
+    ],
+    "window_id": "episode_183926_window_0013"
+  },
+  "stored_at": "2026-10-04T22:13:45.928575+00:00"
+}

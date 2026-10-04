@@ -1,0 +1,290 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c175043w0002",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000073",
+        "evidence_quote": "after semaglutide, Ozempic, Wegovy came, you know, became FDA approved for chronic weight management",
+        "label_ids": [
+          "topic:glp1.new_offlabel_uses",
+          "topic:glp1.use_results"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000045",
+        "summary": "Hosts discuss GLP-1 drugs as a breakthrough for weight management, their approval history, and next-generation drugs in trials."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000092",
+        "evidence_quote": "You were doing competitive, powerlifting",
+        "label_ids": [
+          "topic:fitness.strength_training"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000074",
+        "summary": "Guest describes lifelong fitness, competitive powerlifting, and focusing on lifting weights."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000122",
+        "evidence_quote": "it kind of was around 1,100 calories, five 45 minute sessions of cardio a day",
+        "label_ids": [
+          "topic:diets.calorie_counting",
+          "topic:fitness.cardio_endurance",
+          "topic:fitness.strength_training",
+          "topic:weight.weight_loss_methods"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000093",
+        "summary": "Physician guest recounts extreme calorie-restricted dieting, cardio and lifting in a failed weight-loss attempt."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000066",
+        "evidence_quote": "look at the graph in the in the paper, the error bars are just all over the place",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000065",
+        "summary": "Speaker refers to a paper's graph and error bars to support the point that early GLP-1 weight loss was unimpressive."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000049",
+        "evidence_quote": "Ozempic, Wegovy came",
+        "mention_role": "recommended",
+        "product_name": "Ozempic",
+        "product_type": "medication",
+        "start_unit_id": "u000049"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000049",
+        "evidence_quote": "Ozempic, Wegovy came",
+        "mention_role": "recommended",
+        "product_name": "Wegovy",
+        "product_type": "medication",
+        "start_unit_id": "u000049"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000064",
+        "evidence_quote": "with Byetta, and that was a twice a day injection",
+        "mention_role": "neutral",
+        "product_name": "Byetta",
+        "product_type": "medication",
+        "start_unit_id": "u000064"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000070",
+        "evidence_quote": "So we used Saxenda in our practice when that came out",
+        "mention_role": "recommended",
+        "product_name": "Saxenda",
+        "product_type": "medication",
+        "start_unit_id": "u000067"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "never"
+        ],
+        "claim_text": "These medications are more effective for weight management than anything that has come before.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "There has never been something more effective than these medications",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A superlative efficacy claim about GLP-1 drugs that could be compared with other weight-management interventions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000045",
+        "topic_ids": [
+          "topic:glp1.use_results"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ozempic and Wegovy are FDA approved for chronic weight management.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000049",
+        "evidence_quote": "after semaglutide, Ozempic, Wegovy came, you know, became FDA approved for chronic weight management",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "FDA approval status for these drugs is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000049",
+        "topic_ids": [
+          "topic:glp1.use_results"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Retatrutide is in phase three trials.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000057",
+        "evidence_quote": "that's in phase three trials",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The transcribed name 'Read a true tide' is likely retatrutide; its trial phase is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000053",
+        "topic_ids": [
+          "topic:glp1.new_offlabel_uses"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "GLP-1 drugs were not FDA approved for weight loss until after they had been used for diabetes.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000060",
+        "evidence_quote": "They have not been FDA approved for weight loss, but they were used for",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The history of GLP-1 approvals for diabetes versus weight loss is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000059",
+        "topic_ids": [
+          "topic:glp1.use_results"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Byetta was originally approved for type 2 diabetes in 2005.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000064",
+        "evidence_quote": "Originally, it was for type two diabetes, and that was in 2005 with Byetta",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The approval date and indication for Byetta can be checked against FDA records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000064",
+        "topic_ids": [
+          "topic:glp1.use_results"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Byetta was a twice-a-day injection.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000064",
+        "evidence_quote": "that was a twice a day injection",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Dosing form and frequency for Byetta are documented.",
+        "relevance": "substantive",
+        "start_unit_id": "u000064",
+        "topic_ids": [
+          "topic:glp1.use_results"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Byetta's weight-loss effect was about five pounds and fell within the error bars.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000066",
+        "evidence_quote": "somewhere along the order of five pounds in the error",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The magnitude of early GLP-1 weight loss can be checked against trial data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000065",
+        "topic_ids": [
+          "topic:glp1.use_results"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Saxenda was introduced in 2014.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000067",
+        "evidence_quote": "I think it was Saxenda that was in twenty fourteen",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Saxenda's launch date is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000067",
+        "topic_ids": [
+          "topic:glp1.use_results"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Saxenda required daily injection.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000069",
+        "evidence_quote": "you had to inject every day",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Saxenda's dosing frequency is documented.",
+        "relevance": "substantive",
+        "start_unit_id": "u000069",
+        "topic_ids": [
+          "topic:glp1.use_results"
+        ]
+      }
+    ],
+    "window_id": "episode_175043_window_0002"
+  },
+  "stored_at": "2026-10-04T22:13:54.789950+00:00"
+}

@@ -1,0 +1,321 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c44395w0007",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000413",
+        "evidence_quote": "more than 50,000 babies have been rescued from abortion",
+        "label_ids": [
+          "topic:fertility.abortion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000399",
+        "summary": "Sponsor read for Preborn asks for donations for pregnancy-center ultrasounds framed as rescuing babies from abortion."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000413",
+        "evidence_quote": "dial pound 250 and say the keyword \"baby",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000399",
+        "summary": "Donation pitch with a keyword and URL."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000408",
+        "evidence_quote": "share the hope of Jesus Christ with their mothers",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000404",
+        "summary": "The ad frames giving as sharing the hope of Jesus Christ and saving lives for eternity."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000433",
+        "evidence_quote": "Wellness company offers a hard-to-access RX parasite cleanse: USA compounded ivermectin and memantazol",
+        "label_ids": [
+          "topic:detox.parasite_cleanses",
+          "topic:infectious.parasitic_infections",
+          "topic:medications.repurposed_offlabel"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000413",
+        "summary": "Sponsor read for a compounded ivermectin/memantazol parasite cleanse claims raw fish carries hidden parasites and pushes annual cleansing."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000424",
+        "evidence_quote": "parasites can hide for years while frequently laying eggs before any symptoms appear",
+        "label_ids": [
+          "narrative:parasites_cause_disease"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000419",
+        "summary": "The ad invokes hidden parasites from raw fish entering the body and recommends a yearly preventative cleanse."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000424",
+        "evidence_quote": "Dr. Peter McCullough recommends doing a parasite cleanse at least once a year",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000423",
+        "summary": "Dr. Peter McCullough's recommendation is invoked as grounds for annual parasite cleansing."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000426",
+        "evidence_quote": "Ivermectin paralyzes the parasite's nervous system, while memantazol starves them",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000426",
+        "summary": "The ad explains the drugs' mechanisms against parasites."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000428",
+        "evidence_quote": "Lab tested for quality",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000428",
+        "summary": "The ad asserts the product is lab tested for quality."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000433",
+        "evidence_quote": "use code Candice at checkout to save fifty-two dollars off plus free shipping",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000413",
+        "summary": "Sponsor read with a discount code and URL."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000433",
+        "evidence_quote": "Wellness company offers a hard-to-access RX parasite cleanse: USA compounded ivermectin and memantazol",
+        "mention_role": "advertised",
+        "product_name": "Wellness Company parasite cleanse",
+        "product_type": "medication",
+        "start_unit_id": "u000413"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "More than 50,000 babies have been rescued from abortion so far this year.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000402",
+        "evidence_quote": "more than 50,000 babies have been rescued from abortion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The number of abortions averted by the organization is checkable against its public reporting.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000402",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A free ultrasound is life-saving because it helps prevent abortion.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000407",
+        "evidence_quote": "It costs just $28 to provide one life-saving ultrasound",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claim that ultrasound access prevents abortions and saves lives can be checked against program evaluations.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000406",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Millions of people now eat raw fish weekly.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000418",
+        "evidence_quote": "millions of people now eat raw fish weekly",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Raw fish consumption frequency can be checked against market and survey data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000418",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Salmon naturally contains more than 70 parasites.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000420",
+        "evidence_quote": "it naturally contains more than 70 parasites",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claim about parasite counts in salmon is checkable against veterinary and food-safety sources.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000420",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Parasites from salmon are making their way into the human body.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000421",
+        "evidence_quote": "they're making their way into the human body",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claim that raw-fish parasites reach people is checkable against food-safety and parasitology evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000421",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Once inside, parasites can hide for years while frequently laying eggs before any symptoms appear.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000422",
+        "evidence_quote": "parasites can hide for years while frequently laying eggs before any symptoms appear",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claim about parasite egg-laying and asymptomatic latency is checkable against parasitology sources.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000422",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ivermectin paralyzes the parasite's nervous system, while memantazol starves them.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000426",
+        "evidence_quote": "Ivermectin paralyzes the parasite's nervous system, while memantazol starves them",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The stated drug mechanisms are checkable against pharmacology sources.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000426",
+        "topic_ids": [
+          "topic:detox.parasite_cleanses",
+          "topic:medications.repurposed_offlabel"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Each capsule contains 25 milligrams of ivermectin and 250 milligrams of memantazol.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000427",
+        "evidence_quote": "Each capsule contains 25 milligrams of ivermectin and 250 milligrams of memantazol",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The stated capsule composition can be checked against the product label.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000427",
+        "topic_ids": [
+          "topic:detox.parasite_cleanses",
+          "topic:medications.repurposed_offlabel"
+        ]
+      }
+    ],
+    "window_id": "episode_44395_window_0007"
+  },
+  "stored_at": "2026-10-04T22:36:28.993653+00:00"
+}

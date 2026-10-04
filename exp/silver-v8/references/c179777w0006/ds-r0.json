@@ -1,0 +1,306 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c179777w0006",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000325",
+        "evidence_quote": "my favorite regimen is honestly an estradiol patch, an oral progesterone, and then a testosterone cream",
+        "label_ids": [
+          "topic:womens.hormone_therapy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "summary": "Hosts discuss women's hormone replacement regimens and the pros and cons of testosterone pellets, dosing and lab monitoring."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000325",
+        "evidence_quote": "this is something a lot of women want to know",
+        "label_ids": [
+          "population:women"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "summary": "The conversation concerns women's hormone therapy, pellets and hormone lab testing."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000325",
+        "evidence_quote": "A lot of people will just do a TSH. That's not adequate in my mind",
+        "label_ids": [
+          "topic:procedures.lab_testing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000297",
+        "summary": "The hosts discuss lab ranges and hormone testing: thyroid panels, free versus total testosterone, immunoassay versus mass spectrometry and SHBG."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000319",
+        "evidence_quote": "Like a birth control pill causes it to go up",
+        "label_ids": [
+          "topic:fertility.contraception"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000319",
+        "summary": "The birth control pill is cited as raising SHBG and, through binding testosterone, lowering libido."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000321",
+        "evidence_quote": "A lot of people will just do a TSH. That's not adequate in my mind",
+        "label_ids": [
+          "narrative:normal_labs_miss_disease"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000303",
+        "summary": "A functional-medicine argument that a single TSH is inadequate and that symptoms matter more than lab reference ranges for female hormones."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000281",
+        "evidence_quote": "they have the clinical experience to say, \"Okay, I've used this so many times",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000279",
+        "summary": "A provider's clinical experience with pellet dosing is invoked as grounds for confidence in dose selection."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000309",
+        "evidence_quote": "One, the data isn't great",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000307",
+        "summary": "The speaker acknowledges that the data on normal female androgen ranges is not good."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000319",
+        "evidence_quote": "sex hormone binding globulin is a protein in our blood that binds our hormones, specifically our sex hormones",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000317",
+        "summary": "SHBG binding of sex hormones and the pill's effect on SHBG and libido are explained mechanistically."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000267",
+        "evidence_quote": "if the level does become way too high, and you are predisposed to hair loss, and you are predisposed to high DHT levels",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000266",
+        "summary": "The speaker's own hair loss on pellets is offered as illustration of the risk of high levels and DHT."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Testosterone pellets commit a patient for about three months and cannot be removed from the body.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000284",
+        "evidence_quote": "You are committed to that for three months. You can't take out of your body",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether pellets last three months and are non-removable is checkable and bears on treatment choice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000282",
+        "topic_ids": [
+          "topic:womens.hormone_therapy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "in my mind"
+        ],
+        "claim_text": "A TSH test alone is not adequate for thyroid assessment.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000304",
+        "evidence_quote": "A lot of people will just do a TSH. That's not adequate in my mind",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether TSH alone is an adequate thyroid screen is checkable against clinical guidance and shapes what patients ask for.",
+        "relevance": "substantive",
+        "start_unit_id": "u000303",
+        "topic_ids": [
+          "topic:procedures.lab_testing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "may not be"
+        ],
+        "claim_text": "Immunoassay may not be as accurate as mass spectrometry for measuring testosterone.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000313",
+        "evidence_quote": "Are you doing an immunoassay, which may not be as as excuse me, my brain space for a minute, as accurate as you know mass spectrometry",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The relative accuracy of immunoassay and mass spectrometry for testosterone is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000310",
+        "topic_ids": [
+          "topic:procedures.lab_testing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Mass spectrometry can detect much lower levels of testosterone, which is more appropriate for testing in a woman.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000313",
+        "evidence_quote": "So that can detect much lower levels of testosterone, which is more appropriate for testing in a woman",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The sensitivity of mass spectrometry for female-range testosterone is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000312",
+        "topic_ids": [
+          "topic:procedures.lab_testing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Sex hormone binding globulin is a protein in the blood that binds sex hormones.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000317",
+        "evidence_quote": "sex hormone binding globulin is a protein in our blood that binds our hormones, specifically our sex hormones",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "What SHBG is and does is a checkable physiological fact underlying the hormone-testing discussion.",
+        "relevance": "substantive",
+        "start_unit_id": "u000317",
+        "topic_ids": [
+          "topic:procedures.lab_testing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "many"
+        ],
+        "claim_text": "The birth control pill raises SHBG, which binds testosterone, causing many women on the pill to have no libido.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000319",
+        "evidence_quote": "which is why many women when they're on the birth control pill have no libido",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The pill's effect on SHBG and libido is checkable and matters to women choosing contraception.",
+        "relevance": "substantive",
+        "start_unit_id": "u000319",
+        "topic_ids": [
+          "topic:fertility.contraception",
+          "topic:womens.hormone_therapy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "When a woman's testosterone level becomes too high and she is predisposed to high DHT and hair loss, it triggers hair loss.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000267",
+        "evidence_quote": "if the level does become way too high, and you are predisposed to hair loss, and you are predisposed to high DHT levels",
+        "evidence_signal_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The link between high testosterone/DHT and hair loss in predisposed women is a checkable treatment-risk claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000266",
+        "topic_ids": [
+          "topic:womens.hormone_therapy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I would say"
+        ],
+        "claim_text": "The data on what is normal for women's androgen levels (testosterone, DHT, DHEA) is not good.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000309",
+        "evidence_quote": "One, the data isn't great. I would say about what's normal, what's abnormal",
+        "evidence_signal_ids": [
+          "evidence:evidence_limits"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether adequate reference data exist for female androgens is checkable and affects how women read lab results.",
+        "relevance": "substantive",
+        "start_unit_id": "u000306",
+        "topic_ids": [
+          "topic:procedures.lab_testing"
+        ]
+      }
+    ],
+    "window_id": "episode_179777_window_0006"
+  },
+  "stored_at": "2026-10-04T22:36:27.958285+00:00"
+}

@@ -1,0 +1,194 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c16746w0002",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000097",
+        "evidence_quote": "Miracle Made, however, offers a whole line of self-cleaning, antibacterial bedding",
+        "label_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000076",
+        "summary": "Sponsor read for Miracle Made antibacterial bedding."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000084",
+        "evidence_quote": "you get a better sleep every single night",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000083",
+        "summary": "The ad states Miracle Made sheets give the user a better sleep every night."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000080",
+        "evidence_quote": "Traditional bed sheets can harbor more bacteria than a toilet seat. It can lead to acne, allergies, and stuffy noses",
+        "label_ids": [
+          "topic:infectious.germ_theory_hygiene"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000077",
+        "summary": "The ad claims regular bed sheets harbor bacteria that can cause acne, allergies and stuffy noses."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000097",
+        "evidence_quote": "And if you use our promo code MITUS at checkout, you'll get three free towels",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000076",
+        "summary": "Sponsor read with URL, promo code and discount offer."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000080",
+        "evidence_quote": "Traditional bed sheets can harbor more bacteria than a toilet seat",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000077",
+        "summary": "Regular sheets are framed as bacteria-contaminated and Miracle Made as clean and antibacterial."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000083",
+        "evidence_quote": "Using silver-infused fabrics inspired by NASA",
+        "label_ids": [
+          "evidence:prestige_institution"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000083",
+        "summary": "NASA is invoked to lend authority to the silver-infused fabric technology."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000097",
+        "evidence_quote": "Miracle Made, however, offers a whole line of self-cleaning, antibacterial bedding",
+        "mention_role": "advertised",
+        "product_name": "Miracle Made",
+        "product_type": "household_or_home",
+        "start_unit_id": "u000076"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Traditional bed sheets can harbor more bacteria than a toilet seat.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000077",
+        "evidence_quote": "Traditional bed sheets can harbor more bacteria than a toilet seat",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable comparison about bacterial contamination of bedding that motivates the product.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000077",
+        "topic_ids": [
+          "topic:infectious.germ_theory_hygiene"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Bacteria in bed sheets can lead to acne, allergies, and stuffy noses.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000078",
+        "evidence_quote": "It can lead to acne, allergies, and stuffy noses",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A causal claim linking bacteria in bedding to specific health conditions.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000078",
+        "topic_ids": [
+          "topic:infectious.germ_theory_hygiene"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Miracle Made antibacterial bedding prevents up to 99.7 percent of bacteria growth.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000080",
+        "evidence_quote": "prevent up to 99.7 percent of bacteria growth",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A quantified product efficacy claim in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000080",
+        "topic_ids": [
+          "topic:infectious.germ_theory_hygiene",
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "every single night"
+        ],
+        "claim_text": "Using Miracle Made sheets gives you a better sleep every single night.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000084",
+        "evidence_quote": "you get a better sleep every single night",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A sleep-quality efficacy claim made in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000084",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      }
+    ],
+    "window_id": "episode_16746_window_0002"
+  },
+  "stored_at": "2026-10-04T22:36:32.350577+00:00"
+}

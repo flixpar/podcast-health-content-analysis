@@ -1,0 +1,216 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c63195w0013",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000682",
+        "evidence_quote": "they're a multi-billion-dollar marketing firm",
+        "label_ids": [
+          "topic:health_system.dtc_telehealth",
+          "topic:health_system.pharma_industry",
+          "topic:peptides.peptide_sourcing_regulation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000675",
+        "summary": "Speaker accuses Hims of deliberately damaging the compounding and peptide industry to profit from a Novo Nordisk deal."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000716",
+        "evidence_quote": "there's a huge class action lawsuit now, an antitrust lawsuit that's going on",
+        "label_ids": [
+          "topic:health_system.pharma_industry",
+          "topic:policy.health_law_courts"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000686",
+        "summary": "Speaker recounts calls with the administration, Hims's stock surge, and a class-action antitrust lawsuit over the Novo deal."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000724",
+        "evidence_quote": "the future of biologics and stem cells and creating a regulatory pathway",
+        "label_ids": [
+          "topic:health_system.dtc_telehealth",
+          "topic:health_system.regulators",
+          "topic:peptides.peptide_sourcing_regulation",
+          "topic:policy.hhs_leadership",
+          "topic:procedures.regenerative_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000717",
+        "summary": "Speaker discusses regulatory pathways for peptides, biologics and stem cells, citing Secretary Kennedy's tweet and FDA meetings."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000731",
+        "evidence_quote": "get a drug approved. It costs billions of dollars. Now we've got to lock in that patent",
+        "label_ids": [
+          "topic:health_system.costs_insurance",
+          "topic:health_system.pharma_industry"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000725",
+        "summary": "Speaker describes the drug approval and pricing model, including patents and formulary placement in public programs."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000745",
+        "evidence_quote": "which model is going to take cost out of the system",
+        "label_ids": [
+          "topic:health_system.costs_insurance"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000732",
+        "summary": "Speaker lays out a vision of a parallel, cash-pay model to prevent chronic disease and lower system costs."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000682",
+        "evidence_quote": "bad actors doing things that I think are doing them by design to damage the industry",
+        "label_ids": [
+          "frame:industry_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000675",
+        "summary": "Speaker portrays Hims as a marketing firm that deliberately sabotaged the compounding industry."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000716",
+        "evidence_quote": "the guys that were doing the bad things already inked their backroom deal and rode off into the sunset",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000713",
+        "summary": "Speaker alleges a backroom deal allowed the bad actors to escape accountability."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000704",
+        "evidence_quote": "He's a pharmacist. He's a law degree",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000699",
+        "summary": "Lee Rosebush's credentials are cited to support his lawsuit and questions."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Hims is a multi-billion-dollar marketing firm, not a compounding pharmacy.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000682",
+        "evidence_quote": "they're a multi-billion-dollar marketing firm",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:industry_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable factual claim about what a named health company is, affecting how its conduct is judged.",
+        "relevance": "substantive",
+        "start_unit_id": "u000675",
+        "topic_ids": [
+          "topic:health_system.pharma_industry"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "There's no way"
+        ],
+        "claim_text": "Hims's actions were not an oversight or mistake but were by design to damage the compounding industry before making a deal with Novo Nordisk.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000682",
+        "evidence_quote": "There's no way this was an oversight or a mistake. This was by design",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:industry_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "A specific allegation of deliberate corporate harm, checkable through the timeline and business arrangements.",
+        "relevance": "substantive",
+        "start_unit_id": "u000675",
+        "topic_ids": [
+          "topic:health_system.pharma_industry"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There is a huge class action antitrust lawsuit against Hims.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000698",
+        "evidence_quote": "there's a huge class action lawsuit now, an antitrust lawsuit that's going on",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable legal fact that bears on the alleged wrongdoing.",
+        "relevance": "substantive",
+        "start_unit_id": "u000698",
+        "topic_ids": [
+          "topic:health_system.pharma_industry",
+          "topic:policy.health_law_courts"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The drug model is to get a drug approved at a cost of billions, lock in a patent, let the company profit, and get it on insurance formularies including Medicare, Medicaid, and Tricare.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000731",
+        "evidence_quote": "get a drug approved. It costs billions of dollars. Now we've got to lock in that patent",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general, checkable description of drug development and pricing that shapes policy views.",
+        "relevance": "substantive",
+        "start_unit_id": "u000728",
+        "topic_ids": [
+          "topic:health_system.costs_insurance",
+          "topic:health_system.pharma_industry"
+        ]
+      }
+    ],
+    "window_id": "episode_63195_window_0013"
+  },
+  "stored_at": "2026-10-04T22:36:29.043655+00:00"
+}

@@ -1,0 +1,209 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c94201w0016",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001309",
+        "evidence_quote": "Therapy is a safe space to get things off your chest and to figure out how to work through whatever's weighing you down",
+        "label_ids": [
+          "topic:mental.therapy",
+          "topic:stress.stress_burnout"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001288",
+        "summary": "Sponsor read promotes BetterHelp online therapy for stress and bottled-up feelings."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001309",
+        "evidence_quote": "Visit BetterHelp.com/toast today, and you'll get 10% off your first month",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001288",
+        "summary": "Sponsor read includes a BetterHelp discount code."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001329",
+        "evidence_quote": "AstaPro is a first-of-its-kind nasal allergy spray",
+        "label_ids": [
+          "topic:immune.allergies",
+          "topic:medications.other_drugs"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001313",
+        "summary": "Sponsor read promotes AstaPro nasal allergy spray for fast 24-hour allergy symptom relief."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001329",
+        "evidence_quote": "Go to AstaProAllergy.com for a discount, so you can AstaPro and go today",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001313",
+        "summary": "Sponsor read includes an AstaPro discount code."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001309",
+        "evidence_quote": "Our TV recap is brought to you by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u001288"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001329",
+        "evidence_quote": "AstaPro is a first-of-its-kind nasal allergy spray",
+        "mention_role": "advertised",
+        "product_name": "AstaPro",
+        "product_type": "medication",
+        "start_unit_id": "u001313"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Keeping stressors bottled up can affect us negatively.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001290",
+        "evidence_quote": "Where we keep them bottled up, it can start to affect us negatively",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A general psychological claim used to justify therapy, checkable against evidence on emotional suppression.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001289",
+        "topic_ids": [
+          "topic:mental.therapy",
+          "topic:stress.stress_burnout"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "fastest"
+        ],
+        "claim_text": "AstaPro is the fastest 24-hour over-the-counter allergy spray.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001317",
+        "evidence_quote": "It is the fastest 24-hour over-the-counter allergy spray",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A comparative efficacy claim about a product that can be checked against other OTC allergy sprays.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001317",
+        "topic_ids": [
+          "topic:immune.allergies",
+          "topic:medications.other_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "other"
+        ],
+        "claim_text": "AstaPro starts working in 30 minutes, while other allergy sprays take hours.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001318",
+        "evidence_quote": "It starts working in 30 minutes, while other allergy sprays take hours",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A specific onset-time claim and a comparative claim about competing sprays that can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001318",
+        "topic_ids": [
+          "topic:immune.allergies",
+          "topic:medications.other_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "first and only"
+        ],
+        "claim_text": "AstaPro is the first and only 24-hour steroid-free allergy spray.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001320",
+        "evidence_quote": "AstaPro is the first and only",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A market-position and formulation claim that can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001319",
+        "topic_ids": [
+          "topic:immune.allergies",
+          "topic:medications.other_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "AstaPro delivers full prescription strength indoor and outdoor allergy relief from nasal congestion, runny and itchy nose, and sneezing.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001320",
+        "evidence_quote": "AstaPro delivers full prescription strength indoor and outdoor allergy relief from nasal congestion, runny and itchy nose, and sneezing",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A claim of prescription-strength relief for specific allergy symptoms that can be checked against the product's formulation and studies.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001320",
+        "topic_ids": [
+          "topic:immune.allergies",
+          "topic:medications.other_drugs"
+        ]
+      }
+    ],
+    "window_id": "episode_94201_window_0016"
+  },
+  "stored_at": "2026-10-04T22:13:56.050580+00:00"
+}

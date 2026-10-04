@@ -1,0 +1,283 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c96119w0008",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000723",
+        "evidence_quote": "Nature Raised Farms is free from gluten, dairy, and soy. There are no seed oils and no artificial ingredients. Also, Nature Raised Farms chicken is a good source of fiber",
+        "label_ids": [
+          "topic:food.additives_dyes",
+          "topic:food.fats_oils",
+          "topic:food.meat_animal_foods",
+          "topic:food.plant_foods_fiber"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000719",
+        "summary": "Sponsor read claims Nature Raised Farms chicken is free from gluten/dairy/soy, has no seed oils or artificial ingredients, is a good source of fiber, and has modest fat per serving."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000721",
+        "evidence_quote": "free from gluten, dairy, and soy. There are no seed oils and no artificial ingredients",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000720",
+        "summary": "The chicken ad sells the product by what it is free from, invoking a clean-versus-contaminated framing."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000728",
+        "evidence_quote": "This episode is sponsored by Nature Raised Farms",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000709",
+        "summary": "Nature Raised Farms sponsor read."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000734",
+        "evidence_quote": "it might be time to screen for colon cancer",
+        "label_ids": [
+          "topic:cancer.other_specific_cancers",
+          "topic:cancer.screening_diagnosis"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000730",
+        "summary": "Cologuard ad urges colon-cancer screening for average-risk adults 45 and older and describes the at-home test."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000735",
+        "evidence_quote": "This message is brought to you by Colgard",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000729",
+        "summary": "Cologuard sponsor read."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000728",
+        "evidence_quote": "This episode is sponsored by Nature Raised Farms",
+        "mention_role": "advertised",
+        "product_name": "Nature Raised Farms",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000709"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000735",
+        "evidence_quote": "This message is brought to you by Colgard",
+        "mention_role": "advertised",
+        "product_name": "Cologuard",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000729"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms is free from gluten, dairy, and soy.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000720",
+        "evidence_quote": "Nature Raised Farms is free from gluten, dairy, and soy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Product composition claim in a sponsor read can be checked against ingredients or labeling.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000720",
+        "topic_ids": [
+          "topic:food.meat_animal_foods"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms chicken contains no seed oils.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000721",
+        "evidence_quote": "There are no seed oils and no artificial ingredients",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "The absence of seed oils is a checkable product composition claim tied to a contested dietary narrative.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000721",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms chicken contains no artificial ingredients.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000721",
+        "evidence_quote": "There are no seed oils and no artificial ingredients",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claim that the product has no artificial ingredients can be checked against the product's ingredient list.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000721",
+        "topic_ids": [
+          "topic:food.additives_dyes"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms chicken is a good source of fiber.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000722",
+        "evidence_quote": "Nature Raised Farms chicken is a good source of fiber",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A nutrient content claim in an ad can be checked against nutrition labeling.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000722",
+        "topic_ids": [
+          "topic:food.plant_foods_fiber"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "only"
+        ],
+        "claim_text": "Nature Raised Farms chicken has only between eight to twelve grams of fat per serving, depending on the product.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000723",
+        "evidence_quote": "and only. Between eight to twelve grams of fat per serving, depending on the product",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The stated fat range per serving can be checked against the product's nutrition label.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000722",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Cologuard test is non-invasive.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000731",
+        "evidence_quote": "The ColiGuard test is non-invasive",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product characteristic in a medical ad that can be checked against the test's instructions and labeling.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000731",
+        "topic_ids": [
+          "topic:cancer.other_specific_cancers",
+          "topic:cancer.screening_diagnosis"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Cologuard test requires no special prep or time off.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000731",
+        "evidence_quote": "requires no special prep or time off",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about how the screening test is performed.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000731",
+        "topic_ids": [
+          "topic:cancer.other_specific_cancers",
+          "topic:cancer.screening_diagnosis"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "With Cologuard you start screening right from your home.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000731",
+        "evidence_quote": "you start screening right from your home",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A claim about the at-home nature of the Cologuard test that can be verified.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000731",
+        "topic_ids": [
+          "topic:cancer.other_specific_cancers",
+          "topic:cancer.screening_diagnosis"
+        ]
+      }
+    ],
+    "window_id": "episode_96119_window_0008"
+  },
+  "stored_at": "2026-10-04T22:13:49.615485+00:00"
+}

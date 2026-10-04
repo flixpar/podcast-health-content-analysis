@@ -1,0 +1,72 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "s-certainty-speculative",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000002",
+        "evidence_quote": "i didnt sleep great and then i way overslept",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000002",
+        "summary": "Speaker mentions having slept poorly and overslept."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "on days when i skip breakfast i feel kind of foggy by like ten or eleven",
+        "label_ids": [
+          "topic:cognition.brain_fog",
+          "topic:food.eating_behavior"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "Speakers discuss whether skipping breakfast is behind the speaker's brain fog and consider tracking the pattern and keeping quick snacks."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000031",
+        "evidence_quote": "i wonder if it might be a blood sugar thing like maybe my focus dips because theres nothing in my system yet",
+        "label_ids": [
+          "topic:metabolic.insulin_glucose"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000031",
+        "summary": "Speaker wonders whether the fog is a blood-sugar issue from having nothing in his system yet."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "could also just be the bad sleep honestly probably a mix of things",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000037",
+        "summary": "Speakers consider bad sleep as another possible cause of the fog."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [],
+    "window_id": "synthetic_certainty_speculative_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:33.562143+00:00"
+}

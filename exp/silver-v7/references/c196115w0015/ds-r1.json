@@ -1,0 +1,142 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c196115w0015",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001266",
+        "evidence_quote": "Is it dangerous to have metal on you when you get an MRI",
+        "label_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001222",
+        "summary": "Hosts discuss MRI safety with metal, how MRI magnets affect metal objects, and alternative imaging."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001257",
+        "evidence_quote": "even metal crowns in your mouth",
+        "label_ids": [
+          "topic:oral.dental_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001255",
+        "summary": "Hosts warn that metal dental crowns and restorations can be damaged by MRI magnets."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001257",
+        "evidence_quote": "the vibration can dislodge, bend, and break the dental restoration just from the magnets",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001257",
+        "summary": "The speaker explains the mechanism by which MRI magnets can damage dental restorations."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "MRI magnets can dislodge, bend, and break dental restorations.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001257",
+        "evidence_quote": "the vibration can dislodge, bend, and break the dental restoration just from the magnets",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific MRI safety claim about dental work that can be checked against clinical guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u001257",
+        "topic_ids": [
+          "topic:oral.dental_procedures",
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Loose metal objects can injure you during an MRI.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001259",
+        "evidence_quote": "loose metal objects can injure you as that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A standard MRI safety claim that can be verified against radiology guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u001259",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I would think"
+        ],
+        "claim_text": "A person with a metal plate in the head or dental fillings would be a bad candidate for an MRI.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001263",
+        "evidence_quote": "I would think if you have a metal plate in your head or you got fillings in your teeth, then you would be a bad candidate",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A tentative MRI eligibility claim that can be checked against MRI safety criteria.",
+        "relevance": "substantive",
+        "start_unit_id": "u001262",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Some metals—ferromagnetic materials such as iron, cobalt, manganese, and nickel—are more responsive to MRI magnets than others.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001264",
+        "evidence_quote": "I think there's certain kinds of metals too that are more responsive to it than others",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A factual claim about MRI-responsive metals that can be checked against materials science and MRI safety guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u001263",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      }
+    ],
+    "window_id": "episode_196115_window_0015"
+  },
+  "stored_at": "2026-10-04T22:13:53.254439+00:00"
+}

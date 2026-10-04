@@ -1,0 +1,158 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c41217w0001",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000011",
+        "evidence_quote": "Tremfya is a prescription medicine used to treat adults with moderately to severely active Crohn's disease",
+        "label_ids": [
+          "topic:gut.gi_disease",
+          "topic:medications.other_drugs"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000001",
+        "summary": "Sponsor read for Tremfya, a prescription biologic for Crohn's disease and ulcerative colitis, including dosing and safety instructions."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000011",
+        "evidence_quote": "Ask your doctor about Tremfya today",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000001",
+        "summary": "Paid drug advertisement for Tremfya."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "Therapy offers the space to check in with yourself regularly, and build those small, consistent, healthy habits",
+        "label_ids": [
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000025",
+        "summary": "Sponsor read for BetterHelp online therapy, framed as a way to build routines and healthy habits."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "This is a paid advertisement by BetterHelp",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000025",
+        "summary": "BetterHelp paid advertisement with a branded URL."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000011",
+        "evidence_quote": "Tremfya",
+        "mention_role": "advertised",
+        "product_name": "Tremfya",
+        "product_type": "medication",
+        "start_unit_id": "u000001"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000038",
+        "evidence_quote": "This is a paid advertisement by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000025"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Tremfya offers self-injection or intravenous infusion from the start.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000002",
+        "evidence_quote": "Tremfya offers self-injection or intravenous infusion from the start",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The administration options for Tremfya are checkable product facts that affect how patients take the drug.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000002",
+        "topic_ids": [
+          "topic:gut.gi_disease",
+          "topic:medications.other_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Tremfya is administered as injections under the skin or infusions through a vein every four weeks, followed by injections under the skin every four or eight weeks.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000003",
+        "evidence_quote": "Tremfya is administered as injections under the skin or infusions through a vein every four weeks, followed by injections under the skin every four or eight weeks",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The dosing schedule is checkable product information that materially affects adherence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000003",
+        "topic_ids": [
+          "topic:gut.gi_disease",
+          "topic:medications.other_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Tremfya is a prescription medicine used to treat adults with moderately to severely active Crohn's disease.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000005",
+        "evidence_quote": "Tremfya is a prescription medicine used to treat adults with moderately to severely active Crohn's disease",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The approved indication of a prescription biologic is checkable and relevant to people considering the drug.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000005",
+        "topic_ids": [
+          "topic:gut.gi_disease",
+          "topic:medications.other_drugs"
+        ]
+      }
+    ],
+    "window_id": "episode_41217_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:33.300250+00:00"
+}

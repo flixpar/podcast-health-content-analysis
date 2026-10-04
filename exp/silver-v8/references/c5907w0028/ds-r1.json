@@ -1,0 +1,176 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c5907w0028",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002506",
+        "evidence_quote": "she started sticking needles into me, and I fainted",
+        "label_ids": [
+          "topic:neuro.other_neurological"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002488",
+        "summary": "Hosts tell comedic stories about fainting in response to needles."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002491",
+        "evidence_quote": "I tore my meniscus at acupuncture",
+        "label_ids": [
+          "topic:musculoskeletal.joints_arthritis"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002491",
+        "summary": "A host says he tore his meniscus during an acupuncture appointment."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002515",
+        "evidence_quote": "Two, three months ago, I did the PRP on my knee",
+        "label_ids": [
+          "topic:procedures.regenerative_medicine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002512",
+        "summary": "A host mentions having PRP on his knee and six tubes of blood drawn."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002530",
+        "evidence_quote": "He's he's banged up",
+        "label_ids": [
+          "topic:acute_care.trauma_fractures",
+          "topic:neuro.other_neurological"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002519",
+        "summary": "A friend fell asleep or blacked out at the wheel after shoveling snow, crashed and was banged up."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002607",
+        "evidence_quote": "You can have a heart attack",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:fitness.exercise_general"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002584",
+        "summary": "Hosts discuss the heart attack risk of shoveling snow and treat it as intense exercise, citing a heart-rate study."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002607",
+        "evidence_quote": "after only two minutes of snow shoveling, study participants' heart rates exceeded 85 percent of maximal heart rate",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002607",
+        "summary": "A study is cited for heart-rate response during snow shoveling."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002537",
+        "evidence_quote": "It's not good after 50",
+        "label_ids": [
+          "population:midlife"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002536",
+        "summary": "One host says shoveling snow is not good after 50."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Shoveling snow can cause a heart attack.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002589",
+        "evidence_quote": "You can have a heart attack",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A concrete health risk that could affect whether listeners take precautions while shoveling.",
+        "relevance": "substantive",
+        "start_unit_id": "u002588",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I don't think",
+          "I think"
+        ],
+        "claim_text": "The danger of shoveling snow is exertion, not cold weather.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002592",
+        "evidence_quote": "the weather's cold, but I don't think that's fucking you up. I think it's just the exertion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal attribution for a health risk that determines what precautions to take.",
+        "relevance": "substantive",
+        "start_unit_id": "u002590",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "After only two minutes of snow shoveling, study participants' heart rates exceeded 85 percent of maximal heart rate, a level more commonly expected during intense aerobic exercise testing.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002607",
+        "evidence_quote": "after only two minutes of snow shoveling, study participants' heart rates exceeded 85 percent of maximal heart rate",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable quantitative finding cited to support the claim that shoveling is intense exertion.",
+        "relevance": "substantive",
+        "start_unit_id": "u002607",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:fitness.exercise_general"
+        ]
+      }
+    ],
+    "window_id": "episode_5907_window_0028"
+  },
+  "stored_at": "2026-10-04T22:36:31.288002+00:00"
+}

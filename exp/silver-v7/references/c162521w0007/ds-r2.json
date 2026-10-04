@@ -1,0 +1,263 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c162521w0007",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000542",
+        "evidence_quote": "John's cousin died in a skiing accident",
+        "label_ids": [
+          "topic:acute_care.death_dying",
+          "topic:acute_care.trauma_fractures"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000540",
+        "summary": "A family member's fatal skiing accident is mentioned as the reason the couple left abruptly."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000557",
+        "evidence_quote": "Millions of Americans carry parasites right now, often without symptoms",
+        "label_ids": [
+          "topic:infectious.parasitic_infections"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000552",
+        "summary": "The ad claims that hidden parasite infections are common in Americans and can come from ordinary sources."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000572",
+        "evidence_quote": "The kit works by clearing parasites, worms, candida, and heavy metals",
+        "label_ids": [
+          "topic:detox.heavy_metal_detox",
+          "topic:detox.parasite_cleanses",
+          "topic:gut.candida_histamine"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "summary": "The ad promotes Parify, a 30-day parasite cleanse said to clear parasites, worms, candida and heavy metals and support detox."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000559",
+        "evidence_quote": "hidden in your gut, releasing toxins that sabotage your energy and digestion",
+        "label_ids": [
+          "narrative:parasites_cause_disease"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000553",
+        "summary": "The ad invokes the claim that hidden parasites cause chronic symptoms and require cleansing."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000572",
+        "evidence_quote": "use the code Rachel to get 10% off of your order",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "summary": "Sponsor read for Parify with a discount code."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000559",
+        "evidence_quote": "releasing toxins that sabotage your energy and digestion",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000557",
+        "summary": "Health problems are framed in terms of hidden toxins that need removal."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000562",
+        "evidence_quote": "I'm actually doing it myself right now",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000561",
+        "summary": "The host says she is personally using the parasite cleanse."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000572",
+        "evidence_quote": "Parify, Kim Rogers' 30-day full-spectrum parasite cleanse",
+        "mention_role": "advertised",
+        "product_name": "Parify",
+        "product_type": "supplement",
+        "start_unit_id": "u000558"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "often"
+        ],
+        "claim_text": "Millions of Americans carry parasites right now, often without symptoms.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000554",
+        "evidence_quote": "Millions of Americans carry parasites right now, often without symptoms",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [
+          "narrative:parasites_cause_disease"
+        ],
+        "rationale": "A prevalence claim about parasite carriage in Americans can be checked against surveillance and clinical data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000553",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "it's estimated"
+        ],
+        "claim_text": "It is estimated that millions in the United States have been exposed to Toxocara, a parasitic worm, yet most never even know it.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000555",
+        "evidence_quote": "it's estimated that millions in the United States have been exposed to Toxocara, a parasitic worm, yet most never even know it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [
+          "narrative:parasites_cause_disease"
+        ],
+        "rationale": "The Toxocara exposure estimate is a checkable public-health claim.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000554",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Parasites can enter through tap water, sushi, undercooked foods, or contaminated produce.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000557",
+        "evidence_quote": "they can enter through tap water. Sushi, undercooked foods, or contaminated produce",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The transmission routes named are checkable and affect whether listeners worry about everyday exposures.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000555",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Some parasite strains live hidden in the gut in all stages—eggs, larvae, adults—and release toxins that sabotage energy and digestion.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000558",
+        "evidence_quote": "Some strains live in all stages: eggs, larvae, adults, hidden in your gut, releasing toxins that sabotage your energy and digestion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [
+          "narrative:parasites_cause_disease"
+        ],
+        "rationale": "The claim about parasite life stages and toxin-driven symptoms is checkable and central to the product pitch.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000557",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Parify works by clearing parasites, worms, candida, and heavy metals, targeting parasites in all life stages and supporting gut health, detox pathways, and toxin removal.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000560",
+        "evidence_quote": "The kit works by clearing parasites, worms, candida, and heavy metals, targeting parasites in all life stages, supporting gut health, detox pathways, and toxin removal",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product efficacy claim that could be checked against the ingredients and any evidence for the cleanse.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "topic_ids": [
+          "topic:detox.heavy_metal_detox",
+          "topic:detox.parasite_cleanses",
+          "topic:gut.candida_histamine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Parify is taken orally daily for 30 days with precise dosing.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000561",
+        "evidence_quote": "It's taken orally daily for 30 days with precise dosing",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The stated dosing and route are checkable product facts.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000560",
+        "topic_ids": [
+          "topic:detox.parasite_cleanses"
+        ]
+      }
+    ],
+    "window_id": "episode_162521_window_0007"
+  },
+  "stored_at": "2026-10-04T22:13:54.671707+00:00"
+}

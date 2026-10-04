@@ -1,0 +1,164 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "s-citation-mundane",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "The people who did that ended up eating a bit less at the meal, something like fifty to a hundred fewer calories on average",
+        "label_ids": [
+          "topic:food.beverages_hydration",
+          "topic:food.eating_behavior"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000009",
+        "summary": "Hosts discuss a study on drinking water before lunch and reduced calorie intake."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000014",
+        "evidence_quote": "There was a study out of Ohio State that looked at people drinking a glass of water about twenty minutes before lunch",
+        "label_ids": [
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "summary": "A study from Ohio State found people who drank water before lunch ate fewer calories."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "the study did not really separate that out",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "Host notes the study did not separate water temperature or sparkling water."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000027",
+        "evidence_quote": "So the takeaway is just try it, it is not going to hurt you and it might curb some snacking over time",
+        "label_ids": [
+          "topic:food.beverages_hydration",
+          "topic:food.eating_behavior"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Hosts clarify study limitations and give the takeaway on water before meals."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "kind of like flossing every night",
+        "label_ids": [
+          "topic:oral.oral_hygiene"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000028",
+        "summary": "Flossing named as an analogy for a small health habit."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000035",
+        "evidence_quote": "then get into the sleep stuff after this",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000035",
+        "summary": "Teases an upcoming sleep segment."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "People who drank a glass of water about twenty minutes before lunch ate about 50 to 100 fewer calories at the meal, on average.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000011",
+        "evidence_quote": "The people who did that ended up eating a bit less at the meal, something like fifty to a hundred fewer calories on average",
+        "evidence_signal_ids": [
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The calorie reduction is a checkable finding that could shape eating advice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "topic_ids": [
+          "topic:food.beverages_hydration",
+          "topic:food.eating_behavior"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Filling the stomach with a little water reduces hunger before a meal.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "filling your stomach a little with water takes the edge off your hunger before the food arrives",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanistic claim about appetite that could be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000012",
+        "topic_ids": [
+          "topic:food.beverages_hydration",
+          "topic:food.eating_behavior"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Drinking a glass of water before a meal might curb snacking over time.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000027",
+        "evidence_quote": "it might curb some snacking over time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A possible behavioral benefit that could be studied.",
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "topic_ids": [
+          "topic:food.beverages_hydration",
+          "topic:food.eating_behavior"
+        ]
+      }
+    ],
+    "window_id": "synthetic_citation_mundane_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:33.565943+00:00"
+}

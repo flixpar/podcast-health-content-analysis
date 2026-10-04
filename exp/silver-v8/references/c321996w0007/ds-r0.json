@@ -1,0 +1,217 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c321996w0007",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "People have allergies too to like some of the stuff in the vaccine, so they can't get it",
+        "label_ids": [
+          "topic:immune.allergies",
+          "topic:vaccines.covid_vaccines"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000572",
+        "summary": "Hosts discuss the mRNA COVID vaccine and that some people cannot take it because of allergies to vaccine ingredients."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000621",
+        "evidence_quote": "we're getting everyone vax with certain things like Hep C and all that type of shit before you can start certain jobs",
+        "label_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000583",
+        "summary": "Hosts debate vaccine mandates and exemptions, including requirements for public jobs, the share of the population affected, and negative COVID tests as an alternative."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000605",
+        "evidence_quote": "we need to make it accessible so people in wheelchairs and like handicable people can get in here",
+        "label_ids": [
+          "topic:health_system.disability_access"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000597",
+        "summary": "Speakers use disability access and ADA requirements as an analogy for accommodating people who cannot get vaccinated."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000641",
+        "evidence_quote": "We're going to shut down businesses because we want our old people",
+        "label_ids": [
+          "topic:covid.lockdowns_closures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "Hosts discuss how COVID mortality risk in older adults drove lockdowns and business closures."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000655",
+        "evidence_quote": "there's a lot of people that are getting richer from COVID and lockdowns and restrictions in general",
+        "label_ids": [
+          "topic:health_system.pharma_industry"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000650",
+        "summary": "Hosts speculate that big pharma and other businesses have profited from COVID and lockdowns."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000651",
+        "evidence_quote": "I think big pharma has enough",
+        "label_ids": [
+          "frame:big_pharma"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000650",
+        "summary": "The pharmaceutical industry is cast as profiting from the pandemic."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000641",
+        "evidence_quote": "Fifteen percent is over sixty",
+        "label_ids": [
+          "population:older_adults"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "The policy discussion concerns older adults, described as over sixty and as grandparents and parents."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "certain people"
+        ],
+        "claim_text": "Some people cannot get vaccinated because they have allergies to ingredients in the vaccine.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "People have allergies too to like some of the stuff in the vaccine, so they can't get it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A factual claim about vaccine contraindications that affects who can be subject to a vaccine mandate.",
+        "relevance": "substantive",
+        "start_unit_id": "u000575",
+        "topic_ids": [
+          "topic:immune.allergies",
+          "topic:vaccines.covid_vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "You have to get certain vaccines, such as for hepatitis C, before starting certain jobs, and you still have to get one every 10 years to work at certain places.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000585",
+        "evidence_quote": "we're getting everyone vax with certain things like Hep C and all that type of shit before you can start certain jobs",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about occupational vaccine requirements, though the named disease and interval appear inaccurate.",
+        "relevance": "passing",
+        "start_unit_id": "u000584",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I'm pretty sure",
+          "As of now"
+        ],
+        "claim_text": "As of now, the vaccine requirement has no caveat for people who cannot get vaccinated, so it bars them from entering businesses.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000614",
+        "evidence_quote": "But as of now, there's no like caveat for them",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about the exemptions in a specific COVID vaccine requirement.",
+        "relevance": "substantive",
+        "start_unit_id": "u000606",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I'm pretty sure"
+        ],
+        "claim_text": "A negative COVID test gets you an excusal from the vaccine requirement.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000618",
+        "evidence_quote": "Because a negative COVID test gets you an excusal",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about the testing alternative to the vaccine requirement.",
+        "relevance": "passing",
+        "start_unit_id": "u000615",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "An antigen test will get you in for about two weeks.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000619",
+        "evidence_quote": "I think like an antigen test will get you on for like two weeks or something like that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about how long a negative antigen test substitutes for the vaccine requirement.",
+        "relevance": "passing",
+        "start_unit_id": "u000619",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      }
+    ],
+    "window_id": "episode_321996_window_0007"
+  },
+  "stored_at": "2026-10-04T22:36:28.768610+00:00"
+}

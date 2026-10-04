@@ -1,0 +1,653 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "t-c318639w0005--decoy_hedge_nonclaim",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000346",
+        "evidence_quote": "a pimple can start forming when the Opening to the hair follicle gets plugged up with dead skin and protein",
+        "label_ids": [
+          "topic:skin_beauty.acne"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000279",
+        "summary": "The show explains acne causes and treatments, including salicylic acid, benzoyl peroxide, birth control, and a light therapy mask."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000346",
+        "evidence_quote": "The idea of the light therapy mask is that it uses two types of light",
+        "label_ids": [
+          "topic:recovery.red_light",
+          "topic:skin_beauty.acne"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000331",
+        "summary": "The show tests and explains a light therapy mask for acne, using blue light against bacteria and red light for inflammation."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000319",
+        "evidence_quote": "women with acne can be put on birth control pills that contain estrogen to tweak their hormones",
+        "label_ids": [
+          "topic:fertility.contraception"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000319",
+        "summary": "Mentions birth control pills containing estrogen as a treatment for acne in women."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000319",
+        "evidence_quote": "teenagers whose hormones are changing are more likely to get pimples, and why women with acne can be put on birth control pills",
+        "label_ids": [
+          "population:adolescents",
+          "population:women"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000319",
+        "summary": "The sentence specifically concerns teenagers and women with acne."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000330",
+        "evidence_quote": "there is quote no good evidence that acne is caused or. Cured by washing",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000328",
+        "summary": "Cites a Lancet review to correct the idea that washing the face prevents or cures acne."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "there's no clear evidence that higher strength options, like 10%, work better than 2.5 or 5",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000310",
+        "summary": "Corrects the idea that higher-strength benzoyl peroxide works better than lower strengths."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000344",
+        "evidence_quote": "Plus, this is a sample size of one, and not a study",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000337",
+        "summary": "Debunks the immediate effect of the light therapy mask and notes the demo is not a study."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000291",
+        "evidence_quote": "The American Academy of Dermatology guidelines, which Jonathan helped write, called clinical trials into salicylic acid, limited",
+        "label_ids": [
+          "evidence:expert_consensus"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000290",
+        "summary": "The American Academy of Dermatology guidelines are cited for the limited evidence on salicylic acid."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000292",
+        "evidence_quote": "another paper published in Nature Reviews noted that we don't have sufficient medical literature to say that salicylic acid is effective for acne",
+        "label_ids": [
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000292",
+        "summary": "A paper in Nature Reviews is cited for insufficient literature on salicylic acid for acne."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000292",
+        "evidence_quote": "salicylic acid has not been studied that well",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000289",
+        "summary": "The show emphasizes that salicylic acid has not been well studied and its trials are limited."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000295",
+        "evidence_quote": "He's probably Jonathan, our dermatologist",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000286",
+        "summary": "The dermatologist Jonathan's credentials lend weight to his assessment of salicylic acid."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000309",
+        "evidence_quote": "It's quite clear that benzoyl peroxide has been scientifically proven",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000309",
+        "summary": "The show states benzoyl peroxide has been scientifically proven."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000315",
+        "evidence_quote": "One study of more than a thousand teens found that having someone else in your family with spots doubled the risk of you getting severe to moderate acne",
+        "label_ids": [
+          "evidence:vague_research",
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000315",
+        "summary": "A study of over a thousand teens is cited for a family-history acne risk association."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000323",
+        "evidence_quote": "a recent paper which reviewed a whole bunch of studies on acne described stress as a quote. Potential risk factor. End quote",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000321",
+        "summary": "A recent review of acne studies is cited for stress as a potential risk factor."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000330",
+        "evidence_quote": "A Lancet paper found that there is quote no good evidence that acne is caused or. Cured by washing",
+        "label_ids": [
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000329",
+        "summary": "A Lancet paper is cited for the finding that washing does not cause or cure acne."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "there's no clear evidence that higher strength options, like 10%, work better than 2.5 or 5",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000310",
+        "summary": "The show notes the lack of clear evidence on benzoyl peroxide strength."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000344",
+        "evidence_quote": "this is a sample size of one, and not a study",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000343",
+        "summary": "The show acknowledges the mask demo is a sample size of one, not a study."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000308",
+        "evidence_quote": "benzyl peroxide works by killing bacteria on your skin",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000302",
+        "summary": "The show explains benzoyl peroxide's antibacterial mechanism against P. acnes."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000336",
+        "evidence_quote": "Blue light is supposed to zap p acne's bacteria on your face, and red light is supposed to decrease inflammation",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000335",
+        "summary": "The show relays the claimed mechanism of the light therapy mask."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A pimple can start forming when the opening to a hair follicle gets plugged with dead skin and protein, and a plug that turns black becomes a blackhead.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000284",
+        "evidence_quote": "a pimple can start forming when the Opening to the hair follicle gets plugged up with dead skin and protein, and if that plug turns black, then you get a blackhead",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Describes the biological mechanism of acne formation that the product explanations rest on.",
+        "relevance": "substantive",
+        "start_unit_id": "u000284",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Salicylic acid can help by unplugging hair follicles.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000287",
+        "evidence_quote": "it can help by unplugging hair follicles a little bit",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about how salicylic acid acts on acne lesions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000285",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A paper published in Nature Reviews said there is not sufficient medical literature to say that salicylic acid is effective for acne.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000292",
+        "evidence_quote": "another paper published in Nature Reviews noted that we don't have sufficient medical literature to say that salicylic acid is effective for acne",
+        "evidence_signal_ids": [
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific published claim about the evidence base for salicylic acid that can be checked against the article.",
+        "relevance": "substantive",
+        "start_unit_id": "u000292",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might",
+          "some people"
+        ],
+        "claim_text": "Salicylic acid might be helpful for some people with mild acne.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000293",
+        "evidence_quote": "Jonathan says it might be helpful for some people with mild acne",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A qualified efficacy claim about salicylic acid for acne, attributed to the show's dermatologist.",
+        "relevance": "substantive",
+        "start_unit_id": "u000293",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Benzoyl peroxide works by killing bacteria on the skin.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000302",
+        "evidence_quote": "benzyl peroxide works by killing bacteria on your skin",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about how benzoyl peroxide treats acne.",
+        "relevance": "substantive",
+        "start_unit_id": "u000302",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Benzoyl peroxide can reduce the number of pimples on your face.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000308",
+        "evidence_quote": "it actually can reduce the number of pimples on your face",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A direct efficacy claim about benzoyl peroxide for acne.",
+        "relevance": "substantive",
+        "start_unit_id": "u000308",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "quite clear",
+          "scientifically proven"
+        ],
+        "claim_text": "Benzoyl peroxide has been scientifically proven as an acne treatment.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000309",
+        "evidence_quote": "It's quite clear that benzoyl peroxide has been scientifically proven",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A proof claim about benzoyl peroxide that can be checked against the evidence cited.",
+        "relevance": "substantive",
+        "start_unit_id": "u000309",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There is no clear evidence that higher-strength benzoyl peroxide (10%) works better than 2.5% or 5%.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "there's no clear evidence that higher strength options, like 10%, work better than 2.5 or 5",
+        "evidence_signal_ids": [
+          "evidence:evidence_limits"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about the comparative evidence for benzoyl peroxide strengths.",
+        "relevance": "substantive",
+        "start_unit_id": "u000310",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Benzoyl peroxide can cause irritation, so lower-strength options are recommended.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000311",
+        "evidence_quote": "it's recommended that you go for the lower strength because it can cause irritation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A side-effect and dosing recommendation that could affect product choice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000311",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Acne can come about from a range of things besides bacteria, including oil, dead skin cells and genetics.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000314",
+        "evidence_quote": "acne can come about from a range of things besides bacteria",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A multifactorial causal claim about acne that shapes treatment expectations.",
+        "relevance": "substantive",
+        "start_unit_id": "u000313",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Having someone else in your family with spots doubled the risk of developing severe to moderate acne.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000315",
+        "evidence_quote": "One study of more than a thousand teens found that having someone else in your family with spots doubled the risk of you getting severe to moderate acne",
+        "evidence_signal_ids": [
+          "evidence:vague_research",
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A quantitative genetic-risk association from a cited study that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000315",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Teenagers whose hormones are changing are more likely to get pimples.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000319",
+        "evidence_quote": "teenagers whose hormones are changing are more likely to get pimples",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about hormonal acne risk in adolescence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000319",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Women with acne can be put on birth control pills containing estrogen to adjust their hormones.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000319",
+        "evidence_quote": "women with acne can be put on birth control pills that contain estrogen to tweak their hormones",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about a standard medical treatment for acne in women.",
+        "relevance": "substantive",
+        "start_unit_id": "u000319",
+        "topic_ids": [
+          "topic:fertility.contraception",
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A recent review described stress as a potential risk factor for acne.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000323",
+        "evidence_quote": "a recent paper which reviewed a whole bunch of studies on acne described stress as a quote. Potential risk factor. End quote",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about what a review of acne studies concluded regarding stress.",
+        "relevance": "substantive",
+        "start_unit_id": "u000321",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There is no good evidence that acne is caused or cured by washing the face.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000330",
+        "evidence_quote": "A Lancet paper found that there is quote no good evidence that acne is caused or. Cured by washing",
+        "evidence_signal_ids": [
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "A direct evidence-based claim correcting a common belief about washing and acne.",
+        "relevance": "substantive",
+        "start_unit_id": "u000328",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "supposed to"
+        ],
+        "claim_text": "Blue light is supposed to kill P. acnes bacteria on the face.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000336",
+        "evidence_quote": "Blue light is supposed to zap p acne's bacteria on your face",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A product mechanism claim about blue light therapy for acne, relayed without full endorsement.",
+        "relevance": "substantive",
+        "start_unit_id": "u000336",
+        "topic_ids": [
+          "topic:recovery.red_light",
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "supposed to"
+        ],
+        "claim_text": "Red light is supposed to decrease inflammation.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000336",
+        "evidence_quote": "red light is supposed to decrease inflammation",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A product mechanism claim about red light therapy for acne, relayed without full endorsement.",
+        "relevance": "substantive",
+        "start_unit_id": "u000336",
+        "topic_ids": [
+          "topic:recovery.red_light",
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "it says"
+        ],
+        "claim_text": "The light therapy mask is only useful for mild to moderate acne.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000343",
+        "evidence_quote": "it says it's only useful for mild to moderate acne",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A stated product efficacy limitation that affects whether a listener should try the mask.",
+        "relevance": "substantive",
+        "start_unit_id": "u000343",
+        "topic_ids": [
+          "topic:recovery.red_light",
+          "topic:skin_beauty.acne"
+        ]
+      }
+    ],
+    "window_id": "episode_318639_window_0005_decoy_hedge_nonclaim"
+  },
+  "stored_at": "2026-10-04T22:36:33.654744+00:00"
+}

@@ -1,0 +1,139 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c40166w0011",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000692",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma",
+        "label_ids": [
+          "topic:health_system.pharma_industry",
+          "topic:vaccines"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000681",
+        "summary": "Speaker describes vaccines as a recurring-profit rent-seeking scheme run by Big Pharma and investment funds."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters",
+        "label_ids": [
+          "frame:big_pharma"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000686",
+        "summary": "Big Pharma is cast as a rent-seeking actor with corporate masters."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "their corporate masters, which are these huge investment funds that also control the media and control Big Tech",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "summary": "Investment funds are alleged to control the media and Big Tech as part of the vaccine profit machine."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "when you have that feeling, I suggest you listen to it, because it's usually right. That it's instinct. Some would call it common sense",
+        "label_ids": [
+          "frame:anti_expert_populist"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000692",
+        "summary": "Listener is told to trust the gut feeling that something is wrong over expert narratives."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "These vaccines are given every six months.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000682",
+        "evidence_quote": "in the case of these vaccines, every six months",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:pharma_creates_customers"
+        ],
+        "rationale": "The claimed vaccination frequency is checkable against vaccine recommendations.",
+        "relevance": "substantive",
+        "start_unit_id": "u000681",
+        "topic_ids": [
+          "topic:vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vaccines are a rent-seeking behavior of Big Pharma and their corporate masters.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:big_pharma"
+        ],
+        "narrative_ids": [
+          "narrative:pharma_creates_customers"
+        ],
+        "rationale": "The claim that vaccines are designed as recurring profit extraction can be checked against industry and investment arrangements.",
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "topic_ids": [
+          "topic:health_system.pharma_industry",
+          "topic:vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Big Pharma's corporate masters are huge investment funds that control the media and Big Tech.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "their corporate masters, which are these huge investment funds that also control the media and control Big Tech",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "narrative_ids": [],
+        "rationale": "The alleged control of media and technology companies by investment funds is a checkable institutional claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "topic_ids": [
+          "topic:health_system.pharma_industry"
+        ]
+      }
+    ],
+    "window_id": "episode_40166_window_0011"
+  },
+  "stored_at": "2026-10-04T22:13:55.792378+00:00"
+}

@@ -1,0 +1,65 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c389501w0016",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000909",
+        "evidence_quote": "the COVID investigations with China, which unleashed a virus",
+        "label_ids": [
+          "topic:covid.origins"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000892",
+        "summary": "Host criticizes Biden for not pressing Xi on a U.S. intelligence-led investigation into COVID origins, saying the virus was unleashed from Wuhan."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000895",
+        "evidence_quote": "From Wuhan on the world, which has killed some four million people",
+        "label_ids": [
+          "topic:covid.illness_severity"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000894",
+        "summary": "Host states the virus from Wuhan has killed some four million people."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The virus from Wuhan has killed some four million people.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000895",
+        "evidence_quote": "From Wuhan on the world, which has killed some four million people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The global COVID death toll is a checkable statistic that shapes listeners' sense of the pandemic's scale.",
+        "relevance": "passing",
+        "start_unit_id": "u000895",
+        "topic_ids": [
+          "topic:covid.illness_severity"
+        ]
+      }
+    ],
+    "window_id": "episode_389501_window_0016"
+  },
+  "stored_at": "2026-10-04T22:36:28.909107+00:00"
+}

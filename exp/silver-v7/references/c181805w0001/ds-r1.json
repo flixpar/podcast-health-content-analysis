@@ -1,0 +1,275 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c181805w0001",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "what you're not going to get on a standard blood test is any of the longevity genes",
+        "label_ids": [
+          "topic:genetics.genetic_testing",
+          "topic:longevity.ageing_science"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000011",
+        "summary": "Host asks whether lifespan can be predicted from blood and notes that standard blood tests do not capture longevity genes such as APOE."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "Cardiovascular disease largely driven by three things: lipoproteins, inflammation, endothelial dysfunction",
+        "label_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:cardiovascular.heart_disease",
+          "topic:immune.inflammation",
+          "topic:metabolic.insulin_glucose",
+          "topic:procedures.imaging_diagnostics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Host details blood markers and imaging for atherosclerotic risk: lipoproteins, inflammation, endothelial health, insulin, homocysteine, ADMA/SDMA, CT angiography and calcium score."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000054",
+        "evidence_quote": "virtually every cancer is a result of a somatic mutation, not a germline mutation",
+        "label_ids": [
+          "topic:cancer.causes_rates",
+          "topic:cancer.screening_diagnosis",
+          "topic:genetics.genetic_testing",
+          "topic:immune.inflammation",
+          "topic:metabolic.insulin_glucose"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000046",
+        "summary": "Host says blood gives limited insight into cancer until liquid biopsies mature, notes most cancer is somatic mutation, and ties cancer risk to inflammation and metabolic health with hyperinsulinemia."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "What is this person's risk of neurodegenerative disease",
+        "label_ids": [
+          "topic:dementia_ageing.dementia_alzheimers"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000022",
+        "summary": "Neurodegenerative disease is named as one of three disease risks to assess in blood."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000033",
+        "evidence_quote": "cardiovascular health in patients with type 1 diabetes",
+        "label_ids": [
+          "topic:metabolic.diabetes"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000033",
+        "summary": "A cited paper is described as looking at cardiovascular health in patients with type 1 diabetes."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000035",
+        "evidence_quote": "James O'Keefe just recently was on a paper that looked at cardiovascular health in patients with type 1 diabetes",
+        "label_ids": [
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "summary": "Host cites a recent paper by James O'Keefe on cardiovascular health in type 1 diabetes as evidence about insulin's impact."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "the latest study I saw, which actually just was an editorial that came out two days ago, based on a study in one of the atherosclerosis journals",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000043",
+        "summary": "Host cites an editorial based on a study in an atherosclerosis journal about events occurring at non-calcified lesions."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "or ADMA, and SDMA, which are inhibitors of nitric oxide synthase",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000036",
+        "summary": "ADMA and SDMA are explained as inhibitors of nitric oxide synthase, giving a mechanism for their use as markers."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The lower a person's Lp(a), the greater their chance of cardiovascular mortality.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "the lower your LP little A, the greater your chance of cardiovascular mortality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Lp(a) and cardiovascular mortality are checkable and the stated direction is material for cardiovascular risk.",
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:cardiovascular.cholesterol_lipids"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "largely"
+        ],
+        "claim_text": "Cardiovascular disease is largely driven by lipoproteins, inflammation and endothelial dysfunction.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "Cardiovascular disease largely driven by three things: lipoproteins, inflammation, endothelial dysfunction",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim identifies major causal drivers of cardiovascular disease and can be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "I think insulin is, in and of itself, toxic at high levels to the endothelium.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "insulin is, in and of itself, actually toxic at high levels to the endothelium",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim that high insulin damages the endothelium is checkable and could affect how listeners interpret insulin as a cardiovascular risk marker.",
+        "relevance": "substantive",
+        "start_unit_id": "u000032",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:metabolic.insulin_glucose"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "ADMA and SDMA are inhibitors of nitric oxide synthase.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "or ADMA, and SDMA, which are inhibitors of nitric oxide synthase",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The biochemical role of these biomarkers is a checkable factual claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000037",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fifty percent of patients who had events had them at the site of non-calcified lesions.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "fifty percent of patients that had that had events had them at the site. Of non-calcified lesions",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The study finding is checkable and is used to question the usefulness of low calcium scores.",
+        "relevance": "substantive",
+        "start_unit_id": "u000043",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "virtually"
+        ],
+        "claim_text": "Virtually every cancer is a result of a somatic mutation, not a germline mutation.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000051",
+        "evidence_quote": "virtually every cancer is a result of a somatic mutation, not a germline mutation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The genetic origin of cancer is checkable and affects how much genotype testing can guide cancer risk.",
+        "relevance": "substantive",
+        "start_unit_id": "u000051",
+        "topic_ids": [
+          "topic:cancer.causes_rates"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Knowing a person's genotype does not really help with cancer, outside a few outliers like BRCA or Lynch.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "knowing your genotype doesn't really help, outside of a few outlier things like BRCA or Lynch",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The utility of germline genetic testing for cancer risk is checkable and guides whether listeners should pursue genetic testing.",
+        "relevance": "substantive",
+        "start_unit_id": "u000052",
+        "topic_ids": [
+          "topic:genetics.genetic_testing"
+        ]
+      }
+    ],
+    "window_id": "episode_181805_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:52.866962+00:00"
+}

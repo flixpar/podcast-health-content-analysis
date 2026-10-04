@@ -1,0 +1,77 @@
+{
+  "api": "chat_completions",
+  "benchmark_version": "v2",
+  "completed_at": "2026-10-04T22:00:16.981985+00:00",
+  "concurrency": 256,
+  "config": "benchmark/pipeline-local-nobudget.toml",
+  "created_at": "2026-10-04T19:19:28.414984+00:00",
+  "endpoints": {
+    "http://127.0.0.1:8222/v1": "deepseek-ai/DeepSeek-V4-Flash-0731"
+  },
+  "experiment": null,
+  "git_commit": "9339305ef8cfe76869b8f1a89166885cb4106f99",
+  "items": 320,
+  "items_hash": "44b9fa900dffd792bb695f88c8fbf4d6b646073a7c603bcf83fa51f3818ef6d8",
+  "max_output_tokens": 80000,
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "name": "v7-high-nobudget",
+  "no_auth": true,
+  "notes": null,
+  "prompt_version": "granular-v7:0406a404e1c06f54",
+  "provider": null,
+  "reasoning_effort": "high",
+  "repeat_summaries": [
+    {
+      "attempts": {
+        "accepted": 320,
+        "attempts": 322,
+        "rejected:transport": 2
+      },
+      "exported": 320,
+      "repeat": 0,
+      "stopped_by_usage_limit": null,
+      "unresolved_windows": 0,
+      "unresolved_windows_by_kind": {},
+      "validation_changes": {
+        "dropped": {
+          "certainty_markers_mismatch": 1,
+          "invalid_field": 4,
+          "non_verbatim_quote": 35,
+          "span_out_of_window": 47
+        },
+        "repaired": {
+          "span_widened_for_certainty_marker": 3,
+          "span_widened_for_quote": 262
+        }
+      },
+      "wall_seconds": 9648.5,
+      "window_labels_sha256": "45b8c8499b7d028c296d19a06c38f70476a1c0df3cebf7c8f0a53ed750aa3e67",
+      "windows_labeled": 320
+    }
+  ],
+  "repeats": 1,
+  "rubric_file": null,
+  "rubric_sha256": "d833386a89af0025c900f10860cb9cad3e02afe4fc8be2486d752e130cf955ad",
+  "run_fingerprint": "6895506c50fa2c7126dbcc1b57a1bb7eec61af53ca15c7d38e23954e5eab93c9",
+  "schema_version": "topic-labeling-v5",
+  "seed": null,
+  "stopped_by_usage_limit": null,
+  "taxonomy_sha256": "2d89f0f640b5d11ec6f74e98683cbca1dd6b9fb5674d95b0ae1f33e8b5ed8b51",
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "usage_limits": null,
+  "validation": "lenient",
+  "validation_changes": {
+    "dropped": {
+      "certainty_markers_mismatch": 1,
+      "invalid_field": 4,
+      "non_verbatim_quote": 35,
+      "span_out_of_window": 47
+    },
+    "repaired": {
+      "span_widened_for_certainty_marker": 3,
+      "span_widened_for_quote": 262
+    }
+  },
+  "validator_sha256": "e74161b4d1980b357a06e1d7e7eed1b8f05de441c5b106a923b76497c581a929"
+}

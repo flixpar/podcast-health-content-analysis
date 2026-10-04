@@ -1,0 +1,171 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c4171w0010",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "uses precision temperature control to regulate your body's sleep cycles and give you the perfect sleep",
+        "label_ids": [
+          "topic:sleep.apnea_breathing",
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000541",
+        "summary": "Sponsor read for the Eight Sleep Pod 5, claiming temperature-controlled better sleep and snoring reduction."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000562",
+        "evidence_quote": "Use the code tucker to get three hundred and fifty bucks off your Pod Five Ultra",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000541",
+        "summary": "Eight Sleep read with URL and discount code."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000609",
+        "evidence_quote": "it was pretty obvious that this came from a Chinese lab called the Wuhan Institute of Virology",
+        "label_ids": [
+          "topic:covid.origins"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "summary": "Host asserts COVID-19 came from the Wuhan Institute of Virology and cites a joke doubting animal origin."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000609",
+        "evidence_quote": "it was pretty obvious that this came from a Chinese lab called the Wuhan Institute of Virology",
+        "label_ids": [
+          "narrative:covid_lab_leak"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "summary": "Lab-leak origin proposition is invoked and endorsed."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000562",
+        "evidence_quote": "It's called the Pod Five",
+        "mention_role": "advertised",
+        "product_name": "Eight Sleep Pod 5",
+        "product_type": "household_or_home",
+        "start_unit_id": "u000541"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "pretty obvious"
+        ],
+        "claim_text": "COVID-19 came from a Chinese lab called the Wuhan Institute of Virology.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000606",
+        "evidence_quote": "it was pretty obvious that this came from a Chinese lab called the Wuhan Institute of Virology",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:covid_lab_leak"
+        ],
+        "rationale": "The origin of SARS-CoV-2 is checkable and shapes beliefs about pandemic responsibility and policy.",
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "topic_ids": [
+          "topic:covid.origins"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Pod 5 uses precision temperature control to regulate the body's sleep cycles and give perfect sleep.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000547",
+        "evidence_quote": "uses precision temperature control to regulate your body's sleep cycles and give you the perfect sleep",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product efficacy claim in ad copy that listeners could act on.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000547",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Pod 5 detects snoring and adjusts the bed position to reduce or completely stop it.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000553",
+        "evidence_quote": "it also detects snoring, and then it adjusts your bed position to reduce or completely stop it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about a sleep product's snoring-reduction function.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000552",
+        "topic_ids": [
+          "topic:sleep.apnea_breathing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Temperature has a massive effect on the way people sleep.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000552",
+        "evidence_quote": "Temperature has a massive effect on the way you sleep",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A general physiological claim used to support the product's benefit.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000552",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      }
+    ],
+    "window_id": "episode_4171_window_0010"
+  },
+  "stored_at": "2026-10-04T22:36:28.952657+00:00"
+}

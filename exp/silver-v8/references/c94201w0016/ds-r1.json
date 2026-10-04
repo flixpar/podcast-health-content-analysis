@@ -1,0 +1,222 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c94201w0016",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001312",
+        "evidence_quote": "If you're thinking of starting therapy, give BetterHelp a try",
+        "label_ids": [
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001288",
+        "summary": "Sponsor read for BetterHelp online therapy, framing therapy as a safe way to work through stressors."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001312",
+        "evidence_quote": "Visit BetterHelp.com/toast today, and you'll get 10% off your first month",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001288",
+        "summary": "Sponsored BetterHelp read with a discount code and URL."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001330",
+        "evidence_quote": "It is allergy season, and AstaPro is a first-of-its-kind nasal allergy spray",
+        "label_ids": [
+          "topic:immune.allergies"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001313",
+        "summary": "Sponsor read for AstaPro nasal allergy spray, claiming fast prescription-strength allergy relief."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001330",
+        "evidence_quote": "Go to AstaProAllergy.com for a discount",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001313",
+        "summary": "Sponsored AstaPro read with a discount URL."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001315",
+        "evidence_quote": "we are suffering less thanks to AstaPro",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001314",
+        "summary": "Hosts say they are suffering less thanks to AstaPro samples."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001345",
+        "evidence_quote": "she had like pregnancy brain",
+        "label_ids": [
+          "topic:cognition.brain_fog"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001345",
+        "summary": "A cast member's confusion at the reunion is attributed to pregnancy brain."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001312",
+        "evidence_quote": "Our TV recap is brought to you by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u001288"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001330",
+        "evidence_quote": "today's episode is brought to you by AstaPro",
+        "mention_role": "advertised",
+        "product_name": "AstaPro",
+        "product_type": "medication",
+        "start_unit_id": "u001313"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "AstaPro is the fastest 24-hour over-the-counter allergy spray.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001317",
+        "evidence_quote": "It is the fastest 24-hour over-the-counter allergy spray",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A comparative efficacy claim that can be checked against the allergy spray market.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001317",
+        "topic_ids": [
+          "topic:immune.allergies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "AstaPro starts working in 30 minutes.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001318",
+        "evidence_quote": "It starts working in 30 minutes",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A specific onset-time claim made in the product ad.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001318",
+        "topic_ids": [
+          "topic:immune.allergies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Other allergy sprays take hours to start working.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001318",
+        "evidence_quote": "while other allergy sprays take hours",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable comparative claim about competing allergy sprays.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001318",
+        "topic_ids": [
+          "topic:immune.allergies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "AstaPro is the first and only 24-hour steroid-free allergy spray.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001320",
+        "evidence_quote": "AstaPro is the first and only. 24-hour steroid-free allergy spray",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A uniqueness and composition claim that can be checked against the product category.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001319",
+        "topic_ids": [
+          "topic:immune.allergies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "AstaPro delivers full prescription strength indoor and outdoor allergy relief from nasal congestion, runny and itchy nose, and sneezing.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001320",
+        "evidence_quote": "AstaPro delivers full prescription strength indoor and outdoor allergy relief from nasal congestion, runny and itchy nose, and sneezing",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A stated efficacy claim for the advertised allergy product.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001320",
+        "topic_ids": [
+          "topic:immune.allergies"
+        ]
+      }
+    ],
+    "window_id": "episode_94201_window_0016"
+  },
+  "stored_at": "2026-10-04T22:36:31.504996+00:00"
+}

@@ -1,0 +1,254 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "t-c380025w0001--add_hedge",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "When you're in these types of delusion, every billboard, every Bible verse, license plate, song, everything can become a personal message for you",
+        "label_ids": [
+          "topic:mental.serious_mental_illness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000001",
+        "summary": "Host's cold open describes how delusional thinking turns doubt into confirming evidence in a closed loop."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000043",
+        "evidence_quote": "today's episode is all about understanding delusion and psychosis",
+        "label_ids": [
+          "topic:mental.serious_mental_illness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000013",
+        "summary": "Host introduces delusion and psychosis, contrasts them with ordinary inaccurate beliefs and intrusive thoughts, and defines delusion."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "on social media you see some of the reality testing questions being labeled as narcissistic and gaslighting",
+        "label_ids": [
+          "topic:mental.pop_psychology",
+          "topic:mental.serious_mental_illness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000044",
+        "summary": "Host discusses reality testing, social-media labeling of it as narcissistic and gaslighting, and gray rocking as a response to delusion or narcissistic abuse cycles."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "I want to be clear: these things are not interchangeable",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "Host corrects the assumption that delusion, psychosis and intrusive thoughts are interchangeable."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "This is the first misconception: people believe things every single day that are inaccurate",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "summary": "Host corrects the misconception that ordinary inaccurate beliefs are delusional or psychotic."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "Every"
+        ],
+        "claim_text": "In delusion, every confirmation and every contradiction confirm the belief.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "Every confirmation now confirms the belief, and even worse, now every contradiction also confirms the belief",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This is a testable claim about how delusional cognition responds to confirming and disconfirming information.",
+        "relevance": "substantive",
+        "start_unit_id": "u000008",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Delusion, psychosis and intrusive thoughts are not interchangeable.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "these things are not interchangeable",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "The clinical distinction among delusion, psychosis and intrusive thoughts is checkable against psychiatric definitions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could"
+        ],
+        "claim_text": "Sustained, repeated misperception of others could eventually lead to psychosis.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "repeatedly in a sustained manner, that could eventually lead to psychosis",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claim that sustained misattribution can progress to psychosis is a causal claim worth checking.",
+        "relevance": "substantive",
+        "start_unit_id": "u000040",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A delusion is a belief held with conviction that is resistant to contradictory evidence and disconnected from consensual reality.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000043",
+        "evidence_quote": "a belief that is. Held with a level of conviction that is resistant to contradictory evidence and is disconnected from consensual reality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This definition of delusion can be compared with diagnostic criteria.",
+        "relevance": "substantive",
+        "start_unit_id": "u000042",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "really common"
+        ],
+        "claim_text": "Reality-testing questions are commonly labeled as narcissistic and gaslighting on social media.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000049",
+        "evidence_quote": "on social media you see some of the reality testing questions being labeled as narcissistic and gaslighting",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim that social media commonly labels reality-testing as narcissistic and gaslighting could be checked against public discourse.",
+        "relevance": "substantive",
+        "start_unit_id": "u000049",
+        "topic_ids": [
+          "topic:mental.pop_psychology"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "so many"
+        ],
+        "claim_text": "In many cases, the person who believes they are being gaslit is the one gaslighting the person who is trying to ask questions to piece together reality.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "the person who believes they're being gaslit is the one gaslighting the person who is desperately trying to ask the right questions to piece together reality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claimed reversal in gaslighting dynamics is a checkable psychological claim with clinical implications.",
+        "relevance": "substantive",
+        "start_unit_id": "u000050",
+        "topic_ids": [
+          "topic:mental.pop_psychology",
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Reality testing makes a person in delusion more angry or more emotionally aroused.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000055",
+        "evidence_quote": "reality testing to somebody who is in delusion will actually make them more angry or more emotionally. Aroused",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This is a clinical claim about the effect of reality-testing on people in delusion.",
+        "relevance": "substantive",
+        "start_unit_id": "u000054",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "anything",
+          "only"
+        ],
+        "claim_text": "Anything a person does to actively pull someone out of a delusion only makes the escalation happen.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "anything that you do will only make the escalation happen",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This is a strong causal claim about escalation that could inform how people respond to delusions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000055",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      }
+    ],
+    "window_id": "episode_380025_window_0001_add_hedge"
+  },
+  "stored_at": "2026-10-04T22:13:54.054018+00:00"
+}

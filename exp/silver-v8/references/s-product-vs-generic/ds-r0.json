@@ -1,0 +1,170 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "s-product-vs-generic",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "creatine basically helps your muscles regenerate atp faster",
+        "label_ids": [
+          "topic:supplements.creatine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000014",
+        "summary": "Hosts discuss creatine monohydrate, how it works, dosing, water retention, and a brand preference."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000020",
+        "evidence_quote": "there's a decent amount of interest in it for brain function too",
+        "label_ids": [
+          "topic:cognition",
+          "topic:wellness.energy_fatigue"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Hosts note interest in creatine for brain function, cognition and fatigue, especially in people who don't eat much meat."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "helps your muscles regenerate atp faster",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "summary": "ATP regeneration is given as the mechanism for creatine's gym benefit."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "the research goes back decades",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Hosts cite decades of research on creatine without identifying a specific study."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000020",
+        "evidence_quote": "there's some early work on cognition and fatigue",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "Hosts refer to early work on creatine, cognition and fatigue without identifying a study."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "it's intracellular water though it's not the same as bloating",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "Intracellular water is offered as the mechanism explaining creatine's water retention."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000036",
+        "evidence_quote": "the one i've actually been using myself the last few months is called suncrest creatine",
+        "mention_role": "neutral",
+        "product_name": "Suncrest Creatine",
+        "product_type": "supplement",
+        "start_unit_id": "u000029"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Creatine helps muscles regenerate ATP faster, which is why people notice more reps in the gym.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "creatine basically helps your muscles regenerate atp faster which is why people notice more reps in the gym",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "States a physiological mechanism and an exercise outcome that can be checked against creatine research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "topic_ids": [
+          "topic:supplements.creatine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A creatine loading phase gets you to saturation faster but does not do something different long term.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000023",
+        "evidence_quote": "loading just gets you there faster it's not like it does something different long term",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A dosing claim about creatine loading versus maintenance that can be checked against supplementation guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000023",
+        "topic_ids": [
+          "topic:supplements.creatine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Creatine's water retention is intracellular water, not bloating, and it helps muscle cell function.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "it's intracellular water though it's not the same as bloating it actually helps the muscle cell function",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A physiological claim about creatine's water retention that affects whether users worry about puffiness.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:supplements.creatine"
+        ]
+      }
+    ],
+    "window_id": "synthetic_product_vs_generic_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:29.399245+00:00"
+}

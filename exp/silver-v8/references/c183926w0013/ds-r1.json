@@ -1,0 +1,127 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c183926w0013",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000843",
+        "evidence_quote": "there maybe there's narcissistic traits, or that's a full-on narcissist that they're in a relationship with",
+        "label_ids": [
+          "topic:mental.ocd_personality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000838",
+        "summary": "Discussion of whether someone with narcissistic traits can change in a relationship."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000918",
+        "evidence_quote": "someone who has narcissistic traits generally doesn't come to therapy because they don't think they have a problem",
+        "label_ids": [
+          "topic:mental.ocd_personality",
+          "topic:mental.therapy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000872",
+        "summary": "Guest explains that people with narcissistic traits usually enter therapy only when partners push them, and illustrates with a client."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000871",
+        "evidence_quote": "This episode is sponsored by BetterHelp",
+        "label_ids": [
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000858",
+        "summary": "Sponsor read for the BetterHelp therapy service."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000871",
+        "evidence_quote": "This episode is sponsored by BetterHelp",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000858",
+        "summary": "Paid sponsor read for BetterHelp with a URL and call to action."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000871",
+        "evidence_quote": "This episode is sponsored by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000858"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "generally"
+        ],
+        "claim_text": "People with narcissistic traits generally do not come to therapy because they do not think they have a problem.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000874",
+        "evidence_quote": "someone who has narcissistic traits generally doesn't come to therapy because they don't think they have a problem",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This is a general clinical claim about whether people with narcissistic traits seek therapy.",
+        "relevance": "substantive",
+        "start_unit_id": "u000874",
+        "topic_ids": [
+          "topic:mental.ocd_personality",
+          "topic:mental.therapy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "tend not to"
+        ],
+        "claim_text": "People with narcissistic traits tend not to come to therapy on their own unless they come to couples therapy because their partner is making them come.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000901",
+        "evidence_quote": "they tend not to come on their own to therapy unless they actually agree to come in couples, and they're coming because their partner is making them",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A more specific restatement about why narcissistic people enter couples therapy.",
+        "relevance": "substantive",
+        "start_unit_id": "u000900",
+        "topic_ids": [
+          "topic:mental.ocd_personality",
+          "topic:mental.therapy"
+        ]
+      }
+    ],
+    "window_id": "episode_183926_window_0013"
+  },
+  "stored_at": "2026-10-04T22:36:30.581184+00:00"
+}

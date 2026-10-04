@@ -1,0 +1,178 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c208120w0004",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "what Northam is saying is that the infant will be resuscitated only if the mother wants it",
+        "label_ids": [
+          "topic:fertility.abortion"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "summary": "Host argues that the media and Democrats tolerate infanticide, citing the Gosnell case and Northam's comments on newborn resuscitation."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000218",
+        "evidence_quote": "Babies have to be resuscitated after they're delivered all the time",
+        "label_ids": [
+          "topic:pediatrics.infant_care"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000208",
+        "summary": "Host describes newborn resuscitation as routine medical care that should be provided, in contrast to Northam's position."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "If the baby comes out and you kill the baby a couple seconds later, you know, because there's really no difference",
+        "label_ids": [
+          "narrative:abortion_infanticide"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000177",
+        "summary": "Host asserts that Democrats and Northam accept killing newborns after birth, including letting them die without resuscitation."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000188",
+        "evidence_quote": "Democrats didn't appear to be that upset about it",
+        "label_ids": [
+          "frame:political_partisan"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000173",
+        "summary": "Democrats are blamed as a party for tolerating infanticide."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000169",
+        "evidence_quote": "the media ignored the the Gosnell story and never really expressed any real outrage about it",
+        "label_ids": [
+          "frame:media_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "summary": "Media are accused of ignoring the Gosnell story and showing no outrage."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000222",
+        "evidence_quote": "He had been killing infants outside the womb",
+        "label_ids": [
+          "population:infants"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000171",
+        "summary": "The discussion concerns infants and newborns, from Gosnell's alleged killings to resuscitation decisions after birth."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Gosnell killed infants outside the womb, chopped them up, and left body parts in his clinic.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "He had been killing infants outside the womb, chopping them up, leaving body parts",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:abortion_infanticide"
+        ],
+        "rationale": "A specific allegation about an abortion provider's conduct that can be checked against court records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000171",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Women were dying at Gosnell's clinic.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "Women were dying",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim of patient deaths at a clinic, checkable against legal records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000173",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Northam said that an infant will be resuscitated only if the mother wants it.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000200",
+        "evidence_quote": "what Northam is saying is that the infant will be resuscitated only if the mother wants it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A public figure's stated position on newborn resuscitation, checkable against his comments.",
+        "relevance": "substantive",
+        "start_unit_id": "u000199",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "not in the majority of cases"
+        ],
+        "claim_text": "Babies often need resuscitation after delivery, though not in the majority of births.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "Babies have to be resuscitated after they're delivered all the time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about how often newborns need resuscitation, checkable against neonatal statistics.",
+        "relevance": "substantive",
+        "start_unit_id": "u000208",
+        "topic_ids": [
+          "topic:pediatrics.infant_care"
+        ]
+      }
+    ],
+    "window_id": "episode_208120_window_0004"
+  },
+  "stored_at": "2026-10-04T22:36:33.070907+00:00"
+}

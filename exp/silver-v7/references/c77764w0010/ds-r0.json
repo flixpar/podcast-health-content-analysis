@@ -1,0 +1,280 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c77764w0010",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000570",
+        "evidence_quote": "Surgeons who don't have a checklist kill forty-two percent more people",
+        "label_ids": [
+          "topic:health_system.medical_errors"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000565",
+        "summary": "Speaker cites research on surgical checklists reducing mortality as an analogy for personal checklists."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000565",
+        "evidence_quote": "The research is insane",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000565",
+        "summary": "Speaker invokes research without specifics to support the surgical checklist claim."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000591",
+        "evidence_quote": "80 of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc",
+        "label_ids": [
+          "topic:mental.anxiety",
+          "topic:mental.depression"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000591",
+        "summary": "Speaker says 80% of people are struggling with anxiety and depression."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "suicide rates, the self harm rates, especially among the next generation, are horrific",
+        "label_ids": [
+          "topic:mental.suicide_self_harm"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000594",
+        "summary": "Speaker cites high suicide and self-harm rates among the next generation."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "especially among the next generation",
+        "label_ids": [
+          "population:adolescents"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000594",
+        "summary": "The suicide and self-harm rates are described as especially bad among the next generation."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "suicide rates, the self harm rates, especially among the next generation, are horrific",
+        "label_ids": [
+          "frame:fear_alarm"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000591",
+        "summary": "Speaker frames mental health struggles and youth suicide/self-harm rates in alarming terms."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000610",
+        "evidence_quote": "pandemic levels of anxiety, depression, cancer, diabetes",
+        "label_ids": [
+          "topic:cancer",
+          "topic:mental.anxiety",
+          "topic:mental.depression",
+          "topic:metabolic.diabetes"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000609",
+        "summary": "Speaker lists anxiety, depression, cancer and diabetes as pandemic-level challenges."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000610",
+        "evidence_quote": "pandemic levels of anxiety, depression, cancer, diabetes",
+        "label_ids": [
+          "frame:fear_alarm"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000610",
+        "summary": "Speaker uses epidemic language to frame common diseases as pandemic-level."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000638",
+        "evidence_quote": "Intrinsic motivation, on the other hand, is what's been shown to lead to deep levels of sustainable happiness",
+        "label_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000619",
+        "summary": "Discussion of intrinsic versus extrinsic motivation and its effect on happiness and psychological stability."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000628",
+        "evidence_quote": "what's been shown to lead to deep levels of sustainable happiness",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000627",
+        "summary": "Speaker says intrinsic motivation 'has been shown' to lead to happiness without citing a study."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Surgeons who don't have a checklist kill forty-two percent more people.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "Surgeons who don't have a checklist kill forty-two percent more people",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claimed 42% mortality difference with surgical checklists can be checked against surgical safety research.",
+        "relevance": "passing",
+        "start_unit_id": "u000565",
+        "topic_ids": [
+          "topic:health_system.medical_errors"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "80% of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000591",
+        "evidence_quote": "80 of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A prevalence claim about the share of people struggling with anxiety and depression can be checked against mental health survey data.",
+        "relevance": "passing",
+        "start_unit_id": "u000591",
+        "topic_ids": [
+          "topic:mental.anxiety",
+          "topic:mental.depression"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Suicide rates and self-harm rates, especially among the next generation, are horrific.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "suicide rates, the self harm rates, especially among the next generation, are horrific",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:fear_alarm"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claim that youth suicide and self-harm rates are extremely high can be checked against public health data.",
+        "relevance": "passing",
+        "start_unit_id": "u000594",
+        "topic_ids": [
+          "topic:mental.suicide_self_harm"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Intrinsic motivation has been shown to lead to deep levels of sustainable happiness.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000628",
+        "evidence_quote": "what's been shown to lead to deep levels of sustainable happiness",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim about intrinsic motivation and happiness can be checked against psychological research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000627",
+        "topic_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People predominantly focused on extrinsic goals are less psychologically stable than people pursuing intrinsic goals.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000635",
+        "evidence_quote": "And it always strikes me when I say this, and I quote: \"Less psychological.\" Stable than someone who is pursuing intrinsic stuff",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A comparative psychological claim about motivation orientation and mental stability can be checked against wellbeing research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000632",
+        "topic_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There are pandemic levels of anxiety, depression, cancer, and diabetes.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000610",
+        "evidence_quote": "pandemic levels of anxiety, depression, cancer, diabetes",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:fear_alarm"
+        ],
+        "narrative_ids": [],
+        "rationale": "A claim that these conditions are at pandemic levels can be checked against prevalence and incidence data.",
+        "relevance": "passing",
+        "start_unit_id": "u000610",
+        "topic_ids": [
+          "topic:cancer",
+          "topic:mental.anxiety",
+          "topic:mental.depression",
+          "topic:metabolic.diabetes"
+        ]
+      }
+    ],
+    "window_id": "episode_77764_window_0010"
+  },
+  "stored_at": "2026-10-04T22:13:49.357193+00:00"
+}

@@ -1,0 +1,80 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c73880w0014",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001110",
+        "evidence_quote": "Yeah, you totally blackout",
+        "label_ids": [
+          "topic:acute_care.poisoning_environmental_injury"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001094",
+        "summary": "Guest recounts blacking out, using the G-force breathing maneuver and feeling nauseous during high-G flight."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001220",
+        "evidence_quote": "media messed it up for all of us",
+        "label_ids": [
+          "topic:digital_health.online_health_information"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001199",
+        "summary": "Host and guest discuss disinformation in nutrition and diet coverage and how media misreports epidemiological studies."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001220",
+        "evidence_quote": "we're gonna debunk some stuff",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001199",
+        "summary": "The speakers debunk media exaggeration of a nuts study and clarify statistical significance."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Eating nuts makes people live 12 years longer.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u001215",
+        "evidence_quote": "nuts make you live 12 years longer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable nutrition claim presented as media exaggeration and explicitly rebutted.",
+        "relevance": "substantive",
+        "start_unit_id": "u001214",
+        "topic_ids": [
+          "topic:food.plant_foods_fiber"
+        ]
+      }
+    ],
+    "window_id": "episode_73880_window_0014"
+  },
+  "stored_at": "2026-10-04T22:36:33.407997+00:00"
+}

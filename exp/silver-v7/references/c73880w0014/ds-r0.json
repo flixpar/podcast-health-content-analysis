@@ -1,0 +1,167 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c73880w0014",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001109",
+        "evidence_quote": "you totally blackout",
+        "label_ids": [
+          "topic:other"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001099",
+        "summary": "Anecdote about G-force blackout, G-training breathing and nausea."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001205",
+        "evidence_quote": "or like vaccine hesitancy",
+        "label_ids": [
+          "topic:vaccines.uptake_hesitancy"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001205",
+        "summary": "Vaccine hesitancy is named as another area of disinformation."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001220",
+        "evidence_quote": "let's just talk about why our nutritional science is so fucked up",
+        "label_ids": [
+          "topic:digital_health.online_health_information",
+          "topic:health_system.research_system"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001201",
+        "summary": "Hosts discuss disinformation in nutrition and diet spaces, why nutrition research seems contradictory, and how media misreport studies."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001216",
+        "evidence_quote": "I actually think media messed it up for all of us because they're really. Terrible with their science literacy",
+        "label_ids": [
+          "frame:media_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001210",
+        "summary": "Media are blamed for poor science literacy and for misreporting nutrition research."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001216",
+        "evidence_quote": "That's not what the study said",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001199",
+        "summary": "Hosts announce debunking and correct the nut-study headline."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001212",
+        "evidence_quote": "one epidemiological study showed that people who ate nuts lived on average 12 years longer",
+        "label_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001211",
+        "summary": "An epidemiological study is cited as an example of weak, confounded nutrition research."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "An epidemiological study found that people who ate nuts lived on average 12 years longer.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001211",
+        "evidence_quote": "one epidemiological study showed that people who ate nuts lived on average 12 years longer",
+        "evidence_signal_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:media_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "The existence and finding of this nut-longevity study can be checked, and its confounded design is central to the criticism.",
+        "relevance": "substantive",
+        "start_unit_id": "u001211",
+        "topic_ids": [
+          "topic:food.plant_foods_fiber",
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The study did not account for wealth or exercise.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001212",
+        "evidence_quote": "They didn't account for like wealth, they didn't account for exercise or any of these things",
+        "evidence_signal_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether the study adjusted for confounders is checkable and explains why the headline was misleading.",
+        "relevance": "substantive",
+        "start_unit_id": "u001212",
+        "topic_ids": [
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nuts make you live 12 years longer.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u001216",
+        "evidence_quote": "nuts make you live 12 years longer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking",
+          "frame:media_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "A causal headline claim is being debunked; whether the study supported it can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001215",
+        "topic_ids": [
+          "topic:food.plant_foods_fiber",
+          "topic:health_system.research_system"
+        ]
+      }
+    ],
+    "window_id": "episode_73880_window_0014"
+  },
+  "stored_at": "2026-10-04T22:13:49.164634+00:00"
+}

@@ -1,0 +1,65 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c165313w0002",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000167",
+        "evidence_quote": "He's got Achilles injuries",
+        "label_ids": [
+          "topic:musculoskeletal.sports_injuries"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000166",
+        "summary": "The hosts relay a news note that running back Joique Bell is recovering from Achilles injuries and may not be back in shape by training camp."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000167",
+        "evidence_quote": "He's got Achilles injuries",
+        "label_ids": [
+          "population:athletes"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000166",
+        "summary": "The health content concerns an NFL player's injury and conditioning."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Joique Bell has Achilles injuries.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000167",
+        "evidence_quote": "He's got Achilles injuries",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The injury status of a professional athlete is a checkable factual claim reported in the episode.",
+        "relevance": "passing",
+        "start_unit_id": "u000167",
+        "topic_ids": [
+          "topic:musculoskeletal.sports_injuries"
+        ]
+      }
+    ],
+    "window_id": "episode_165313_window_0002"
+  },
+  "stored_at": "2026-10-04T22:13:54.709348+00:00"
+}

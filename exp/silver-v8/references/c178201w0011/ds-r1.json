@@ -1,0 +1,204 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c178201w0011",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000602",
+        "evidence_quote": "you guys market yourself as non-toxic",
+        "label_ids": [
+          "topic:digital_health.health_apps",
+          "topic:environment.household_personal_care",
+          "topic:skin_beauty.skincare"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000565",
+        "summary": "The conversation covers the Yuka app's ratings of a beauty brand's products, non-toxic marketing, and the guest's own clean skincare formulation and EWG verification."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000619",
+        "evidence_quote": "people moving from chemical sunscreens to more non toxic zinc based sunscreens",
+        "label_ids": [
+          "topic:skin_beauty.sunscreen"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000602",
+        "summary": "They discuss the move from chemical to non-toxic zinc sunscreens and claim chemical sunscreen causes cancer."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000633",
+        "evidence_quote": "very, very prone to hyperpigmentation and melasma",
+        "label_ids": [
+          "topic:radiation_light.sunlight_uv",
+          "topic:skin_beauty.skin_conditions",
+          "topic:skin_beauty.sunscreen"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000620",
+        "summary": "Speaker explains her sun-avoidance for the face due to hyperpigmentation and melasma, against wellness-community advice to get more sun."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000616",
+        "evidence_quote": "it is really causing cancer",
+        "label_ids": [
+          "narrative:sunscreen_harmful"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000608",
+        "summary": "Chemical sunscreen ingredients are said to cause cancer, while zinc is said to lack those side effects."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "not fully like clean",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000568",
+        "summary": "Products are judged as 'clean' versus 'not fully clean' using Yuka."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000598",
+        "evidence_quote": "the safest, highest, cleanest standard",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000583",
+        "summary": "EWG verification is framed as guaranteeing 'clean' products."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000616",
+        "evidence_quote": "non toxic zinc based sunscreens",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000603",
+        "summary": "Chemical sunscreens are contrasted with 'non toxic' zinc sunscreens."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000602",
+        "evidence_quote": "I'm formulating more products, more skin health products",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000578",
+        "summary": "The guest discusses her own skincare brand's formulations, EWG verification, and upcoming lip balm and sunscreens."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000580",
+        "evidence_quote": "skin health products with clinically proven ingredients",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000580",
+        "summary": "Skin health products are said to use clinically proven ingredients."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000593",
+        "evidence_quote": "They do EWG verified products",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000583",
+        "summary": "EWG verification is invoked as a certification of safety and cleanliness."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000571",
+        "evidence_quote": "I had on the Yuka app",
+        "mention_role": "neutral",
+        "product_name": "Yuka",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000565"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A chemical used in chemical sunscreens causes cancer.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000614",
+        "evidence_quote": "it is really causing cancer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:sunscreen_harmful"
+        ],
+        "rationale": "A safety claim about chemical sunscreen ingredients that could change product choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u000609",
+        "topic_ids": [
+          "topic:skin_beauty.sunscreen"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Zinc-based sunscreen protects against the sun without the side effects of chemical-based sunscreen.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000616",
+        "evidence_quote": "zinc does a fantastic job of protecting against the sun without any of the kind of side effects",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A comparative efficacy and safety claim for mineral versus chemical sunscreen.",
+        "relevance": "substantive",
+        "start_unit_id": "u000616",
+        "topic_ids": [
+          "topic:skin_beauty.sunscreen"
+        ]
+      }
+    ],
+    "window_id": "episode_178201_window_0011"
+  },
+  "stored_at": "2026-10-04T22:36:30.401986+00:00"
+}

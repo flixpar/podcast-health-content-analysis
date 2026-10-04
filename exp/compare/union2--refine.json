@@ -1,0 +1,490 @@
+{
+  "a": "v7-union2",
+  "b": "v7-refine",
+  "by_stratum": {
+    "ad_read": {
+      "claim_a": 0.7692,
+      "claim_b": 0.7692,
+      "topic_a": 0.7547,
+      "topic_b": 0.7647
+    },
+    "discourse": {
+      "claim_a": 0.7981,
+      "claim_b": 0.8357,
+      "topic_a": 0.75,
+      "topic_b": 0.75
+    },
+    "health_dense": {
+      "claim_a": 0.7765,
+      "claim_b": 0.8163,
+      "topic_a": 0.8053,
+      "topic_b": 0.8166
+    },
+    "mixed": {
+      "claim_a": 0.8065,
+      "claim_b": 0.8387,
+      "topic_a": 0.7854,
+      "topic_b": 0.7442
+    },
+    "narrative": {
+      "claim_a": 0.8104,
+      "claim_b": 0.831,
+      "topic_a": 0.7731,
+      "topic_b": 0.7857
+    },
+    "null": {
+      "claim_a": 1.0,
+      "claim_b": 1.0,
+      "topic_a": 0.6875,
+      "topic_b": 0.5455
+    },
+    "rare_label": {
+      "claim_a": 0.8049,
+      "claim_b": 0.8098,
+      "topic_a": 0.7486,
+      "topic_b": 0.7692
+    },
+    "synthetic": {
+      "claim_a": 0.8681,
+      "claim_b": 0.9011,
+      "topic_a": 0.796,
+      "topic_b": 0.7678
+    }
+  },
+  "items": 305,
+  "metrics": [
+    {
+      "a": 0.7731,
+      "b": 0.7823,
+      "delta": 0.0092,
+      "high": 0.0219,
+      "low": -0.003,
+      "metric": "topic F1 (strict)",
+      "n": 305,
+      "share_positive": 0.9245
+    },
+    {
+      "a": 0.7026,
+      "b": 0.7176,
+      "delta": 0.015,
+      "high": 0.0358,
+      "low": -0.0053,
+      "metric": "topic recall (required)",
+      "n": 305,
+      "share_positive": 0.926
+    },
+    {
+      "a": 0.8361,
+      "b": 0.8384,
+      "delta": 0.0022,
+      "high": 0.0147,
+      "low": -0.0107,
+      "metric": "topic precision",
+      "n": 305,
+      "share_positive": 0.6385
+    },
+    {
+      "a": 0.795,
+      "b": 0.813,
+      "delta": 0.018,
+      "high": 0.0421,
+      "low": -0.0065,
+      "metric": "narrative F1 (strict)",
+      "n": 305,
+      "share_positive": 0.928
+    },
+    {
+      "a": 0.784,
+      "b": 0.7762,
+      "delta": -0.0078,
+      "high": 0.0132,
+      "low": -0.0285,
+      "metric": "frame F1 (strict)",
+      "n": 305,
+      "share_positive": 0.212
+    },
+    {
+      "a": 0.772,
+      "b": 0.7681,
+      "delta": -0.0039,
+      "high": 0.0117,
+      "low": -0.0198,
+      "metric": "evidence F1 (strict)",
+      "n": 305,
+      "share_positive": 0.3155
+    },
+    {
+      "a": 0.8817,
+      "b": 0.8741,
+      "delta": -0.0075,
+      "high": 0.0224,
+      "low": -0.0352,
+      "metric": "population F1 (strict)",
+      "n": 305,
+      "share_positive": 0.304
+    },
+    {
+      "a": 0.8007,
+      "b": 0.8229,
+      "delta": 0.0222,
+      "high": 0.0367,
+      "low": 0.0071,
+      "metric": "claim recall (required)",
+      "n": 305,
+      "share_positive": 0.9995
+    },
+    {
+      "a": 0.8512,
+      "b": 0.8389,
+      "delta": -0.0124,
+      "high": 0.0011,
+      "low": -0.0264,
+      "metric": "claim precision",
+      "n": 305,
+      "share_positive": 0.045
+    },
+    {
+      "a": 0.8734,
+      "b": 0.8795,
+      "delta": 0.0061,
+      "high": 0.0295,
+      "low": -0.0201,
+      "metric": "product F1 (strict)",
+      "n": 305,
+      "share_positive": 0.679
+    }
+  ],
+  "moved_items": [
+    {
+      "a_fn": 22.0,
+      "a_fp": 0.0,
+      "a_tp": 9.0,
+      "b_fn": 9.0,
+      "b_fp": 1.0,
+      "b_tp": 22.0,
+      "delta": 27.0,
+      "item_id": "c28560w0006",
+      "stratum": "rare_label"
+    },
+    {
+      "a_fn": 11.0,
+      "a_fp": 2.0,
+      "a_tp": 10.0,
+      "b_fn": 5.0,
+      "b_fp": 3.0,
+      "b_tp": 18.0,
+      "delta": 15.0,
+      "item_id": "c182305w0009",
+      "stratum": "rare_label"
+    },
+    {
+      "a_fn": 14.0,
+      "a_fp": 1.0,
+      "a_tp": 14.0,
+      "b_fn": 7.0,
+      "b_fp": 2.0,
+      "b_tp": 21.0,
+      "delta": 15.0,
+      "item_id": "c5436w0023",
+      "stratum": "rare_label"
+    },
+    {
+      "a_fn": 6.0,
+      "a_fp": 5.0,
+      "a_tp": 14.0,
+      "b_fn": 11.0,
+      "b_fp": 2.0,
+      "b_tp": 9.0,
+      "delta": 13.0,
+      "item_id": "c176740w0013",
+      "stratum": "discourse"
+    },
+    {
+      "a_fn": 1.0,
+      "a_fp": 3.0,
+      "a_tp": 25.0,
+      "b_fn": 6.0,
+      "b_fp": 0.0,
+      "b_tp": 20.0,
+      "delta": 13.0,
+      "item_id": "c192950w0011",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 11.0,
+      "a_fp": 3.0,
+      "a_tp": 24.0,
+      "b_fn": 7.0,
+      "b_fp": 6.0,
+      "b_tp": 29.0,
+      "delta": 12.0,
+      "item_id": "c186894w0008",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 5.0,
+      "a_fp": 2.0,
+      "a_tp": 9.0,
+      "b_fn": 11.0,
+      "b_fp": 2.0,
+      "b_tp": 3.0,
+      "delta": 12.0,
+      "item_id": "c31510w0003",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 0.0,
+      "a_fp": 0.0,
+      "a_tp": 6.0,
+      "b_fn": 6.0,
+      "b_fp": 0.0,
+      "b_tp": 0.0,
+      "delta": 12.0,
+      "item_id": "c4171w0010",
+      "stratum": "rare_label"
+    },
+    {
+      "a_fn": 5.0,
+      "a_fp": 2.0,
+      "a_tp": 16.0,
+      "b_fn": 1.0,
+      "b_fp": 5.0,
+      "b_tp": 20.0,
+      "delta": 11.0,
+      "item_id": "c193025w0004",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 13.0,
+      "a_fp": 6.0,
+      "a_tp": 18.0,
+      "b_fn": 9.0,
+      "b_fp": 4.0,
+      "b_tp": 22.0,
+      "delta": 10.0,
+      "item_id": "c174925w0002",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 10.0,
+      "a_fp": 0.0,
+      "a_tp": 12.0,
+      "b_fn": 15.0,
+      "b_fp": 1.0,
+      "b_tp": 8.0,
+      "delta": 10.0,
+      "item_id": "c176579w0010",
+      "stratum": "rare_label"
+    },
+    {
+      "a_fn": 11.0,
+      "a_fp": 3.0,
+      "a_tp": 28.0,
+      "b_fn": 7.0,
+      "b_fp": 2.0,
+      "b_tp": 33.0,
+      "delta": 10.0,
+      "item_id": "c179765w0001",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 7.0,
+      "a_fp": 6.0,
+      "a_tp": 10.0,
+      "b_fn": 4.0,
+      "b_fp": 9.0,
+      "b_tp": 13.0,
+      "delta": 9.0,
+      "item_id": "c185744w0001",
+      "stratum": "rare_label"
+    },
+    {
+      "a_fn": 3.0,
+      "a_fp": 0.0,
+      "a_tp": 5.0,
+      "b_fn": 1.0,
+      "b_fp": 4.0,
+      "b_tp": 8.0,
+      "delta": 9.0,
+      "item_id": "c190235w0011",
+      "stratum": "rare_label"
+    },
+    {
+      "a_fn": 7.0,
+      "a_fp": 2.0,
+      "a_tp": 15.0,
+      "b_fn": 3.0,
+      "b_fp": 1.0,
+      "b_tp": 19.0,
+      "delta": 9.0,
+      "item_id": "c190550w0001",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 6.0,
+      "a_fp": 2.0,
+      "a_tp": 25.0,
+      "b_fn": 9.0,
+      "b_fp": 1.0,
+      "b_tp": 20.0,
+      "delta": 9.0,
+      "item_id": "c192950w0002",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 10.0,
+      "a_fp": 9.0,
+      "a_tp": 12.0,
+      "b_fn": 8.0,
+      "b_fp": 6.0,
+      "b_tp": 16.0,
+      "delta": 9.0,
+      "item_id": "c36549w0004",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 5.0,
+      "a_fp": 3.0,
+      "a_tp": 14.0,
+      "b_fn": 2.0,
+      "b_fp": 5.0,
+      "b_tp": 18.0,
+      "delta": 9.0,
+      "item_id": "c78786w0019",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 4.0,
+      "a_fp": 2.0,
+      "a_tp": 9.0,
+      "b_fn": 8.0,
+      "b_fp": 2.0,
+      "b_tp": 5.0,
+      "delta": 8.0,
+      "item_id": "c181028w0001",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 3.0,
+      "a_fp": 3.0,
+      "a_tp": 18.0,
+      "b_fn": 6.0,
+      "b_fp": 3.0,
+      "b_tp": 13.0,
+      "delta": 8.0,
+      "item_id": "c9005w0016",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 8.0,
+      "a_fp": 0.0,
+      "a_tp": 9.0,
+      "b_fn": 5.0,
+      "b_fp": 1.0,
+      "b_tp": 12.0,
+      "delta": 7.0,
+      "item_id": "c206720w0004",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 3.0,
+      "a_fp": 0.0,
+      "a_tp": 8.0,
+      "b_fn": 0.0,
+      "b_fp": 0.0,
+      "b_tp": 12.0,
+      "delta": 7.0,
+      "item_id": "c331394w0027",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 6.0,
+      "a_fp": 7.0,
+      "a_tp": 9.0,
+      "b_fn": 4.0,
+      "b_fp": 5.0,
+      "b_tp": 11.0,
+      "delta": 6.0,
+      "item_id": "c13214w0015",
+      "stratum": "discourse"
+    },
+    {
+      "a_fn": 11.0,
+      "a_fp": 6.0,
+      "a_tp": 13.0,
+      "b_fn": 13.0,
+      "b_fp": 4.0,
+      "b_tp": 11.0,
+      "delta": 6.0,
+      "item_id": "c177172w0003",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 5.0,
+      "a_fp": 1.0,
+      "a_tp": 13.0,
+      "b_fn": 3.0,
+      "b_fp": 2.0,
+      "b_tp": 16.0,
+      "delta": 6.0,
+      "item_id": "c182457w0012",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 8.0,
+      "a_fp": 2.0,
+      "a_tp": 19.0,
+      "b_fn": 5.0,
+      "b_fp": 2.0,
+      "b_tp": 22.0,
+      "delta": 6.0,
+      "item_id": "c182604w0018",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 3.0,
+      "a_fp": 0.0,
+      "a_tp": 9.0,
+      "b_fn": 6.0,
+      "b_fp": 0.0,
+      "b_tp": 6.0,
+      "delta": 6.0,
+      "item_id": "s-topic-boundary-vaccine-covid",
+      "stratum": "synthetic"
+    },
+    {
+      "a_fn": 8.0,
+      "a_fp": 1.0,
+      "a_tp": 21.0,
+      "b_fn": 5.0,
+      "b_fp": 1.0,
+      "b_tp": 23.0,
+      "delta": 5.0,
+      "item_id": "c177018w0009",
+      "stratum": "rare_label"
+    },
+    {
+      "a_fn": 2.0,
+      "a_fp": 6.0,
+      "a_tp": 11.0,
+      "b_fn": 3.0,
+      "b_fp": 4.0,
+      "b_tp": 9.0,
+      "delta": 5.0,
+      "item_id": "c190223w0001",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 4.0,
+      "a_fp": 1.0,
+      "a_tp": 7.0,
+      "b_fn": 2.0,
+      "b_fp": 1.0,
+      "b_tp": 10.0,
+      "delta": 5.0,
+      "item_id": "c190406w0003",
+      "stratum": "narrative"
+    }
+  ],
+  "rows": 305
+}

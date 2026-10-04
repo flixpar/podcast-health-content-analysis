@@ -1,0 +1,261 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c24869w0011",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000816",
+        "evidence_quote": "Walter died of dehydration",
+        "label_ids": [
+          "topic:acute_care.death_dying",
+          "topic:alt_medicine.energy_spiritual_healing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000812",
+        "summary": "Hosts recount a boy who died of dehydration during an exorcism and mock the exorcists."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000835",
+        "evidence_quote": "thousands of exorcisms are done every single year now",
+        "label_ids": [
+          "topic:alt_medicine.energy_spiritual_healing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000825",
+        "summary": "Hosts mention the yearly number of exorcisms and quote a priest's claim that demons give in 99% of the time."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000853",
+        "evidence_quote": "Walter's death returned him to Jesus",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000851",
+        "summary": "Hosts describe the parents' belief that Walter's death returned him to Jesus."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000856",
+        "evidence_quote": "no, you just killed a boy",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000852",
+        "summary": "Hosts reject the spiritual rationalization and say the boy was simply killed."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000856",
+        "evidence_quote": "you just killed a little boy",
+        "label_ids": [
+          "population:children"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000851",
+        "summary": "The hosts identify the exorcism victim as a little boy."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000893",
+        "evidence_quote": "an eight-year-old autistic boy named Terrence Cotrell died during church when members of his congregation attempted to all heal him at the same time",
+        "label_ids": [
+          "topic:acute_care.death_dying",
+          "topic:alt_medicine.energy_spiritual_healing",
+          "topic:neurodevelopment.autism_treatment"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000867",
+        "summary": "Hosts recount the death of an autistic boy during a church healing service and explain the congregation's exorcism theology."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000893",
+        "evidence_quote": "an eight-year-old autistic boy",
+        "label_ids": [
+          "population:children"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000867",
+        "summary": "The exorcism and autism healing story concerns an eight-year-old child."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000893",
+        "evidence_quote": "we will heal his autism",
+        "label_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000877",
+        "summary": "The church's proposition that faith healing can fix or heal an autistic boy is presented and contradicted by the child's death."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000894",
+        "evidence_quote": "this is the whole concept of laying hands",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000889",
+        "summary": "The church's demon-exorcism concept frames the boy's condition in spiritual terms."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000869",
+        "evidence_quote": "I was reading an interesting article on this story",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000869",
+        "summary": "A host cites an article as the source of the Terrence Cotrell story."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Walter died of dehydration after being denied food and water.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000814",
+        "evidence_quote": "Walter died of dehydration",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The cause of death in this exorcism case is checkable and central to the story.",
+        "relevance": "substantive",
+        "start_unit_id": "u000812",
+        "topic_ids": [
+          "topic:acute_care.death_dying",
+          "topic:alt_medicine.energy_spiritual_healing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Every single time"
+        ],
+        "claim_text": "Every time these exorcists are brought in, the person dies.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000815",
+        "evidence_quote": "every single time these guys bring in their closer, these people die",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "An overgeneralized but checkable claim about exorcism outcomes.",
+        "relevance": "substantive",
+        "start_unit_id": "u000815",
+        "topic_ids": [
+          "topic:acute_care.death_dying",
+          "topic:alt_medicine.energy_spiritual_healing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "they say"
+        ],
+        "claim_text": "Thousands of exorcisms are done every single year now.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000826",
+        "evidence_quote": "they say thousands of exorcisms are done every single year now",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The number of exorcisms performed annually is a checkable prevalence claim.",
+        "relevance": "passing",
+        "start_unit_id": "u000825",
+        "topic_ids": [
+          "topic:alt_medicine.energy_spiritual_healing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "God wins in 99 percent of exorcisms and the demons give in.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000831",
+        "evidence_quote": "Ninety-nine percent. These demons just give in",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:spiritual_religious"
+        ],
+        "narrative_ids": [],
+        "rationale": "The priest's claimed success rate for exorcism is checkable against practice records if any exist.",
+        "relevance": "passing",
+        "start_unit_id": "u000828",
+        "topic_ids": [
+          "topic:alt_medicine.energy_spiritual_healing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The church can heal a child's autism.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000881",
+        "evidence_quote": "we will heal his autism",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:spiritual_religious"
+        ],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A faith-healing cure claim for autism, checkable against the child's outcome.",
+        "relevance": "substantive",
+        "start_unit_id": "u000877",
+        "topic_ids": [
+          "topic:alt_medicine.energy_spiritual_healing",
+          "topic:neurodevelopment.autism_treatment"
+        ]
+      }
+    ],
+    "window_id": "episode_24869_window_0011"
+  },
+  "stored_at": "2026-10-04T22:13:53.374942+00:00"
+}

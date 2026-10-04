@@ -1,0 +1,152 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c14152w0032",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002377",
+        "evidence_quote": "in vaccinating people and preventing illness, the health benefits to the economy overall has a a tremendous impact in a positive manner",
+        "label_ids": [
+          "topic:health_system.global_health",
+          "topic:vaccines.efficacy_response"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002362",
+        "summary": "Host explains that the Gates clip is about vaccination's economic and humanitarian benefits, not profiteering."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002441",
+        "evidence_quote": "It's been a hundred billion overall that the world's put in. Our foundation is a bit more than ten billion, but we feel there's been over a twenty-to-one return",
+        "label_ids": [
+          "topic:health_system.global_health",
+          "topic:vaccines.efficacy_response"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002393",
+        "summary": "Hosts play the unedited Gates clip about vaccination ROI and global health, then rebut the edited clip's profiteering narrative."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002433",
+        "evidence_quote": "helping young children live. Get the right nutrition, contribute to their countries",
+        "label_ids": [
+          "population:children"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002432",
+        "summary": "Gates's clip mentions young children as beneficiaries of vaccines and nutrition."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002441",
+        "evidence_quote": "Fucking demon that just wants to make money off of vaccines, and he's pushing vaccines",
+        "label_ids": [
+          "narrative:vaccines_for_profit"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002436",
+        "summary": "Hosts rebut the narrative that Bill Gates pushes vaccines to profit."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002441",
+        "evidence_quote": "Clearly, that's not what he's saying. There's this weird narrative, there's this weird meme, there's this weird conspiracy",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002436",
+        "summary": "Hosts correct the edited clip and call the profiteering claim a weird conspiracy."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "we feel"
+        ],
+        "claim_text": "The world has put $100 billion into vaccines, and the Gates Foundation feels there has been over a 20-to-1 return.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002425",
+        "evidence_quote": "It's been a hundred billion overall that the world's put in. Our foundation is a bit more than ten billion, but we feel there's been over a twenty-to-one return",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claimed return on global vaccine investment can be checked against funding and impact data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002397",
+        "topic_ids": [
+          "topic:health_system.global_health",
+          "topic:vaccines.efficacy_response"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vaccinating people and preventing disease saves millions of lives.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002419",
+        "evidence_quote": "You literally save millions of lives",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A strong, checkable claim about vaccine impact on mortality.",
+        "relevance": "substantive",
+        "start_unit_id": "u002417",
+        "topic_ids": [
+          "topic:health_system.global_health",
+          "topic:vaccines.efficacy_response"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Bill Gates wants to make money off vaccines and pushes vaccines for profit.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002441",
+        "evidence_quote": "Just wants to give you this vaccine because he wants to make money",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:vaccines_for_profit"
+        ],
+        "rationale": "A profit-motive claim about Bill Gates and vaccines that the hosts rebut as an edited conspiracy.",
+        "relevance": "substantive",
+        "start_unit_id": "u002436",
+        "topic_ids": [
+          "topic:vaccines"
+        ]
+      }
+    ],
+    "window_id": "episode_14152_window_0032"
+  },
+  "stored_at": "2026-10-04T22:36:30.104487+00:00"
+}

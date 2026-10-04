@@ -1,0 +1,125 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c322364w0013",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000951",
+        "evidence_quote": "For adults with Crohn's disease or ulcerative colitis symptoms, every choice matters. Tremfya offers self-injection or intravenous infusion from the start",
+        "label_ids": [
+          "topic:gut.gi_disease",
+          "topic:medications.other_drugs"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000941",
+        "summary": "Tremfya ad for adults with Crohn's disease and ulcerative colitis, covering dosing and safety information."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000951",
+        "evidence_quote": "Explore what's possible. Ask your doctor about Trumphia today",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000941",
+        "summary": "Direct-to-consumer drug advertisement with a call to ask a doctor about Tremfya."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000951",
+        "evidence_quote": "Tremfya offers self-injection or intravenous infusion from the start",
+        "mention_role": "advertised",
+        "product_name": "Tremfya",
+        "product_type": "medication",
+        "start_unit_id": "u000941"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Tremfya is a prescription medicine used to treat adults with moderately to severely active Crohn's disease and adults with moderately to severely active ulcerative colitis.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000947",
+        "evidence_quote": "Tremfya is a prescription medicine. Used to treat adults with moderately to severely active Crohn's disease",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Drug indication claims are checkable against the FDA label and bear on treatment decisions.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000946",
+        "topic_ids": [
+          "topic:gut.gi_disease",
+          "topic:medications.other_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Tremfya is administered as injections under the skin or infusions through a vein every four weeks, followed by injections under the skin every four or eight weeks.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000944",
+        "evidence_quote": "Tremfya is administered as injections under the skin or infusions through a vein every four weeks",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The dosing schedule is checkable against the product label and informs patients' expectations.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000943",
+        "topic_ids": [
+          "topic:gut.gi_disease",
+          "topic:medications.other_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "may"
+        ],
+        "claim_text": "Serious allergic reactions, increased risk of infections or lower ability to fight them, and liver problems may occur with Tremfya.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000947",
+        "evidence_quote": "serious allergic reactions, increased risk of infections or lower ability to fight them, and liver problems may occur",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Adverse-event warnings are checkable against the label and bear on risk decisions.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000947",
+        "topic_ids": [
+          "topic:gut.gi_disease",
+          "topic:medications.other_drugs"
+        ]
+      }
+    ],
+    "window_id": "episode_322364_window_0013"
+  },
+  "stored_at": "2026-10-04T22:13:53.516132+00:00"
+}

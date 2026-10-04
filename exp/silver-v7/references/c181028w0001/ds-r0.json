@@ -1,0 +1,289 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c181028w0001",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "Pulsed electromagnetic frequencies, done in the right way with the right frequencies, are incredibly beneficial for your mitochondria",
+        "label_ids": [
+          "topic:biohacking.devices_gadgets"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000004",
+        "summary": "Sponsor read for a Therasage PEMF mat, listing the device's technologies and a discount code."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "help reduce pain, reduce inflammation, to improve your overall immune function",
+        "label_ids": [
+          "topic:immune.immune_function",
+          "topic:immune.inflammation",
+          "topic:musculoskeletal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000017",
+        "summary": "The ad claims the mat reduces pain and inflammation and improves immune function."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "Pulsed electromagnetic frequencies, done in the right way with the right frequencies, are incredibly beneficial for your mitochondria",
+        "label_ids": [
+          "narrative:energy_frequency_healing"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000005",
+        "summary": "The sponsor read invokes the proposition that frequency-based devices heal, claiming benefits for mitochondria, pain, inflammation and immunity."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "I want to thank my sponsor, Therasage",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000004",
+        "summary": "Delimited sponsor read with a discount code."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "this technology is a natural way for healing process",
+        "label_ids": [
+          "frame:naturalness_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000017",
+        "summary": "The technology is framed as a natural way for healing."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "I've been using it at alternative doctors' offices for a very long time",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000007",
+        "summary": "The host's long personal use of PEMF is offered as endorsement."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000070",
+        "evidence_quote": "I had excruciating pain, like a hot poker knife shoved in my back",
+        "label_ids": [
+          "topic:musculoskeletal.back_neck_posture"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000065",
+        "summary": "Host describes his career-ending back injury and the excruciating pain it caused."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000068",
+        "evidence_quote": "that back injury led me to some of the deepest trauma in my life",
+        "label_ids": [
+          "topic:mental.trauma_ptsd"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000066",
+        "summary": "Host says the back injury surfaced deep psychological trauma and that he is exploring it."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "That was in a ceremony in a med. Retreat",
+        "label_ids": [
+          "topic:stress.meditation_mindfulness"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000036",
+        "summary": "The vow was made at a meditation retreat."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000028",
+        "evidence_quote": "Therapro is safe, low EMF, and no weird flicker of the lights",
+        "mention_role": "advertised",
+        "product_name": "Therapro",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000004"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Pulsed electromagnetic frequencies, done in the right way with the right frequencies, are incredibly beneficial for mitochondria.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000005",
+        "evidence_quote": "Pulsed electromagnetic frequencies, done in the right way with the right frequencies, are incredibly beneficial for your mitochondria",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [
+          "narrative:energy_frequency_healing"
+        ],
+        "rationale": "A device-efficacy claim about PEMF and mitochondria that could be checked against research.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000005",
+        "topic_ids": [
+          "topic:biohacking.devices_gadgets"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Therapro technology helps reduce pain.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "help reduce pain, reduce inflammation, to improve your overall immune function",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:naturalness_appeal"
+        ],
+        "narrative_ids": [
+          "narrative:energy_frequency_healing"
+        ],
+        "rationale": "A product efficacy claim in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000017",
+        "topic_ids": [
+          "topic:biohacking.devices_gadgets",
+          "topic:musculoskeletal"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Therapro technology helps reduce inflammation.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "reduce inflammation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:naturalness_appeal"
+        ],
+        "narrative_ids": [
+          "narrative:energy_frequency_healing"
+        ],
+        "rationale": "A product efficacy claim in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000017",
+        "topic_ids": [
+          "topic:biohacking.devices_gadgets",
+          "topic:immune.inflammation"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Therapro technology helps improve overall immune function.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "to improve your overall immune function",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:naturalness_appeal"
+        ],
+        "narrative_ids": [
+          "narrative:energy_frequency_healing"
+        ],
+        "rationale": "A product efficacy claim in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000017",
+        "topic_ids": [
+          "topic:biohacking.devices_gadgets",
+          "topic:immune.immune_function"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Therapro is safe.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "Therapro is safe, low EMF, and no weird flicker of the lights",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A safety claim about a marketed device.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:biohacking.devices_gadgets"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Therapro is low EMF.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "Therapro is safe, low EMF, and no weird flicker of the lights",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product specification with EMF-safety implications.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:biohacking.devices_gadgets"
+        ]
+      }
+    ],
+    "window_id": "episode_181028_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:45.434822+00:00"
+}

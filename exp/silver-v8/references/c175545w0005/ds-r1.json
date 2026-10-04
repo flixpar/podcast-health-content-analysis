@@ -1,0 +1,204 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c175545w0005",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000269",
+        "evidence_quote": "zinc quietly plays a huge role in testosterone production, strength, recovery, and energy",
+        "label_ids": [
+          "topic:supplements.other_vitamins_minerals"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000256",
+        "summary": "Sponsor read for Momentus zinc, claiming roles in testosterone, strength, recovery and energy."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000262",
+        "evidence_quote": "it's NSF certified for sport, which means it's been independently tested",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000261",
+        "summary": "The ad invokes NSF certification as proof of quality and purity."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000269",
+        "evidence_quote": "you can get 35% off your first subscription and that 30-day money-back guarantee by going to the link in the description below",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000256",
+        "summary": "Sponsor read with discount code and URL."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000308",
+        "evidence_quote": "I've been pretty sick for the last eighteen months now",
+        "label_ids": [
+          "topic:chronic_complex.patient_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000274",
+        "summary": "Guest recounts an 18-month unexplained illness and diagnostic journey."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000302",
+        "evidence_quote": "underlying old infectiony stuff like Lyme that wasn't really bothering me",
+        "label_ids": [
+          "topic:chronic_complex.chronic_lyme"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000280",
+        "summary": "Guest describes a Lyme diagnosis and frames it as an old underlying infection."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000304",
+        "evidence_quote": "I get EBV and fucking CMV",
+        "label_ids": [
+          "topic:chronic_complex.persistent_infections"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000301",
+        "summary": "Guest attributes his illness partly to immune overload and old infections including EBV and CMV."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000302",
+        "evidence_quote": "just overload of the immune system. Ah, a lot of dysregulation",
+        "label_ids": [
+          "topic:immune.immune_function"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000301",
+        "summary": "Guest describes his condition as immune system overload and dysregulation."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000303",
+        "evidence_quote": "I move into a house with mold",
+        "label_ids": [
+          "topic:chronic_complex.mold_illness"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000303",
+        "summary": "Guest mentions moving into a moldy house as part of his illness timeline."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000297",
+        "evidence_quote": "that was what's called an HHO treatment, a hemol hyperoxygenation treatment",
+        "label_ids": [
+          "topic:alt_medicine.iv_ozone_therapies"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000291",
+        "summary": "Guest describes HHO hyperthermia and hyperoxygenation blood treatment in Vienna."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000300",
+        "evidence_quote": "I also went and got natural killer cell infusion in Lithuania",
+        "label_ids": [
+          "topic:procedures.blood_cell_therapies"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000298",
+        "summary": "Guest says he received a natural killer cell infusion in Lithuania."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000269",
+        "evidence_quote": "Momentus' zinc",
+        "mention_role": "advertised",
+        "product_name": "Momentus Zinc",
+        "product_type": "supplement",
+        "start_unit_id": "u000259"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Zinc plays a huge role in testosterone production, strength, recovery, and energy.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000258",
+        "evidence_quote": "zinc quietly plays a huge role in testosterone production, strength, recovery, and energy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A supplement claim about zinc's physiological roles that can be checked against evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000258",
+        "topic_ids": [
+          "topic:supplements.other_vitamins_minerals"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most people are chronically low on zinc.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000259",
+        "evidence_quote": "And most people are chronically low on it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Prevalence of zinc deficiency is checkable and underlies the supplement recommendation.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000259",
+        "topic_ids": [
+          "topic:supplements.other_vitamins_minerals"
+        ]
+      }
+    ],
+    "window_id": "episode_175545_window_0005"
+  },
+  "stored_at": "2026-10-04T22:36:30.303230+00:00"
+}

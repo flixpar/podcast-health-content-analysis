@@ -1,0 +1,231 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c161491w0007",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000393",
+        "evidence_quote": "BetterHelp is the world's largest online therapy platform",
+        "label_ids": [
+          "topic:health_system.dtc_telehealth",
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000379",
+        "summary": "Sponsor read for BetterHelp online therapy platform emphasizing accessibility and therapist credentials."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000393",
+        "evidence_quote": "Sign up and get 10% off at BetterHelp.com/Rotten",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000379",
+        "summary": "Sponsor read with a discount code."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000387",
+        "evidence_quote": "therapists have at least three years and 1,000 hours of hands-on experience, and hold all required education, training, and certifications",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000387",
+        "summary": "Ad cites therapists' experience and certifications as a reason to trust the service."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000406",
+        "evidence_quote": "getting fed up with a female member's anxiety",
+        "label_ids": [
+          "topic:mental.anxiety"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000406",
+        "summary": "Nicole is said to have been fed up with a member's anxiety."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000452",
+        "evidence_quote": "the man starts doing things down there that are not part of an om. And Ashley did not consent to it",
+        "label_ids": [
+          "topic:acute_care.violence_abuse"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000406",
+        "summary": "Host recounts alleged sexual assault, coercion, domestic violence and threats against women in a community."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000433",
+        "evidence_quote": "I totally disassociated. I mean, it was really damaging. It felt like being r-worded",
+        "label_ids": [
+          "topic:mental.trauma_ptsd"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000417",
+        "summary": "Survivors describe dissociation, psychological damage, re-traumatization and childhood domestic-violence patterns."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000442",
+        "evidence_quote": "I was told that sometimes our soulmates must do violent things to help us grow",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000441",
+        "summary": "Quoted ideology frames abuse as spiritual growth through soulmates."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000452",
+        "evidence_quote": "A true turned-on woman would have taken his beast cry for help with grace and love",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000451",
+        "summary": "Community standard frames fearlessness before violence as a spiritual-sexual ideal."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000393",
+        "evidence_quote": "BetterHelp is the world's largest online therapy platform",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000379"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "world's largest"
+        ],
+        "claim_text": "BetterHelp is the world's largest online therapy platform.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000381",
+        "evidence_quote": "BetterHelp is the world's largest online therapy platform",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Market-leader claim in ad copy can be checked against platform size and market data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000381",
+        "topic_ids": [
+          "topic:health_system.dtc_telehealth",
+          "topic:mental.therapy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp has over thirty thousand therapists worldwide.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000383",
+        "evidence_quote": "With over thirty thousand therapists worldwide",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Therapist count is a checkable marketing claim.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000383",
+        "topic_ids": [
+          "topic:health_system.dtc_telehealth",
+          "topic:mental.therapy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp therapists have at least three years and 1,000 hours of hands-on experience.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000387",
+        "evidence_quote": "therapists have at least three years and 1,000 hours of hands-on experience",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Therapist qualification standards are checkable against BetterHelp's stated criteria.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000387",
+        "topic_ids": [
+          "topic:health_system.dtc_telehealth",
+          "topic:mental.therapy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "all required"
+        ],
+        "claim_text": "BetterHelp therapists hold all required education, training, and certifications.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000387",
+        "evidence_quote": "hold all required education, training, and certifications",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Credentialing claim is checkable against therapist requirements.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000387",
+        "topic_ids": [
+          "topic:health_system.dtc_telehealth",
+          "topic:mental.therapy"
+        ]
+      }
+    ],
+    "window_id": "episode_161491_window_0007"
+  },
+  "stored_at": "2026-10-04T22:13:54.667253+00:00"
+}

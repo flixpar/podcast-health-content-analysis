@@ -1,0 +1,161 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c23571w0003",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000151",
+        "evidence_quote": "But for some of the pathological liars, it's not so clear that they're trying to",
+        "label_ids": [
+          "topic:mental.ocd_personality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000110",
+        "summary": "Host and guest discuss pathological lying, its definition, and the research on how common lying is."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000128",
+        "evidence_quote": "we would refer to that as delusional",
+        "label_ids": [
+          "topic:mental.serious_mental_illness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000122",
+        "summary": "Guest explains the clinical distinction between lying and delusional belief."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "When looking at the research on lie frequency, most people tell zero lies within a 24-hour period",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000133",
+        "summary": "Guest invokes research on lie frequency without identifying a specific study."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "it's some of the work of Kim Saroda and Timothy Levine, and they looked at lie distribution and lie frequency",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000145",
+        "summary": "Guest cites the work of named deception researchers and Timothy Levine's truth default theory."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "Most",
+          "most of the time"
+        ],
+        "claim_text": "Most people are honest most of the time.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000133",
+        "evidence_quote": "Most people are honest most of the time",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about population truthfulness that can be checked against deception research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000133",
+        "topic_ids": [
+          "topic:mental.ocd_personality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most people tell zero lies within a 24-hour period.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "most people tell zero lies within a 24-hour period",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific frequency claim about daily lying that research can support or contradict.",
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "topic_ids": [
+          "topic:mental.ocd_personality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "On average, people tell two lies a day.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000146",
+        "evidence_quote": "people tell, on average, two lies a day",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A widely cited statistical claim about daily lie frequency that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000146",
+        "topic_ids": [
+          "topic:mental.ocd_personality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The most common number of lies told per day is zero.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "the mode or the most lies told, it's zero",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A statistical claim about the modal lie frequency that can be checked against lie-frequency data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000147",
+        "topic_ids": [
+          "topic:mental.ocd_personality"
+        ]
+      }
+    ],
+    "window_id": "episode_23571_window_0003"
+  },
+  "stored_at": "2026-10-04T22:36:30.996112+00:00"
+}

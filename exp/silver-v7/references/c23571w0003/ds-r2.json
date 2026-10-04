@@ -1,0 +1,326 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c23571w0003",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000121",
+        "evidence_quote": "But for some of the pathological liars, it's not so clear that they're trying to. Keep lies straight is just lying on a whim in the moment",
+        "label_ids": [
+          "topic:mental"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000110",
+        "summary": "The guest explains pathological lying as impulsive lying and discusses whether liars come to believe their own lies."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000128",
+        "evidence_quote": "If someone believes something that's not honest or truthful matches with reality, then we would refer to that as delusional",
+        "label_ids": [
+          "topic:mental.serious_mental_illness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000122",
+        "summary": "The guest draws a clinical distinction between lying and delusion, defining delusion as believing something that does not match reality."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000151",
+        "evidence_quote": "When looking at the research on lie frequency, most people tell zero lies within a 24-hour period",
+        "label_ids": [
+          "topic:mental"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000129",
+        "summary": "The guest discusses lie frequency research, truth default theory, and the consequences of pathological lying."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "When looking at the research on lie frequency",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000133",
+        "summary": "The guest invokes research on lie frequency without identifying a specific study."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "some of the work of Kim Saroda and Timothy Levine, and they looked at lie distribution and lie frequency",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000145",
+        "summary": "The guest cites the work of researchers Kim Serota and Timothy Levine on lie distribution and frequency."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "while the average is correct, the mode or the most lies told, it's zero",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000146",
+        "summary": "The guest corrects the common two-lies-a-day statistic by noting the mode is zero."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most people find it cognitively effortful to keep lies straight.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000110",
+        "evidence_quote": "most people, as we develop outside of the teenage years, we we realize it takes a lot of cognitive energy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim about the cognitive effort of lying is a testable psychological claim about lie production.",
+        "relevance": "substantive",
+        "start_unit_id": "u000110",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "some of the"
+        ],
+        "claim_text": "Some pathological liars lie impulsively on a whim rather than trying to keep their lies straight.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000112",
+        "evidence_quote": "But for some of the pathological liars, it's not so clear that they're trying to. Keep lies straight is just lying on a whim in the moment",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Descriptive claim about pathological liars' lying style can be compared with clinical descriptions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000111",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Pathological liars admit they were lying when evidence is brought against them.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000116",
+        "evidence_quote": "Hey, this is a lie, and this is contrary to what you said. They do admit, yeah, that's right",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim about how pathological liars respond to evidence is testable in deception research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000115",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Under researchers' definition, a false statement the speaker truly believes is not a lie.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000122",
+        "evidence_quote": "if you if you come to believe something that that is a lie, then we'd say that's it no longer counts as a lie",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The researchers' definition of lying determines what counts as pathological lying.",
+        "relevance": "substantive",
+        "start_unit_id": "u000122",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Believing something that does not match reality is called delusional.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000124",
+        "evidence_quote": "If someone believes something that's not honest or truthful matches with reality, then we would refer to that as delusional",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Clinical definition of delusion is checkable against psychiatric criteria.",
+        "relevance": "substantive",
+        "start_unit_id": "u000124",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most people tell zero lies within a 24-hour period.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "When looking at the research on lie frequency, most people tell zero lies within a 24-hour period",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Lie frequency statistic is checkable against deception research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "On average, people tell two lies a day.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000146",
+        "evidence_quote": "people tell, on average, two lies a day",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Historical average claim is checkable against the cited deception literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000146",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The most common number of lies people tell in a day is zero.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "the mode or the most lies told, it's zero",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "Mode-zero claim is checkable against lie distribution data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000147",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Lying can be effective for a small group of people, who may use it in jobs, leadership, or administrative positions.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "it is for a small group of people that, as I mentioned, might use it in their jobs, in leadership, in administrative positions",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim about lying as an effective strategy for a minority is a testable psychological claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000136",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "clearly"
+        ],
+        "claim_text": "Pathological liars' lying severs relationships and causes distress.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "pathological liars where their lying is not giving them an advantage, but clearly severing their relationships and causing distress",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim about pathological lying causing distress is checkable against clinical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000139",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Most",
+          "most of the time"
+        ],
+        "claim_text": "Most people are honest most of the time.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000133",
+        "evidence_quote": "Most people are honest most of the time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "General honesty claim is central to truth default theory and checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000133",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      }
+    ],
+    "window_id": "episode_23571_window_0003"
+  },
+  "stored_at": "2026-10-04T22:13:55.539684+00:00"
+}

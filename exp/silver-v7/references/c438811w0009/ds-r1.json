@@ -1,0 +1,163 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c438811w0009",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000404",
+        "evidence_quote": "suffered mental breakdowns",
+        "label_ids": [
+          "topic:mental"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000404",
+        "summary": "The narrator recounts that some Philadelphia Experiment sailors suffered mental breakdowns."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000440",
+        "evidence_quote": "a massive radiation sickness cover-up",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000440",
+        "summary": "The phrase cover-up alleges concealment of radiation sickness."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000445",
+        "evidence_quote": "fluoride is probably not a mind control scheme",
+        "label_ids": [
+          "narrative:fluoride_mind_control"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000445",
+        "summary": "The fluoride-as-mind-control conspiracy is dismissed."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000445",
+        "evidence_quote": "fluoride is probably not a mind control scheme",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000445",
+        "summary": "The narrator corrects the fluoride mind-control theory."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000468",
+        "evidence_quote": "all powered by the good fats from 100% pure avocado oil",
+        "label_ids": [
+          "topic:food.fats_oils"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000466",
+        "summary": "Sponsor read for Chosen Foods avocado-oil products, framed against seed oils."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000467",
+        "evidence_quote": "defend your favorite foods from the forces of seed oils",
+        "label_ids": [
+          "narrative:seed_oils_toxic"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000466",
+        "summary": "The ad casts seed oils as an enemy to defend against."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000468",
+        "evidence_quote": "Have no fear, chosen foods is here to defend",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000466",
+        "summary": "A sponsor read for Chosen Foods."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000468",
+        "evidence_quote": "chosen foods",
+        "mention_role": "advertised",
+        "product_name": "Chosen Foods",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000466"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The Manhattan Project involved a massive radiation sickness cover-up.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000440",
+        "evidence_quote": "a massive radiation sickness cover-up",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "narrative_ids": [],
+        "rationale": "A historical claim about official concealment of radiation harm that could be checked.",
+        "relevance": "passing",
+        "start_unit_id": "u000440",
+        "topic_ids": [
+          "topic:environment.air_pollution"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Chosen Foods salad dressings and mayo are powered by 100% pure avocado oil.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000467",
+        "evidence_quote": "all powered by the good fats from 100% pure avocado oil",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Product composition claim in ad copy that can be checked against ingredients.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000467",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      }
+    ],
+    "window_id": "episode_438811_window_0009"
+  },
+  "stored_at": "2026-10-04T22:13:53.650628+00:00"
+}

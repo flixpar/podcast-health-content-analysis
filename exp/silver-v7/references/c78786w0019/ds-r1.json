@@ -1,0 +1,617 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c78786w0019",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001001",
+        "evidence_quote": "there are an increasing number of companies that offer these tests",
+        "label_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000993",
+        "summary": "Hosts encourage repeated blood work and mention direct-to-consumer testing companies."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001010",
+        "evidence_quote": "You want to do your HbA1c, which is your average glucose levels over the month",
+        "label_ids": [
+          "topic:metabolic.insulin_glucose",
+          "topic:self_tracking.consumer_lab_tests"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001008",
+        "summary": "HbA1c is recommended as a key blood test for average glucose."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001030",
+        "evidence_quote": "Let's talk about C-reactive protein for a second",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:immune.inflammation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001011",
+        "summary": "CRP is discussed as an inflammatory marker tied to heart disease and mortality, with advice on lowering it."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001045",
+        "evidence_quote": "I want your thoughts on cholesterol, and serum cholesterol and dietary cholesterol",
+        "label_ids": [
+          "topic:cardiovascular.cholesterol_lipids"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001031",
+        "summary": "Hosts discuss the confusing literature on cholesterol, LDL, HDL and dietary cholesterol."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001047",
+        "evidence_quote": "I know a fair bit about cholesterol because it it's in my family history",
+        "label_ids": [
+          "topic:cardiovascular.cholesterol_lipids"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001046",
+        "summary": "Guest mentions his family history of high cholesterol."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001048",
+        "evidence_quote": "my grandmother had a stroke at thirty",
+        "label_ids": [
+          "topic:neuro.stroke"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001048",
+        "summary": "Guest's grandmother's early stroke is mentioned as part of family history."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001051",
+        "evidence_quote": "So I went on a statin, and I know there's a lot of people who say that statins long term are bad",
+        "label_ids": [
+          "topic:cardiovascular.statins_lipid_drugs"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001049",
+        "summary": "Guest discusses his long-term statin use and concerns some people raise about statins."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u001051",
+        "evidence_quote": "It might it's associated with with Alzheimer's disease",
+        "label_ids": [
+          "topic:dementia_ageing.dementia_alzheimers"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001050",
+        "summary": "The possible association between statins and Alzheimer's disease is raised."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u001035",
+        "evidence_quote": "dietary cholesterol has nothing to do with serum cholesterol and nothing to do with longevity",
+        "label_ids": [
+          "narrative:saturated_fat_cholesterol_myth"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001033",
+        "summary": "The social-media claim that dietary cholesterol is unrelated to serum cholesterol or longevity is dismissed as nonsense."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001050",
+        "evidence_quote": "a lot of people who say that statins long term are bad",
+        "label_ids": [
+          "narrative:statins_harmful"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001049",
+        "summary": "The claim that statins are harmful long-term is relayed."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.85,
+        "discourse_role": "questioned",
+        "end_unit_id": "u001051",
+        "evidence_quote": "It might it's associated with with Alzheimer's disease",
+        "label_ids": [
+          "narrative:statins_harmful"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001050",
+        "summary": "A possible link between statins and Alzheimer's is raised as a concern."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001034",
+        "evidence_quote": "all the essentially nonsense that's out there in various social media groups that saying cholesterol is is the worst thing in the world",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001033",
+        "summary": "Speaker dismisses social-media cholesterol claims as nonsense."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001007",
+        "evidence_quote": "Insight Tracker is one of them",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001000",
+        "summary": "Insight Tracker is promoted as a direct-to-consumer testing option, with service phone details."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001017",
+        "evidence_quote": "it was originally picked up as something that was associated with heart disease in the Framingham study",
+        "label_ids": [
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001017",
+        "summary": "The Framingham study is cited for CRP's association with heart disease."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001019",
+        "evidence_quote": "and so this is an association",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001019",
+        "summary": "Speaker acknowledges that the CRP-mortality link is an association."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001012",
+        "evidence_quote": "it's been shown to be an early marker of macular degeneration, of of heart disease",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001012",
+        "summary": "Research is invoked vaguely for CRP as an early marker."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001021",
+        "evidence_quote": "there's enough. Data that I would say",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001019",
+        "summary": "Speaker appeals vaguely to enough data to support acting on high CRP."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001039",
+        "evidence_quote": "I am aware of quite good data that shows",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001038",
+        "summary": "Unspecified data is cited for the LDL observation in anorexics."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001041",
+        "evidence_quote": "their dietary cholesterol is essentially zero, and so their manufacture. A lot of their own",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001039",
+        "summary": "A mechanism is offered to explain high LDL despite zero dietary cholesterol."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u001007",
+        "evidence_quote": "Insight Tracker is one of them",
+        "mention_role": "own_product",
+        "product_name": "Insight Tracker",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u001000"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "HbA1c is your average glucose levels over the month.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001010",
+        "evidence_quote": "HbA1c, which is your average glucose levels over the month",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A stated definition of a common lab value; it can be checked against clinical guidelines.",
+        "relevance": "substantive",
+        "start_unit_id": "u001010",
+        "topic_ids": [
+          "topic:metabolic.insulin_glucose",
+          "topic:self_tracking.consumer_lab_tests"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "CRP has been shown to be an early marker of macular degeneration and heart disease.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001012",
+        "evidence_quote": "I think it's been shown to be an early marker of macular degeneration, of of heart disease, of a variety of different things",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific predictive claim about CRP that can be checked against the biomarker literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u001012",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:immune.inflammation"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I believe"
+        ],
+        "claim_text": "CRP was originally picked up as something associated with heart disease in the Framingham study.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001017",
+        "evidence_quote": "it was originally picked up as something that was associated with heart disease in the Framingham study, I believe",
+        "evidence_signal_ids": [
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Attribution to a specific landmark study can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001017",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:immune.inflammation"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "the best"
+        ],
+        "claim_text": "CRP is the best marker for cardiovascular inflammation.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001018",
+        "evidence_quote": "It is a the best marker for cardiovascular inflammation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A superlative claim about a clinical biomarker that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001018",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:immune.inflammation"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "CRP is used as a predictor of longevity.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001018",
+        "evidence_quote": "is also we use it as a predictor of longevity",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about clinical use of CRP as a longevity predictor.",
+        "relevance": "substantive",
+        "start_unit_id": "u001018",
+        "topic_ids": [
+          "topic:immune.inflammation"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "CRP levels go up with mortality.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001019",
+        "evidence_quote": "its levels go up with mortality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A statistical association claim that can be checked against mortality studies.",
+        "relevance": "substantive",
+        "start_unit_id": "u001019",
+        "topic_ids": [
+          "topic:immune.inflammation"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "usually"
+        ],
+        "claim_text": "CRP levels usually go up with age and with levels of inflammation.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001022",
+        "evidence_quote": "the levels usually go up with age and with levels of inflammation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general claim about CRP determinants.",
+        "relevance": "substantive",
+        "start_unit_id": "u001022",
+        "topic_ids": [
+          "topic:immune.inflammation"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Switching to eating less and eating more vegetables lowers CRP.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001024",
+        "evidence_quote": "switch the diet, eat less, try to eat more vegetables. You'll find it will come down",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A dietary intervention claim that can be checked against diet-inflammation trials.",
+        "relevance": "substantive",
+        "start_unit_id": "u001022",
+        "topic_ids": [
+          "topic:immune.inflammation"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Anti-inflammatory drugs can lower CRP.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001026",
+        "evidence_quote": "There are also drugs that can do it. Anti-inflammatories can do it as well",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about drug effects on an inflammatory marker.",
+        "relevance": "substantive",
+        "start_unit_id": "u001025",
+        "topic_ids": [
+          "topic:immune.inflammation",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "A lot of people have normal blood sugar but high CRP.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001031",
+        "evidence_quote": "a lot of people have normal blood sugar but have high CRP",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A prevalence claim about a clinical pattern.",
+        "relevance": "substantive",
+        "start_unit_id": "u001030",
+        "topic_ids": [
+          "topic:immune.inflammation",
+          "topic:metabolic.insulin_glucose"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "High CRP is just as bad for you long term.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001031",
+        "evidence_quote": "which is just as bad for you long term",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A comparative risk claim that could mislead if overstated.",
+        "relevance": "substantive",
+        "start_unit_id": "u001030",
+        "topic_ids": [
+          "topic:immune.inflammation"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "High CRP can predict a future heart attack.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001031",
+        "evidence_quote": "can predict a future heart attack",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A predictive claim about CRP and cardiovascular risk.",
+        "relevance": "substantive",
+        "start_unit_id": "u001030",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:immune.inflammation"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "often"
+        ],
+        "claim_text": "Anorexics, who essentially eat no food, can often have very high LDL.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001039",
+        "evidence_quote": "anorexics—people that essentially eat no food unless you force them to—can often have very high LDL",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about LDL in a specific clinical population that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001038",
+        "topic_ids": [
+          "topic:cardiovascular.cholesterol_lipids"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People with essentially zero dietary cholesterol still manufacture a lot of their own cholesterol.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001041",
+        "evidence_quote": "their dietary cholesterol is essentially zero, and so their manufacture. A lot of their own",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanism claim about endogenous cholesterol synthesis.",
+        "relevance": "substantive",
+        "start_unit_id": "u001039",
+        "topic_ids": [
+          "topic:cardiovascular.cholesterol_lipids"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of people who say"
+        ],
+        "claim_text": "Statins are bad long term.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001050",
+        "evidence_quote": "there's a lot of people who say that statins long term are bad",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:statins_harmful"
+        ],
+        "rationale": "A widely circulated drug-safety claim, reported here, worth checking against long-term statin evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u001049",
+        "topic_ids": [
+          "topic:cardiovascular.statins_lipid_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Statins are associated with Alzheimer's disease.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "questioned",
+        "end_unit_id": "u001051",
+        "evidence_quote": "It might it's associated with with Alzheimer's disease",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:statins_harmful"
+        ],
+        "rationale": "A contested association claim that affects statin decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u001050",
+        "topic_ids": [
+          "topic:cardiovascular.statins_lipid_drugs",
+          "topic:dementia_ageing.dementia_alzheimers"
+        ]
+      }
+    ],
+    "window_id": "episode_78786_window_0019"
+  },
+  "stored_at": "2026-10-04T22:13:53.841175+00:00"
+}

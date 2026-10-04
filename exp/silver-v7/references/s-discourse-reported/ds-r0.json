@@ -1,0 +1,82 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "s-discourse-reported",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000025",
+        "evidence_quote": "she said it causes significant muscle loss in most people who take it",
+        "label_ids": [
+          "topic:glp1.side_effects"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Hosts discuss a doctor's claim that semaglutide causes significant muscle loss in most people who take it."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000019",
+        "evidence_quote": "it causes significant muscle loss in most people who take it",
+        "label_ids": [
+          "narrative:glp1_dangers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "A doctor's claim that semaglutide causes muscle loss in most users is relayed."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000051",
+        "evidence_quote": "my feet are still sore",
+        "label_ids": [
+          "topic:musculoskeletal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000050",
+        "summary": "Speaker mentions sore feet after dancing at a wedding."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "most people"
+        ],
+        "claim_text": "Semaglutide causes significant muscle loss in most people who take it.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000019",
+        "evidence_quote": "she said it causes significant muscle loss in most people who take it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:glp1_dangers"
+        ],
+        "rationale": "A specific, checkable drug side-effect claim that could affect whether listeners take semaglutide.",
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:glp1.side_effects"
+        ]
+      }
+    ],
+    "window_id": "synthetic_discourse_reported_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:49.737716+00:00"
+}

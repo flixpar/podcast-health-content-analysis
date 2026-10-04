@@ -1,0 +1,246 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c181494w0006",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000254",
+        "evidence_quote": "alcohol is under no dose helpful",
+        "label_ids": [
+          "topic:alcohol.health_effects"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000226",
+        "summary": "Guest reviews Mendelian randomization evidence that alcohol raises mortality and concludes no dose is helpful, then weighs moderate social drinking."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "leads to a greater increase in the risk of everything from hypertension to dementia to cardiovascular disease to cancer to all-cause mortality",
+        "label_ids": [
+          "topic:cancer",
+          "topic:cardiovascular",
+          "topic:cardiovascular.blood_pressure",
+          "topic:dementia_ageing.dementia_alzheimers"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000232",
+        "summary": "Alcohol dose is said to raise risk of hypertension, dementia, cardiovascular disease, cancer, and all-cause mortality."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "if you drink a little bit too close to bed, your sleep is going to be disrupted",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000238",
+        "summary": "Drinking too close to bed is said to disrupt sleep."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000257",
+        "evidence_quote": "What do you think are the key principles for a \"quote unquote\" well-balanced, healthy diet",
+        "label_ids": [
+          "topic:food.general_nutrition"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000255",
+        "summary": "Host introduces a listener question asking for key principles of a healthy balanced diet."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000269",
+        "evidence_quote": "covers a wide range of topics related to longevity",
+        "label_ids": [
+          "topic:longevity"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000269",
+        "summary": "Premium newsletter is described as covering topics related to longevity."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000244",
+        "evidence_quote": "alcohol is under no dose helpful",
+        "label_ids": [
+          "narrative:alcohol_moderate_protective"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000243",
+        "summary": "The idea that moderate drinking is beneficial is rejected: alcohol is said to be helpful at no dose."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "The MRS show that at any increase in the consumption of alcohol, there is indeed an increase in mortality",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "summary": "Mendelian randomization studies are cited for the finding that any increase in alcohol raises mortality and disease risk."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000271",
+        "evidence_quote": "you'll want to become a premium member",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "summary": "Host pitches the show's premium membership and its benefits."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000271",
+        "evidence_quote": "you'll want to become a premium member",
+        "mention_role": "own_product",
+        "product_name": "The Drive premium membership",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000258"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Any increase in alcohol consumption increases mortality.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000229",
+        "evidence_quote": "The MRS show that at any increase in the consumption of alcohol, there is indeed an increase in mortality",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A dose-response claim about alcohol and mortality that can be checked against Mendelian randomization studies.",
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Any standard deviation increase in alcohol consumption leads to a greater increase in the risk of hypertension, dementia, cardiovascular disease, cancer, and all-cause mortality.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "leads to a greater increase in the risk of everything from hypertension to dementia to cardiovascular disease to cancer to all-cause mortality",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific dose-response claim about alcohol and multiple disease outcomes that can be checked against the cited studies.",
+        "relevance": "substantive",
+        "start_unit_id": "u000232",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:cancer",
+          "topic:cardiovascular",
+          "topic:cardiovascular.blood_pressure",
+          "topic:dementia_ageing.dementia_alzheimers"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Alcohol is not an essential nutrient and provides no health benefit.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000237",
+        "evidence_quote": "it's not an essential nutrient. There's nothing that it's doing that's good for you",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claims about alcohol's nutritional status and absence of benefit can be checked against nutritional science.",
+        "relevance": "substantive",
+        "start_unit_id": "u000236",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think",
+          "most people"
+        ],
+        "claim_text": "Drinking too close to bed disrupts sleep.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "I think most people will observe that if you drink a little bit too close to bed, your sleep is going to be disrupted",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A common causal claim about alcohol and sleep quality that evidence could support or contradict.",
+        "relevance": "passing",
+        "start_unit_id": "u000239",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Alcohol is not helpful at any dose.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000243",
+        "evidence_quote": "alcohol is under no dose helpful",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:alcohol_moderate_protective"
+        ],
+        "rationale": "A direct negation of the moderate-drinking-protective narrative that can be checked against evidence on alcohol's health effects.",
+        "relevance": "substantive",
+        "start_unit_id": "u000243",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      }
+    ],
+    "window_id": "episode_181494_window_0006"
+  },
+  "stored_at": "2026-10-04T22:36:28.071676+00:00"
+}

@@ -1,0 +1,69 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c322364w0013",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000951",
+        "evidence_quote": "Used to treat adults with moderately to severely active Crohn's disease and adults with moderately to severely active ulcerative colitis",
+        "label_ids": [
+          "topic:gut.gi_disease",
+          "topic:medications.other_drugs"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000942",
+        "summary": "A prescription drug ad for Tremfya for moderately to severely active Crohn's disease and ulcerative colitis, covering administration options and safety information."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000951",
+        "evidence_quote": "For adults with Crohn's disease or ulcerative colitis symptoms, every choice matters",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000942",
+        "summary": "A delimited sponsor read for the drug Tremfya."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000951",
+        "evidence_quote": "Ask your doctor about Trumphia today",
+        "label_ids": [
+          "frame:disclaimer"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000951",
+        "summary": "The ad directs listeners to ask their doctor about Tremfya."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000951",
+        "evidence_quote": "Tremfya offers self-injection or intravenous infusion from the start",
+        "mention_role": "advertised",
+        "product_name": "Tremfya",
+        "product_type": "medication",
+        "start_unit_id": "u000942"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_322364_window_0013"
+  },
+  "stored_at": "2026-10-04T22:36:31.120371+00:00"
+}

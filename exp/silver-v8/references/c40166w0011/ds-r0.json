@@ -1,0 +1,95 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c40166w0011",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000693",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma",
+        "label_ids": [
+          "topic:health_system.pharma_industry"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000681",
+        "summary": "Guest describes vaccines as a rent-seeking revenue stream for Big Pharma and investment funds, urging listeners to trust their instincts against it."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "in the case of these vaccines, every six months",
+        "label_ids": [
+          "narrative:vaccines_for_profit"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000681",
+        "summary": "Vaccines are cast as recurring profit-seeking products pushed by Big Pharma and investment funds."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma",
+        "label_ids": [
+          "frame:big_pharma"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000681",
+        "summary": "Big Pharma is portrayed as a rent-seeking industry profiting from repeated vaccines."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "Some would call it common sense",
+        "label_ids": [
+          "frame:anti_expert_populist"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000688",
+        "summary": "Guest urges listeners to trust their instinct and common sense that something is wrong rather than credentialed fact-checkers or institutions."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "These vaccines are given every six months.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000682",
+        "evidence_quote": "in the case of these vaccines, every six months",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:big_pharma"
+        ],
+        "narrative_ids": [
+          "narrative:vaccines_for_profit"
+        ],
+        "rationale": "The stated frequency of the vaccine schedule is checkable and bears on the claim that boosters are profit-driven.",
+        "relevance": "substantive",
+        "start_unit_id": "u000681",
+        "topic_ids": [
+          "topic:health_system.pharma_industry"
+        ]
+      }
+    ],
+    "window_id": "episode_40166_window_0011"
+  },
+  "stored_at": "2026-10-04T22:36:28.941903+00:00"
+}

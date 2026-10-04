@@ -1,0 +1,105 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c3505w0015",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001259",
+        "evidence_quote": "a rather deadly malaria outbreak back in 1850",
+        "label_ids": [
+          "topic:infectious.vector_borne"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001245",
+        "summary": "Hosts describe a deadly malaria outbreak in the area in 1850, mosquito transmission, a doctor's account of residents' suffering, and swamp drainage that stopped the deaths for a time."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001275",
+        "evidence_quote": "Shot to death and then buried in the area",
+        "label_ids": [
+          "topic:acute_care.trauma_fractures"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001263",
+        "summary": "Three confirmed historical murders are recounted, including being killed with a car jack, decapitation, and being shot to death."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "There was a deadly malaria outbreak in this area in 1850.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001246",
+        "evidence_quote": "a rather deadly malaria outbreak back in 1850",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The existence and timing of the malaria outbreak can be checked against historical records.",
+        "relevance": "substantive",
+        "start_unit_id": "u001245",
+        "topic_ids": [
+          "topic:infectious.vector_borne"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "many"
+        ],
+        "claim_text": "Many of the residents expected the usual attacks of chills in the spring.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001254",
+        "evidence_quote": "many of the residents expected the usual attacks of chills in the spring",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The quoted doctor describes recurring malaria symptoms in the local population, a checkable historical claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u001254",
+        "topic_ids": [
+          "topic:infectious.vector_borne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Draining the swampy area led to the deaths stopping for a while.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001259",
+        "evidence_quote": "they drained the swampy area, which luckily led to the deaths stopping for a while",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The causal effect of the drainage on malaria deaths can be checked against historical accounts.",
+        "relevance": "substantive",
+        "start_unit_id": "u001259",
+        "topic_ids": [
+          "topic:infectious.vector_borne"
+        ]
+      }
+    ],
+    "window_id": "episode_3505_window_0015"
+  },
+  "stored_at": "2026-10-04T22:13:55.745724+00:00"
+}

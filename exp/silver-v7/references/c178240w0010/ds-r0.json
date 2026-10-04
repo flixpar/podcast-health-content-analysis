@@ -1,0 +1,174 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c178240w0010",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000714",
+        "evidence_quote": "plastic surgery is absolutely fine",
+        "label_ids": [
+          "topic:skin_beauty.cosmetic_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000633",
+        "summary": "Host and plastic surgeons discuss cosmetic surgery generally, including the athletic BBL, breast surgery, and surgery for loose skin after pregnancy or weight loss."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000695",
+        "evidence_quote": "especially with all these new weight loss drugs, loose skin is just becoming a bigger and bigger problem for people",
+        "label_ids": [
+          "topic:glp1.side_effects"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000692",
+        "summary": "Surgeon says new weight-loss drugs are making loose skin a growing problem that surgery must address."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000691",
+        "evidence_quote": "moms that have had changes to their body",
+        "label_ids": [
+          "topic:pregnancy.postpartum"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000689",
+        "summary": "Describes postpartum moms' loose skin and muscle separation after diet and exercise."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000691",
+        "evidence_quote": "What are women coming in to you bothered by the most",
+        "label_ids": [
+          "population:women"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000686",
+        "summary": "The consultation discussion centers on women's body concerns."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000691",
+        "evidence_quote": "moms that have had changes to their body",
+        "label_ids": [
+          "population:pregnant_postpartum"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000689",
+        "summary": "The loose-skin and muscle-separation discussion is specifically about mothers after pregnancy."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000692",
+        "evidence_quote": "Common thing that we see in our practice",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000689",
+        "summary": "Surgeon bases loose-skin observations on his practice's patients."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000666",
+        "evidence_quote": "Nineteen Plastic Surgery has been leading the charge",
+        "mention_role": "recommended",
+        "product_name": "Nineteen Plastic Surgery",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000645"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "New weight loss drugs are making loose skin a bigger and bigger problem for people.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000692",
+        "evidence_quote": "especially with all these new weight loss drugs, loose skin is just becoming a bigger and bigger problem for people",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal side-effect claim about weight-loss drugs that can be checked against clinical data and affects demand for surgery.",
+        "relevance": "substantive",
+        "start_unit_id": "u000692",
+        "topic_ids": [
+          "topic:glp1.side_effects"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "no amount"
+        ],
+        "claim_text": "No amount of diet and exercise can fix loose skin.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "there's no amount of diet and exercise that can fix that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "An absolute claim that diet and exercise cannot address loose skin; it can be checked and is used to justify surgery.",
+        "relevance": "substantive",
+        "start_unit_id": "u000694",
+        "topic_ids": [
+          "topic:skin_beauty.cosmetic_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "the most common"
+        ],
+        "claim_text": "The most common issue in their practice is postpartum mothers who cannot fix loose skin and muscle separation with diet and exercise.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000691",
+        "evidence_quote": "Common thing that we see in our practice is moms that have had changes to their body",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A prevalence claim from clinical experience that could be checked against practice data or postpartum studies.",
+        "relevance": "substantive",
+        "start_unit_id": "u000689",
+        "topic_ids": [
+          "topic:pregnancy.postpartum",
+          "topic:skin_beauty.cosmetic_procedures"
+        ]
+      }
+    ],
+    "window_id": "episode_178240_window_0010"
+  },
+  "stored_at": "2026-10-04T22:13:45.064276+00:00"
+}

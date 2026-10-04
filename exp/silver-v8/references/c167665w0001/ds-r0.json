@@ -1,0 +1,449 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c167665w0001",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000012",
+        "evidence_quote": "the science behind the administration's announcement earlier this week about a potential cause for autism",
+        "label_ids": [
+          "topic:neurodevelopment.autism_causes_prevalence",
+          "topic:policy.hhs_leadership"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000008",
+        "summary": "Episode teaser announces the FDA commissioner interview about an autism cause announcement."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000054",
+        "evidence_quote": "We are letting people know about the potential risks of acetaminophen in pregnancy",
+        "label_ids": [
+          "topic:health_system.regulators",
+          "topic:neurodevelopment.autism_causes_prevalence",
+          "topic:policy.hhs_leadership",
+          "topic:pregnancy.exposures_in_pregnancy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "summary": "Makary announces a potential causal link between acetaminophen in pregnancy and autism and the FDA's label-change plan."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000062",
+        "evidence_quote": "The treatment is called leucovorin",
+        "label_ids": [
+          "topic:immune.autoimmune",
+          "topic:neurodevelopment.autism_treatment",
+          "topic:supplements.b_vitamins_methylation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000055",
+        "summary": "Makary describes leucovorin as a treatment for autism and explains the folate-receptor antibody mechanism."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000064",
+        "evidence_quote": "there's been a lot of controversy about HHS, in particular, taking on autism. They'll talk about the how vaccines are completely safe, et cetera, et cetera",
+        "label_ids": [
+          "topic:policy.hhs_leadership",
+          "topic:vaccines.safety_injury"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000063",
+        "summary": "Makary notes controversy over HHS addressing autism and dismisses vaccine-safety pushback."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000054",
+        "evidence_quote": "large studies linking that medication to autism in children",
+        "label_ids": [
+          "narrative:tylenol_autism"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000036",
+        "summary": "Makary asserts the proposition that acetaminophen in pregnancy causes autism."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "a potential treatment that hundreds of thousands of kids with severe autism would likely qualify for",
+        "label_ids": [
+          "narrative:leucovorin_autism_treatment"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000036",
+        "summary": "Makary introduces leucovorin as a potential treatment for severe autism."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000062",
+        "evidence_quote": "The treatment is called leucovorin",
+        "label_ids": [
+          "narrative:leucovorin_autism_treatment"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000055",
+        "summary": "Makary describes leucovorin as a treatment for autism and its folate-receptor mechanism."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000050",
+        "evidence_quote": "the potential risks of acetaminophen in pregnancy",
+        "label_ids": [
+          "population:pregnant_postpartum"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000036",
+        "summary": "The acetaminophen-autism discussion concerns exposure during pregnancy."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000062",
+        "evidence_quote": "hundreds of thousands of kids with severe autism",
+        "label_ids": [
+          "population:children"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000036",
+        "summary": "The autism discussion concerns children."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "There have been large studies linking that medication to autism in children",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000038",
+        "summary": "Large studies are cited without identification."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000042",
+        "evidence_quote": "we now have good data from large studies and the Harvard School of Public Health dean",
+        "label_ids": [
+          "evidence:credential_appeal",
+          "evidence:prestige_institution",
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000040",
+        "summary": "Good data from large studies and the Harvard School of Public Health dean's causal statement are cited."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000050",
+        "evidence_quote": "that cord blood level has been associated with the degree of risk",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000048",
+        "summary": "Associations between acetaminophen use, cord blood levels and autism risk are cited without a study."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "We have an epidemic of autism that has increased 400 percent",
+        "label_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000052",
+        "summary": "The 400 percent autism increase is cited as an unattributed statistic."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000060",
+        "evidence_quote": "the body is creating antibodies that block the folate receptors on their brain",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000060",
+        "summary": "The folate-receptor antibody mechanism is offered to explain autism."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "potential"
+        ],
+        "claim_text": "Acetaminophen in pregnancy is a potential cause of autism.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "We are letting people know about the potential risks of acetaminophen in pregnancy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:tylenol_autism"
+        ],
+        "rationale": "The announcement of a potential causal link between a common drug and autism is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000036",
+        "topic_ids": [
+          "topic:neurodevelopment.autism_causes_prevalence",
+          "topic:pregnancy.exposures_in_pregnancy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Acetaminophen taken in pregnancy is linked to autism in children.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "There have been large studies linking that medication to autism in children",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:tylenol_autism"
+        ],
+        "rationale": "The existence and conclusion of large studies linking acetaminophen to autism can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000038",
+        "topic_ids": [
+          "topic:neurodevelopment.autism_causes_prevalence",
+          "topic:pregnancy.exposures_in_pregnancy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The association between acetaminophen in pregnancy and autism is causal.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000042",
+        "evidence_quote": "Has made a very conclusive statement that he believes the association is causal",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal",
+          "evidence:prestige_institution",
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:tylenol_autism"
+        ],
+        "rationale": "The causal claim is the crux of the FDA announcement and can be checked against the cited evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000041",
+        "topic_ids": [
+          "topic:neurodevelopment.autism_causes_prevalence",
+          "topic:pregnancy.exposures_in_pregnancy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The duration of acetaminophen use in pregnancy and its proximity to the time of birth are associated with the risk of autism.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000049",
+        "evidence_quote": "there are associations. Between the duration of acetaminophen use and the risk of autism in children subsequently, as well as the proximity to the time of birth",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:tylenol_autism"
+        ],
+        "rationale": "Dose-response and timing associations in the cited data can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000048",
+        "topic_ids": [
+          "topic:neurodevelopment.autism_causes_prevalence",
+          "topic:pregnancy.exposures_in_pregnancy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Acetaminophen in newborn cord blood is associated with the degree of autism risk.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000050",
+        "evidence_quote": "that cord blood level has been associated with the degree of risk",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:tylenol_autism"
+        ],
+        "rationale": "The cord-blood association is a checkable empirical claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000049",
+        "topic_ids": [
+          "topic:neurodevelopment.autism_causes_prevalence",
+          "topic:pregnancy.exposures_in_pregnancy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Autism has increased by 400 percent in recent decades.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000053",
+        "evidence_quote": "We have an epidemic of autism that has increased 400 percent",
+        "evidence_signal_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The 400 percent increase is a specific, checkable prevalence claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000052",
+        "topic_ids": [
+          "topic:neurodevelopment.autism_causes_prevalence"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "vast majority"
+        ],
+        "claim_text": "The vast majority of low-grade fevers do not need to be treated.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000043",
+        "evidence_quote": "the vast majority of low-grade fevers do not need to be treated",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Clinical guidance on treating low-grade fevers is checkable and affects whether listeners medicate fevers.",
+        "relevance": "substantive",
+        "start_unit_id": "u000043",
+        "topic_ids": [
+          "topic:immune.immune_function"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The FDA is starting a process to change the acetaminophen label and has sent a Dear Doctor letter to all U.S. physicians about the acetaminophen-autism association.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000041",
+        "evidence_quote": "we are going to start the process to change the label. And I've sent a dear doctor letter to all U.S",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The FDA's announced regulatory actions are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000039",
+        "topic_ids": [
+          "topic:health_system.regulators",
+          "topic:neurodevelopment.autism_causes_prevalence",
+          "topic:policy.hhs_leadership",
+          "topic:pregnancy.exposures_in_pregnancy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "some",
+          "may be"
+        ],
+        "claim_text": "Some children with autism have an autoimmune disease in which antibodies block folate receptors on the brain, restricting folate from entering the brain.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000060",
+        "evidence_quote": "The mechanism may be that the body is creating antibodies that block the folate receptors on their brain",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The folate-receptor antibody mechanism and its role in autism is checkable and drives the treatment claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000059",
+        "topic_ids": [
+          "topic:immune.autoimmune",
+          "topic:neurodevelopment.autism_treatment",
+          "topic:supplements.b_vitamins_methylation"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "some"
+        ],
+        "claim_text": "Leucovorin treats autism in some children whose folate receptors are blocked by antibodies.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000062",
+        "evidence_quote": "they will then move on to treat some kids with this folic acid or vitamin B twelve that bypasses the receptor",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:leucovorin_autism_treatment"
+        ],
+        "rationale": "The efficacy of leucovorin for autism is a checkable treatment claim central to the FDA announcement.",
+        "relevance": "substantive",
+        "start_unit_id": "u000057",
+        "topic_ids": [
+          "topic:neurodevelopment.autism_treatment",
+          "topic:supplements.b_vitamins_methylation"
+        ]
+      }
+    ],
+    "window_id": "episode_167665_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:27.652692+00:00"
+}

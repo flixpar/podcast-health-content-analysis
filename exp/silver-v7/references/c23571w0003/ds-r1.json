@@ -1,0 +1,209 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c23571w0003",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000123",
+        "evidence_quote": "But for some of the pathological liars, it's not so clear that they're trying to",
+        "label_ids": [
+          "topic:mental"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000110",
+        "summary": "Pathological lying is described and the researchers' definition of lying is introduced."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000128",
+        "evidence_quote": "we would refer to that as delusional",
+        "label_ids": [
+          "topic:mental.serious_mental_illness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000124",
+        "summary": "Speakers distinguish delusional belief from lying, using the example of believing the sky is green and purple."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000149",
+        "evidence_quote": "Most people are honest most of the time",
+        "label_ids": [
+          "topic:mental"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000129",
+        "summary": "Speakers discuss lying as a strategy, pathological liars' outcomes, and research on lie frequency."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "When looking at the research on lie frequency",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "summary": "Speaker appeals to research on lie frequency without identifying a specific study."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "the work of Kim Saroda and Timothy Levine, and they looked at lie distribution and lie frequency",
+        "label_ids": [
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000145",
+        "summary": "Named researchers' work on lie distribution and frequency is cited."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000151",
+        "evidence_quote": "He's a licensed psychologist and author of the book *Big Liars",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000151",
+        "summary": "Host introduces the guest as a licensed psychologist and book author."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000151",
+        "evidence_quote": "author of the book *Big Liars",
+        "mention_role": "own_product",
+        "product_name": "Big Liars",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000151"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most people tell zero lies within a 24-hour period.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "most people tell zero lies within a 24-hour period",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Lie-frequency prevalence is checkable against deception research and bears on how listeners think about lying.",
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People tell, on average, two lies a day.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000146",
+        "evidence_quote": "people tell, on average, two lies a day",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The two-lies-a-day average is a checkable statistic in deception research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000146",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The mode, or most common number, of lies told per day is zero.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "the mode or the most lies told, it's zero",
+        "evidence_signal_ids": [
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific statistical claim about the distribution of daily lies that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000147",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "If a person comes to believe something that was a lie, it no longer counts as a lie.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000122",
+        "evidence_quote": "if you come to believe something that that is a lie, then we'd say that's it no longer counts as a lie",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A definitional claim about lying used by researchers that can be checked against their stated definitions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000122",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Believing something that does not match reality is referred to as delusional.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000124",
+        "evidence_quote": "we would refer to that as delusional",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A clinical definition that can be checked against psychiatric diagnostic criteria.",
+        "relevance": "substantive",
+        "start_unit_id": "u000124",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      }
+    ],
+    "window_id": "episode_23571_window_0003"
+  },
+  "stored_at": "2026-10-04T22:13:53.361935+00:00"
+}

@@ -1,0 +1,223 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c330613w0006",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000247",
+        "evidence_quote": "RFK Junior testified yesterday",
+        "label_ids": [
+          "topic:policy.hhs_leadership"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000242",
+        "summary": "Hosts introduce RFK Jr.'s Senate testimony and HHS oversight."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000246",
+        "evidence_quote": "Lots of democratic attacks",
+        "label_ids": [
+          "frame:political_partisan"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000245",
+        "summary": "Hosts describe Democratic attacks on RFK Jr. during his confirmation hearing."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000255",
+        "evidence_quote": "American's overall health is in grievous condition",
+        "label_ids": [
+          "frame:maha_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000250",
+        "summary": "RFK Jr.'s opening statement frames American health as a chronic-disease crisis and lays out the MAHA agenda."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000252",
+        "evidence_quote": "Over seventy percent of adults and a third of children are overweight or obese",
+        "label_ids": [
+          "topic:weight.obesity_rates"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000251",
+        "summary": "RFK Jr. states that most adults and a third of children are overweight or obese and that obesity has risen sharply since the 1960s."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000251",
+        "evidence_quote": "a third of children are overweight or obese",
+        "label_ids": [
+          "population:children"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000251",
+        "summary": "The statistic specifically concerns children's obesity."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000253",
+        "evidence_quote": "Cancer among young people is rising by one or two percent a year",
+        "label_ids": [
+          "topic:cancer.causes_rates"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000253",
+        "summary": "RFK Jr. says cancer among young people is rising by one or two percent a year."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000255",
+        "evidence_quote": "Autoimmune diseases, neurodevelopmental disorders, Alzheimer's, asthma, ADHD, depression, addiction, and a host of other physical and mental health conditions are all on the rise, some of them exponentially",
+        "label_ids": [
+          "topic:wellness.chronic_disease_trends"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000254",
+        "summary": "RFK Jr. says a list of chronic physical and mental health conditions are all rising, some exponentially."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000261",
+        "evidence_quote": "I am pro safety, pro vaccine",
+        "label_ids": [
+          "topic:vaccines"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000259",
+        "summary": "RFK Jr. denies being anti-vaccine and calls himself pro-safety and pro-vaccine."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000266",
+        "evidence_quote": "Let's get then to what he referenced their vaccine statements",
+        "label_ids": [
+          "topic:policy.hhs_leadership"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000265",
+        "summary": "Hosts note that criticism of RFK Jr. centered on his vaccine statements."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Over seventy percent of adults and a third of children are overweight or obese.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.95,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000251",
+        "evidence_quote": "Over seventy percent of adults and a third of children are overweight or obese",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:maha_framing"
+        ],
+        "narrative_ids": [],
+        "rationale": "Prevalence statistics about obesity can be checked against national survey data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000251",
+        "topic_ids": [
+          "topic:weight.obesity_rates"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Obesity is ten times more prevalent than it was during the nineteen sixties.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000252",
+        "evidence_quote": "Is ten times more prevalent than it was during the nineteen sixties",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:maha_framing"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claimed historical increase in obesity prevalence is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000252",
+        "topic_ids": [
+          "topic:weight.obesity_rates"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Cancer among young people is rising by one or two percent a year.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000253",
+        "evidence_quote": "Cancer among young people is rising by one or two percent a year",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:maha_framing"
+        ],
+        "narrative_ids": [],
+        "rationale": "The trend in early-onset cancer incidence is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000253",
+        "topic_ids": [
+          "topic:cancer.causes_rates"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "all"
+        ],
+        "claim_text": "Autoimmune diseases, neurodevelopmental disorders, Alzheimer's, asthma, ADHD, depression, addiction, and a host of other physical and mental health conditions are all on the rise, some of them exponentially.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000254",
+        "evidence_quote": "Autoimmune diseases, neurodevelopmental disorders, Alzheimer's, asthma, ADHD, depression, addiction, and a host of other physical and mental health conditions are all on the rise, some of them exponentially",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:maha_framing"
+        ],
+        "narrative_ids": [],
+        "rationale": "Claims of rising prevalence across multiple conditions can be checked against incidence data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000254",
+        "topic_ids": [
+          "topic:wellness.chronic_disease_trends"
+        ]
+      }
+    ],
+    "window_id": "episode_330613_window_0006"
+  },
+  "stored_at": "2026-10-04T22:13:55.722731+00:00"
+}

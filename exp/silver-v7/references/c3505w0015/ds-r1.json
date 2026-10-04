@@ -1,0 +1,123 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c3505w0015",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001258",
+        "evidence_quote": "a rather deadly malaria outbreak back in 1850",
+        "label_ids": [
+          "topic:infectious.vector_borne"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001245",
+        "summary": "Hosts recount an 1850 malaria outbreak in the Shades of Death Road area, its swamp-mosquito setting, and the swamp drainage that stopped the deaths."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001208",
+        "evidence_quote": "many of the Native Americans, though, ended up getting killed",
+        "label_ids": [
+          "topic:acute_care.violence_abuse"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001207",
+        "summary": "The legend says many Native Americans in the area were killed, drowned, or thrown into the lake after being murdered."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001227",
+        "evidence_quote": "They'd slit your throat if you were traveling by",
+        "label_ids": [
+          "topic:acute_care.violence_abuse"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001227",
+        "summary": "A historical account describes highway robbers slitting travelers' throats."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001236",
+        "evidence_quote": "they hung them from all those low hanging trees",
+        "label_ids": [
+          "topic:acute_care.violence_abuse"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001234",
+        "summary": "The story says locals hanged highway robbers from low-hanging trees and left the bodies as a warning."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001274",
+        "evidence_quote": "One man was robbed alongside the road, and he was actually killed with his own car jack for some golds that he had on him at the time",
+        "label_ids": [
+          "topic:acute_care.violence_abuse"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001269",
+        "summary": "Three confirmed local murders are described, including a killing with a car jack, a decapitation, and a shooting."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "There was a deadly malaria outbreak in the area in 1850.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001246",
+        "evidence_quote": "a rather deadly malaria outbreak back in 1850",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The occurrence and timing of a local malaria outbreak is a checkable historical health fact.",
+        "relevance": "substantive",
+        "start_unit_id": "u001245",
+        "topic_ids": [
+          "topic:infectious.vector_borne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Draining the swampy area led to the malaria deaths stopping for a while.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001259",
+        "evidence_quote": "they drained the swampy area, which luckily led to the deaths stopping for a while",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claimed effect of swamp drainage on malaria deaths is checkable against historical accounts.",
+        "relevance": "substantive",
+        "start_unit_id": "u001258",
+        "topic_ids": [
+          "topic:infectious.vector_borne"
+        ]
+      }
+    ],
+    "window_id": "episode_3505_window_0015"
+  },
+  "stored_at": "2026-10-04T22:13:53.587380+00:00"
+}

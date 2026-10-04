@@ -1,0 +1,88 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c193307w0006",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states",
+        "label_ids": [
+          "topic:glp1.use_results",
+          "topic:health_system.dtc_telehealth"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "summary": "Ad read for the Hers weight-loss telehealth offering, naming Wegovy and directing listeners to forhers.com."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "Visit forhers.com",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "summary": "The passage is a paid ad for Hers and Wegovy with a website call to action."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states",
+        "mention_role": "advertised",
+        "product_name": "Weight loss by Hers",
+        "product_type": "program_or_course",
+        "start_unit_id": "u000306"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000310",
+        "evidence_quote": "Wegovy is a registered trademark of Novo Nordisk AS",
+        "mention_role": "advertised",
+        "product_name": "Wegovy",
+        "product_type": "medication",
+        "start_unit_id": "u000306"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Weight loss by Hers is not available in all 50 states.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000306",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "State availability of the Hers weight-loss service is checkable and affects whether listeners can use it.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "topic_ids": [
+          "topic:glp1.use_results",
+          "topic:health_system.dtc_telehealth"
+        ]
+      }
+    ],
+    "window_id": "episode_193307_window_0006"
+  },
+  "stored_at": "2026-10-04T22:13:53.221090+00:00"
+}

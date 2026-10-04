@@ -1,0 +1,96 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "s-citation-mundane",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "people drinking a glass of water about twenty minutes before lunch",
+        "label_ids": [
+          "topic:food.beverages_hydration",
+          "topic:food.eating_behavior"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "summary": "Hosts discuss an Ohio State study on drinking water before lunch and recommend the habit to reduce eating."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000027",
+        "evidence_quote": "does it matter if the water is cold or room temperature",
+        "label_ids": [
+          "topic:food.beverages_hydration",
+          "topic:food.eating_behavior"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "They revisit the water tip, noting the study did not separate water temperature or sparkling water, and suggest trying it."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000014",
+        "evidence_quote": "There was a study out of Ohio State that looked at people drinking a glass of water about twenty minutes before lunch",
+        "label_ids": [
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "summary": "The water-before-meals finding is attributed to a study from Ohio State with a comparison group."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000035",
+        "evidence_quote": "get into the sleep stuff after this",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000035",
+        "summary": "Hosts tease upcoming sleep-related content after the break."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "People who drank a glass of water about twenty minutes before lunch ate about 50 to 100 fewer calories at the meal.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000011",
+        "evidence_quote": "The people who did that ended up eating a bit less at the meal, something like fifty to a hundred fewer calories on average",
+        "evidence_signal_ids": [
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The study's finding is checkable and could influence whether listeners adopt the water-before-meals habit.",
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "topic_ids": [
+          "topic:food.beverages_hydration",
+          "topic:food.eating_behavior"
+        ]
+      }
+    ],
+    "window_id": "synthetic_citation_mundane_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:31.540797+00:00"
+}

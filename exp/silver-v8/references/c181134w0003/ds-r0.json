@@ -1,0 +1,272 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c181134w0003",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000132",
+        "evidence_quote": "there's stem cells, and there's all these other things coming online",
+        "label_ids": [
+          "topic:longevity.ageing_science"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000131",
+        "summary": "Mentions stem cells and peptides as emerging anti-aging options but says lifestyle and habits matter more."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000215",
+        "evidence_quote": "Why is our eyesight being lost anyway",
+        "label_ids": [
+          "topic:sensory.vision"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000133",
+        "summary": "The hosts discuss why eyesight declines with age, whether glasses worsen it, and the anatomy of vision."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000170",
+        "evidence_quote": "once you get into glasses, we've kind of accepted them as the treatment. But they make the condition worse",
+        "label_ids": [
+          "narrative:glasses_worsen_vision"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000165",
+        "summary": "Guest asserts glasses are accepted as treatment but make the vision condition worse, comparing them to symptom-masking pills."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000169",
+        "evidence_quote": "taking a pharmaceutical pill for something just to get you through, but you're not treating any sort of causal situation",
+        "label_ids": [
+          "frame:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000168",
+        "summary": "Glasses are compared to a pharmaceutical pill that only gets you through without treating the causal situation."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000141",
+        "evidence_quote": "I don't know if you've watched the Blue Zones",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000141",
+        "summary": "Guest cites watching the Blue Zones as a source."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000142",
+        "evidence_quote": "when you look at these centenarians, many of them don't wear glasses",
+        "label_ids": [
+          "evidence:foreign_comparison"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000141",
+        "summary": "Guest cites centenarians in the Blue Zones, many without glasses, as evidence."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000160",
+        "evidence_quote": "Neuroscience and studies, and showing how all these things like nutrition, lifestyle, outlook",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000159",
+        "summary": "Guest appeals broadly to neuroscience and studies on nutrition, lifestyle and outlook."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000166",
+        "evidence_quote": "pretty much all the people I talk to can attest to that",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000165",
+        "summary": "Guest cites everyone they talk to as testimony that glasses worsen the condition."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000214",
+        "evidence_quote": "the lens and the cornea do a big part of the so-called refraction",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000211",
+        "summary": "Guest explains refraction through the cornea and lens and the optic nerve signal as the mechanism of vision."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000142",
+        "evidence_quote": "watched the Blue Zones",
+        "mention_role": "recommended",
+        "product_name": "Blue Zones",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000141"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Lens hardening is why people lose their near vision.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000155",
+        "evidence_quote": "The doctors tell you your lens is hardening. That's why you lose your near vision",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A standard explanation of presbyopia that the guest goes on to question; it can be checked against ophthalmology.",
+        "relevance": "substantive",
+        "start_unit_id": "u000154",
+        "topic_ids": [
+          "topic:sensory.vision"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Nearsighted people can still read up close even when they are in their sixties or seventies.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000156",
+        "evidence_quote": "all the nearsighted people, they can still read up close, really, and they might be in their 60s, 70s",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Counterexample to the lens-hardening explanation; the visual function of older myopes is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000156",
+        "topic_ids": [
+          "topic:sensory.vision"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Wearing glasses makes the vision condition worse.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000166",
+        "evidence_quote": "But they make the condition worse",
+        "evidence_signal_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:glasses_worsen_vision"
+        ],
+        "rationale": "A contested claim that wearing glasses worsens vision; central to the episode.",
+        "relevance": "substantive",
+        "start_unit_id": "u000165",
+        "topic_ids": [
+          "topic:sensory.vision"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "many"
+        ],
+        "claim_text": "Many centenarians in the Blue Zones do not wear glasses.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000142",
+        "evidence_quote": "when you look at these centenarians, many of them don't wear glasses",
+        "evidence_signal_ids": [
+          "evidence:foreign_comparison",
+          "evidence:media_source"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Observation about Blue Zone centenarians used to argue that vision loss is not inevitable; checkable from documentary and photographic evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000141",
+        "topic_ids": [
+          "topic:sensory.vision"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The eye is the only area where the brain can be viewed without surgery.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000201",
+        "evidence_quote": "that's actually the only area we can look into the brain without",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "An anatomical claim about examining the brain through the eye; checkable against ophthalmology and neurosurgery.",
+        "relevance": "substantive",
+        "start_unit_id": "u000200",
+        "topic_ids": [
+          "topic:sensory.vision"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The length of the eyeball is a factor in vision.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "there is the length of the eyeball, is a factor",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A basic mechanism claim about how eyeball length affects visual acuity; checkable in vision science.",
+        "relevance": "substantive",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:sensory.vision"
+        ]
+      }
+    ],
+    "window_id": "episode_181134_window_0003"
+  },
+  "stored_at": "2026-10-04T22:36:28.005830+00:00"
+}

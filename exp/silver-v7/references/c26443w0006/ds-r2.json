@@ -1,0 +1,243 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c26443w0006",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000290",
+        "evidence_quote": "why are we actually in a mental health crisis, and what is mental illness, anyways",
+        "label_ids": [
+          "topic:mental"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000255",
+        "summary": "Speaker argues mental illness stems from distorted perception and self-deception and pitches Break Method to dismantle these patterns."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000260",
+        "evidence_quote": "From paradigmatic entrenchment to exorbitant costs that are impressed upon a person to actually run a simple study in the United States",
+        "label_ids": [
+          "topic:health_system.research_system"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000255",
+        "summary": "Speaker criticizes academic gatekeeping, research costs, and the priorities of the research system."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000258",
+        "evidence_quote": "we have a glaring problem in the mental health space, and really any space dominated by big academia",
+        "label_ids": [
+          "frame:anti_expert_populist"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000255",
+        "summary": "Speaker frames academia and gatekeepers as blocking truth and healing."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000263",
+        "evidence_quote": "I see mental illness as a byproduct of a distorted perception of reality",
+        "label_ids": [
+          "frame:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000263",
+        "summary": "Mental illness is framed as a byproduct of an underlying distorted perception."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000253",
+        "evidence_quote": "a wonderful gentleman from the National Institute of Health approached me",
+        "label_ids": [
+          "evidence:prestige_institution"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000249",
+        "summary": "A National Institutes of Health official is quoted praising the product."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000268",
+        "evidence_quote": "The way neurocognition works is that it follows a top-down flow",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000264",
+        "summary": "Speaker explains a top-down perceptual-to-behavioral mechanism for emotion and behavior."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000289",
+        "evidence_quote": "These patterns can be observed and dismantled with Break Method",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000289",
+        "summary": "Speaker promotes Break Method as the tool to dismantle self-deception patterns."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000289",
+        "evidence_quote": "These patterns can be observed and dismantled with Break Method",
+        "mention_role": "own_product",
+        "product_name": "Break Method",
+        "product_type": "program_or_course",
+        "start_unit_id": "u000289"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "We are in a mental health crisis.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000261",
+        "evidence_quote": "why are we actually in a mental health crisis",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The existence of a mental health crisis is a checkable prevalence claim that frames the episode.",
+        "relevance": "substantive",
+        "start_unit_id": "u000261",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I see"
+        ],
+        "claim_text": "Mental illness is a byproduct of a distorted perception of reality.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000263",
+        "evidence_quote": "I see mental illness as a byproduct of a distorted perception of reality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:root_cause_framing"
+        ],
+        "narrative_ids": [],
+        "rationale": "A causal definition of mental illness that underlies the whole method and can be compared with clinical models.",
+        "relevance": "substantive",
+        "start_unit_id": "u000263",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Perception precedes emotion and behavior.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000268",
+        "evidence_quote": "perception precedes emotion and behavior",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A testable cognitive claim about the order of perception, emotion and behavior.",
+        "relevance": "substantive",
+        "start_unit_id": "u000264",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Perception is extremely distorted by early childhood inputs.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000269",
+        "evidence_quote": "it is extremely distorted by our early childhood inputs",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim about childhood shaping perception that could be examined against developmental psychology.",
+        "relevance": "substantive",
+        "start_unit_id": "u000269",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Each person has a unique pattern of self-deception that influences motivations, perception of reality, and emotional responses and actions.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000288",
+        "evidence_quote": "each of us has a unique pattern of self-deception, and that pattern of self-deception will in Influence our underlying motivations",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general psychological claim about self-deception patterns that the Break Method claims to address.",
+        "relevance": "substantive",
+        "start_unit_id": "u000288",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Self-deception patterns can be observed and dismantled with the Break Method.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000289",
+        "evidence_quote": "These patterns can be observed and dismantled with Break Method",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product efficacy claim about the Break Method's ability to dismantle self-deception patterns.",
+        "relevance": "substantive",
+        "start_unit_id": "u000289",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      }
+    ],
+    "window_id": "episode_26443_window_0006"
+  },
+  "stored_at": "2026-10-04T22:13:55.572938+00:00"
+}

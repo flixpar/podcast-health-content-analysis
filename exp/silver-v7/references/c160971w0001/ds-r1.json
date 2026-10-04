@@ -1,0 +1,173 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c160971w0001",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000039",
+        "evidence_quote": "Dream Powder, their science-backed healthy hot cocoa for sleep with no added sugar",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:supplements.sleep_mood_supplements"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000009",
+        "summary": "Host pitches Beam Dream Sleep Tea/Powder for falling and staying asleep, describing her own sleep struggles and improved sleep."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "their science-backed healthy hot cocoa for sleep",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000034",
+        "summary": "Ad copy asserts the product is backed by science."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "in a clinical study, 93% of participants reported that Dream helped them get better sleep",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000036",
+        "summary": "Ad cites an unnamed clinical study with a 93% participant-reported result."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "my Aura Ring has showed that my sleep scores went from the 60s to now the 90s",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000037",
+        "summary": "Host offers her Aura Ring sleep-score improvement as personal testimony."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000039",
+        "evidence_quote": "my listeners get a very special discount on Beam",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000033",
+        "summary": "Host offers a discount code and shop link for Beam."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000059",
+        "evidence_quote": "nursing student who was murdered on the UGA campus",
+        "label_ids": [
+          "topic:acute_care.violence_abuse"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000058",
+        "summary": "Host introduces Laken Riley, a nursing student murdered on the UGA campus, in a true-crime update."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000039",
+        "evidence_quote": "it is Beam Dream Sleep Tea",
+        "mention_role": "advertised",
+        "product_name": "Beam Dream Sleep Tea",
+        "product_type": "supplement",
+        "start_unit_id": "u000014"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000037",
+        "evidence_quote": "my Aura Ring has showed",
+        "mention_role": "neutral",
+        "product_name": "Aura Ring",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000037"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000027",
+        "evidence_quote": "I have tried Ambien",
+        "mention_role": "neutral",
+        "product_name": "Ambien",
+        "product_type": "medication",
+        "start_unit_id": "u000027"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Beam Dream Sleep Tea has only 15 calories and zero added sugar.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000015",
+        "evidence_quote": "it's only 15 calories, it has zero added sugar",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Calorie and sugar content of the product are checkable and appear in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000015",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:supplements.sleep_mood_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In a clinical study, 93% of participants reported that Dream helped them get better sleep.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "in a clinical study, 93% of participants reported that Dream helped them get better sleep",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The existence and result of the cited clinical study are checkable, and the claim underpins the product's efficacy message.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000036",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:supplements.sleep_mood_supplements"
+        ]
+      }
+    ],
+    "window_id": "episode_160971_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:52.509969+00:00"
+}

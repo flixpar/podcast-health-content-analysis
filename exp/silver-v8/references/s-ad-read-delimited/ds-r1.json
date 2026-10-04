@@ -1,0 +1,134 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "s-ad-read-delimited",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "nordlite makes an electrolyte mix",
+        "label_ids": [
+          "topic:supplements.other_vitamins_minerals"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000017",
+        "summary": "Sponsor read for Nordlite electrolyte mix, describing its electrolyte content, sugar-free selling point, and host testimonial."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "use the code pod20 for 20 percent off your first order",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000017",
+        "summary": "Sponsor read with a discount code and call to action."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "i noticed i stopped getting that mid afternoon crash pretty much the first week",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000021",
+        "summary": "Host offers a personal testimonial that the product stopped his mid-afternoon crash."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000024",
+        "evidence_quote": "nordlite makes an electrolyte mix",
+        "mention_role": "advertised",
+        "product_name": "Nordlite",
+        "product_type": "supplement",
+        "start_unit_id": "u000017"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "supposedly"
+        ],
+        "claim_text": "Nordlite contains sodium, potassium, and magnesium in a ratio that is supposedly closer to what the body loses when you sweat.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "sodium potassium and magnesium in a ratio that's supposedly closer to what your body actually loses when you sweat",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable product composition claim about the electrolyte ratio in the advertised mix.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:supplements.other_vitamins_minerals"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nordlite has three times the electrolytes of a typical sports drink.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000020",
+        "evidence_quote": "it says right on the packet that it has three times the electrolytes of a typical sports drink",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A quantified product claim that can be checked against the product label or independent analysis.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000020",
+        "topic_ids": [
+          "topic:supplements.other_vitamins_minerals"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nordlite does not load it up with sugar like many other drink mixes on the shelf.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "they also don't load it up with sugar like a lot of the other drink mixes on the shelf",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable free-from claim about the product's sugar content relative to competitors.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000022",
+        "topic_ids": [
+          "topic:supplements.other_vitamins_minerals"
+        ]
+      }
+    ],
+    "window_id": "synthetic_ad_read_delimited_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:31.528047+00:00"
+}

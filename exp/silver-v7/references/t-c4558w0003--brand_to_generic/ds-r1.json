@@ -1,0 +1,243 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "t-c4558w0003--brand_to_generic",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000120",
+        "evidence_quote": "we're going to make the databases public for the first time. We've gone into the CDC. We've gotten the data from CMS, which is Medicaid and Medicare",
+        "label_ids": [
+          "topic:vaccines.safety_injury"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "Speaker outlines a plan to open CDC, CMS and Vaccine Safety Data Link records to independent researchers to study possible vaccine-related health associations."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000115",
+        "evidence_quote": "we're going to make the databases public for the first time",
+        "label_ids": [
+          "frame:censorship_suppression"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "The speaker frames vaccine-safety data as having been unavailable to independent scientists and promises to make it public for the first time."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000106",
+        "evidence_quote": "studies that the Institute of Medicine originally recommended",
+        "label_ids": [
+          "evidence:expert_consensus"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "The speaker cites the Institute of Medicine's original recommendation as the basis for the planned studies."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "corn chips have no seed oils whatsoever",
+        "label_ids": [
+          "topic:food.fats_oils"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000123",
+        "summary": "A sponsor read for corn chips contrasts them with seed-oil-laden chip brands and frames the food supply as corrupted."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "seed oil-infused crap",
+        "label_ids": [
+          "narrative:seed_oils_toxic"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000123",
+        "summary": "The ad invokes the contested claim that seed oils are unhealthy and promotes corn chips as free of them."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "Use the code Tucker for twenty five percent off your first order",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000121",
+        "summary": "A sponsor read for corn chips with a discount code."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "unlike the rest of this country's corrupted food supply",
+        "label_ids": [
+          "frame:big_food"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000123",
+        "summary": "The ad casts the typical American chip brand and the broader food supply as corrupted."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "chemically-laced, seed oil-infused crap",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000125",
+        "summary": "The ad frames regular chips as chemically-laced and seed oil-infused and corn chips as clean."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "endorsed by nutrition experts around the country",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000139",
+        "summary": "The ad cites endorsement by nutrition experts as support for the product."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000145",
+        "evidence_quote": "Visit corn chips dot com slash Tucker",
+        "mention_role": "advertised",
+        "product_name": "Corn chips",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000129"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "whatsoever"
+        ],
+        "claim_text": "Corn chips have no seed oils whatsoever.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "unlike the rest of this country's corrupted food supply, corn chips have no seed oils whatsoever",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:big_food",
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [
+          "narrative:seed_oils_toxic"
+        ],
+        "rationale": "A concrete product-composition claim in ad copy that could be checked against the product label.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000134",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Corn chips have almost nothing in them except a few basic ingredients.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000135",
+        "evidence_quote": "In fact, they have almost nothing in them except a few basic ingredients",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product-composition claim that could be checked against the ingredient list.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000135",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Corn chips are not bad for you.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "So they're not bad for you, and they are delicious",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [
+          "narrative:seed_oils_toxic"
+        ],
+        "rationale": "A safety claim about the product in ad copy that could be checked against evidence on the food.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000137",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Corn chips are endorsed by nutrition experts around the country.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "endorsed by nutrition experts around the country",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A verifiable marketing claim about expert endorsement.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000139",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      }
+    ],
+    "window_id": "episode_4558_window_0003_brand_to_generic"
+  },
+  "stored_at": "2026-10-04T22:13:54.058577+00:00"
+}

@@ -1,0 +1,319 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c63195w0013",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000716",
+        "evidence_quote": "where these peptides and these treatment modalities are available to the public",
+        "label_ids": [
+          "topic:glp1.access_compounding",
+          "topic:health_system.dtc_telehealth",
+          "topic:health_system.pharma_industry",
+          "topic:peptides.peptide_sourcing_regulation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000675",
+        "summary": "Host describes the Hims/Novo deal as a deliberate attack on compounding peptide companies, followed by an antitrust lawsuit."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000724",
+        "evidence_quote": "you get into the whole world of biologics and the future of biologics and stem cells and creating a regulatory pathway",
+        "label_ids": [
+          "topic:health_system.regulators",
+          "topic:peptides.peptide_sourcing_regulation",
+          "topic:policy.hhs_leadership",
+          "topic:procedures.regenerative_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000717",
+        "summary": "Host discusses the FDA and HHS regulatory landscape for peptides, biologics and stem cells under Secretary Kennedy."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000731",
+        "evidence_quote": "The whole model is get a drug approved. It costs billions of dollars. Now we've got to lock in that patent",
+        "label_ids": [
+          "topic:health_system.costs_insurance",
+          "topic:health_system.pharma_industry"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000725",
+        "summary": "Host lays out the drug approval, patent and formulary reimbursement model."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000745",
+        "evidence_quote": "let's see who can prevent chronic disease",
+        "label_ids": [
+          "topic:health_system.costs_insurance",
+          "topic:wellness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000732",
+        "summary": "Speaker proposes a parallel health model to prevent chronic disease and take cost out of the system."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000716",
+        "evidence_quote": "There's no way this was an oversight or a mistake. This was by design",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000675",
+        "summary": "The Hims/Novo episode is framed as a deliberate backroom scheme to damage the compounding industry."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000721",
+        "evidence_quote": "Your war on stem cells and peptides are over",
+        "label_ids": [
+          "frame:censorship_suppression"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000718",
+        "summary": "Kennedy's tweet frames past regulation as a war on stem cells and peptides."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000704",
+        "evidence_quote": "He's a pharmacist. He's a law degree",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000700",
+        "summary": "Lee Rosebush's credentials are cited to support the credibility of his lawsuit and questions."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000720",
+        "evidence_quote": "Secretary Kennedy, he tweeted this",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000718",
+        "summary": "Kennedy's tweet is cited as evidence about the regulatory war on stem cells and peptides."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000707",
+        "evidence_quote": "Hims is shot through the roof because they inked the deal with Novo",
+        "mention_role": "criticized",
+        "product_name": "Hims",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000678"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Hims is not a compounding pharmacy but a multi-billion-dollar marketing firm.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000675",
+        "evidence_quote": "they're not a compounding; they're a multi-billion-dollar marketing firm",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "narrative_ids": [],
+        "rationale": "Hims's actual business model and compounding operations can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000675",
+        "topic_ids": [
+          "topic:glp1.access_compounding",
+          "topic:health_system.dtc_telehealth"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "no way"
+        ],
+        "claim_text": "The Hims situation was by design, not an oversight or mistake.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000677",
+        "evidence_quote": "There's no way this was an oversight or a mistake",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "narrative_ids": [],
+        "rationale": "A conspiracy-style claim about corporate conduct that could be tested by evidence about the deal.",
+        "relevance": "substantive",
+        "start_unit_id": "u000676",
+        "topic_ids": [
+          "topic:glp1.access_compounding",
+          "topic:health_system.dtc_telehealth",
+          "topic:health_system.pharma_industry"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Hims made a deal with Novo to provide the brand-name version of the drug.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000679",
+        "evidence_quote": "they inked the deal with Novo and said, \"Now we're going to provide you with the brand name of the drug",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The reported business agreement between Hims and Novo is checkable and affects access to compounded drugs.",
+        "relevance": "substantive",
+        "start_unit_id": "u000678",
+        "topic_ids": [
+          "topic:glp1.access_compounding",
+          "topic:health_system.dtc_telehealth",
+          "topic:health_system.pharma_industry"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A class-action antitrust lawsuit has been filed against Hims.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000698",
+        "evidence_quote": "there is a, there's a huge class action lawsuit now, an antitrust lawsuit that's going on",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "narrative_ids": [],
+        "rationale": "Whether the antitrust lawsuit exists can be checked in court records and news reports.",
+        "relevance": "substantive",
+        "start_unit_id": "u000698",
+        "topic_ids": [
+          "topic:glp1.access_compounding",
+          "topic:health_system.dtc_telehealth"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Lee Rosebush's firm filed a lawsuit against Hims.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000707",
+        "evidence_quote": "I think Lee Rosebush and his firm brought it forward",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether the named firm filed the antitrust suit can be checked in court records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000698",
+        "topic_ids": [
+          "topic:glp1.access_compounding",
+          "topic:health_system.dtc_telehealth"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Getting a drug approved costs billions of dollars.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000729",
+        "evidence_quote": "It costs billions of dollars",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Drug development cost estimates are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000728",
+        "topic_ids": [
+          "topic:health_system.costs_insurance",
+          "topic:health_system.pharma_industry"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The drug model requires locking in a patent and getting the drug on insurance formularies, Medicare, Medicaid, and Tricare.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000731",
+        "evidence_quote": "we've got to get it on insurance formularies, Medicare, Medicaid, and Tricare",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The standard commercialization and reimbursement pathway for new drugs can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000730",
+        "topic_ids": [
+          "topic:health_system.costs_insurance",
+          "topic:health_system.pharma_industry"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Secretary Kennedy tweeted that the war on stem cells and peptides is over.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000721",
+        "evidence_quote": "Your war on stem cells and peptides are over",
+        "evidence_signal_ids": [
+          "evidence:media_source"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:censorship_suppression"
+        ],
+        "narrative_ids": [],
+        "rationale": "The tweet is a public record and its content can be verified.",
+        "relevance": "substantive",
+        "start_unit_id": "u000718",
+        "topic_ids": [
+          "topic:health_system.regulators",
+          "topic:peptides.peptide_sourcing_regulation",
+          "topic:policy.hhs_leadership"
+        ]
+      }
+    ],
+    "window_id": "episode_63195_window_0013"
+  },
+  "stored_at": "2026-10-04T22:13:53.732627+00:00"
+}

@@ -1,0 +1,179 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c191370w0004",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000140",
+        "evidence_quote": "they have PTSD, And and now I see it becoming a lot more part of our dialogue",
+        "label_ids": [
+          "topic:mental.pop_psychology",
+          "topic:mental.trauma_ptsd"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000109",
+        "summary": "Hosts and guest discuss how the word trauma has expanded into everyday language, where that came from, and whether it helps or harms trauma awareness and treatment."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "referred pain is a really strange biological thing",
+        "label_ids": [
+          "topic:other"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000141",
+        "summary": "Referred pain is explained as a biological phenomenon in which pain is felt somewhere other than its source."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000151",
+        "evidence_quote": "It's the breakup that they just had because they were planning a future with someone",
+        "label_ids": [
+          "topic:mental.trauma_ptsd"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "summary": "The guest applies the referred-pain idea to trauma, describing a first responder whose nightmares trace to a breakup, and notes that not all breakups or war experiences are traumatic."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000150",
+        "evidence_quote": "I've seen this with many many clients where they will come in",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "summary": "The speaker cites her work with clients to support the pattern of trauma symptoms tracing to a breakup rather than the apparent source."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000123",
+        "evidence_quote": "I just had a book that came out called Unbroken The Trauma Response is Never Wrong",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000123",
+        "summary": "The guest promotes her own just-released book on trauma."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000140",
+        "evidence_quote": "I just had a book that came out called Unbroken The Trauma Response is Never Wrong",
+        "mention_role": "own_product",
+        "product_name": "Unbroken The Trauma Response is Never Wrong",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000123"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "More people talking about trauma makes it less likely that people will feel too stigmatized to get help when they need it.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "that more people are talking about trauma, and so that makes it less likely that people will feel really like too stigmatized to get help when they need it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim about destigmatization and help-seeking that surveys could test.",
+        "relevance": "substantive",
+        "start_unit_id": "u000137",
+        "topic_ids": [
+          "topic:mental.pop_psychology",
+          "topic:mental.trauma_ptsd"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might have"
+        ],
+        "claim_text": "Jaw pain can be a symptom of a heart attack.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "even though the pain is in your jaw, you're actually having a heart attack",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A classic medical teaching about referred pain that can be checked against cardiac symptom guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000144",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Pain in the shoulder might be a result of the spleen.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000146",
+        "evidence_quote": "you might have pain in your shoulder and it's actually a result of your spleen",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific referred-pain claim about shoulder pain and the spleen that can be checked anatomically.",
+        "relevance": "substantive",
+        "start_unit_id": "u000146",
+        "topic_ids": [
+          "topic:other"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "necessarily"
+        ],
+        "claim_text": "The source of the pain and the pain don't necessarily match up.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "the source of the pain and the pain don't necessarily match up",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The general definition of referred pain, checkable against medical descriptions of the phenomenon.",
+        "relevance": "substantive",
+        "start_unit_id": "u000147",
+        "topic_ids": [
+          "topic:other"
+        ]
+      }
+    ],
+    "window_id": "episode_191370_window_0004"
+  },
+  "stored_at": "2026-10-04T22:13:53.165942+00:00"
+}

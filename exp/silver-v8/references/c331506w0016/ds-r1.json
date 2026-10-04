@@ -1,0 +1,517 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c331506w0016",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000638",
+        "evidence_quote": "the World Health Organization has officially designated OMICRON as a variant of concern",
+        "label_ids": [
+          "topic:covid.illness_severity",
+          "topic:covid.pandemic_institutions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000634",
+        "summary": "Hosts report WHO designating Omicron a variant of concern and early uncertainty about transmissibility, severity and vaccine efficacy."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000669",
+        "evidence_quote": "New variants mean new products and endless profits from a rich world buying up boosters",
+        "label_ids": [
+          "narrative:pharma_creates_customers",
+          "narrative:vaccines_for_profit"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000639",
+        "summary": "Pharma is cast as profiting from an endless cycle of new variants and boosters, keeping the world vulnerable for profit."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000652",
+        "evidence_quote": "if you are a pharma exach looking to be as evil and greedy as possible",
+        "label_ids": [
+          "frame:big_pharma"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000640",
+        "summary": "Pharma executives are cast as evil and greedy, profiting from the pandemic."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000652",
+        "evidence_quote": "everyone involved in that heist would need a decent cover story so that public outrage would not spoil their plan",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000650",
+        "summary": "Speakers allege a coordinated heist and cover story involving Big Pharma and Gates."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000649",
+        "evidence_quote": "potentially keeping us lucked in a cycle of forever pandemic",
+        "label_ids": [
+          "frame:fear_alarm"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000639",
+        "summary": "Alarmist language about a forever pandemic and the poor world as a petri dish."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000666",
+        "evidence_quote": "Gates, with his billions, effectively runs global public health",
+        "label_ids": [
+          "frame:industry_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000653",
+        "summary": "Bill Gates's money and ties are cast as controlling global public health and vaccine access."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000663",
+        "evidence_quote": "According to The New York Times, Gates personally fundraised for Kovacs from world leaders",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000663",
+        "summary": "The New York Times is cited for Gates fundraising for COVAX."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000636",
+        "evidence_quote": "experts are saying it's way too early to panic about omicron",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000636",
+        "summary": "Unnamed experts are invoked for early uncertainty about Omicron."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000670",
+        "evidence_quote": "countries with thirty five percent and thirty percent of their adult populations vaccinated, respectively",
+        "label_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000670",
+        "summary": "Vaccination coverage percentages for South Africa and Botswana are given without a source."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The World Health Organization officially designated Omicron as a variant of concern.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000634",
+        "evidence_quote": "the World Health Organization has officially designated OMICRON as a variant of concern",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "An official classification that can be checked against WHO announcements.",
+        "relevance": "substantive",
+        "start_unit_id": "u000634",
+        "topic_ids": [
+          "topic:covid.illness_severity",
+          "topic:covid.pandemic_institutions"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Omicron variant was first flagged in South Africa, the earliest known case was identified in Botswana, and it has appeared in Hong Kong, Israel, and the UK.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000635",
+        "evidence_quote": "This new variant was first flagged in South Africa and the earliest known case was identified in Botswana",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Geographic origin and spread are checkable against outbreak reports.",
+        "relevance": "substantive",
+        "start_unit_id": "u000635",
+        "topic_ids": [
+          "topic:covid.illness_severity"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Pharmaceutical companies made a working COVID vaccine and sold it nearly exclusively to rich countries at premium prices.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000650",
+        "evidence_quote": "You'd make a vaccine that actually works, and then you'd sell it nearly exclusively to the rich world at premium prices",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:big_pharma"
+        ],
+        "narrative_ids": [
+          "narrative:vaccines_for_profit"
+        ],
+        "rationale": "A claim about vaccine pricing and distribution that can be checked against purchasing and allocation data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000643",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions",
+          "topic:health_system.pharma_industry"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The global South was priced out of the vaccine market, allowing the virus to continue circulating and dramatically increasing the chance of new variants.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000645",
+        "evidence_quote": "the global South will they'd be more or less priced down of that market, allowing the virus to continue to circulate rapidly and dramatically increase the chances of new variants",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:big_pharma"
+        ],
+        "narrative_ids": [
+          "narrative:pharma_creates_customers",
+          "narrative:vaccines_for_profit"
+        ],
+        "rationale": "A causal claim about vaccine inequity and variant emergence that is checkable against distribution and variant data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000645",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions",
+          "topic:health_system.pharma_industry"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "New variants create new products and profits from rich countries buying boosters and new vaccine formulations.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000646",
+        "evidence_quote": "New variants mean new products and endless profits from a rich world buying up boosters",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:big_pharma"
+        ],
+        "narrative_ids": [
+          "narrative:pharma_creates_customers",
+          "narrative:vaccines_for_profit"
+        ],
+        "rationale": "A claim about vaccine booster markets and profits that can be checked against industry data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000646",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions",
+          "topic:health_system.pharma_industry"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Taxpayers in rich countries, primarily the US, funded the vaccine technology and development.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000647",
+        "evidence_quote": "taxpayers in some of those rich countries, primarily the US, funded the vaccine technology and development to start with",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Public funding of vaccine development is checkable against government funding records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000647",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions",
+          "topic:health_system.pharma_industry"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Bill Gates effectively runs global public health, and no one crosses him for fear of losing access to his dollars.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000655",
+        "evidence_quote": "Gates, with his billions, effectively runs global public health. No one wants to cross him because they do not want to lose access to his dollars",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:industry_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "A claim about concentrated private influence over global health institutions that can be examined.",
+        "relevance": "substantive",
+        "start_unit_id": "u000654",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Gates built his billions by building a monopoly through abuse of patent protection laws.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000656",
+        "evidence_quote": "made his billions by building a monopoly through abuse of our patent protection laws",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A legal and historical claim about how Gates acquired his wealth, relevant to his alleged influence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000656",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions",
+          "topic:health_system.pharma_industry"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Gates pushed for the failed COVAX program instead of advocating for vaccine formulas to be a global public good.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000657",
+        "evidence_quote": "he instead pushed for the utterly failed Kovax program at the World Health Organization",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:industry_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "A claim about Gates's policy choices and COVAX's outcome that can be checked against program records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000657",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions",
+          "topic:health_system.global_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A Gates-funded nonprofit drove COVAX's creation.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000661",
+        "evidence_quote": "A Gates funded nonprofit drove Kvax's creation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific organizational claim about COVAX's origins that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000661",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions",
+          "topic:health_system.global_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "COVAX is run by a consortium of Gates-funded nonprofits, WHO, and UNICEF.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000662",
+        "evidence_quote": "It is run by a consortium of Bill Gates funded nonprofits, the World Health Organization, and UNISF",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "COVAX's governance structure is publicly documented and checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000662",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions",
+          "topic:health_system.global_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Two days after COVID was declared a pandemic, Gates met with twelve pharma executives to plan the response.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000660",
+        "evidence_quote": "Two days after COVID was declared a pandemic. Gates was already meeting with twelve different pharma executives to plan the response",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific dated claim about Gates's early pandemic meetings that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000659",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "According to The New York Times, Gates personally fundraised for COVAX from world leaders.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000663",
+        "evidence_quote": "According to The New York Times, Gates personally fundraised for Kovacs from world leaders",
+        "evidence_signal_ids": [
+          "evidence:media_source"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A sourced factual claim about Gates's fundraising role that can be verified against the cited reporting.",
+        "relevance": "substantive",
+        "start_unit_id": "u000663",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions",
+          "topic:health_system.global_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Gates spoke regularly with Fauci and collaborated with Mitch McConnell.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000664",
+        "evidence_quote": "He spoke regularly with Fauci, He collaborated with Mitch McConnell",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about Gates's relationships with officials.",
+        "relevance": "substantive",
+        "start_unit_id": "u000664",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Gates's foundation gave millions to pay McKinsey consultants to staff COVAX.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000664",
+        "evidence_quote": "his foundation gave millions to pay McKinsey consultants to staff the whole effort",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific funding claim that can be checked against foundation grant records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000664",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions",
+          "topic:health_system.global_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "COVAX's original goal was to vaccinate 20 percent of the population in poor nations.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000668",
+        "evidence_quote": "They wanted to fund enough vaccine doses to vaccinate twenty percent of the population in poor nations",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "COVAX's initial vaccination target is publicly documented.",
+        "relevance": "substantive",
+        "start_unit_id": "u000667",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions",
+          "topic:health_system.global_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "COVAX did not come close to achieving its 20 percent goal.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000669",
+        "evidence_quote": "they would not even come close to achieving that extraordinarily low achievement",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "COVAX's delivery figures can be checked against its stated goals.",
+        "relevance": "substantive",
+        "start_unit_id": "u000669",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions",
+          "topic:health_system.global_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "South Africa and Botswana had 35 percent and 30 percent of their adult populations vaccinated, respectively, when the new variant was first detected.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000670",
+        "evidence_quote": "countries with thirty five percent and thirty percent of their adult populations vaccinated, respectively",
+        "evidence_signal_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Vaccination coverage figures are checkable against national immunization data.",
+        "relevance": "passing",
+        "start_unit_id": "u000670",
+        "topic_ids": [
+          "topic:covid.illness_severity",
+          "topic:covid.pandemic_institutions"
+        ]
+      }
+    ],
+    "window_id": "episode_331506_window_0016"
+  },
+  "stored_at": "2026-10-04T22:36:31.165705+00:00"
+}

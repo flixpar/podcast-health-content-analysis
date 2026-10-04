@@ -1,0 +1,617 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c195560w0002",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000073",
+        "evidence_quote": "you eat more saturated fat, your LDL cholesterol is going to go up",
+        "label_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:food.fats_oils"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000067",
+        "summary": "The traditional saturated-fat-to-LDL hypothesis is stated, then qualified by calorie balance and carbohydrate intake."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000077",
+        "evidence_quote": "In a very compelling study, where he was stepwise increasing saturated fat while he was decreasing carbs",
+        "label_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:diets.low_carb_keto",
+          "topic:food.fats_oils"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000074",
+        "summary": "A Volek study is cited showing improved blood lipids with more saturated fat and fewer carbs."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000076",
+        "evidence_quote": "Dr. Jeff Volek, a ketogenic diet expert, he documented. In a very compelling study",
+        "label_ids": [
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000074",
+        "summary": "A named-author study of stepwise saturated-fat increase and carb decrease is invoked."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000075",
+        "evidence_quote": "a ketogenic diet expert",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000074",
+        "summary": "Volek's expertise as a ketogenic diet expert is cited alongside his study."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000082",
+        "evidence_quote": "that last step that the LDL cholesterol is then causing a plaque to form. That's where it just goes off the rails",
+        "label_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:cardiovascular.heart_disease",
+          "topic:cardiovascular.statins_lipid_drugs"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000078",
+        "summary": "The speaker rejects LDL as a causal predictor and says statins give no primary-prevention benefit."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000081",
+        "evidence_quote": "which is identified or or revealed in the evidence, suggesting that LDL is not a great predictor of who's going to have a heart attack",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000080",
+        "summary": "Unspecified evidence is invoked that LDL is not a great predictor."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000082",
+        "evidence_quote": "That's where it just goes off the rails",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000078",
+        "summary": "The LDL-causes-plaque step is called going off the rails, correcting the lipid hypothesis."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000088",
+        "evidence_quote": "Every sex hormone comes from cholesterol",
+        "label_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:endocrine.other_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000083",
+        "summary": "Cholesterol is described as the precursor of steroid hormones and vitamin D."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000094",
+        "evidence_quote": "if a person has had a coronary artery calcium scan, so a CT scan of their heart",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:cardiovascular.statins_lipid_drugs",
+          "topic:procedures.imaging_diagnostics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000089",
+        "summary": "Statin treatment is said to be warranted only with high coronary calcium plaque, with benefit independent of LDL."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000094",
+        "evidence_quote": "that last step that the LDL cholesterol is then causing a plaque to form. That's where it just goes off the rails",
+        "label_ids": [
+          "narrative:saturated_fat_cholesterol_myth"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000078",
+        "summary": "The claim that LDL/cholesterol cause heart disease is rejected and cholesterol is defended as a molecule of life."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000108",
+        "evidence_quote": "there's virtually no benefit to that at all",
+        "label_ids": [
+          "narrative:statins_harmful"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000080",
+        "summary": "Statins are said to be useless in primary prevention, harmful in women, and linked to diabetes and libido loss."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000108",
+        "evidence_quote": "her risk of developing type two diabetes goes up by fifty percent",
+        "label_ids": [
+          "topic:cardiovascular.statins_lipid_drugs",
+          "topic:metabolic.diabetes",
+          "topic:sexual.sexual_function"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000095",
+        "summary": "Statin use after a heart attack is said to help, but sex-specific harms include diabetes in women and libido loss in men."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000105",
+        "evidence_quote": "in women, statins appear to be an overt harm",
+        "label_ids": [
+          "population:women"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000102",
+        "summary": "Statin harms are described specifically for women."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000108",
+        "evidence_quote": "guys, the risk is a little less, although we also have a bigger hit to our libido",
+        "label_ids": [
+          "population:men"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "Statin harms are described specifically for men's libido and sex hormones."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000121",
+        "evidence_quote": "maybe the LDL is there in response to an injury",
+        "label_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:cardiovascular.heart_disease",
+          "topic:immune.inflammation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000109",
+        "summary": "LDL is cast as a symptom responding to arterial injury, with inflammation and infection as underlying causes."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000115",
+        "evidence_quote": "could the root be something like inflammation",
+        "label_ids": [
+          "frame:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000109",
+        "summary": "LDL is framed as a symptom and inflammation as the root cause."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000121",
+        "evidence_quote": "maybe the LDL is there in response to an injury",
+        "label_ids": [
+          "narrative:saturated_fat_cholesterol_myth"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000109",
+        "summary": "The response-to-injury metaphor asserts LDL is not the cause of plaque."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000127",
+        "evidence_quote": "if you go in and remove the plaque, you can take it to a lab and find like a dozen infectious bacteria at that plaque",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:chronic_complex.persistent_infections"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000121",
+        "summary": "An infection theory of atherosclerosis is presented, with bacteria found in plaque."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000124",
+        "evidence_quote": "Remember, we don't. Actually, know how this happens",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000121",
+        "summary": "The speaker notes the cause of atherosclerosis is not actually known."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000127",
+        "evidence_quote": "maybe the LDL is there in response to an injury, and so that brings up the idea of yes, inflammation, but also infection",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000120",
+        "summary": "LDL is explained as a response to injury, and bacteria in plaque as a mechanism of atherosclerosis."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Eating more saturated fat raises LDL cholesterol, and LDL cholesterol causes heart disease.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000067",
+        "evidence_quote": "you eat more saturated fat, your LDL cholesterol is going to go up, and thus you have more heart disease",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:saturated_fat_cholesterol_myth"
+        ],
+        "rationale": "The traditional diet-heart hypothesis is the target of the episode's rebuttal and is checkable against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000067",
+        "topic_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:cardiovascular.heart_disease",
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "not uncommon",
+          "not always"
+        ],
+        "claim_text": "Eating more saturated fat raises LDL cholesterol, but not always.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000069",
+        "evidence_quote": "If someone eats more saturated fat, it's not uncommon that their LDL will go up, but not always",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The relationship between saturated fat intake and LDL response is checkable and relevant to diet advice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000069",
+        "topic_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In Dr. Jeff Volek's study, stepwise increasing saturated fat while decreasing carbs improved blood lipids and reduced saturated fat in the blood.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000077",
+        "evidence_quote": "In a very compelling study, where he was stepwise increasing saturated fat while he was decreasing carbs, and the blood lipids of these people looked amazing",
+        "evidence_signal_ids": [
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The existence and results of a named-author study can be checked against the published literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000074",
+        "topic_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:diets.low_carb_keto",
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "suggesting"
+        ],
+        "claim_text": "LDL cholesterol is not a great predictor of who will have a heart attack.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000081",
+        "evidence_quote": "suggesting that LDL is not a great predictor of who's going to have a heart attack",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:saturated_fat_cholesterol_myth"
+        ],
+        "rationale": "Whether LDL predicts heart attack is a central, checkable claim in the cholesterol debate.",
+        "relevance": "substantive",
+        "start_unit_id": "u000080",
+        "topic_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "virtually"
+        ],
+        "claim_text": "Statins used as primary prevention in people who have not had a heart attack provide virtually no benefit.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000082",
+        "evidence_quote": "if it is used as a primary prevention, so a person who has not had a heart attack, there's virtually no benefit to that at all",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:statins_harmful"
+        ],
+        "rationale": "Statin primary-prevention benefit is directly checkable against trials and guidelines.",
+        "relevance": "substantive",
+        "start_unit_id": "u000080",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:cardiovascular.statins_lipid_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Every"
+        ],
+        "claim_text": "Cholesterol is the precursor of every sex hormone, cortisol, aldosterone, and vitamin D.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000087",
+        "evidence_quote": "Every sex hormone comes from cholesterol",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Cholesterol's role as a precursor to steroid hormones and vitamin D is checkable and bears on the harms of cholesterol lowering.",
+        "relevance": "substantive",
+        "start_unit_id": "u000083",
+        "topic_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:endocrine.other_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "appear to"
+        ],
+        "claim_text": "Statins appear to confer some mortality benefit when a person has a relatively high amount of coronary artery plaque.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000093",
+        "evidence_quote": "statins appear to convey some degree of mortality benefit",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "CAC-guided statin benefit is a checkable clinical claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000089",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:cardiovascular.statins_lipid_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Statin benefit is independent of LDL levels.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000094",
+        "evidence_quote": "that is totally independent of LDL levels",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:saturated_fat_cholesterol_myth"
+        ],
+        "rationale": "Whether statin benefit varies by baseline LDL is checkable in clinical trials.",
+        "relevance": "substantive",
+        "start_unit_id": "u000094",
+        "topic_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:cardiovascular.statins_lipid_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "looks like"
+        ],
+        "claim_text": "After a heart attack, statins appear to provide benefit.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000101",
+        "evidence_quote": "If it's a follow-up, it looks like there is a benefit",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Secondary-prevention benefit of statins is a core checkable clinical claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000096",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:cardiovascular.statins_lipid_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "appear to"
+        ],
+        "claim_text": "Statins appear to be an overt harm in women.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000102",
+        "evidence_quote": "statins appear to be an overt harm",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:statins_harmful"
+        ],
+        "rationale": "The claim that statins harm women overall is checkable but broad.",
+        "relevance": "substantive",
+        "start_unit_id": "u000102",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:cardiovascular.statins_lipid_drugs"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A woman's risk of developing type 2 diabetes goes up by fifty percent on a statin.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000104",
+        "evidence_quote": "her risk of developing type two diabetes goes up by fifty percent",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:statins_harmful"
+        ],
+        "rationale": "The 50% diabetes risk increase is a specific, checkable number.",
+        "relevance": "substantive",
+        "start_unit_id": "u000103",
+        "topic_ids": [
+          "topic:cardiovascular.statins_lipid_drugs",
+          "topic:metabolic.diabetes"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Men on statins feel a bigger hit to sex hormones and libido than women, while women get more metabolic harm.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000108",
+        "evidence_quote": "We feel that hit on the sex hormones a little more than the females do, but they get the hit when it comes to metabolic health",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:statins_harmful"
+        ],
+        "rationale": "Sex differences in statin side effects can be checked against clinical data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "topic_ids": [
+          "topic:cardiovascular.statins_lipid_drugs",
+          "topic:metabolic.diabetes",
+          "topic:sexual.sexual_function"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Could it be",
+          "maybe"
+        ],
+        "claim_text": "LDL does not cause plaque; it is a response to arterial injury, inflammation, or infection.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000121",
+        "evidence_quote": "maybe the LDL is there in response to an injury",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:root_cause_framing"
+        ],
+        "narrative_ids": [
+          "narrative:saturated_fat_cholesterol_myth"
+        ],
+        "rationale": "The response-to-injury theory of atherosclerosis is checkable and central to the debate.",
+        "relevance": "substantive",
+        "start_unit_id": "u000109",
+        "topic_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:cardiovascular.heart_disease",
+          "topic:immune.inflammation"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Atherosclerotic plaque contains infectious bacteria.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000127",
+        "evidence_quote": "you can take it to a lab and find like a dozen infectious bacteria at that plaque",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The presence of infectious bacteria in plaque is checkable and supports the infection theory.",
+        "relevance": "substantive",
+        "start_unit_id": "u000126",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:chronic_complex.persistent_infections"
+        ]
+      }
+    ],
+    "window_id": "episode_195560_window_0002"
+  },
+  "stored_at": "2026-10-04T22:36:30.838171+00:00"
+}

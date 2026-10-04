@@ -1,0 +1,186 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c23571w0003",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000151",
+        "evidence_quote": "We're talking about lying, why we all do it, and the consequences for doing it",
+        "label_ids": [
+          "topic:mental"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000110",
+        "summary": "Interview discusses pathological lying, why people lie, and research on lie frequency."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "When looking at the research on lie frequency, most people tell zero lies within a 24-hour period",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "summary": "Research on lie frequency is invoked generally to support the zero-lies claim."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "some of the work of Kim Saroda and Timothy Levine, and they looked at lie distribution and lie frequency",
+        "label_ids": [
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000145",
+        "summary": "Named researchers' work on lie distribution is invoked."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000151",
+        "evidence_quote": "He's a licensed psychologist and author of the book *Big Liars",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000150",
+        "summary": "The guest's psychologist credential and book are cited as authority."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000151",
+        "evidence_quote": "author of the book *Big Liars",
+        "mention_role": "own_product",
+        "product_name": "Big Liars",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000151"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most people tell zero lies within a 24-hour period.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "When looking at the research on lie frequency, most people tell zero lies within a 24-hour period",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific empirical claim about daily lie frequency that can be checked against deception research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People tell on average two lies a day.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000146",
+        "evidence_quote": "people tell, on average, two lies a day",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A widely cited statistic about daily lie frequency that can be checked against the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000146",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The most common number of lies told per day is zero.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "the mode or the most lies told, it's zero",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A distributional claim about lie frequency that can be checked against the research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000147",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most",
+          "most of the time"
+        ],
+        "claim_text": "Most people are honest most of the time.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000148",
+        "evidence_quote": "most people are honest most of the time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general prevalence claim central to truth default theory.",
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "only"
+        ],
+        "claim_text": "People lie only when they think the truth will not work.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000148",
+        "evidence_quote": "it's only those instances where we think the truth won't work that we lie",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim about the conditions under which lying occurs.",
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      }
+    ],
+    "window_id": "episode_23571_window_0003"
+  },
+  "stored_at": "2026-10-04T22:13:47.163091+00:00"
+}

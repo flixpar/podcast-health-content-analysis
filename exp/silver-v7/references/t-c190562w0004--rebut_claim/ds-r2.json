@@ -1,0 +1,802 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "t-c190562w0004--rebut_claim",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "The more stress that you're under, the more epinephrine and norepinephrine and cortisol is pumped out",
+        "label_ids": [
+          "topic:endocrine.cortisol_adrenal",
+          "topic:stress.stress_burnout"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000160",
+        "summary": "The speaker explains how positive and negative stress drive epinephrine, norepinephrine and cortisol, eventually causing adrenal burnout."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "adrenal burnout where your poor adrenal glands are so damn tired, they cannot produce enough cortisol, epinephrine, and norepinephrine",
+        "label_ids": [
+          "narrative:adrenal_fatigue_real"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000166",
+        "summary": "Adrenal burnout is presented as a real consequence of chronic stress."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000167",
+        "evidence_quote": "The more stress that you're under, the more epinephrine and norepinephrine and cortisol is pumped out",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000165",
+        "summary": "A stress-hormone cascade is offered as the mechanism behind adrenal burnout."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000174",
+        "evidence_quote": "So using L-tyrosine, in addition to it literally improving your mood, because it can improve your mood because it helps produce dopamine",
+        "label_ids": [
+          "topic:cognition.neurochemistry_talk",
+          "topic:stress.stress_burnout",
+          "topic:supplements.protein_powders"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "summary": "L-tyrosine is pitched as improving mood through dopamine and making the user more resilient to stress."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000183",
+        "evidence_quote": "When you're under that amount of stress, weight is gonna come on, inflammation is gonna increase, your sleep is gonna be all jacked up",
+        "label_ids": [
+          "topic:immune.inflammation",
+          "topic:metabolic.insulin_glucose",
+          "topic:sleep.sleep_duration_quality",
+          "topic:stress.stress_burnout",
+          "topic:weight.weight_gain_causes"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000177",
+        "summary": "High stress is said to cause weight gain, inflammation, poor sleep, and disordered glucose and insulin regulation."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000197",
+        "evidence_quote": "L-tyrosine coming in and just supporting our brain, supporting neurotransmitters, giving us more dopamine",
+        "label_ids": [
+          "topic:cognition.neurochemistry_talk",
+          "topic:mental.depression",
+          "topic:supplements.protein_powders",
+          "topic:weight.weight_loss_methods"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000184",
+        "summary": "L-tyrosine is said to raise dopamine, lift depressed or low mood, and support adrenals and thyroid, stacking into weight help."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000201",
+        "evidence_quote": "L-tyrosine can also increase energy by supporting thyroid function and the production of dopamine, norepinephrine, epinephrine",
+        "label_ids": [
+          "topic:endocrine.thyroid",
+          "topic:supplements.protein_powders",
+          "topic:weight.weight_loss_methods"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000198",
+        "summary": "L-tyrosine is claimed to increase energy through thyroid and catecholamine support, helping activity and weight loss; a correction follows."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000199",
+        "evidence_quote": "And that is just not true, the evidence shows the opposite",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000199",
+        "summary": "The preceding L-tyrosine mechanism claim is rejected as false."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000199",
+        "evidence_quote": "the evidence shows the opposite",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000199",
+        "summary": "A vague appeal to evidence is used to rebut the L-tyrosine claim."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000213",
+        "evidence_quote": "Coleus for scoli is actually a plant in the mint family, and it contains a bioactive compound called forscolin",
+        "label_ids": [
+          "topic:supplements.herbal_adaptogens",
+          "topic:weight.weight_loss_methods"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000202",
+        "summary": "Coleus forskohlii is promoted for weight loss through forskolin and cAMP-mediated fat breakdown."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "this has been studied for decades, decades, for its effects on weight loss",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000203",
+        "summary": "Decades of research are invoked for forskolin's weight-loss effects without specifics."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "which increases levels of cyclic AMP in cells",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000207",
+        "summary": "A cAMP and lipolysis mechanism is offered for forskolin's fat-loss effect."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000227",
+        "evidence_quote": "Maybe it's down to 500 calories a day. but you're eating 3,000 calories a day",
+        "label_ids": [
+          "topic:endocrine.thyroid",
+          "topic:metabolic.insulin_glucose",
+          "topic:weight.body_composition",
+          "topic:weight.weight_gain_causes"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000214",
+        "summary": "The speaker discusses hypothyroid low metabolism, calorie math, and insulin resistance as contributors to rapid weight gain."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000217",
+        "evidence_quote": "That's not really possible",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000217",
+        "summary": "The speaker corrects the idea that five pounds of fat can be gained overnight."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Positive or 'good' stressors still place stress on the body.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000164",
+        "evidence_quote": "happy, good stress though, still stress on the body",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claims positive events still create physiological stress; checkable in stress physiology.",
+        "relevance": "substantive",
+        "start_unit_id": "u000164",
+        "topic_ids": [
+          "topic:stress.stress_burnout"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The more stress a person is under, the more epinephrine, norepinephrine and cortisol are pumped out.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000166",
+        "evidence_quote": "The more stress that you're under, the more epinephrine and norepinephrine and cortisol is pumped out",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable physiological claim about the stress response.",
+        "relevance": "substantive",
+        "start_unit_id": "u000166",
+        "topic_ids": [
+          "topic:endocrine.cortisol_adrenal",
+          "topic:stress.stress_burnout"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Chronic stress eventually leads to adrenal burnout, in which the adrenal glands cannot produce enough cortisol, epinephrine and norepinephrine.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000167",
+        "evidence_quote": "this is going to lead to eventually adrenal burnout where your poor adrenal glands are so damn tired, they cannot produce enough cortisol, epinephrine, and norepinephrine",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:adrenal_fatigue_real"
+        ],
+        "rationale": "Core contested claim that chronic stress exhausts adrenal hormone production.",
+        "relevance": "substantive",
+        "start_unit_id": "u000167",
+        "topic_ids": [
+          "topic:endocrine.cortisol_adrenal"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Adrenal burnout causes fatigue and the feeling of being wired but tired.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000168",
+        "evidence_quote": "this is where the fatigue comes in or the feeling of being wired but tired",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:adrenal_fatigue_real"
+        ],
+        "rationale": "Claimed symptom of adrenal burnout.",
+        "relevance": "substantive",
+        "start_unit_id": "u000168",
+        "topic_ids": [
+          "topic:endocrine.cortisol_adrenal"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "When adrenal glands are 'tanked out', weight gain occurs.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "Weight gain. Weight gain. comes in when your adrenal glands are tanked out",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:adrenal_fatigue_real"
+        ],
+        "rationale": "Weight gain is attributed to exhausted adrenals.",
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "topic_ids": [
+          "topic:endocrine.cortisol_adrenal",
+          "topic:weight.weight_gain_causes"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "L-tyrosine can improve mood because it helps produce dopamine.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000172",
+        "evidence_quote": "using L-tyrosine, in addition to it literally improving your mood, because it can improve your mood because it helps produce dopamine",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Supplement claim that L-tyrosine improves mood via dopamine.",
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "topic_ids": [
+          "topic:cognition.neurochemistry_talk",
+          "topic:supplements.protein_powders"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "L-tyrosine provides the body with building blocks of stress hormones, making a person more resilient to stress.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000174",
+        "evidence_quote": "you're providing your body with that building block of the stress hormones so that you become more resilient to stress",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claimed benefit of L-tyrosine for stress resilience.",
+        "relevance": "substantive",
+        "start_unit_id": "u000174",
+        "topic_ids": [
+          "topic:stress.stress_burnout",
+          "topic:supplements.protein_powders"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "High-level stress causes weight gain.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000179",
+        "evidence_quote": "When you're under that amount of stress, weight is gonna come on",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Stress is presented as a cause of weight gain.",
+        "relevance": "substantive",
+        "start_unit_id": "u000178",
+        "topic_ids": [
+          "topic:stress.stress_burnout",
+          "topic:weight.weight_gain_causes"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "High-level stress increases inflammation.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000179",
+        "evidence_quote": "inflammation is gonna increase",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Stress is said to raise inflammation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000179",
+        "topic_ids": [
+          "topic:immune.inflammation",
+          "topic:stress.stress_burnout"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "High-level stress disrupts sleep.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000179",
+        "evidence_quote": "your sleep is gonna be all jacked up",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Stress is said to impair sleep.",
+        "relevance": "substantive",
+        "start_unit_id": "u000179",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:stress.stress_burnout"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Lack of sleep makes insulin regulation go off the charts and raises glucose.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000180",
+        "evidence_quote": "when we're not sleeping, our insulin regulation goes off the charts, glucose",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Links sleep loss to glucose dysregulation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000180",
+        "topic_ids": [
+          "topic:metabolic.insulin_glucose",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Stress can cause a high blood glucose reading even after eating only a steak.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000182",
+        "evidence_quote": "All I ate was a steak, well, because you're under stress",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Stress is offered as an explanation for high glucose after a low-carb meal.",
+        "relevance": "substantive",
+        "start_unit_id": "u000182",
+        "topic_ids": [
+          "topic:metabolic.insulin_glucose",
+          "topic:stress.stress_burnout"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "L-tyrosine increases dopamine.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000184",
+        "evidence_quote": "L-tyrosine coming in and just supporting our brain, supporting neurotransmitters, giving us more dopamine",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic supplement claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000184",
+        "topic_ids": [
+          "topic:cognition.neurochemistry_talk",
+          "topic:supplements.protein_powders"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Serotonin is called the happy hormone.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000186",
+        "evidence_quote": "Serotonin is like called the happy hormone",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A simplified neurochemistry claim that circulates widely.",
+        "relevance": "substantive",
+        "start_unit_id": "u000185",
+        "topic_ids": [
+          "topic:cognition.neurochemistry_talk"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Dopamine is the feel-good hormone.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000193",
+        "evidence_quote": "you want to think of dopamine as that burst of feel good. It's that feel good hormone",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Popular dopamine characterization.",
+        "relevance": "substantive",
+        "start_unit_id": "u000192",
+        "topic_ids": [
+          "topic:cognition.neurochemistry_talk"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "L-tyrosine helps people come out of a deep depressed or low mood state and have more energy.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000197",
+        "evidence_quote": "when we come out of that deep depressed state, when we come out of that low mood state, we have more energy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claims L-tyrosine lifts depressed or low mood.",
+        "relevance": "substantive",
+        "start_unit_id": "u000195",
+        "topic_ids": [
+          "topic:mental.depression",
+          "topic:supplements.protein_powders"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "L-tyrosine supports the adrenals and thyroid hormone production, and these effects stack to help with weight.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000198",
+        "evidence_quote": "in addition to supporting our adrenals, in addition to supporting our thyroid hormone production, all of that can stack upon itself and help with weight",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Combined supplement effect claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000197",
+        "topic_ids": [
+          "topic:endocrine.thyroid",
+          "topic:supplements.protein_powders",
+          "topic:weight.weight_loss_methods"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "L-tyrosine can increase energy by supporting thyroid function and the production of dopamine, norepinephrine and epinephrine.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000199",
+        "evidence_quote": "L-tyrosine can also increase energy by supporting thyroid function and the production of dopamine, norepinephrine, epinephrine",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claim is stated and then explicitly rebutted, so it should be counted as a checkable claim regardless of stance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000199",
+        "topic_ids": [
+          "topic:cognition.neurochemistry_talk",
+          "topic:endocrine.thyroid",
+          "topic:supplements.protein_powders"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "L-tyrosine can improve energy levels.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000200",
+        "evidence_quote": "L-tyrosine can actually improve energy levels",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Supplement efficacy claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000200",
+        "topic_ids": [
+          "topic:supplements.protein_powders"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Improved energy makes it easier to stay active and maintain a regular exercise routine, which leads to weight loss.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000201",
+        "evidence_quote": "So that's going to make it easier to stay active, maintain a regular exercise routine, which of course comes back to weight loss",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic pathway from supplement energy to weight loss.",
+        "relevance": "substantive",
+        "start_unit_id": "u000200",
+        "topic_ids": [
+          "topic:supplements.protein_powders",
+          "topic:weight.weight_loss_methods"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Coleus forskohlii is a plant in the mint family and contains forskolin.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "Coleus for scoli is actually a plant in the mint family, and it contains a bioactive compound called forscolin",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Identifiable factual claim about the supplement's identity.",
+        "relevance": "substantive",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:supplements.herbal_adaptogens"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Forskolin has been studied for decades for its effects on weight loss.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "this has been studied for decades, decades, for its effects on weight loss",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Research-support claim with no specific study.",
+        "relevance": "substantive",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:supplements.herbal_adaptogens",
+          "topic:weight.weight_loss_methods"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Forskolin activates adenylate cyclase, which increases levels of cyclic AMP in cells.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000209",
+        "evidence_quote": "Horsicolin activates an enzyme called adenylate cyclase. I know, say that again, five times fast. which increases levels of cyclic AMP in cells",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Biochemical mechanism claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000207",
+        "topic_ids": [
+          "topic:supplements.herbal_adaptogens"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "associated with"
+        ],
+        "claim_text": "Higher cAMP levels are associated with the breakdown of fat stored in fat cells, promoting fat loss and energy release.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "So higher camp levels are associated with the breakdown of fat stored in fat cells, promoting fat loss and energy release or calorie burning",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic fat-loss claim, hedged as association.",
+        "relevance": "substantive",
+        "start_unit_id": "u000210",
+        "topic_ids": [
+          "topic:supplements.herbal_adaptogens",
+          "topic:weight.weight_loss_methods"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Forskolin can increase lipolysis and reduce fat accumulation, making it easier to lose fat.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000213",
+        "evidence_quote": "it can increase lipolysis or the breakdown of fats and reduce fat accumulation, making it easier to lose fat",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Supplement efficacy claim for fat loss.",
+        "relevance": "substantive",
+        "start_unit_id": "u000212",
+        "topic_ids": [
+          "topic:supplements.herbal_adaptogens",
+          "topic:weight.weight_loss_methods"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "we know"
+        ],
+        "claim_text": "It takes 3,500 calories to equal one pound.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000221",
+        "evidence_quote": "Because we know it takes 3,500 calories to equal one pound",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Classic calorie rule that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000220",
+        "topic_ids": [
+          "topic:weight.body_composition",
+          "topic:weight.weight_gain_causes"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could",
+          "possible"
+        ],
+        "claim_text": "A person with a very low basal metabolic rate who eats 3,000 calories a day, with a thyroid problem and insulin resistance, can gain five pounds in two days.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000225",
+        "evidence_quote": "it is possible that you could put on five pounds in two days",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim about rapid weight gain under low metabolism.",
+        "relevance": "substantive",
+        "start_unit_id": "u000222",
+        "topic_ids": [
+          "topic:endocrine.thyroid",
+          "topic:metabolic.insulin_glucose",
+          "topic:weight.body_composition",
+          "topic:weight.weight_gain_causes"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "not really"
+        ],
+        "claim_text": "Gaining five pounds of fat overnight is not really possible.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000217",
+        "evidence_quote": "That's not really possible",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "A correction of an extreme rapid-gain claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000217",
+        "topic_ids": [
+          "topic:weight.weight_gain_causes"
+        ]
+      }
+    ],
+    "window_id": "episode_190562_window_0004_rebut_claim"
+  },
+  "stored_at": "2026-10-04T22:13:56.149766+00:00"
+}

@@ -1,0 +1,195 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c128911w0034",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003026",
+        "evidence_quote": "I'm starting to get the shooting pain down my right leg",
+        "label_ids": [
+          "topic:musculoskeletal.back_neck_posture",
+          "topic:neuro.nerve_spinal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002957",
+        "summary": "Hosts discuss a severe lower back episode, probable bulging disc, and sciatic nerve pain."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003004",
+        "evidence_quote": "You have to start stretching, like all the time",
+        "label_ids": [
+          "topic:musculoskeletal.back_neck_posture",
+          "topic:musculoskeletal.rehab_manual_therapy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002991",
+        "summary": "Hosts agree that recovering from the back injury requires stretching, abs and regular exercise."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002977",
+        "evidence_quote": "I've been taking muscle relaxers at night. Where's the hurt? Lower back",
+        "label_ids": [
+          "topic:medications.other_drugs",
+          "topic:musculoskeletal.back_neck_posture"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002975",
+        "summary": "Speaker says he has been taking muscle relaxers at night for the back pain."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003014",
+        "evidence_quote": "Just rubbing CBD on my spine",
+        "label_ids": [
+          "topic:musculoskeletal.back_neck_posture",
+          "topic:psychoactives.cannabis"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003012",
+        "summary": "A host suggests rubbing CBD on the speaker's spine for the back."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "unclear",
+        "end_unit_id": "u003039",
+        "evidence_quote": "Some HGH. Okay. For my back",
+        "label_ids": [
+          "topic:endocrine.other_hormones",
+          "topic:musculoskeletal.back_neck_posture"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003036",
+        "summary": "A passing mention of HGH for the speaker's back."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u003069",
+        "evidence_quote": "Billy also said muscle aches and back aches are a sign of COVID",
+        "label_ids": [
+          "topic:covid.illness_severity"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003041",
+        "summary": "Hosts joke about Billy diagnosing the speaker with COVID based on symptoms and temperature."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003052",
+        "evidence_quote": "I had I had food poisoning",
+        "label_ids": [
+          "topic:infectious.foodborne"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003045",
+        "summary": "Speaker recounts a brief food poisoning illness after Chinese food."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A bulging disc basically hits the nerve.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003023",
+        "evidence_quote": "the disc, a bulging disc, like basically hits the nerve",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Anatomical explanation of sciatic pain that can be checked against medical sources.",
+        "relevance": "substantive",
+        "start_unit_id": "u003023",
+        "topic_ids": [
+          "topic:musculoskeletal.back_neck_posture",
+          "topic:neuro.nerve_spinal"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Muscle aches and back aches are a sign of COVID.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u003069",
+        "evidence_quote": "Billy also said muscle aches and back aches are a sign of COVID",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A diagnostic claim about COVID symptoms, attributed here to Billy.",
+        "relevance": "passing",
+        "start_unit_id": "u003068",
+        "topic_ids": [
+          "topic:covid.illness_severity"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The bulging disc will slowly go down, and then it will be with you for the rest of your life.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003026",
+        "evidence_quote": "It will slowly go down, and then it will be with you for the rest",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A prognostic claim about the natural history of a bulging disc.",
+        "relevance": "substantive",
+        "start_unit_id": "u003026",
+        "topic_ids": [
+          "topic:musculoskeletal.back_neck_posture",
+          "topic:neuro.nerve_spinal"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "You have to actually exercise, and do things with your body to make your body not hurt anymore.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002998",
+        "evidence_quote": "you have to actually exercise, and do things with your body to make your body not hurt anymore",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claims that exercise is required to resolve back pain, a checkable treatment claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u002998",
+        "topic_ids": [
+          "topic:musculoskeletal.back_neck_posture",
+          "topic:musculoskeletal.rehab_manual_therapy"
+        ]
+      }
+    ],
+    "window_id": "episode_128911_window_0034"
+  },
+  "stored_at": "2026-10-04T22:13:52.450989+00:00"
+}

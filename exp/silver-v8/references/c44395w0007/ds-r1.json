@@ -1,0 +1,236 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c44395w0007",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000413",
+        "evidence_quote": "more than 50,000 babies have been rescued from abortion",
+        "label_ids": [
+          "topic:fertility.abortion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000400",
+        "summary": "Sponsor read for Preborn, a pregnancy-center ministry, thanking donors for rescuing babies from abortion and soliciting ultrasound donations."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000413",
+        "evidence_quote": "dial pound 250 and say the keyword \"baby",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000400",
+        "summary": "Preborn sponsor read soliciting donations with a call to action and promo code."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000408",
+        "evidence_quote": "share the hope of Jesus Christ with their mothers",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000403",
+        "summary": "The abortion-rescue appeal is framed through Christian faith and eternal salvation."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000432",
+        "evidence_quote": "Wellness company offers a hard-to-access RX parasite cleanse: USA compounded ivermectin and memantazol",
+        "label_ids": [
+          "topic:detox.parasite_cleanses",
+          "topic:infectious.parasitic_infections",
+          "topic:medications.repurposed_offlabel"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000414",
+        "summary": "Sponsor read for the Wellness Company's compounded ivermectin and memantazol parasite cleanse, warning about parasites in raw fish and recommending yearly cleansing."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000424",
+        "evidence_quote": "Dr. Peter McCullough recommends doing a parasite cleanse at least once a year as a preventative measure",
+        "label_ids": [
+          "narrative:parasites_cause_disease"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000419",
+        "summary": "Ad warns of hidden parasites from raw fish and recommends routine yearly cleansing, invoking the routine-deworming narrative."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000432",
+        "evidence_quote": "use code Candice at checkout to save fifty-two dollars off plus free shipping",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000414",
+        "summary": "Sponsor read for the Wellness Company parasite cleanse with a discount code."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000424",
+        "evidence_quote": "Dr. Peter McCullough recommends doing a parasite cleanse at least once a year as a preventative measure",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000423",
+        "summary": "The recommendation is grounded in Dr. Peter McCullough's name and title."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000428",
+        "evidence_quote": "Lab tested for quality",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000428",
+        "summary": "Ad asserts the product is lab tested for quality."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000432",
+        "evidence_quote": "Wellness company offers a hard-to-access RX parasite cleanse: USA compounded ivermectin and memantazol",
+        "mention_role": "advertised",
+        "product_name": "Wellness Company RX parasite cleanse",
+        "product_type": "medication",
+        "start_unit_id": "u000424"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Salmon naturally contains more than 70 parasites.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000420",
+        "evidence_quote": "Salmon is one of the most popular fish worldwide, but it naturally contains more than 70 parasites",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific, checkable food-safety claim about the parasite content of salmon that supports the product pitch.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000420",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Most of the parasites in salmon are tiny, nearly impossible to see, and make their way into the human body.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000421",
+        "evidence_quote": "Most are tiny and nearly impossible to see, and they're making their way into the human body",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claims a hidden exposure pathway for parasites from a popular food, making the advertised cleanse seem necessary.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000420",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Once inside the body, parasites can hide for years and frequently lay eggs before any symptoms appear.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000422",
+        "evidence_quote": "Once inside, parasites can hide for years while frequently laying eggs before any symptoms appear",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:parasites_cause_disease"
+        ],
+        "rationale": "A checkable claim about parasite behavior and delayed symptoms that justifies preventative cleansing.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000422",
+        "topic_ids": [
+          "topic:detox.parasite_cleanses",
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ivermectin paralyzes the parasite's nervous system, while memantazol starves them.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000426",
+        "evidence_quote": "Ivermectin paralyzes the parasite's nervous system, while memantazol starves them",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific mechanism-of-action claim about the advertised drug combination that could be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000426",
+        "topic_ids": [
+          "topic:detox.parasite_cleanses",
+          "topic:medications.repurposed_offlabel"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Each capsule contains 25 milligrams of ivermectin and 250 milligrams of memantazol.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000427",
+        "evidence_quote": "Each capsule contains 25 milligrams of ivermectin and 250 milligrams of memantazol",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable composition claim about the product's dosage.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000427",
+        "topic_ids": [
+          "topic:detox.parasite_cleanses",
+          "topic:medications.repurposed_offlabel"
+        ]
+      }
+    ],
+    "window_id": "episode_44395_window_0007"
+  },
+  "stored_at": "2026-10-04T22:36:31.257518+00:00"
+}

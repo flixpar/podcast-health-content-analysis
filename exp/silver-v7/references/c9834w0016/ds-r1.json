@@ -1,0 +1,470 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c9834w0016",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000716",
+        "evidence_quote": "They also are big on colloidal silver and old supplements",
+        "label_ids": [
+          "topic:alt_medicine.fringe_ingested_remedies"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000713",
+        "summary": "The group sells colloidal silver and old supplements."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000716",
+        "evidence_quote": "they claim that it can cure COVID",
+        "label_ids": [
+          "topic:covid.treatments"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000716",
+        "summary": "They claim their colloidal silver cures COVID."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000716",
+        "evidence_quote": "they claim that it can cure COVID",
+        "label_ids": [
+          "narrative:fringe_chemical_cures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000716",
+        "summary": "Colloidal silver is invoked as a chemical cure for COVID."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000719",
+        "evidence_quote": "getting a letter from the FDA saying you have to stop claiming this",
+        "label_ids": [
+          "topic:health_system.regulators"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000717",
+        "summary": "The FDA ordered them to stop selling and claiming; they kept going until the products vanished."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000721",
+        "evidence_quote": "turmeric cures diabetes",
+        "label_ids": [
+          "topic:metabolic.diabetes",
+          "topic:supplements.herbal_adaptogens"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000721",
+        "summary": "The group claims turmeric cures diabetes."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000721",
+        "evidence_quote": "lemon and baking soda cures cancer",
+        "label_ids": [
+          "topic:cancer",
+          "topic:cancer_alt.natural_remedies"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000721",
+        "summary": "The group claims lemon and baking soda cure cancer."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000721",
+        "evidence_quote": "staring into the sun makes you go blind",
+        "label_ids": [
+          "topic:radiation_light.sunlight_uv",
+          "topic:sensory.vision"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000721",
+        "summary": "The group denies that staring at the sun causes blindness."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000723",
+        "evidence_quote": "stare into the sun to receive healing quote unquote l like codes",
+        "label_ids": [
+          "topic:alt_medicine.energy_spiritual_healing",
+          "topic:radiation_light.sunlight_uv"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000723",
+        "summary": "The group claims sun gazing delivers healing codes and burns away inner darkness."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000721",
+        "evidence_quote": "lemon and baking soda cures cancer",
+        "label_ids": [
+          "narrative:fringe_chemical_cures",
+          "narrative:natural_remedy_cures_cancer"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000721",
+        "summary": "The cancer-cure claim is relayed as the group's remedy claim."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000723",
+        "evidence_quote": "stare into the sun to receive healing quote unquote l like codes",
+        "label_ids": [
+          "narrative:sun_exposure_cures"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000723",
+        "summary": "The sun-gazing healing claim is relayed."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000721",
+        "evidence_quote": "it's a myth that staring into the sun makes you go blind",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000721",
+        "summary": "The group frames the blindness warning as a myth."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000723",
+        "evidence_quote": "burns away the darkness inside you",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000723",
+        "summary": "The sun-gazing claim is framed in spiritual language."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000725",
+        "evidence_quote": "you don't have to worry about having heart attacks because it's just your heart expanding",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000725",
+        "summary": "The group claims heart attacks are just the heart expanding."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000726",
+        "evidence_quote": "it's just a bunch of super dangerous and very crazy",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000726",
+        "summary": "Host rejects the alternative claims as dangerous non-medical theories."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000733",
+        "evidence_quote": "she's been raped several times",
+        "label_ids": [
+          "topic:acute_care.violence_abuse"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000733",
+        "summary": "Amy's claim of being raped is mentioned as background."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000740",
+        "evidence_quote": "maybe from all the coloidal silver that she's constantly ingesting",
+        "label_ids": [
+          "topic:alt_medicine.fringe_ingested_remedies"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000735",
+        "summary": "Colloidal silver ingestion is discussed as a possible cause of Amy's decline."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000735",
+        "evidence_quote": "probably maybe from the drinking",
+        "label_ids": [
+          "topic:alcohol.health_effects"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000735",
+        "summary": "Drinking is floated as a possible cause of Amy's decline."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000736",
+        "evidence_quote": "she seems to be paralyzed from the waist down",
+        "label_ids": [
+          "topic:neuro.nerve_spinal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000736",
+        "summary": "Amy appears paralyzed from the waist down."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000752",
+        "evidence_quote": "they refuse to take her",
+        "label_ids": [
+          "topic:health_system.hospitals_access"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000747",
+        "summary": "Followers refuse to take Amy to a doctor or hospital."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000752",
+        "evidence_quote": "the cabal comes in kills her and represses the truth",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000750",
+        "summary": "The cult's hijacking conspiracy is relayed as the reason for refusing hospital care."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000756",
+        "evidence_quote": "The members say she has cancer",
+        "label_ids": [
+          "topic:cancer"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000756",
+        "summary": "Followers say Amy has cancer without a medical diagnosis."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000758",
+        "evidence_quote": "they turn the police and the ambulances away",
+        "label_ids": [
+          "topic:health_system.hospitals_access"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000758",
+        "summary": "Amy's mother's wellness checks are blocked and ambulances turned away."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000761",
+        "evidence_quote": "her cause of death is as yet to be determined",
+        "label_ids": [
+          "topic:acute_care.death_dying"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000761",
+        "summary": "Cause of death is pending due to missing records and body condition."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Colloidal silver can cure COVID-19.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000716",
+        "evidence_quote": "they claim that it can cure COVID",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:fringe_chemical_cures"
+        ],
+        "rationale": "Efficacy claim for colloidal silver against COVID is checkable against clinical evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000716",
+        "topic_ids": [
+          "topic:alt_medicine.fringe_ingested_remedies",
+          "topic:covid.treatments"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Turmeric cures diabetes.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000721",
+        "evidence_quote": "turmeric cures diabetes",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claim that turmeric cures diabetes is checkable and could affect treatment decisions.",
+        "relevance": "passing",
+        "start_unit_id": "u000721",
+        "topic_ids": [
+          "topic:metabolic.diabetes",
+          "topic:supplements.herbal_adaptogens"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Lemon and baking soda cures cancer.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000721",
+        "evidence_quote": "lemon and baking soda cures cancer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:fringe_chemical_cures",
+          "narrative:natural_remedy_cures_cancer"
+        ],
+        "rationale": "Cancer-cure claim is checkable and dangerous if followed.",
+        "relevance": "passing",
+        "start_unit_id": "u000721",
+        "topic_ids": [
+          "topic:cancer",
+          "topic:cancer_alt.natural_remedies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Staring into the sun does not make you go blind.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000721",
+        "evidence_quote": "it's a myth that staring into the sun makes you go blind",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "Safety claim about sun exposure and blindness is checkable.",
+        "relevance": "passing",
+        "start_unit_id": "u000721",
+        "topic_ids": [
+          "topic:radiation_light.sunlight_uv",
+          "topic:sensory.vision"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Heart attacks are just the heart expanding.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000725",
+        "evidence_quote": "you don't have to worry about having heart attacks because it's just your heart expanding",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanism claim about heart attacks is checkable and could discourage emergency care.",
+        "relevance": "passing",
+        "start_unit_id": "u000725",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ingesting colloidal silver was turning Amy gray-blue.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000740",
+        "evidence_quote": "she was kind of turning a gray blue from how much cloidal silver she was ingesting",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The causal link between colloidal silver and gray-blue skin (argyria) can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000740",
+        "topic_ids": [
+          "topic:alt_medicine.fringe_ingested_remedies"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "members say"
+        ],
+        "claim_text": "Amy has cancer.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000756",
+        "evidence_quote": "The members say she has cancer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A reported cancer diagnosis for a publicized cult figure is checkable against records.",
+        "relevance": "passing",
+        "start_unit_id": "u000756",
+        "topic_ids": [
+          "topic:cancer"
+        ]
+      }
+    ],
+    "window_id": "episode_9834_window_0016"
+  },
+  "stored_at": "2026-10-04T22:13:53.911523+00:00"
+}

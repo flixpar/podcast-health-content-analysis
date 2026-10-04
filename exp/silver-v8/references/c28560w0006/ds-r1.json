@@ -1,0 +1,262 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c28560w0006",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000261",
+        "evidence_quote": "at least 93.2% of American adults have at least one biomarker of metabolic dysfunction",
+        "label_ids": [
+          "topic:metabolic.mitochondria_energy",
+          "topic:wellness.chronic_disease_trends"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000218",
+        "summary": "Speaker explains that metabolic and mitochondrial dysfunction underlies a wide range of chronic diseases in American adults."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000251",
+        "evidence_quote": "in each of those cells, there is likely a metabolic problem, an underpowering mitochondrial dysfunction",
+        "label_ids": [
+          "narrative:metabolic_dysfunction_root"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000227",
+        "summary": "Speaker asserts that metabolic and mitochondrial dysfunction is the underlying cause of nearly all chronic disease."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "if you zoom in on what's happening inside the cell",
+        "label_ids": [
+          "frame:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000228",
+        "summary": "Speaker contrasts medicine's disease-by-disease approach with a single metabolic problem inside cells."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000243",
+        "evidence_quote": "The industrialization, the eighty thousand plus synthetic chemicals",
+        "label_ids": [
+          "frame:naturalness_appeal",
+          "frame:toxin_purity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000235",
+        "summary": "Speaker blames synthetic chemicals, environmental toxins and artificial light for metabolic dysfunction."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000261",
+        "evidence_quote": "it is also a spiritual crisis because we are underpowered bodies",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000253",
+        "summary": "Speaker frames metabolic dysfunction as a spiritual crisis of dimmed life force and blocked energy."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000219",
+        "evidence_quote": "that is research that came out a couple years ago",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000218",
+        "summary": "The 93.2% statistic is attributed only to research from a couple of years ago."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "what we know now from the most recent research",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000232",
+        "summary": "The claim that every diseased cell has a metabolic problem is attributed to 'most recent research'."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000222",
+        "evidence_quote": "anything that doesn't have enough power is going to become dysfunctional",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000220",
+        "summary": "Speaker explains that underpowered cells become dysfunctional."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "At least 93.2% of American adults have at least one biomarker of metabolic dysfunction.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000219",
+        "evidence_quote": "at least 93.2% of American adults have at least one biomarker of metabolic dysfunction",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific prevalence statistic that can be checked against the underlying research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000218",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "would"
+        ],
+        "claim_text": "An underpowered ovarian cell would manifest as infertility, menstrual irregularity, or hormone dysfunction.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000224",
+        "evidence_quote": "if a ovarian cell is underpowered, it would look like some set of symptoms",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic causal claim about mitochondrial dysfunction and gynecological symptoms.",
+        "relevance": "substantive",
+        "start_unit_id": "u000224",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could"
+        ],
+        "claim_text": "An underpowered brain cell could cause migraines, chronic pain, fibromyalgia, Alzheimer's dementia, neurodevelopmental disorders, depression, or anxiety.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000226",
+        "evidence_quote": "if a brain cell is underpowered, metabolically dysfunctional, well, depending on which brain cell it is, it could look like a lot of different things",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic causal claim linking brain-cell metabolic dysfunction to a list of conditions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000225",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "likely"
+        ],
+        "claim_text": "In each of the diseased cells in conditions like infertility and brain disorders, there is likely a metabolic problem—an underpowering mitochondrial dysfunction.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "in each of those cells, there is likely a metabolic problem, an underpowering mitochondrial dysfunction",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:root_cause_framing"
+        ],
+        "narrative_ids": [
+          "narrative:metabolic_dysfunction_root"
+        ],
+        "rationale": "The core root-cause claim that a single mitochondrial dysfunction underlies many diseases.",
+        "relevance": "substantive",
+        "start_unit_id": "u000232",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Changes over the last hundred years—industrialization, synthetic chemicals, technology, sleep disruption, chronic stress, sedentary lifestyles, environmental toxins, artificial light, and microbiome decimation—have damaged mitochondria and caused metabolic dysfunction in many Americans.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000245",
+        "evidence_quote": "all of those different vectors uniquely hurt our mitochondria, and that is why so many Americans have metabolic dysfunction right now",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:naturalness_appeal",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [
+          "narrative:metabolic_dysfunction_root"
+        ],
+        "rationale": "Causal claim attributing population metabolic dysfunction to modern lifestyle and environmental exposures.",
+        "relevance": "substantive",
+        "start_unit_id": "u000233",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "More than 80,000 synthetic chemicals created in factories are present in our food, water, air, and personal care products.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000236",
+        "evidence_quote": "the eighty thousand plus synthetic chemicals that are now created in factories that live in our food, water, air, personal care products",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:naturalness_appeal",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable number about the chemical environment and its presence in everyday products.",
+        "relevance": "substantive",
+        "start_unit_id": "u000236",
+        "topic_ids": [
+          "topic:environment"
+        ]
+      }
+    ],
+    "window_id": "episode_28560_window_0006"
+  },
+  "stored_at": "2026-10-04T22:36:31.060864+00:00"
+}

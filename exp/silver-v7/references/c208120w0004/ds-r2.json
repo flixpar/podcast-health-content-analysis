@@ -1,0 +1,203 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c208120w0004",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000188",
+        "evidence_quote": "He had been killing infants outside the womb",
+        "label_ids": [
+          "topic:fertility.abortion"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "summary": "The hosts use the Gosnell case to argue that Democrats and the media tolerate late-term abortion and infanticide."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000169",
+        "evidence_quote": "the media ignored the the Gosnell story",
+        "label_ids": [
+          "frame:media_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "summary": "The host accuses the media of ignoring the Gosnell story."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "killing a fully developed infant",
+        "label_ids": [
+          "population:infants"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000171",
+        "summary": "The discussion concerns infants, from infants killed in the Gosnell case to newborn resuscitation decisions."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000188",
+        "evidence_quote": "Democrats didn't appear to be that upset about it",
+        "label_ids": [
+          "frame:political_partisan"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000173",
+        "summary": "The hosts frame the abortion issue as a Democratic willingness to tolerate infanticide."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000208",
+        "evidence_quote": "what Northam is saying is that the infant will be resuscitated only if the mother wants it",
+        "label_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000181",
+        "summary": "The hosts invoke the contested claim that abortion supporters see no difference between late-term abortion and killing a born infant, and that Northam's comments endorse letting newborns die."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "So they could just let the baby die right there, and that is infanticide",
+        "label_ids": [
+          "topic:fertility.abortion"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000189",
+        "summary": "The hosts parse Ralph Northam's born-alive comments and argue that letting a newborn die rather than resuscitating it is infanticide."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000220",
+        "evidence_quote": "Babies have to be resuscitated after they're delivered all the time",
+        "label_ids": [
+          "topic:pediatrics.infant_care"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000209",
+        "summary": "The hosts explain that newborns routinely need resuscitation or immediate medical attention after delivery."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000231",
+        "evidence_quote": "give him Heimlich",
+        "label_ids": [
+          "topic:acute_care.wounds_first_aid"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000224",
+        "summary": "The host compares letting a newborn die to letting a choking four-year-old die without giving the Heimlich."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Kermit Gosnell killed infants outside the womb and chopped them up, leaving body parts.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "He had been killing infants outside the womb, chopping them up, leaving body parts",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The allegations against Gosnell can be checked against court records and news coverage.",
+        "relevance": "substantive",
+        "start_unit_id": "u000171",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Women were dying in Gosnell's clinic.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "Women were dying",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Patient deaths connected to the clinic can be checked against the criminal case.",
+        "relevance": "substantive",
+        "start_unit_id": "u000173",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Northam said that a born-alive infant would be resuscitated only if the mother wanted it.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000201",
+        "evidence_quote": "And what Northam is saying is that the infant will be resuscitated only if the mother wants it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "The attribution to Northam can be checked against his public remarks.",
+        "relevance": "substantive",
+        "start_unit_id": "u000200",
+        "topic_ids": [
+          "topic:fertility.abortion",
+          "topic:pediatrics.infant_care"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Babies have to be resuscitated after they are delivered all the time, though not in the majority of births.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "Babies have to be resuscitated after they're delivered all the time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The frequency of newborn resuscitation can be checked against obstetric and pediatric data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000209",
+        "topic_ids": [
+          "topic:pediatrics.infant_care"
+        ]
+      }
+    ],
+    "window_id": "episode_208120_window_0004"
+  },
+  "stored_at": "2026-10-04T22:13:55.456531+00:00"
+}

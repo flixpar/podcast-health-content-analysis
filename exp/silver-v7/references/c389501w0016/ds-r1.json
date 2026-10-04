@@ -1,0 +1,86 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c389501w0016",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000909",
+        "evidence_quote": "the COVID investigations with China, which unleashed a virus. From Wuhan on the world",
+        "label_ids": [
+          "topic:covid.origins"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000892",
+        "summary": "Host criticizes Biden for not pressing China on the COVID origins investigation and plays Psaki's response."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000895",
+        "evidence_quote": "which unleashed a virus. From Wuhan on the world",
+        "label_ids": [
+          "narrative:covid_lab_leak"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000894",
+        "summary": "Host asserts that China unleashed the COVID virus from Wuhan, invoking the contested Wuhan-origin claim."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "China unleashed a virus from Wuhan on the world.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000895",
+        "evidence_quote": "which unleashed a virus. From Wuhan on the world",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:covid_lab_leak"
+        ],
+        "rationale": "Whether China released the pandemic virus from Wuhan is the central contested question in the COVID origins debate.",
+        "relevance": "substantive",
+        "start_unit_id": "u000894",
+        "topic_ids": [
+          "topic:covid.origins"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The virus from Wuhan has killed some four million people.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000895",
+        "evidence_quote": "which has killed some four million people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The global COVID death toll is a checkable statistic used here to argue the pandemic's severity.",
+        "relevance": "passing",
+        "start_unit_id": "u000894",
+        "topic_ids": [
+          "topic:covid.illness_severity"
+        ]
+      }
+    ],
+    "window_id": "episode_389501_window_0016"
+  },
+  "stored_at": "2026-10-04T22:13:53.616298+00:00"
+}

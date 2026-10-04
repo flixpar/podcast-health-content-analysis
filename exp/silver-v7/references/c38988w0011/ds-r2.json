@@ -1,0 +1,224 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c38988w0011",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000726",
+        "evidence_quote": "That's behind the trans movement: is that we are actually going to change the chromosomal makeup itself",
+        "label_ids": [
+          "topic:gender.gender_identity_science"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000725",
+        "summary": "Hosts claim the trans movement seeks to change chromosomal makeup."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000766",
+        "evidence_quote": "we saw Gates on the name with the whole COVID thing that started in oh nine",
+        "label_ids": [
+          "topic:covid.pandemic_institutions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000758",
+        "summary": "Hosts reference Gates's involvement in COVID in conspiratorial terms."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000788",
+        "evidence_quote": "the mRNA gene altering shot that they call the vaccine is we're going to change your DNA",
+        "label_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000769",
+        "summary": "Hosts argue the mRNA COVID vaccine alters DNA and is dangerous, citing Malone and McCullough's warnings."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000770",
+        "evidence_quote": "the mRNA gene altering shot that they call the vaccine is we're going to change your DNA",
+        "label_ids": [
+          "narrative:mrna_alters_dna"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000769",
+        "summary": "The claim that the mRNA vaccine changes DNA is asserted."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000788",
+        "evidence_quote": "the odds of you dying from this are very high. It may say heart attack, stroke",
+        "label_ids": [
+          "narrative:covid_vaccine_deaths"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000787",
+        "summary": "Malone is quoted warning of very high death odds and heart attack or stroke from the vaccine."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000785",
+        "evidence_quote": "they push this down",
+        "label_ids": [
+          "narrative:vaccine_injury_hidden"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000784",
+        "summary": "Warnings about vaccine danger are described as pushed down."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000769",
+        "evidence_quote": "I'm trying to change what God has designed",
+        "label_ids": [
+          "frame:naturalness_appeal",
+          "frame:spiritual_religious"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000767",
+        "summary": "The mRNA vaccine is framed as an attempt to redesign what God has designed."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000785",
+        "evidence_quote": "they push this down",
+        "label_ids": [
+          "frame:censorship_suppression"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000784",
+        "summary": "The speakers say vaccine warnings are being suppressed."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000766",
+        "evidence_quote": "they kind of operate with their own kind of hive consciousness",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000757",
+        "summary": "Gates and 'top guys' are portrayed as a coordinated cabal behind COVID."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000787",
+        "evidence_quote": "a vaccinologist like him does not go on a podcast unless there's really something wrong",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000778",
+        "summary": "The hosts invoke Malone's and McCullough's credentials as vaccinologists to argue the vaccine is dangerous."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The mRNA vaccine changes your DNA.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000769",
+        "evidence_quote": "the mRNA gene altering shot that they call the vaccine is we're going to change your DNA",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:mrna_alters_dna"
+        ],
+        "rationale": "A central claim that mRNA COVID vaccines alter DNA, checkable against molecular biology.",
+        "relevance": "substantive",
+        "start_unit_id": "u000769",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The odds of dying from the COVID vaccine are very high.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000787",
+        "evidence_quote": "the odds of you dying from this are very high",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:covid_vaccine_deaths"
+        ],
+        "rationale": "A specific, checkable claim about vaccine mortality risk.",
+        "relevance": "substantive",
+        "start_unit_id": "u000787",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "may"
+        ],
+        "claim_text": "The vaccine may cause heart attack and stroke.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000788",
+        "evidence_quote": "It may say heart attack, stroke",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:covid_vaccine_deaths"
+        ],
+        "rationale": "A specific, checkable claim about cardiovascular harms from the vaccine.",
+        "relevance": "substantive",
+        "start_unit_id": "u000788",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ]
+      }
+    ],
+    "window_id": "episode_38988_window_0011"
+  },
+  "stored_at": "2026-10-04T22:13:55.777425+00:00"
+}

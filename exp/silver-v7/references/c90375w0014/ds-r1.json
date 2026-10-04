@@ -1,0 +1,220 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c90375w0014",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001194",
+        "evidence_quote": "They believe that food shouldn't be complicated, especially chicken",
+        "label_ids": [
+          "topic:food.meat_animal_foods"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001177",
+        "summary": "Sponsor read for Nature Raised Farms chicken, a poultry product ad with nutrition and ingredient claims."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001192",
+        "evidence_quote": "There are no seed oils and no artificial ingredients",
+        "label_ids": [
+          "topic:food.fats_oils"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001189",
+        "summary": "The ad advertises the absence of seed oils and states the product's fat content per serving."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001194",
+        "evidence_quote": "This episode is sponsored by Nature Raised Farms",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001177",
+        "summary": "A paid sponsor read for Nature Raised Farms."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001181",
+        "evidence_quote": "Thank goodness for nature-raised farms. They believe that food shouldn't be complicated, especially chicken",
+        "label_ids": [
+          "frame:naturalness_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001180",
+        "summary": "The ad recommends the product through a nature and simplicity appeal."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001189",
+        "evidence_quote": "nature-raised farms is free from gluten, dairy, and soy",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001188",
+        "summary": "The ad frames the product as pure by being free from gluten, dairy, soy, seed oils and artificial ingredients."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001190",
+        "evidence_quote": "There are no seed oils and no artificial ingredients",
+        "label_ids": [
+          "narrative:seed_oils_toxic"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001189",
+        "summary": "Marketing the absence of seed oils invokes the seed-oils-are-toxic narrative."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001194",
+        "evidence_quote": "This episode is sponsored by Nature Raised Farms",
+        "mention_role": "advertised",
+        "product_name": "Nature Raised Farms",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u001177"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms chicken is free from gluten, dairy, and soy.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001189",
+        "evidence_quote": "nature-raised farms is free from gluten, dairy, and soy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product composition claim that can be checked against the product's ingredients.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001188",
+        "topic_ids": [
+          "topic:food.meat_animal_foods"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms chicken contains no seed oils.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001190",
+        "evidence_quote": "There are no seed oils",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [
+          "narrative:seed_oils_toxic"
+        ],
+        "rationale": "A product composition claim that can be checked against the product's ingredients.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001189",
+        "topic_ids": [
+          "topic:food.fats_oils",
+          "topic:food.meat_animal_foods"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms chicken contains no artificial ingredients.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001190",
+        "evidence_quote": "no artificial ingredients",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product composition claim that can be checked against the product's ingredients.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001189",
+        "topic_ids": [
+          "topic:food.meat_animal_foods"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms chicken is a good source of fiber.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001192",
+        "evidence_quote": "Chicken is a good source of fiber",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A nutritional-content claim that can be checked against the product's nutrition facts.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001192",
+        "topic_ids": [
+          "topic:food.meat_animal_foods"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms chicken has only between eight to twelve grams of fat per serving, depending on the product.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001192",
+        "evidence_quote": "only between eight to twelve grams of fat per serving, depending on the product",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A nutritional-content claim that can be checked against the product's nutrition facts.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001192",
+        "topic_ids": [
+          "topic:food.fats_oils",
+          "topic:food.meat_animal_foods"
+        ]
+      }
+    ],
+    "window_id": "episode_90375_window_0014"
+  },
+  "stored_at": "2026-10-04T22:13:53.877273+00:00"
+}

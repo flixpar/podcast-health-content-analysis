@@ -1,0 +1,79 @@
+{
+  "api": "chat_completions",
+  "benchmark_version": "v2",
+  "completed_at": "2026-10-04T21:41:54.754899+00:00",
+  "concurrency": 256,
+  "config": "benchmark/pipeline-local.toml",
+  "created_at": "2026-10-04T19:19:28.393789+00:00",
+  "endpoints": {
+    "http://127.0.0.1:8222/v1": "deepseek-ai/DeepSeek-V4-Flash-0731"
+  },
+  "experiment": null,
+  "git_commit": "9339305ef8cfe76869b8f1a89166885cb4106f99",
+  "items": 320,
+  "items_hash": "44b9fa900dffd792bb695f88c8fbf4d6b646073a7c603bcf83fa51f3818ef6d8",
+  "max_output_tokens": 80000,
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "name": "v7-low-b24k",
+  "no_auth": true,
+  "notes": null,
+  "prompt_version": "granular-v7:0406a404e1c06f54",
+  "provider": null,
+  "reasoning_effort": "low",
+  "repeat_summaries": [
+    {
+      "attempts": {
+        "accepted": 320,
+        "attempts": 322,
+        "rejected:empty_output": 1,
+        "rejected:window_id_mismatch": 1
+      },
+      "exported": 320,
+      "repeat": 0,
+      "stopped_by_usage_limit": null,
+      "unresolved_windows": 0,
+      "unresolved_windows_by_kind": {},
+      "validation_changes": {
+        "dropped": {
+          "invalid_field": 4,
+          "non_verbatim_quote": 49,
+          "span_out_of_window": 78
+        },
+        "repaired": {
+          "certainty_marker_dropped": 1,
+          "span_widened_for_certainty_marker": 1,
+          "span_widened_for_quote": 249
+        }
+      },
+      "wall_seconds": 8546.3,
+      "window_labels_sha256": "6036b54cb4964ec32c2e38af5a8afa11b1aa2182714debce7e6d79245d666bac",
+      "windows_labeled": 320
+    }
+  ],
+  "repeats": 1,
+  "rubric_file": null,
+  "rubric_sha256": "d833386a89af0025c900f10860cb9cad3e02afe4fc8be2486d752e130cf955ad",
+  "run_fingerprint": "c539cda26ec08a0d368a2f2f8a4a6fec02c41626d8bea29b4ef4bc350f5e3742",
+  "schema_version": "topic-labeling-v5",
+  "seed": null,
+  "stopped_by_usage_limit": null,
+  "taxonomy_sha256": "2d89f0f640b5d11ec6f74e98683cbca1dd6b9fb5674d95b0ae1f33e8b5ed8b51",
+  "temperature": 1.0,
+  "thinking_token_budget": 24000,
+  "top_p": 0.95,
+  "usage_limits": null,
+  "validation": "lenient",
+  "validation_changes": {
+    "dropped": {
+      "invalid_field": 4,
+      "non_verbatim_quote": 49,
+      "span_out_of_window": 78
+    },
+    "repaired": {
+      "certainty_marker_dropped": 1,
+      "span_widened_for_certainty_marker": 1,
+      "span_widened_for_quote": 249
+    }
+  },
+  "validator_sha256": "e74161b4d1980b357a06e1d7e7eed1b8f05de441c5b106a923b76497c581a929"
+}

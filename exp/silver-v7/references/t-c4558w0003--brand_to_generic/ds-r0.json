@@ -1,0 +1,174 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "t-c4558w0003--brand_to_generic",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000120",
+        "evidence_quote": "all the records of vaccination and then the subsequent health claims",
+        "label_ids": [
+          "topic:vaccines.safety_injury"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "Speaker describes plans to study vaccine safety by using CDC, CMS and Vaccine Safety Data Link records and opening the data to independent researchers."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "unlike the rest of this country's corrupted food supply, corn chips have no seed oils whatsoever",
+        "label_ids": [
+          "topic:food.fats_oils",
+          "topic:food.ultra_processed"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000123",
+        "summary": "Sponsor read for Corn chips contrasts the product with typical seed-oil-laden snack chips and calls the wider food supply corrupted."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "Visit corn chips dot com slash Tucker",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000121",
+        "summary": "Sponsor read with a product URL and discount code."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "chemically-laced, seed oil-infused crap",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000125",
+        "summary": "Chips and the broader food supply are framed in terms of chemical contamination and purity."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "endorsed by nutrition experts around the country",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000139",
+        "summary": "The ad invokes nutrition experts as endorsing the product."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000144",
+        "evidence_quote": "It's called corn chips",
+        "mention_role": "advertised",
+        "product_name": "Corn chips",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000129"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "no seed oils whatsoever"
+        ],
+        "claim_text": "Corn chips have no seed oils whatsoever.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "corn chips have no seed oils whatsoever",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific product composition claim that can be checked against the product label.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000134",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Corn chips contain almost nothing except a few basic ingredients.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000135",
+        "evidence_quote": "they have almost nothing in them except a few basic ingredients",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about the product's ingredient simplicity.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000135",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Corn chips are not bad for you.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "So they're not bad for you",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general health-safety claim about the product that could affect purchasing decisions.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000137",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Vaccine Safety Data Link is the biggest repository for HMO health records.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000110",
+        "evidence_quote": "the Vaccine Safety Data Link, which is the biggest repository for HMO health records",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A factual claim about the size and nature of a federal vaccine safety database.",
+        "relevance": "substantive",
+        "start_unit_id": "u000110",
+        "topic_ids": [
+          "topic:vaccines.safety_injury"
+        ]
+      }
+    ],
+    "window_id": "episode_4558_window_0003_brand_to_generic"
+  },
+  "stored_at": "2026-10-04T22:13:49.991192+00:00"
+}

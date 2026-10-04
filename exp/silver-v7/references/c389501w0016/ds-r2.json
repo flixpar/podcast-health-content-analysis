@@ -1,0 +1,84 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c389501w0016",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000908",
+        "evidence_quote": "intel agency-led investigation into the origins of COVID",
+        "label_ids": [
+          "topic:covid.origins"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000892",
+        "summary": "Host criticizes Biden for not pressing China on a U.S. intelligence-led investigation into COVID-19's origins."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000895",
+        "evidence_quote": "which has killed some four million people",
+        "label_ids": [
+          "topic:covid.illness_severity"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000894",
+        "summary": "Host notes the Wuhan virus has killed around four million people."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "China unleashed a virus from Wuhan on the world.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000895",
+        "evidence_quote": "with China, which unleashed a virus. From Wuhan",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim assigns responsibility for releasing the pandemic virus from Wuhan, which is checkable but contested.",
+        "relevance": "passing",
+        "start_unit_id": "u000894",
+        "topic_ids": [
+          "topic:covid.origins"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The virus from Wuhan has killed some four million people.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000895",
+        "evidence_quote": "which has killed some four million people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The global COVID death toll is a checkable mortality figure.",
+        "relevance": "passing",
+        "start_unit_id": "u000895",
+        "topic_ids": [
+          "topic:covid.illness_severity"
+        ]
+      }
+    ],
+    "window_id": "episode_389501_window_0016"
+  },
+  "stored_at": "2026-10-04T22:13:55.773926+00:00"
+}

@@ -1,0 +1,128 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c163975w0007",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000545",
+        "evidence_quote": "With LabCorp On Demand, you can purchase the health tests",
+        "label_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000538",
+        "summary": "Sponsor read pitches LabCorp On Demand consumer lab tests that can be ordered without a doctor visit."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000545",
+        "evidence_quote": "visit ondemand.labcorp.com/football and use the code football to save up to 15% on select tests",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000538",
+        "summary": "Sponsor read includes a discount code for LabCorp On Demand."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000541",
+        "evidence_quote": "more than a hundred science-backed lab tests",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000541",
+        "summary": "The ad describes its lab tests as science-backed."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000542",
+        "evidence_quote": "from a lab that doctors trust",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000542",
+        "summary": "The ad invokes doctors' trust in the lab."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000545",
+        "evidence_quote": "With LabCorp On Demand, you can purchase the health tests",
+        "mention_role": "advertised",
+        "product_name": "LabCorp On Demand",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000538"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "LabCorp On Demand offers more than a hundred science-backed lab tests.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000541",
+        "evidence_quote": "more than a hundred science-backed lab tests",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The number of tests and the claim that they are science-backed can be checked against LabCorp On Demand's offerings.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000541",
+        "topic_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "LabCorp provides accurate lab test results.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000542",
+        "evidence_quote": "you will get results that are accurate, easy to understand, and from a lab that doctors trust",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A claim about lab test accuracy is checkable and bears on medical decisions.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000542",
+        "topic_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ]
+      }
+    ],
+    "window_id": "episode_163975_window_0007"
+  },
+  "stored_at": "2026-10-04T22:13:54.697850+00:00"
+}

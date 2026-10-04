@@ -1,0 +1,54 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c322584w0021",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001460",
+        "evidence_quote": "it's not a long procedure, and local anesthetic is used",
+        "label_ids": [
+          "topic:fertility.contraception",
+          "topic:procedures.surgery_hospital"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001451",
+        "summary": "Hosts joke about a vasectomy, mentioning that it is a short procedure done under local anesthetic and that the podcast helped distract from it."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A vasectomy uses local anesthetic.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001451",
+        "evidence_quote": "local anesthetic is used",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The anesthesia used for a vasectomy is a checkable fact that could inform someone's decision about the procedure.",
+        "relevance": "passing",
+        "start_unit_id": "u001451",
+        "topic_ids": [
+          "topic:fertility.contraception",
+          "topic:procedures.surgery_hospital"
+        ]
+      }
+    ],
+    "window_id": "episode_322584_window_0021"
+  },
+  "stored_at": "2026-10-04T22:36:31.123621+00:00"
+}

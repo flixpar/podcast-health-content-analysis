@@ -1,0 +1,189 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c128911w0034",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003027",
+        "evidence_quote": "I'm starting to get the shooting pain down my right leg",
+        "label_ids": [
+          "topic:musculoskeletal.back_neck_posture",
+          "topic:neuro.nerve_spinal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002957",
+        "summary": "Hosts discuss his lower back injury, shooting leg pain, suspected bulging disc and sciatic nerve involvement."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002971",
+        "evidence_quote": "every doctor is busy shooting people up with 5G",
+        "label_ids": [
+          "topic:vaccines.covid_vaccines"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002971",
+        "summary": "A joke about doctors giving 5G shots invokes and mocks a vaccine conspiracy."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002971",
+        "evidence_quote": "every doctor is busy shooting people up with 5G",
+        "label_ids": [
+          "narrative:vaccine_microchips_5g"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002971",
+        "summary": "Speaker jokes that doctors are busy injecting 5G, mocking the microchip-vaccine conspiracy."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002975",
+        "evidence_quote": "I've been taking muscle relaxers at night",
+        "label_ids": [
+          "topic:medications.other_drugs"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002975",
+        "summary": "Speaker mentions taking muscle relaxers at night for the back pain."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003003",
+        "evidence_quote": "You have to start stretching, like all the time",
+        "label_ids": [
+          "topic:musculoskeletal.rehab_manual_therapy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002991",
+        "summary": "Hosts advise stretching, exercise and core work to manage the back injury."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003014",
+        "evidence_quote": "Just rubbing CBD on my spine",
+        "label_ids": [
+          "topic:psychoactives.cannabis"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003014",
+        "summary": "Topical CBD is mentioned as a back-pain remedy."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "unclear",
+        "end_unit_id": "u003039",
+        "evidence_quote": "Some HGH",
+        "label_ids": [
+          "topic:endocrine.other_hormones"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003032",
+        "summary": "A joking mention of using HGH for the speaker's back."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u003042",
+        "evidence_quote": "Billy convinced me I had COVID on Sunday",
+        "label_ids": [
+          "topic:covid.illness_severity"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003042",
+        "summary": "Speaker says Billy convinced him he had COVID."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003053",
+        "evidence_quote": "I puked twice, and then I was fine on Saturday night",
+        "label_ids": [
+          "topic:infectious.foodborne"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003046",
+        "summary": "Speaker recounts a brief food-poisoning episode after Chinese food."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u003069",
+        "evidence_quote": "Billy also said muscle aches and back aches are a sign of COVID",
+        "label_ids": [
+          "topic:covid.illness_severity"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u003069",
+        "summary": "Billy's claim that back and muscle aches are a COVID sign is relayed and mocked."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A bulging disc will slowly go down, and then it will be with you for the rest.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u003026",
+        "evidence_quote": "It will slowly go down, and then it will be with you for the rest",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A prognosis about the long-term course of a bulging disc that could affect expectations.",
+        "relevance": "substantive",
+        "start_unit_id": "u003026",
+        "topic_ids": [
+          "topic:musculoskeletal.back_neck_posture"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Muscle aches and back aches are a sign of COVID.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u003069",
+        "evidence_quote": "Billy also said muscle aches and back aches are a sign of COVID",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable symptom claim about COVID, relayed and mocked by the hosts.",
+        "relevance": "passing",
+        "start_unit_id": "u003069",
+        "topic_ids": [
+          "topic:covid.illness_severity"
+        ]
+      }
+    ],
+    "window_id": "episode_128911_window_0034"
+  },
+  "stored_at": "2026-10-04T22:36:32.254227+00:00"
+}

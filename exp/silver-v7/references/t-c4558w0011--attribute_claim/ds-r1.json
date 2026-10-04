@@ -1,0 +1,519 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "t-c4558w0011--attribute_claim",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000564",
+        "evidence_quote": "It's called the Pod Five. It's an original and innovative mattress cover plus a blanket that uses precision temperature",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "summary": "Sponsor read for the Eight Sleep Pod Five mattress cover and blanket, claiming temperature-controlled sleep improvement."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "it also detects snoring, and then it adjusts your bed position to reduce or. Completely stop it",
+        "label_ids": [
+          "topic:sleep.apnea_breathing"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000567",
+        "summary": "The ad claims the Pod Five detects snoring and adjusts bed position to reduce or stop it."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000579",
+        "evidence_quote": "Visit eightsleep.com/tucker. Use the code Tucker to get 350 bucks off your Pod Five Ultra",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "summary": "A sponsor read with a discount code for the Eight Sleep Pod Five."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000624",
+        "evidence_quote": "What about all the people who are injured by the COVID vax",
+        "label_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000604",
+        "summary": "Host and guest discuss COVID vaccine injuries, the 1986 Vaccine Act, and expanding the vaccine injury compensation program."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000607",
+        "evidence_quote": "My guest last week said that some died",
+        "label_ids": [
+          "narrative:covid_vaccine_deaths"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000607",
+        "summary": "The claim that some people died from the COVID vaccine is relayed from a previous guest."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000610",
+        "evidence_quote": "Nobody seems to care. You never hear about them, and they don't seem to be getting any help",
+        "label_ids": [
+          "narrative:vaccine_injury_hidden"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000609",
+        "summary": "The speaker asserts that COVID vaccine injuries are ignored and that injured people receive no help."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000606",
+        "evidence_quote": "There are a lot of them. I know a lot of them",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "summary": "The speaker supports the prevalence of COVID vaccine injuries with personal acquaintance with injured people."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000579",
+        "evidence_quote": "It's called the Pod Five",
+        "mention_role": "advertised",
+        "product_name": "Pod Five",
+        "product_type": "household_or_home",
+        "start_unit_id": "u000558"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Drug approvals can be done very quickly with AI, without needing primates or animal models.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000551",
+        "evidence_quote": "Approvals, so that you don't need to use primates or even animal models. You can, you know, you can do the drug approvals very, very quickly with AI",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A concrete claim about AI's capacity to replace animal testing in FDA approvals.",
+        "relevance": "substantive",
+        "start_unit_id": "u000549",
+        "topic_ids": [
+          "topic:digital_health.ai_in_medicine",
+          "topic:health_system.regulators"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Looking at population data drug by drug can tell which diabetes, statin or SSRI drug is working, which gives the best value, and which has the most side effects.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "you can then look drug by drug, and you can tell in the population whether it's working or not, and which one is giving you the best bang for the buck",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about what population-level AI analysis can reveal about drug effectiveness and side effects.",
+        "relevance": "substantive",
+        "start_unit_id": "u000555",
+        "topic_ids": [
+          "topic:digital_health.ai_in_medicine",
+          "topic:health_system.regulators"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "perfect"
+        ],
+        "claim_text": "The Pod Five uses precision temperature control to regulate your body's sleep cycles and give you the perfect sleep.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000564",
+        "evidence_quote": "uses precision temperature. Control to regulate your body's sleep cycles and give you the perfect sleep",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Ad efficacy claim for the product's temperature control.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000562",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Pod Five can range from fifty-five degrees to a hundred and ten degrees.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000565",
+        "evidence_quote": "They can range all the way from fifty-five degrees to a hundred and ten degrees",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Checkable product specification in the ad.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000565",
+        "topic_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Pod Five makes you sleep better.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000566",
+        "evidence_quote": "it makes you sleep better",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Direct ad claim of sleep improvement.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000566",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Temperature has a massive effect on the way you sleep.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000567",
+        "evidence_quote": "Temperature has a massive effect on the way you sleep",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A general causal claim used to support the product's benefit.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000567",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Pod Five detects snoring and adjusts your bed position to reduce or completely stop it.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "it also detects snoring, and then it adjusts your bed position to reduce or. Completely stop it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Product capability claim about reducing snoring.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000568",
+        "topic_ids": [
+          "topic:sleep.apnea_breathing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "no better"
+        ],
+        "claim_text": "There is no better way to be alert, productive, and happy than by sleeping well.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000571",
+        "evidence_quote": "there's no better way to be alert, productive, and happy than by sleeping well",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Superlative claim about sleep's benefits used in the ad.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000571",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Eight Sleep really does help you sleep well.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000572",
+        "evidence_quote": "And eight sleep really does help",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Product efficacy claim in ad.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000572",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "A lot of people have been injured by the COVID vaccine.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000606",
+        "evidence_quote": "There are a lot of them. I know a lot of them",
+        "evidence_signal_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Prevalence claim about COVID vaccine injury supported by personal knowledge.",
+        "relevance": "substantive",
+        "start_unit_id": "u000604",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "My guest last week said that"
+        ],
+        "claim_text": "Some people died from the COVID vaccine.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000607",
+        "evidence_quote": "My guest last week said that some died",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:covid_vaccine_deaths"
+        ],
+        "rationale": "A death-injury claim attributed to a previous guest.",
+        "relevance": "substantive",
+        "start_unit_id": "u000607",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "My guest last week said that"
+        ],
+        "claim_text": "Some people were permanently disabled by the COVID vaccine.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000608",
+        "evidence_quote": "and that some were permanently disabled",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A disability-injury claim attributed to a previous guest.",
+        "relevance": "substantive",
+        "start_unit_id": "u000607",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Congress passed the Vaccine Act and gave immunity from liability to vaccine companies.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000616",
+        "evidence_quote": "when Congress passed the Vaccine Act and gave immunity from liability to vaccine companies",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Legal fact about vaccine manufacturer liability.",
+        "relevance": "substantive",
+        "start_unit_id": "u000616",
+        "topic_ids": [
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The American Academy of Pediatrics characterized vaccines as unavoidably unsafe.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000617",
+        "evidence_quote": "the characterization of the American Academy of Pediatrics, were unavoidably unsafe",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Attribution of a characterization to a named medical organization.",
+        "relevance": "substantive",
+        "start_unit_id": "u000616",
+        "topic_ids": [
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Some people, as with every medicine, are going to be injured and killed by vaccines.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000618",
+        "evidence_quote": "some people are going to be injured and killed",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general risk claim about vaccine injury and death.",
+        "relevance": "substantive",
+        "start_unit_id": "u000617",
+        "topic_ids": [
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The vaccine injury trust fund is endowed by a 75-cent surcharge on every vaccine.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000620",
+        "evidence_quote": "The trust fund is endowed by a 75 cent surcharge on every vaccine",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable funding mechanism for the vaccine injury program.",
+        "relevance": "substantive",
+        "start_unit_id": "u000619",
+        "topic_ids": [
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The vaccine court is supposed to be generous and fast, and gives the tie to the runner, so if there is doubt about whether an injury was vaccine-caused, the claimant is compensated.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000622",
+        "evidence_quote": "if there's doubts about you know whether somebody's injured him from vaccine or not, you're going to assume they got it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Describes the compensation standard of the vaccine court.",
+        "relevance": "substantive",
+        "start_unit_id": "u000621",
+        "topic_ids": [
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The vaccine injury program has paid out over five billion dollars to about twelve thousand people.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000623",
+        "evidence_quote": "it's paid out over five billion dollars",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Checkable payout figure for the compensation program.",
+        "relevance": "substantive",
+        "start_unit_id": "u000622",
+        "topic_ids": [
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "They are looking at ways to enlarge the vaccine injury program so COVID vaccine injured people can be compensated.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000624",
+        "evidence_quote": "we're looking at ways to enlarge that program so that COVID vaccine injured people can be compensated",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A stated policy plan about compensation for COVID vaccine injuries.",
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ]
+      }
+    ],
+    "window_id": "episode_4558_window_0011_attribute_claim"
+  },
+  "stored_at": "2026-10-04T22:13:54.063119+00:00"
+}

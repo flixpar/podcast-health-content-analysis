@@ -1,0 +1,267 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c190223w0004",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000276",
+        "evidence_quote": "mitochondria have a second role beyond their role as energy generators and that is as environmental sensors",
+        "label_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000206",
+        "summary": "Guest explains the cell danger response model: mitochondria act as environmental sensors and shift from energy production to cellular defense under stress."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000291",
+        "evidence_quote": "the way it's experienced is less energy",
+        "label_ids": [
+          "topic:wellness.energy_fatigue"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000277",
+        "summary": "The guest ties the mitochondrial model to felt fatigue after infection or overtraining."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000275",
+        "evidence_quote": "not just corrected by giving B vitamins and co-Q10 and alpha-lipoac acid and acetylol carnitine",
+        "label_ids": [
+          "topic:supplements.b_vitamins_methylation",
+          "topic:supplements.other_compounds"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000273",
+        "summary": "Mitochondrial problems are said not to be simply corrected by B vitamins, CoQ10, alpha-lipoic acid, and acetyl-L-carnitine."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000212",
+        "evidence_quote": "what we now know through research, especially in the last decade and synthesized in a coherent framework by Dr",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000208",
+        "summary": "Recent research and Dr. Robert Naviaux's cell danger response framework are cited without a specific study."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000234",
+        "evidence_quote": "There's a whole field of research called mitochondrial psychobiology now",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000232",
+        "summary": "The speaker invokes a research field, mitochondrial psychobiology, as support."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000272",
+        "evidence_quote": "almost every type of stress when in excess of what the body can handle will result in increased levels of oxidative damage",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000236",
+        "summary": "A causal biological account explains how stressors damage cells, leak danger signals, and shift mitochondria to defense."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Mitochondria have a second role beyond generating energy: they act as environmental sensors.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "mitochondria have a second role beyond their role as energy generators and that is as environmental sensors",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This is a factual claim about mitochondrial function that could be checked against cell biology literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000210",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "basically every"
+        ],
+        "claim_text": "Mitochondria can detect basically every type of threat or stress, from poor diet and leaky gut to infections, overtraining, injury, environmental toxins, and psychological stress.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000231",
+        "evidence_quote": "Mitochondria can detect basically every type of threat or danger signal or stress imaginable from poor diet to leaky gut to infections to physical overtraining",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A broad, checkable claim about the range of stressors mitochondria can sense.",
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "almost every"
+        ],
+        "claim_text": "Almost every type of stress in excess of what the body can handle results in increased oxidative damage, inflammatory cytokines, or cellular damage.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000240",
+        "evidence_quote": "almost every type of stress when in excess of what the body can handle will result in increased levels of oxidative damage, increased levels of inflammatory cytokines",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanistic claim about how diverse stressors produce cellular damage.",
+        "relevance": "substantive",
+        "start_unit_id": "u000237",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "ATP, ADP, and mitochondrial DNA leak into the bloodstream when there is enough cellular damage.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000247",
+        "evidence_quote": "like ATP and ADP leaking outside the cell into the extracellular space into the bloodstream and mitochondrial DNA leaking into the bloodstream",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Specific claim about cell contents entering the bloodstream after cellular damage.",
+        "relevance": "substantive",
+        "start_unit_id": "u000241",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Leaked energy molecules and mitochondrial DNA serve as danger signaling molecules.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000248",
+        "evidence_quote": "those molecules, energy molecules, mitochondrial DNA actually serve as danger signaling molecules",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanistic claim about the signaling function of leaked cellular contents.",
+        "relevance": "substantive",
+        "start_unit_id": "u000247",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "If danger signals exceed the mitochondria's resilience threshold, mitochondria shift into the cell danger response and redirect resources from energy production to cellular defense.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000263",
+        "evidence_quote": "the mitochondria shift into the cell danger response, where they are redirecting resources away from energy production towards cellular defense",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A central checkable claim of the cell danger response model.",
+        "relevance": "substantive",
+        "start_unit_id": "u000260",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Peacetime metabolism and wartime metabolism are mutually exclusive; when mitochondria sense high stress, they reduce energy production and shift resources to cellular defense.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000272",
+        "evidence_quote": "they are turning down the dial on energy production and shifting resources towards cellular defense",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanistic claim about mutually exclusive metabolic states.",
+        "relevance": "substantive",
+        "start_unit_id": "u000266",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fatigue is a classic symptom of colds, flu, COVID, and extreme over-exercising.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000291",
+        "evidence_quote": "what's one of the classic symptoms? Fatigue",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable symptom claim used to illustrate the mitochondrial model.",
+        "relevance": "substantive",
+        "start_unit_id": "u000283",
+        "topic_ids": [
+          "topic:wellness.energy_fatigue"
+        ]
+      }
+    ],
+    "window_id": "episode_190223_window_0004"
+  },
+  "stored_at": "2026-10-04T22:36:30.674924+00:00"
+}

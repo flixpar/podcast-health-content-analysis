@@ -1,0 +1,69 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c77624w0013",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000787",
+        "evidence_quote": "get that man in a detox, and he needs to take care of himself",
+        "label_ids": [
+          "topic:drugs_addiction.addiction_recovery"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000768",
+        "summary": "Host urges Laura and her partner to seek help for substance use, mentioning detox, Al-Anon and codependency meetings."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000819",
+        "evidence_quote": "if those two people make a child, that child, the chances of that child being comfortable and well in its own skin, probably not super great",
+        "label_ids": [
+          "topic:genetics.genetic_conditions",
+          "topic:genetics.inheritance"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000793",
+        "summary": "Host tells a story about two intellectually disabled people and speculates that their child would probably not be well."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "If two intellectually disabled people have a child, the child's chances of being comfortable and well in its own skin are probably not very good.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000813",
+        "evidence_quote": "the chances of that child being comfortable and well in its own skin, probably not super great",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A heredity/outcome claim about children of intellectually disabled parents, checkable against genetic and developmental studies.",
+        "relevance": "passing",
+        "start_unit_id": "u000813",
+        "topic_ids": [
+          "topic:genetics.genetic_conditions",
+          "topic:genetics.inheritance"
+        ]
+      }
+    ],
+    "window_id": "episode_77624_window_0013"
+  },
+  "stored_at": "2026-10-04T22:13:53.811726+00:00"
+}

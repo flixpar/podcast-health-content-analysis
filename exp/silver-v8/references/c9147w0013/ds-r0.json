@@ -1,0 +1,147 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c9147w0013",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "the reality of how they were reporting cases? And deaths, and the the insurance data of the all cause mortality rate on the vaccines",
+        "label_ids": [
+          "topic:covid.testing_counting",
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000921",
+        "summary": "Hosts claim official COVID case and death reporting was false and cite vaccine all-cause mortality data."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "the reality of how they were reporting cases? And deaths",
+        "label_ids": [
+          "narrative:covid_deaths_inflated"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000921",
+        "summary": "Speakers assert that official COVID case and death counts were inflated through reporting and PCR testing."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "the insurance data of the all cause mortality rate on the vaccines",
+        "label_ids": [
+          "narrative:covid_vaccine_deaths"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000922",
+        "summary": "The all-cause mortality rate on the vaccines is cited, implying COVID vaccines killed people."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "nobody realized that it was bullshit",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000921",
+        "summary": "Official COVID reporting is described as bullshit."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000922",
+        "evidence_quote": "the insurance data of the all cause mortality rate on the vaccines",
+        "label_ids": [
+          "evidence:official_data_documents"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000922",
+        "summary": "Insurance data is invoked for vaccine all-cause mortality."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000930",
+        "evidence_quote": "Men who have been paralyzed, who are now finding some joy and some relief",
+        "label_ids": [
+          "topic:neuro.nerve_spinal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000930",
+        "summary": "Paralyzed men are described as gaining joy and normal life through the technology."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Official reporting of COVID cases and deaths was false.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000923",
+        "evidence_quote": "the reality of how they were reporting cases? And deaths",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [
+          "narrative:covid_deaths_inflated"
+        ],
+        "rationale": "A checkable allegation that official COVID case and death counts were misreported.",
+        "relevance": "substantive",
+        "start_unit_id": "u000921",
+        "topic_ids": [
+          "topic:covid.testing_counting"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "COVID vaccines caused an elevated all-cause mortality rate, according to insurance data.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000922",
+        "evidence_quote": "the insurance data of the all cause mortality rate on the vaccines",
+        "evidence_signal_ids": [
+          "evidence:official_data_documents"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:covid_vaccine_deaths"
+        ],
+        "rationale": "A mortality claim about COVID vaccines that could be checked against insurance data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000922",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ]
+      }
+    ],
+    "window_id": "episode_9147_window_0013"
+  },
+  "stored_at": "2026-10-04T22:36:29.294795+00:00"
+}

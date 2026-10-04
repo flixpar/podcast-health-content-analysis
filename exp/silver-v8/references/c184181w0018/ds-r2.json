@@ -1,0 +1,366 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c184181w0018",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001229",
+        "evidence_quote": "She says I'm convinced it's because of the way I eat",
+        "label_ids": [
+          "topic:covid.illness_severity",
+          "topic:immune.immune_function"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001223",
+        "summary": "A patient who was exposed to coronavirus and did not get it credits her diet."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001238",
+        "evidence_quote": "broad spectrum antibiotics that all of us took for every little sniffle, for every little cough that hurts us, we're killing off our microbiome",
+        "label_ids": [
+          "topic:gut.microbiome",
+          "topic:immune.immune_function",
+          "topic:infectious.antibiotics_resistance"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001230",
+        "summary": "The hosts blame weak immune systems on diet and on broad-spectrum antibiotics killing the microbiome."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001277",
+        "evidence_quote": "most probiotics are pretty worthless because they're not protected from acid in the stomach or bile in the in the first part of the duodenum, which will kill them",
+        "label_ids": [
+          "topic:food.plant_foods_fiber",
+          "topic:gut.microbiome",
+          "topic:gut.probiotics_fermented"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001239",
+        "summary": "The guest discusses probiotic deficiency, why most probiotics fail to reach the gut, and the need for prebiotics and vegetables to feed them."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001280",
+        "evidence_quote": "how leaky gut is the cause of a weak immune system",
+        "label_ids": [
+          "topic:gut.leaky_gut",
+          "topic:immune.immune_function"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001279",
+        "summary": "Leaky gut is stated as the cause of a weak immune system."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001302",
+        "evidence_quote": "How much does that hurt our immune system",
+        "label_ids": [
+          "topic:immune.immune_function",
+          "topic:stress.mind_body"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001281",
+        "summary": "The hosts argue that human connection, touch and emotional release affect the immune system, and recommend pets during social distancing."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001280",
+        "evidence_quote": "how leaky gut is the cause of a weak immune system",
+        "label_ids": [
+          "narrative:leaky_gut_root_cause"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001279",
+        "summary": "The claim that leaky gut causes weak immunity is invoked."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001255",
+        "evidence_quote": "For instance, Gundry MD makes a 24 strain probiotic",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001248",
+        "summary": "The guest promotes his own Gundry MD probiotic line and its spore-forming capsules."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001277",
+        "evidence_quote": "I make Prebio Thrive, which is",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001275",
+        "summary": "The guest promotes his own Prebio Thrive prebiotic product."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001229",
+        "evidence_quote": "She says I'm convinced it's because of the way I eat",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001223",
+        "summary": "A patient's personal story is offered as evidence that diet protected her from coronavirus."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001247",
+        "evidence_quote": "most probiotics are pretty worthless because they're not protected from acid in the stomach or bile in the in the first part of the duodenum, which will kill them",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001243",
+        "summary": "Stomach acid and bile are explained as killing unprotected probiotics, requiring encapsulation or spore-forming strains."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001273",
+        "evidence_quote": "if you don't give them what they need to eat and that soluble fiber, they're not going to grow",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001272",
+        "summary": "The mechanism that probiotics need soluble fiber and prebiotics to grow is explained."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001283",
+        "evidence_quote": "As a heart doctor who's specialized this in this for years about the heart",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001283",
+        "summary": "The host invokes the guest's specialization as a heart doctor when asking about heart and immunity."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u001251",
+        "evidence_quote": "Gundry MD makes a 24 strain probiotic",
+        "mention_role": "own_product",
+        "product_name": "Gundry MD 24 strain probiotic",
+        "product_type": "supplement",
+        "start_unit_id": "u001248"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u001253",
+        "evidence_quote": "All of our probiotics in, like, Vital Reds",
+        "mention_role": "own_product",
+        "product_name": "Vital Reds",
+        "product_type": "supplement",
+        "start_unit_id": "u001253"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u001253",
+        "evidence_quote": "in, like, BioComplete Three, are",
+        "mention_role": "own_product",
+        "product_name": "BioComplete Three",
+        "product_type": "supplement",
+        "start_unit_id": "u001253"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001277",
+        "evidence_quote": "I make Prebio Thrive, which is",
+        "mention_role": "own_product",
+        "product_name": "Prebio Thrive",
+        "product_type": "supplement",
+        "start_unit_id": "u001275"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Broad-spectrum antibiotics taken for minor illnesses killed off people's microbiomes.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001237",
+        "evidence_quote": "broad spectrum antibiotics that all of us took for every little sniffle, for every little cough that hurts us, we're killing off our microbiome",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Antibiotic overuse and microbiome damage are checkable and central to the immune discussion.",
+        "relevance": "substantive",
+        "start_unit_id": "u001236",
+        "topic_ids": [
+          "topic:gut.microbiome",
+          "topic:infectious.antibiotics_resistance"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Because of lifestyle, people are very deficient in probiotics.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001241",
+        "evidence_quote": "we are, unfortunately, just because of our lifestyle, very deficient in probiotics",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim that populations are deficient in probiotics is a checkable prevalence claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u001241",
+        "topic_ids": [
+          "topic:gut.probiotics_fermented"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most probiotics never make it to the gut because they are killed by stomach acid or bile.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001245",
+        "evidence_quote": "Most probiotics never make it to the gut",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether most oral probiotics survive to the gut is checkable and affects supplement choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u001243",
+        "topic_ids": [
+          "topic:gut.probiotics_fermented"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Probiotics need soluble fiber and prebiotics to grow in the gut.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001273",
+        "evidence_quote": "if you don't give them what they need to eat and that soluble fiber, they're not going to grow",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The nutritional dependence of gut probiotics on fiber and prebiotics is a checkable biological claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u001272",
+        "topic_ids": [
+          "topic:gut.probiotics_fermented"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Leaky gut is the cause of a weak immune system.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001280",
+        "evidence_quote": "how leaky gut is the cause of a weak immune system",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:leaky_gut_root_cause"
+        ],
+        "rationale": "A causal claim about intestinal permeability and immunity that is contested and checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001279",
+        "topic_ids": [
+          "topic:gut.leaky_gut",
+          "topic:immune.immune_function"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Lack of human connection and social distancing hurt the immune system.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001291",
+        "evidence_quote": "we're actually very ill-equipped for social distancing",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim that social isolation weakens immunity is checkable and shapes behavior.",
+        "relevance": "substantive",
+        "start_unit_id": "u001281",
+        "topic_ids": [
+          "topic:immune.immune_function",
+          "topic:stress.mind_body"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Prebio Thrive's prebiotics feed gut bacteria and support you if you are not eating vegetables.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001277",
+        "evidence_quote": "Because if you're not eating your veggies, you got to take that to support you",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product efficacy claim for a prebiotic supplement that could be checked against its ingredients and effects.",
+        "relevance": "substantive",
+        "start_unit_id": "u001275",
+        "topic_ids": [
+          "topic:gut.probiotics_fermented"
+        ]
+      }
+    ],
+    "window_id": "episode_184181_window_0018"
+  },
+  "stored_at": "2026-10-04T22:36:32.721818+00:00"
+}

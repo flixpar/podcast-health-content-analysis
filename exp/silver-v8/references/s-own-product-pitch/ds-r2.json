@@ -1,0 +1,154 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "s-own-product-pitch",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "so it's a supplement line but the first thing i built was a magnesium and l theanine combo for evening wind down",
+        "label_ids": [
+          "topic:supplements.sleep_mood_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "summary": "Host pitches his Vitalyx supplement line, starting with a magnesium and L-theanine evening wind-down combo."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "most of the stuff on the shelf either underdoses the magnesium or loads it with a bunch of filler",
+        "label_ids": [
+          "topic:supplements.industry_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000019",
+        "summary": "Host criticizes supplement brands for underdosing ingredients and using filler."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "yeah we're working on a protein blend next just because so many people asked for it",
+        "label_ids": [
+          "topic:supplements.protein_powders"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000030",
+        "summary": "Host mentions an upcoming protein blend for his audience."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000046",
+        "evidence_quote": "my back has not hurt once since i switched",
+        "label_ids": [
+          "topic:musculoskeletal.back_neck_posture"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000044",
+        "summary": "Host reports his back pain stopped after switching office chairs."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "it's just on the vitalyx website right now we kept it direct instead of going through retailers",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "summary": "Host promotes his own supplement line and tells listeners where to find it."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "a lot of brands just throw everything in to make the label look impressive",
+        "label_ids": [
+          "frame:industry_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Supplement brands are framed as underdosing ingredients and adding useless filler."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000038",
+        "evidence_quote": "it's this whole thing i've been building called vitalyx",
+        "mention_role": "own_product",
+        "product_name": "Vitalyx",
+        "product_type": "supplement",
+        "start_unit_id": "u000015"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most of the stuff on the shelf either underdoses the magnesium or loads it with a bunch of filler.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "most of the stuff on the shelf either underdoses the magnesium or loads it with a bunch of filler",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:industry_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable generalization about competing supplement products that could affect buyers' choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:supplements.industry_quality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Half of the ingredients in such supplements are probably included at doses too small to matter.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000034",
+        "evidence_quote": "half of it is probably in there at doses too small to matter anyway",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "frame:industry_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "A broad claim about supplement label dosing that is vague but checkable in principle.",
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "topic_ids": [
+          "topic:supplements.industry_quality"
+        ]
+      }
+    ],
+    "window_id": "synthetic_own_product_pitch_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:33.588900+00:00"
+}

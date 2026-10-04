@@ -1,0 +1,231 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c208120w0004",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "He had been killing infants outside the womb",
+        "label_ids": [
+          "topic:fertility.abortion"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "summary": "Host discusses the Gosnell clinic, late-term abortion, and Northam's born-alive comments, arguing they reveal Democratic acceptance of infanticide."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000222",
+        "evidence_quote": "the infant will be resuscitated only if the mother wants it",
+        "label_ids": [
+          "topic:acute_care.emergency_critical_care"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000200",
+        "summary": "Host describes Northam's position on newborn resuscitation and argues that withholding basic resuscitation lets a baby die."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000222",
+        "evidence_quote": "He had been killing infants outside the womb",
+        "label_ids": [
+          "population:infants"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000171",
+        "summary": "The discussion concerns newborn infants, from infants killed at Gosnell's clinic to resuscitation decisions after birth."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000188",
+        "evidence_quote": "there's really no difference",
+        "label_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000181",
+        "summary": "The host asserts the recurring claim that Democrats and abortion supporters see no difference between late-term abortion and killing a born infant."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000169",
+        "evidence_quote": "the media ignored the the Gosnell story and never really expressed any real outrage about it",
+        "label_ids": [
+          "frame:media_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "summary": "Host assumes mainstream media ignored the Gosnell story and showed no outrage."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000188",
+        "evidence_quote": "Democrats didn't appear to be that upset about it",
+        "label_ids": [
+          "frame:political_partisan"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000173",
+        "summary": "Host frames the abortion issue through Democratic Party blame."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000239",
+        "evidence_quote": "what's the discussion about, Northam",
+        "label_ids": [
+          "frame:insinuating_questions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000236",
+        "summary": "Host uses sarcastic rhetorical questions to imply Northam's promised 'discussion' covers something sinister."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Gosnell had been killing infants outside the womb, chopping them up, and leaving body parts.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "He had been killing infants outside the womb, chopping them up, leaving body parts",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Describes criminal conduct at a clinic; checkable against trial records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000171",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Gosnell clinic was in shambles and did not sanitize its equipment ahead of time.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000172",
+        "evidence_quote": "the the clinic was in was in shambles, and not even sanitizing the equipment ahead of time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Conditions at the clinic are checkable against inspections and testimony.",
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "topic_ids": [
+          "topic:fertility.abortion",
+          "topic:health_system.medical_errors"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Women were dying at the Gosnell clinic.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "Women were dying",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Patient deaths at the clinic can be checked against court and news records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000173",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Northam says the infant will be resuscitated only if the mother wants it.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000201",
+        "evidence_quote": "what Northam is saying is that the infant will be resuscitated only if the mother wants it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Attribution to Northam can be checked against his public comments.",
+        "relevance": "substantive",
+        "start_unit_id": "u000200",
+        "topic_ids": [
+          "topic:acute_care.emergency_critical_care",
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Northam says that even after resuscitation, there will be a discussion.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000205",
+        "evidence_quote": "Even after the the resuscitation, there will be a discussion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Attribution to Northam can be checked against his public comments.",
+        "relevance": "substantive",
+        "start_unit_id": "u000205",
+        "topic_ids": [
+          "topic:acute_care.emergency_critical_care",
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "all the time",
+          "not in the majority of cases"
+        ],
+        "claim_text": "Babies have to be resuscitated after they are delivered all the time, though not in the majority of births.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "Babies have to be resuscitated after they're delivered all the time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Frequency of neonatal resuscitation is checkable against delivery statistics.",
+        "relevance": "substantive",
+        "start_unit_id": "u000209",
+        "topic_ids": [
+          "topic:acute_care.emergency_critical_care"
+        ]
+      }
+    ],
+    "window_id": "episode_208120_window_0004"
+  },
+  "stored_at": "2026-10-04T22:13:53.331386+00:00"
+}

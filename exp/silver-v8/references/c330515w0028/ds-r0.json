@@ -1,0 +1,184 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c330515w0028",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001388",
+        "evidence_quote": "the more likely cause is the shoddy lab that was doing a bola research in Sierra Leone",
+        "label_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001362",
+        "summary": "Guest and host discuss the Ebola outbreak in West Africa, the disputed official origin story, and the alternative that it came from biodefense research in Sierra Leone."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001370",
+        "evidence_quote": "the more likely cause is the shoddy lab that was doing a bola research in Sierra Leone",
+        "label_ids": [
+          "narrative:outbreak_engineered"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "summary": "The official Ebola origin story is rejected and the outbreak is attributed to a lab in Sierra Leone."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001364",
+        "evidence_quote": "outbreak happened is ludicrous as no evidentiary basis",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "summary": "Host debunks the official Ebola origin story as baseless."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001371",
+        "evidence_quote": "any attempt to have a conversation that challenged the dominant narrative as we called it then, was considered a conspiracy theory",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "summary": "The official account of the Ebola outbreak is distrusted and framed as a dominant narrative that was protected from challenge."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001372",
+        "evidence_quote": "any attempt to have a conversation that challenged the dominant narrative as we called it then, was considered a conspiracy theory",
+        "label_ids": [
+          "frame:censorship_suppression"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001371",
+        "summary": "Challenging the official narrative is described as being dismissed as conspiracy theory."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001395",
+        "evidence_quote": "access to HIV HIV treatment like they need that treatment",
+        "label_ids": [
+          "topic:sexual.stis_hiv"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001395",
+        "summary": "HIV treatment access is cited as an individual benefit of foreign aid."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The Ebola outbreak started in Guinea, with a two-year-old child and an 18-year-old boy as index cases, and the child had participated in hunting and grilling a bat.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u001369",
+        "evidence_quote": "they identified Emily woman way two years old or less than two year old child an eighteen year old boy as the index case of the outbreak",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:government_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "The official origin story is contested and can be checked against outbreak investigations.",
+        "relevance": "substantive",
+        "start_unit_id": "u001368",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "more likely"
+        ],
+        "claim_text": "The Ebola outbreak was more likely caused by a shoddy lab doing Ebola research in Sierra Leone than by the officially described index cases.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001364",
+        "evidence_quote": "the more likely cause is the shoddy lab that was doing a bola research in Sierra Leone",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:outbreak_engineered"
+        ],
+        "rationale": "A causal claim about the outbreak's origin that can be checked against investigations and reporting.",
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A biodefense research operation was happening in eastern Sierra Leone dating back to 2004, ten years before the Ebola outbreak.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001370",
+        "evidence_quote": "the biodefense research operation that was happening in eastern Syrallian dating back to two thousand and four, ten years before the outbreak",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:outbreak_engineered"
+        ],
+        "rationale": "The existence and timing of the research operation can be checked against records and reporting.",
+        "relevance": "substantive",
+        "start_unit_id": "u001370",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The same institutions and individuals involved with COVID were the ones involved in the Ebola outbreak in West Africa.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001387",
+        "evidence_quote": "the same institution, same individuals who are involved with COVID where the ones who get involved in West",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim of institutional overlap that can be checked against known involvement in the two outbreaks.",
+        "relevance": "substantive",
+        "start_unit_id": "u001386",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      }
+    ],
+    "window_id": "episode_330515_window_0028"
+  },
+  "stored_at": "2026-10-04T22:36:28.816009+00:00"
+}

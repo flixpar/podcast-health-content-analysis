@@ -1,0 +1,344 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c321712w0018",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001384",
+        "evidence_quote": "the first one that gets embedded that actually triggers this incredible electrical system, like a force field forms around the egg",
+        "label_ids": [
+          "topic:fertility.male_fertility"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001361",
+        "summary": "Hosts explain sperm fuel limits and how the first sperm to reach the egg triggers a block."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001392",
+        "evidence_quote": "they do like a sperm cleaning is what they call where they essentially look for like the healthiest versions",
+        "label_ids": [
+          "topic:fertility.infertility_treatment",
+          "topic:fertility.male_fertility"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001386",
+        "summary": "The hosts question whether IVF sperm selection changes the natural first-sperm advantage and describe sperm cleaning."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001437",
+        "evidence_quote": "He said he could render any guy completely infertile by just going in a hot tub",
+        "label_ids": [
+          "topic:fertility.male_fertility"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001411",
+        "summary": "Heat exposure, hot tubs, saunas and testicular temperature regulation are discussed in relation to male fertility."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001437",
+        "evidence_quote": "render any guy completely infertile",
+        "label_ids": [
+          "population:men"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001361",
+        "summary": "The health content concerns male fertility and sperm health."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u001406",
+        "evidence_quote": "I've heard people say like, \"Oh, don't put your phone in your pocket for sperm health",
+        "label_ids": [
+          "narrative:emf_5g_harm"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001401",
+        "summary": "The claim that phone EMF harms sperm is raised and dismissed as unsupported."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001406",
+        "evidence_quote": "I don't, I don't find any of the EMF data compelling",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001403",
+        "summary": "Speaker corrects the belief that EMF is harmful."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001403",
+        "evidence_quote": "I have looked at a lot of this research",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001403",
+        "summary": "Speaker appeals to having reviewed research without naming it."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001413",
+        "evidence_quote": "He said he could render any guy completely infertile by just going in a hot tub",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001411",
+        "summary": "Speaker cites Paul's podcast statement about hot tubs and infertility."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001429",
+        "evidence_quote": "that's mostly for cold protection, not heat protection",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001424",
+        "summary": "Mechanism of testicular temperature control is used to explain why hot tubs affect fertility."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Each sperm has only enough fuel to reach the egg and no reserve after that.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001365",
+        "evidence_quote": "each sperm has the fuel, and it's used to get to the egg, and after that, there's no reserve",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Sperm energy stores are a checkable biological claim about fertilization.",
+        "relevance": "substantive",
+        "start_unit_id": "u001365",
+        "topic_ids": [
+          "topic:fertility.male_fertility"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "no"
+        ],
+        "claim_text": "The first sperm to embed triggers an electrical reaction that forms a barrier preventing other sperm from entering.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001376",
+        "evidence_quote": "the first one that gets embedded that actually triggers this incredible electrical system, like a force field forms around the egg, and no other sperm can get in",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The egg's block to polyspermy is a checkable physiological claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u001375",
+        "topic_ids": [
+          "topic:fertility.male_fertility"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Aneuploidy is having multiple copies of chromosomes and is catastrophic.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001379",
+        "evidence_quote": "It's called aneuploidy, where you have multiple copies of chromosomes. If you do this, and that would be catastrophic",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The definition and consequences of aneuploidy can be checked against genetics references.",
+        "relevance": "substantive",
+        "start_unit_id": "u001378",
+        "topic_ids": [
+          "topic:fertility.male_fertility"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A calcium channel triggers a rapid block once the first sperm makes contact with the egg.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001381",
+        "evidence_quote": "there's this whole calcium channel that like flips a switch, and like the second, like the millisecond that that first sperm makes contact",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The calcium wave at fertilization is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001381",
+        "topic_ids": [
+          "topic:fertility.male_fertility"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "only"
+        ],
+        "claim_text": "The first 95 million sperm to reach the egg are blocked, and only the last five million get through.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001385",
+        "evidence_quote": "Your 95 million best sperm get axed the second they touch the shore",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The numerical claim about which sperm reach the egg can be checked against fertilization biology.",
+        "relevance": "substantive",
+        "start_unit_id": "u001382",
+        "topic_ids": [
+          "topic:fertility.male_fertility"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "IVF uses sperm cleaning to select the healthiest sperm and implant them.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001392",
+        "evidence_quote": "they do like a sperm cleaning is what they call where they essentially look for like the healthiest versions",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "IVF sperm selection methods are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001392",
+        "topic_ids": [
+          "topic:fertility.infertility_treatment",
+          "topic:fertility.male_fertility"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Heat exposure is a real issue for sperm health.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001411",
+        "evidence_quote": "Heat is a real issue",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The effect of heat on male fertility is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001411",
+        "topic_ids": [
+          "topic:fertility.male_fertility"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could",
+          "completely"
+        ],
+        "claim_text": "Four hot tub sessions a week can render a man completely infertile.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001413",
+        "evidence_quote": "He said he could render any guy completely infertile by just going in a hot tub by doing four hot tub sessions a week",
+        "evidence_signal_ids": [
+          "evidence:media_source"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific dose-effect claim about hot tubs and fertility, reported from another speaker.",
+        "relevance": "substantive",
+        "start_unit_id": "u001413",
+        "topic_ids": [
+          "topic:fertility.male_fertility"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Sounds like"
+        ],
+        "claim_text": "Heat-induced fertility impairment is transient.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001433",
+        "evidence_quote": "Sounds like from him, it's just—it's just transient",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether heat effects on fertility are temporary is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001433",
+        "topic_ids": [
+          "topic:fertility.male_fertility"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "mostly"
+        ],
+        "claim_text": "Testicles ascend and descend mostly for cold protection, not heat protection.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001425",
+        "evidence_quote": "that's mostly for cold protection, not heat protection",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The function of testicular movement is a checkable physiological claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u001425",
+        "topic_ids": [
+          "topic:fertility.male_fertility"
+        ]
+      }
+    ],
+    "window_id": "episode_321712_window_0018"
+  },
+  "stored_at": "2026-10-04T22:13:55.653030+00:00"
+}

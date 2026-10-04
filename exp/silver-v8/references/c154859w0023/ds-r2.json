@@ -1,0 +1,215 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c154859w0023",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002523",
+        "evidence_quote": "fentanyl precursors are largely coming through the air",
+        "label_ids": [
+          "topic:drugs_addiction.drug_policy",
+          "topic:drugs_addiction.opioids_fentanyl"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002433",
+        "summary": "A former DEA section chief discusses fentanyl precursor sourcing from India and China, air shipments, and interagency enforcement efforts."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002553",
+        "evidence_quote": "drug smuggling from Venezuela to the United States",
+        "label_ids": [
+          "topic:drugs_addiction.drug_policy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002524",
+        "summary": "Host asks the former DEA official to rank Venezuela as a drug-trafficking threat; he calls it serious on volume and recommends Wes Tabor's podcast."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.7,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002448",
+        "evidence_quote": "degrade the US from the inside without firing a shot",
+        "label_ids": [
+          "narrative:fentanyl_foreign_attack"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002442",
+        "summary": "Speaker questions whether China is waging hybrid warfare to degrade the US from within."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.7,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002460",
+        "evidence_quote": "But China, you have to wonder, you know, and you know, you see, you see reports",
+        "label_ids": [
+          "narrative:fentanyl_foreign_attack"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002456",
+        "summary": "Speaker insinuates China's role in the fentanyl precursor supply with 'you have to wonder'."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002457",
+        "evidence_quote": "But China, you have to wonder",
+        "label_ids": [
+          "frame:insinuating_questions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002456",
+        "summary": "Suspicion about China's role is advanced through a 'you have to wonder' move."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002455",
+        "evidence_quote": "And my experience is no, I mean, yes, stuff does get diverted, but they're they're they're they're just industry",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002452",
+        "summary": "The speaker cites his own field experience to distinguish Indian chemical manufacturers from deliberate diverters."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "I've heard that",
+          "much of"
+        ],
+        "claim_text": "Much of the fentanyl precursor chemicals come from India and China.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002435",
+        "evidence_quote": "I've heard that much of these chemicals come from or they did from India",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The sourcing of fentanyl precursor chemicals is checkable and central to drug-policy debates.",
+        "relevance": "substantive",
+        "start_unit_id": "u002433",
+        "topic_ids": [
+          "topic:drugs_addiction.drug_policy",
+          "topic:drugs_addiction.opioids_fentanyl"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "largely"
+        ],
+        "claim_text": "Fentanyl precursors are largely coming through the air.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002461",
+        "evidence_quote": "fentanyl precursors are largely coming through the air",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "How fentanyl precursors are shipped is a checkable fact bearing on enforcement policy.",
+        "relevance": "substantive",
+        "start_unit_id": "u002460",
+        "topic_ids": [
+          "topic:drugs_addiction.drug_policy",
+          "topic:drugs_addiction.opioids_fentanyl"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "are they engaged in"
+        ],
+        "claim_text": "China is engaged in a one-hundred-year war or hybrid warfare to degrade the US from the inside without firing a shot.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.7,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002448",
+        "evidence_quote": "are they engaged in like I don't know what do they call it one hundred year war",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:fentanyl_foreign_attack"
+        ],
+        "rationale": "A contested claim that China deliberately uses the drug supply as an attack on the US.",
+        "relevance": "substantive",
+        "start_unit_id": "u002442",
+        "topic_ids": [
+          "topic:drugs_addiction.drug_policy",
+          "topic:drugs_addiction.opioids_fentanyl"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "you have to wonder",
+          "you don't know"
+        ],
+        "claim_text": "China may be deliberately involved in the fentanyl precursor supply.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.7,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002460",
+        "evidence_quote": "But China, you have to wonder, you know, and you know, you see, you see reports, you hear things",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "frame:insinuating_questions"
+        ],
+        "narrative_ids": [
+          "narrative:fentanyl_foreign_attack"
+        ],
+        "rationale": "An insinuated claim about China's deliberate role in the fentanyl trade.",
+        "relevance": "substantive",
+        "start_unit_id": "u002456",
+        "topic_ids": [
+          "topic:drugs_addiction.drug_policy",
+          "topic:drugs_addiction.opioids_fentanyl"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Roughly one hundred thousand Americans were dying a year from fentanyl.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002508",
+        "evidence_quote": "roughly if one hundred thousand Americans were dying a year",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The scale of fentanyl-related overdose deaths is a checkable statistic used to justify the response.",
+        "relevance": "substantive",
+        "start_unit_id": "u002507",
+        "topic_ids": [
+          "topic:drugs_addiction.drug_policy",
+          "topic:drugs_addiction.opioids_fentanyl"
+        ]
+      }
+    ],
+    "window_id": "episode_154859_window_0023"
+  },
+  "stored_at": "2026-10-04T22:36:32.276729+00:00"
+}

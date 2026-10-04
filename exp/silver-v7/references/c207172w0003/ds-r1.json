@@ -1,0 +1,514 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c207172w0003",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000127",
+        "evidence_quote": "trans patients are paired up with an activist from the community who attends appointments with them",
+        "label_ids": [
+          "topic:gender.lgbtq_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000105",
+        "summary": "Hosts describe and mock Vanderbilt's Trans Buddy program pairing transgender patients with community advocates."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "Vanderbilt administers chemical castration drugs, aka puberty blockers, and irreversible hormone therapy to minors",
+        "label_ids": [
+          "topic:gender.youth_gender_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000128",
+        "summary": "Host claims Vanderbilt gives puberty blockers, hormones and mastectomies to minors and concealed the practice."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000160",
+        "evidence_quote": "if they are 16, 17, here at Vanderbilt, if they have been on testosterone, have a parental consent, we're able to do a lot of the top surgeries for those patients",
+        "label_ids": [
+          "topic:gender.adult_transition",
+          "topic:gender.youth_gender_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000154",
+        "summary": "Quoted Vanderbilt clinicians explain WPATH-based top-surgery criteria, including for 16- and 17-year-olds."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "trans patients are paired up with an activist from the community",
+        "label_ids": [
+          "population:lgbtq"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000105",
+        "summary": "The discussion is specifically about transgender patients and their care."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000160",
+        "evidence_quote": "for our patients",
+        "label_ids": [
+          "population:lgbtq"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000154",
+        "summary": "The quoted surgical criteria concern transgender patients."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000130",
+        "evidence_quote": "available to patients of any age, including minors",
+        "label_ids": [
+          "population:children"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000128",
+        "summary": "The host's claim concerns minors."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "double mastectomies on adolescent girls",
+        "label_ids": [
+          "population:adolescents"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "summary": "The criticized treatments are given to adolescents, including girls 13-17."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000160",
+        "evidence_quote": "if they are 16, 17",
+        "label_ids": [
+          "population:adolescents"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000160",
+        "summary": "The criteria concern 16- and 17-year-old patients."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "after they've drugged and sterilized the kids",
+        "label_ids": [
+          "narrative:gender_care_harmful_youth"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000130",
+        "summary": "The host asserts that youth gender-affirming care is chemical castration, sterilization and irreversible surgery."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "Vanderbilt makes their Orwellian trans buddies available",
+        "label_ids": [
+          "frame:political_partisan"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000105",
+        "summary": "Gender-affirming care is framed as an Orwellian culture-war program."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "drugged and sterilized the kids",
+        "label_ids": [
+          "frame:fear_alarm"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000130",
+        "summary": "Alarmist language presents treatments as chemical castration, sterilization and mutilation."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000133",
+        "evidence_quote": "they removed language from their website explicitly advertising this practice",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000131",
+        "summary": "Speaker implies Vanderbilt hid the practice by deleting website language."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000133",
+        "evidence_quote": "We had to look it up on the archived version of the web",
+        "label_ids": [
+          "evidence:official_data_documents"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000131",
+        "summary": "Archived version of Vanderbilt's website is invoked as evidence."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "a video from Vanderbilt Psychiatry's YouTube channel back in 2020",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "summary": "A Vanderbilt Psychiatry YouTube video is invoked as evidence."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000140",
+        "evidence_quote": "the Endocrine Society recommended to start these at age sixteen",
+        "label_ids": [
+          "evidence:expert_consensus"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000138",
+        "summary": "Endocrine Society age recommendations are cited."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000156",
+        "evidence_quote": "we do again follow these guidelines",
+        "label_ids": [
+          "evidence:expert_consensus"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000154",
+        "summary": "The clinician cites WPATH guidelines."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "as explained in this video presentation by plastic surgeon Julian Winickor and physician's assistant Shaylen Vanderblomen",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000145",
+        "summary": "A video presentation by Vanderbilt clinicians is invoked as evidence."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000129",
+        "evidence_quote": "program called Trans Buddy",
+        "mention_role": "criticized",
+        "product_name": "Trans Buddy",
+        "product_type": "program_or_course",
+        "start_unit_id": "u000107"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Trans Buddy pairs transgender patients with a community activist who attends their medical appointments.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000108",
+        "evidence_quote": "trans patients are paired up with an activist from the community who attends appointments with them",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Program design is checkable against Vanderbilt's own materials.",
+        "relevance": "substantive",
+        "start_unit_id": "u000108",
+        "topic_ids": [
+          "topic:gender.lgbtq_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vanderbilt makes Trans Buddy services available to patients of any age, including minors.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000128",
+        "evidence_quote": "Vanderbilt makes their Orwellian trans buddies available to patients of any age, including minors",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The availability of Trans Buddy for minors is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000128",
+        "topic_ids": [
+          "topic:gender.lgbtq_health",
+          "topic:gender.youth_gender_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vanderbilt administers puberty blockers and irreversible hormone therapy to minors.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000130",
+        "evidence_quote": "Vanderbilt administers chemical castration drugs, aka puberty blockers, and irreversible hormone therapy to minors",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:fear_alarm"
+        ],
+        "narrative_ids": [
+          "narrative:gender_care_harmful_youth"
+        ],
+        "rationale": "Claims about what medical treatments a hospital gives to minors are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000130",
+        "topic_ids": [
+          "topic:gender.youth_gender_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vanderbilt removed language from its website that explicitly advertised puberty blockers and hormone therapy for minors.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000133",
+        "evidence_quote": "they removed language from their website explicitly advertising this practice",
+        "evidence_signal_ids": [
+          "evidence:official_data_documents"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "narrative_ids": [],
+        "rationale": "Website changes are checkable through archives and current pages.",
+        "relevance": "substantive",
+        "start_unit_id": "u000131",
+        "topic_ids": [
+          "topic:gender.youth_gender_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vanderbilt has given and will give hormone drugs to children as young as 13.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "they will give and have given irreversible hormone drugs to children as young as 13",
+        "evidence_signal_ids": [
+          "evidence:media_source"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:fear_alarm"
+        ],
+        "narrative_ids": [
+          "narrative:gender_care_harmful_youth"
+        ],
+        "rationale": "The video and Vanderbilt's practices can be checked for the age of hormone initiation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "topic_ids": [
+          "topic:gender.youth_gender_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Endocrine Society previously recommended starting gender-affirming hormones at age 16.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000138",
+        "evidence_quote": "Previously, the Endocrine Society recommended to start these at age sixteen",
+        "evidence_signal_ids": [
+          "evidence:expert_consensus"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Past Endocrine Society guidance can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000138",
+        "topic_ids": [
+          "topic:gender.youth_gender_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Endocrine Society updated its guidance to allow starting hormones as early as 14 for compelling reasons.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000140",
+        "evidence_quote": "they did update that to say as early as fourteen for compelling reasons",
+        "evidence_signal_ids": [
+          "evidence:expert_consensus"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Current Endocrine Society guidance can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000140",
+        "topic_ids": [
+          "topic:gender.youth_gender_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Some Vanderbilt patients have started gender-affirming hormones at age 13 or 14.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000141",
+        "evidence_quote": "we have some individuals who have started gender-affirming hormones at thirteen or fourteen",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This clinical statement from the video can be checked against Vanderbilt practices.",
+        "relevance": "substantive",
+        "start_unit_id": "u000141",
+        "topic_ids": [
+          "topic:gender.youth_gender_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Puberty blockers and hormone therapy sterilize children.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "after they've drugged and sterilized the kids",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:fear_alarm"
+        ],
+        "narrative_ids": [
+          "narrative:gender_care_harmful_youth"
+        ],
+        "rationale": "The claim that gender-affirming treatment sterilizes minors is checkable and central to the critique.",
+        "relevance": "substantive",
+        "start_unit_id": "u000145",
+        "topic_ids": [
+          "topic:gender.youth_gender_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vanderbilt performs double mastectomies on adolescent girls.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "they will happily perform double mastectomies on adolescent girls",
+        "evidence_signal_ids": [
+          "evidence:media_source"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:fear_alarm"
+        ],
+        "narrative_ids": [
+          "narrative:gender_care_harmful_youth"
+        ],
+        "rationale": "Hospital surgical practice for minors is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000145",
+        "topic_ids": [
+          "topic:gender.youth_gender_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "For top surgery, Vanderbilt requires one letter of persistent, well-documented gender dysphoria from a licensed mental health provider.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000157",
+        "evidence_quote": "for any kind of top surgery, we do require one letter of persistent, well-documented gender dysphoria by a licensed mental health provider",
+        "evidence_signal_ids": [
+          "evidence:expert_consensus"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Surgical requirements can be checked against Vanderbilt and WPATH policies.",
+        "relevance": "substantive",
+        "start_unit_id": "u000154",
+        "topic_ids": [
+          "topic:gender.adult_transition",
+          "topic:gender.youth_gender_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "Vanderbilt is able to do many top surgeries for 16- and 17-year-old patients who have been on testosterone and have parental consent.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000160",
+        "evidence_quote": "if they are 16, 17, here at Vanderbilt, if they have been on testosterone, have a parental consent, we're able to do a lot of the top surgeries for those patients",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The quoted criteria describe a checkable surgical practice for minors.",
+        "relevance": "substantive",
+        "start_unit_id": "u000160",
+        "topic_ids": [
+          "topic:gender.youth_gender_medicine"
+        ]
+      }
+    ],
+    "window_id": "episode_207172_window_0003"
+  },
+  "stored_at": "2026-10-04T22:13:53.321038+00:00"
+}

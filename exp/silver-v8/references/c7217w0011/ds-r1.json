@@ -1,0 +1,147 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c7217w0011",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000588",
+        "evidence_quote": "the CDC says that we want people who are vaccinated to know that they are really safe, even when they go indoors without a mask",
+        "label_ids": [
+          "topic:covid.masks_distancing",
+          "topic:vaccines.covid_vaccines"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000550",
+        "summary": "Speaker explains the CDC mask guidance for fully vaccinated people and defends private businesses that still require masks."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000582",
+        "evidence_quote": "It's not a mandate to take your mask off",
+        "label_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000553",
+        "summary": "Speaker clarifies the guidance is not a mask mandate, notes there is no vaccine passport, and supports private businesses requiring masks."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000611",
+        "evidence_quote": "reluctance that may impact our ability to get the country vaccinated",
+        "label_ids": [
+          "topic:digital_health.online_health_information",
+          "topic:vaccines.uptake_hesitancy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000589",
+        "summary": "Host and guest discuss misinformation, including from senators, and the vaccine reluctance it feeds, and how to counter it with facts."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000608",
+        "evidence_quote": "how to combat right-wing information",
+        "label_ids": [
+          "frame:political_partisan"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000607",
+        "summary": "Host frames the misinformation to be combated as right-wing information."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "the CDC says that we want people who are vaccinated to know that they are really safe",
+        "label_ids": [
+          "evidence:expert_consensus"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000550",
+        "summary": "Speaker cites CDC guidance and calls it a scientific statement as the basis for the safety claim."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "If you are fully vaccinated, your risk is really very low, not only outdoors but also indoors.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "if you are fully vaccinated, your risk is really very low, not only outdoors but also indoors",
+        "evidence_signal_ids": [
+          "evidence:expert_consensus"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A safety claim about vaccinated people that underlies the mask guidance and can be checked against vaccine effectiveness data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000550",
+        "topic_ids": [
+          "topic:covid.masks_distancing",
+          "topic:vaccines.covid_vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The vaccines are highly protective.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000585",
+        "evidence_quote": "the vaccines are highly, highly protective",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A broad effectiveness claim that can be checked against trial and surveillance data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000584",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There is no vaccine passport.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000570",
+        "evidence_quote": "we don't have a vaccine passport",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A factual claim about national vaccination policy that shapes mask requirements.",
+        "relevance": "substantive",
+        "start_unit_id": "u000569",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      }
+    ],
+    "window_id": "episode_7217_window_0011"
+  },
+  "stored_at": "2026-10-04T22:36:31.392399+00:00"
+}

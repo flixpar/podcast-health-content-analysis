@@ -1,0 +1,501 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c318639w0006",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000330",
+        "evidence_quote": "A Lancet paper found that there is quote no good evidence that acne is caused or. Cured by washing",
+        "label_ids": [
+          "topic:skin_beauty.acne"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000329",
+        "summary": "Hosts cite a Lancet paper finding no good evidence that washing causes or cures acne."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000330",
+        "evidence_quote": "A Lancet paper found that there is quote no good evidence that acne is caused or. Cured by washing",
+        "label_ids": [
+          "evidence:specific_study"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000329",
+        "summary": "A Lancet paper is cited for the finding on washing and acne."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000356",
+        "evidence_quote": "the use of light therapies for people with acne, is lacking",
+        "label_ids": [
+          "topic:recovery.red_light",
+          "topic:skin_beauty.acne"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000331",
+        "summary": "Hosts test and review light therapy masks for acne, concluding the evidence is lacking."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000336",
+        "evidence_quote": "Blue light is supposed to zap p acne's bacteria on your face, and red light is supposed to decrease inflammation",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000335",
+        "summary": "The proposed mechanism of the light mask is explained: blue light kills acne bacteria, red light reduces inflammation."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000344",
+        "evidence_quote": "this is a sample size of one, and not a study",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000344",
+        "summary": "Hosts acknowledge their single test is not evidence."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000349",
+        "evidence_quote": "the Cochrane review, which was published in 2016, noted that, \"quote, high quality evidence on the use of light therapies for people with acne, is lacking",
+        "label_ids": [
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000346",
+        "summary": "A 2016 Cochrane review is cited for its finding that high-quality evidence on light therapy for acne is lacking."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000348",
+        "evidence_quote": "two small studies of around 30 people that suggested blue, red light therapies might be better than placebos",
+        "label_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000348",
+        "summary": "The review's two small studies are noted."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000356",
+        "evidence_quote": "high quality evidence on the use of light therapies for people with acne, is lacking",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000346",
+        "summary": "Hosts evaluate and ultimately debunk the claim that light masks help acne."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000356",
+        "evidence_quote": "there's no conclusive evidence that they'll help you with your acne",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000356",
+        "summary": "The hosts conclude there is no conclusive evidence for light masks."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000359",
+        "evidence_quote": "Phenol peroxide could be helpful, but it won't necessarily clear your skin entirely",
+        "label_ids": [
+          "topic:skin_beauty.acne"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000357",
+        "summary": "Hosts briefly assess benzoyl peroxide and salicylic acid for acne."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000397",
+        "evidence_quote": "P. Acnes is found on healthy skin too",
+        "label_ids": [
+          "topic:skin_beauty.acne",
+          "topic:skin_beauty.skincare"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000360",
+        "summary": "Hosts explain P. acnes as a normal skin bacterium and describe strain differences linked to acne."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000377",
+        "evidence_quote": "In one study, it made up ninety percent of the bugs hanging out on people's faces",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000376",
+        "summary": "An unnamed study is cited for the 90 percent figure for P. acnes on faces."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000399",
+        "evidence_quote": "After the break, can popping your pimples help",
+        "label_ids": [
+          "topic:skin_beauty.acne"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000398",
+        "summary": "A teaser asks whether popping pimples can help."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "There is no good evidence that acne is caused or cured by washing.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000330",
+        "evidence_quote": "no good evidence that acne is caused or. Cured by washing",
+        "evidence_signal_ids": [
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether washing affects acne is checkable and commonly believed.",
+        "relevance": "passing",
+        "start_unit_id": "u000329",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "is supposed to"
+        ],
+        "claim_text": "Blue light is supposed to kill P. acnes bacteria on the face.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000336",
+        "evidence_quote": "Blue light is supposed to zap p acne's bacteria on your face",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanism claim made for light-therapy masks.",
+        "relevance": "substantive",
+        "start_unit_id": "u000335",
+        "topic_ids": [
+          "topic:recovery.red_light",
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "is supposed to"
+        ],
+        "claim_text": "Red light is supposed to decrease inflammation.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000336",
+        "evidence_quote": "red light is supposed to decrease inflammation",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanism claim made for light-therapy masks.",
+        "relevance": "substantive",
+        "start_unit_id": "u000335",
+        "topic_ids": [
+          "topic:recovery.red_light",
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The light therapy mask is only useful for mild to moderate acne.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000343",
+        "evidence_quote": "it says it's only useful for mild to moderate acne",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A product claim about which acne severity the mask treats.",
+        "relevance": "substantive",
+        "start_unit_id": "u000343",
+        "topic_ids": [
+          "topic:recovery.red_light",
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "suggested",
+          "might"
+        ],
+        "claim_text": "Two small studies suggested blue and red light therapies might be better than placebos for acne.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000348",
+        "evidence_quote": "two small studies of around 30 people that suggested blue, red light therapies might be better than placebos",
+        "evidence_signal_ids": [
+          "evidence:specific_study",
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A Cochrane review finding about light therapy efficacy.",
+        "relevance": "substantive",
+        "start_unit_id": "u000348",
+        "topic_ids": [
+          "topic:recovery.red_light",
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "High-quality evidence on the use of light therapies for acne is lacking.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000349",
+        "evidence_quote": "high quality evidence on the use of light therapies for people with acne, is lacking",
+        "evidence_signal_ids": [
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable statement about the evidence base.",
+        "relevance": "substantive",
+        "start_unit_id": "u000349",
+        "topic_ids": [
+          "topic:recovery.red_light",
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There is no conclusive evidence that light masks help with acne.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000356",
+        "evidence_quote": "there's no conclusive evidence that they'll help you with your acne",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The show's verdict on light masks.",
+        "relevance": "substantive",
+        "start_unit_id": "u000356",
+        "topic_ids": [
+          "topic:recovery.red_light",
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could",
+          "won't necessarily"
+        ],
+        "claim_text": "Phenol peroxide could be helpful, but it won't necessarily clear your skin entirely.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000358",
+        "evidence_quote": "Phenol peroxide could be helpful, but it won't necessarily clear your skin entirely",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A treatment claim about an acne product.",
+        "relevance": "substantive",
+        "start_unit_id": "u000358",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The evidence for salicylic acid for acne isn't good.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000359",
+        "evidence_quote": "the evidence for that isn't good",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about the evidence base for salicylic acid.",
+        "relevance": "substantive",
+        "start_unit_id": "u000359",
+        "topic_ids": [
+          "topic:skin_beauty.acne"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "P. acnes is found on healthy skin too.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000373",
+        "evidence_quote": "It turns out that P. Acnes is found on healthy skin too",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A factual claim about the skin microbiome relevant to acne causation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000372",
+        "topic_ids": [
+          "topic:skin_beauty.acne",
+          "topic:skin_beauty.skincare"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "P. acnes is the most common bacteria on human faces.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000376",
+        "evidence_quote": "P. Acnes is the most common bacteria on our faces, on clear faces, pimpled faces, freckled faces, moon faces",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A prevalence claim about skin bacteria.",
+        "relevance": "substantive",
+        "start_unit_id": "u000375",
+        "topic_ids": [
+          "topic:skin_beauty.acne",
+          "topic:skin_beauty.skincare"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In one study, P. acnes made up ninety percent of the bacteria on people's faces.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000377",
+        "evidence_quote": "In one study, it made up ninety percent of the bugs hanging out on people's faces",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A quantitative claim from an unnamed study.",
+        "relevance": "substantive",
+        "start_unit_id": "u000376",
+        "topic_ids": [
+          "topic:skin_beauty.acne",
+          "topic:skin_beauty.skincare"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Some strains of P. acnes might protect the skin from bad bacteria.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000391",
+        "evidence_quote": "she found other strains that, as you heard her say, were good strains that might actually be protecting the skin from the bad bacteria",
+        "evidence_signal_ids": [
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A protective mechanism claim for certain P. acnes strains.",
+        "relevance": "substantive",
+        "start_unit_id": "u000390",
+        "topic_ids": [
+          "topic:skin_beauty.acne",
+          "topic:skin_beauty.skincare"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Good strains of P. acnes might help people avoid acne by taking the space and food of bad strains.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000393",
+        "evidence_quote": "those good strains of P. Acnes, well, they might help you to avoid acne because they take the space and the food of the bad strains",
+        "evidence_signal_ids": [
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A proposed mechanism for protective P. acnes strains.",
+        "relevance": "substantive",
+        "start_unit_id": "u000392",
+        "topic_ids": [
+          "topic:skin_beauty.acne",
+          "topic:skin_beauty.skincare"
+        ]
+      }
+    ],
+    "window_id": "episode_318639_window_0006"
+  },
+  "stored_at": "2026-10-04T22:36:31.099106+00:00"
+}

@@ -1,0 +1,306 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c185631w0006",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000322",
+        "evidence_quote": "if you're mouth breathing, then The whole face can kind of shrink back because there's nothing pushing",
+        "label_ids": [
+          "topic:oral.dental_procedures",
+          "topic:sleep.apnea_breathing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000251",
+        "summary": "Dentist links mouth breathing, TMJ, bruxism, crowded teeth and facial changes to airway and jaw structure, recommending arch widening over Botox and night guards."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000322",
+        "evidence_quote": "We need to really restore their arch width to, you know, what it should have been before modern diets and epigenetic changes",
+        "label_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000271",
+        "summary": "Mouth breathing and modern-diet-related narrow arches are said to cause facial and dental changes that structural widening treats."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000270",
+        "evidence_quote": "It's not looking at the root cause, so that's great",
+        "label_ids": [
+          "frame:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "summary": "Botox and night guards are dismissed as band-aids that miss the root cause."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000282",
+        "evidence_quote": "That's God's plan to help us grow forward and wide",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000278",
+        "summary": "Tongue posture is described as God's design for facial growth."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000284",
+        "evidence_quote": "People come in all the time and say, \"I feel like I don't look like I used to",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000273",
+        "summary": "Practitioner cites patients presenting with shrunken faces and crowded teeth."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000321",
+        "evidence_quote": "So, we usually those kind of patients",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000307",
+        "summary": "Practitioner describes typical patients needing arch-width restoration and trapped mandibles seen on CT."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000283",
+        "evidence_quote": "It's meant to be pushing on the palate and maintain your architecture",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000278",
+        "summary": "Explains how tongue posture and mouth breathing reshape the face."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000311",
+        "evidence_quote": "So the lower arch is a victim of the upper arch",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000305",
+        "summary": "Explains how a narrow upper arch crowds the lower teeth."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000260",
+        "evidence_quote": "Botox is a bandaid on that for sure",
+        "mention_role": "criticized",
+        "product_name": "Botox",
+        "product_type": "medication",
+        "start_unit_id": "u000252"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000302",
+        "evidence_quote": "Everybody is doing Invisalign again",
+        "mention_role": "neutral",
+        "product_name": "Invisalign",
+        "product_type": "personal_care_or_cosmetic",
+        "start_unit_id": "u000286"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Botox does not fix the underlying airway problem; a person is still choking at night and not getting enough oxygen.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000260",
+        "evidence_quote": "We'll put some Botox in there, but you're still choking in the night and not getting enough oxygen",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:root_cause_framing"
+        ],
+        "narrative_ids": [],
+        "rationale": "A treatment-efficacy claim that could affect whether someone chooses Botox for TMJ.",
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "topic_ids": [
+          "topic:oral.dental_procedures",
+          "topic:sleep.apnea_breathing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Teeth grinding is structural rather than caused by stress.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000270",
+        "evidence_quote": "When in reality, it's structural",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:root_cause_framing"
+        ],
+        "narrative_ids": [],
+        "rationale": "Attributing bruxism to structure rather than stress is checkable and changes treatment advice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000264",
+        "topic_ids": [
+          "topic:oral.dental_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "for sure"
+        ],
+        "claim_text": "Mouth breathing makes the face less attractive over time by causing the jaw to shrink back and the teeth to become crowded.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000284",
+        "evidence_quote": "Can bad breath? breathing actually make you less attractive over time as you get older? Yeah, for sure",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience",
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A widely repeated claim about mouth breathing and facial appearance that can be checked against craniofacial evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000271",
+        "topic_ids": [
+          "topic:oral.dental_procedures",
+          "topic:sleep.apnea_breathing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A narrow upper arch makes the lower teeth crowded and prone to collapsing.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000311",
+        "evidence_quote": "So the lower arch is a victim of the upper arch",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience",
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "An orthodontic causal claim that drives the recommendation to widen the arch.",
+        "relevance": "substantive",
+        "start_unit_id": "u000305",
+        "topic_ids": [
+          "topic:oral.dental_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Modern diets and epigenetic changes have made dental arches narrower than they should be.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000309",
+        "evidence_quote": "We need to really restore their arch width to, you know, what it should have been before modern diets and epigenetic changes",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A contested claim about the cause of narrow dental arches that affects whether widening is presented as restoring a norm.",
+        "relevance": "substantive",
+        "start_unit_id": "u000308",
+        "topic_ids": [
+          "topic:oral.dental_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Widening the maxilla and giving the lower arch room brings the jaw forward, releases TMJ tension, improves the profile, and gets the tongue and lower jaw out of the airway.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000322",
+        "evidence_quote": "if we widen the maxilla, we can give them room to be in a more comfortable position, and it releases a lot of tension in the joint",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A checkable treatment claim about the effects of maxillary widening on TMJ, profile and airway.",
+        "relevance": "substantive",
+        "start_unit_id": "u000314",
+        "topic_ids": [
+          "topic:oral.dental_procedures",
+          "topic:sleep.apnea_breathing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A chin that is too far back is caused by the upper arch trapping the lower jaw.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000316",
+        "evidence_quote": "Their chin is too far back because it's trapped by the upper arch",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A specific causal claim about a receding chin that supports the orthodontic intervention.",
+        "relevance": "substantive",
+        "start_unit_id": "u000315",
+        "topic_ids": [
+          "topic:oral.dental_procedures"
+        ]
+      }
+    ],
+    "window_id": "episode_185631_window_0006"
+  },
+  "stored_at": "2026-10-04T22:36:32.734967+00:00"
+}

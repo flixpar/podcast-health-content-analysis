@@ -1,0 +1,81 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c164579w0001",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "My day kicks off with a refreshing Celsius energy drink",
+        "label_ids": [
+          "topic:stimulants.energy_drinks"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000005",
+        "summary": "Ad read for Celsius energy drink presented as fuel for an active day."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "Grab a cold, refreshing Celsius at your local retailer or locate now at Celsius.com",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000005",
+        "summary": "Sponsor read for Celsius with a retail and website call to action."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000103",
+        "evidence_quote": "diagnosed yesterday with a thigh bruise, says a source",
+        "label_ids": [
+          "topic:musculoskeletal.sports_injuries"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000103",
+        "summary": "Injury report notes Amari Cooper's thigh bruise and that it knocked him out of the game."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000103",
+        "evidence_quote": "Amari Cooper was diagnosed yesterday with a thigh bruise",
+        "label_ids": [
+          "population:athletes"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000103",
+        "summary": "The injury report concerns a professional football player."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000012",
+        "evidence_quote": "Celsius energy drink",
+        "mention_role": "advertised",
+        "product_name": "Celsius",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000005"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_164579_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:54.703848+00:00"
+}

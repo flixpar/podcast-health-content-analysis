@@ -1,0 +1,213 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c26443w0006",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000260",
+        "evidence_quote": "the line between safeguarding and gatekeeping is razor thin and incredibly easily corrupted",
+        "label_ids": [
+          "topic:health_system.research_system"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000255",
+        "summary": "Speaker critiques the mental-health and academic establishment as gatekeeping and as not prioritizing healing."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000290",
+        "evidence_quote": "I see mental illness as a byproduct of a distorted perception of reality",
+        "label_ids": [
+          "topic:mental.causes_models"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000261",
+        "summary": "Speaker presents a model of mental illness as distorted perception driven by self-deception, and introduces Break Method to dismantle the patterns."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000260",
+        "evidence_quote": "Plot twist does not put your healing in the top spot",
+        "label_ids": [
+          "frame:industry_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000255",
+        "summary": "The mental-health system is cast as corrupted gatekeeping that does not put healing first."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000289",
+        "evidence_quote": "These patterns can be observed and dismantled with Break Method",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000289",
+        "summary": "The speaker names and promotes their own Break Method product."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000269",
+        "evidence_quote": "The way neurocognition works is that it follows a top-down flow",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000263",
+        "summary": "Speaker explains mental illness through a top-down cognitive flow from perception to biochemical reaction."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000250",
+        "evidence_quote": "a wonderful gentleman from the National Institute of Health approached me",
+        "label_ids": [
+          "evidence:prestige_institution"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000249",
+        "summary": "An NIH staffer's endorsement is relayed to validate the speaker's product."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000289",
+        "evidence_quote": "dismantled with Break Method",
+        "mention_role": "own_product",
+        "product_name": "Break Method",
+        "product_type": "program_or_course",
+        "start_unit_id": "u000289"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "I see"
+        ],
+        "claim_text": "Mental illness is a byproduct of a distorted perception of reality.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000263",
+        "evidence_quote": "I see mental illness as a byproduct of a distorted perception of reality",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general causal claim about the nature of mental illness that underlies the speaker's treatment method.",
+        "relevance": "substantive",
+        "start_unit_id": "u000263",
+        "topic_ids": [
+          "topic:mental.causes_models"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Perception precedes emotion and behavior.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000268",
+        "evidence_quote": "perception precedes emotion and behavior",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A falsifiable claim about the ordering of cognition and emotion that the method depends on.",
+        "relevance": "substantive",
+        "start_unit_id": "u000268",
+        "topic_ids": [
+          "topic:mental.causes_models"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Our perception is extremely distorted by our early childhood inputs.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000269",
+        "evidence_quote": "it is extremely distorted by our early childhood inputs",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about developmental origins of distorted perception that supports the model.",
+        "relevance": "substantive",
+        "start_unit_id": "u000269",
+        "topic_ids": [
+          "topic:mental.causes_models"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Each of us has a unique pattern of self-deception that influences our motivations, perception of reality, and emotional responses and actions.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000288",
+        "evidence_quote": "each of us has a unique pattern of self-deception, and that pattern of self-deception will in Influence our underlying motivations",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general psychological claim about stable individual patterns the method claims to address.",
+        "relevance": "substantive",
+        "start_unit_id": "u000288",
+        "topic_ids": [
+          "topic:mental.causes_models"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "These patterns can be observed and dismantled with Break Method.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000289",
+        "evidence_quote": "These patterns can be observed and dismantled with Break Method",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product efficacy claim that listeners could act on by seeking out Break Method.",
+        "relevance": "substantive",
+        "start_unit_id": "u000289",
+        "topic_ids": [
+          "topic:mental"
+        ]
+      }
+    ],
+    "window_id": "episode_26443_window_0006"
+  },
+  "stored_at": "2026-10-04T22:36:28.656314+00:00"
+}

@@ -1,0 +1,220 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c199989w0021",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001200",
+        "evidence_quote": "She said there's no reason to suspect psychosis, no reason to hospitalize her",
+        "label_ids": [
+          "topic:mental.psychiatric_care",
+          "topic:mental.serious_mental_illness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001195",
+        "summary": "Hosts discuss the treating doctor's assessment that Lindsay showed no psychosis and did not need hospitalization."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001217",
+        "evidence_quote": "It's the law that says you're not allowed to talk about a patient's treatment to anyone",
+        "label_ids": [
+          "topic:health_system.ethics_law_privacy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001201",
+        "summary": "Hosts explain HIPAA and why the doctor did not ask for a release to contact Lindsay's family."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001224",
+        "evidence_quote": "she did say she used, I think, one marijuana gummy",
+        "label_ids": [
+          "topic:psychoactives.cannabis"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001218",
+        "summary": "Hosts relay that Lindsay's health records said she tried one marijuana gummy and did not continue because it was not effective."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001226",
+        "evidence_quote": "they so they ask about the thyroid test yet again",
+        "label_ids": [
+          "topic:endocrine.thyroid"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001225",
+        "summary": "Hosts note the prosecution again asked about thyroid tests the doctor knew nothing about."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001261",
+        "evidence_quote": "their cookware is made without forever chemicals, and has been since day one",
+        "label_ids": [
+          "topic:environment.household_personal_care"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001227",
+        "summary": "Sponsor read for Our Place cookware and the Wonder Oven Pro, promoting cookware made without forever chemicals."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001261",
+        "evidence_quote": "Visit fromourplace dot com slash prosecute and use code PROSECUTE for ten percent off site wide",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001227",
+        "summary": "Sponsor read with a discount code and URL."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001245",
+        "evidence_quote": "their cookware is made without forever chemicals, and has been since day one",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001233",
+        "summary": "The ad frames the cookware as free of forever chemicals."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001235",
+        "evidence_quote": "It's third-party tested to meet global safety standards",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001235",
+        "summary": "The ad cites third-party testing to global safety standards as support."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001263",
+        "evidence_quote": "she has repeatedly said that Lindsay did not have any symptoms of mania",
+        "label_ids": [
+          "topic:mental.serious_mental_illness"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001262",
+        "summary": "Hosts relay that the doctor has repeatedly said Lindsay showed no symptoms of mania."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u001261",
+        "evidence_quote": "Our place makes beautiful, high-performance kitchenware",
+        "mention_role": "advertised",
+        "product_name": "Our Place",
+        "product_type": "household_or_home",
+        "start_unit_id": "u001228"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001255",
+        "evidence_quote": "I got the Wonder Oven Pro",
+        "mention_role": "advertised",
+        "product_name": "Wonder Oven Pro",
+        "product_type": "household_or_home",
+        "start_unit_id": "u001236"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "HIPAA is the law that says a person is not allowed to talk about a patient's treatment to anyone, or even say that they are a patient, unless that patient waives those rights.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001207",
+        "evidence_quote": "It's the law that says you're not allowed to talk about a patient's treatment to anyone, or even. Say that they are a patient unless that patient waves those rights",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The legal rule of HIPAA confidentiality is checkable and central to the trial discussion.",
+        "relevance": "substantive",
+        "start_unit_id": "u001206",
+        "topic_ids": [
+          "topic:health_system.ethics_law_privacy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Our Place cookware is made without forever chemicals.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001234",
+        "evidence_quote": "their cookware is made without forever chemicals, and has been since day one",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A free-from product claim that can be checked against the product's materials.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001233",
+        "topic_ids": [
+          "topic:environment.household_personal_care"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Every cooking surface of the Wonder Oven Pro is made without forever chemicals.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001245",
+        "evidence_quote": "every cooking surface is made without forever chemicals",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A free-from product claim for the advertised appliance that can be checked against the product's materials.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001244",
+        "topic_ids": [
+          "topic:environment.household_personal_care"
+        ]
+      }
+    ],
+    "window_id": "episode_199989_window_0021"
+  },
+  "stored_at": "2026-10-04T22:36:30.873424+00:00"
+}

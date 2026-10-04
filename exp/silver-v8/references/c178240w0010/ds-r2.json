@@ -1,0 +1,182 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c178240w0010",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000713",
+        "evidence_quote": "to just teach people, plastic surgery is absolutely fine",
+        "label_ids": [
+          "topic:skin_beauty.cosmetic_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000632",
+        "summary": "The segment discusses plastic surgery, choosing a surgeon, the athletic BBL, and loose-skin surgery after weight loss or pregnancy."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000684",
+        "evidence_quote": "Nineteen Plastic Surgery has been leading the charge",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000645",
+        "summary": "The host and guest surgeons promote Nineteen Plastic Surgery as a relationship-based practice."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000669",
+        "evidence_quote": "I met Ryan five years ago because I had breast surgery with him. And my results are absolutely phenomenal",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000667",
+        "summary": "The host cites her own breast surgery with Ryan and her phenomenal results as an endorsement of the surgeons."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000692",
+        "evidence_quote": "Common thing that we see in our practice is moms",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000688",
+        "summary": "A surgeon describes what he commonly sees in his practice: moms with loose skin and muscle separation, and more loose skin with weight-loss drugs."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000692",
+        "evidence_quote": "especially with all these new weight loss drugs, loose skin is just becoming a bigger and bigger problem for people",
+        "label_ids": [
+          "topic:weight"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000692",
+        "summary": "Weight-loss drugs are mentioned as making loose skin a bigger problem."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000692",
+        "evidence_quote": "What are women coming in to you bothered by the most",
+        "label_ids": [
+          "population:women"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000686",
+        "summary": "The surgeon describes what women and moms come in for, including postpartum changes and loose skin from weight-loss drugs."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000693",
+        "evidence_quote": "female patients, male patients",
+        "label_ids": [
+          "population:men"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000693",
+        "summary": "The surgeon notes loose skin from weight loss affects male patients too."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000666",
+        "evidence_quote": "Nineteen Plastic Surgery has been leading the charge",
+        "mention_role": "own_product",
+        "product_name": "Nineteen Plastic Surgery",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000645"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Weight-loss drugs are making loose skin a bigger and bigger problem for people.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000692",
+        "evidence_quote": "especially with all these new weight loss drugs, loose skin is just becoming a bigger and bigger problem for people",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about an effect of weight-loss drugs on loose skin that could be checked against patient outcomes.",
+        "relevance": "substantive",
+        "start_unit_id": "u000692",
+        "topic_ids": [
+          "topic:weight"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "no amount"
+        ],
+        "claim_text": "No amount of diet and exercise can fix loose skin.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "there's no amount of diet and exercise that can fix that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A universal claim about what can and cannot fix loose skin, relevant to whether patients pursue surgery.",
+        "relevance": "substantive",
+        "start_unit_id": "u000693",
+        "topic_ids": [
+          "topic:skin_beauty.cosmetic_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Surgery is the solution for loose skin that diet and exercise cannot fix.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000695",
+        "evidence_quote": "So surgery is the solution",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A treatment recommendation that surgery resolves loose skin.",
+        "relevance": "substantive",
+        "start_unit_id": "u000694",
+        "topic_ids": [
+          "topic:skin_beauty.cosmetic_procedures"
+        ]
+      }
+    ],
+    "window_id": "episode_178240_window_0010"
+  },
+  "stored_at": "2026-10-04T22:36:32.518221+00:00"
+}

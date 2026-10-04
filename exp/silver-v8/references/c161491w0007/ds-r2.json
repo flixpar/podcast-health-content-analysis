@@ -1,0 +1,69 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c161491w0007",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000393",
+        "evidence_quote": "BetterHelp is the world's largest online therapy platform",
+        "label_ids": [
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000379",
+        "summary": "Sponsor read for BetterHelp online therapy platform."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000393",
+        "evidence_quote": "Sign up and get 10% off at BetterHelp.com/Rotten",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000379",
+        "summary": "Sponsor read with a discount code."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000452",
+        "evidence_quote": "It's not even just re-traumatizing essay victims, but it's also encouraging them to be victims",
+        "label_ids": [
+          "topic:acute_care.violence_abuse",
+          "topic:mental.trauma_ptsd"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000406",
+        "summary": "Host recounts alleged sexual assault and domestic violence in the One Taste community and the psychological harm to victims."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000393",
+        "evidence_quote": "BetterHelp is the world's largest online therapy platform",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000379"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_161491_window_0007"
+  },
+  "stored_at": "2026-10-04T22:36:32.306479+00:00"
+}

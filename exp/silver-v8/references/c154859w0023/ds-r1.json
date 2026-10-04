@@ -1,0 +1,102 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c154859w0023",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002552",
+        "evidence_quote": "fentanyl precursors are largely coming through the air",
+        "label_ids": [
+          "topic:drugs_addiction.drug_policy",
+          "topic:drugs_addiction.opioids_fentanyl"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002433",
+        "summary": "Interview about fentanyl precursor supply chains, drug trafficking enforcement, agency coordination, and the overdose crisis."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.7,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002460",
+        "evidence_quote": "But China, you have to wonder",
+        "label_ids": [
+          "narrative:fentanyl_foreign_attack"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002442",
+        "summary": "Host raises and guest half-entertains the idea that China is deliberately using fentanyl or precursor supply as hybrid warfare against the US."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002460",
+        "evidence_quote": "But China, you have to wonder",
+        "label_ids": [
+          "frame:insinuating_questions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002456",
+        "summary": "Suspicion about China's role in fentanyl precursor supply is advanced with 'you have to wonder' rather than asserted."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Roughly one hundred thousand Americans were dying a year from the fentanyl problem.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002509",
+        "evidence_quote": "one hundred thousand Americans were dying a year",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The scale of annual overdose deaths is a checkable public-health statistic invoked as the rationale for the drug enforcement effort.",
+        "relevance": "passing",
+        "start_unit_id": "u002507",
+        "topic_ids": [
+          "topic:drugs_addiction.drug_policy",
+          "topic:drugs_addiction.opioids_fentanyl"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "largely"
+        ],
+        "claim_text": "Fentanyl precursors are largely coming through the air.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002461",
+        "evidence_quote": "fentanyl precursors are largely coming through the air",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about how fentanyl precursor chemicals are being shipped, relevant to drug supply and enforcement policy.",
+        "relevance": "passing",
+        "start_unit_id": "u002459",
+        "topic_ids": [
+          "topic:drugs_addiction.drug_policy",
+          "topic:drugs_addiction.opioids_fentanyl"
+        ]
+      }
+    ],
+    "window_id": "episode_154859_window_0023"
+  },
+  "stored_at": "2026-10-04T22:36:30.118499+00:00"
+}

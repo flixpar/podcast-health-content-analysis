@@ -1,0 +1,197 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "s-certainty-speculative",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000002",
+        "evidence_quote": "i didnt sleep great and then i way overslept",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000001",
+        "summary": "One host mentions not sleeping well and oversleeping."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "might be the only reason im functioning right now",
+        "label_ids": [
+          "topic:stimulants.caffeine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000007",
+        "summary": "Coffee is mentioned as what keeps the speaker functioning in the morning."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "on days when i skip breakfast i feel kind of foggy by like ten or eleven",
+        "label_ids": [
+          "topic:food.eating_behavior"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "Hosts discuss how skipping breakfast seems to cause morning brain fog and what quick snacks might help."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000039",
+        "evidence_quote": "hard to focus almost like my brain is running slow",
+        "label_ids": [
+          "topic:cognition.brain_fog"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "They discuss feeling foggy and unfocused, especially on mornings when breakfast is skipped."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000032",
+        "evidence_quote": "i wonder if it might be a blood sugar thing",
+        "label_ids": [
+          "topic:metabolic.insulin_glucose"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000031",
+        "summary": "The host wonders whether the brain fog is a blood-sugar issue from having nothing in his system."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000029",
+        "evidence_quote": "on days when i skip breakfast i feel kind of foggy by like ten or eleven",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "The host offers his own pattern of foggy mornings as the basis for the suspected link."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "your brain needs fuel too",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000031",
+        "summary": "The brain-needs-fuel idea is offered as a mechanism for the fog."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "could also just be the bad sleep honestly probably a mix of things",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000037",
+        "summary": "They consider poor sleep as another possible cause of the brain fog."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "maybe"
+        ],
+        "claim_text": "Skipping breakfast may be causing the brain fog.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000030",
+        "evidence_quote": "maybe skipping breakfast is whats making you foggy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim that skipping breakfast can cause brain fog is checkable and could affect listeners' morning eating habits.",
+        "relevance": "substantive",
+        "start_unit_id": "u000030",
+        "topic_ids": [
+          "topic:cognition.brain_fog",
+          "topic:food.eating_behavior"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "i wonder if",
+          "might",
+          "maybe"
+        ],
+        "claim_text": "Brain fog after skipping breakfast might be a blood-sugar issue, because focus dips when there is nothing in the system yet.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000031",
+        "evidence_quote": "i wonder if it might be a blood sugar thing like maybe my focus dips because theres nothing in my system yet",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The proposed blood-sugar mechanism for breakfast-related brain fog can be checked against evidence on fasting and cognition.",
+        "relevance": "substantive",
+        "start_unit_id": "u000031",
+        "topic_ids": [
+          "topic:cognition.brain_fog",
+          "topic:food.eating_behavior",
+          "topic:metabolic.insulin_glucose"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could",
+          "probably",
+          "for sure"
+        ],
+        "claim_text": "Bad sleep could also be causing the brain fog, or it could be a mix of bad sleep and skipping breakfast.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000039",
+        "evidence_quote": "could also just be the bad sleep honestly probably a mix of things",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether poor sleep can produce brain fog is checkable and affects how the symptoms are explained.",
+        "relevance": "substantive",
+        "start_unit_id": "u000037",
+        "topic_ids": [
+          "topic:cognition.brain_fog",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      }
+    ],
+    "window_id": "synthetic_certainty_speculative_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:49.700521+00:00"
+}

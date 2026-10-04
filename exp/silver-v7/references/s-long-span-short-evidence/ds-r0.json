@@ -1,0 +1,690 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "s-long-span-short-evidence",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000030",
+        "evidence_quote": "deep dive on sleep hygiene",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000001",
+        "summary": "Host and sleep physician give a broad sleep hygiene primer covering environment, timing, substances, screens, naps, bedding, diet, anxiety and stimulus control."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000005",
+        "evidence_quote": "going to bed and waking up around the same time every day, weekends included, trains your body's internal clock",
+        "label_ids": [
+          "topic:sleep.circadian_light",
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000005",
+        "summary": "A consistent sleep-wake schedule is described as training the body's internal clock."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000007",
+        "evidence_quote": "Caffeine timing matters a lot too, it can linger in your system for six or more hours depending on the person",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:stimulants.caffeine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000006",
+        "summary": "Caffeine's long half-life is explained as a reason afternoon coffee can affect sleep at night."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "it fragments sleep later in the night",
+        "label_ids": [
+          "topic:alcohol.health_effects",
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000008",
+        "summary": "Alcohol's effect on sleep is explained: it may help onset but fragments later sleep."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000008",
+        "evidence_quote": "people think it helps them fall asleep, and it might, but it fragments sleep later in the night",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000008",
+        "summary": "Speaker corrects the idea that alcohol helps sleep."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000010",
+        "evidence_quote": "Exercise earlier in the day tends to help sleep quality, but intense exercise right before bed can rev some people up too much",
+        "label_ids": [
+          "topic:fitness.exercise_general",
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "summary": "Earlier exercise tends to improve sleep quality while intense late exercise can overstimulate."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "As a board certified sleep physician, I have seen this pattern in my own patients over and over again in the clinic",
+        "label_ids": [
+          "evidence:clinical_experience",
+          "evidence:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000011",
+        "summary": "The physician invokes board certification and repeated clinical encounters to ground the advice."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "People come in convinced their sleep problem is some rare condition, and it usually turns out to be one of these basic habits stacked on top of each other",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000012",
+        "summary": "Speaker corrects the misconception that sleep problems are usually rare conditions."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000014",
+        "evidence_quote": "doom scrolling keeps your brain alert right when it should be winding down",
+        "label_ids": [
+          "topic:cognition.digital_media_brain",
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000014",
+        "summary": "Screens and doomscrolling are said to keep the brain alert at bedtime."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "that combination seems to help a lot of my patients specifically",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Cooler room and heavier blanket combination is supported by the physician's patients."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000023",
+        "evidence_quote": "a heavy or spicy meal too close to bedtime can cause discomfort that keeps people up",
+        "label_ids": [
+          "topic:food.eating_behavior",
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "summary": "Heavy or spicy meals and large amounts of liquid near bedtime are said to disrupt sleep."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "Anxiety about sleep itself is a huge factor too",
+        "label_ids": [
+          "topic:mental.anxiety",
+          "topic:sleep.insomnia",
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Anxiety about not sleeping and stimulus-control advice are discussed, including getting out of bed and keeping the bedroom for sleep."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "most folks"
+        ],
+        "claim_text": "Most people sleep better at around 65 degrees.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000002",
+        "evidence_quote": "most folks sleep better somewhere around sixty five degrees",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Room-temperature guidance is a checkable claim about sleep quality.",
+        "relevance": "substantive",
+        "start_unit_id": "u000002",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Blackout curtains help improve sleep.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000003",
+        "evidence_quote": "Blackout curtains help a lot too",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claims about light-blocking improving sleep can be checked against sleep research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000003",
+        "topic_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Even small amounts of light can disrupt deeper sleep stages.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000003",
+        "evidence_quote": "even small amounts of light from a hallway or a streetlight can disrupt deeper sleep stages",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Light exposure and sleep architecture is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000003",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Going to bed and waking up at the same time every day trains the body's internal clock.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000005",
+        "evidence_quote": "going to bed and waking up around the same time every day, weekends included, trains your body's internal clock",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The circadian effect of a regular sleep schedule is empirically checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000005",
+        "topic_ids": [
+          "topic:sleep.circadian_light",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Caffeine can linger in the body for six or more hours, depending on the person.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000006",
+        "evidence_quote": "it can linger in your system for six or more hours depending on the person",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Caffeine half-life claims can be checked against pharmacokinetic data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000006",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:stimulants.caffeine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Afternoon coffee might still affect a person at 10 p.m. even if they do not feel wired anymore.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000007",
+        "evidence_quote": "that afternoon coffee might still be affecting you at ten at night even if you do not feel wired anymore",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about caffeine's lingering sleep effects despite lack of felt stimulation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000007",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:stimulants.caffeine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "people think",
+          "might"
+        ],
+        "claim_text": "Alcohol may help people fall asleep.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000008",
+        "evidence_quote": "people think it helps them fall asleep, and it might",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The sedative effect of alcohol on sleep onset is checkable and bears on drinking advice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000008",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Alcohol fragments sleep later in the night.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000008",
+        "evidence_quote": "it fragments sleep later in the night",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "Alcohol's effect on sleep architecture is a well-defined checkable claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000008",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "tend to"
+        ],
+        "claim_text": "People tend to wake up more in the second half of the night after drinking.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "You tend to wake up more in the second half of the night after drinking",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claims about alcohol-related sleep fragmentation are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000009",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "tends to"
+        ],
+        "claim_text": "Exercise earlier in the day tends to help sleep quality.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000010",
+        "evidence_quote": "Exercise earlier in the day tends to help sleep quality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The effect of exercise timing on sleep is empirically checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "topic_ids": [
+          "topic:fitness.exercise_general",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "some people"
+        ],
+        "claim_text": "Intense exercise right before bed can overstimulate some people.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000010",
+        "evidence_quote": "intense exercise right before bed can rev some people up too much",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about late intense exercise and arousal that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "topic_ids": [
+          "topic:fitness.exercise_general",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "usually"
+        ],
+        "claim_text": "Sleep problems that people think are rare are usually caused by stacked basic sleep habits.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "it usually turns out to be one of these basic habits stacked on top of each other",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "A clinical claim about the common causes of sleep complaints.",
+        "relevance": "substantive",
+        "start_unit_id": "u000012",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Doomscrolling keeps the brain alert when it should be winding down.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000014",
+        "evidence_quote": "doom scrolling keeps your brain alert right when it should be winding down",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claims about screen stimulation delaying sleep are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000014",
+        "topic_ids": [
+          "topic:cognition.digital_media_brain",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "A wind-down routine helps a lot of people.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000015",
+        "evidence_quote": "A wind down routine helps a lot of people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The benefit of pre-sleep routines is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "topic_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "usually",
+          "most people"
+        ],
+        "claim_text": "A short nap earlier in the day is usually fine for most people.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "a short nap earlier in the day is usually fine for most people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Nap timing recommendations are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000016",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A long nap late in the afternoon can make it much harder to fall asleep at bedtime.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000017",
+        "evidence_quote": "A long nap late in the afternoon can make it much harder to fall asleep at your normal bedtime that night",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Late long naps' effect on sleep onset is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "An old mattress or an unsupportive pillow can wreck sleep.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "a mattress that is too old or a pillow that does not support your neck right can wreck an otherwise good night",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Bedding effects on sleep are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "seem to",
+          "a lot of"
+        ],
+        "claim_text": "Weighted blankets seem to have a calming effect for a lot of people.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000020",
+        "evidence_quote": "Weighted blankets in general seem to have a calming effect for a lot of people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Weighted blanket calming claims are testable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A heavy or spicy meal too close to bedtime can cause discomfort that keeps people up.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "a heavy or spicy meal too close to bedtime can cause discomfort that keeps people up",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Meal timing and sleep disruption are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "topic_ids": [
+          "topic:food.eating_behavior",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Drinking a lot of liquid before bed causes a trip to the bathroom in the night.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000023",
+        "evidence_quote": "a lot of liquid right before bed, that is just going to mean a trip to the bathroom at two in the morning",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Nighttime urination from pre-bed fluid intake is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000023",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "tends to"
+        ],
+        "claim_text": "Anxiety about not sleeping tends to make sleep worse.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "lying there stressing about not sleeping tends to make it worse",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Sleep anxiety's effect on insomnia is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "topic_ids": [
+          "topic:mental.anxiety",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Some people"
+        ],
+        "claim_text": "Some people do better getting out of bed for a bit when they cannot sleep.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "Some people do better getting out of bed for a bit if they cannot sleep rather than lying there frustrated for hours",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Stimulus-control advice is a checkable behavioral intervention.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:sleep.insomnia",
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "some people"
+        ],
+        "claim_text": "Reading a boring magazine in dim light in another room for fifteen minutes can help some people fall asleep.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "Reading a boring magazine in dim light in another room for fifteen minutes and then trying again can actually help some people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific behavioral sleep aid that can be tested.",
+        "relevance": "substantive",
+        "start_unit_id": "u000026",
+        "topic_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "seems to"
+        ],
+        "claim_text": "Keeping the bedroom just for sleeping seems to reinforce the bed-sleep association.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "keeping the bedroom just for sleeping, and not for work or scrolling, seems to reinforce that association over time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Stimulus-control mechanism is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000028",
+        "topic_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      }
+    ],
+    "window_id": "synthetic_long_span_short_evidence_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:49.760541+00:00"
+}

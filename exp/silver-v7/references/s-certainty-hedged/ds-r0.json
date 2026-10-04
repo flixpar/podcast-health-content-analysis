@@ -1,0 +1,95 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "s-certainty-hedged",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000046",
+        "evidence_quote": "probiotics probably help reduce bloating",
+        "label_ids": [
+          "topic:gut.digestive_symptoms",
+          "topic:gut.probiotics_fermented"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "A host describes recurring afternoon bloating and discusses trying a pharmacy probiotic, its possible effect, and choosing supplements."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "balancing out the bacteria in your gut",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Speaker explains probiotics may reduce bloating by balancing gut bacteria."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "probably",
+          "a lot of people"
+        ],
+        "claim_text": "Probiotics probably help reduce bloating for a lot of people.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "probiotics probably help reduce bloating for a lot of people",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A broad efficacy claim about probiotics and bloating that can be checked against clinical evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "topic_ids": [
+          "topic:gut.digestive_symptoms",
+          "topic:gut.probiotics_fermented"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "i think",
+          "tends to"
+        ],
+        "claim_text": "Probiotics tend to reduce bloating by balancing out the bacteria in the gut.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "i think it tends to have to do with balancing out the bacteria in your gut",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A proposed mechanism for probiotic effect on bloating that could be checked against microbiome studies.",
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "topic_ids": [
+          "topic:gut.digestive_symptoms",
+          "topic:gut.probiotics_fermented"
+        ]
+      }
+    ],
+    "window_id": "synthetic_certainty_hedged_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:49.692972+00:00"
+}

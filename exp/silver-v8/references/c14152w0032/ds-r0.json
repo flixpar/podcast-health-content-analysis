@@ -1,0 +1,207 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c14152w0032",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002377",
+        "evidence_quote": "in vaccinating people and preventing illness",
+        "label_ids": [
+          "topic:health_system.global_health",
+          "topic:vaccines.efficacy_response"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002362",
+        "summary": "Hosts explain that the edited Gates clip was about the humanitarian and economic benefits of vaccination, not profiteering."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002441",
+        "evidence_quote": "great success in global health",
+        "label_ids": [
+          "topic:health_system.global_health",
+          "topic:vaccines.efficacy_response"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002393",
+        "summary": "Hosts play the unedited Bill Gates clip on global vaccination returns and debunk the edited vaccine-for-profit version."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002434",
+        "evidence_quote": "helping young children live",
+        "label_ids": [
+          "population:children"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002432",
+        "summary": "The actual clip describes vaccination and nutrition helping young children survive and contribute."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002375",
+        "evidence_quote": "it's really disingenuously edited",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002368",
+        "summary": "Hosts say the clip was disingenuously edited and did not represent what Gates said."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002441",
+        "evidence_quote": "See, that's what he really said",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002436",
+        "summary": "Hosts reject the edited clip and the Gates vaccine-profit conspiracy as false."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002441",
+        "evidence_quote": "Just wants to give you this vaccine because he wants to make money",
+        "label_ids": [
+          "narrative:vaccines_for_profit"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002436",
+        "summary": "The claim that Bill Gates pushes vaccines for profit is raised and rejected."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Making vaccines inexpensive through volume commitments and delivering them widely saves millions of lives.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002419",
+        "evidence_quote": "You literally save millions of lives",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The mortality impact of global vaccination programmes can be checked against global health estimates.",
+        "relevance": "substantive",
+        "start_unit_id": "u002417",
+        "topic_ids": [
+          "topic:health_system.global_health",
+          "topic:vaccines.efficacy_response"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The world has put in $100 billion overall, and the Gates Foundation a bit more than $10 billion, toward global vaccination.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002425",
+        "evidence_quote": "It's been a hundred billion overall that the world's put in. Our foundation is a bit more than ten billion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "These funding totals are checkable and frame the return-on-investment claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u002424",
+        "topic_ids": [
+          "topic:health_system.global_health",
+          "topic:vaccines.efficacy_response"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "we feel"
+        ],
+        "claim_text": "There has been over a 20-to-1 return on global vaccination investment.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002425",
+        "evidence_quote": "we feel there's been over a twenty-to-one return",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claimed return multiple is checkable against economic evaluations of vaccination.",
+        "relevance": "substantive",
+        "start_unit_id": "u002424",
+        "topic_ids": [
+          "topic:health_system.global_health",
+          "topic:vaccines.efficacy_response"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "If the money invested in vaccination had been put in the S&P 500 with dividends reinvested, it would have grown to about $17 billion, while the vaccination return is about $200 billion.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002431",
+        "evidence_quote": "you'd come up with something like 17 billion dollars. But you think it's 200 billion dollars",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The counterfactual market return and the claimed vaccination return are checkable figures.",
+        "relevance": "substantive",
+        "start_unit_id": "u002429",
+        "topic_ids": [
+          "topic:health_system.global_health",
+          "topic:vaccines.efficacy_response"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Bill Gates wants to make money off vaccines and pushes vaccines for profit.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.9,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u002441",
+        "evidence_quote": "Just wants to give you this vaccine because he wants to make money",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:vaccines_for_profit"
+        ],
+        "rationale": "A widely circulated claim about Bill Gates's motives, raised here to be rebutted.",
+        "relevance": "substantive",
+        "start_unit_id": "u002437",
+        "topic_ids": [
+          "topic:vaccines.efficacy_response"
+        ]
+      }
+    ],
+    "window_id": "episode_14152_window_0032"
+  },
+  "stored_at": "2026-10-04T22:36:27.503698+00:00"
+}

@@ -1,0 +1,175 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c191370w0004",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "the more colloquial use of the term trauma or the term traumatic",
+        "label_ids": [
+          "topic:mental.pop_psychology",
+          "topic:mental.trauma_ptsd"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000109",
+        "summary": "Hosts and guest discuss the expanding colloquial use of 'trauma' for breakups and everyday stress versus clinical PTSD, and the guest argues the word should not be stretched to meaninglessness."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "referred pain is a really strange biological thing",
+        "label_ids": [
+          "topic:other"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000144",
+        "summary": "Guest explains referred pain as a biological phenomenon, giving jaw pain from a heart attack and shoulder pain from the spleen as examples."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000151",
+        "evidence_quote": "it's not the job that's traumatic. It's the breakup",
+        "label_ids": [
+          "topic:mental.trauma_ptsd"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "summary": "Guest gives a clinical example of a first responder whose nightmares traced to a breakup, and cautions that not all breakups or war experiences are traumatic."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000140",
+        "evidence_quote": "I just had a book that came out called Unbroken The Trauma Response is Never Wrong",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000123",
+        "summary": "Guest promotes her book Unbroken The Trauma Response is Never Wrong and describes its structure."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000150",
+        "evidence_quote": "I've seen this with many many clients",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "summary": "Guest cites her work with many clients to support the point that the trauma source may be hidden."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000140",
+        "evidence_quote": "I just had a book that came out called Unbroken The Trauma Response is Never Wrong",
+        "mention_role": "own_product",
+        "product_name": "Unbroken: The Trauma Response Is Never Wrong",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000123"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A person can have pain in the jaw and actually be having a heart attack.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "even though the pain is in your jaw, you're actually having a heart attack",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Referred pain from cardiac ischemia to the jaw is a checkable medical fact that affects emergency care decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000144",
+        "topic_ids": [
+          "topic:other"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Pain in the shoulder can actually be a result of the spleen.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000146",
+        "evidence_quote": "you might have pain in your shoulder and it's actually a result of your spleen",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether splenic pathology can refer pain to the shoulder is a checkable physiological claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000146",
+        "topic_ids": [
+          "topic:other"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "in many cases"
+        ],
+        "claim_text": "Trauma is in many cases a life or death situation.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000129",
+        "evidence_quote": "it is in many cases a life or death situation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about trauma's severity that drives the guest's warning against diluting the term.",
+        "relevance": "substantive",
+        "start_unit_id": "u000129",
+        "topic_ids": [
+          "topic:mental.trauma_ptsd"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "More people talking about trauma makes it less likely that people will feel too stigmatized to get help when they need it.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "that makes it less likely that people will feel really like too stigmatized to get help when they need it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A testable claim about destigmatization and help-seeking that could influence mental-health messaging.",
+        "relevance": "substantive",
+        "start_unit_id": "u000137",
+        "topic_ids": [
+          "topic:mental.pop_psychology",
+          "topic:mental.trauma_ptsd"
+        ]
+      }
+    ],
+    "window_id": "episode_191370_window_0004"
+  },
+  "stored_at": "2026-10-04T22:36:28.376520+00:00"
+}

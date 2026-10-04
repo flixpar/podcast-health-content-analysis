@@ -1,0 +1,81 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c22784w0014",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001258",
+        "evidence_quote": "He knew his body was transitioning, which is looking very",
+        "label_ids": [
+          "topic:gender.adult_transition"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001233",
+        "summary": "Hosts joke about getting estrogen at a gym and describe a man's body transitioning and suffering symptoms."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001266",
+        "evidence_quote": "I was trying to make my boobies smaller by doing chest exercises",
+        "label_ids": [
+          "topic:fitness.strength_training"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001260",
+        "summary": "Speaker jokes about chest exercises changing chest size and getting stronger."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001338",
+        "evidence_quote": "It's shining the spotlight on therapists, people who truly make the world a better place, because the right therapist can change everything",
+        "label_ids": [
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001323",
+        "summary": "Sponsor read for BetterHelp therapy service, tied to World Mental Health Day."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001338",
+        "evidence_quote": "Our listeners get 10% off their first month at BetterHelp.com/lastpod",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001323",
+        "summary": "BetterHelp ad includes a discount code and URL."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001338",
+        "evidence_quote": "This is an ad by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u001323"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_22784_window_0014"
+  },
+  "stored_at": "2026-10-04T22:36:33.083904+00:00"
+}

@@ -1,0 +1,217 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c330515w0028",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001370",
+        "evidence_quote": "the shoddy lab that was doing a bola research in Sierra Leone",
+        "label_ids": [
+          "topic:health_system.research_system",
+          "topic:infectious.emerging_outbreaks"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001362",
+        "summary": "Book and guest discuss the Ebola outbreak's official narrative and a biodefense research operation in Sierra Leone as the likely cause."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001380",
+        "evidence_quote": "There has been some kind of congressional discussion, some kind of White House conversation around COVID",
+        "label_ids": [
+          "topic:covid.pandemic_institutions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001379",
+        "summary": "Notes that COVID has received congressional and White House attention while the West African Ebola victims have not."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001395",
+        "evidence_quote": "access to HIV HIV treatment",
+        "label_ids": [
+          "topic:sexual.stis_hiv"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001395",
+        "summary": "Mentions people needing access to HIV treatment."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001399",
+        "evidence_quote": "the pulling back of U S A I D",
+        "label_ids": [
+          "topic:health_system.global_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001395",
+        "summary": "Sets up discussion of the fallout from USAID cuts and aid projects in the regions the guest covers."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001370",
+        "evidence_quote": "the more likely cause is the shoddy lab that was doing a bola research in Sierra Leone",
+        "label_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "summary": "Ebola-lab-leak narrative: the official story is baseless and the outbreak came from biodefense research in Sierra Leone."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001372",
+        "evidence_quote": "any attempt to have a conversation that challenged the dominant narrative as we called it then, was considered a conspiracy theory",
+        "label_ids": [
+          "frame:censorship_suppression"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001370",
+        "summary": "Says challenging the dominant narrative was dismissed as conspiracy theory and few were willing to discuss it."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001387",
+        "evidence_quote": "We need the truth, We need some kind of a disclosure of information around what corporations",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001386",
+        "summary": "Calls for disclosure of what corporations, universities and researchers were doing, implying concealment."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "more likely"
+        ],
+        "claim_text": "The more likely cause of the Ebola outbreak was a shoddy lab doing Ebola research in Sierra Leone.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001364",
+        "evidence_quote": "the more likely cause is the shoddy lab that was doing a bola research in Sierra Leone",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "This lab-origin claim, if wrong, changes who is responsible for the outbreak and the public-health response.",
+        "relevance": "substantive",
+        "start_unit_id": "u001364",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The official narrative said the Ebola outbreak started in Guinea and identified a two-year-old child and an 18-year-old boy as index cases.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001368",
+        "evidence_quote": "they identified Emily woman way two years old or less than two year old child an eighteen year old boy as the index case of the outbreak",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "It records the official origin story that the book challenges, and can be checked against WHO and Guinea investigation reports.",
+        "relevance": "substantive",
+        "start_unit_id": "u001368",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A biodefense research operation was happening in eastern Sierra Leone dating back to 2004, ten years before the Ebola outbreak.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001370",
+        "evidence_quote": "the biodefense research operation that was happening in eastern Syrallian dating back to two thousand and four",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "The existence, location and dates of such a research operation are checkable and central to the alternative origin claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u001370",
+        "topic_ids": [
+          "topic:health_system.research_system",
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The same institutions and individuals involved with COVID were the ones involved in West Africa.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001387",
+        "evidence_quote": "we're talking about the same institution, same individuals who are involved with COVID where the ones who get involved in West",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claimed overlap between COVID and West African research institutions is checkable and underpins the cover-up argument.",
+        "relevance": "substantive",
+        "start_unit_id": "u001386",
+        "topic_ids": [
+          "topic:covid.pandemic_institutions",
+          "topic:infectious.emerging_outbreaks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "What was witnessed in West Africa in 2015 was a prelude, a dress rehearsal, to what the world will face with pathogens as part of warfare and bioterrorism.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001382",
+        "evidence_quote": "was a prelude, was address reheaursal to what the world will face with this whole idea of pathrogens being part of warfare",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This claim attributes a deliberate biowarfare rehearsal meaning to the Ebola outbreak and is checkable as a stated thesis.",
+        "relevance": "substantive",
+        "start_unit_id": "u001381",
+        "topic_ids": [
+          "topic:infectious.emerging_outbreaks"
+        ]
+      }
+    ],
+    "window_id": "episode_330515_window_0028"
+  },
+  "stored_at": "2026-10-04T22:13:53.557381+00:00"
+}

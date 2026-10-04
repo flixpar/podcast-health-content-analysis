@@ -1,0 +1,218 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c175545w0005",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000269",
+        "evidence_quote": "zinc quietly plays a huge role in testosterone production, strength, recovery, and energy",
+        "label_ids": [
+          "topic:supplements.other_vitamins_minerals"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000256",
+        "summary": "Sponsor read for Momentus zinc, claiming roles in testosterone, strength, recovery and energy."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000269",
+        "evidence_quote": "get 35% off your first subscription",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000256",
+        "summary": "Sponsor read with discount code and subscription offer."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000262",
+        "evidence_quote": "it's NSF certified for sport, which means it's been independently tested",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000261",
+        "summary": "NSF certification is offered as independent testing and approval for the zinc product."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000282",
+        "evidence_quote": "diagnosed with Lyme disease",
+        "label_ids": [
+          "topic:chronic_complex.chronic_lyme",
+          "topic:chronic_complex.patient_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000270",
+        "summary": "Guest describes an 18-month unexplained illness, the diagnostic journey, and his Lyme diagnosis."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000296",
+        "evidence_quote": "that was what's called an HHO treatment, a hemol hyperoxygenation treatment",
+        "label_ids": [
+          "topic:alt_medicine.iv_ozone_therapies"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000283",
+        "summary": "Guest describes an HHO hyperthermia and hyperoxygenation blood treatment in Vienna."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000299",
+        "evidence_quote": "went and got natural killer cell infusion in Lithuania",
+        "label_ids": [
+          "topic:procedures.blood_cell_therapies"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000297",
+        "summary": "Guest mentions receiving an NK cell infusion in Lithuania."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000308",
+        "evidence_quote": "I move into a house with mold, and I get EBV and fucking CMV and heavy metals and BPA's and roundworm, liver fluke, H",
+        "label_ids": [
+          "topic:chronic_complex.chronic_lyme",
+          "topic:chronic_complex.mold_illness",
+          "topic:chronic_complex.persistent_infections",
+          "topic:environment.endocrine_disruptors",
+          "topic:environment.heavy_metals",
+          "topic:gut.candida_histamine",
+          "topic:gut.digestive_symptoms",
+          "topic:gut.gi_disease",
+          "topic:infectious.parasitic_infections"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000300",
+        "summary": "Guest attributes immune overload and dysregulation to old Lyme, mold, EBV/CMV, heavy metals, BPA, parasites, H. pylori, SIBO and Candida."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000269",
+        "evidence_quote": "Momentus' zinc",
+        "mention_role": "advertised",
+        "product_name": "Momentus Zinc",
+        "product_type": "supplement",
+        "start_unit_id": "u000256"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Zinc plays a huge role in testosterone production, strength, recovery, and energy.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000258",
+        "evidence_quote": "zinc quietly plays a huge role in testosterone production, strength, recovery, and energy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Nutrient physiology claim that underlies the supplement's efficacy pitch.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000258",
+        "topic_ids": [
+          "topic:supplements.other_vitamins_minerals"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most people are chronically low on zinc.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000259",
+        "evidence_quote": "most people are chronically low on it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Prevalence claim about zinc deficiency in the population.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000259",
+        "topic_ids": [
+          "topic:supplements.other_vitamins_minerals"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Momentus zinc supports testosterone, boosts vitality, and helps keep everything running like it should.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000260",
+        "evidence_quote": "It supports testosterone, boosts vitality, and helps keep everything running like it should",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Product efficacy claim made in the sponsor read.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000260",
+        "topic_ids": [
+          "topic:supplements.other_vitamins_minerals"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Momentus zinc is NSF certified for sport, meaning it has been independently tested and approved for purity, safety, and zero shady ingredients.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000262",
+        "evidence_quote": "it's NSF certified for sport, which means it's been independently tested",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Certification claim that can be checked against NSF records.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000261",
+        "topic_ids": [
+          "topic:supplements.other_vitamins_minerals"
+        ]
+      }
+    ],
+    "window_id": "episode_175545_window_0005"
+  },
+  "stored_at": "2026-10-04T22:36:27.766954+00:00"
+}

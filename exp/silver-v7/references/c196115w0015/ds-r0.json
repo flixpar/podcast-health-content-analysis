@@ -1,0 +1,189 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c196115w0015",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001243",
+        "evidence_quote": "Is it dangerous to have metal on you when you get an MRI",
+        "label_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001222",
+        "summary": "Hosts ask whether metal is dangerous in an MRI and speculate about how MRI works."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001266",
+        "evidence_quote": "So you should not have any metal, even metal crowns in your mouth",
+        "label_ids": [
+          "topic:oral.dental_procedures",
+          "topic:procedures.imaging_diagnostics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001255",
+        "summary": "Hosts explain MRI metal safety, including dental crowns and ferromagnetic materials, and mention ultrasound and CT as alternatives."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "Is it dangerous"
+        ],
+        "claim_text": "Having metal on you during an MRI is dangerous.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "questioned",
+        "end_unit_id": "u001222",
+        "evidence_quote": "Is it dangerous to have metal on you when you get an MRI",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The safety question is checkable and material to anyone with metal before an MRI.",
+        "relevance": "substantive",
+        "start_unit_id": "u001222",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The MRI magnets' vibration can dislodge, bend, or break dental restorations.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001257",
+        "evidence_quote": "the vibration can dislodge, bend, and break the dental restoration just from the magnets",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific MRI safety effect on dental work that listeners with metal crowns would act on.",
+        "relevance": "substantive",
+        "start_unit_id": "u001257",
+        "topic_ids": [
+          "topic:oral.dental_procedures",
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Loose metal objects can injure a person during an MRI.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001259",
+        "evidence_quote": "loose metal objects can injure you as that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general MRI safety warning that can be checked against radiology guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u001259",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I would think"
+        ],
+        "claim_text": "People with a metal plate in the head or dental fillings are bad candidates for an MRI.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001263",
+        "evidence_quote": "I would think if you have a metal plate in your head or you got fillings in your teeth, then you would be a bad candidate",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claims about MRI candidacy with metal implants and fillings affect patient decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u001262",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Some kinds of metals are more responsive to MRI magnets than others.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001264",
+        "evidence_quote": "I think there's certain kinds of metals too that are more responsive to it than others",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about differential metal reactivity in MRI can guide safety choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u001263",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ferromagnetic materials include iron, cobalt, manganese, and nickel.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001265",
+        "evidence_quote": "they call ferromagnetic materials—iron, cobalt, manganese, nickel",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A list of ferromagnetic materials is checkable and relevant to MRI safety.",
+        "relevance": "substantive",
+        "start_unit_id": "u001264",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I guess"
+        ],
+        "claim_text": "Ultrasound or CT scans are alternatives to MRI for people who cannot have an MRI.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001266",
+        "evidence_quote": "ultrasound or like a CT scan or something like that would be sort of the other alternative, I guess",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about alternative imaging for people who cannot have MRI affects clinical choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u001265",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      }
+    ],
+    "window_id": "episode_196115_window_0015"
+  },
+  "stored_at": "2026-10-04T22:13:46.795664+00:00"
+}

@@ -1,0 +1,91 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c322584w0021",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001455",
+        "evidence_quote": "it's not a long procedure, and local anesthetic is used",
+        "label_ids": [
+          "topic:mens.genital_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001451",
+        "summary": "Hosts joke about a vasectomy being a short procedure done under local anesthetic while listening to the podcast."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001461",
+        "evidence_quote": "got me through my vasectomy",
+        "label_ids": [
+          "topic:mens.genital_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001460",
+        "summary": "A host jokes about the podcast getting him through his vasectomy."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001455",
+        "evidence_quote": "it's not a long procedure, and local anesthetic is used",
+        "label_ids": [
+          "population:men"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001451",
+        "summary": "The vasectomy talk is specifically about men's health."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001461",
+        "evidence_quote": "got me through my vasectomy",
+        "label_ids": [
+          "population:men"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001460",
+        "summary": "The vasectomy joke is specifically about men's health."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A vasectomy is not a long procedure and uses local anesthetic.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001451",
+        "evidence_quote": "it's not a long procedure, and local anesthetic is used",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The duration and anesthetic use of a vasectomy are checkable facts that could affect someone's decision about the procedure.",
+        "relevance": "passing",
+        "start_unit_id": "u001451",
+        "topic_ids": [
+          "topic:mens.genital_health"
+        ]
+      }
+    ],
+    "window_id": "episode_322584_window_0021"
+  },
+  "stored_at": "2026-10-04T22:13:55.669427+00:00"
+}

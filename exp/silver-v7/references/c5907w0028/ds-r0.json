@@ -1,0 +1,195 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c5907w0028",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002491",
+        "evidence_quote": "I I tore my meniscus at acupuncture",
+        "label_ids": [
+          "topic:alt_medicine.acupuncture_tcm",
+          "topic:musculoskeletal.sports_injuries"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002488",
+        "summary": "Speaker fainted during an acupuncture session and says he tore his meniscus."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002512",
+        "evidence_quote": "I'd be petrified of needles",
+        "label_ids": [
+          "topic:mental.anxiety"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002496",
+        "summary": "Hosts trade stories about needle phobia and fainting at blood tests, IVs and movie needle scenes."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002515",
+        "evidence_quote": "I did the PRP on my knee",
+        "label_ids": [
+          "topic:procedures.regenerative_medicine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002513",
+        "summary": "Speaker mentions having PRP on his knee and having six tubes of blood drawn."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002531",
+        "evidence_quote": "Got some injuries",
+        "label_ids": [
+          "topic:acute_care.trauma_fractures"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002519",
+        "summary": "Tommy fell asleep or blacked out while driving after shoveling snow, crashed and was banged up with injuries."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002544",
+        "evidence_quote": "It's not good after 50",
+        "label_ids": [
+          "topic:fitness.exercise_general"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002532",
+        "summary": "Speakers discuss snow shoveling as a strenuous workout, riskier for the unfit and after 50."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002607",
+        "evidence_quote": "You can have a heart attack",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002584",
+        "summary": "Speakers warn that shoveling snow can cause heart attacks and debate whether cold or exertion is responsible, citing heart-rate data."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002607",
+        "evidence_quote": "study participants' heart rates exceeded 85 percent of maximal heart rate",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002607",
+        "summary": "A study is invoked showing heart rates above 85 percent of max during snow shoveling, without enough detail to identify it."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Shoveling snow can cause a heart attack.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002589",
+        "evidence_quote": "You can have a heart attack",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general risk claim about shoveling snow and heart attacks that can be checked against medical data.",
+        "relevance": "passing",
+        "start_unit_id": "u002588",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I just was told",
+          "a lot of"
+        ],
+        "claim_text": "A lot of people die while shoveling snow.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002586",
+        "evidence_quote": "a lot of people drop fucking",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A hearsay-based prevalence claim about deaths from shoveling snow that could be checked against mortality data.",
+        "relevance": "passing",
+        "start_unit_id": "u002585",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "The exertion of shoveling snow, not the cold weather, is what causes the harm.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002592",
+        "evidence_quote": "I think it's just the exertion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal explanation of snow-shoveling cardiac risk that can be compared with research on cold and exertion.",
+        "relevance": "passing",
+        "start_unit_id": "u002590",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "After only two minutes of snow shoveling, study participants' heart rates exceeded 85 percent of maximal heart rate, a level more commonly expected during intense aerobic exercise testing.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002607",
+        "evidence_quote": "after only two minutes of snow shoveling, study participants' heart rates exceeded 85 percent of maximal heart rate",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A quantitative physiological claim attributed only to unnamed study participants; verifiable against exercise physiology literature.",
+        "relevance": "passing",
+        "start_unit_id": "u002607",
+        "topic_ids": [
+          "topic:fitness.cardio_endurance"
+        ]
+      }
+    ],
+    "window_id": "episode_5907_window_0028"
+  },
+  "stored_at": "2026-10-04T22:13:48.825306+00:00"
+}

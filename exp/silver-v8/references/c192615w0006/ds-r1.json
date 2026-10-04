@@ -1,0 +1,249 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c192615w0006",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000326",
+        "evidence_quote": "we started the study on chronic congestive heart failure",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:procedures.regenerative_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "summary": "Guest describes a plant-based StemRegen supplement that mobilizes stem cells and cites an ongoing clinical study in chronic congestive heart failure, with other studies planned."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000326",
+        "evidence_quote": "all we do is that we add stem regen",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "summary": "The guest promotes his own StemRegen product throughout the interview, describing its mechanisms and trials."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000274",
+        "evidence_quote": "we know that there's good documentation that by increasing the number of stem cells in circulation, you can help the heart repair",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000274",
+        "summary": "Guest cites 'good documentation' as support for stem cells helping heart repair."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000280",
+        "evidence_quote": "after analyzing ten patients or participants that have been in the study after six months, they have normal heart function",
+        "label_ids": [
+          "evidence:vague_research",
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000275",
+        "summary": "Guest describes an ongoing clinical trial of StemRegen in heart failure and reports the first ten-patient result."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000288",
+        "evidence_quote": "There's tons of scientific documentation that many aspects of human health can improve when you put more stem cells in circulation",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000287",
+        "summary": "Guest invokes 'tons of scientific documentation' for broad health benefits of more stem cells."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000306",
+        "evidence_quote": "a cardiologist who has seen over the years that when he combines both, that's when he sees the best results",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000305",
+        "summary": "Guest cites a cardiologist's long-term observation that combining StemRegen with injections gives the best results."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000313",
+        "evidence_quote": "all we do is that we add stem regen",
+        "mention_role": "own_product",
+        "product_name": "StemRegen",
+        "product_type": "supplement",
+        "start_unit_id": "u000279"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Blue-green algae causes an increase in circulating stem cells of about 25 percent at one hour, returning to baseline within two to three hours.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000264",
+        "evidence_quote": "blue-green algae will trigger a release that will be like a an increase of about 25% at one hour",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A specific quantitative claim about an ingredient's effect on stem cell release that could be tested against company or independent data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000263",
+        "topic_ids": [
+          "topic:procedures.regenerative_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Panax notoginseng, seabuckthorn berry, and Aloe macrorrhiza increase the number of circulating stem cells, with levels still increasing at three hours.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000266",
+        "evidence_quote": "Panax notoginseng, seabuckthorn berry, or Aloe macrorrhiza, you see a completely different behavior. There's an increase in number of stem cells, and by three hours it's still increasing",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about specific botanical ingredients and their stem-cell release profile.",
+        "relevance": "substantive",
+        "start_unit_id": "u000265",
+        "topic_ids": [
+          "topic:procedures.regenerative_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Increasing the number of circulating stem cells can help the heart repair.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000274",
+        "evidence_quote": "we know that there's good documentation that by increasing the number of stem cells in circulation, you can help the heart repair",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A mechanistic benefit claim that underpins the product's proposed use in heart disease.",
+        "relevance": "substantive",
+        "start_unit_id": "u000274",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:procedures.regenerative_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ten out of ten patients with at least two years of chronic stable congestive heart failure had normal heart function after six months of adding StemRegen to standard care.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000280",
+        "evidence_quote": "after analyzing ten patients or participants that have been in the study after six months, they have normal heart function",
+        "evidence_signal_ids": [
+          "evidence:vague_research",
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A striking clinical-trial result for the product that would change patient decisions if believed.",
+        "relevance": "substantive",
+        "start_unit_id": "u000278",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:procedures.regenerative_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Combining StemRegen with stem cell injections produces the best results in patients.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000306",
+        "evidence_quote": "a cardiologist who has seen over the years that when he combines both, that's when he sees the best results",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A general treatment-comparison claim based on a cardiologist's clinical experience.",
+        "relevance": "substantive",
+        "start_unit_id": "u000305",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:procedures.regenerative_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most of the time",
+          "I think",
+          "oftentimes",
+          "Probably"
+        ],
+        "claim_text": "Most patients with chronic stable congestive heart failure are treated with beta blockers, blood pressure medication, and diuretics.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000322",
+        "evidence_quote": "they put them on beta blockers, high blood pressure medication, and oftentimes there's another medication that they add to this. It's not coming to mind right now. Probably diuretics",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A standard-care claim that frames how remarkable the reported StemRegen result is said to be.",
+        "relevance": "substantive",
+        "start_unit_id": "u000318",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      }
+    ],
+    "window_id": "episode_192615_window_0006"
+  },
+  "stored_at": "2026-10-04T22:36:30.801420+00:00"
+}

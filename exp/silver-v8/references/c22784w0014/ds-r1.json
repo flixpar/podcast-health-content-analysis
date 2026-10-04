@@ -1,0 +1,81 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c22784w0014",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001239",
+        "evidence_quote": "you could just get estrogen at the gym",
+        "label_ids": [
+          "topic:endocrine.other_hormones"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001233",
+        "summary": "Hosts talk about buying estrogen at a gym after it became illegal to sell."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001258",
+        "evidence_quote": "He knew his body was transitioning",
+        "label_ids": [
+          "topic:endocrine.other_hormones"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001256",
+        "summary": "Hosts describe a man whose body was changing and who was suffering without knowing estrogen was the cause."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001338",
+        "evidence_quote": "the right therapist can change everything",
+        "label_ids": [
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001323",
+        "summary": "Sponsored BetterHelp read promoting therapy and matching with qualified therapists."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001338",
+        "evidence_quote": "Our listeners get 10% off their first month at BetterHelp.com/lastpod",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001323",
+        "summary": "Sponsor read for BetterHelp with a discount code."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001338",
+        "evidence_quote": "This is an ad by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u001323"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_22784_window_0014"
+  },
+  "stored_at": "2026-10-04T22:36:30.980612+00:00"
+}

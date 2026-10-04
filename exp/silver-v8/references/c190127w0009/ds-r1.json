@@ -1,0 +1,497 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c190127w0009",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000601",
+        "evidence_quote": "one of biggest epidemics in the world is low vitamin D",
+        "label_ids": [
+          "topic:cancer.causes_rates",
+          "topic:mens.testosterone",
+          "topic:mental.depression",
+          "topic:metabolic.diabetes",
+          "topic:metabolic.insulin_glucose",
+          "topic:supplements.vitamin_d"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000597",
+        "summary": "Guest says low vitamin D is epidemic and links it to diabetes, metabolic syndrome, cancer, depression, and lower testosterone."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000610",
+        "evidence_quote": "in the United States, around 50% of people have gastrointestinal problems",
+        "label_ids": [
+          "topic:gut.digestive_symptoms",
+          "topic:gut.leaky_gut",
+          "topic:supplements.vitamin_d"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000604",
+        "summary": "Guest claims many people fail to absorb oral vitamin D because of GI problems or leaky gut, so sun or a UV machine is needed."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000650",
+        "evidence_quote": "for bone health, we must have K2 for the calcium",
+        "label_ids": [
+          "topic:cardiovascular.blood_circulation",
+          "topic:musculoskeletal.bone_health",
+          "topic:supplements.other_vitamins_minerals",
+          "topic:supplements.vitamin_d"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000616",
+        "summary": "Hosts discuss vitamin K2 with vitamin D for calcium metabolism, bone health, and moving calcium away from arteries and veins."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000656",
+        "evidence_quote": "that only happens when you have low levels of vitamin K2",
+        "label_ids": [
+          "topic:supplements.other_vitamins_minerals",
+          "topic:supplements.vitamin_d"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000651",
+        "summary": "Guest reassures that vitamin D overdose problems only occur with low vitamin K2 and that taking K2 prevents them."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000667",
+        "evidence_quote": "we inevitably crash between hits of stimulants or we end up needing more and more to get the same effect",
+        "label_ids": [
+          "topic:drugs_addiction.stimulants_illicit",
+          "topic:stimulants.caffeine",
+          "topic:stimulants.energy_drinks"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000664",
+        "summary": "Ad copy describes people using Adderall, energy drinks, and coffee for focus and then experiencing crashes and tolerance."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000674",
+        "evidence_quote": "Blue canotine is a novel combination of low dose and pharmaceutical grade nicotine, caffeine, CBD, and methylene blue",
+        "label_ids": [
+          "topic:cognition.focus_productivity",
+          "topic:cognition.nootropics"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000668",
+        "summary": "Ad promotes Blue canotine as a nootropic combination that boosts focus and productivity."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000656",
+        "evidence_quote": "There's many people that are afraid of overdosing with vitamin D",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000651",
+        "summary": "Guest corrects the fear that taking vitamin D causes overdose problems, saying K2 prevents hypercalcemia."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000674",
+        "evidence_quote": "However, there is another better way and it's called blue canotine",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000657",
+        "summary": "A sponsor-style read pitches Blue canotine as a focus product."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000605",
+        "evidence_quote": "in the United States, around 50% of people have gastrointestinal problems",
+        "label_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "summary": "The 50% gastrointestinal prevalence figure is cited as a statistic."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000674",
+        "evidence_quote": "it's called blue canotine",
+        "mention_role": "advertised",
+        "product_name": "Blue canotine",
+        "product_type": "supplement",
+        "start_unit_id": "u000668"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000665",
+        "evidence_quote": "drugs like adderol",
+        "mention_role": "criticized",
+        "product_name": "Adderall",
+        "product_type": "medication",
+        "start_unit_id": "u000665"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "When the sun is weighed down, there is no UVA or UVB, so sunscreen is not needed.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000593",
+        "evidence_quote": "when the sun is weighed down, you don't have UVA, you don't have UVB, so you don't need it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim that cloudy or low sun eliminates UVA and UVB affects whether people use sunscreen.",
+        "relevance": "substantive",
+        "start_unit_id": "u000592",
+        "topic_ids": [
+          "topic:radiation_light.sunlight_uv",
+          "topic:skin_beauty.sunscreen"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Low vitamin D is one of the biggest epidemics in the world.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000598",
+        "evidence_quote": "one of biggest epidemics in the world is low vitamin D",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The prevalence of low vitamin D as a global epidemic is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000597",
+        "topic_ids": [
+          "topic:supplements.vitamin_d"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Low vitamin D causes a higher incidence of diabetes, metabolic syndrome, many types of cancer, depression, and lower testosterone.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000601",
+        "evidence_quote": "when you have low vitamin D, due for example, have a higher incidence of diabetics, of also a metabolic syndrome, of many types of cancer, of depression, of lower testosterone",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This causal list could change what listeners believe about treating or preventing several conditions with vitamin D.",
+        "relevance": "substantive",
+        "start_unit_id": "u000599",
+        "topic_ids": [
+          "topic:cancer.causes_rates",
+          "topic:mens.testosterone",
+          "topic:mental.depression",
+          "topic:metabolic.diabetes",
+          "topic:metabolic.insulin_glucose",
+          "topic:supplements.vitamin_d"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "About 50% of people in the United States have gastrointestinal problems.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000605",
+        "evidence_quote": "in the United States, around 50% of people have gastrointestinal problems",
+        "evidence_signal_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claimed prevalence of GI problems is an unattributed statistic that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "topic_ids": [
+          "topic:gut.digestive_symptoms"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "If you have gastrointestinal problems, your body probably does not absorb oral vitamin D.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000606",
+        "evidence_quote": "even if you're taking oral vitamin D, your body is probably not absorbing it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether GI problems block oral vitamin D absorption affects supplement advice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "topic_ids": [
+          "topic:gut.digestive_symptoms",
+          "topic:supplements.vitamin_d"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People with chronic disease or leaky gut do not absorb nutrients from supplements, so sunlight is the only way to get vitamin D.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000610",
+        "evidence_quote": "with chronic disease or with leaky gut, you would not be absorbing the nutrients. So the only way would be to take the sun",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim that sun is the only vitamin D source for people with malabsorption is checkable and changes advice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000607",
+        "topic_ids": [
+          "topic:gut.leaky_gut",
+          "topic:supplements.vitamin_d"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vitamin D controls the absorption of calcium in the intestine.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000631",
+        "evidence_quote": "vitamin D, what it makes is that it controls the absorption of calcium in your intestine",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This mechanism claim underlies the speaker's advice about vitamin D and calcium.",
+        "relevance": "substantive",
+        "start_unit_id": "u000631",
+        "topic_ids": [
+          "topic:musculoskeletal.bone_health",
+          "topic:supplements.vitamin_d"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Without enough vitamin D, you do not absorb calcium from the foods you eat.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000633",
+        "evidence_quote": "when you don't have enough vitamin D, you're not absorbing the calcium from the foods you eat",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This is a checkable claim about vitamin D's role in calcium absorption.",
+        "relevance": "substantive",
+        "start_unit_id": "u000632",
+        "topic_ids": [
+          "topic:musculoskeletal.bone_health",
+          "topic:supplements.vitamin_d"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vitamin K2 takes calcium from the blood and puts it into bone.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000636",
+        "evidence_quote": "it's actually K2, the one that takes it from the blood and puts it into the bone",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claimed mechanism of K2 matters to whether people take it for bone health.",
+        "relevance": "substantive",
+        "start_unit_id": "u000635",
+        "topic_ids": [
+          "topic:musculoskeletal.bone_health",
+          "topic:supplements.other_vitamins_minerals"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vitamin K2 takes calcium away from arteries and veins and puts it into bones.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000639",
+        "evidence_quote": "many people that have problems with their arteries, they're taking K2 because it takes the calcium away from their veins and put it into the bones",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This claim about K2 moving vascular calcium is checkable and affects supplement use for artery problems.",
+        "relevance": "substantive",
+        "start_unit_id": "u000637",
+        "topic_ids": [
+          "topic:cardiovascular.blood_circulation",
+          "topic:supplements.other_vitamins_minerals"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vitamin K2 can be obtained from mushrooms and sun-fermented foods, but it is not easy to get enough through food.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000641",
+        "evidence_quote": "you can get it from mushrooms and sun fermented foods, but it's not that easy to get it through food",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether food sources supply enough K2 is checkable and supports the recommendation to supplement.",
+        "relevance": "substantive",
+        "start_unit_id": "u000640",
+        "topic_ids": [
+          "topic:supplements.other_vitamins_minerals"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Hypercalcemia from vitamin D only happens when vitamin K2 levels are low.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000654",
+        "evidence_quote": "hypercalcemia when you get too much calcium in the blood, but that only happens when you have low levels of vitamin K2",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This claim about vitamin D safety and K2 status is checkable and affects supplement use.",
+        "relevance": "substantive",
+        "start_unit_id": "u000652",
+        "topic_ids": [
+          "topic:supplements.other_vitamins_minerals",
+          "topic:supplements.vitamin_d"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Taking lots of vitamin D is harmless as long as you take vitamin K2.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000656",
+        "evidence_quote": "it doesn't matter if you take lots of vitamin D, as long as you're taking K2, you won't have any problem",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim that high vitamin D is safe with K2 is a checkable safety claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000654",
+        "topic_ids": [
+          "topic:supplements.other_vitamins_minerals",
+          "topic:supplements.vitamin_d"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "inevitably"
+        ],
+        "claim_text": "Stimulants used for focus inevitably cause crashes and require more and more to get the same effect.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000667",
+        "evidence_quote": "we inevitably crash between hits of stimulants or we end up needing more and more to get the same effect",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The ad makes a checkable claim about stimulant side effects to motivate the product.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000664",
+        "topic_ids": [
+          "topic:drugs_addiction.stimulants_illicit",
+          "topic:stimulants.caffeine",
+          "topic:stimulants.energy_drinks"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Blue canotine is a combination of low-dose pharmaceutical-grade nicotine, caffeine, CBD, and methylene blue.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000674",
+        "evidence_quote": "Blue canotine is a novel combination of low dose and pharmaceutical grade nicotine, caffeine, CBD, and methylene blue",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The product's stated composition can be checked against its label or marketing.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000673",
+        "topic_ids": [
+          "topic:cognition.nootropics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Blue canotine improves focus and productivity.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000674",
+        "evidence_quote": "that will literally rip those cobwebs off and launch your productivity",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This is the ad's efficacy claim for the product.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000673",
+        "topic_ids": [
+          "topic:cognition.focus_productivity",
+          "topic:cognition.nootropics"
+        ]
+      }
+    ],
+    "window_id": "episode_190127_window_0009"
+  },
+  "stored_at": "2026-10-04T22:36:30.662928+00:00"
+}

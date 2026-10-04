@@ -1,0 +1,277 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c190223w0004",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000291",
+        "evidence_quote": "Mitochondria are of central importance in human physiology",
+        "label_ids": [
+          "topic:longevity.cellular_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000206",
+        "summary": "The speaker explains the cell danger response: mitochondria act as environmental sensors that shift from energy production to cellular defense under stress, causing fatigue."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "it's there's kind of framed as like these mindless energy generators",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000206",
+        "summary": "The speaker corrects the simplified view of mitochondria as mere energy generators."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "what we now know through research, especially in the last decade",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000208",
+        "summary": "The speaker invokes recent research generally as the basis for the framework."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "in a coherent framework by Dr. Robert Navio",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000209",
+        "summary": "Dr. Robert Navio's authority is invoked for the cell danger response framework."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000234",
+        "evidence_quote": "There's a whole field of research called mitochondrial psychobiology now",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000232",
+        "summary": "A whole research field is invoked to support the mind-mitochondria link."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000250",
+        "evidence_quote": "almost every type of stress when in excess of what the body can handle will result in increased levels of oxidative damage, increased levels of inflammatory cytokines",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000235",
+        "summary": "The speaker gives a mechanistic account of how stressors trigger mitochondrial damage, leakage of ATP and mitochondrial DNA, and danger signaling."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Mitochondria have a second role beyond energy generation: they act as environmental sensors.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "mitochondria have a second role beyond their role as energy generators and that is as environmental sensors",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "A central physiological claim about mitochondrial function that can be checked against the cell danger response literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000208",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "every type"
+        ],
+        "claim_text": "Mitochondria can detect basically every type of threat or danger signal or stress imaginable.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000234",
+        "evidence_quote": "Mitochondria can detect basically every type of threat or danger signal or stress imaginable",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A broad claim about mitochondrial sensing that could be checked against the cell danger response evidence base.",
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "almost every"
+        ],
+        "claim_text": "Almost every type of stress, when in excess of what the body can handle, results in increased oxidative damage, inflammatory cytokines, or cellular damage.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "almost every type of stress when in excess of what the body can handle will result in increased levels of oxidative damage, increased levels of inflammatory cytokines",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A core mechanistic claim in the cell danger response explanation, checkable against stress physiology research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000237",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "When there is enough cellular damage, ATP, ADP, and mitochondrial DNA leak from inside cells into the bloodstream.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000242",
+        "evidence_quote": "like ATP and ADP leaking outside the cell into the extracellular space into the bloodstream and mitochondrial DNA leaking into the bloodstream",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific mechanistic claim about cellular leakage that can be checked against cell biology research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000240",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Leaked energy molecules and mitochondrial DNA act as danger signaling molecules sensed by other cells, organs, and the brain.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000250",
+        "evidence_quote": "those molecules, energy molecules, mitochondrial DNA actually serve as danger signaling molecules",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanistic claim about how mitochondrial contents signal danger, checkable against the danger-signaling literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000247",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "If stress exceeds the resilience threshold, mitochondria shift from energy production into the cell danger response.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000261",
+        "evidence_quote": "if it exceeds your resilience threshold, the capacity of your mitochondria to handle that level of danger signal, of stress signaling, then the mitochondria shift into the cell danger response",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A defining claim of the cell danger response model, checkable against published descriptions of the model.",
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Peacetime metabolism and wartime metabolism are mutually exclusive states of the mitochondria.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000268",
+        "evidence_quote": "these are dual roles of the mitochondria and it's a critically important to understand. They are mutually exclusive",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A falsifiable claim about mitochondrial metabolic states in the cell danger response framework.",
+        "relevance": "substantive",
+        "start_unit_id": "u000267",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "When mitochondria shift to cellular defense, the individual experiences less energy.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000282",
+        "evidence_quote": "the way it's experienced is less energy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A symptom-level implication of the cell danger response, checkable against clinical descriptions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000278",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "After extreme overexercising, you will be fatigued and run down for a day or two.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000291",
+        "evidence_quote": "You're going to be fatigued and run down for a day or two",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about the expected recovery response to extreme exercise.",
+        "relevance": "substantive",
+        "start_unit_id": "u000288",
+        "topic_ids": [
+          "topic:fitness.exercise_general"
+        ]
+      }
+    ],
+    "window_id": "episode_190223_window_0004"
+  },
+  "stored_at": "2026-10-04T22:13:55.264395+00:00"
+}

@@ -1,0 +1,422 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c162528w0006",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000325",
+        "evidence_quote": "You're talking about umbilical cord blood banking",
+        "label_ids": [
+          "topic:procedures.blood_cell_therapies"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000308",
+        "summary": "Hosts discuss private umbilical cord blood banking and its limited uses."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000350",
+        "evidence_quote": "That's why I'm excited about Parify, Kim Rogers' 30-day full-spectrum parasite cleanse. The kit works by clearing parasites, worms, candida, and heavy metals",
+        "label_ids": [
+          "topic:detox.parasite_cleanses",
+          "topic:infectious.parasitic_infections"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "summary": "Ad for Parify parasite cleanse claims hidden parasites are widespread and the product clears them."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000333",
+        "evidence_quote": "Some strains live in all stages: eggs, larvae, adults, hidden in your gut, releasing toxins that sabotage your energy and digestion",
+        "label_ids": [
+          "narrative:parasites_cause_disease"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "summary": "The ad invokes the claim that hidden parasites are widespread and cause symptoms, so a cleanse is needed."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000327",
+        "evidence_quote": "the idea that you only get parasites when you travel to some exotic? Country is flat wrong",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "summary": "Ad states the idea that parasites only come from exotic travel is flat wrong."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000333",
+        "evidence_quote": "releasing toxins that sabotage your energy and digestion",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000332",
+        "summary": "Ad frames parasites as releasing toxins that harm energy and digestion."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000329",
+        "evidence_quote": "it's estimated that millions in the United States have been exposed to Toxocara, a parasitic worm",
+        "label_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000328",
+        "summary": "Ad offers an unattributed estimate of Toxocara exposure."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000350",
+        "evidence_quote": "use the code Rachel to get 10% off of your order",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "summary": "Sponsor read with discount code for Parify."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000381",
+        "evidence_quote": "a single umbilical cord. Will accommodate approximately 500 individual patients",
+        "label_ids": [
+          "topic:procedures.blood_cell_therapies"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000351",
+        "summary": "Guest explains their umbilical cord stem cell donation, processing, cryopreservation and shipping viability checks."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000388",
+        "evidence_quote": "how the stem cells stem cells go into the body and they find what where they need to be within that individual",
+        "label_ids": [
+          "topic:procedures.regenerative_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000382",
+        "summary": "Host asks how long stem cells take to find and repair what needs repair."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000381",
+        "evidence_quote": "the donation is made to us",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000351",
+        "summary": "Guest describes their own stem cell bank's process and product."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000350",
+        "evidence_quote": "Parify, Kim Rogers' 30-day full-spectrum parasite cleanse",
+        "mention_role": "advertised",
+        "product_name": "Parify",
+        "product_type": "supplement",
+        "start_unit_id": "u000326"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The idea that you only get parasites when you travel to an exotic country is flat wrong.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000327",
+        "evidence_quote": "the idea that you only get parasites when you travel to some exotic? Country is flat wrong",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claim about where parasites are acquired is checkable.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "often"
+        ],
+        "claim_text": "Millions of Americans carry parasites right now, often without symptoms.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000328",
+        "evidence_quote": "Millions of Americans carry parasites right now, often without symptoms",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Prevalence of asymptomatic parasitic infection in the US is checkable and supports the ad's cleanse pitch.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000328",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "It is estimated that millions in the United States have been exposed to Toxocara, a parasitic worm.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000329",
+        "evidence_quote": "it's estimated that millions in the United States have been exposed to Toxocara, a parasitic worm",
+        "evidence_signal_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The Toxocara exposure estimate can be checked against seroprevalence data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000329",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most people exposed to Toxocara never know it.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000330",
+        "evidence_quote": "Yet most never even know it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The proportion of asymptomatic Toxocara infections is checkable.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000330",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Parasites can enter the body through tap water, sushi, undercooked foods, or contaminated produce.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000332",
+        "evidence_quote": "Parasites do not need a plane ticket. They can enter through tap water, sushi, undercooked foods, or contaminated produce",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Transmission routes of parasites in the US are checkable.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000331",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Some"
+        ],
+        "claim_text": "Some parasites live in the gut and release toxins that sabotage energy and digestion.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000333",
+        "evidence_quote": "Some strains live in all stages: eggs, larvae, adults, hidden in your gut, releasing toxins that sabotage your energy and digestion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:parasites_cause_disease"
+        ],
+        "rationale": "The claim that hidden parasites release toxins causing symptoms is checkable and drives the cleanse recommendation.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000333",
+        "topic_ids": [
+          "topic:infectious.parasitic_infections"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Parify clears parasites, worms, candida, and heavy metals, and supports gut health, detox pathways, and toxin removal.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000335",
+        "evidence_quote": "The kit works by clearing parasites, worms, candida, and heavy metals, targeting parasites in all life stages, supporting gut health, detox pathways, and toxin removal",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A product efficacy claim in ad copy that listeners could rely on.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000334",
+        "topic_ids": [
+          "topic:detox.parasite_cleanses"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Private cord blood banking is limited strictly to use in the child it came from or its parents.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000321",
+        "evidence_quote": "it's limited strictly to the child itself, from who it came from, or to their parents",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The allowed uses of banked cord blood are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000320",
+        "topic_ids": [
+          "topic:procedures.blood_cell_therapies"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "certainly"
+        ],
+        "claim_text": "Cord blood stem cells can certainly help with blood-borne illnesses such as leukemia.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000323",
+        "evidence_quote": "it's strictly limited towards blood-borne illnesses, things like leukemia. It can certainly help with",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether banked cord blood treats leukemia is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000322",
+        "topic_ids": [
+          "topic:procedures.blood_cell_therapies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A single umbilical cord will accommodate approximately 500 individual patients.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000368",
+        "evidence_quote": "a single umbilical cord. Will accommodate approximately 500 individual patients",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The patient yield per donated cord is a checkable operational claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000367",
+        "topic_ids": [
+          "topic:procedures.blood_cell_therapies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Cord stem cell products can be frozen and remain good for upwards of ten years.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000377",
+        "evidence_quote": "How long can how long can it be frozen where it's still good? Upwards of ten years",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The cryopreservation shelf life of cord stem cells is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000373",
+        "topic_ids": [
+          "topic:procedures.blood_cell_therapies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A shipped stem cell product that thaws and is refrozen is dead.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000380",
+        "evidence_quote": "if it loses its its freeze when they get refrozen way back up. It's a dead product",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Viability of cryopreserved stem cells after thawing is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000377",
+        "topic_ids": [
+          "topic:procedures.blood_cell_therapies"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Stem cells go into the body and find where they need to be within that individual.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000383",
+        "evidence_quote": "how the stem cells stem cells go into the body and they find what where they need to be within that individual",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claimed homing behavior of stem cells is checkable and central to the therapy's rationale.",
+        "relevance": "substantive",
+        "start_unit_id": "u000383",
+        "topic_ids": [
+          "topic:procedures.regenerative_medicine"
+        ]
+      }
+    ],
+    "window_id": "episode_162528_window_0006"
+  },
+  "stored_at": "2026-10-04T22:36:30.157982+00:00"
+}

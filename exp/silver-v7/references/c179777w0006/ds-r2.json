@@ -1,0 +1,291 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c179777w0006",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000293",
+        "evidence_quote": "my favorite regimen is honestly an estradiol patch, an oral progesterone, and then a testosterone cream",
+        "label_ids": [
+          "topic:womens.hormone_therapy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "summary": "Speakers discuss their preferred menopausal hormone therapy regimen and the pros and cons of hormone pellets."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000325",
+        "evidence_quote": "estradiol, progesterone, and testosterone",
+        "label_ids": [
+          "topic:womens.female_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000295",
+        "summary": "Speakers discuss hormone lab ranges, testosterone assay methods, and SHBG in women."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000305",
+        "evidence_quote": "A lot of people will just do a TSH. That's not adequate in my mind",
+        "label_ids": [
+          "topic:endocrine.thyroid"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000302",
+        "summary": "Speaker says a TSH alone is inadequate and free T4 and free T3 are needed."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000319",
+        "evidence_quote": "birth control pill causes it to go up, which is soaks up all that extra testosterone, which is why many women when they're on the birth control pill have no libido",
+        "label_ids": [
+          "topic:fertility.contraception",
+          "topic:sexual.sexual_function"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000319",
+        "summary": "Speaker explains that birth control pills raise SHBG and can lower libido."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000325",
+        "evidence_quote": "this is something a lot of women want to know",
+        "label_ids": [
+          "population:women"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "summary": "The hormone therapy and lab discussion is specifically about women's health."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000267",
+        "evidence_quote": "it triggered hair loss that was so bad for me",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000264",
+        "summary": "Personal experience with pellet-induced high hormone levels and hair loss is recounted."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000277",
+        "evidence_quote": "I was angry and horny for three months",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000273",
+        "summary": "A personal bad experience with pellets is offered as an anecdote."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000281",
+        "evidence_quote": "they have the clinical experience to say",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000280",
+        "summary": "A provider's clinical experience is cited to support pellet dosing confidence."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000286",
+        "evidence_quote": "I've had patients, friends, acquaintances who swear by them",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000286",
+        "summary": "Testimonials from patients, friends, and acquaintances are cited for pellets."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000308",
+        "evidence_quote": "One, the data isn't great",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000307",
+        "summary": "Speaker acknowledges the data on normal hormone ranges is not strong."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000319",
+        "evidence_quote": "sex hormone binding globulin is a protein in our blood that binds our hormones, specifically our sex hormones",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000317",
+        "summary": "A biochemical mechanism involving SHBG is used to explain birth control's effect on libido."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "If pellet hormone levels become too high in a woman predisposed to hair loss and high DHT, it triggers hair loss.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000267",
+        "evidence_quote": "if the level does become way too high, and you are predisposed to hair loss, and you are predisposed to high DHT levels",
+        "evidence_signal_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A generalizable risk claim about pellet hormone therapy and hair loss that could be checked against clinical evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000266",
+        "topic_ids": [
+          "topic:womens.hormone_therapy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Hormone pellets commit a patient for three months and cannot be taken out of the body.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000284",
+        "evidence_quote": "You are committed to that for three months. You can't take out of your body",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A factual claim about the duration and reversibility of pellet therapy that patients use to decide.",
+        "relevance": "substantive",
+        "start_unit_id": "u000282",
+        "topic_ids": [
+          "topic:womens.hormone_therapy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "in my mind"
+        ],
+        "claim_text": "A TSH alone is not adequate to assess thyroid function.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000304",
+        "evidence_quote": "A lot of people will just do a TSH. That's not adequate in my mind",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A diagnostic claim about thyroid testing that can be checked against thyroid guidelines.",
+        "relevance": "passing",
+        "start_unit_id": "u000303",
+        "topic_ids": [
+          "topic:endocrine.thyroid"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "may not"
+        ],
+        "claim_text": "Immunoassay may not be as accurate as mass spectrometry for testosterone, and mass spectrometry can detect much lower levels, making it more appropriate for testing in women.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000313",
+        "evidence_quote": "immunoassay, which may not be as as excuse me, my brain space for a minute, as accurate as you know mass spectrometry",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A diagnostic testing claim that affects how women's testosterone is measured and interpreted.",
+        "relevance": "substantive",
+        "start_unit_id": "u000310",
+        "topic_ids": [
+          "topic:womens.female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Sex hormone binding globulin is a protein in blood that binds sex hormones.",
+        "claim_type": "mechanism",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000317",
+        "evidence_quote": "sex hormone binding globulin is a protein in our blood that binds our hormones, specifically our sex hormones",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A factual biological definition that grounds the later claim about birth control and libido.",
+        "relevance": "passing",
+        "start_unit_id": "u000317",
+        "topic_ids": [
+          "topic:womens.female_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "many"
+        ],
+        "claim_text": "Birth control pills raise SHBG, which binds testosterone, causing many women on the pill to have no libido.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000319",
+        "evidence_quote": "birth control pill causes it to go up, which is soaks up all that extra testosterone, which is why many women when they're on the birth control pill have no libido",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim about oral contraceptive side effects that can be checked against studies of SHBG and libido.",
+        "relevance": "passing",
+        "start_unit_id": "u000319",
+        "topic_ids": [
+          "topic:fertility.contraception",
+          "topic:sexual.sexual_function"
+        ]
+      }
+    ],
+    "window_id": "episode_179777_window_0006"
+  },
+  "stored_at": "2026-10-04T22:13:55.025694+00:00"
+}

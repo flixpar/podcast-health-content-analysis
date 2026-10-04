@@ -1,0 +1,361 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c18517w0045",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004260",
+        "evidence_quote": "Joe, he had HIV",
+        "label_ids": [
+          "topic:sexual.stis_hiv"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004236",
+        "summary": "Hosts discuss Magic Johnson's HIV, his aging, stigma, and the improved prognosis of HIV."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004282",
+        "evidence_quote": "what's worse, herpes all over your dick for life",
+        "label_ids": [
+          "topic:sexual.stis_hiv"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u004263",
+        "summary": "A joking comparison of lifelong herpes and HIV, including claims about blisters and curability."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u004337",
+        "evidence_quote": "Can't they give you some HIV, bro",
+        "label_ids": [
+          "topic:infectious.vector_borne",
+          "topic:sexual.stis_hiv"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u004335",
+        "summary": "Hosts wonder whether mosquitoes can transmit HIV, mentioning malaria and Ebola."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u004343",
+        "evidence_quote": "Somebody said you can't get it in your mouth",
+        "label_ids": [
+          "topic:sexual.stis_hiv"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u004339",
+        "summary": "A claim that HIV cannot be caught orally is quoted and joked about."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004353",
+        "evidence_quote": "There's no way to get it though",
+        "label_ids": [
+          "topic:sexual.stis_hiv"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u004351",
+        "summary": "The joke that there is no way to get HIV orally is repeated."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004362",
+        "evidence_quote": "there's no evidence mosquitoes can transmit HIV",
+        "label_ids": [
+          "topic:infectious.vector_borne",
+          "topic:sexual.stis_hiv"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004361",
+        "summary": "A correction explains that mosquitoes do not transmit HIV and that HIV dies quickly in the mosquito."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.65,
+        "discourse_role": "questioned",
+        "end_unit_id": "u004337",
+        "evidence_quote": "Can't they give you some HIV, bro",
+        "label_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u004337",
+        "summary": "The recurring claim that mosquitoes can transmit HIV is raised as a question."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u004362",
+        "evidence_quote": "there's no evidence mosquitoes can transmit HIV",
+        "label_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004361",
+        "summary": "The mosquito-HIV transmission myth is corrected."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004362",
+        "evidence_quote": "there's no evidence mosquitoes can transmit HIV",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004361",
+        "summary": "Speaker corrects the idea that mosquitoes can transmit HIV."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004277",
+        "evidence_quote": "No, the blisters go away",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u004273",
+        "summary": "Speaker corrects the claim that herpes blisters never go away, noting outbreaks instead."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004362",
+        "evidence_quote": "Studies with HIV have shown clearly",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u004362",
+        "summary": "Speaker cites studies without identifying them for HIV survival in mosquitoes."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "HIV is not a death sentence anymore.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004260",
+        "evidence_quote": "It's not a death sentence anymore",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This is a checkable claim about the current prognosis of HIV that could affect how seriously listeners take the disease.",
+        "relevance": "passing",
+        "start_unit_id": "u004260",
+        "topic_ids": [
+          "topic:sexual.stis_hiv"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "HIV can basically be cured.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004269",
+        "evidence_quote": "they can basically cure it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about HIV being curable is material to treatment expectations and could be checked against current medical consensus.",
+        "relevance": "passing",
+        "start_unit_id": "u004269",
+        "topic_ids": [
+          "topic:sexual.stis_hiv"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Herpes blisters never go away.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u004273",
+        "evidence_quote": "those blisters don't go away",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "A factual claim about the course of herpes that is made and then corrected.",
+        "relevance": "passing",
+        "start_unit_id": "u004270",
+        "topic_ids": [
+          "topic:sexual.stis_hiv"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Herpes blisters go away.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004273",
+        "evidence_quote": "No, the blisters go away",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "A correction about the episodic nature of herpes symptoms that can be checked.",
+        "relevance": "passing",
+        "start_unit_id": "u004273",
+        "topic_ids": [
+          "topic:sexual.stis_hiv"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Somebody said"
+        ],
+        "claim_text": "You can't get HIV in your mouth.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u004341",
+        "evidence_quote": "Somebody said you can't get it in your mouth",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A hearsay claim about oral HIV transmission that is repeated in the conversation.",
+        "relevance": "passing",
+        "start_unit_id": "u004339",
+        "topic_ids": [
+          "topic:sexual.stis_hiv"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Can't they"
+        ],
+        "claim_text": "Mosquitoes can transmit HIV.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "questioned",
+        "end_unit_id": "u004337",
+        "evidence_quote": "Can't they give you some HIV, bro",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A recurring misconception about mosquito transmission of HIV is raised as a question.",
+        "relevance": "passing",
+        "start_unit_id": "u004337",
+        "topic_ids": [
+          "topic:infectious.vector_borne",
+          "topic:sexual.stis_hiv"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There's no evidence mosquitoes can transmit HIV.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004361",
+        "evidence_quote": "there's no evidence mosquitoes can transmit HIV",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A checkable public-health correction about HIV transmission by mosquitoes.",
+        "relevance": "substantive",
+        "start_unit_id": "u004361",
+        "topic_ids": [
+          "topic:infectious.vector_borne",
+          "topic:sexual.stis_hiv"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "clearly"
+        ],
+        "claim_text": "HIV disappears in the mosquito after about one to two days.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004362",
+        "evidence_quote": "Studies with HIV have shown clearly the virus disappears in the mosquito after about one to two days",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A specific mechanistic claim about HIV survival in mosquitoes that can be checked against research.",
+        "relevance": "substantive",
+        "start_unit_id": "u004362",
+        "topic_ids": [
+          "topic:infectious.vector_borne",
+          "topic:sexual.stis_hiv"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Mosquitoes are carriers of yellow fever, dengue fever, Japanese encephalitis, and encephalitis.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u004361",
+        "evidence_quote": "mosquitoes are carriers of yellow fever, dengue fever, Japanese encephalitis, encephalitis",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A list of mosquito-borne diseases that can be checked against vector-borne disease knowledge.",
+        "relevance": "passing",
+        "start_unit_id": "u004361",
+        "topic_ids": [
+          "topic:infectious.vector_borne"
+        ]
+      }
+    ],
+    "window_id": "episode_18517_window_0045"
+  },
+  "stored_at": "2026-10-04T22:13:45.949371+00:00"
+}

@@ -1,0 +1,257 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c321996w0007",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000574",
+        "evidence_quote": "mRNA, but let's just for lack of better",
+        "label_ids": [
+          "topic:vaccines.covid_vaccines"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000572",
+        "summary": "Speakers tentatively identify the vaccine being discussed as mRNA."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "People have allergies too to like some of the stuff in the vaccine, so they can't get it",
+        "label_ids": [
+          "topic:vaccines.safety_injury"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000575",
+        "summary": "Speaker notes that people with allergies to vaccine components cannot get vaccinated."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000589",
+        "evidence_quote": "teacher is one of those public jobs where I feel like, nah, you should have to",
+        "label_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000583",
+        "summary": "Speaker argues everyone should be vaccinated and that public-service jobs like teaching should require it."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000596",
+        "evidence_quote": "we cannot bend all of legislation to one percent of the population",
+        "label_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000591",
+        "summary": "Speaker questions mandating vaccines for the whole population when the affected minority is about one percent."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000621",
+        "evidence_quote": "there's no caveat for people that can't get vaccinated, so it's actually disbaring them from. Entering into businesses",
+        "label_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000606",
+        "summary": "Speaker says the vaccine requirement lacks a medical-exemption caveat and that negative COVID tests can provide an excusal."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000638",
+        "evidence_quote": "We're going to shut down businesses because we want our old people",
+        "label_ids": [
+          "topic:covid.lockdowns_closures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "Speakers discuss how the older-adult share of the population drove COVID closures of businesses."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000641",
+        "evidence_quote": "Fifteen percent is over sixty",
+        "label_ids": [
+          "population:older_adults"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "The discussion specifically concerns older adults and their protection from COVID."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000655",
+        "evidence_quote": "I think that's the big pharma. I think big pharma has enough",
+        "label_ids": [
+          "topic:health_system.pharma_industry"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000649",
+        "summary": "Speaker says big pharma and other businesses are profiting from COVID, lockdowns and restrictions."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000655",
+        "evidence_quote": "I think that's the big pharma. I think big pharma has enough",
+        "label_ids": [
+          "frame:big_pharma"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000645",
+        "summary": "Speakers frame pandemic policy as serving powerful corporate financial interests, especially big pharma."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Some people cannot get vaccinated because they are allergic to ingredients in the vaccine.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "People have allergies too to like some of the stuff in the vaccine, so they can't get it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Vaccine contraindications from allergies are checkable and matter for who can be mandated to vaccinate.",
+        "relevance": "substantive",
+        "start_unit_id": "u000575",
+        "topic_ids": [
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People are required to get vaccines for things like hepatitis C before starting certain jobs.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000584",
+        "evidence_quote": "we're getting everyone vax with certain things like Hep C and all that type of shit before you can start certain jobs",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Occupational vaccine requirements can be checked, though the reference to hepatitis C is unclear.",
+        "relevance": "substantive",
+        "start_unit_id": "u000584",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "You still have to get this vaccine every 10 years to work at certain places.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000586",
+        "evidence_quote": "you still have to get it every 10 years for to work at certain. Places",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Booster intervals for occupational vaccines are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000585",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I'm pretty sure"
+        ],
+        "claim_text": "The vaccine requirement has no caveat or exemption for people who cannot get vaccinated, so it bars them from entering businesses.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000614",
+        "evidence_quote": "there's no caveat for people that can't get vaccinated, so it's actually disbaring them from. Entering into businesses",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether a vaccine mandate included a medical-exemption caveat is a checkable policy fact.",
+        "relevance": "substantive",
+        "start_unit_id": "u000606",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I imagine that's right"
+        ],
+        "claim_text": "People who are not allowed to get the vaccine can show a negative COVID test to get an excusal.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000618",
+        "evidence_quote": "a negative COVID test gets you an excusal",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "COVID vaccine mandate exemption rules are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000615",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "or something like that"
+        ],
+        "claim_text": "An antigen test provides an excusal for about two weeks.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000619",
+        "evidence_quote": "an antigen test will get you on for like two weeks or something like that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The duration of an antigen-test excusal under the mandate is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000619",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      }
+    ],
+    "window_id": "episode_321996_window_0007"
+  },
+  "stored_at": "2026-10-04T22:13:53.512186+00:00"
+}

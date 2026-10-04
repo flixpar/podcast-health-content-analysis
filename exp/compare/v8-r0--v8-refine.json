@@ -1,0 +1,490 @@
+{
+  "a": "v8-high-b24k",
+  "b": "v8-refine",
+  "by_stratum": {
+    "ad_read": {
+      "claim_a": 0.5934,
+      "claim_b": 0.6484,
+      "topic_a": 0.724,
+      "topic_b": 0.7249
+    },
+    "discourse": {
+      "claim_a": 0.6103,
+      "claim_b": 0.7042,
+      "topic_a": 0.6503,
+      "topic_b": 0.7044
+    },
+    "health_dense": {
+      "claim_a": 0.6761,
+      "claim_b": 0.7538,
+      "topic_a": 0.6922,
+      "topic_b": 0.7394
+    },
+    "mixed": {
+      "claim_a": 0.4839,
+      "claim_b": 0.5484,
+      "topic_a": 0.6145,
+      "topic_b": 0.6404
+    },
+    "narrative": {
+      "claim_a": 0.6497,
+      "claim_b": 0.7692,
+      "topic_a": 0.658,
+      "topic_b": 0.7015
+    },
+    "null": {
+      "claim_a": 1.0,
+      "claim_b": 1.0,
+      "topic_a": 0.2105,
+      "topic_b": 0.2
+    },
+    "rare_label": {
+      "claim_a": 0.6423,
+      "claim_b": 0.7496,
+      "topic_a": 0.635,
+      "topic_b": 0.6927
+    },
+    "synthetic": {
+      "claim_a": 0.7033,
+      "claim_b": 0.8022,
+      "topic_a": 0.6495,
+      "topic_b": 0.6884
+    }
+  },
+  "items": 305,
+  "metrics": [
+    {
+      "a": 0.66,
+      "b": 0.7063,
+      "delta": 0.0463,
+      "high": 0.0584,
+      "low": 0.035,
+      "metric": "topic F1 (strict)",
+      "n": 305,
+      "share_positive": 1.0
+    },
+    {
+      "a": 0.5447,
+      "b": 0.6224,
+      "delta": 0.0777,
+      "high": 0.0933,
+      "low": 0.0633,
+      "metric": "topic recall (required)",
+      "n": 305,
+      "share_positive": 1.0
+    },
+    {
+      "a": 0.8049,
+      "b": 0.789,
+      "delta": -0.0158,
+      "high": -0.0035,
+      "low": -0.0281,
+      "metric": "topic precision",
+      "n": 305,
+      "share_positive": 0.007
+    },
+    {
+      "a": 0.7081,
+      "b": 0.7565,
+      "delta": 0.0485,
+      "high": 0.0776,
+      "low": 0.0212,
+      "metric": "narrative F1 (strict)",
+      "n": 305,
+      "share_positive": 0.9995
+    },
+    {
+      "a": 0.7157,
+      "b": 0.7644,
+      "delta": 0.0486,
+      "high": 0.0675,
+      "low": 0.03,
+      "metric": "frame F1 (strict)",
+      "n": 305,
+      "share_positive": 1.0
+    },
+    {
+      "a": 0.6752,
+      "b": 0.7308,
+      "delta": 0.0556,
+      "high": 0.0761,
+      "low": 0.0354,
+      "metric": "evidence F1 (strict)",
+      "n": 305,
+      "share_positive": 1.0
+    },
+    {
+      "a": 0.814,
+      "b": 0.806,
+      "delta": -0.008,
+      "high": 0.0241,
+      "low": -0.0394,
+      "metric": "population F1 (strict)",
+      "n": 305,
+      "share_positive": 0.3355
+    },
+    {
+      "a": 0.648,
+      "b": 0.748,
+      "delta": 0.1001,
+      "high": 0.124,
+      "low": 0.0813,
+      "metric": "claim recall (required)",
+      "n": 305,
+      "share_positive": 1.0
+    },
+    {
+      "a": 0.9278,
+      "b": 0.8846,
+      "delta": -0.0432,
+      "high": -0.0319,
+      "low": -0.0547,
+      "metric": "claim precision",
+      "n": 305,
+      "share_positive": 0.0
+    },
+    {
+      "a": 0.8689,
+      "b": 0.9081,
+      "delta": 0.0392,
+      "high": 0.0706,
+      "low": 0.0137,
+      "metric": "product F1 (strict)",
+      "n": 305,
+      "share_positive": 0.999
+    }
+  ],
+  "moved_items": [
+    {
+      "a_fn": 34.0,
+      "a_fp": 0.0,
+      "a_tp": 0.0,
+      "b_fn": 18.0,
+      "b_fp": 7.0,
+      "b_tp": 17.0,
+      "delta": 40.0,
+      "item_id": "c186894w0008",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 11.0,
+      "a_fp": 2.0,
+      "a_tp": 6.0,
+      "b_fn": 5.0,
+      "b_fp": 4.0,
+      "b_tp": 13.0,
+      "delta": 15.0,
+      "item_id": "c176604w0021",
+      "stratum": "rare_label"
+    },
+    {
+      "a_fn": 30.0,
+      "a_fp": 1.0,
+      "a_tp": 1.0,
+      "b_fn": 23.0,
+      "b_fp": 1.0,
+      "b_tp": 8.0,
+      "delta": 14.0,
+      "item_id": "c28560w0006",
+      "stratum": "rare_label"
+    },
+    {
+      "a_fn": 8.0,
+      "a_fp": 6.0,
+      "a_tp": 16.0,
+      "b_fn": 7.0,
+      "b_fp": 10.0,
+      "b_tp": 24.0,
+      "delta": 13.0,
+      "item_id": "c182151w0019",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 11.0,
+      "a_fp": 24.0,
+      "a_tp": 43.0,
+      "b_fn": 6.0,
+      "b_fp": 27.0,
+      "b_tp": 48.0,
+      "delta": 13.0,
+      "item_id": "c182721w0002",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 13.0,
+      "a_fp": 1.0,
+      "a_tp": 18.0,
+      "b_fn": 8.0,
+      "b_fp": 2.0,
+      "b_tp": 25.0,
+      "delta": 13.0,
+      "item_id": "c190127w0009",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 19.0,
+      "a_fp": 11.0,
+      "a_tp": 22.0,
+      "b_fn": 17.0,
+      "b_fp": 3.0,
+      "b_tp": 24.0,
+      "delta": 12.0,
+      "item_id": "c179765w0001",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 14.0,
+      "a_fp": 5.0,
+      "a_tp": 15.0,
+      "b_fn": 10.0,
+      "b_fp": 8.0,
+      "b_tp": 19.0,
+      "delta": 11.0,
+      "item_id": "c174981w0008",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 6.0,
+      "a_fp": 1.0,
+      "a_tp": 7.0,
+      "b_fn": 1.0,
+      "b_fp": 0.0,
+      "b_tp": 12.0,
+      "delta": 11.0,
+      "item_id": "c29445w0004",
+      "stratum": "discourse"
+    },
+    {
+      "a_fn": 10.0,
+      "a_fp": 8.0,
+      "a_tp": 15.0,
+      "b_fn": 7.0,
+      "b_fp": 10.0,
+      "b_tp": 20.0,
+      "delta": 10.0,
+      "item_id": "c36549w0004",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 7.0,
+      "a_fp": 1.0,
+      "a_tp": 8.0,
+      "b_fn": 4.0,
+      "b_fp": 4.0,
+      "b_tp": 11.0,
+      "delta": 9.0,
+      "item_id": "c185664w0014",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 7.0,
+      "a_fp": 2.0,
+      "a_tp": 8.0,
+      "b_fn": 5.0,
+      "b_fp": 6.0,
+      "b_tp": 10.0,
+      "delta": 8.0,
+      "item_id": "c169519w0002",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 10.0,
+      "a_fp": 4.0,
+      "a_tp": 18.0,
+      "b_fn": 7.0,
+      "b_fp": 4.0,
+      "b_tp": 23.0,
+      "delta": 8.0,
+      "item_id": "c177018w0009",
+      "stratum": "rare_label"
+    },
+    {
+      "a_fn": 10.0,
+      "a_fp": 0.0,
+      "a_tp": 14.0,
+      "b_fn": 6.0,
+      "b_fp": 0.0,
+      "b_tp": 18.0,
+      "delta": 8.0,
+      "item_id": "c179765w0002",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 6.0,
+      "a_fp": 3.0,
+      "a_tp": 11.0,
+      "b_fn": 4.0,
+      "b_fp": 7.0,
+      "b_tp": 13.0,
+      "delta": 8.0,
+      "item_id": "c190168w0014",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 5.0,
+      "a_fp": 0.0,
+      "a_tp": 3.0,
+      "b_fn": 1.0,
+      "b_fp": 0.0,
+      "b_tp": 7.0,
+      "delta": 8.0,
+      "item_id": "c190235w0011",
+      "stratum": "rare_label"
+    },
+    {
+      "a_fn": 7.0,
+      "a_fp": 13.0,
+      "a_tp": 22.0,
+      "b_fn": 4.0,
+      "b_fp": 11.0,
+      "b_tp": 25.0,
+      "delta": 8.0,
+      "item_id": "c192950w0002",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 9.0,
+      "a_fp": 1.0,
+      "a_tp": 7.0,
+      "b_fn": 6.0,
+      "b_fp": 1.0,
+      "b_tp": 11.0,
+      "delta": 7.0,
+      "item_id": "c162700w0016",
+      "stratum": "rare_label"
+    },
+    {
+      "a_fn": 0.0,
+      "a_fp": 4.0,
+      "a_tp": 11.0,
+      "b_fn": 0.0,
+      "b_fp": 11.0,
+      "b_tp": 11.0,
+      "delta": 7.0,
+      "item_id": "c167673w0003",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 7.0,
+      "a_fp": 0.0,
+      "a_tp": 8.0,
+      "b_fn": 4.0,
+      "b_fp": 1.0,
+      "b_tp": 11.0,
+      "delta": 7.0,
+      "item_id": "c178272w0010",
+      "stratum": "discourse"
+    },
+    {
+      "a_fn": 16.0,
+      "a_fp": 3.0,
+      "a_tp": 2.0,
+      "b_fn": 13.0,
+      "b_fp": 4.0,
+      "b_tp": 5.0,
+      "delta": 7.0,
+      "item_id": "c180833w0018",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 10.0,
+      "a_fp": 1.0,
+      "a_tp": 3.0,
+      "b_fn": 7.0,
+      "b_fp": 2.0,
+      "b_tp": 6.0,
+      "delta": 7.0,
+      "item_id": "c181028w0001",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 11.0,
+      "a_fp": 0.0,
+      "a_tp": 7.0,
+      "b_fn": 8.0,
+      "b_fp": 1.0,
+      "b_tp": 10.0,
+      "delta": 7.0,
+      "item_id": "c193025w0004",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 8.0,
+      "a_fp": 3.0,
+      "a_tp": 9.0,
+      "b_fn": 5.0,
+      "b_fp": 4.0,
+      "b_tp": 12.0,
+      "delta": 7.0,
+      "item_id": "c206720w0004",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 16.0,
+      "a_fp": 4.0,
+      "a_tp": 14.0,
+      "b_fn": 15.0,
+      "b_fp": 6.0,
+      "b_tp": 17.0,
+      "delta": 6.0,
+      "item_id": "c174925w0002",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 9.0,
+      "a_fp": 4.0,
+      "a_tp": 10.0,
+      "b_fn": 6.0,
+      "b_fp": 4.0,
+      "b_tp": 13.0,
+      "delta": 6.0,
+      "item_id": "c175545w0005",
+      "stratum": "narrative"
+    },
+    {
+      "a_fn": 9.0,
+      "a_fp": 2.0,
+      "a_tp": 6.0,
+      "b_fn": 6.0,
+      "b_fp": 2.0,
+      "b_tp": 9.0,
+      "delta": 6.0,
+      "item_id": "c181355w0013",
+      "stratum": "rare_label"
+    },
+    {
+      "a_fn": 5.0,
+      "a_fp": 1.0,
+      "a_tp": 9.0,
+      "b_fn": 3.0,
+      "b_fp": 0.0,
+      "b_tp": 12.0,
+      "delta": 6.0,
+      "item_id": "c182738w0001",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 5.0,
+      "a_fp": 6.0,
+      "a_tp": 7.0,
+      "b_fn": 2.0,
+      "b_fp": 6.0,
+      "b_tp": 10.0,
+      "delta": 6.0,
+      "item_id": "c190223w0001",
+      "stratum": "health_dense"
+    },
+    {
+      "a_fn": 10.0,
+      "a_fp": 2.0,
+      "a_tp": 0.0,
+      "b_fn": 8.0,
+      "b_fp": 4.0,
+      "b_tp": 2.0,
+      "delta": 6.0,
+      "item_id": "c190223w0004",
+      "stratum": "health_dense"
+    }
+  ],
+  "rows": 305
+}

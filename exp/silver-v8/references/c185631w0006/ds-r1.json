@@ -1,0 +1,377 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c185631w0006",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000323",
+        "evidence_quote": "it also makes the profile look better and gets their tongue and their lower jaw out of their airway",
+        "label_ids": [
+          "topic:oral.dental_procedures",
+          "topic:sleep.apnea_breathing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000251",
+        "summary": "Clinician explains mouth breathing, TMJ, dental crowding and narrow arches, recommending maxillary expansion over Botox and night guards."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000253",
+        "evidence_quote": "I see women my age constantly talking about",
+        "label_ids": [
+          "population:midlife",
+          "population:women"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000252",
+        "summary": "Speaker notes women her age often discuss TMJ and Botox."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000287",
+        "evidence_quote": "Women in their forties—they're all doing Invisalign again",
+        "label_ids": [
+          "population:midlife",
+          "population:women"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000285",
+        "summary": "Women in their forties are said to be getting Invisalign again."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000270",
+        "evidence_quote": "Botox is a bandaid on that for sure. It's not looking at the root cause",
+        "label_ids": [
+          "frame:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "summary": "Botox and night guards are framed as band-aids that miss the structural root cause."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000282",
+        "evidence_quote": "The tongue is kind of like God's retainer",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000277",
+        "summary": "Facial and dental architecture is described as God's design."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000321",
+        "evidence_quote": "People come in all the time",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000273",
+        "summary": "Clinician draws on patients presenting with facial shrinkage, crowding and trapped mandibles."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000321",
+        "evidence_quote": "The tongue is kind of like God's retainer. It's meant to be pushing on the palate",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000277",
+        "summary": "Explains tongue posture, arch width and maxillary expansion in structural terms."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000260",
+        "evidence_quote": "Botox is a bandaid on that for sure",
+        "mention_role": "criticized",
+        "product_name": "Botox",
+        "product_type": "medication",
+        "start_unit_id": "u000253"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000302",
+        "evidence_quote": "Everybody is doing Invisalign again",
+        "mention_role": "neutral",
+        "product_name": "Invisalign",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000285"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "tend to"
+        ],
+        "claim_text": "Patients with airway problems tend to keep their heads forward in order to maintain their airway.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000251",
+        "evidence_quote": "those patients tend to keep their heads forward in order to maintain their airway",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable physiological claim about head posture compensating for airway obstruction.",
+        "relevance": "passing",
+        "start_unit_id": "u000251",
+        "topic_ids": [
+          "topic:sleep.apnea_breathing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Patients who get Botox for TMJ are still choking at night and not getting enough oxygen.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000260",
+        "evidence_quote": "We'll put some Botox in there, but you're still choking in the night and not getting enough oxygen",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about a common TMJ treatment failing to fix an airway problem, relevant to patient decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000260",
+        "topic_ids": [
+          "topic:oral.dental_procedures",
+          "topic:sleep.apnea_breathing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Teeth grinding is structural, not caused by stress.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000270",
+        "evidence_quote": "When in reality, it's structural",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim about bruxism that would change whether patients seek stress management or structural treatment.",
+        "relevance": "substantive",
+        "start_unit_id": "u000262",
+        "topic_ids": [
+          "topic:oral.dental_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Mouth breathing causes the face to shrink, the jaw to recede, and the teeth to become crowded.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000284",
+        "evidence_quote": "if you're mouth breathing, then The whole face can kind of shrink back because there's nothing pushing",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim about mouth breathing changing facial and dental structure.",
+        "relevance": "substantive",
+        "start_unit_id": "u000273",
+        "topic_ids": [
+          "topic:oral.dental_procedures",
+          "topic:sleep.apnea_breathing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "When the tongue and lips are not in balance, the jaw decreases, the chin comes back, the maxilla shrinks, and the teeth become crowded.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000284",
+        "evidence_quote": "then the actual jaw will decrease, and the chin can come back, and the the maxilla can shrink back as well",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic claim about soft-tissue balance determining skeletal and dental structure.",
+        "relevance": "substantive",
+        "start_unit_id": "u000282",
+        "topic_ids": [
+          "topic:oral.dental_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "If the upper arch is too narrow, the lower arch lacks room for all the teeth and they become crowded.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000307",
+        "evidence_quote": "if your upper arch is a little bit too narrow, then the lower arch is going to not really have an. Room for all the teeth",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Mechanistic explanation of dental crowding based on arch relationship.",
+        "relevance": "substantive",
+        "start_unit_id": "u000303",
+        "topic_ids": [
+          "topic:oral.dental_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Modern diets and epigenetic changes have caused dental arches to be narrower than they should be.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000309",
+        "evidence_quote": "restore their arch width to, you know, what it should have been before modern diets and epigenetic changes",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim about modern diets and epigenetic changes driving jaw narrowing.",
+        "relevance": "substantive",
+        "start_unit_id": "u000308",
+        "topic_ids": [
+          "topic:oral.dental_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Widening the dental arch and creating extra space makes the teeth much less likely to collapse.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "when we make enough room for the teeth and have a little extra space in there, they're way less likely to collapse in",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A treatment claim about arch expansion preventing dental crowding.",
+        "relevance": "substantive",
+        "start_unit_id": "u000308",
+        "topic_ids": [
+          "topic:oral.dental_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Kicking out the canines and molars gives the lower jaw more room to come forward.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000317",
+        "evidence_quote": "if we kick out the canines and the molars a little bit more, we can give the lower arch room to come forward",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A treatment claim about dental expansion improving jaw position.",
+        "relevance": "substantive",
+        "start_unit_id": "u000314",
+        "topic_ids": [
+          "topic:oral.dental_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "A lot of people have a trapped mandible, with the TMJ close to the ear and jammed back as seen on CT.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000318",
+        "evidence_quote": "a lot of people have a trapped mandible where it's really, if you look at a CT scan, you can see the TMJ is like really close to the ear and jammed back",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A diagnostic prevalence claim about mandibular position and TMJ.",
+        "relevance": "substantive",
+        "start_unit_id": "u000317",
+        "topic_ids": [
+          "topic:oral.dental_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Widening the maxilla gives the lower jaw room to sit comfortably and releases tension in the TMJ.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000321",
+        "evidence_quote": "if we widen the maxilla, we can give them room to be in a more comfortable position, and it releases a lot of tension in the joint",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A treatment claim about maxillary expansion reducing TMJ tension.",
+        "relevance": "substantive",
+        "start_unit_id": "u000320",
+        "topic_ids": [
+          "topic:oral.dental_procedures",
+          "topic:sleep.apnea_breathing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Widening the maxilla improves the facial profile and gets the tongue and lower jaw out of the airway.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000322",
+        "evidence_quote": "it also makes the profile look better and gets their tongue and their lower jaw out of their airway",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A treatment claim about maxillary expansion improving facial profile and airway.",
+        "relevance": "substantive",
+        "start_unit_id": "u000321",
+        "topic_ids": [
+          "topic:oral.dental_procedures",
+          "topic:sleep.apnea_breathing"
+        ]
+      }
+    ],
+    "window_id": "episode_185631_window_0006"
+  },
+  "stored_at": "2026-10-04T22:36:30.598681+00:00"
+}

@@ -1,0 +1,94 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "t-c29218w0006--add_hedge",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000414",
+        "evidence_quote": "BetterHelp does the initial matching work for you, so you can focus on your therapy goals",
+        "label_ids": [
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000399",
+        "summary": "Sponsor read for BetterHelp online therapy, tied to World Mental Health Day."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000406",
+        "evidence_quote": "are fully qualified",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000406",
+        "summary": "The ad supports BetterHelp by noting its therapists are fully qualified."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000414",
+        "evidence_quote": "Our listeners get 10% off their first month at BetterHelp",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000399",
+        "summary": "Sponsor read with a discount code and promotional URL."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000414",
+        "evidence_quote": "This is an ad by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000399"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "BetterHelp therapists probably work according to a strict code of conduct and are fully qualified.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000406",
+        "evidence_quote": "BetterHelp therapists probably work according to a strict code of conduct and are fully qualified",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The qualifications and conduct-code requirements of BetterHelp therapists can be checked against the company's practices.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000406",
+        "topic_ids": [
+          "topic:mental.therapy"
+        ]
+      }
+    ],
+    "window_id": "episode_29218_window_0006_add_hedge"
+  },
+  "stored_at": "2026-10-04T22:13:49.967132+00:00"
+}

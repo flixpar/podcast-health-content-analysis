@@ -1,0 +1,64 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c193307w0006",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states. Wegovy is a registered trademark of Novo Nordisk AS",
+        "label_ids": [
+          "topic:glp1.use_results"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "summary": "Sponsor read promotes Hers' weight-loss program and the GLP-1 drug Wegovy."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers is not available in all 50 states",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "summary": "The passage is an advertising read for a health product."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers",
+        "mention_role": "advertised",
+        "product_name": "Weight loss by Hers",
+        "product_type": "program_or_course",
+        "start_unit_id": "u000306"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000310",
+        "evidence_quote": "Wegovy is a registered trademark of Novo Nordisk AS",
+        "mention_role": "advertised",
+        "product_name": "Wegovy",
+        "product_type": "medication",
+        "start_unit_id": "u000306"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_193307_window_0006"
+  },
+  "stored_at": "2026-10-04T22:13:55.354985+00:00"
+}

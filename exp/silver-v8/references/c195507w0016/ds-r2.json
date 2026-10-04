@@ -1,0 +1,523 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c195507w0016",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001178",
+        "evidence_quote": "Organifi's green juice has a nice dose of ashwagandha",
+        "label_ids": [
+          "topic:fitness.strength_training",
+          "topic:mens.testosterone",
+          "topic:stress.stress_burnout",
+          "topic:supplements.greens_whole_food",
+          "topic:supplements.herbal_adaptogens"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001161",
+        "summary": "Sponsor read pitches Organifi green juice with ashwagandha for stress, testosterone, and muscle/strength."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001178",
+        "evidence_quote": "Organifi's green juice has a nice dose of ashwagandha",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001161",
+        "summary": "Sponsor read for Organifi green juice."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001169",
+        "evidence_quote": "these studies are typically eight eight to twelve weeks long",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001169",
+        "summary": "Cites studies generally for ashwagandha's effects and timing."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001170",
+        "evidence_quote": "precisely because it it reduces the stress",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001170",
+        "summary": "Explains ashwagandha's muscle/strength benefit via stress reduction."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001170",
+        "evidence_quote": "for athletes, ashwagandha people gain muscle and strength on it",
+        "label_ids": [
+          "population:athletes"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001170",
+        "summary": "Claims about ashwagandha's muscle and strength benefits for athletes."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001175",
+        "evidence_quote": "raise testosterone with pe with men who have low testosterone",
+        "label_ids": [
+          "population:men"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001175",
+        "summary": "Claims ashwagandha raises testosterone in men with low testosterone."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001187",
+        "evidence_quote": "chlorine, and that can alter the microbiome on your skin",
+        "label_ids": [
+          "topic:environment.water_quality",
+          "topic:skin_beauty.skincare"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001179",
+        "summary": "Sponsor read for Jolie shower filter claiming chlorine disrupts skin microbiome and causes skin problems."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001187",
+        "evidence_quote": "a company called Jolie that has showerheads that filter all that out",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001179",
+        "summary": "Sponsor read for Jolie shower filter."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001181",
+        "evidence_quote": "probably has chlorine, and that can alter the microbiome on your skin. It's not a good thing",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001179",
+        "summary": "Frames chlorine as a contaminant to filter out."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001231",
+        "evidence_quote": "if you did Maps 15, which is two exercises a day, and you got between eight to ten thousand steps a day",
+        "label_ids": [
+          "topic:fitness.daily_movement",
+          "topic:fitness.strength_training",
+          "topic:wellness.habits_behavior_change"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001191",
+        "summary": "Hosts advise a desk-bound parent to get most strength-training benefit with two daily exercises and daily steps, using short walks and consistency strategies."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001178",
+        "evidence_quote": "Organifi's green juice has a nice dose of ashwagandha",
+        "mention_role": "advertised",
+        "product_name": "Organifi Green Juice",
+        "product_type": "supplement",
+        "start_unit_id": "u001162"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001187",
+        "evidence_quote": "a company called Jolie that has showerheads that filter all that out",
+        "mention_role": "advertised",
+        "product_name": "Jolie Shower Filter",
+        "product_type": "household_or_home",
+        "start_unit_id": "u001182"
+      },
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u001196",
+        "evidence_quote": "if you did Maps 15, which is two exercises a day",
+        "mention_role": "recommended",
+        "product_name": "Maps 15",
+        "product_type": "program_or_course",
+        "start_unit_id": "u001195"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u001201",
+        "evidence_quote": "in your Apple Watch or phone",
+        "mention_role": "neutral",
+        "product_name": "Apple Watch",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001200"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Organifi's green juice contains ashwagandha.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001162",
+        "evidence_quote": "Organifi's green juice has a nice dose of ashwagandha",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Product composition claim that can be checked against the label.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001162",
+        "topic_ids": [
+          "topic:supplements.greens_whole_food",
+          "topic:supplements.herbal_adaptogens"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "for sure"
+        ],
+        "claim_text": "Ashwagandha helps people manage stress.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001178",
+        "evidence_quote": "it's a great supplement for for people trying to manage their stress for sure",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Supplement efficacy claim central to the ad.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001163",
+        "topic_ids": [
+          "topic:stress.stress_burnout",
+          "topic:supplements.herbal_adaptogens"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ashwagandha raises testosterone in men with low testosterone.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001175",
+        "evidence_quote": "it'll raise testosterone with pe with men who have low testosterone",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Supplement effect claim that can be checked against trials.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001175",
+        "topic_ids": [
+          "topic:mens.testosterone",
+          "topic:supplements.herbal_adaptogens"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ashwagandha helps athletes gain muscle and strength.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001170",
+        "evidence_quote": "for athletes, ashwagandha people gain muscle and strength on it",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Efficacy claim for a supplement in athletes.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001170",
+        "topic_ids": [
+          "topic:fitness.strength_training",
+          "topic:supplements.herbal_adaptogens"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Organifi green juice contains an efficacious dose of ashwagandha and micronutrients from greens.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001177",
+        "evidence_quote": "it has an efficacious dose of ashwagandha, plus it has all the other micronutrients from greens",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Composition and dose claim about the product.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001176",
+        "topic_ids": [
+          "topic:supplements.greens_whole_food",
+          "topic:supplements.herbal_adaptogens"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Ashwagandha effects typically appear within the first one to two weeks of use.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001169",
+        "evidence_quote": "you'll start to see the effects within the first one or two weeks",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Claims about onset of supplement effects.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001169",
+        "topic_ids": [
+          "topic:supplements.herbal_adaptogens"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Typical shower water contains chlorine.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001179",
+        "evidence_quote": "Your water, the one that you shower with, probably has chlorine",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A factual premise about municipal water that can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001179",
+        "topic_ids": [
+          "topic:environment.water_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Chlorine can alter the microbiome on the skin.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001179",
+        "evidence_quote": "chlorine, and that can alter the microbiome on your skin",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "Causal claim about an exposure's effect on skin microbiome.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001179",
+        "topic_ids": [
+          "topic:environment.water_quality",
+          "topic:skin_beauty.skincare"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "An altered skin microbiome can cause dryness, acne, and poor skin health.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001181",
+        "evidence_quote": "An altered microbiome can cause dryness, acne, skin problems, or just poor skin health",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "Causal claim about skin microbiome and skin conditions.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001181",
+        "topic_ids": [
+          "topic:skin_beauty.skincare"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Jolie showerheads filter chlorine out of shower water.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001183",
+        "evidence_quote": "a company called Jolie that has showerheads that filter all that out",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Product function claim that can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001182",
+        "topic_ids": [
+          "topic:environment.water_quality"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Filtering chlorine from shower water prevents dryness, acne, and poor skin health.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001183",
+        "evidence_quote": "now you have filtered water that you can wash yourself with",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "The product benefit claim is implied by pairing the health problem with the filter.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001181",
+        "topic_ids": [
+          "topic:environment.water_quality",
+          "topic:skin_beauty.skincare"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Doing two exercises a day (Maps 15) and getting 8,000 to 10,000 steps a day provides 85% of the benefit of strength training.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001197",
+        "evidence_quote": "you're going to get 85 percent of all the benefit you'll get from strength training activity",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific quantitative claim about exercise dose and benefit.",
+        "relevance": "substantive",
+        "start_unit_id": "u001195",
+        "topic_ids": [
+          "topic:fitness.daily_movement",
+          "topic:fitness.strength_training"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Two exercises a day takes about fifteen to twenty minutes.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001203",
+        "evidence_quote": "two exercises a day is about fifteen to twenty minutes a day",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about time required.",
+        "relevance": "substantive",
+        "start_unit_id": "u001203",
+        "topic_ids": [
+          "topic:fitness.strength_training"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People with kids and a family are more likely to be consistent with exercise if they start the day with it rather than end with it.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001205",
+        "evidence_quote": "If you have kids and a family, you're more likely to be consistent if you start your day with it versus end with it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A behavioral claim about exercise adherence.",
+        "relevance": "substantive",
+        "start_unit_id": "u001204",
+        "topic_ids": [
+          "topic:wellness.habits_behavior_change"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Walking five to ten minutes several times a day will add up to the daily step target.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001202",
+        "evidence_quote": "For five to ten minutes, several times a day, and you'll hit that number",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A practical claim about step accumulation.",
+        "relevance": "substantive",
+        "start_unit_id": "u001201",
+        "topic_ids": [
+          "topic:fitness.daily_movement"
+        ]
+      }
+    ],
+    "window_id": "episode_195507_window_0016"
+  },
+  "stored_at": "2026-10-04T22:36:32.978311+00:00"
+}

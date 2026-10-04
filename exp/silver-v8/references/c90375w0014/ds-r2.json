@@ -1,0 +1,149 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c90375w0014",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001194",
+        "evidence_quote": "Chicken is a good source of fiber and only between eight to twelve grams of fat per serving",
+        "label_ids": [
+          "topic:food.meat_animal_foods"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001176",
+        "summary": "Sponsor read advertises Nature Raised Farms chicken with free-from and nutrient claims."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001194",
+        "evidence_quote": "This episode is sponsored by Nature Raised Farms",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001176",
+        "summary": "The passage is a paid sponsor read for a food brand."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001190",
+        "evidence_quote": "free from gluten, dairy, and soy",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001188",
+        "summary": "Free-from and no-additives language frames the chicken product as clean."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001194",
+        "evidence_quote": "This episode is sponsored by Nature Raised Farms",
+        "mention_role": "advertised",
+        "product_name": "Nature Raised Farms chicken",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u001176"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms chicken is free from gluten, dairy, and soy.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001189",
+        "evidence_quote": "nature-raised farms is free from gluten, dairy, and soy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A free-from claim that can be checked against the product's ingredients and processing.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001188",
+        "topic_ids": [
+          "topic:food.meat_animal_foods"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms chicken contains no seed oils and no artificial ingredients.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001190",
+        "evidence_quote": "There are no seed oils and no artificial ingredients",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A composition claim about the product's ingredients that can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001189",
+        "topic_ids": [
+          "topic:food.meat_animal_foods"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms chicken is a good source of fiber.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001192",
+        "evidence_quote": "Chicken is a good source of fiber",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A nutrient-content claim that can be checked against the product's nutrition information.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001192",
+        "topic_ids": [
+          "topic:food.meat_animal_foods"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nature Raised Farms chicken has only between eight and twelve grams of fat per serving, depending on the product.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001192",
+        "evidence_quote": "only between eight to twelve grams of fat per serving",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A quantified nutrient claim that can be checked against product labels.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001192",
+        "topic_ids": [
+          "topic:food.meat_animal_foods"
+        ]
+      }
+    ],
+    "window_id": "episode_90375_window_0014"
+  },
+  "stored_at": "2026-10-04T22:36:33.514996+00:00"
+}

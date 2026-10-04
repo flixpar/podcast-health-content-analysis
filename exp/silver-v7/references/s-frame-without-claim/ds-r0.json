@@ -1,0 +1,84 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "s-frame-without-claim",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000039",
+        "evidence_quote": "it's this whole thing with the health agencies i just don't buy the story anymore",
+        "label_ids": [
+          "topic:health_system.regulators"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Hosts discuss distrust of health agencies and official explanations without naming a specific agency or policy."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "if you actually followed the money on some of this stuff you'd stop being surprised by anything",
+        "label_ids": [
+          "narrative:fda_captured"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Speaker implies health agencies' actions are explained by money and who benefits, i.e. regulatory capture."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "i just don't buy the story anymore",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Speaker says he no longer trusts the health agencies' neutral-referee story and finds the official picture suspicious."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "once you start looking at who benefits from what",
+        "label_ids": [
+          "frame:conflict_of_interest"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Speaker says following the money and asking who benefits explains why certain health things are pushed."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "my gut has been right more than any official explanation has in my experience",
+        "label_ids": [
+          "frame:anti_expert_populist"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000037",
+        "summary": "Speaker says he trusts his gut over official explanations."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [],
+    "window_id": "synthetic_frame_without_claim_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:49.749795+00:00"
+}

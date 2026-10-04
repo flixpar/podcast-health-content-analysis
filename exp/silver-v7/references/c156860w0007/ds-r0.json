@@ -1,0 +1,213 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c156860w0007",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000532",
+        "evidence_quote": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand",
+        "label_ids": [
+          "topic:skin_beauty.hair_loss_hair",
+          "topic:supplements"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000522",
+        "summary": "Sponsor read for the Nutrafol hair-growth supplement, claiming thicker, stronger, faster-growing hair and less shedding in three to six months."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000526",
+        "evidence_quote": "mom or aunt going through menopause, a friend who just had a baby and is experiencing postpartum hair shedding",
+        "label_ids": [
+          "topic:pregnancy.postpartum",
+          "topic:womens.menopause"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000526",
+        "summary": "Ad names menopausal women and postpartum hair shedding as audiences for the supplement."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000544",
+        "evidence_quote": "as someone with social anxiety, this is incredible",
+        "label_ids": [
+          "topic:mental.anxiety"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000541",
+        "summary": "Speaker describes rideshare adrenaline spikes and cites her social anxiety as reasons she prefers Waymo."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000532",
+        "evidence_quote": "go to Nutrafol.com and use promo code Giggly",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000522",
+        "summary": "Nutrafol sponsor read with a promo code."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000552",
+        "evidence_quote": "download the Waymo app and use code Giggly to get twenty percent off your next two rides",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000541",
+        "summary": "Waymo sponsor read with a discount code."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "science-backed support",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000522",
+        "summary": "The ad asserts science-backed support and dermatologist recommendation for Nutrafol."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000532",
+        "evidence_quote": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand",
+        "mention_role": "advertised",
+        "product_name": "Nutrafol",
+        "product_type": "supplement",
+        "start_unit_id": "u000522"
+      },
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000552",
+        "evidence_quote": "which is why Waymo has genuinely changed the game for us",
+        "mention_role": "advertised",
+        "product_name": "Waymo",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000541"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Nutrafol gives users stronger and faster-growing hair.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "give the gift of stronger and faster-growing hair",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product efficacy claim in ad copy that could be checked against Nutrafol's clinical data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000522",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair",
+          "topic:supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "number one"
+        ],
+        "claim_text": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "number one dermatologist-recommended hair growth supplement brand",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A superlative marketing ranking claim that could be checked against surveys of dermatologists.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000523",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair",
+          "topic:supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nutrafol is trusted by over one and a half million people.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "trusted by over one and a half million people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A customer-count claim that could be checked against the company's sales data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000523",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair",
+          "topic:supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nutrafol produces thicker, stronger, faster-growing hair with less shedding within three to six months.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000524",
+        "evidence_quote": "See thicker, stronger, faster-growing hair with less shedding in just three to six months",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A specific time-bound efficacy claim in the ad that could be checked against clinical results.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000524",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair",
+          "topic:supplements"
+        ]
+      }
+    ],
+    "window_id": "episode_156860_window_0007"
+  },
+  "stored_at": "2026-10-04T22:13:43.996430+00:00"
+}

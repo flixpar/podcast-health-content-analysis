@@ -1,0 +1,106 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c196115w0015",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001267",
+        "evidence_quote": "Is it dangerous to have metal on you when you get an MRI",
+        "label_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001222",
+        "summary": "Hosts discuss MRI safety with metal, including dental restorations, and how MRI magnets work."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001256",
+        "evidence_quote": "you should not have any metal, even metal crowns in your mouth",
+        "label_ids": [
+          "topic:oral.dental_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001254",
+        "summary": "Warns that MRI magnets can dislodge, bend or break metal dental crowns and restorations."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The vibration from MRI magnets can dislodge, bend, and break dental restorations.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001257",
+        "evidence_quote": "the vibration can dislodge, bend, and break the dental restoration just from the magnets",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific safety claim about dental work during MRI that could be checked against imaging safety guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u001256",
+        "topic_ids": [
+          "topic:oral.dental_procedures",
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Loose metal objects can injure you during an MRI.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001259",
+        "evidence_quote": "loose metal objects can injure you as that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "General MRI safety claim that is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001258",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I would think"
+        ],
+        "claim_text": "Having a metal plate in your head or fillings in your teeth makes someone a bad candidate for an MRI.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001263",
+        "evidence_quote": "I would think if you have a metal plate in your head or you got fillings in your teeth, then you would be a bad candidate",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A safety and eligibility claim about metal implants and dental fillings in MRI.",
+        "relevance": "substantive",
+        "start_unit_id": "u001262",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      }
+    ],
+    "window_id": "episode_196115_window_0015"
+  },
+  "stored_at": "2026-10-04T22:36:32.995409+00:00"
+}

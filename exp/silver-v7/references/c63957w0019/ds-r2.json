@@ -1,0 +1,129 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c63957w0019",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001236",
+        "evidence_quote": "The right window treatments change everything: your sleep",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001236",
+        "summary": "Blinds.com ad says the right window treatments change your sleep."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001242",
+        "evidence_quote": "Save up to 40% when you buy two or more",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001236",
+        "summary": "Paid ad read for Blinds.com with a savings offer."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001256",
+        "evidence_quote": "Total Healthcare provides care for the entire community",
+        "label_ids": [
+          "topic:health_system.hospitals_access"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001251",
+        "summary": "Ad for Total Health Care community clinic offering primary care, pediatrics, dental, mental health, OB/GYN, podiatry, HIV services, pharmacies, and multiple locations."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001256",
+        "evidence_quote": "Visit TotalHealthCare.org or call us at 410-383-8300 to schedule your appointment today",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001251",
+        "summary": "Paid ad for Total Health Care with appointment scheduling contact."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001252",
+        "evidence_quote": "At Total Healthcare, I know my family is getting the care we need",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001251",
+        "summary": "Ad uses a customer testimonial that her family gets the care they need at Total Health Care."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001242",
+        "evidence_quote": "At Blinds.com",
+        "mention_role": "advertised",
+        "product_name": "Blinds.com",
+        "product_type": "household_or_home",
+        "start_unit_id": "u001236"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001256",
+        "evidence_quote": "At Total Healthcare",
+        "mention_role": "advertised",
+        "product_name": "Total Health Care",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u001251"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "change everything"
+        ],
+        "claim_text": "The right window treatments change your sleep.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001236",
+        "evidence_quote": "The right window treatments change everything: your sleep",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The ad claims a home product benefits sleep, a checkable health claim in paid advertising.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001236",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      }
+    ],
+    "window_id": "episode_63957_window_0019"
+  },
+  "stored_at": "2026-10-04T22:13:55.879575+00:00"
+}

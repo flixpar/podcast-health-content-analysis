@@ -1,0 +1,224 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "s-discourse-rebutted",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000044",
+        "evidence_quote": "i wanted to talk about flu season since its coming up",
+        "label_ids": [
+          "topic:vaccines.flu_vaccine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "summary": "Host and guest discuss whether the flu shot can give you the flu, and the host explains why it cannot."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "it gives you the flu every single time",
+        "label_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Guest says the flu shot gives her the flu every time she gets it."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.95,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000033",
+        "evidence_quote": "it cannot give you the flu itself",
+        "label_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "Host argues the flu shot cannot give you the flu and explains why people misattribute illness to it."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "i got it in the past i was sick for like a week straight",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Guest's past sickness after flu shots is offered as evidence for the claim that the shot gives the flu."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "doesnt contain a live virus that can replicate in your body",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "Host explains the vaccine's lack of live replicating virus and the immune reaction that can cause mild symptoms."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000027",
+        "evidence_quote": "thats actually not accurate and i want to push back on it",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Host corrects the belief that the flu shot gives people the flu."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "every single time"
+        ],
+        "claim_text": "The flu shot gives you the flu every single time.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000018",
+        "evidence_quote": "it gives you the flu every single time",
+        "evidence_signal_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "rationale": "A common vaccine-safety claim whose falsity would change whether people get the flu shot.",
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:infectious.influenza_avian",
+          "topic:vaccines.flu_vaccine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The flu shot does not contain a live virus that can replicate in the body.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "rationale": "A factual claim about vaccine composition that underlies the safety argument.",
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "topic_ids": [
+          "topic:vaccines.flu_vaccine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "cannot"
+        ],
+        "claim_text": "The flu shot cannot give you the flu itself.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "so it cannot give you the flu itself",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "rationale": "A direct safety claim that contradicts the common belief.",
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "topic_ids": [
+          "topic:infectious.influenza_avian",
+          "topic:vaccines.flu_vaccine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "usually",
+          "might"
+        ],
+        "claim_text": "People might get a sore arm, mild fatigue, or a low fever for a day or two after the flu shot as an immune reaction, not the flu.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "you might get a sore arm or mild fatigue or a low fever for a day or two",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "Explains post-shot symptoms people mistake for the flu; checkable against vaccine side-effect information.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:vaccines.flu_vaccine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "Many people get the flu shot as cold and flu season is ramping up, catch an unrelated virus around the same time, and blame the shot.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000029",
+        "evidence_quote": "a lot of people get the shot right as cold and flu season is ramping up so they catch an unrelated virus right around the same time and blame the shot",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A timing explanation for perceived flu-shot illness that can be evaluated in principle.",
+        "relevance": "substantive",
+        "start_unit_id": "u000029",
+        "topic_ids": [
+          "topic:vaccines.flu_vaccine"
+        ]
+      }
+    ],
+    "window_id": "synthetic_discourse_rebutted_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:33.573146+00:00"
+}

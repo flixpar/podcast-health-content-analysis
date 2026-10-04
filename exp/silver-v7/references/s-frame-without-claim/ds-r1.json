@@ -1,0 +1,71 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "s-frame-without-claim",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "health agencies i just don't buy the story anymore",
+        "label_ids": [
+          "topic:policy.public_health_authority"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Hosts discuss distrust of health agencies and the official public-health story."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "health agencies i just don't buy the story anymore",
+        "label_ids": [
+          "frame:government_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Health agencies are portrayed as untrustworthy and their official story as too polished to be true."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "if you actually followed the money on some of this stuff you'd stop being surprised by anything",
+        "label_ids": [
+          "frame:conflict_of_interest"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "The official story is discounted by pointing to money and who benefits."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "i'd rather just trust my gut here than trust whatever they're feeding us",
+        "label_ids": [
+          "frame:anti_expert_populist"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000037",
+        "summary": "Personal intuition is elevated over official explanations."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [],
+    "window_id": "synthetic_frame_without_claim_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:53.947018+00:00"
+}

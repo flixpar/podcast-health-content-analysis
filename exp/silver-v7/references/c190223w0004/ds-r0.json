@@ -1,0 +1,292 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c190223w0004",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000291",
+        "evidence_quote": "mitochondria have a second role beyond their role as energy generators and that is as environmental sensors",
+        "label_ids": [
+          "topic:longevity.cellular_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000206",
+        "summary": "Guest explains mitochondria as environmental sensors and the cell danger response, linking excess stress to reduced energy and fatigue."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000230",
+        "evidence_quote": "from poor diet to leaky gut to infections",
+        "label_ids": [
+          "topic:gut.leaky_gut"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000230",
+        "summary": "Leaky gut is named as one of the stressors mitochondria can detect."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000275",
+        "evidence_quote": "it's not just corrected by giving B vitamins and co-Q10 and alpha-lipoac acid and acetylol carnitine",
+        "label_ids": [
+          "topic:supplements.b_vitamins_methylation",
+          "topic:supplements.other_compounds",
+          "topic:supplements.protein_powders"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000273",
+        "summary": "Speaker says the cell danger response is not fixed just by B vitamins, CoQ10, alpha-lipoic acid and acetyl-L-carnitine."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "it's there's kind of framed as like these mindless energy generators",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000206",
+        "summary": "Speaker corrects the simple framing of mitochondria as mindless energy generators."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "what we now know through research, especially in the last decade",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000208",
+        "summary": "Research from the last decade is cited without identifying studies."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000212",
+        "evidence_quote": "synthesized in a coherent framework by Dr. Robert Navio",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000208",
+        "summary": "The framework is attributed to Dr. Robert Navio by name and title."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000264",
+        "evidence_quote": "almost every type of stress when in excess of what the body can handle will result in increased levels of oxidative damage",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000237",
+        "summary": "A causal biological account explains how stress causes cellular damage and shifts mitochondria into the cell danger response."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Mitochondria have a second role beyond energy generation: they act as environmental sensors.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "mitochondria have a second role beyond their role as energy generators and that is as environmental sensors",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal",
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A core claim of the cell danger response framework that can be checked against cell biology literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000208",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "every type"
+        ],
+        "claim_text": "Mitochondria can detect every type of threat or danger signal or stress imaginable, from poor diet and leaky gut to infections, overtraining, injury, environmental toxins and psychological stress.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000231",
+        "evidence_quote": "Mitochondria can detect basically every type of threat or danger signal or stress imaginable",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A broad empirical claim about mitochondrial sensing that is central to the framework's scope.",
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "almost every"
+        ],
+        "claim_text": "Almost every type of stress in excess of what the body can handle results in increased oxidative damage, inflammatory cytokines or cellular damage.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "almost every type of stress when in excess of what the body can handle will result in increased levels of oxidative damage, increased levels of inflammatory cytokines or cellular damage",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A checkable biological claim about the common pathway of diverse stressors.",
+        "relevance": "substantive",
+        "start_unit_id": "u000237",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "ATP, ADP and mitochondrial DNA leaking into the bloodstream act as danger signaling molecules.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000247",
+        "evidence_quote": "And those molecules, energy molecules, mitochondrial DNA actually serve as danger signaling molecules",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A specific molecular claim that can be checked against danger-signaling literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000240",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "When a stress load exceeds the mitochondria's resilience threshold, the mitochondria shift into the cell danger response and redirect resources from energy production to cellular defense.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000264",
+        "evidence_quote": "then the mitochondria shift into the cell danger response",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "Core prediction of the cell danger response framework that could be tested or checked in the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000256",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The cell danger response is not corrected just by taking B vitamins, CoQ10, alpha-lipoic acid and acetyl-L-carnitine.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000275",
+        "evidence_quote": "it's not just corrected by giving B vitamins and co-Q10 and alpha-lipoac acid and acetylol carnitine",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A treatment-related claim that supplements are insufficient to fix mitochondrial dysfunction.",
+        "relevance": "passing",
+        "start_unit_id": "u000273",
+        "topic_ids": [
+          "topic:longevity.cellular_ageing",
+          "topic:supplements.b_vitamins_methylation",
+          "topic:supplements.other_compounds",
+          "topic:supplements.protein_powders"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fatigue is a classic symptom of colds, flu and COVID.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000286",
+        "evidence_quote": "think of the last time you got a cold or a flu or a COVID, what's one of the classic symptoms? Fatigue",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A common symptom claim used to illustrate fatigue as a mitochondrial response.",
+        "relevance": "passing",
+        "start_unit_id": "u000284",
+        "topic_ids": [
+          "topic:covid.illness_severity",
+          "topic:infectious.respiratory_common"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "After extreme over-exercising, people are fatigued and run down for a day or two.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000291",
+        "evidence_quote": "You're going to be fatigued and run down for a day or two",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A practical recovery claim that could be checked against sports medicine evidence.",
+        "relevance": "passing",
+        "start_unit_id": "u000288",
+        "topic_ids": [
+          "topic:fitness.sports_performance"
+        ]
+      }
+    ],
+    "window_id": "episode_190223_window_0004"
+  },
+  "stored_at": "2026-10-04T22:13:46.335521+00:00"
+}

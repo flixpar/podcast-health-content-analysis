@@ -1,0 +1,168 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c95062w0004",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000193",
+        "evidence_quote": "you're experimenting? With LSD, you're you're smoking cigarettes, you're you're drinking scotch",
+        "label_ids": [
+          "topic:alcohol",
+          "topic:psychoactives.psychedelic_therapy",
+          "topic:stimulants.smoking"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000192",
+        "summary": "Host recalls the guest's past experimentation with LSD, cigarettes and scotch as a medical student."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000204",
+        "evidence_quote": "all the American doctors were in Vietnam, and there was a big shortage of physicians",
+        "label_ids": [
+          "topic:health_system.doctors_profession"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000195",
+        "summary": "Guest recounts how foreign medical graduates filled U.S. hospital posts during the Vietnam War and were treated as cheap labor."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000206",
+        "evidence_quote": "So we had gunshot wounds",
+        "label_ids": [
+          "topic:acute_care.trauma_fractures"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000205",
+        "summary": "Guest mentions seeing gunshot wounds at the New Jersey hospital."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000209",
+        "evidence_quote": "still smoking and drinking and partying as a",
+        "label_ids": [
+          "topic:alcohol",
+          "topic:stimulants.smoking"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000208",
+        "summary": "Guest mentions still smoking and drinking during his residency."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "I then took specialty training in endocrinology, which is the study of hormones, and then in neuroendocrinology, which is looking at brain chemistry",
+        "label_ids": [
+          "topic:health_system.doctors_profession"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000208",
+        "summary": "Guest describes his internal medicine residency and specialty training in endocrinology and neuroendocrinology."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000224",
+        "evidence_quote": "We were discovering in the brain these chemicals that now everybody knows about",
+        "label_ids": [
+          "topic:cognition.neurochemistry_talk"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000216",
+        "summary": "Guest describes the discovery of neuropeptides and 'molecules of emotion' such as serotonin, dopamine, oxytocin and opiates."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000231",
+        "evidence_quote": "they're too anecdotal. There's not enough research",
+        "label_ids": [
+          "topic:health_system.research_system"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000225",
+        "summary": "Guest describes being puzzled by different patient outcomes and having his anecdotal patient stories rejected by medical journals for lacking research."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000244",
+        "evidence_quote": "I had given up alcohol and I had given up every experiment. I was meditating",
+        "label_ids": [
+          "topic:alcohol",
+          "topic:stress.meditation_mindfulness"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000242",
+        "summary": "Guest says he gave up alcohol and other experiments and began meditating."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Neuropeptides are protein-like molecules in the brain.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000220",
+        "evidence_quote": "So, neuro because they're in the brain, peptides because they're. Protein-like molecules",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable scientific definition central to the guest's description of neuropeptides.",
+        "relevance": "substantive",
+        "start_unit_id": "u000218",
+        "topic_ids": [
+          "topic:cognition.neurochemistry_talk"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "all"
+        ],
+        "claim_text": "All the American doctors were in Vietnam, and there was a big shortage of physicians.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000199",
+        "evidence_quote": "all the American doctors were in Vietnam, and there was a big shortage of physicians",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A historical claim about the physician workforce that can be checked against records of the Vietnam era.",
+        "relevance": "substantive",
+        "start_unit_id": "u000199",
+        "topic_ids": [
+          "topic:health_system.doctors_profession"
+        ]
+      }
+    ],
+    "window_id": "episode_95062_window_0004"
+  },
+  "stored_at": "2026-10-04T22:13:49.598563+00:00"
+}

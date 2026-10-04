@@ -1,0 +1,249 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c89759w0004",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000365",
+        "evidence_quote": "So vapes pouches, we all know them. I've had my own journey with them. They keep you hooked in a cycle of nicotine spikes",
+        "label_ids": [
+          "topic:drugs_addiction.addiction_recovery",
+          "topic:stimulants.nicotine_products",
+          "topic:stimulants.vaping"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "summary": "Sponsor read for Quit with Jones nicotine mints, describing vaping and pouch harms and framing the product as a science-backed way to quit."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000384",
+        "evidence_quote": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand",
+        "label_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000367",
+        "summary": "Sponsor read for Nutrafol hair growth supplement, claiming thicker, stronger, faster-growing hair with less shedding."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000365",
+        "evidence_quote": "Today's episode is also brought to you by Quit with Jones",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "summary": "Sponsor read with a discount code and sponsor thanks."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000384",
+        "evidence_quote": "Today's episode is also brought to you by Nutrafol",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000367",
+        "summary": "Sponsor read with a promo code for Nutrafol."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000337",
+        "evidence_quote": "There's no hidden chemicals",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000335",
+        "summary": "Product is contrasted with vapes and pouches by having no smoke, no vapor, and no hidden chemicals."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000366",
+        "evidence_quote": "Again, it's science-backed",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000334",
+        "summary": "Ad calls the product science-backed and FDA approved."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000346",
+        "evidence_quote": "So digital support boosts quit rates by forty percent",
+        "label_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000346",
+        "summary": "Unattributed statistic that digital support boosts quit rates by forty percent."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000351",
+        "evidence_quote": "As somebody who has successfully quit a vape, I can tell you there is like a future for you",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000350",
+        "summary": "Host's personal success quitting a vape is offered as proof that quitting is possible."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000372",
+        "evidence_quote": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000369",
+        "summary": "Ad cites science-backed support and dermatologist recommendation."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000365",
+        "evidence_quote": "Today's episode is also brought to you by Quit with Jones",
+        "mention_role": "advertised",
+        "product_name": "Quit with Jones",
+        "product_type": "nicotine_or_tobacco",
+        "start_unit_id": "u000326"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000384",
+        "evidence_quote": "Today's episode is also brought to you by Nutrafol",
+        "mention_role": "advertised",
+        "product_name": "Nutrafol",
+        "product_type": "supplement",
+        "start_unit_id": "u000367"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Vapes and pouches keep people hooked in a cycle of nicotine spikes, crashes and constant cravings.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000329",
+        "evidence_quote": "They keep you hooked in a cycle of nicotine spikes",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "This describes the addictive cycle of nicotine products in a way that affects whether listeners use vapes or pouches.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000329",
+        "topic_ids": [
+          "topic:drugs_addiction.addiction_recovery",
+          "topic:stimulants.nicotine_products",
+          "topic:stimulants.vaping"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Using vapes or pouches means inhaling chemicals or irritating your gums.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000331",
+        "evidence_quote": "Plus, you're inhaling chemicals or irritating your gums",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "This makes a checkable risk claim about vaping and pouches.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000331",
+        "topic_ids": [
+          "topic:stimulants.nicotine_products",
+          "topic:stimulants.vaping"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Digital support boosts quit rates by forty percent.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000346",
+        "evidence_quote": "So digital support boosts quit rates by forty percent",
+        "evidence_signal_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The 40 percent quit-rate boost is a checkable statistic offered to sell the app.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000346",
+        "topic_ids": [
+          "topic:drugs_addiction.addiction_recovery"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nutrafol users see thicker, stronger, faster-growing hair with less shedding in three to six months.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000372",
+        "evidence_quote": "who see thicker, stronger, faster-growing hair with less shedding in just three to six months",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claimed hair-growth results in a time frame are checkable efficacy claims for the supplement.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000372",
+        "topic_ids": [
+          "topic:skin_beauty.hair_loss_hair"
+        ]
+      }
+    ],
+    "window_id": "episode_89759_window_0004"
+  },
+  "stored_at": "2026-10-04T22:36:29.232298+00:00"
+}

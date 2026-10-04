@@ -1,0 +1,254 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c190223w0004",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000291",
+        "evidence_quote": "Mitochondria are the central hub of the wheel of metabolism",
+        "label_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000206",
+        "summary": "Hosts explain the cell danger response: mitochondria act as environmental sensors that shift from energy production to cellular defense under stress."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000291",
+        "evidence_quote": "the way it's experienced is less energy",
+        "label_ids": [
+          "topic:wellness.energy_fatigue"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000279",
+        "summary": "The hosts note that the mitochondrial stress response is experienced as low energy and use fatigue after infection or overexercise as examples."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "what we now know through research, especially in the last decade and synthesized in a coherent framework by Dr. Robert Navio with the cell danger response",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000208",
+        "summary": "Speaker invokes research from the last decade synthesized into Dr. Robert Navio's cell danger response framework."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000233",
+        "evidence_quote": "There's a whole field of research called mitochondrial psychobiology now",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000232",
+        "summary": "Speaker invokes a field of research called mitochondrial psychobiology."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000264",
+        "evidence_quote": "almost every type of stress when in excess of what the body can handle will result in increased levels of oxidative damage, increased levels of inflammatory cytokines or cellular damage",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000236",
+        "summary": "Explains the mechanism by which stress causes oxidative and cellular damage, leakage of ATP and mitochondrial DNA as danger signals, and the shift from energy production to cellular defense."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "what we now know through research"
+        ],
+        "claim_text": "Mitochondria have a second role beyond producing energy: they act as environmental sensors.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "mitochondria have a second role beyond their role as energy generators and that is as environmental sensors",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "States a specific testable claim about mitochondrial function that underpins the rest of the discussion.",
+        "relevance": "substantive",
+        "start_unit_id": "u000208",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "basically every type of threat or danger signal or stress imaginable"
+        ],
+        "claim_text": "Mitochondria can detect basically every type of threat or stress, from poor diet and leaky gut to infections, overtraining, injury, environmental toxins, and psychological stress.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000233",
+        "evidence_quote": "Mitochondria can detect basically every type of threat or danger signal or stress imaginable from poor diet to leaky gut to infections",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A sweeping, checkable claim about the range of stressors mitochondria sense.",
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "almost every type of stress"
+        ],
+        "claim_text": "Almost every type of stress, when in excess of what the body can handle, results in oxidative damage, inflammatory cytokines, or cellular damage such that ATP, ADP, and mitochondrial DNA leak from cells.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000242",
+        "evidence_quote": "leakage of cellular contents and these can be a few things, pure and urgent molecules like the actual energy molecules like ATP and ADP leaking outside the cell",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanistic claim about how excess stress damages cells and causes leakage of mitochondrial contents.",
+        "relevance": "substantive",
+        "start_unit_id": "u000236",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Leaked ATP, ADP, and mitochondrial DNA act as danger signaling molecules, detected by receptors on other cells and signaling danger to tissues, organs, and the brain.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000250",
+        "evidence_quote": "those molecules, energy molecules, mitochondrial DNA actually serve as danger signaling molecules",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific mechanistic claim about the signaling function of leaked mitochondrial contents.",
+        "relevance": "substantive",
+        "start_unit_id": "u000244",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "When danger signals exceed the mitochondrial resilience threshold, mitochondria shift into the cell danger response and redirect resources from energy production to cellular defense.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000264",
+        "evidence_quote": "if it exceeds your resilience threshold, the capacity of your mitochondria to handle that level of danger signal, of stress signaling, then the mitochondria shift into the cell danger response",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "States the threshold mechanism that defines the cell danger response.",
+        "relevance": "substantive",
+        "start_unit_id": "u000253",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The way the mitochondrial stress response is experienced is less energy.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000282",
+        "evidence_quote": "the way it's experienced is less energy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim that mitochondrial danger response presents as fatigue or low energy.",
+        "relevance": "substantive",
+        "start_unit_id": "u000280",
+        "topic_ids": [
+          "topic:metabolic.mitochondria_energy",
+          "topic:wellness.energy_fatigue"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fatigue is a classic symptom after a cold, flu, or COVID.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000287",
+        "evidence_quote": "think of the last time you got a cold or a flu or a COVID, what's one of the classic symptoms? Fatigue",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Everyday symptom claim that is checkable and could affect expectations.",
+        "relevance": "substantive",
+        "start_unit_id": "u000283",
+        "topic_ids": [
+          "topic:wellness.energy_fatigue"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "After extreme overexercising, a person is fatigued and run down for a day or two.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000291",
+        "evidence_quote": "You're going to be fatigued and run down for a day or two",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general claim about post-exercise fatigue that could be checked and affects training expectations.",
+        "relevance": "substantive",
+        "start_unit_id": "u000288",
+        "topic_ids": [
+          "topic:wellness.energy_fatigue"
+        ]
+      }
+    ],
+    "window_id": "episode_190223_window_0004"
+  },
+  "stored_at": "2026-10-04T22:36:28.311172+00:00"
+}

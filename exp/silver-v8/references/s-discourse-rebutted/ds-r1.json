@@ -1,0 +1,197 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "s-discourse-rebutted",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000044",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body",
+        "label_ids": [
+          "topic:vaccines.flu_vaccine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Hosts discuss the common belief that flu shots cause the flu, and one host corrects it and explains side effects and timing."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "it gives you the flu every single time",
+        "label_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Speaker A says the flu shot gives her the flu every time she gets it."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000029",
+        "evidence_quote": "it cannot give you the flu itself",
+        "label_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Speaker B rebuts the claim that the flu shot causes the flu, saying the shot cannot give you the flu and offering alternative explanations."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "thats actually not accurate",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Speaker B explicitly says the flu-shot-causes-flu belief is not accurate."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000029",
+        "evidence_quote": "its a really common misunderstanding",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "summary": "Speaker B calls the belief a common misunderstanding and explains the timing coincidence."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "i got it in the past i was sick for like a week straight",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Speaker A offers her past sickness after the shot as grounds for the general claim that the shot gives people the flu."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "every single time"
+        ],
+        "claim_text": "The flu shot gives you the flu every single time.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000018",
+        "evidence_quote": "it gives you the flu every single time",
+        "evidence_signal_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "rationale": "A widely repeated claim that flu shots cause the flu; if believed, it deters vaccination.",
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:vaccines.flu_vaccine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "cannot"
+        ],
+        "claim_text": "The flu shot does not contain a live virus that can replicate in the body, so it cannot give you the flu.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body so it cannot give you the flu itself",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "rationale": "The factual basis for correcting the flu-shot-causes-flu claim; vaccine composition and causation are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "topic_ids": [
+          "topic:vaccines.flu_vaccine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "usually",
+          "might"
+        ],
+        "claim_text": "Feeling sick after the flu shot is usually the immune system reacting to the shot, so you might get a sore arm, mild fatigue, or a low fever for a day or two, which is different from actually having the flu.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "usually its your immune system reacting to the shot so you might get a sore arm or mild fatigue or a low fever for a day or two",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "rationale": "Distinguishes vaccine side effects from influenza infection and explains perceived flu after vaccination.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:vaccines.flu_vaccine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "A lot of people get the flu shot right as cold and flu season is ramping up, catch an unrelated virus around the same time, and blame the shot.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000029",
+        "evidence_quote": "a lot of people get the shot right as cold and flu season is ramping up so they catch an unrelated virus",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "rationale": "A testable explanation for the perceived link between vaccination timing and unrelated winter infections.",
+        "relevance": "substantive",
+        "start_unit_id": "u000029",
+        "topic_ids": [
+          "topic:vaccines.flu_vaccine"
+        ]
+      }
+    ],
+    "window_id": "synthetic_discourse_rebutted_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:31.547294+00:00"
+}

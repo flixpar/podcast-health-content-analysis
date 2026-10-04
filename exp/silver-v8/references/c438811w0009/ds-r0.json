@@ -1,0 +1,177 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c438811w0009",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000440",
+        "evidence_quote": "a massive radiation sickness cover-up",
+        "label_ids": [
+          "topic:radiation_light.ionizing_radiation"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000440",
+        "summary": "The narrator names radiation sickness as part of a cover-up in the Manhattan Project."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000440",
+        "evidence_quote": "a massive radiation sickness cover-up",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000440",
+        "summary": "The show alleges a cover-up of radiation sickness."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000445",
+        "evidence_quote": "fluoride is probably not a mind control scheme",
+        "label_ids": [
+          "topic:oral.water_fluoridation"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000445",
+        "summary": "The hosts reject the fluoride mind-control conspiracy."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.85,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000445",
+        "evidence_quote": "fluoride is probably not a mind control scheme",
+        "label_ids": [
+          "narrative:fluoride_mind_control"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000445",
+        "summary": "The hosts say fluoride is probably not a mind-control scheme, rebutting the conspiracy."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000445",
+        "evidence_quote": "fluoride is probably not a mind control scheme",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000445",
+        "summary": "The hosts debunk the fluoride mind-control claim."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000468",
+        "evidence_quote": "defend your favorite foods from the forces of seed oils and sketchy ingredients",
+        "label_ids": [
+          "topic:food.fats_oils"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000466",
+        "summary": "Sponsor read for avocado-oil cooking oils, dressings and mayo, framed against seed oils."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000468",
+        "evidence_quote": "defend your favorite foods from the forces of seed oils and sketchy ingredients",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000466",
+        "summary": "The ad frames seed oils and sketchy ingredients as threats to defend against."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000468",
+        "evidence_quote": "Have no fear, chosen foods is here",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000466",
+        "summary": "A sponsor read for Chosen Foods."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000468",
+        "evidence_quote": "chosen foods",
+        "mention_role": "advertised",
+        "product_name": "Chosen Foods",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000466"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The real Manhattan Project involved a massive radiation sickness cover-up.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000440",
+        "evidence_quote": "a massive radiation sickness cover-up",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "narrative_ids": [],
+        "rationale": "A checkable historical claim about concealment of radiation harm.",
+        "relevance": "passing",
+        "start_unit_id": "u000440",
+        "topic_ids": [
+          "topic:radiation_light.ionizing_radiation"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Chosen Foods cooking oils, salad dressings and mayo get their fats from 100% pure avocado oil.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000468",
+        "evidence_quote": "all powered by the good fats from 100% pure avocado oil",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product composition claim that underlies the no-seed-oils health framing.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000466",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      }
+    ],
+    "window_id": "episode_438811_window_0009"
+  },
+  "stored_at": "2026-10-04T22:36:28.973354+00:00"
+}

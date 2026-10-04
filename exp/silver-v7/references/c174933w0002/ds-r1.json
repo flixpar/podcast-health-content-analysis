@@ -1,0 +1,289 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c174933w0002",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "I started working on this idea about what was this leaky gut",
+        "label_ids": [
+          "topic:gut.leaky_gut"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000074",
+        "summary": "Guest recounts his research history on leaky gut, including ATP, cytokines and the debate over whether it exists."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000075",
+        "evidence_quote": "I'm thinking about septic shock and hemorrhagic shock and traumatic brain injury",
+        "label_ids": [
+          "topic:acute_care.emergency_critical_care",
+          "topic:neuro.concussion_tbi"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000075",
+        "summary": "Guest names his ICU research interests: septic shock, hemorrhagic shock and traumatic brain injury."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000116",
+        "evidence_quote": "there's no such thing as leaky gut. You're crazy. And then I'm like, well, there's all these articles by Harvard",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000113",
+        "summary": "Guest rebuts doctors who denied leaky gut, pointing to articles by Harvard-trained physicians."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000116",
+        "evidence_quote": "there's all these articles by Harvard. Trained physicians on intestinal permeability",
+        "label_ids": [
+          "evidence:credential_appeal",
+          "evidence:prestige_institution",
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000114",
+        "summary": "Guest cites vague articles by Harvard-trained physicians as evidence that intestinal permeability is established."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000137",
+        "evidence_quote": "Paper coming out of Hopkins by Solomon Snyder's group",
+        "label_ids": [
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "summary": "Guest cites a paper from Solomon Snyder's Hopkins group on PARP, NAD and ATP."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000086",
+        "evidence_quote": "there's very little oxygen at the tip of the cells. So I thought, well, maybe ATP could be a Problem that's accounting for this leakiness",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000085",
+        "summary": "Guest explains the low-oxygen/ATP mechanism he hypothesized for gut leakiness."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000137",
+        "evidence_quote": "it would eat up this thing called NAD, and then if there was no NAD, then there would be no ATP that you could make",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000136",
+        "summary": "Guest describes the PARP-NAD-ATP mechanism from the Hopkins paper."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000135",
+        "evidence_quote": "Solomon Snyder is one of the great neuroscientists of the 20th century",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000134",
+        "summary": "Guest invokes Solomon Snyder's standing as a great neuroscientist when introducing his lab's paper."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Septic shock increases gut leakiness dramatically.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000080",
+        "evidence_quote": "septic shock increases the leakiness of the gut quite dramatically",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific physiological claim from the speaker's research that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000080",
+        "topic_ids": [
+          "topic:acute_care.emergency_critical_care",
+          "topic:gut.leaky_gut"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There is very little oxygen at the tips of gut cells.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000085",
+        "evidence_quote": "there's very little oxygen at the tip of the cells",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable anatomical/physiological claim about gut tissue oxygenation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000085",
+        "topic_ids": [
+          "topic:gut.leaky_gut"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "maybe",
+          "could"
+        ],
+        "claim_text": "ATP depletion could account for gut leakiness.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000086",
+        "evidence_quote": "maybe ATP could be a Problem that's accounting for this leakiness",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A hypothesis that connects cellular energy to gut barrier function.",
+        "relevance": "substantive",
+        "start_unit_id": "u000086",
+        "topic_ids": [
+          "topic:gut.leaky_gut"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Changes in ATP were associated with loss of gut barrier integrity.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000090",
+        "evidence_quote": "we saw huge changes in ATP that were associated with the loss of gut barrier integrity",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A reported research association between ATP and permeability.",
+        "relevance": "substantive",
+        "start_unit_id": "u000090",
+        "topic_ids": [
+          "topic:gut.leaky_gut"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Cytokines increase permeability in a cultured gut monolayer.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000098",
+        "evidence_quote": "we gave cytokines to these cells, mimicking inflammation. And sure enough, we had a big leak in in the monolayer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanistic finding that inflammatory cytokines disrupt the gut barrier.",
+        "relevance": "substantive",
+        "start_unit_id": "u000097",
+        "topic_ids": [
+          "topic:gut.leaky_gut"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "After cytokine exposure, ATP levels in the gut cells were down.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000100",
+        "evidence_quote": "we should look at the ATP levels, and they were down",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific experimental observation linking inflammation to cellular energy.",
+        "relevance": "substantive",
+        "start_unit_id": "u000100",
+        "topic_ids": [
+          "topic:gut.leaky_gut"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There is no such thing as leaky gut.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.9,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000116",
+        "evidence_quote": "medical doctors telling me there's no such thing as leaky gut",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "A contested existence claim about a diagnosis, raised to be rebutted.",
+        "relevance": "substantive",
+        "start_unit_id": "u000113",
+        "topic_ids": [
+          "topic:gut.leaky_gut"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could"
+        ],
+        "claim_text": "PARP could be activated by DNA damage, and if activated it would consume NAD, so without NAD no ATP could be made.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000137",
+        "evidence_quote": "it would eat up this thing called NAD, and then if there was no NAD, then there would be no ATP that you could make",
+        "evidence_signal_ids": [
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A reported biochemical mechanism from the Hopkins paper that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "topic_ids": [
+          "topic:gut.leaky_gut"
+        ]
+      }
+    ],
+    "window_id": "episode_174933_window_0002"
+  },
+  "stored_at": "2026-10-04T22:13:52.621581+00:00"
+}

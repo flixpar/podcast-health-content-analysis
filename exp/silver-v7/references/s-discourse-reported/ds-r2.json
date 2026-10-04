@@ -1,0 +1,69 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "s-discourse-reported",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000026",
+        "evidence_quote": "she was talking about semaglutide and she said it causes significant muscle loss in most people who take it",
+        "label_ids": [
+          "topic:glp1.side_effects"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000019",
+        "summary": "One friend relays a podcast guest doctor's claim that semaglutide causes significant muscle loss in most users; the friends briefly note they don't know enough to judge it."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000025",
+        "evidence_quote": "it causes significant muscle loss in most people who take it",
+        "label_ids": [
+          "narrative:glp1_dangers"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000019",
+        "summary": "The reported claim that semaglutide causes muscle loss in most users invokes the GLP-1 dangers narrative without endorsing it."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "most people"
+        ],
+        "claim_text": "Semaglutide causes significant muscle loss in most people who take it.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000019",
+        "evidence_quote": "she said it causes significant muscle loss in most people who take it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:glp1_dangers"
+        ],
+        "rationale": "A specific, checkable side-effect claim that could affect whether people take GLP-1 drugs.",
+        "relevance": "passing",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:glp1.side_effects"
+        ]
+      }
+    ],
+    "window_id": "synthetic_discourse_reported_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:56.096365+00:00"
+}

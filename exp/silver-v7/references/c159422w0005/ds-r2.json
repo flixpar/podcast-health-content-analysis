@@ -1,0 +1,118 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c159422w0005",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000316",
+        "evidence_quote": "she lost almost sixty pounds",
+        "label_ids": [
+          "topic:weight"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000316",
+        "summary": "Patty's sixty-pound weight loss is mentioned as a sign of her affair."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000345",
+        "evidence_quote": "fill the longer nights with perfect sleep night after night",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000344",
+        "summary": "A mattress ad promises perfect sleep across the longer nights."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000346",
+        "evidence_quote": "System that helps relieve aches and back pain",
+        "label_ids": [
+          "topic:musculoskeletal.back_neck_posture"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000346",
+        "summary": "The mattress's support system is advertised as relieving aches and back pain."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000348",
+        "evidence_quote": "Save up to eight hundred dollars on Certa Perfect Sleeper X mattresses and adjustable base sets",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000344",
+        "summary": "The mattress segment is a paid ad read directing listeners to a retailer."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000376",
+        "evidence_quote": "was living in constant fear of, well, a monster, an ogre-like creature out of a Grimm's fairy tale, who took pleasure in beating her",
+        "label_ids": [
+          "topic:acute_care.violence_abuse"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000355",
+        "summary": "Patty's alleged domestic abuse by Ron is recounted, including beatings, being hung upside down, and police inaction."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000348",
+        "evidence_quote": "Certa Perfect Sleeper X mattresses and adjustable base sets",
+        "mention_role": "advertised",
+        "product_name": "Certa Perfect Sleeper X",
+        "product_type": "household_or_home",
+        "start_unit_id": "u000344"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The Certa Perfect Sleeper X mattress's Q Four Support System helps relieve aches and back pain.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000346",
+        "evidence_quote": "System that helps relieve aches and back pain",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product efficacy claim in ad copy that could be checked against user or test data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000346",
+        "topic_ids": [
+          "topic:musculoskeletal.back_neck_posture",
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      }
+    ],
+    "window_id": "episode_159422_window_0005"
+  },
+  "stored_at": "2026-10-04T22:13:54.650151+00:00"
+}

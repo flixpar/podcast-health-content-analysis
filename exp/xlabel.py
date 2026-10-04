@@ -67,6 +67,15 @@ Answer with JSON: {"health": "none" | "passing" | "substantive", "ad": true|fals
 - "none": no health content as defined above.
 """
 
+SCREEN_BROAD_INSTRUCTIONS = """You screen podcast transcript windows before an expensive health-content labeler. Missing a window that has any health content is much worse than passing one that has none, so when in doubt, pass it.
+
+Answer "substantive" or "passing" if ANY part of the window touches on health in any way, even briefly: physical or mental health, emotions and psychology (stress, anxiety, depression, trauma, therapy, burnout, addiction), illness, injuries (including sports injuries and fight damage), medicine, drugs, alcohol or smoking as a health matter, sleep, diet, nutrition, food as health, weight, fitness and training, the body, sex and reproduction, pregnancy, babies and child development, ageing, death and dying, violence or abuse that harms someone, health policy, insurance, doctors, hospitals, public health, vaccines, health conspiracies, or an advertisement for any product that makes a health, wellness or body claim (supplements, meal kits sold as healthy, sleep products, deodorant "without aluminum", etc.).
+
+Answer "none" only if nothing health-related comes up at all, or health words appear only as idioms ("that's sick", "I'm dying to see it") or as a pure time marker ("back in 2020 during COVID").
+
+Answer with JSON: {"health": "none" | "passing" | "substantive", "ad": true|false, "reason": "<= 12 words"}.
+"""
+
 SCREEN_SCHEMA = {
     "type": "object",
     "properties": {
@@ -153,7 +162,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--bench", default="v2", help="benchmark dir (v2 = v7 labels, v3 = v8 labels)")
     parser.add_argument("--name", required=True)
-    parser.add_argument("--mode", default="standard", choices=("standard", "hints", "refine", "screen"))
+    parser.add_argument("--mode", default="standard", choices=("standard", "hints", "refine", "screen", "screen-broad"))
     parser.add_argument("--split", default="all")
     parser.add_argument("--strata", nargs="*")
     parser.add_argument("--limit", type=int)
@@ -175,8 +184,9 @@ def main() -> int:
 
     taxonomy = json.loads((REPO / f"benchmark/{args.bench}/taxonomy.json").read_text())
     label_axes = {label["label_id"]: label["axis"] for label in taxonomy["labels"]}
-    if args.mode == "screen":
-        instructions, schema, schema_name = SCREEN_INSTRUCTIONS, SCREEN_SCHEMA, "health_screen"
+    if args.mode in ("screen", "screen-broad"):
+        instructions = SCREEN_INSTRUCTIONS if args.mode == "screen" else SCREEN_BROAD_INSTRUCTIONS
+        schema, schema_name = SCREEN_SCHEMA, "health_screen"
     else:
         instructions, schema, schema_name = tl.taxonomy_instructions(taxonomy), tl.response_schema(taxonomy), "podcast_topic_clips"
     settings = tl.ModelSettings(
@@ -201,7 +211,7 @@ def main() -> int:
         "provider": "local",
         "mode": args.mode,
         "bench": args.bench,
-        "prompt_version": tl.prompt_version(taxonomy) if args.mode != "screen" else "screen-v1",
+        "prompt_version": tl.prompt_version(taxonomy) if not args.mode.startswith("screen") else args.mode + "-v1",
         "settings": settings.fingerprint(),
         "base_run": args.base_run,
         "lexicon": args.lexicon,
@@ -231,7 +241,7 @@ def main() -> int:
                 record["usage"] = response.get("usage")
                 tl.raise_for_chat_status(response)
                 parsed = tl.parse_json_output(tl.extract_chat_output_text(response))
-                if args.mode == "screen":
+                if args.mode.startswith("screen"):
                     result = {"window_id": window["window_id"], "screen": parsed}
                     changes: dict[str, Any] = {}
                 else:

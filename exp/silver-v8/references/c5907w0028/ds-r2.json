@@ -1,0 +1,187 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c5907w0028",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002491",
+        "evidence_quote": "I tore my meniscus at acupuncture",
+        "label_ids": [
+          "topic:alt_medicine.acupuncture_tcm",
+          "topic:musculoskeletal.joints_arthritis"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002488",
+        "summary": "Host recounts fainting during an acupuncture session and tearing his meniscus there."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002507",
+        "evidence_quote": "And she started sticking needles into me, and I fainted",
+        "label_ids": [
+          "topic:neuro.other_neurological"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002488",
+        "summary": "Hosts share stories of fainting around needles and in movie scenes."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002511",
+        "evidence_quote": "she would send me down to get a blood test",
+        "label_ids": [
+          "topic:procedures.lab_testing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002496",
+        "summary": "Host recalls avoiding blood tests and having IVs that did not work."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002515",
+        "evidence_quote": "I did the PRP on my knee",
+        "label_ids": [
+          "topic:procedures.regenerative_medicine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002513",
+        "summary": "Host mentions getting PRP on his knee, which required drawing six tubes of blood."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002544",
+        "evidence_quote": "It's a really good workout",
+        "label_ids": [
+          "topic:fitness.exercise_general"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002532",
+        "summary": "Snow shoveling is discussed as a workout that is harder for out-of-shape people."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002537",
+        "evidence_quote": "It's not good after 50",
+        "label_ids": [
+          "population:midlife"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002536",
+        "summary": "The warning about snow shoveling is specifically directed at people after 50."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002607",
+        "evidence_quote": "You can have a heart attack",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002584",
+        "summary": "Hosts discuss the risk of heart attack from strenuous snow shoveling and the exertion involved."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002607",
+        "evidence_quote": "after only two minutes of snow shoveling, study participants' heart rates exceeded 85 percent of maximal heart rate",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002607",
+        "summary": "A study is cited for heart rate response to two minutes of snow shoveling, without identifying the study."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "People can have a heart attack while shoveling snow.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002589",
+        "evidence_quote": "You can have a heart attack",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific risk claim about a common activity that can be checked against data on exertion and cardiac events.",
+        "relevance": "substantive",
+        "start_unit_id": "u002588",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I don't think",
+          "I think"
+        ],
+        "claim_text": "Cold weather is not what makes snow shoveling dangerous; the exertion is.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002592",
+        "evidence_quote": "the weather's cold, but I don't think that's fucking you up. I think it's just the exertion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal explanation of shoveling-related heart risk that could be checked against data on cold exposure versus exertion.",
+        "relevance": "substantive",
+        "start_unit_id": "u002590",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "After only two minutes of snow shoveling, study participants' heart rates exceeded 85 percent of maximal heart rate.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002607",
+        "evidence_quote": "after only two minutes of snow shoveling, study participants' heart rates exceeded 85 percent of maximal heart rate",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The finding is checkable against the cited study and matters to the risk of shoveling.",
+        "relevance": "substantive",
+        "start_unit_id": "u002607",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      }
+    ],
+    "window_id": "episode_5907_window_0028"
+  },
+  "stored_at": "2026-10-04T22:36:33.355799+00:00"
+}

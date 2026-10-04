@@ -1,0 +1,300 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c181805w0001",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000054",
+        "evidence_quote": "looking at someone's blood, can you get a sense of how long until they're going to die",
+        "label_ids": [
+          "topic:longevity.ageing_science"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000011",
+        "summary": "Doctor discusses whether blood tests can measure longevity and predict lifespan."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "what is this person's risk of atherosclerotic disease, so heart disease or stroke",
+        "label_ids": [
+          "topic:cardiovascular.cholesterol_lipids",
+          "topic:cardiovascular.heart_disease",
+          "topic:immune.inflammation",
+          "topic:procedures.imaging_diagnostics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Doctor walks through blood and imaging markers for cardiovascular risk: lipoproteins, inflammation, endothelial function, and calcium score."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000053",
+        "evidence_quote": "until companies like GRAIL have fully functioning liquid biopsies",
+        "label_ids": [
+          "topic:cancer.causes_rates",
+          "topic:cancer.screening_diagnosis",
+          "topic:genetics.genetic_testing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000046",
+        "summary": "Doctor says blood gives least insight into cancer until liquid biopsies mature, and genotype helps little because most cancers are somatic mutations."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "What is this person's risk of neurodegenerative disease",
+        "label_ids": [
+          "topic:neuro.neurodegenerative"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000022",
+        "summary": "Doctor names neurodegenerative disease risk as one of three disease risks to assess in blood."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "I think that insulin is, in and of itself, actually toxic at high levels to the endothelium",
+        "label_ids": [
+          "topic:metabolic.insulin_glucose"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000032",
+        "summary": "Doctor says high insulin is toxic to the endothelium."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000034",
+        "evidence_quote": "James O'Keefe just recently was on a paper that looked at cardiovascular health in patients with type 1 diabetes",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000032",
+        "summary": "Doctor cites a recent paper by James O'Keefe on cardiovascular health in type 1 diabetes but cannot recall the exact outcome."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "the latest study I saw, which actually just was an editorial that came out two days ago, based on a study in one of the atherosclerosis journals",
+        "label_ids": [
+          "evidence:media_source",
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000043",
+        "summary": "Doctor cites an editorial based on an atherosclerosis-journal study finding half of events at non-calcified lesions."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "Cardiovascular disease largely driven by three things: lipoproteins, inflammation, endothelial dysfunction",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Doctor states cardiovascular disease is driven by lipoproteins, inflammation and endothelial dysfunction."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "I think that insulin is, in and of itself, actually toxic at high levels to the endothelium",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000032",
+        "summary": "Doctor offers the mechanism that high insulin is toxic to the endothelium."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "ADMA, and SDMA, which are inhibitors of nitric oxide synthase",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000037",
+        "summary": "Doctor notes ADMA and SDMA are inhibitors of nitric oxide synthase."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000041",
+        "evidence_quote": "The older a patient gets, the more I would probably rely on things like CT angiograms",
+        "label_ids": [
+          "population:older_adults"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000041",
+        "summary": "Doctor says for older patients he relies more on CT angiograms and less on calcium scores."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The lower the LP(a) level, the greater the chance of cardiovascular mortality.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "the lower your LP little A, the greater your chance of cardiovascular mortality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The relationship between Lp(a) and cardiovascular mortality is checkable and clinically consequential.",
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:cardiovascular.cholesterol_lipids"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "largely"
+        ],
+        "claim_text": "Cardiovascular disease is largely driven by lipoproteins, inflammation, and endothelial dysfunction.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "Cardiovascular disease largely driven by three things: lipoproteins, inflammation, endothelial dysfunction",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This attributes cardiovascular disease to three modifiable mechanisms that can be compared with evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Insulin is toxic at high levels to the endothelium.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "I think that insulin is, in and of itself, actually toxic at high levels to the endothelium",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanistic claim about insulin and endothelial damage that affects how clinicians interpret insulin levels.",
+        "relevance": "substantive",
+        "start_unit_id": "u000032",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:metabolic.insulin_glucose"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fifty percent of patients who had cardiovascular events had them at the site of non-calcified lesions.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "fifty percent of patients that had that had events had them at the site. Of non-calcified lesions",
+        "evidence_signal_ids": [
+          "evidence:media_source",
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The proportion of events at non-calcified lesions is a checkable finding that bears on the value of calcium scores.",
+        "relevance": "substantive",
+        "start_unit_id": "u000043",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "virtually"
+        ],
+        "claim_text": "Virtually every cancer is the result of a somatic mutation, not a germline mutation.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000051",
+        "evidence_quote": "virtually every cancer is a result of a somatic mutation, not a germline mutation",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The somatic-versus-germline basis of cancer is checkable and shapes whether genetic testing helps.",
+        "relevance": "substantive",
+        "start_unit_id": "u000050",
+        "topic_ids": [
+          "topic:cancer.causes_rates"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Knowing your genotype does not really help for cancer, outside of a few outlier things like BRCA or Lynch.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "knowing your genotype doesn't really help, outside of a few outlier things like BRCA or Lynch",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim that germline genetic testing has limited cancer utility except for syndromes like BRCA/Lynch can be checked against testing guidelines.",
+        "relevance": "substantive",
+        "start_unit_id": "u000051",
+        "topic_ids": [
+          "topic:cancer.causes_rates",
+          "topic:genetics.genetic_testing"
+        ]
+      }
+    ],
+    "window_id": "episode_181805_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:55.089498+00:00"
+}

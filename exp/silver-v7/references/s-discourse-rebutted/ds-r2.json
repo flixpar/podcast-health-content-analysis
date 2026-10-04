@@ -1,0 +1,258 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "s-discourse-rebutted",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000013",
+        "evidence_quote": "mostly just lifting a few days a week and some walking whenever i can fit it in",
+        "label_ids": [
+          "topic:fitness.daily_movement",
+          "topic:fitness.strength_training"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000010",
+        "summary": "Hosts briefly mention lifting and walking as their current workout routine."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000044",
+        "evidence_quote": "so i actually dont get the flu shot anymore because honestly it gives you the flu every single time",
+        "label_ids": [
+          "topic:infectious.influenza_avian",
+          "topic:vaccines.flu_vaccine",
+          "topic:vaccines.safety_injury",
+          "topic:vaccines.uptake_hesitancy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000015",
+        "summary": "Host and guest discuss the flu shot, the claim that it causes the flu, side effects, and the guest's decision whether to get it."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "i actually dont get the flu shot anymore because honestly it gives you the flu every single time",
+        "label_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Guest asserts that the flu shot gives him the flu every time."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000033",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body so it cannot give you the flu itself",
+        "label_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Host rebuts the flu-shot-causes-flu claim and explains why people sometimes feel sick after the shot."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "thats actually not accurate and i want to push back on it a bit",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Host corrects the guest's misconception about the flu shot."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "i got it in the past i was sick for like a week straight",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Guest offers his own past illness as evidence that the shot causes the flu."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "Host explains that the flu shot cannot cause flu because it has no replicating live virus."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "usually its your immune system reacting to the shot",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "Host explains post-shot symptoms as an immune reaction rather than the flu."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "every single time"
+        ],
+        "claim_text": "The flu shot gives you the flu every single time.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "it gives you the flu every single time i got it in the past i was sick for like a week straight",
+        "evidence_signal_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "rationale": "A widely repeated claim about flu vaccine harm that affects vaccination decisions and can be checked against vaccine virology and trials.",
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:infectious.influenza_avian",
+          "topic:vaccines.flu_vaccine",
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "cannot"
+        ],
+        "claim_text": "The flu shot cannot give you the flu.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "it cannot give you the flu itself",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "rationale": "A direct counterclaim to the flu-shot-causes-flu belief, checkable against vaccine composition and clinical data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "topic_ids": [
+          "topic:infectious.influenza_avian",
+          "topic:vaccines.flu_vaccine",
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The flu shot does not contain a live virus that can replicate in the body.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about the composition of flu vaccines.",
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "topic_ids": [
+          "topic:vaccines.flu_vaccine",
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "usually",
+          "might"
+        ],
+        "claim_text": "The flu shot usually causes only a sore arm, mild fatigue, or a low fever for a day or two, which is different from having the flu.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "you might get a sore arm or mild fatigue or a low fever for a day or two and thats different from actually having the flu",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "rationale": "A checkable description of the typical side effects of flu vaccination.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:infectious.influenza_avian",
+          "topic:vaccines.flu_vaccine",
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "A lot of people get the flu shot right as cold and flu season ramps up, catch an unrelated virus around the same time, and blame the shot.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000029",
+        "evidence_quote": "a lot of people get the shot right as cold and flu season is ramping up so they catch an unrelated virus right around the same time and blame the shot",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "rationale": "A testable explanation for perceived flu-vaccine side effects that shapes how people interpret their symptoms.",
+        "relevance": "substantive",
+        "start_unit_id": "u000029",
+        "topic_ids": [
+          "topic:infectious.influenza_avian",
+          "topic:vaccines.flu_vaccine"
+        ]
+      }
+    ],
+    "window_id": "synthetic_discourse_rebutted_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:56.093366+00:00"
+}

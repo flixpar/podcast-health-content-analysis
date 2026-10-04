@@ -1,0 +1,190 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c185811w0024",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001452",
+        "evidence_quote": "Cancer is a metabolic disease",
+        "label_ids": [
+          "topic:cancer.causes_rates"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001442",
+        "summary": "They discuss cancer as a metabolic disease and environmental triggers of cancer cells."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001447",
+        "evidence_quote": "Cancer is a metabolic disease",
+        "label_ids": [
+          "narrative:cancer_metabolic_disease"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001444",
+        "summary": "The claim that cancer is a metabolic disease is asserted and endorsed."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001457",
+        "evidence_quote": "You believe in viruses",
+        "label_ids": [
+          "topic:infectious.germ_theory_hygiene"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001453",
+        "summary": "Guest denies belief in viruses and the host approves."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001457",
+        "evidence_quote": "No",
+        "label_ids": [
+          "narrative:germ_theory_denial"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001453",
+        "summary": "The proposition that viruses do not exist is asserted and approved."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001519",
+        "evidence_quote": "all the bad food that you've been eating",
+        "label_ids": [
+          "topic:food.general_nutrition"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001512",
+        "summary": "Speaker argues bad food and environmental intake make people unhealthy, overweight and mentally sluggish, undermining their ability to fight tyranny."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001452",
+        "evidence_quote": "Epigenetics, all that right",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001450",
+        "summary": "Environmental triggers are said to activate cancer cells, with epigenetics named as the mechanism."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u001432",
+        "evidence_quote": "getting their magazine",
+        "mention_role": "recommended",
+        "product_name": "Wise Traditions",
+        "product_type": "book_or_media",
+        "start_unit_id": "u001429"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Cancer is a metabolic disease.",
+        "claim_type": "mechanism",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001444",
+        "evidence_quote": "Cancer is a metabolic disease",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:cancer_metabolic_disease"
+        ],
+        "rationale": "A contested claim about the fundamental nature of cancer that shapes treatment beliefs.",
+        "relevance": "substantive",
+        "start_unit_id": "u001444",
+        "topic_ids": [
+          "topic:cancer.causes_rates"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Everybody's body already has cancer cells within it.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001449",
+        "evidence_quote": "Everybody's body already has cancer cells that are within it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A widely repeated claim about cancer prevalence that can be checked against oncology definitions.",
+        "relevance": "substantive",
+        "start_unit_id": "u001449",
+        "topic_ids": [
+          "topic:cancer.causes_rates"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Things from the environment can activate cancer cells to fight the body.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001451",
+        "evidence_quote": "the things that come from your environment that can actually express those cells to. Fight your own body",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claims a mechanism for cancer development that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001450",
+        "topic_ids": [
+          "topic:cancer.causes_rates"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Viruses do not exist.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001454",
+        "evidence_quote": "No",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:germ_theory_denial"
+        ],
+        "rationale": "A denial of viral pathogens that affects prevention and treatment beliefs.",
+        "relevance": "substantive",
+        "start_unit_id": "u001453",
+        "topic_ids": [
+          "topic:infectious.germ_theory_hygiene"
+        ]
+      }
+    ],
+    "window_id": "episode_185811_window_0024"
+  },
+  "stored_at": "2026-10-04T22:36:28.205422+00:00"
+}

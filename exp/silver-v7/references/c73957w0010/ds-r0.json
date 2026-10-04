@@ -1,0 +1,211 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c73957w0010",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000939",
+        "evidence_quote": "a good night's sleep is very important to me",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000924",
+        "summary": "Sponsor read for Helix mattresses, tying the right mattress and cooling upgrades to better sleep."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000939",
+        "evidence_quote": "Go to helixsleep.com/armchair for up to 30% off your Helix mattress",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000924",
+        "summary": "Sponsor read with discount code for Helix."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000968",
+        "evidence_quote": "Weight loss by Hers gives you access to FDA-approved GLP-1 medications, including the Wegovy pill and the Wegovy",
+        "label_ids": [
+          "topic:glp1.access_compounding",
+          "topic:glp1.use_results",
+          "topic:health_system.dtc_telehealth"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000940",
+        "summary": "Sponsor read for Hers weight-loss care, offering GLP-1 medications through an app with provider and AI support."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000951",
+        "evidence_quote": "doctors who've guided women like you",
+        "label_ids": [
+          "population:women"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000948",
+        "summary": "The Hers weight-loss ad is addressed to women and references doctors who have guided women."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000968",
+        "evidence_quote": "Visit forhers dot com slash armchair to meet the new hers app",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000940",
+        "summary": "Sponsor read for the Hers app with URL and promotional path."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000951",
+        "evidence_quote": "FDA-approved GLP-1 medications",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000951",
+        "summary": "The ad says the GLP-1 medications are FDA-approved."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000963",
+        "evidence_quote": "AI responses in the HERS app are AI-generated and do not constitute a medical diagnosis",
+        "label_ids": [
+          "frame:disclaimer"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000961",
+        "summary": "Legal disclaimer that AI responses are not a medical diagnosis and that a licensed provider is available."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000939",
+        "evidence_quote": "this episode is supported by Helix",
+        "mention_role": "advertised",
+        "product_name": "Helix",
+        "product_type": "household_or_home",
+        "start_unit_id": "u000924"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000968",
+        "evidence_quote": "Weight loss by Hers gives you access to FDA-approved GLP-1 medications",
+        "mention_role": "advertised",
+        "product_name": "Hers",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000940"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000951",
+        "evidence_quote": "including the Wegovy pill and the Wegovy",
+        "mention_role": "advertised",
+        "product_name": "Wegovy",
+        "product_type": "medication",
+        "start_unit_id": "u000951"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Helix cooling upgrades can get you the best rest even on hot nights.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000929",
+        "evidence_quote": "Helix has cooling upgrades that can get you the best rest, even on hot nights",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Ad claims a product feature improves sleep quality on hot nights; checkable against product testing or reviews.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000928",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Helix cooling upgrade makes your sleep so much better.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000935",
+        "evidence_quote": "It makes your sleep. So much better",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Ad claims the cooling upgrade improves sleep quality; can be checked against user evidence or product testing.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000933",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Weight loss by Hers gives access to FDA-approved GLP-1 medications, including the Wegovy pill and the Wegovy.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000951",
+        "evidence_quote": "Weight loss by Hers gives you access to FDA-approved GLP-1 medications, including the Wegovy pill and the Wegovy",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The availability, formulation, and FDA-approval status of the medications offered can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000951",
+        "topic_ids": [
+          "topic:glp1.access_compounding",
+          "topic:glp1.use_results",
+          "topic:health_system.dtc_telehealth"
+        ]
+      }
+    ],
+    "window_id": "episode_73957_window_0010"
+  },
+  "stored_at": "2026-10-04T22:13:49.193225+00:00"
+}

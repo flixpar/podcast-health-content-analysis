@@ -1,0 +1,363 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c318550w0004",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000252",
+        "evidence_quote": "ibuprofen could make people with coronavirus even sicker",
+        "label_ids": [
+          "topic:covid.illness_severity",
+          "topic:medications.pain_relievers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000185",
+        "summary": "The segment discusses whether ibuprofen and NSAIDs can worsen COVID-19, from the French warning and WHO clarification to the ACE2 theory and related influenza research."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000209",
+        "evidence_quote": "mandating us to not to use hydroxychloroquine",
+        "label_ids": [
+          "topic:covid.treatments"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000209",
+        "summary": "A quoted colleague asks whether there is data behind the French minister's move against hydroxychloroquine."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000251",
+        "evidence_quote": "It comes from research done into influenza",
+        "label_ids": [
+          "topic:infectious.influenza_avian"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000251",
+        "summary": "Mentions that the relevant research was done into influenza."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000252",
+        "evidence_quote": "taking high-dose NSAIDs while you have respiratory infections can increase your risk of getting a heart attack",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000252",
+        "summary": "Cites research suggesting high-dose NSAIDs during respiratory infections may raise heart attack risk."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000196",
+        "evidence_quote": "but that's not actually what they said",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000192",
+        "summary": "The hosts correct the claim that the WHO backed the French advice against ibuprofen."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000242",
+        "evidence_quote": "The problem with this theory is that there's actually not great evidence",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000237",
+        "summary": "The doctor debunks the ACE2 theory by noting there is no strong evidence for it."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000199",
+        "evidence_quote": "a doctor and public health researcher at Emory University in Atlanta",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000198",
+        "summary": "The guest is introduced as a doctor and public health researcher at Emory."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000215",
+        "evidence_quote": "a few young COVID patients who were otherwise healthy had started developing serious symptoms after being given an NSAID",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000213",
+        "summary": "The only support for the ibuprofen warning is a few anecdotal COVID patient cases after NSAID use."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000218",
+        "evidence_quote": "unfortunately, very limited data",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000211",
+        "summary": "Del Rio's colleague says data are very limited and nothing has been published."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000220",
+        "evidence_quote": "A letter in the Lancet, a very fancy journal",
+        "label_ids": [
+          "evidence:prestige_institution"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000220",
+        "summary": "The Lancet letter is invoked with its journal name as authority."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000223",
+        "evidence_quote": "I'm a cardiologist at the University of Michigan",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000222",
+        "summary": "The second guest is introduced as a cardiologist at the University of Michigan."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000240",
+        "evidence_quote": "The science we have mostly comes from animal studies",
+        "label_ids": [
+          "evidence:preclinical_extrapolation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000239",
+        "summary": "The evidence for the ACE2 theory is described as mostly coming from animal studies."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000242",
+        "evidence_quote": "we don't know that",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000237",
+        "summary": "The doctor says the ACE2-ibuprofen theory is not supported by good evidence and is speculative."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000252",
+        "evidence_quote": "some early research is suggesting that for a small group of people",
+        "label_ids": [
+          "evidence:vague_research",
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000251",
+        "summary": "Early research is cited vaguely for the NSAID-heart attack risk, with a small group."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "could"
+        ],
+        "claim_text": "Ibuprofen could make people with coronavirus even sicker.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000186",
+        "evidence_quote": "ibuprofen could make people with coronavirus even sicker",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This is the central safety claim that could change whether people with COVID avoid ibuprofen.",
+        "relevance": "substantive",
+        "start_unit_id": "u000186",
+        "topic_ids": [
+          "topic:covid.illness_severity",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The WHO is recommending that anyone suffering COVID-19 symptoms avoid taking ibuprofen.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000188",
+        "evidence_quote": "The World Health Organization is now recommending that anyone suffering COVID-19 symptoms avoid taking ibuprofen",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The reported WHO recommendation was later contradicted and is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000188",
+        "topic_ids": [
+          "topic:covid.illness_severity",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "WHO does not recommend against the use of ibuprofen.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000194",
+        "evidence_quote": "WHO does not recommend against the use of ibuprofen",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "The WHO's actual position on ibuprofen is directly checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000194",
+        "topic_ids": [
+          "topic:covid.illness_severity",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "We think"
+        ],
+        "claim_text": "The coronavirus breaks into cells by binding to a receptor called ACE2.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000230",
+        "evidence_quote": "We think the way that this coronavirus breaks in is by binding to a receptor called ACE two",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "SARS-CoV-2 entry via ACE2 is a checkable biological claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000230",
+        "topic_ids": [
+          "topic:covid.illness_severity"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "theoretical",
+          "could",
+          "may"
+        ],
+        "claim_text": "Ibuprofen could increase the level of ACE2, which may then present more binding sites for the coronavirus to attach to.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000235",
+        "evidence_quote": "The theoretical risk is that ibuprofen could increase the level of ACE2, which may then present more binding sites",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This is the proposed mechanism behind the ibuprofen warning and is testable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000235",
+        "topic_ids": [
+          "topic:covid.illness_severity",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "mostly"
+        ],
+        "claim_text": "The science on whether ibuprofen increases ACE2 production mostly comes from animal studies.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000240",
+        "evidence_quote": "The science we have mostly comes from animal studies",
+        "evidence_signal_ids": [
+          "evidence:preclinical_extrapolation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claimed evidence base for the ACE2-ibuprofen theory can be checked against the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000239",
+        "topic_ids": [
+          "topic:covid.illness_severity",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "some early research is suggesting",
+          "for a small group of people"
+        ],
+        "claim_text": "For a small group of people, taking high-dose NSAIDs while you have respiratory infections can increase your risk of getting a heart attack.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000252",
+        "evidence_quote": "some early research is suggesting that for a small group of people, taking high-dose NSAIDs while you have respiratory infections can increase your risk of getting a heart attack",
+        "evidence_signal_ids": [
+          "evidence:vague_research",
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This links NSAID use during respiratory infections to heart attack risk and is checkable against the cited research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000252",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:medications.pain_relievers"
+        ]
+      }
+    ],
+    "window_id": "episode_318550_window_0004"
+  },
+  "stored_at": "2026-10-04T22:13:53.459887+00:00"
+}

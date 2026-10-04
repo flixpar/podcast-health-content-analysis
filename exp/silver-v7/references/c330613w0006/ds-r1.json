@@ -1,0 +1,210 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c330613w0006",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000246",
+        "evidence_quote": "So RFK Junior testified yesterday",
+        "label_ids": [
+          "topic:policy.hhs_leadership"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000241",
+        "summary": "Hosts introduce RFK Jr.'s confirmation testimony before Senate committees for HHS."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000247",
+        "evidence_quote": "basically laid out the Make America Healthy Again movement",
+        "label_ids": [
+          "topic:policy.maha_movement"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000247",
+        "summary": "Hosts note RFK Jr. laid out the Make America Healthy Again movement in his opening statement."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000252",
+        "evidence_quote": "Over seventy percent of adults and a third of children are overweight or obese",
+        "label_ids": [
+          "topic:weight.obesity_rates"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000251",
+        "summary": "RFK cites obesity prevalence among adults and children and a tenfold rise since the 1960s."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000253",
+        "evidence_quote": "Cancer among young people is rising by one or two percent a year",
+        "label_ids": [
+          "topic:cancer.causes_rates"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000253",
+        "summary": "RFK says cancer among young people is rising one to two percent a year."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000255",
+        "evidence_quote": "Autoimmune diseases, neurodevelopmental disorders, Alzheimer's, asthma, ADHD, depression, addiction, and a host of other physical and mental health conditions are all on the rise",
+        "label_ids": [
+          "topic:wellness.chronic_disease_trends"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000254",
+        "summary": "RFK lists rising chronic physical and mental health conditions and says there is no single culprit."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000255",
+        "evidence_quote": "Today, American's overall health is in grievous condition",
+        "label_ids": [
+          "frame:maha_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000250",
+        "summary": "RFK's opening statement frames American health as a chronic-disease crisis."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000261",
+        "evidence_quote": "News reports have claimed that I am anti vaccine or any industry",
+        "label_ids": [
+          "topic:vaccines"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000259",
+        "summary": "RFK says news reports calling him anti-vaccine are wrong and that he is pro-safety and pro-vaccine."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000269",
+        "evidence_quote": "Let's get then to what he referenced their vaccine statements",
+        "label_ids": [
+          "topic:vaccines"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000265",
+        "summary": "Hosts say RFK's vaccine statements drew the bulk of Democratic criticism, and a senator presses his pro-vaccine stance."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Over seventy percent of adults and a third of children are overweight or obese.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000251",
+        "evidence_quote": "Over seventy percent of adults and a third of children are overweight or obese",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:maha_framing"
+        ],
+        "narrative_ids": [],
+        "rationale": "Obesity prevalence statistics are checkable against national surveys.",
+        "relevance": "substantive",
+        "start_unit_id": "u000251",
+        "topic_ids": [
+          "topic:weight.obesity_rates"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Obesity is ten times more prevalent than it was during the nineteen sixties.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000252",
+        "evidence_quote": "Is ten times more prevalent than it was during the nineteen sixties",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:maha_framing"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claimed tenfold increase in obesity prevalence can be checked against historical national survey data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000252",
+        "topic_ids": [
+          "topic:weight.obesity_rates"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Cancer among young people is rising by one or two percent a year.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000253",
+        "evidence_quote": "Cancer among young people is rising by one or two percent a year",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:maha_framing"
+        ],
+        "narrative_ids": [],
+        "rationale": "Incidence trends in young-onset cancer can be checked against cancer registry data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000253",
+        "topic_ids": [
+          "topic:cancer.causes_rates"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "all"
+        ],
+        "claim_text": "Autoimmune diseases, neurodevelopmental disorders, Alzheimer's, asthma, ADHD, depression, addiction, and a host of other physical and mental health conditions are all on the rise, some of them exponentially.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000254",
+        "evidence_quote": "Autoimmune diseases, neurodevelopmental disorders, Alzheimer's, asthma, ADHD, depression, addiction, and a host of other physical and mental health conditions are all on the rise",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:maha_framing"
+        ],
+        "narrative_ids": [],
+        "rationale": "Claims that multiple chronic conditions are rising, some exponentially, can be checked against incidence and prevalence data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000254",
+        "topic_ids": [
+          "topic:wellness.chronic_disease_trends"
+        ]
+      }
+    ],
+    "window_id": "episode_330613_window_0006"
+  },
+  "stored_at": "2026-10-04T22:13:53.561164+00:00"
+}

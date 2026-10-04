@@ -1,0 +1,196 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "t-c380025w0001--add_hedge",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "today's episode is all about understanding delusion and psychosis",
+        "label_ids": [
+          "topic:mental.serious_mental_illness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000001",
+        "summary": "Host teaches what delusions and psychosis are and how they relate to intrusive thoughts, referencing the Lindsay Clancy trial."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "Someone has an intrusive thought about doing something horrific",
+        "label_ids": [
+          "topic:mental.ocd_personality"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "summary": "Host distinguishes intrusive thoughts from psychosis and says they are not interchangeable."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "especially if you're dealing with somebody who's deep in a delusion or or acting out some sort of narcissistic abuse cycle",
+        "label_ids": [
+          "topic:mental.pop_psychology"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000049",
+        "summary": "Host criticizes therapy-speak labels such as narcissistic and gaslighting and recommends gray rocking with people deep in delusion or narcissistic abuse cycles."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "these things are not interchangeable",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000016",
+        "summary": "Host corrects the misconception that delusional, obsessive, religious and intrusive-thought experiences are interchangeable with psychosis."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "This is the first misconception: people believe things every single day that are inaccurate",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "summary": "Host corrects the misconception that everyday inaccurate beliefs are psychosis."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "the person who believes they're being gaslit is the one gaslighting the person who is desperately trying to ask the right questions",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000049",
+        "summary": "Host pushes back against calling reality-testing questions narcissistic and gaslighting."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A delusion is a belief held with conviction that is resistant to contradictory evidence and disconnected from consensual reality.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000043",
+        "evidence_quote": "A delusion involves a belief that is. Held with a level of conviction that is resistant to contradictory evidence and is disconnected from consensual reality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A clinical definition of delusion that can be checked against psychiatric diagnostic criteria.",
+        "relevance": "substantive",
+        "start_unit_id": "u000042",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In delusion, doubt and contradiction are reinterpreted as confirming the belief, creating a closed loop.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "Every confirmation now confirms the belief, and even worse, now every contradiction also confirms the belief",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claimed psychological mechanism of delusion that can be assessed against clinical accounts.",
+        "relevance": "substantive",
+        "start_unit_id": "u000005",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could"
+        ],
+        "claim_text": "Repeatedly and persistently interpreting other people's behavior inaccurately could eventually lead to psychosis.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "repeatedly in a sustained manner, that could eventually lead to psychosis",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim that sustained misinterpretation can progress to psychosis.",
+        "relevance": "substantive",
+        "start_unit_id": "u000039",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Reality testing directed at someone in a delusion makes them more angry or more emotionally aroused.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000055",
+        "evidence_quote": "reality testing to somebody who is in delusion will actually make them more angry or more emotionally. Aroused",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A behavioral claim about how people in delusion respond to reality testing.",
+        "relevance": "substantive",
+        "start_unit_id": "u000053",
+        "topic_ids": [
+          "topic:mental.serious_mental_illness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Having an intrusive thought about doing something horrific is not the same as being in psychosis.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "Someone has an intrusive thought about doing something horrific. People. Immediately wonder, are they in psychosis? And I want to be clear: these things are not interchangeable",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A clinical distinction between intrusive thoughts and psychosis that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "topic_ids": [
+          "topic:mental.ocd_personality",
+          "topic:mental.serious_mental_illness"
+        ]
+      }
+    ],
+    "window_id": "episode_380025_window_0001_add_hedge"
+  },
+  "stored_at": "2026-10-04T22:36:29.501746+00:00"
+}

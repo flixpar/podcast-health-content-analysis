@@ -1,0 +1,219 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c77764w0010",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "Surgeons who don't have a checklist kill forty-two percent more people",
+        "label_ids": [
+          "topic:health_system.medical_errors"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000565",
+        "summary": "Speaker cites research on surgical checklists reducing mortality, using it as an analogy for daily routines."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000565",
+        "evidence_quote": "The research is insane",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000565",
+        "summary": "Research on surgical checklists is invoked without specifics."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000593",
+        "evidence_quote": "80 of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc",
+        "label_ids": [
+          "topic:mental.anxiety",
+          "topic:mental.depression"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000591",
+        "summary": "Speaker says most people are struggling with anxiety and depression."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "the suicide rates, the self harm rates, especially among the next generation, are horrific",
+        "label_ids": [
+          "topic:mental.suicide_self_harm"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000594",
+        "summary": "Speaker calls suicide and self-harm rates, especially among the next generation, horrific."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "especially among the next generation",
+        "label_ids": [
+          "population:adolescents",
+          "population:young_adults"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000594",
+        "summary": "The suicide and self-harm discussion is specifically about the next generation."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000610",
+        "evidence_quote": "it's pandemic levels of anxiety, depression, cancer, diabetes, political polarization, etc",
+        "label_ids": [
+          "topic:wellness.chronic_disease_trends"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000610",
+        "summary": "Speaker lists pandemic levels of anxiety, depression, cancer and diabetes among society's challenges."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000635",
+        "evidence_quote": "Intrinsic motivation, on the other hand, is what's been shown to lead to deep levels of sustainable happiness",
+        "label_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000623",
+        "summary": "Discussion of research on intrinsic versus extrinsic motivation and their effects on happiness and psychological stability."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000624",
+        "evidence_quote": "scientists have studied motivation",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000623",
+        "summary": "Scientific study of motivation is invoked without specifics."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000628",
+        "evidence_quote": "what's been shown to lead to deep levels of sustainable happiness",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000628",
+        "summary": "Research is invoked for the claim that intrinsic motivation leads to happiness."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Surgeons who do not have a checklist kill forty-two percent more people.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "Surgeons who don't have a checklist kill forty-two percent more people",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The 42 percent mortality difference attributed to surgical checklists is checkable against published research on surgical safety checklists.",
+        "relevance": "passing",
+        "start_unit_id": "u000565",
+        "topic_ids": [
+          "topic:health_system.medical_errors"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Suicide rates and self-harm rates, especially among the next generation, are horrific.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "the suicide rates, the self harm rates, especially among the next generation, are horrific",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The assertion that suicide and self-harm rates are very high among young people can be checked against mortality data.",
+        "relevance": "passing",
+        "start_unit_id": "u000594",
+        "topic_ids": [
+          "topic:mental.suicide_self_harm"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Intrinsic motivation leads to deep levels of sustainable happiness.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000628",
+        "evidence_quote": "Intrinsic motivation, on the other hand, is what's been shown to lead to deep levels of sustainable happiness",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether intrinsic motivation produces greater happiness is a checkable claim in psychology research.",
+        "relevance": "passing",
+        "start_unit_id": "u000628",
+        "topic_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People predominantly focused on extrinsic goals are less psychologically stable than people pursuing intrinsic goals.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000635",
+        "evidence_quote": "And it always strikes me when I say this, and I quote: \"Less psychological.\" Stable than someone who is pursuing intrinsic stuff",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The psychological outcome of extrinsic versus intrinsic goal pursuit is checkable in motivation research.",
+        "relevance": "passing",
+        "start_unit_id": "u000633",
+        "topic_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ]
+      }
+    ],
+    "window_id": "episode_77764_window_0010"
+  },
+  "stored_at": "2026-10-04T22:36:33.455048+00:00"
+}

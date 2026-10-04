@@ -1,0 +1,202 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c191370w0004",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000119",
+        "evidence_quote": "the more colloquial use of the term trauma or the term traumatic, our use of it in this current generation",
+        "label_ids": [
+          "topic:mental.pop_psychology",
+          "topic:mental.trauma_ptsd"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000109",
+        "summary": "Host asks why the word trauma is now used for ordinary experiences like breakups, citing veterans with PTSD."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "We don't want to stretch the word trauma to the point of meaninglessness",
+        "label_ids": [
+          "topic:mental.pop_psychology",
+          "topic:mental.trauma_ptsd"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000120",
+        "summary": "Guest discusses the risks of overusing trauma language, warns against stretching it to meaninglessness, and notes benefits like reduced stigma."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000140",
+        "evidence_quote": "I just had a book that came out called Unbroken The Trauma Response is Never Wrong",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000123",
+        "summary": "Guest promotes her book 'Unbroken: The Trauma Response is Never Wrong' and describes its structure."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "So referred pain is a really strange biological thing, whereby you might have like the classic example is if you have jaw pain",
+        "label_ids": [
+          "topic:other"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000141",
+        "summary": "Guest explains referred pain with the jaw pain/heart attack and shoulder/spleen examples."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000151",
+        "evidence_quote": "it's not the job that's traumatic",
+        "label_ids": [
+          "topic:mental.trauma_ptsd"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "summary": "Guest applies referred pain to trauma: a first responder's nightmares traced to a breakup, and not all breakups are traumatic."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000148",
+        "evidence_quote": "I've seen this with many many clients",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000148",
+        "summary": "Guest cites her therapy clients as evidence that a breakup can be the real source of trauma symptoms."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000150",
+        "evidence_quote": "the source of the pain and the pain don't necessarily match up",
+        "label_ids": [
+          "frame:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000147",
+        "summary": "The referred pain analogy frames therapy as finding the true source of distress rather than the apparent trigger."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000140",
+        "evidence_quote": "I just had a book that came out called Unbroken The Trauma Response is Never Wrong",
+        "mention_role": "own_product",
+        "product_name": "Unbroken The Trauma Response is Never Wrong",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000123"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Jaw pain can be a symptom of a heart attack.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "even though the pain is in your jaw, you're actually having a heart attack",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This is a checkable medical symptom claim that could affect whether a listener seeks emergency care.",
+        "relevance": "substantive",
+        "start_unit_id": "u000144",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "necessarily"
+        ],
+        "claim_text": "Pain can be felt in a different part of the body from its actual source.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000147",
+        "evidence_quote": "the source of the pain and the pain don't necessarily match up",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Referred pain is a checkable physiological claim central to the guest's analogy.",
+        "relevance": "substantive",
+        "start_unit_id": "u000146",
+        "topic_ids": [
+          "topic:other"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Shoulder pain can originate from the spleen.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000146",
+        "evidence_quote": "you might have pain in your shoulder and it's actually a result of your spleen",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific claim about referred pain from the spleen that can be checked against medical sources.",
+        "relevance": "substantive",
+        "start_unit_id": "u000146",
+        "topic_ids": [
+          "topic:other"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "More people talking about trauma makes people less likely to feel too stigmatized to get help.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "that makes it less likely that people will feel really like too stigmatized to get help when they need it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "This is a checkable claim about the social effect of normalizing trauma language.",
+        "relevance": "substantive",
+        "start_unit_id": "u000137",
+        "topic_ids": [
+          "topic:mental.pop_psychology",
+          "topic:mental.trauma_ptsd"
+        ]
+      }
+    ],
+    "window_id": "episode_191370_window_0004"
+  },
+  "stored_at": "2026-10-04T22:13:46.568962+00:00"
+}

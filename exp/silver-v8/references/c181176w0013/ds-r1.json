@@ -1,0 +1,270 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c181176w0013",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000760",
+        "evidence_quote": "the mice that we supplemented, we gave them exogenous NR in their diet, did much, much better, and they were able to preserve their ejection fraction",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:longevity.nad_sirtuins"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000756",
+        "summary": "Guest discusses NR/NAD supplementation for heart failure, citing a mouse study and University of Washington clinical testing."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000811",
+        "evidence_quote": "And we found that if we supplemented the new moms, they have a weight loss advantage over the non-supplemented moms",
+        "label_ids": [
+          "topic:cognition.memory_learning",
+          "topic:longevity.nad_sirtuins",
+          "topic:pregnancy.infant_feeding",
+          "topic:pregnancy.postpartum",
+          "topic:pregnancy.pregnancy_health",
+          "topic:weight.body_composition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000770",
+        "summary": "Guest describes NR supplementation in postpartum mothers and its effects on maternal weight and milk production, and on offspring body composition and learning in mice and rats, with planned human trials for mothers of preemies."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000807",
+        "evidence_quote": "they're looking at NR supplementation for like moms of preemies",
+        "label_ids": [
+          "population:pregnant_postpartum"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000770",
+        "summary": "The research concerns pregnant and postpartum women, including mothers of preemies."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000771",
+        "evidence_quote": "the babies can be born small",
+        "label_ids": [
+          "population:infants"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000770",
+        "summary": "The passage notes that babies can be born small when mothers are overweight in pregnancy."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000756",
+        "evidence_quote": "the mice that we supplemented, we gave them exogenous NR in their diet, did much, much better, and they were able to preserve their ejection fraction",
+        "label_ids": [
+          "evidence:preclinical_extrapolation",
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000756",
+        "summary": "The speaker's mouse model of genetically programmed heart failure with NR supplementation."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000771",
+        "evidence_quote": "there's a lot of data that says that when mom is dealing with overweight. In pregnancy",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000770",
+        "summary": "A broad reference to data on overweight in pregnancy and fetal development."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000811",
+        "evidence_quote": "So we basically supplemented in the postpartum phase for mice, and then we did this with rats. What we found is that if we supplemented new moms with NR",
+        "label_ids": [
+          "evidence:preclinical_extrapolation",
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000772",
+        "summary": "The speaker's mouse and rat postpartum NR experiments with maternal and offspring outcomes."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000792",
+        "evidence_quote": "it's got to be, you know, calorie transfer, right? So the mom is is giving milk to the offspring",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000779",
+        "summary": "Speaker explains the maternal weight-loss effect as calorie transfer through milk production and the body's mobilization of macronutrients."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Mice supplemented with exogenous NR preserved their ejection fraction despite being genetically programmed to have heart failure.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000756",
+        "evidence_quote": "the mice that we supplemented, we gave them exogenous NR in their diet, did much, much better, and they were able to preserve their ejection fraction",
+        "evidence_signal_ids": [
+          "evidence:preclinical_extrapolation",
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "An animal-model efficacy claim for NR in heart failure that could be checked against the described experiment.",
+        "relevance": "substantive",
+        "start_unit_id": "u000756",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:longevity.nad_sirtuins"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "When mothers are overweight in pregnancy, fetal development is worse and babies can be born small and less resilient.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000771",
+        "evidence_quote": "there's a lot of data that says that when mom is dealing with overweight. In pregnancy, that the fetal development isn't as good",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A general claim about maternal overweight and fetal/newborn outcomes that can be checked against the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000770",
+        "topic_ids": [
+          "topic:pregnancy.pregnancy_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Supplementing new mothers with NR produced a weight loss advantage over non-supplemented mothers.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000777",
+        "evidence_quote": "And we found that if we supplemented the new moms, they have a weight loss advantage over the non-supplemented moms",
+        "evidence_signal_ids": [
+          "evidence:preclinical_extrapolation",
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A postpartum supplementation effect claim in animal models that can be checked against the described experiments.",
+        "relevance": "substantive",
+        "start_unit_id": "u000777",
+        "topic_ids": [
+          "topic:longevity.nad_sirtuins",
+          "topic:pregnancy.postpartum",
+          "topic:weight.body_composition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "NR-supplemented mothers produced significantly more milk than non-supplemented mothers, transferring more calories to offspring.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000799",
+        "evidence_quote": "The NR supplemented moms produced significantly more milk than the non supplemented moms",
+        "evidence_signal_ids": [
+          "evidence:preclinical_extrapolation",
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A lactation effect claim that can be checked against the described animal experiments.",
+        "relevance": "substantive",
+        "start_unit_id": "u000797",
+        "topic_ids": [
+          "topic:longevity.nad_sirtuins",
+          "topic:pregnancy.infant_feeding",
+          "topic:pregnancy.postpartum"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Offspring of NR-supplemented mothers were bigger at weaning with higher fat and muscle mass, and at adulthood had lower fat mass with preserved muscle mass.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000811",
+        "evidence_quote": "They had a little bit higher fat mass, a little bit higher muscle mass. Ultimately, at adulthood, they had lower fat mass with preserved muscle mass",
+        "evidence_signal_ids": [
+          "evidence:preclinical_extrapolation",
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Offspring body-composition findings that can be checked against the described experiments.",
+        "relevance": "substantive",
+        "start_unit_id": "u000808",
+        "topic_ids": [
+          "topic:longevity.nad_sirtuins",
+          "topic:weight.body_composition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Offspring of NR-supplemented mothers outperformed controls in intellectual, motor and spatial learning tests.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000812",
+        "evidence_quote": "at multiple stages, where we looked at their kind of intellectual, motor abilities, and then their spatial learning, they outperform mice",
+        "evidence_signal_ids": [
+          "evidence:preclinical_extrapolation",
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A developmental learning-outcome claim in animal offspring that can be checked against the described experiments.",
+        "relevance": "substantive",
+        "start_unit_id": "u000811",
+        "topic_ids": [
+          "topic:cognition.memory_learning",
+          "topic:longevity.nad_sirtuins"
+        ]
+      }
+    ],
+    "window_id": "episode_181176_window_0013"
+  },
+  "stored_at": "2026-10-04T22:36:30.505721+00:00"
+}

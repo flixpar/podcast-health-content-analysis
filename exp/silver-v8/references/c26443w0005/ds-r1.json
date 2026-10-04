@@ -1,0 +1,289 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c26443w0005",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "it helps detox your body, it boosts circulation, it improves recovery",
+        "label_ids": [
+          "topic:recovery.heat_sauna"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000199",
+        "summary": "Sponsor read for Healing Saunas claiming detox, circulation, recovery, brain and mitochondrial health, and lifespan benefits."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000210",
+        "evidence_quote": "Listeners of this podcast get $100 off by using my personal code BGHEAL at healingsauna.com",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000199",
+        "summary": "Sponsor read with discount code and URL."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000205",
+        "evidence_quote": "has been proven to extend your lifespan",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000205",
+        "summary": "Claims 20 minutes six times a week has been proven to extend lifespan."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000226",
+        "evidence_quote": "Not acknowledge that this is the root of mental illness",
+        "label_ids": [
+          "topic:mental.causes_models"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000211",
+        "summary": "Promo for Decoded presents self-deception as the root of mental illness and promises brain-pattern rewiring."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000247",
+        "evidence_quote": "Over the coming weeks of Decoded",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000211",
+        "summary": "Promo for the Decoded podcast."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000226",
+        "evidence_quote": "the mental health establishment has treated this word of self-deception like such a taboo concept",
+        "label_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000224",
+        "summary": "Mental health establishment is criticized for treating self-deception as taboo and ignoring the root of mental illness."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000226",
+        "evidence_quote": "this is the root of mental illness",
+        "label_ids": [
+          "frame:root_cause_framing"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000224",
+        "summary": "Self-deception is framed as the root cause of mental illness."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000246",
+        "evidence_quote": "solve the substance use disorder crisis using technology",
+        "label_ids": [
+          "topic:drugs_addiction.addiction_recovery"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000229",
+        "summary": "Promo describes a technology intervention for substance use disorder and the speaker's Johns Hopkins pitch."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "the academics and the professors who don't actually work in the field, could be so disconnected from the needs of the people on the ground",
+        "label_ids": [
+          "frame:anti_expert_populist"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000234",
+        "summary": "Academics and decision makers are portrayed as disconnected from the people the field serves."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000210",
+        "evidence_quote": "go head over to Healing Saunas",
+        "mention_role": "advertised",
+        "product_name": "Healing Saunas",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000199"
+      },
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000247",
+        "evidence_quote": "Over the coming weeks of Decoded",
+        "mention_role": "advertised",
+        "product_name": "Decoded",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000211"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "has been proven"
+        ],
+        "claim_text": "Using the sauna for 20 minutes six times a week has been proven to extend your lifespan.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000205",
+        "evidence_quote": "has been proven to extend your lifespan",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A lifespan-extension claim for a sauna product is checkable against evidence on sauna use and mortality.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000205",
+        "topic_ids": [
+          "topic:recovery.heat_sauna"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The sauna helps detox the body.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "it helps detox your body",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A detoxification benefit claim in ad copy that can be checked against physiological evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:recovery.heat_sauna"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The sauna boosts circulation.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "it boosts circulation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A circulatory benefit claim in ad copy that can be checked against physiological evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:recovery.heat_sauna"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The sauna improves recovery.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "it improves recovery",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A recovery benefit claim in ad copy that can be checked against evidence on sauna and recovery.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:recovery.heat_sauna"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "of course"
+        ],
+        "claim_text": "The sauna supports brain and mitochondrial health.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000203",
+        "evidence_quote": "of course, it supports brain and mitochondrial health",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A claim about effects on brain and mitochondrial health in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000203",
+        "topic_ids": [
+          "topic:recovery.heat_sauna"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Self-deception is the root of mental illness.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000226",
+        "evidence_quote": "this is the root of mental illness",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization",
+          "frame:root_cause_framing"
+        ],
+        "narrative_ids": [],
+        "rationale": "A causal claim about mental illness that would shape how listeners understand mental health treatment.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000226",
+        "topic_ids": [
+          "topic:mental.causes_models"
+        ]
+      }
+    ],
+    "window_id": "episode_26443_window_0005"
+  },
+  "stored_at": "2026-10-04T22:36:31.016616+00:00"
+}

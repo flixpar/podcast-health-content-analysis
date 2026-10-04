@@ -1,0 +1,200 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c178240w0010",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000714",
+        "evidence_quote": "plastic surgery is absolutely fine",
+        "label_ids": [
+          "topic:skin_beauty.cosmetic_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000633",
+        "summary": "Host and surgeons discuss plastic surgery and cosmetic procedures, including the athletic BBL, surgeon choice, and surgery for loose skin after pregnancy and weight loss."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "Loose skin, muscle separation—that's the most common",
+        "label_ids": [
+          "topic:pregnancy.postpartum"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000689",
+        "summary": "Surgeon describes postpartum changes—loose skin and muscle separation—that mothers cannot fix with diet and exercise."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "especially with all these new weight loss drugs, loose skin is just becoming a bigger and bigger problem",
+        "label_ids": [
+          "topic:weight"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000692",
+        "summary": "Weight-loss drugs are said to make loose skin a bigger problem, expanding the surgery patient pool."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000688",
+        "evidence_quote": "What are women coming in to you bothered by the most",
+        "label_ids": [
+          "population:women"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000686",
+        "summary": "The surgeon is asked what bothers women most in consultations."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000691",
+        "evidence_quote": "moms that have had changes to their body",
+        "label_ids": [
+          "population:pregnant_postpartum"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000689",
+        "summary": "The loose-skin and muscle-separation discussion concerns postpartum mothers."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000670",
+        "evidence_quote": "Nineteen Plastic Surgery has been leading the charge",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000645",
+        "summary": "Host introduces and praises the surgeons' clinic and recounts her own breast surgery there."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000695",
+        "evidence_quote": "Common thing that we see in our practice is moms that have had changes to their body",
+        "label_ids": [
+          "evidence:clinical_experience"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000689",
+        "summary": "Surgeon bases the description of common loose-skin complaints and the limits of diet and exercise on what he sees in practice."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000670",
+        "evidence_quote": "I had breast surgery with him. And my results are absolutely phenomenal",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000667",
+        "summary": "Host offers her own breast surgery and results as a testimonial for the surgeon."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000666",
+        "evidence_quote": "Nineteen Plastic Surgery has been leading the charge on transforming women's lives",
+        "mention_role": "own_product",
+        "product_name": "Nineteen Plastic Surgery",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000647"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "New weight loss drugs are making loose skin a bigger problem for people.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000692",
+        "evidence_quote": "especially with all these new weight loss drugs, loose skin is just becoming a bigger and bigger problem",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim that current weight-loss drugs increase loose skin is checkable and affects decisions about weight loss and body-contouring surgery.",
+        "relevance": "substantive",
+        "start_unit_id": "u000692",
+        "topic_ids": [
+          "topic:skin_beauty.cosmetic_procedures",
+          "topic:weight"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "no amount"
+        ],
+        "claim_text": "No amount of diet and exercise can fix loose skin or muscle separation.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000694",
+        "evidence_quote": "there's no amount of diet and exercise that can fix that",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A categorical claim that non-surgical measures cannot correct loose skin or muscle separation; it justifies surgery and is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000694",
+        "topic_ids": [
+          "topic:skin_beauty.cosmetic_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Surgery is the solution for loose skin.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000695",
+        "evidence_quote": "So surgery is the solution",
+        "evidence_signal_ids": [
+          "evidence:clinical_experience"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A treatment claim that surgery corrects loose skin, central to the surgeons' recommendation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000695",
+        "topic_ids": [
+          "topic:skin_beauty.cosmetic_procedures"
+        ]
+      }
+    ],
+    "window_id": "episode_178240_window_0010"
+  },
+  "stored_at": "2026-10-04T22:36:27.909443+00:00"
+}

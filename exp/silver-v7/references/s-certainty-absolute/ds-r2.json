@@ -1,0 +1,122 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "s-certainty-absolute",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "magnesium glycinate definitely helps you fall asleep faster",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:supplements.magnesium"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "summary": "Hosts discuss poor sleep and recommend magnesium glycinate as a sleep aid."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "its proven at this point",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "summary": "Speaker asserts that magnesium glycinate is proven to help with falling asleep."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "every single time i take it im out within ten minutes no joke",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "Host supports the recommendation with her own experience of falling asleep quickly."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "definitely"
+        ],
+        "claim_text": "Magnesium glycinate definitely helps you fall asleep faster.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "magnesium glycinate definitely helps you fall asleep faster",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A product efficacy claim that could be checked against trials of magnesium glycinate for sleep onset.",
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:supplements.magnesium"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Magnesium glycinate is basically magnesium bonded to the amino acid glycine, which is why it is absorbed a little differently than other forms.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "magnesium glycinate is basically magnesium bonded to the amino acid glycine which is why its absorbed a little differently than other forms",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The chemical composition and absorption difference of magnesium glycinate can be checked against chemistry and pharmacology references.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:supplements.magnesium"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Magnesium oxide is more for digestion.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "magnesium oxide which is more for digestion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claimed digestive use of magnesium oxide can be checked against supplement references.",
+        "relevance": "substantive",
+        "start_unit_id": "u000028",
+        "topic_ids": [
+          "topic:supplements.magnesium"
+        ]
+      }
+    ],
+    "window_id": "synthetic_certainty_absolute_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:56.075816+00:00"
+}

@@ -1,0 +1,165 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "s-certainty-absolute",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "magnesium glycinate definitely helps you fall asleep faster",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:supplements.magnesium"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000017",
+        "summary": "Hosts discuss using magnesium glycinate for falling asleep and the speaker's nightly wind-down routine."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000048",
+        "evidence_quote": "can we talk about your coffee situation for a second",
+        "label_ids": [
+          "topic:stimulants.caffeine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000041",
+        "summary": "Hosts note one speaker drinks four or five cups of coffee a day and call it a lot."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "you should try it and see how it goes for you everyones a little different but it worked for me",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:supplements.magnesium"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000051",
+        "summary": "Hosts close by recommending trying magnesium glycinate for sleep."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "i started taking it a few months ago and honestly it changed everything for me",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "Speaker offers their own magnesium glycinate success as support for trying it."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "its proven at this point",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "summary": "Speaker asserts the sleep benefit is proven."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "magnesium bonded to the amino acid glycine which is why its absorbed a little differently than other forms",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "summary": "Speaker explains magnesium glycinate's different absorption via its glycine bond."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "definitely",
+          "proven"
+        ],
+        "claim_text": "Magnesium glycinate helps you fall asleep faster.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "magnesium glycinate definitely helps you fall asleep faster its proven at this point",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A supplement efficacy claim a listener could act on; it is checkable against trials.",
+        "relevance": "substantive",
+        "start_unit_id": "u000022",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality",
+          "topic:supplements.magnesium"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Magnesium glycinate is magnesium bonded to the amino acid glycine, which is why it is absorbed a little differently than other forms.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "magnesium bonded to the amino acid glycine which is why its absorbed a little differently than other forms",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The chemical composition and absorption difference of a supplement form are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:supplements.magnesium"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The glycinate form of magnesium is the one people use for sleep, while magnesium oxide is more for digestion.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000028",
+        "evidence_quote": "most people dont know the glycinate form specifically is the one people talk about for sleep versus like magnesium oxide which is more for digestion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Conventional uses of magnesium forms are checkable claims that could shape supplement choices.",
+        "relevance": "substantive",
+        "start_unit_id": "u000028",
+        "topic_ids": [
+          "topic:supplements.magnesium"
+        ]
+      }
+    ],
+    "window_id": "synthetic_certainty_absolute_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:29.345996+00:00"
+}

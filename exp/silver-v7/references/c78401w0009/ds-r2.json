@@ -1,0 +1,235 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c78401w0009",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "instead of giving standard abortion procedures, they're giving women C sections or forcing them into vaginal labor even before viability",
+        "label_ids": [
+          "topic:fertility.abortion"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000492",
+        "summary": "Speakers describe how abortion bans force C-sections or induced labor for life-saving abortions, then discuss mifepristone litigation and the bodily-autonomy analogy to vaccines."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000552",
+        "evidence_quote": "the idea that mandatory vaccinations to secure collective public health is an intrusion on your bodily autonomy",
+        "label_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000534",
+        "summary": "The anti-choice movement's vaccination analogy is relayed as an example of a bodily-autonomy intrusion."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000551",
+        "evidence_quote": "they have made a lot about this in the context of masking and vaccinations",
+        "label_ids": [
+          "topic:covid.masks_distancing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000549",
+        "summary": "Masking is mentioned as another context where the bodily-autonomy argument is made."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000529",
+        "evidence_quote": "they were forced to endure a pregnancy, and they died during that pregnancy",
+        "label_ids": [
+          "population:pregnant_postpartum"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000492",
+        "summary": "The described abortion restrictions and harms affect pregnant people and women."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "Their claim is going to be that as anti-abortion states",
+        "label_ids": [
+          "frame:political_partisan"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000507",
+        "summary": "Abortion access is framed through partisan actors: anti-abortion states, the anti-choice movement, and the Dobbs court."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000549",
+        "evidence_quote": "mandatory vaccinations to secure collective public health is an intrusion on your bodily autonomy",
+        "label_ids": [
+          "frame:medical_freedom"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000534",
+        "summary": "The bodily-autonomy argument against mandatory vaccination is relayed and discussed."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "a lot of"
+        ],
+        "claim_text": "In a lot of these states, abortion laws are written so that instead of giving standard abortion procedures, they give women C-sections or force them into vaginal labor before viability, even when the fetus cannot survive.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000496",
+        "evidence_quote": "instead of giving standard abortion procedures, they're giving women C sections or forcing them into vaginal labor even before viability",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific claim about how state abortion laws are being applied in life-saving situations.",
+        "relevance": "substantive",
+        "start_unit_id": "u000492",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "One reason doctors perform C-sections or forced labor instead of standard abortion procedures is to protect themselves from liability.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000494",
+        "evidence_quote": "this is one of the ways that doctors are trying to protect themselves from liability",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Claims about physician motivation under abortion laws can be checked through reporting and legal cases.",
+        "relevance": "substantive",
+        "start_unit_id": "u000494",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The laws require a maternal-fetal separation, meaning C-section or forced vaginal labor, when life-saving care is needed and the pregnancy must be ended.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000496",
+        "evidence_quote": "it's also written in the laws if a life saving care is needed, and they need to end the pregnancy. You need to give a maternal-fetal separation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Directly checkable against the text of state abortion laws.",
+        "relevance": "substantive",
+        "start_unit_id": "u000495",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The court preserved the status quo on mifepristone.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000504",
+        "evidence_quote": "the court preserved the status quo on mifepristone",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The Supreme Court's action on mifepristone access is a checkable legal fact.",
+        "relevance": "substantive",
+        "start_unit_id": "u000504",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There are already three states ready to bring a case against mifepristone.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000505",
+        "evidence_quote": "There are already three states who are teed up and ready to bring that case",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The existence of pending state challenges to mifepristone can be checked against court filings.",
+        "relevance": "substantive",
+        "start_unit_id": "u000505",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Anti-abortion states will claim that the availability of mifepristone and medication abortion flouts their ability to regulate abortion.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000508",
+        "evidence_quote": "Their claim is going to be that as anti-abortion states. The availability of mifepristone and medication abortion flouts their ability to regulate abortion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:political_partisan"
+        ],
+        "narrative_ids": [],
+        "rationale": "The states' stated legal theory is checkable against the litigation they have signaled.",
+        "relevance": "substantive",
+        "start_unit_id": "u000507",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Jerry Santoro was a mother of two who was butchered in a hotel room trying to end a pregnancy she did not want.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000522",
+        "evidence_quote": "stories like Jerry Santoro, who was a mother of two, who was literally butchered in a hotel room trying to end a pregnancy she did not want",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A named historical abortion-death case can be checked against historical records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000522",
+        "topic_ids": [
+          "topic:fertility.abortion"
+        ]
+      }
+    ],
+    "window_id": "episode_78401_window_0009"
+  },
+  "stored_at": "2026-10-04T22:13:55.962871+00:00"
+}

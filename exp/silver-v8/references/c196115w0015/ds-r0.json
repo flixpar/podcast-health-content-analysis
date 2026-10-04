@@ -1,0 +1,184 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c196115w0015",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001266",
+        "evidence_quote": "Is it dangerous to have metal on you when you get an MRI",
+        "label_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001222",
+        "summary": "Hosts discuss MRI safety with metal, including dental restorations and ferromagnetic materials, and mention ultrasound and CT as alternatives."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001241",
+        "evidence_quote": "I think it takes your atoms and it makes them all point in one direction because of the",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001240",
+        "summary": "A host explains MRI by saying it aligns atoms with a magnet."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001257",
+        "evidence_quote": "the vibration can dislodge, bend, and break the dental restoration just from the magnets",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001257",
+        "summary": "A host explains that MRI magnets can vibrate and break dental restorations."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "kind of",
+          "a little bit"
+        ],
+        "claim_text": "We still kind of don't know how MRIs work.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001228",
+        "evidence_quote": "we really we still kind of don't know how MRIs work",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether the physics of MRI is understood is a checkable claim about medical imaging.",
+        "relevance": "passing",
+        "start_unit_id": "u001227",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "I think an MRI takes your atoms and makes them all point in one direction.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001241",
+        "evidence_quote": "I think it takes your atoms and it makes them all point in one direction because of the",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "How MRI works at the atomic level is a checkable mechanism claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u001241",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The vibration from MRI magnets can dislodge, bend, and break dental restorations.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001257",
+        "evidence_quote": "the vibration can dislodge, bend, and break the dental restoration just from the magnets",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether MRI magnets can damage dental restorations is a checkable safety claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u001257",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Loose metal objects can injure a person during an MRI.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001259",
+        "evidence_quote": "loose metal objects can injure you as that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The danger of loose metal in MRI is checkable against MRI safety guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u001259",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I would think"
+        ],
+        "claim_text": "I would think if you have a metal plate in your head or fillings in your teeth, then you would be a bad candidate for an MRI.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001263",
+        "evidence_quote": "I would think if you have a metal plate in your head or you got fillings in your teeth, then you would be a bad candidate",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "MRI candidacy with metal implants or dental fillings is a checkable safety claim.",
+        "relevance": "passing",
+        "start_unit_id": "u001262",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "I think certain kinds of metals, ferromagnetic materials such as iron, cobalt, manganese, and nickel, are more responsive to MRI magnets than others.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001264",
+        "evidence_quote": "I think there's certain kinds of metals too that are more responsive to it than others",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Which metals are ferromagnetic and how they behave around MRI magnets is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001263",
+        "topic_ids": [
+          "topic:procedures.imaging_diagnostics"
+        ]
+      }
+    ],
+    "window_id": "episode_196115_window_0015"
+  },
+  "stored_at": "2026-10-04T22:36:28.476817+00:00"
+}

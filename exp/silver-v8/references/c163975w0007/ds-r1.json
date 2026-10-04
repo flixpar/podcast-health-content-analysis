@@ -1,0 +1,113 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c163975w0007",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000545",
+        "evidence_quote": "With LabCorp On Demand, you can purchase the health tests",
+        "label_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000538",
+        "summary": "Sponsor read promotes LabCorp On Demand, a direct-to-consumer lab testing service for cholesterol, testosterone, micronutrients and other tests."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000545",
+        "evidence_quote": "visit ondemand.labcorp.com/football and use the code football to save up to 15",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000538",
+        "summary": "Sponsor read for LabCorp On Demand includes a discount code and call to action."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000542",
+        "evidence_quote": "a suite of more than a hundred science-backed lab tests",
+        "label_ids": [
+          "evidence:strength_assertion"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000541",
+        "summary": "The ad supports the service with 'science-backed' and 'doctors trust' claims."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000545",
+        "evidence_quote": "With LabCorp On Demand",
+        "mention_role": "advertised",
+        "product_name": "LabCorp On Demand",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000538"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "LabCorp On Demand lets consumers buy health tests without a doctor's appointment.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000540",
+        "evidence_quote": "without having to schedule a doctor's appointment",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Describes the service model a listener could act on, and is checkable against the product's offering.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000539",
+        "topic_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "LabCorp On Demand delivers accurate results from a lab that doctors trust.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000542",
+        "evidence_quote": "you will get results that are accurate, easy to understand, and from a lab that doctors trust",
+        "evidence_signal_ids": [
+          "evidence:strength_assertion"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A quality and trust claim about health test results in ad copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000542",
+        "topic_ids": [
+          "topic:self_tracking.consumer_lab_tests"
+        ]
+      }
+    ],
+    "window_id": "episode_163975_window_0007"
+  },
+  "stored_at": "2026-10-04T22:36:30.171733+00:00"
+}

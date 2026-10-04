@@ -1,0 +1,197 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c181494w0006",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000254",
+        "evidence_quote": "The MRS show that at any increase in the consumption of alcohol, there is indeed an increase in mortality",
+        "label_ids": [
+          "topic:alcohol.health_effects"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000226",
+        "summary": "Host discusses Mendelian randomization evidence that alcohol increases mortality and gives dose-based advice on drinking."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "The MRS show that at any increase in the consumption of alcohol, there is indeed an increase in mortality",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "summary": "Mendelian randomization studies are cited by design only, with no identifiable study."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000235",
+        "evidence_quote": "neither technique is perfect",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000234",
+        "summary": "Speaker acknowledges neither research technique is perfect."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000243",
+        "evidence_quote": "alcohol is under no dose helpful",
+        "label_ids": [
+          "narrative:alcohol_moderate_protective"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000243",
+        "summary": "The host states alcohol is not helpful at any dose, rebutting the idea that moderate drinking is protective."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000269",
+        "evidence_quote": "This newsletter covers a wide range of topics related to longevity",
+        "label_ids": [
+          "topic:longevity.ageing_science"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000268",
+        "summary": "The premium newsletter is described as covering topics related to longevity."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000271",
+        "evidence_quote": "you'll want to become a premium member",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000258",
+        "summary": "Host pitches the show's premium membership and member benefits."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000271",
+        "evidence_quote": "you'll want to become a premium member",
+        "mention_role": "own_product",
+        "product_name": "The Drive premium membership",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000258"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Any increase in alcohol consumption increases mortality.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000229",
+        "evidence_quote": "at any increase in the consumption of alcohol, there is indeed an increase in mortality",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:alcohol_moderate_protective"
+        ],
+        "rationale": "This directly asserts a dose-response relationship between alcohol and mortality, checkable against Mendelian randomization studies.",
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Any standard deviation increase in alcohol consumption leads to a greater increase in the risk of hypertension, dementia, cardiovascular disease, cancer, and all-cause mortality.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "any standard deviation and increase in the consumption of alcohol leads to a greater increase in the risk of everything from hypertension to dementia to cardiovascular disease to cancer to all-cause mortality",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:alcohol_moderate_protective"
+        ],
+        "rationale": "Specific quantified risk claim for alcohol across several disease outcomes, checkable against Mendelian randomization literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000232",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Alcohol is not an essential nutrient and has no health benefits.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000237",
+        "evidence_quote": "because it's not an essential nutrient. There's nothing that it's doing that's good for you",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:alcohol_moderate_protective"
+        ],
+        "rationale": "A categorical claim about alcohol's lack of health benefit and essentiality that listeners may act on.",
+        "relevance": "substantive",
+        "start_unit_id": "u000236",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Drinking alcohol too close to bedtime disrupts sleep.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "if you drink a little bit too close to bed, your sleep is going to be disrupted",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A practical claim about alcohol's effect on sleep that listeners can check and act on.",
+        "relevance": "substantive",
+        "start_unit_id": "u000239",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      }
+    ],
+    "window_id": "episode_181494_window_0006"
+  },
+  "stored_at": "2026-10-04T22:36:30.519777+00:00"
+}

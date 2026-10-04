@@ -1,0 +1,193 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v2",
+  "item_id": "c27447w0012",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000907",
+        "evidence_quote": "World Mental Health Day is in the middle of October",
+        "label_ids": [
+          "topic:mental"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000906",
+        "summary": "Host jokes about mental health struggles on World Mental Health Day."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000919",
+        "evidence_quote": "But that's where BetterHelp comes in. It's shining the spotlight on therapists",
+        "label_ids": [
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000908",
+        "summary": "Sponsor read for BetterHelp online therapy."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000919",
+        "evidence_quote": "Our listeners get 10 off their first month at BetterHelp.com/lastpod",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000908",
+        "summary": "Sponsor read with a discount code."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000911",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000911",
+        "summary": "Ad invokes therapist qualifications and a code of conduct."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000955",
+        "evidence_quote": "tie him down while I went to work or ran my errands",
+        "label_ids": [
+          "topic:acute_care.violence_abuse"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000950",
+        "summary": "Birdella describes holding Pearson captive and tying him down."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000968",
+        "evidence_quote": "bit down hard and damn near ripped the head off Birdella's penis",
+        "label_ids": [
+          "topic:acute_care.trauma_fractures"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000962",
+        "summary": "Pearson bites Birdella's penis, nearly severing it."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000992",
+        "evidence_quote": "he beat Pearson with a stick until he was unconscious",
+        "label_ids": [
+          "topic:acute_care.violence_abuse",
+          "topic:neuro.concussion_tbi"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000984",
+        "summary": "Birdella beats Pearson with a stick, leaving him unconscious with head trauma."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000992",
+        "evidence_quote": "Bob spent two days at the hospital",
+        "label_ids": [
+          "topic:procedures.surgery_hospital"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000985",
+        "summary": "Birdella seeks hospital care after the bite and later spends two days at the hospital."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000995",
+        "evidence_quote": "put a plastic bag over Pearson's head, and suffocated him to death",
+        "label_ids": [
+          "topic:acute_care.poisoning_environmental_injury",
+          "topic:acute_care.violence_abuse"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000994",
+        "summary": "Birdella suffocates Pearson with a plastic bag, killing him."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000919",
+        "evidence_quote": "But that's where BetterHelp comes in",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000908"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp therapists work according to a strict code of conduct.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000911",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Ad claim about therapist conduct that could be checked against BetterHelp's stated standards.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000911",
+        "topic_ids": [
+          "topic:mental.therapy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp therapists are fully qualified.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000911",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Ad claim about therapist qualifications that could be checked against BetterHelp's credentialing process.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000911",
+        "topic_ids": [
+          "topic:mental.therapy"
+        ]
+      }
+    ],
+    "window_id": "episode_27447_window_0012"
+  },
+  "stored_at": "2026-10-04T22:13:53.423285+00:00"
+}

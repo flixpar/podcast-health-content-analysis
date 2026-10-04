@@ -1,0 +1,144 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c75207w0008",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000442",
+        "evidence_quote": "people who are either happy or unhappy at the end of their life",
+        "label_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000379",
+        "summary": "Discussion of whether high performers are happy at the end of life, introducing the Strivers' Curse and examples from Darwin and Bach."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000425",
+        "evidence_quote": "he was very depressed",
+        "label_ids": [
+          "topic:mental.depression"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000423",
+        "summary": "Darwin is described as very depressed and unable to find joy in his later years."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000403",
+        "evidence_quote": "after age seventy, gets happier and happier all the way to the end",
+        "label_ids": [
+          "population:older_adults"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000393",
+        "summary": "Claims about happiness trajectories after age 70 and disappointment after 80 concern older adults."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000380",
+        "evidence_quote": "I've studied a lot of biography to see this question",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000380",
+        "summary": "Biographies are cited as the source for observations about high performers' happiness."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000436",
+        "evidence_quote": "I've got tons of them in my book that I talk about",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000435",
+        "summary": "The speaker mentions his own book containing examples of unhappy Nobel winners."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "About half of the population after age 70 gets happier and happier to the end of life, and the other half gets unhappier.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000393",
+        "evidence_quote": "about half of the population, after age seventy, gets happier and happier all the way to the end, and the other half gets unhappier all the way to the end",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific population claim about late-life happiness trajectories that could be checked against survey data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000393",
+        "topic_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "tend to be"
+        ],
+        "claim_text": "People who are most successful in worldly terms tend to be on the lower branch of happiness in later life.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000396",
+        "evidence_quote": "the people who are most successful in worldly terms they tend to be on the lower branch",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "An association between worldly success and late-life happiness that could be tested.",
+        "relevance": "substantive",
+        "start_unit_id": "u000396",
+        "topic_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People identified as high performers before age 20 are more likely to be disappointed with their lives after 80.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000403",
+        "evidence_quote": "if you were identified as a high performer before 20, you're more likely to be. Disappointed with your life after eighty",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A testable claim about early high performers' later-life satisfaction.",
+        "relevance": "substantive",
+        "start_unit_id": "u000402",
+        "topic_ids": [
+          "topic:mental.wellbeing_grief_loneliness"
+        ]
+      }
+    ],
+    "window_id": "episode_75207_window_0008"
+  },
+  "stored_at": "2026-10-04T22:36:33.422249+00:00"
+}

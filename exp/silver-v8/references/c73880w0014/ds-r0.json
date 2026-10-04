@@ -1,0 +1,134 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c73880w0014",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001109",
+        "evidence_quote": "Yeah, you totally blackout",
+        "label_ids": [
+          "topic:acute_care.poisoning_environmental_injury"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001094",
+        "summary": "Hosts recount the physical effects of pulling 9.3 Gs: blackout, the G straining maneuver, G-suit squeeze, and nausea."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001220",
+        "evidence_quote": "Audacious exaggeration of science is in nutritional space and the diet space",
+        "label_ids": [
+          "topic:digital_health.online_health_information",
+          "topic:health_system.research_system"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001201",
+        "summary": "Hosts discuss health misinformation in nutrition and diet, blaming media science illiteracy and misreported epidemiological studies."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001211",
+        "evidence_quote": "I actually think media messed it up for all of us",
+        "label_ids": [
+          "frame:media_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001210",
+        "summary": "Speaker blames the media's poor science literacy for confusing nutrition reporting."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001220",
+        "evidence_quote": "That's not what the study said",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001215",
+        "summary": "Speaker corrects the media overstatement that nuts make people live 12 years longer and distinguishes statistical from practical significance."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u001212",
+        "evidence_quote": "one epidemiological study showed that people who ate nuts lived on average 12 years longer",
+        "label_ids": [
+          "evidence:evidence_limits",
+          "evidence:vague_research",
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001211",
+        "summary": "A 40-year-old epidemiological study on nuts and longevity is invoked only to be discounted for lacking controls for wealth and exercise."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "An epidemiological study found that people who ate nuts lived on average 12 years longer.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001211",
+        "evidence_quote": "one epidemiological study showed that people who ate nuts lived on average 12 years longer",
+        "evidence_signal_ids": [
+          "evidence:evidence_limits",
+          "evidence:vague_research",
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The study result is checkable, and the speaker cites it only to illustrate how media misreport it.",
+        "relevance": "substantive",
+        "start_unit_id": "u001211",
+        "topic_ids": [
+          "topic:food.plant_foods_fiber",
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nuts make people live 12 years longer.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u001215",
+        "evidence_quote": "nuts make you live 12 years longer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "The headline claim about nuts extending life by 12 years is a checkable health claim presented as a media misreport.",
+        "relevance": "substantive",
+        "start_unit_id": "u001215",
+        "topic_ids": [
+          "topic:digital_health.online_health_information",
+          "topic:food.plant_foods_fiber"
+        ]
+      }
+    ],
+    "window_id": "episode_73880_window_0014"
+  },
+  "stored_at": "2026-10-04T22:36:29.111749+00:00"
+}

@@ -1,0 +1,553 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c178272w0003",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000171",
+        "evidence_quote": "Wi-fi radiation does all kinds of bad things, including causing cancer",
+        "label_ids": [
+          "topic:cancer.causes_rates",
+          "topic:radiation_light.wireless_emf"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000151",
+        "summary": "In a Joe Rogan clip, RFK Jr. claims Wi-Fi radiation causes cancer, cell phone tumors, and blood-brain barrier damage."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000171",
+        "evidence_quote": "The Russians won't let kids use cell phones in kindergarten or in grade school",
+        "label_ids": [
+          "population:children"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000169",
+        "summary": "RFK's claim about Russian school cell-phone restrictions concerns children."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000171",
+        "evidence_quote": "Wi-fi radiation does all kinds of bad things, including causing cancer",
+        "label_ids": [
+          "narrative:emf_5g_harm"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000151",
+        "summary": "RFK asserts that Wi-Fi and cell-phone radiation cause cancer and other harm."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000166",
+        "evidence_quote": "There are tens of thousands of studies that show the horrendous danger of Wi-Fi radiation",
+        "label_ids": [
+          "frame:fear_alarm"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000159",
+        "summary": "RFK uses alarmist language about Wi-Fi radiation, calling it a horrendous danger."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000161",
+        "evidence_quote": "all these toxins that are in your body can now go into your brain",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000160",
+        "summary": "RFK frames Wi-Fi harm through toxins entering the brain."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000158",
+        "evidence_quote": "I'm representing hundreds of people who have cell phone tumors behind the ear",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000157",
+        "summary": "RFK cites his clients as anecdotal evidence of cell phone tumors."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000161",
+        "evidence_quote": "Wi-fi radiation opens up your blood brain barrier",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000160",
+        "summary": "RFK offers a biological mechanism for Wi-Fi radiation harm."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000166",
+        "evidence_quote": "There are tens of thousands of studies that show the horrendous danger of Wi-Fi radiation",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000165",
+        "summary": "RFK invokes an unspecified large body of studies."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000171",
+        "evidence_quote": "The Russians won't let kids use cell phones in kindergarten or in grade school",
+        "label_ids": [
+          "evidence:foreign_comparison"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "summary": "RFK cites Russian school phone restrictions as evidence of Wi-Fi danger."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000184",
+        "evidence_quote": "My favorite little interaction is when he's like, \"Did you know it opens up the blood brain barrier",
+        "label_ids": [
+          "topic:radiation_light.wireless_emf"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000175",
+        "summary": "Hosts mock and reject RFK's Wi-Fi and cell-phone health claims."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.85,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000184",
+        "evidence_quote": "That's why the kids are trans because of the frogs and the cell phones",
+        "label_ids": [
+          "narrative:emf_5g_harm"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000175",
+        "summary": "Hosts sarcastically dismiss the Wi-Fi/cell-phone radiation harm narrative."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000184",
+        "evidence_quote": "That's why the kids are trans because of the frogs and the cell phones",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000172",
+        "summary": "Hosts sarcastically debunk RFK's Wi-Fi and cell-phone claims."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.75,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000179",
+        "evidence_quote": "That's why the kids are trans because of the frogs and the cell phones",
+        "label_ids": [
+          "narrative:endocrine_disruptors_feminizing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000179",
+        "summary": "Host jokes that RFK-style chemical and cell-phone claims would explain trans kids."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000205",
+        "evidence_quote": "Kennedy, though, suspects a flu vaccine may be to blame",
+        "label_ids": [
+          "topic:neuro.neurodegenerative",
+          "topic:vaccines.flu_vaccine",
+          "topic:vaccines.safety_injury"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000194",
+        "summary": "Hosts read an NBC article on RFK's spasmodic dysphonia and his suspicion that a flu vaccine caused it."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000196",
+        "evidence_quote": "a very good NBC News article about him",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000196",
+        "summary": "Hosts cite an NBC News article as their source on RFK's condition."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000205",
+        "evidence_quote": "links to fact sheets included in manufacturer packaging of more recent flu vaccines that list dysphonia among dozens of reported 'adverse reactions",
+        "label_ids": [
+          "evidence:official_data_documents"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000203",
+        "summary": "RFK's press person offered package-insert fact sheets as documentation."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000205",
+        "evidence_quote": "based on unverified observations, and, as they make clear, don’t suggest the vaccine necessarily caused the reaction",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000205",
+        "summary": "The article notes that package inserts are not evidence of causation."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000205",
+        "evidence_quote": "Kennedy, though, suspects a flu vaccine may be to blame",
+        "label_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000201",
+        "summary": "The article reports RFK's suspicion that a flu vaccine caused his dysphonia."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000212",
+        "evidence_quote": "he makes this wildly overblown claim, \"I got this from the flu vaccine",
+        "label_ids": [
+          "topic:vaccines.flu_vaccine",
+          "topic:vaccines.safety_injury"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000206",
+        "summary": "Hosts mock RFK's flu vaccine causation claim and his pattern of unsupported speculation."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000212",
+        "evidence_quote": "he makes this wildly overblown claim, \"I got this from the flu vaccine",
+        "label_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000206",
+        "summary": "Hosts rebut and mock the flu vaccine harm claim."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000212",
+        "evidence_quote": "he makes this wildly overblown claim, \"I got this from the flu vaccine",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000206",
+        "summary": "Hosts debunk RFK's flu vaccine causation claim and the package-insert evidence."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Wi-Fi radiation causes cancer.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000151",
+        "evidence_quote": "Wi-fi radiation does all kinds of bad things, including causing cancer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:emf_5g_harm"
+        ],
+        "rationale": "A checkable causal claim about a common exposure that could affect listeners' behavior.",
+        "relevance": "substantive",
+        "start_unit_id": "u000151",
+        "topic_ids": [
+          "topic:cancer.causes_rates",
+          "topic:radiation_light.wireless_emf"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "always"
+        ],
+        "claim_text": "Cell phone tumors are always on the ear that people favor with their cell phone.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000158",
+        "evidence_quote": "It's always on the ear that you favor with your cell phone",
+        "evidence_signal_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:emf_5g_harm"
+        ],
+        "rationale": "The claim asserts a specific pattern of cell-phone-related tumors that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000157",
+        "topic_ids": [
+          "topic:cancer.causes_rates",
+          "topic:radiation_light.wireless_emf"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Wi-Fi radiation opens up the blood-brain barrier.",
+        "claim_type": "mechanism",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000160",
+        "evidence_quote": "Wi-fi radiation opens up your blood brain barrier",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:emf_5g_harm"
+        ],
+        "rationale": "A physiological mechanism claim that can be checked against the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000160",
+        "topic_ids": [
+          "topic:radiation_light.wireless_emf"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Once the blood-brain barrier is opened, toxins in the body can go into the brain.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000161",
+        "evidence_quote": "all these toxins that are in your body can now go into your brain",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [
+          "narrative:emf_5g_harm"
+        ],
+        "rationale": "A checkable claim about blood-brain barrier permeability and toxin entry.",
+        "relevance": "substantive",
+        "start_unit_id": "u000161",
+        "topic_ids": [
+          "topic:radiation_light.wireless_emf"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There are tens of thousands of studies showing the dangers of Wi-Fi radiation.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000166",
+        "evidence_quote": "There are tens of thousands of studies that show the horrendous danger of Wi-Fi radiation",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:fear_alarm"
+        ],
+        "narrative_ids": [
+          "narrative:emf_5g_harm"
+        ],
+        "rationale": "The claimed number and content of studies can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000165",
+        "topic_ids": [
+          "topic:radiation_light.wireless_emf"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Russian schools do not let children use cell phones in kindergarten or grade school because of the danger.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000171",
+        "evidence_quote": "The Russians won't let kids use cell phones in kindergarten or in grade school",
+        "evidence_signal_ids": [
+          "evidence:foreign_comparison"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:emf_5g_harm"
+        ],
+        "rationale": "Russian school cell-phone policy and its rationale can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "topic_ids": [
+          "topic:radiation_light.wireless_emf"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "suspects",
+          "may"
+        ],
+        "claim_text": "A flu vaccine may have caused or contributed to RFK Jr.'s spasmodic dysphonia.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000201",
+        "evidence_quote": "Kennedy, though, suspects a flu vaccine may be to blame",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "rationale": "A causal claim about vaccine injury that could influence vaccine decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000198",
+        "topic_ids": [
+          "topic:neuro.neurodegenerative",
+          "topic:vaccines.flu_vaccine",
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The cause of spasmodic dysphonia is unknown.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000199",
+        "evidence_quote": "The cause of spasmodic dysphonia isn’t known",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable statement about the state of knowledge of a condition's etiology.",
+        "relevance": "substantive",
+        "start_unit_id": "u000199",
+        "topic_ids": [
+          "topic:neuro.neurodegenerative"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Researchers think spasmodic dysphonia might be genetic, a leftover disability from a respiratory infection, or stress.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000200",
+        "evidence_quote": "Researchers think it might be genetic, or a leftover disability from a respiratory infection, or even stress",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Candidate causes of a neurological condition are checkable against the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000200",
+        "topic_ids": [
+          "topic:neuro.neurodegenerative"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Package inserts for flu vaccines list dysphonia among dozens of reported adverse reactions.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000204",
+        "evidence_quote": "links to fact sheets included in manufacturer packaging of more recent flu vaccines that list dysphonia among dozens of reported 'adverse reactions",
+        "evidence_signal_ids": [
+          "evidence:official_data_documents"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "rationale": "The contents of vaccine package inserts can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000204",
+        "topic_ids": [
+          "topic:vaccines.flu_vaccine",
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Adverse reactions listed in vaccine package inserts are based on unverified observations and do not necessarily mean the vaccine caused the reaction.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000205",
+        "evidence_quote": "based on unverified observations, and, as they make clear, don’t suggest the vaccine necessarily caused the reaction",
+        "evidence_signal_ids": [
+          "evidence:evidence_limits"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:flu_shot_ineffective_harmful"
+        ],
+        "rationale": "A claim about the evidentiary meaning of package inserts that bears on vaccine causation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000205",
+        "topic_ids": [
+          "topic:vaccines.flu_vaccine",
+          "topic:vaccines.safety_injury"
+        ]
+      }
+    ],
+    "window_id": "episode_178272_window_0003"
+  },
+  "stored_at": "2026-10-04T22:13:54.960693+00:00"
+}

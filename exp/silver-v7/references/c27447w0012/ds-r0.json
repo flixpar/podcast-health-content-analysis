@@ -1,0 +1,134 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c27447w0012",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000919",
+        "evidence_quote": "It's shining the spotlight on therapists",
+        "label_ids": [
+          "topic:health_system.dtc_telehealth",
+          "topic:mental.therapy"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000906",
+        "summary": "Sponsor read for BetterHelp therapy, framing therapy as helpful and normalizing mental health struggles."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000919",
+        "evidence_quote": "Our listeners get 10 off their first month at BetterHelp.com/lastpod",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000906",
+        "summary": "Sponsor read with a discount code for BetterHelp."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000911",
+        "evidence_quote": "work according to a strict code of conduct and are fully qualified",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000911",
+        "summary": "Ad cites therapists' qualifications and code of conduct as support."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000968",
+        "evidence_quote": "bit down hard and damn near ripped the head off Birdella's penis",
+        "label_ids": [
+          "topic:acute_care.wounds_first_aid"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000962",
+        "summary": "In a true-crime story, a man nearly severs another's penis with a bite."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000992",
+        "evidence_quote": "Bob spent two days at the hospital while Larry was just tied up in the bed back at his house, presumably in and out of consciousness from the blows to the skull",
+        "label_ids": [
+          "topic:acute_care.trauma_fractures",
+          "topic:procedures.surgery_hospital"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000984",
+        "summary": "The attacker is treated at a hospital for the bite injury while the victim lies unconscious after a beating."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000995",
+        "evidence_quote": "put a plastic bag over Pearson's head, and suffocated him to death",
+        "label_ids": [
+          "topic:acute_care.death_dying"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000995",
+        "summary": "The victim is suffocated to death in the story."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000919",
+        "evidence_quote": "But that's where BetterHelp comes in",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000908"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp therapists work according to a strict code of conduct and are fully qualified.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000911",
+        "evidence_quote": "work according to a strict code of conduct and are fully qualified",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "The ad's claim about therapist qualifications is checkable and could affect whether listeners trust the service.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000911",
+        "topic_ids": [
+          "topic:health_system.dtc_telehealth",
+          "topic:mental.therapy"
+        ]
+      }
+    ],
+    "window_id": "episode_27447_window_0012"
+  },
+  "stored_at": "2026-10-04T22:13:47.270175+00:00"
+}

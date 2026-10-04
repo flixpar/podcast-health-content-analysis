@@ -1,0 +1,146 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c77764w0010",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000570",
+        "evidence_quote": "Surgeons who don't have a checklist kill forty-two percent more people",
+        "label_ids": [
+          "topic:health_system.medical_errors"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000565",
+        "summary": "Speaker cites research that surgeons without checklists have higher mortality as an analogy for personal checklists."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "The research is insane",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000565",
+        "summary": "Research is invoked without identifying a study."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000592",
+        "evidence_quote": "80 of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc",
+        "label_ids": [
+          "topic:mental.anxiety",
+          "topic:mental.depression"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000591",
+        "summary": "Speaker says most people are struggling mentally with anxiety and depression."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "the suicide rates, the self harm rates, especially among the next generation, are horrific",
+        "label_ids": [
+          "topic:mental.suicide_self_harm"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000594",
+        "summary": "Speaker calls suicide and self-harm rates among the next generation horrific."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "especially among the next generation",
+        "label_ids": [
+          "population:adolescents",
+          "population:young_adults"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000594",
+        "summary": "The suicide and self-harm rates are singled out as especially affecting the next generation."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000610",
+        "evidence_quote": "pandemic levels of anxiety, depression, cancer, diabetes",
+        "label_ids": [
+          "topic:cancer",
+          "topic:mental.anxiety",
+          "topic:mental.depression",
+          "topic:metabolic.diabetes"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000610",
+        "summary": "Speaker lists pandemic-level anxiety, depression, cancer and diabetes among society's challenges."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Surgeons who do not use a checklist kill 42 percent more people.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "Surgeons who don't have a checklist kill forty-two percent more people",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The mortality difference between surgeons with and without checklists is a checkable patient-safety claim.",
+        "relevance": "passing",
+        "start_unit_id": "u000569",
+        "topic_ids": [
+          "topic:health_system.medical_errors"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "the unfortunate fact is"
+        ],
+        "claim_text": "80% of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000591",
+        "evidence_quote": "the unfortunate fact is, 80 of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A quantitative claim about the share of the population struggling with mental-health problems that could be checked against survey data.",
+        "relevance": "passing",
+        "start_unit_id": "u000591",
+        "topic_ids": [
+          "topic:mental.anxiety",
+          "topic:mental.depression"
+        ]
+      }
+    ],
+    "window_id": "episode_77764_window_0010"
+  },
+  "stored_at": "2026-10-04T22:36:29.158401+00:00"
+}

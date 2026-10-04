@@ -1,0 +1,482 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c181065w0001",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "no sketchy coatings, no forever chemicals, just pure, conscious design",
+        "label_ids": [
+          "topic:environment.household_personal_care",
+          "topic:environment.pfas"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000004",
+        "summary": "Sponsor read for Our Place cookware, framed as non-toxic and free of forever chemicals, with claims that PFAS harm health."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "every time you cook, you could be introducing toxins into your body",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000004",
+        "summary": "The ad frames ordinary cookware as a source of toxins and the product as clean."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "you can get 10 off with my code",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000004",
+        "summary": "Sponsor read with a discount code and free-trial offer."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000063",
+        "evidence_quote": "sunlight, real, natural, ancient. It has been labeled toxic, when in reality it might be your missing medicine",
+        "label_ids": [
+          "topic:radiation_light.sunlight_uv"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "summary": "Host frames sunlight as healing medicine and recounts the history of heliotherapy."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000083",
+        "evidence_quote": "We keep hearing the same story: skin cancer is caused by the sun",
+        "label_ids": [
+          "topic:cancer.causes_rates",
+          "topic:cancer.skin_cancer"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000064",
+        "summary": "Host challenges the idea that the sun alone caused the skin cancer rise and blames modern lifestyle factors."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000083",
+        "evidence_quote": "sunlight, real, natural, ancient. It has been labeled toxic, when in reality it might be your missing medicine",
+        "label_ids": [
+          "narrative:sun_exposure_cures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "summary": "Host asserts sunlight is healing and that fear of sun exposure is misplaced."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000083",
+        "evidence_quote": "That's not just about the sun",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000064",
+        "summary": "Host corrects the oversimplified story that skin cancer is caused by the sun."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000061",
+        "evidence_quote": "sunlight, real, natural, ancient",
+        "label_ids": [
+          "frame:naturalness_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000035",
+        "summary": "Sunlight is called real, natural and ancient against industrial and chemical modernity."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000071",
+        "evidence_quote": "the explosion in skin cancer rates over the past 70 years",
+        "label_ids": [
+          "frame:fear_alarm"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000071",
+        "summary": "The rise in skin cancer rates is called an explosion."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000053",
+        "evidence_quote": "For hundreds of years, sunlight was used intentionally as therapy",
+        "label_ids": [
+          "evidence:traditional_use"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000044",
+        "summary": "Centuries of heliotherapy and historical medical use are cited as support."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000050",
+        "evidence_quote": "won the Nobel Prize in 1903",
+        "label_ids": [
+          "evidence:prestige_institution"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000049",
+        "summary": "The Nobel Prize is cited to validate concentrated light therapy."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000055",
+        "evidence_quote": "backed up. By research in 2021",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000054",
+        "summary": "Host says heliotherapy was backed up by research in 2021."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000076",
+        "evidence_quote": "In 2012, a study noted that the global rise in cancer, including skin cancer, is closely tied to environmental toxins",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000074",
+        "summary": "A 2012 study is cited linking rising cancer to modern lifestyle."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000083",
+        "evidence_quote": "in 2020, review reminded us that in the 1930s and 1950s, doctors actually linked less sun",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000082",
+        "summary": "Scientists in 1953 and a 2020 review are cited about not blaming sunlight alone."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000031",
+        "evidence_quote": "cook with confidence with the Titanium Always Pan Pro",
+        "mention_role": "advertised",
+        "product_name": "Our Place Titanium Always Pan Pro",
+        "product_type": "household_or_home",
+        "start_unit_id": "u000004"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most non-stick pans are still loaded with PFOs.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000015",
+        "evidence_quote": "most non-stick pans they're still loaded with PFOs",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product-safety claim that can be checked against cookware composition.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000015",
+        "topic_ids": [
+          "topic:environment.household_personal_care",
+          "topic:environment.pfas"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "These forever chemicals break down in your body, stay in your body, and accumulate over time.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "These forever chemicals that break down in your body and stay in your body, and they accumulate over time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "Body persistence of PFAS is checkable and affects risk assessment.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000016",
+        "topic_ids": [
+          "topic:environment.pfas"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Forever chemicals disrupt the gut microbiome.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "They disrupt the gut microbiome",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A specific health effect claimed for PFAS.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:environment.pfas",
+          "topic:gut.microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Forever chemicals contribute to testosterone dysregulation, metabolic issues, hormone imbalances, immune dysfunction, and chronic inflammation.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "Testosterone dysregulation, metabolic issues, hormone imbalances, immune dysfunction, and chronic inflammation—they contribute to",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "Multiple organ-system harms are attributed to PFAS; checkable against evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:environment.pfas"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could"
+        ],
+        "claim_text": "Every time you cook, you could be introducing toxins into your body.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000020",
+        "evidence_quote": "every time you cook, you could be introducing toxins into your body",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "A risk claim about ordinary cookware.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000020",
+        "topic_ids": [
+          "topic:environment.household_personal_care"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Switching to safe cookware eliminates toxic exposure.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "the simple act of switching to safe cookware eliminates that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:toxin_purity"
+        ],
+        "narrative_ids": [],
+        "rationale": "Product efficacy claim central to the ad.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000021",
+        "topic_ids": [
+          "topic:environment.household_personal_care"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Sunlight, which has been labeled toxic, might be your missing medicine.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000036",
+        "evidence_quote": "It has been labeled toxic, when in reality it might be your missing medicine",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "frame:naturalness_appeal"
+        ],
+        "narrative_ids": [
+          "narrative:sun_exposure_cures"
+        ],
+        "rationale": "A broad health claim that sunlight is therapeutic.",
+        "relevance": "substantive",
+        "start_unit_id": "u000035",
+        "topic_ids": [
+          "topic:radiation_light.sunlight_uv"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People healed chronic diseases through full-body sun exposure, water and air.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000047",
+        "evidence_quote": "He opened clinics where people healed chronic diseases through full-body sun exposure, as well as water and air",
+        "evidence_signal_ids": [
+          "evidence:traditional_use"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:sun_exposure_cures"
+        ],
+        "rationale": "A historical cure claim used to support heliotherapy.",
+        "relevance": "substantive",
+        "start_unit_id": "u000047",
+        "topic_ids": [
+          "topic:radiation_light.sunlight_uv"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Concentrated light was used to treat tuberculosis of the skin.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000050",
+        "evidence_quote": "using concentrated light to treat tuberculosis of the skin",
+        "evidence_signal_ids": [
+          "evidence:prestige_institution",
+          "evidence:traditional_use"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:sun_exposure_cures"
+        ],
+        "rationale": "A disease-treatment claim backed by the Nobel Prize citation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000050",
+        "topic_ids": [
+          "topic:infectious.other_infections",
+          "topic:radiation_light.sunlight_uv"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Excessive, unprotected UV exposure can cause DNA damage.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000068",
+        "evidence_quote": "excessive, unprotected, excessive, unprotected UV exposure can cause DNA damage. That's a fact",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A core, checkable claim about UV harm.",
+        "relevance": "substantive",
+        "start_unit_id": "u000067",
+        "topic_ids": [
+          "topic:cancer.skin_cancer",
+          "topic:radiation_light.sunlight_uv"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Skin cancer is caused by the sun.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000064",
+        "evidence_quote": "We keep hearing the same story: skin cancer is caused by the sun",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "The claim the host raises and qualifies.",
+        "relevance": "substantive",
+        "start_unit_id": "u000064",
+        "topic_ids": [
+          "topic:cancer.skin_cancer"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The global rise in cancer, including skin cancer, is closely tied to environmental toxins, highly processed food, sedentary behavior, industrial pollution, and modern stress patterns.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000076",
+        "evidence_quote": "In 2012, a study noted that the global rise in cancer, including skin cancer, is closely tied to environmental toxins",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim about rising cancer rates.",
+        "relevance": "substantive",
+        "start_unit_id": "u000074",
+        "topic_ids": [
+          "topic:cancer.causes_rates",
+          "topic:cancer.skin_cancer"
+        ]
+      }
+    ],
+    "window_id": "episode_181065_window_0001"
+  },
+  "stored_at": "2026-10-04T22:36:27.999882+00:00"
+}

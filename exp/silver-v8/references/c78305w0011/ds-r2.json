@@ -1,0 +1,218 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c78305w0011",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000466",
+        "evidence_quote": "I do wait for the coffee in the morning for about two hours after I get up",
+        "label_ids": [
+          "topic:stimulants.caffeine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000464",
+        "summary": "Host says he waits about two hours after waking before coffee and advises against drinking it immediately."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000470",
+        "evidence_quote": "I brought up again with the mercury. I've never looked at this stuff before, and realizing the different effects it has and how it can affect markers",
+        "label_ids": [
+          "topic:environment.heavy_metals"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000469",
+        "summary": "Host mentions mercury and its effects on health markers."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000472",
+        "evidence_quote": "what you were talking about with like detoxification, getting rid of toxins, etc",
+        "label_ids": [
+          "topic:detox.toxic_load_general"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000472",
+        "summary": "Host raises detoxification and removing toxins as a topic."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000485",
+        "evidence_quote": "you don't need to include fiber as part of your overall carb",
+        "label_ids": [
+          "topic:diets.low_carb_keto",
+          "topic:food.plant_foods_fiber"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000473",
+        "summary": "Host and guest discuss net-carb counting, subtracting fiber, and low-carb eating with vegetables and low-glycemic berries."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000509",
+        "evidence_quote": "Well, it seems like everything revolves around our gut health",
+        "label_ids": [
+          "topic:gut"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000487",
+        "summary": "Host and guest discuss gut health as central to disease, including the immune system in the gut and common gut problems."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000517",
+        "evidence_quote": "it just becomes more permeable. But now you're allowing bacteria or mycotoxins or other things to come into the bloodstream, and then that sets off an inflammatory reaction",
+        "label_ids": [
+          "topic:gut.leaky_gut",
+          "topic:immune.inflammation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000510",
+        "summary": "Guest explains that inflammation increases intestinal permeability and allows bacteria or mycotoxins into the bloodstream, triggering inflammation."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000522",
+        "evidence_quote": "I had rheumatoid arthritis when I had 17, when I was 17, but then I stopped having it at 28",
+        "label_ids": [
+          "topic:immune.autoimmune"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000521",
+        "summary": "Guest mentions his past rheumatoid arthritis as an example tied to the gut-inflammation-genetics explanation."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000521",
+        "evidence_quote": "and then that sets off an inflammatory reaction. Now that inflammation from the immune system then sets off our genetics",
+        "label_ids": [
+          "narrative:leaky_gut_root_cause"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000510",
+        "summary": "Guest presents leaky gut as the route from gut problems to inflammation, immune activation, genetics and autoimmune disease."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000502",
+        "evidence_quote": "everybody always throws around the stat that there's about eighty percent of the immune system in and around the the gut",
+        "label_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000502",
+        "summary": "Guest cites the common unattributed statistic that about 80 percent of the immune system is in and around the gut."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000517",
+        "evidence_quote": "it just becomes more permeable. But now you're allowing bacteria or mycotoxins or other things to come into the bloodstream",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000510",
+        "summary": "Guest offers a biological mechanism from increased gut permeability to bacterial and mycotoxin translocation."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "About 80 percent of the immune system is in and around the gut.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000502",
+        "evidence_quote": "everybody always throws around the stat that there's about eighty percent of the immune system in and around the the gut",
+        "evidence_signal_ids": [
+          "evidence:weak_human_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The share of immune tissue associated with the gut is a checkable physiological claim used to argue gut health's importance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000502",
+        "topic_ids": [
+          "topic:gut",
+          "topic:immune.immune_function"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Inflammation increases intestinal permeability.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000511",
+        "evidence_quote": "But then you get inflammation, which increases the intestinal permeability",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal claim at the center of the leaky-gut explanation that could be checked against evidence on intestinal permeability.",
+        "relevance": "substantive",
+        "start_unit_id": "u000510",
+        "topic_ids": [
+          "topic:gut.leaky_gut",
+          "topic:immune.inflammation"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Increased gut permeability allows bacteria or mycotoxins into the bloodstream and triggers an inflammatory reaction.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000517",
+        "evidence_quote": "But now you're allowing bacteria or mycotoxins or other things to come into the bloodstream, and then that sets off an inflammatory reaction",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A mechanistic claim about bacterial and mycotoxin translocation that underpins the leaky-gut theory.",
+        "relevance": "substantive",
+        "start_unit_id": "u000515",
+        "topic_ids": [
+          "topic:gut.leaky_gut",
+          "topic:immune.inflammation"
+        ]
+      }
+    ],
+    "window_id": "episode_78305_window_0011"
+  },
+  "stored_at": "2026-10-04T22:36:33.459347+00:00"
+}

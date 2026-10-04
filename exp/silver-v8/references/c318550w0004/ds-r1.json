@@ -1,0 +1,398 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c318550w0004",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000197",
+        "evidence_quote": "ibuprofen could make people with coronavirus even sicker",
+        "label_ids": [
+          "topic:covid.treatments",
+          "topic:health_system.regulators",
+          "topic:medications.pain_relievers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000186",
+        "summary": "Hosts report the news that ibuprofen might worsen COVID, the French minister's warning, and the WHO's actual statement."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000217",
+        "evidence_quote": "unfortunately, very limited data",
+        "label_ids": [
+          "topic:covid.treatments",
+          "topic:medications.pain_relievers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000203",
+        "summary": "Interview with Dr. Del Rio about the French warning, anecdotal cases, and the very limited data."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000252",
+        "evidence_quote": "A letter in the Lancet, a very fancy journal, which could explain how this drug might cause problems for people with COVID",
+        "label_ids": [
+          "topic:covid.treatments",
+          "topic:medications.pain_relievers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000219",
+        "summary": "Explains and weighs the Lancet ACE2 theory and later cites flu research on NSAIDs and heart attack risk."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000252",
+        "evidence_quote": "taking high-dose NSAIDs while you have respiratory infections can increase your risk of getting a heart attack",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:infectious.respiratory_common",
+          "topic:medications.pain_relievers"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000251",
+        "summary": "Early flu research suggests high-dose NSAIDs during respiratory infections may raise heart attack risk."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000196",
+        "evidence_quote": "some news reports said that the WHO backed up the French on this, but that's not actually what they said",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000192",
+        "summary": "Corrects reports that WHO backed the French warning."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000241",
+        "evidence_quote": "The problem with this theory is that there's actually not great evidence that ibuprofen actually does increase ACE two production",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000238",
+        "summary": "Casts doubt on the ACE2 theory as lacking good evidence and speculative."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000187",
+        "evidence_quote": "We've got new evidence that suggests that an anti-inflammatory like ibuprofen could be potentially harmful",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000187",
+        "summary": "Invokes unspecified new evidence."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000217",
+        "evidence_quote": "unfortunately, very limited data",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000211",
+        "summary": "Notes the data are very limited and unpublished."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000215",
+        "evidence_quote": "a few young COVID patients who were otherwise healthy had started developing serious symptoms after being given an NSAID",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000213",
+        "summary": "Relays anecdotal reports of young COVID patients after NSAIDs."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000220",
+        "evidence_quote": "A letter in the Lancet, a very fancy journal",
+        "label_ids": [
+          "evidence:prestige_institution"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000219",
+        "summary": "Invokes the Lancet as a prestigious journal."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000235",
+        "evidence_quote": "those researchers said that drugs like ibuprofen can ramp up the production of ACE2",
+        "label_ids": [
+          "evidence:specific_study"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000220",
+        "summary": "Cites the Lancet letter's claim about ACE2."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000235",
+        "evidence_quote": "binding to a receptor called ACE two",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "summary": "Explains the ACE2 receptor entry mechanism."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000240",
+        "evidence_quote": "The science we have mostly comes from animal studies",
+        "label_ids": [
+          "evidence:evidence_limits",
+          "evidence:preclinical_extrapolation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000239",
+        "summary": "Notes the science is mostly animal studies and the link is unknown."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000246",
+        "evidence_quote": "Maybe, but there's no clear evidence",
+        "label_ids": [
+          "evidence:evidence_limits"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000246",
+        "summary": "A Chinese doctor says there is no clear evidence."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000252",
+        "evidence_quote": "some early research is suggesting that for a small group of people, taking high-dose NSAIDs while you have respiratory infections can increase your risk of getting a heart attack",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000251",
+        "summary": "Invokes early flu research on NSAIDs and heart attacks."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000196",
+        "evidence_quote": "WHO does not recommend against the use of ibuprofen",
+        "label_ids": [
+          "evidence:official_data_documents"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000194",
+        "summary": "Quotes the WHO tweet as the official statement."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "could"
+        ],
+        "claim_text": "Ibuprofen could make people with coronavirus even sicker.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000186",
+        "evidence_quote": "ibuprofen could make people with coronavirus even sicker",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A widely reported risk claim about a common drug and COVID; it drove the public health guidance and can be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000186",
+        "topic_ids": [
+          "topic:covid.treatments",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The World Health Organization is now recommending that anyone suffering COVID-19 symptoms avoid taking ibuprofen.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000188",
+        "evidence_quote": "The World Health Organization is now recommending that anyone suffering COVID-19 symptoms avoid taking ibuprofen",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A checkable claim about WHO guidance that was later corrected.",
+        "relevance": "substantive",
+        "start_unit_id": "u000188",
+        "topic_ids": [
+          "topic:covid.treatments",
+          "topic:health_system.regulators",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The WHO does not recommend against the use of ibuprofen.",
+        "claim_type": "other_factual",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000196",
+        "evidence_quote": "WHO does not recommend against the use of ibuprofen",
+        "evidence_signal_ids": [
+          "evidence:official_data_documents"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking"
+        ],
+        "narrative_ids": [],
+        "rationale": "The corrected official position on ibuprofen and COVID; checkable against the WHO statement.",
+        "relevance": "substantive",
+        "start_unit_id": "u000194",
+        "topic_ids": [
+          "topic:covid.treatments",
+          "topic:health_system.regulators",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could"
+        ],
+        "claim_text": "Taking anti-inflammatory drugs such as ibuprofen could be an aggravating factor of the infection.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000204",
+        "evidence_quote": "taking anti-inflammatory drugs such as ibuprofen could be an aggravating factor",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The French minister's warning that drove the controversy; checkable against later evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000204",
+        "topic_ids": [
+          "topic:covid.treatments",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Drugs like ibuprofen can ramp up the production of ACE2.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000234",
+        "evidence_quote": "those researchers said that drugs like ibuprofen can ramp up the production of ACE2",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation",
+          "evidence:specific_study"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The Lancet letter's proposed mechanism for how ibuprofen could worsen COVID; checkable against the letter and subsequent research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000234",
+        "topic_ids": [
+          "topic:covid.treatments",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could",
+          "may"
+        ],
+        "claim_text": "Ibuprofen could increase ACE2 levels, which may give the coronavirus more binding sites to attach to.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000235",
+        "evidence_quote": "ibuprofen could increase the level of ACE2, which may then present more binding sites or more docks on the on cells for the coronavirus to attach to",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The proposed mechanism linking ibuprofen to worse COVID outcomes; checkable against studies of ACE2 regulation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000235",
+        "topic_ids": [
+          "topic:covid.treatments",
+          "topic:medications.pain_relievers"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "suggesting"
+        ],
+        "claim_text": "For a small group of people, taking high-dose NSAIDs while they have respiratory infections can increase their risk of getting a heart attack.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000252",
+        "evidence_quote": "some early research is suggesting that for a small group of people, taking high-dose NSAIDs while you have respiratory infections can increase your risk of getting a heart attack",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A specific risk claim about NSAID use during respiratory infections; checkable against the influenza studies.",
+        "relevance": "substantive",
+        "start_unit_id": "u000251",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:infectious.respiratory_common",
+          "topic:medications.pain_relievers"
+        ]
+      }
+    ],
+    "window_id": "episode_318550_window_0004"
+  },
+  "stored_at": "2026-10-04T22:36:31.085164+00:00"
+}

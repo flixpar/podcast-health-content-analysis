@@ -1,0 +1,118 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c24869w0011",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000814",
+        "evidence_quote": "after six days, Walter died of dehydration",
+        "label_ids": [
+          "topic:acute_care.death_dying"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000812",
+        "summary": "Walter died of dehydration after being denied food and water during a prayer ritual."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000814",
+        "evidence_quote": "strapped to a chair, denied food and water, and prayed over",
+        "label_ids": [
+          "topic:alt_medicine.energy_spiritual_healing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000812",
+        "summary": "Walter was strapped down and prayed over in what is presented as a faith-healing/exorcism ritual."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000868",
+        "evidence_quote": "died during church when members of his congregation attempted to all heal him",
+        "label_ids": [
+          "topic:acute_care.death_dying"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000866",
+        "summary": "An eight-year-old autistic boy died during a church healing attempt."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000893",
+        "evidence_quote": "attempted to all heal him at the same time",
+        "label_ids": [
+          "topic:alt_medicine.energy_spiritual_healing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000866",
+        "summary": "The church's exorcism and laying-on-of-hands practice is described as a way to heal an autistic child."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000881",
+        "evidence_quote": "we will heal his autism",
+        "label_ids": [
+          "topic:neurodevelopment.autism_treatment"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000877",
+        "summary": "A woman promises the boy's parents that her church can fix and heal his autism."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000893",
+        "evidence_quote": "their idea is that you physically make it impossible for the demon to exist inside this body",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000889",
+        "summary": "The church's demon-expulsion theology is explained as the basis for the healing attempt."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The church will heal the boy's autism.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000881",
+        "evidence_quote": "we will heal his autism",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A faith-healing cure claim that led parents to bring an autistic child to the church instead of medical care.",
+        "relevance": "passing",
+        "start_unit_id": "u000877",
+        "topic_ids": [
+          "topic:alt_medicine.energy_spiritual_healing",
+          "topic:neurodevelopment.autism_treatment"
+        ]
+      }
+    ],
+    "window_id": "episode_24869_window_0011"
+  },
+  "stored_at": "2026-10-04T22:36:33.111209+00:00"
+}

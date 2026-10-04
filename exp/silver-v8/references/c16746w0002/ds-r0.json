@@ -1,0 +1,168 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c16746w0002",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000097",
+        "evidence_quote": "Miracle Made, however, offers a whole line of self-cleaning, antibacterial bedding",
+        "label_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000076",
+        "summary": "Sponsor read for Miracle Made antibacterial bedding claiming to prevent bacteria growth and improve sleep."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000084",
+        "evidence_quote": "So you get a better sleep every single night",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000083",
+        "summary": "Ad states Miracle Made sheets keep you comfortable and give better sleep every night."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000097",
+        "evidence_quote": "Thank you, Miracle Made, for sponsoring this episode",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000076",
+        "summary": "Delimited sponsor read with URL and promo code."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000083",
+        "evidence_quote": "silver-infused fabrics inspired by NASA",
+        "label_ids": [
+          "evidence:prestige_institution"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000083",
+        "summary": "NASA is invoked to lend authority to the silver-infused fabric."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000097",
+        "evidence_quote": "Miracle Made, however, offers a whole line of self-cleaning, antibacterial bedding",
+        "mention_role": "advertised",
+        "product_name": "Miracle Made",
+        "product_type": "household_or_home",
+        "start_unit_id": "u000076"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Traditional bed sheets can harbor more bacteria than a toilet seat.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000077",
+        "evidence_quote": "Traditional bed sheets can harbor more bacteria than a toilet seat",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A comparative contamination claim that supports buying the antibacterial bedding.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000077",
+        "topic_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Bacteria in traditional bed sheets can lead to acne, allergies, and stuffy noses.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000078",
+        "evidence_quote": "It can lead to acne, allergies, and stuffy noses",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Attributes acne, allergies and nasal symptoms to bacterial contamination of bedding.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000078",
+        "topic_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Miracle Made bedding prevents up to 99.7 percent of bacteria growth.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000080",
+        "evidence_quote": "prevent up to 99.7 percent of bacteria growth",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Specific efficacy claim central to the ad.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000080",
+        "topic_ids": [
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "every single night"
+        ],
+        "claim_text": "Miracle Made sheets give you a better sleep every single night.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000084",
+        "evidence_quote": "So you get a better sleep every single night",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "Ad claims a nightly sleep-quality benefit from the product.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000083",
+        "topic_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ]
+      }
+    ],
+    "window_id": "episode_16746_window_0002"
+  },
+  "stored_at": "2026-10-04T22:36:27.646438+00:00"
+}

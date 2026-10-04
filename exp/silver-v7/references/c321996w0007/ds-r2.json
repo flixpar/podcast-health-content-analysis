@@ -1,0 +1,257 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c321996w0007",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000620",
+        "evidence_quote": "I think that's enough to have everyone get vax",
+        "label_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.mandates_exemptions",
+          "topic:vaccines.safety_injury"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000572",
+        "summary": "Speakers debate COVID vaccine mandates and exemptions, noting that some people cannot get vaccinated because of allergies and questioning whether mandates include caveats."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000605",
+        "evidence_quote": "people who are paralyzed or in wheelchairs",
+        "label_ids": [
+          "topic:musculoskeletal.chronic_pain"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000579",
+        "summary": "Wheelchair users and paralyzed people are used as an analogy for groups that society accommodates."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000643",
+        "evidence_quote": "We're going to shut down businesses because we want our old people",
+        "label_ids": [
+          "topic:covid.lockdowns_closures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000622",
+        "summary": "Speakers discuss whether public policy should change for a percentage of the population, citing COVID lockdowns to protect older people."
+      },
+      {
+        "axis": "population",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000643",
+        "evidence_quote": "Fifteen percent is over sixty",
+        "label_ids": [
+          "population:older_adults"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "The discussion is specifically about older adults as the group COVID policy sought to protect."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000655",
+        "evidence_quote": "I think big pharma has enough",
+        "label_ids": [
+          "topic:health_system.pharma_industry"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000650",
+        "summary": "Speakers say big pharma and other businesses profited from COVID and lockdowns."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000655",
+        "evidence_quote": "people that are getting richer from COVID and lockdowns and restrictions in general",
+        "label_ids": [
+          "frame:big_pharma"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000650",
+        "summary": "Big Pharma and other businesses are cast as profiting from COVID and lockdowns."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000657",
+        "evidence_quote": "If it becomes popular for everybody to get vaxxed",
+        "label_ids": [
+          "topic:vaccines.uptake_hesitancy"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000656",
+        "summary": "Speaker notes vaccine uptake may follow popular sentiment, comparing it to trans bathroom policies."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Some people are allergic to ingredients in the vaccine and therefore cannot get vaccinated.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "People have allergies too to like some of the stuff in the vaccine, so they can't get it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether vaccine ingredients commonly cause allergic contraindications is checkable and affects exemption policy.",
+        "relevance": "substantive",
+        "start_unit_id": "u000575",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Certain jobs require vaccination against things like Hep C before you can start.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000584",
+        "evidence_quote": "we're getting everyone vax with certain things like Hep C and all that type of shit before you can start certain jobs",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Occupational vaccine requirements are checkable and are used to support mandates.",
+        "relevance": "substantive",
+        "start_unit_id": "u000584",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Some required vaccines must be repeated every 10 years for certain jobs.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000585",
+        "evidence_quote": "you still have to get it every 10 years for to work at certain",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Booster intervals for occupational vaccines are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000585",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Fewer than one percent of the population uses wheelchairs.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000604",
+        "evidence_quote": "This is probably less than one percent of the population",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Wheelchair use prevalence is checkable and is used to weigh accommodations against mandates.",
+        "relevance": "passing",
+        "start_unit_id": "u000604",
+        "topic_ids": [
+          "topic:musculoskeletal.chronic_pain"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "pretty sure"
+        ],
+        "claim_text": "As of now, the vaccine requirement has no caveat for people who cannot get vaccinated.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000615",
+        "evidence_quote": "there's no caveat for people that can't get vaccinated",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Whether the mandate had a medical exemption is checkable and affects access to businesses.",
+        "relevance": "substantive",
+        "start_unit_id": "u000606",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "pretty sure",
+          "I imagine"
+        ],
+        "claim_text": "A negative COVID test gets you an excusal from the vaccine requirement.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000618",
+        "evidence_quote": "a negative COVID test gets you an excusal",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Exemption rules for vaccine mandates are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000615",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "An antigen test gets you in for about two weeks.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000619",
+        "evidence_quote": "an antigen test will get you on for like two weeks or something like that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The validity period of an antigen test as an exemption is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000619",
+        "topic_ids": [
+          "topic:vaccines.mandates_exemptions"
+        ]
+      }
+    ],
+    "window_id": "episode_321996_window_0007"
+  },
+  "stored_at": "2026-10-04T22:13:55.660678+00:00"
+}

@@ -1,0 +1,64 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v3",
+  "item_id": "c193307w0006",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers",
+        "label_ids": [
+          "topic:glp1.access_compounding"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "summary": "Sponsor read for the Hers weight loss program, mentioning Wegovy and directing listeners to forhers.com."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000310",
+        "evidence_quote": "Visit forhers.com",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000306",
+        "summary": "Paid sponsor read for Hers weight loss with a call to action to forhers.com."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000310",
+        "evidence_quote": "Weight loss by Hers",
+        "mention_role": "advertised",
+        "product_name": "Hers Weight Loss",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000306"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000309",
+        "evidence_quote": "Wegovy is a registered trademark of Novo Nordisk AS",
+        "mention_role": "advertised",
+        "product_name": "Wegovy",
+        "product_type": "medication",
+        "start_unit_id": "u000307"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_193307_window_0006"
+  },
+  "stored_at": "2026-10-04T22:36:28.432517+00:00"
+}

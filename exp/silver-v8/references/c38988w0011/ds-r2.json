@@ -1,0 +1,187 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c38988w0011",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000787",
+        "evidence_quote": "the entire one of the premises behind the mRNA gene altering shot that they call the vaccine is we're going to change your DNA",
+        "label_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000769",
+        "summary": "Hosts claim the mRNA COVID shot is a gene-altering vaccine that changes DNA and carries a very high death risk, citing Robert Malone and Peter McCullough."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000770",
+        "evidence_quote": "we're going to change your DNA",
+        "label_ids": [
+          "narrative:mrna_alters_dna"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000769",
+        "summary": "The premise that the mRNA shot changes DNA is asserted and confirmed."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000787",
+        "evidence_quote": "the odds of you dying from this are very high",
+        "label_ids": [
+          "narrative:covid_vaccine_deaths"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000786",
+        "summary": "Malone's warning that the odds of dying from the shot are very high is endorsed, with deaths possibly recorded as heart attack or stroke."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000769",
+        "evidence_quote": "I'm trying to change what God has designed",
+        "label_ids": [
+          "frame:spiritual_religious"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000767",
+        "summary": "The vaccine is framed as an attempt to change what God has designed."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000785",
+        "evidence_quote": "But they push this down",
+        "label_ids": [
+          "frame:censorship_suppression"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000784",
+        "summary": "Hosts say the warnings are pushed down while boosters keep being pushed."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000788",
+        "evidence_quote": "It may say heart attack, stroke, so on and so forth",
+        "label_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000786",
+        "summary": "Deaths from the vaccine are alleged to be concealed by recording them as heart attack or stroke."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000787",
+        "evidence_quote": "the guy who invented damn RNA is saying",
+        "label_ids": [
+          "evidence:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000771",
+        "summary": "Robert Malone's status as the mRNA inventor and a vaccinologist is used to ground the warning; Peter McCullough's expertise is invoked the same way."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The premise behind the mRNA shot they call the vaccine is to change people's DNA.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000769",
+        "evidence_quote": "the entire one of the premises behind the mRNA gene altering shot that they call the vaccine is we're going to change your DNA",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:spiritual_religious"
+        ],
+        "narrative_ids": [
+          "narrative:mrna_alters_dna"
+        ],
+        "rationale": "A checkable claim about what mRNA vaccines do, central to vaccine hesitancy.",
+        "relevance": "substantive",
+        "start_unit_id": "u000769",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The odds of dying from the COVID vaccine are very high.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000787",
+        "evidence_quote": "the odds of you dying from this are very high",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:covid_vaccine_deaths"
+        ],
+        "rationale": "A specific, checkable claim about vaccine mortality risk attributed to Robert Malone and endorsed by the hosts.",
+        "relevance": "substantive",
+        "start_unit_id": "u000786",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "may"
+        ],
+        "claim_text": "Deaths from the COVID vaccine may be recorded as heart attack or stroke.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000788",
+        "evidence_quote": "It may say heart attack, stroke, so on and so forth",
+        "evidence_signal_ids": [
+          "evidence:credential_appeal"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "frame:conspiracy_cover_up"
+        ],
+        "narrative_ids": [
+          "narrative:covid_vaccine_deaths"
+        ],
+        "rationale": "Claims vaccine deaths are concealed by misattribution on death records, which is checkable against mortality data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000787",
+        "topic_ids": [
+          "topic:vaccines.covid_vaccines",
+          "topic:vaccines.safety_injury"
+        ]
+      }
+    ],
+    "window_id": "episode_38988_window_0011"
+  },
+  "stored_at": "2026-10-04T22:36:33.286600+00:00"
+}

@@ -1,0 +1,235 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c181134w0003",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000215",
+        "evidence_quote": "Why is our eyesight being lost anyway",
+        "label_ids": [
+          "topic:sensory.vision"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000133",
+        "summary": "Hosts discuss why eyesight declines with age, question the conventional lens-hardening explanation, argue glasses worsen the condition, and explain the anatomy of vision."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000164",
+        "evidence_quote": "when you look at these centenarians, many of them don't wear glasses",
+        "label_ids": [
+          "topic:longevity.ageing_science"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000140",
+        "summary": "Blue Zones centenarians and lifestyle factors (habits, purpose, Ikigai) are cited to argue that aging is not purely genetic and eyesight loss is not inevitable."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "But they make the condition worse",
+        "label_ids": [
+          "narrative:glasses_worsen_vision"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000165",
+        "summary": "The claim that glasses are accepted as the treatment but make the eye condition worse is asserted, with glasses called 'pills for the eyes'."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "But they make the condition worse",
+        "label_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000154",
+        "summary": "The conventional lens-hardening explanation is questioned and glasses are compared to symptom-masking pills, framing conventional vision care as failing to address causes."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000169",
+        "evidence_quote": "you're not treating any sort of causal situation",
+        "label_ids": [
+          "frame:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000168",
+        "summary": "The speaker contrasts taking a pill to get through with treating the causal situation."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000142",
+        "evidence_quote": "you notice that when you look at these centenarians, many of them don't wear glasses",
+        "label_ids": [
+          "evidence:foreign_comparison"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000141",
+        "summary": "Blue Zones centenarians are cited as evidence that eyesight need not be lost with age."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000160",
+        "evidence_quote": "we now have so much science. Neuroscience and studies",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000159",
+        "summary": "The speaker invokes unnamed neuroscience and studies as showing that lifestyle factors matter."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000166",
+        "evidence_quote": "pretty much all the people I talk to can attest to that",
+        "label_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000165",
+        "summary": "The speaker cites everyone they talk to as attesting that glasses make the condition worse."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Wearing glasses makes the underlying eye condition worse.",
+        "claim_type": "causal",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000166",
+        "evidence_quote": "But they make the condition worse",
+        "evidence_signal_ids": [
+          "evidence:personal_anecdote"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "narrative_ids": [
+          "narrative:glasses_worsen_vision"
+        ],
+        "rationale": "A central claim of the natural-vision viewpoint that glasses worsen eyesight; checkable against optometric evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000165",
+        "topic_ids": [
+          "topic:sensory.vision"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "many of them"
+        ],
+        "claim_text": "Many centenarians in the Blue Zones do not wear glasses.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000142",
+        "evidence_quote": "many of them don't wear glasses",
+        "evidence_signal_ids": [
+          "evidence:foreign_comparison"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A prevalence claim about centenarians' vision used to argue that eyesight loss is not inevitable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000141",
+        "topic_ids": [
+          "topic:longevity.ageing_science",
+          "topic:sensory.vision"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The lens hardens with age, which is why people lose near vision.",
+        "claim_type": "mechanism",
+        "confidence": 0.85,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000155",
+        "evidence_quote": "The doctors tell you your lens is hardening. That's why you lose your near vision",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "narrative_ids": [],
+        "rationale": "The conventional explanation of presbyopia is stated and then challenged by the nearsighted-counterexample argument.",
+        "relevance": "substantive",
+        "start_unit_id": "u000154",
+        "topic_ids": [
+          "topic:sensory.vision"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nearsighted people can still read up close even at older ages.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000156",
+        "evidence_quote": "all the nearsighted people, they can still read up close, really",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:anti_mainstream_medicine"
+        ],
+        "narrative_ids": [],
+        "rationale": "An empirical claim about myopes' retained near vision, offered as a counterexample to the lens-hardening explanation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000156",
+        "topic_ids": [
+          "topic:sensory.vision"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "What people do every day has a bigger impact on aging than age and genetics.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000152",
+        "evidence_quote": "what we do every day has a bigger impact on age and genetics",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A comparative claim about lifestyle versus genetics in aging that is checkable against longevity research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000152",
+        "topic_ids": [
+          "topic:longevity.ageing_science",
+          "topic:sensory.vision"
+        ]
+      }
+    ],
+    "window_id": "episode_181134_window_0003"
+  },
+  "stored_at": "2026-10-04T22:36:30.498723+00:00"
+}

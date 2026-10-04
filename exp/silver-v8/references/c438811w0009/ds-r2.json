@@ -1,0 +1,142 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v3",
+  "item_id": "c438811w0009",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000433",
+        "evidence_quote": "mostly just binge drinking and outdoor urination",
+        "label_ids": [
+          "topic:alcohol.drinking_culture"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000433",
+        "summary": "Notes that the actual activities at Bohemian Grove are mostly binge drinking."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000440",
+        "evidence_quote": "a massive radiation sickness cover-up",
+        "label_ids": [
+          "topic:environment.air_pollution"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000440",
+        "summary": "Mentions a radiation sickness cover-up as part of the Manhattan Project's history."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000445",
+        "evidence_quote": "fluoride is probably not a mind control scheme",
+        "label_ids": [
+          "topic:oral.water_fluoridation"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000445",
+        "summary": "Dismisses the fluoride mind-control conspiracy theory."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.9,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000445",
+        "evidence_quote": "fluoride is probably not a mind control scheme",
+        "label_ids": [
+          "narrative:fluoride_mind_control"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000445",
+        "summary": "The fluoride mind-control narrative is raised and rejected."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000468",
+        "evidence_quote": "all powered by the good fats from 100% pure avocado oil",
+        "label_ids": [
+          "topic:food.fats_oils"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000466",
+        "summary": "Ad for Chosen Foods avocado-oil cooking oils, salad dressings, and mayo, positioned against seed oils."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000468",
+        "evidence_quote": "defend your favorite foods from the forces of seed oils and sketchy ingredients",
+        "label_ids": [
+          "frame:toxin_purity"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000466",
+        "summary": "Ad frames seed oils and sketchy ingredients as forces to be defended against."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000468",
+        "evidence_quote": "Have no fear, chosen foods is here to defend your favorite foods",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000466",
+        "summary": "Paid sponsor read for Chosen Foods."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000468",
+        "evidence_quote": "Have no fear, chosen foods is here to defend your favorite foods",
+        "mention_role": "advertised",
+        "product_name": "Chosen Foods",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000466"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The fats in Chosen Foods cooking oils, salad dressings, and mayo come from 100% pure avocado oil.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000468",
+        "evidence_quote": "all powered by the good fats from 100% pure avocado oil and simple, delicious ingredients",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A stated ingredient composition in a food ad is checkable against the product label.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000466",
+        "topic_ids": [
+          "topic:food.fats_oils"
+        ]
+      }
+    ],
+    "window_id": "episode_438811_window_0009"
+  },
+  "stored_at": "2026-10-04T22:36:33.315849+00:00"
+}

@@ -1,0 +1,162 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c73880w0014",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001110",
+        "evidence_quote": "Yeah, you totally blackout. Yeah, you have to do the G training maneuver, where like you're breathing in a specific way, because you can't take a full deep breath",
+        "label_ids": [
+          "topic:other"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001094",
+        "summary": "Guest describes the physical effects of high G-force: blackout, the G-training breathing maneuver, the G suit, and nausea."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001220",
+        "evidence_quote": "Audacious exaggeration of science is in nutritional space and the diet space",
+        "label_ids": [
+          "topic:digital_health.online_health_information",
+          "topic:health_system.research_system"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001201",
+        "summary": "Hosts discuss why nutritional science reporting is unreliable, citing media misreporting of an epidemiological nut study and confusion between statistical and practical significance."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001205",
+        "evidence_quote": "or like vaccine hesitancy",
+        "label_ids": [
+          "topic:vaccines.uptake_hesitancy"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001205",
+        "summary": "Vaccine hesitancy is named as another area where disinformation is common."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001215",
+        "evidence_quote": "media messed it up for all of us",
+        "label_ids": [
+          "frame:media_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001209",
+        "summary": "The media are blamed for mangling nutritional science reporting."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001220",
+        "evidence_quote": "That's not what the study said",
+        "label_ids": [
+          "frame:correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001214",
+        "summary": "Hosts correct media misreadings: the nut article overstates the study, and statistical significance is not practical significance."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001211",
+        "evidence_quote": "one epidemiological study showed that people who ate nuts lived on average 12 years longer",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001210",
+        "summary": "An unidentified epidemiological study is cited as the basis of a media claim about nuts and longevity."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "One epidemiological study showed that people who ate nuts lived on average 12 years longer.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001211",
+        "evidence_quote": "one epidemiological study showed that people who ate nuts lived on average 12 years longer",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The existence, methods and findings of this epidemiological study can be checked, and the speaker treats it as an example of media misreporting.",
+        "relevance": "substantive",
+        "start_unit_id": "u001210",
+        "topic_ids": [
+          "topic:food",
+          "topic:health_system.research_system"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nuts make you live 12 years longer.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u001215",
+        "evidence_quote": "nuts make you live 12 years longer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:correction_debunking",
+          "frame:media_distrust"
+        ],
+        "narrative_ids": [],
+        "rationale": "A causal health claim attributed to media coverage of a study, and explicitly rebutted by the speakers.",
+        "relevance": "substantive",
+        "start_unit_id": "u001214",
+        "topic_ids": [
+          "topic:food"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The epidemiological study about nuts and longevity did not account for wealth or exercise.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001212",
+        "evidence_quote": "They didn't account for like wealth, they didn't account for exercise",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim about the study's confounders is checkable and affects how the nut-longevity result should be interpreted.",
+        "relevance": "substantive",
+        "start_unit_id": "u001211",
+        "topic_ids": [
+          "topic:health_system.research_system"
+        ]
+      }
+    ],
+    "window_id": "episode_73880_window_0014"
+  },
+  "stored_at": "2026-10-04T22:13:55.920370+00:00"
+}

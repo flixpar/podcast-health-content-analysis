@@ -1,0 +1,105 @@
+{
+  "annotator_id": "ds-r1",
+  "benchmark_version": "v3",
+  "item_id": "c159422w0005",
+  "provenance": {
+    "repeat": 1,
+    "run_dir": "benchmark/v3/runs/v8-high-b24k",
+    "run_fingerprint": "685bd69c8e22002ba60d9a9efe41b4a581c1efe5db269edb9e3244d1ca1d055e"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000316",
+        "evidence_quote": "she lost almost sixty pounds",
+        "label_ids": [
+          "topic:weight"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000316",
+        "summary": "A woman's roughly sixty-pound weight loss is noted in passing as a sign she was having an affair."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000347",
+        "evidence_quote": "Certa Perfect Sleeper X mattresses and adjustable base sets with the Q Four Support. System that helps relieve aches and back pain",
+        "label_ids": [
+          "topic:musculoskeletal.back_neck_posture",
+          "topic:sleep.sleep_hygiene_environment"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000344",
+        "summary": "Mattress ad sells a Certa Perfect Sleeper X set with a support system that relieves aches and back pain."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000344",
+        "evidence_quote": "fill the longer nights with perfect sleep night after night",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000344",
+        "summary": "The ad promises perfect sleep through the mattress."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000347",
+        "evidence_quote": "Save up to eight hundred dollars on Certa Perfect Sleeper X mattresses and adjustable base sets",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000344",
+        "summary": "Paid mattress ad with a savings offer and retailer URL."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000347",
+        "evidence_quote": "Certa Perfect Sleeper X mattresses and adjustable base sets",
+        "mention_role": "advertised",
+        "product_name": "Serta Perfect Sleeper X",
+        "product_type": "household_or_home",
+        "start_unit_id": "u000345"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The Certa Perfect Sleeper X mattress and adjustable base set with the Q Four Support System helps relieve aches and back pain.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000346",
+        "evidence_quote": "the Q Four Support. System that helps relieve aches and back pain",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "frame:commercialization"
+        ],
+        "narrative_ids": [],
+        "rationale": "A product efficacy claim in ad copy that could be checked against the mattress system's design or testing.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000345",
+        "topic_ids": [
+          "topic:musculoskeletal.back_neck_posture",
+          "topic:sleep.sleep_hygiene_environment"
+        ]
+      }
+    ],
+    "window_id": "episode_159422_window_0005"
+  },
+  "stored_at": "2026-10-04T22:36:30.133246+00:00"
+}

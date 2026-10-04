@@ -1,0 +1,138 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "t-c154859w0023--remove_hedge",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002441",
+        "evidence_quote": "industrial chemicals in their mind and then it gets hijacked along the way by bad actors",
+        "label_ids": [
+          "topic:drugs_addiction.drug_policy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002433",
+        "summary": "Guest says industrial chemicals from India and China are diverted into the drug trade by bad actors."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002461",
+        "evidence_quote": "fentanyl precursors are largely coming through the air",
+        "label_ids": [
+          "topic:drugs_addiction.drug_policy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002449",
+        "summary": "Guest says Chinese organized crime and India's chemical industry feed fentanyl precursors, which largely arrive by air."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002523",
+        "evidence_quote": "one hundred thousand Americans were dying a year",
+        "label_ids": [
+          "topic:drugs_addiction.drug_policy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002462",
+        "summary": "Guest recounts interagency efforts to stop fentanyl precursor air shipments and cites roughly 100,000 American deaths a year."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002542",
+        "evidence_quote": "drug smuggling from Venezuela to the United States",
+        "label_ids": [
+          "topic:drugs_addiction.drug_policy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002524",
+        "summary": "Host asks about Venezuelan drug smuggling and drone strikes on drug boats; guest calls Venezuela a serious threat by volume."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002459",
+        "evidence_quote": "But China, you have to wonder, you know, and you know, you see, you see reports, you hear things",
+        "label_ids": [
+          "frame:insinuating_questions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002457",
+        "summary": "Guest insinuates unanswered questions about China's role in fentanyl precursor shipments."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002458",
+        "evidence_quote": "you see, you see reports, you hear things",
+        "label_ids": [
+          "evidence:media_source"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002457",
+        "summary": "Guest invokes unspecified reports and things heard about China's activities."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "largely"
+        ],
+        "claim_text": "Fentanyl precursors largely come through the air.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002461",
+        "evidence_quote": "fentanyl precursors are largely coming through the air",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The main air-shipment route for fentanyl precursors can be checked against seizure and customs data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002459",
+        "topic_ids": [
+          "topic:drugs_addiction.drug_policy"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Roughly one hundred thousand Americans were dying a year because of the drug problem.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002509",
+        "evidence_quote": "one hundred thousand Americans were dying a year",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Annual overdose death counts are checkable statistics and the figure is used to justify federal drug enforcement.",
+        "relevance": "substantive",
+        "start_unit_id": "u002507",
+        "topic_ids": [
+          "topic:drugs_addiction.drug_policy"
+        ]
+      }
+    ],
+    "window_id": "episode_154859_window_0023_remove_hedge"
+  },
+  "stored_at": "2026-10-04T22:13:49.858011+00:00"
+}

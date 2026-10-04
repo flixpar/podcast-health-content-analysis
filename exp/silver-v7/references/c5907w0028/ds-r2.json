@@ -1,0 +1,141 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "c5907w0028",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002491",
+        "evidence_quote": "I tore my meniscus at acupuncture",
+        "label_ids": [
+          "topic:alt_medicine.acupuncture_tcm",
+          "topic:musculoskeletal.sports_injuries"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002488",
+        "summary": "Speaker jokes that he fainted during acupuncture and tore his meniscus."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002515",
+        "evidence_quote": "I did the PRP on my knee",
+        "label_ids": [
+          "topic:procedures.regenerative_medicine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002513",
+        "summary": "Speaker recounts having PRP on his knee and six tubes of blood drawn."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002530",
+        "evidence_quote": "Just falls asleep, hits a fucking wall",
+        "label_ids": [
+          "topic:acute_care.trauma_fractures",
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002519",
+        "summary": "Hosts tell how Tommy fell asleep driving after shoveling snow and was injured hitting a wall."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002544",
+        "evidence_quote": "It's a really good workout",
+        "label_ids": [
+          "topic:fitness.exercise_general"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002531",
+        "summary": "Hosts discuss snow shoveling as a workout and whether it is only good for people in shape."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002607",
+        "evidence_quote": "Shoveling snow. You can have a heart attack",
+        "label_ids": [
+          "topic:cardiovascular.heart_disease",
+          "topic:fitness.exercise_general"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002584",
+        "summary": "Hosts warn that shoveling snow can cause heart attacks, debate exertion versus cold, and cite a study on heart rates."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002607",
+        "evidence_quote": "after only two minutes of snow shoveling, study participants' heart rates exceeded 85 percent of maximal heart rate",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002607",
+        "summary": "Speaker cites a study showing heart rates above 85 percent of max after two minutes of shoveling."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Shoveling snow can cause a heart attack.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002589",
+        "evidence_quote": "Shoveling snow. You can have a heart attack",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "The claim that snow shoveling can trigger heart attacks is checkable and affects behavior.",
+        "relevance": "substantive",
+        "start_unit_id": "u002587",
+        "topic_ids": [
+          "topic:cardiovascular.heart_disease"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "After only two minutes of snow shoveling, study participants' heart rates exceeded 85 percent of maximal heart rate.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002607",
+        "evidence_quote": "after only two minutes of snow shoveling, study participants' heart rates exceeded 85 percent of maximal heart rate",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A quantitative research finding that can be checked against the study literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u002607",
+        "topic_ids": [
+          "topic:fitness.exercise_general"
+        ]
+      }
+    ],
+    "window_id": "episode_5907_window_0028"
+  },
+  "stored_at": "2026-10-04T22:13:55.864674+00:00"
+}

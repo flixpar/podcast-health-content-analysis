@@ -1,0 +1,171 @@
+{
+  "annotator_id": "ds-r2",
+  "benchmark_version": "v2",
+  "item_id": "s-certainty-speculative",
+  "provenance": {
+    "repeat": 2,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000002",
+        "evidence_quote": "i didnt sleep great and then i way overslept",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000002",
+        "summary": "Speaker mentions having slept poorly and overslept."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "might be the only reason im functioning right now",
+        "label_ids": [
+          "topic:stimulants.caffeine"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000007",
+        "summary": "Hosts joke that coffee is the only thing keeping them functioning."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "on days when i skip breakfast i feel kind of foggy by like ten or eleven",
+        "label_ids": [
+          "topic:cognition.brain_fog",
+          "topic:food.eating_behavior"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "Speakers discuss how skipping breakfast may cause late-morning brain fog and suggest keeping quick snacks like bananas and almonds."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000032",
+        "evidence_quote": "i wonder if it might be a blood sugar thing like maybe my focus dips because theres nothing in my system yet",
+        "label_ids": [
+          "topic:metabolic.insulin_glucose"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000031",
+        "summary": "Speakers speculate that low blood sugar from an empty stomach may explain the focus dip."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000032",
+        "evidence_quote": "maybe my focus dips because theres nothing in my system yet",
+        "label_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000031",
+        "summary": "A biological mechanism is proposed: an empty system and blood sugar affect focus."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000039",
+        "evidence_quote": "could also just be the bad sleep honestly probably a mix of things",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000038",
+        "summary": "Speakers consider poor sleep as another likely contributor to the brain fog."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "maybe",
+          "i dont know"
+        ],
+        "claim_text": "Maybe skipping breakfast is what is making the speaker feel foggy.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000030",
+        "evidence_quote": "maybe thats connected i dont know maybe skipping breakfast is whats making you foggy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal hypothesis about meal skipping and brain fog that could be checked by tracking symptoms.",
+        "relevance": "substantive",
+        "start_unit_id": "u000030",
+        "topic_ids": [
+          "topic:cognition.brain_fog",
+          "topic:food.eating_behavior"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "i wonder if",
+          "might",
+          "maybe"
+        ],
+        "claim_text": "The speaker's focus might dip because of a blood sugar thing, since there is nothing in the system yet.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000031",
+        "evidence_quote": "i wonder if it might be a blood sugar thing like maybe my focus dips because theres nothing in my system yet",
+        "evidence_signal_ids": [
+          "evidence:mechanistic_explanation"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "Proposes a mechanism linking an empty stomach and blood sugar to reduced focus; could be checked against meal-timing and glucose data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000031",
+        "topic_ids": [
+          "topic:cognition.brain_fog",
+          "topic:metabolic.insulin_glucose"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could",
+          "probably"
+        ],
+        "claim_text": "Bad sleep could also be causing the brain fog; it is probably a mix of things.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "could also just be the bad sleep honestly probably a mix of things",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A causal hypothesis about sleep quality contributing to brain fog that could be checked with sleep and symptom tracking.",
+        "relevance": "substantive",
+        "start_unit_id": "u000038",
+        "topic_ids": [
+          "topic:cognition.brain_fog",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      }
+    ],
+    "window_id": "synthetic_certainty_speculative_window_0001"
+  },
+  "stored_at": "2026-10-04T22:13:56.083065+00:00"
+}

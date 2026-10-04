@@ -1,0 +1,288 @@
+{
+  "annotator_id": "ds-r0",
+  "benchmark_version": "v2",
+  "item_id": "c181494w0006",
+  "provenance": {
+    "repeat": 0,
+    "run_dir": "benchmark/v2/runs/v7-high-b24k",
+    "run_fingerprint": "1be91b36b67e9a28e28b06ca280f9bdf8e71b25c7d5484a4ad413c570957bd3b"
+  },
+  "raw": null,
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000254",
+        "evidence_quote": "at any increase in the consumption of alcohol, there is indeed an increase in mortality",
+        "label_ids": [
+          "topic:alcohol.health_effects"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000226",
+        "summary": "Speaker discusses Mendelian randomization evidence that alcohol raises mortality and disease risk at any dose, then weighs social drinking against dose."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000229",
+        "evidence_quote": "The MRS show that at any increase in the consumption of alcohol, there is indeed an increase in mortality",
+        "label_ids": [
+          "evidence:vague_research"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "summary": "Speaker cites Mendelian randomization studies generally without naming a specific study."
+      },
+      {
+        "axis": "narrative",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000244",
+        "evidence_quote": "alcohol is under no dose helpful",
+        "label_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "summary": "Alcohol has no safe or helpful dose, a recurring contested public-health proposition."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "if you drink a little bit too close to bed, your sleep is going to be disrupted",
+        "label_ids": [
+          "topic:sleep.sleep_duration_quality"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000238",
+        "summary": "Speaker notes alcohol near bedtime disrupts sleep."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "With the ubiquity of sleep trackers out there",
+        "label_ids": [
+          "topic:self_tracking.wearables"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000239",
+        "summary": "Speaker references the ubiquity of sleep trackers while discussing alcohol's effect on sleep."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000257",
+        "evidence_quote": "What do you think are the key principles for a \"quote unquote\" well-balanced, healthy diet",
+        "label_ids": [
+          "topic:diets"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000255",
+        "summary": "Host asks about key principles for a well-balanced healthy diet as a teaser for the next question."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000271",
+        "evidence_quote": "become a premium member",
+        "label_ids": [
+          "frame:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000258",
+        "summary": "Host pitches the Drive premium membership and its member benefits."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000269",
+        "evidence_quote": "This newsletter covers a wide range of topics related to longevity",
+        "label_ids": [
+          "topic:longevity"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000269",
+        "summary": "Membership pitch mentions that the premium newsletter covers topics related to longevity."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000271",
+        "evidence_quote": "become a premium member",
+        "mention_role": "own_product",
+        "product_name": "The Drive premium membership",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000258"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "any"
+        ],
+        "claim_text": "At any increase in alcohol consumption, there is an increase in mortality.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000229",
+        "evidence_quote": "at any increase in the consumption of alcohol, there is indeed an increase in mortality",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A dose-response claim about alcohol and mortality that can be checked against Mendelian randomization evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "any"
+        ],
+        "claim_text": "Any standard deviation increase in alcohol consumption leads to a greater increase in the risk of hypertension, dementia, cardiovascular disease, cancer, and all-cause mortality.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000232",
+        "evidence_quote": "any standard deviation and increase in the consumption of alcohol leads to a greater increase in the risk of everything",
+        "evidence_signal_ids": [
+          "evidence:vague_research"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "Specific quantitative claim about alcohol increasing multiple disease risks and mortality.",
+        "relevance": "substantive",
+        "start_unit_id": "u000229",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "no"
+        ],
+        "claim_text": "Alcohol is not helpful at any dose.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000243",
+        "evidence_quote": "alcohol is under no dose helpful",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "narrative_ids": [
+          "narrative:unlisted_narrative"
+        ],
+        "rationale": "A general claim about alcohol having no beneficial dose that is central to the precautionary conclusion.",
+        "relevance": "substantive",
+        "start_unit_id": "u000243",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Low doses of alcohol are probably not terribly bad.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000244",
+        "evidence_quote": "Under low doses, probably not terribly bad",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A hedged risk claim about low-dose alcohol that a listener could act on.",
+        "relevance": "substantive",
+        "start_unit_id": "u000244",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Under escalating doses, alcohol is actually quite negative.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000244",
+        "evidence_quote": "under escalating doses, it's actually quite negative",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A claim about the harms of higher alcohol doses that can be checked against dose-response data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000244",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Drinking alcohol too close to bedtime disrupts sleep.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000239",
+        "evidence_quote": "if you drink a little bit too close to bed, your sleep is going to be disrupted",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A practical health claim about alcohol and sleep that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000239",
+        "topic_ids": [
+          "topic:alcohol.health_effects",
+          "topic:sleep.sleep_duration_quality"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Having three or four beers a couple times a month is probably not that bad.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000254",
+        "evidence_quote": "three or four beers a couple times a month, then I would say, yeah, it's probably not that bad",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "narrative_ids": [],
+        "rationale": "A hedged clinical judgment about moderate drinking that affects patient decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000254",
+        "topic_ids": [
+          "topic:alcohol.health_effects"
+        ]
+      }
+    ],
+    "window_id": "episode_181494_window_0006"
+  },
+  "stored_at": "2026-10-04T22:13:45.682271+00:00"
+}
