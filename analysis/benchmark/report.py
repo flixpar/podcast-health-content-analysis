@@ -15,14 +15,39 @@ HEADLINE_ROWS: list[tuple[str, str, str]] = [
     ("Topic F1 (adjacent credit)", "detection:topic", "f1_adjacent"),
     ("Topic recall (required)", "detection:topic", "recall_strict"),
     ("Topic precision", "detection:topic", "precision"),
+    ("Narrative F1 (soft)", "detection:narrative", "f1_soft"),
+    ("Narrative F1 (strict)", "detection:narrative", "f1_strict"),
     ("Frame F1 (soft)", "detection:frame", "f1_soft"),
     ("Evidence F1 (soft)", "detection:evidence", "f1_soft"),
+    ("Population F1 (soft)", "detection:population", "f1_soft"),
     ("Claim recall (required)", "claim", "recall_strict"),
     ("Claim precision", "claim", "precision"),
     ("Product F1 (soft)", "product", "f1_soft"),
     ("Topic yield ratio", "detection:topic", "yield_ratio"),
     ("Claim yield ratio", "claim", "yield_ratio"),
 ]
+
+
+# Every group a scorecard can show; groups with no gold and no predictions
+# (narrative and population on a v1 benchmark) are left out of the tables.
+AXIS_GROUPS = (
+    "detection:topic",
+    "detection:narrative",
+    "detection:frame",
+    "detection:evidence",
+    "detection:population",
+    "claim",
+    "product",
+)
+
+
+def _present_groups(score: dict[str, Any]) -> list[str]:
+    groups = (score.get("mean", {}).get("all", {}) or {}).get("groups", {})
+    ceiling = score.get("ceiling", {})
+    return [
+        g for g in AXIS_GROUPS
+        if (groups.get(g) or {}).get("gold") or (groups.get(g) or {}).get("pred") or g in ceiling
+    ]
 
 
 def _fmt(value: Any) -> str:
@@ -59,11 +84,47 @@ def scorecard(score: dict[str, Any]) -> str:
     lines.append("| --- | --- | --- |")
     dev = score.get("mean", {}).get("by_split", {}).get("dev", {})
     test = score.get("mean", {}).get("by_split", {}).get("test", {})
+    present = _present_groups(score)
     for label, group, field in HEADLINE_ROWS:
+        if group not in present:
+            continue
         lines.append(
             f"| {label} | {_fmt(_group_value(dev, group, field))} | {_fmt(_group_value(test, group, field))} |"
         )
     lines.append("")
+    levels = score.get("levels") or {}
+    if levels:
+        lines.append("## Topic F1 by level of the topic tree")
+        lines.append("")
+        lines.append(
+            "The same references re-clustered at each level: a subtopic error under the right "
+            "parent counts at the parent level. Read each level against its own leave-one-out "
+            "ceiling (mean over reference annotators)."
+        )
+        lines.append("")
+        lines.append("| level | dev P / R / F1 | test F1 | candidate vs references | leave-one-out F1 (mean) |")
+        lines.append("| --- | --- | --- | --- | --- |")
+        subtopic_loo = [
+            (entry.get("groups", {}).get("detection:topic") or {}).get("f1_strict")
+            for entry in (score.get("leave_one_out") or {}).values()
+        ]
+        subtopic_vs = [g.get("detection:topic", {}).get("f1") for g in score.get("agreement_with_annotators", {}).values()]
+        rows = [("subtopic", _group_value(dev, "detection:topic", "precision"), _group_value(dev, "detection:topic", "recall_strict"),
+                 _group_value(dev, "detection:topic", "f1_strict"), _group_value(test, "detection:topic", "f1_strict"), subtopic_vs, subtopic_loo)]
+        for level, entry in levels.items():
+            d = (entry.get("by_split") or {}).get("dev") or {}
+            t = (entry.get("by_split") or {}).get("test") or {}
+            vs = [g.get("f1") for g in (entry.get("agreement_with_annotators") or {}).values() if g]
+            loo = [g.get("f1_strict") for g in (entry.get("leave_one_out") or {}).values()]
+            rows.append((level, d.get("precision"), d.get("recall_strict"), d.get("f1_strict"), t.get("f1_strict"), vs, loo))
+
+        def _mean(values):
+            values = [v for v in values if v is not None]
+            return sum(values) / len(values) if values else None
+
+        for level, p, r, f, tf, vs, loo in rows:
+            lines.append(f"| {level} | {_fmt(p)} / {_fmt(r)} / {_fmt(f)} | {_fmt(tf)} | {_fmt(_mean(vs))} | {_fmt(_mean(loo))} |")
+        lines.append("")
     lines.append("## Ceiling and noise floor (pairwise F1, like for like)")
     lines.append("")
     lines.append(
@@ -75,7 +136,7 @@ def scorecard(score: dict[str, Any]) -> str:
     lines.append("| axis | candidate vs references (mean) | reference vs reference (mean, range) | candidate vs own repeat |")
     lines.append("| --- | --- | --- | --- |")
     agreement = score.get("agreement_with_annotators", {})
-    for group in ("detection:topic", "detection:frame", "detection:evidence", "claim", "product"):
+    for group in present:
         values = [g.get(group, {}).get("f1") for g in agreement.values() if g.get(group)]
         candidate = sum(values) / len(values) if values else None
         ref = ceiling.get(group, {})
@@ -93,14 +154,21 @@ def scorecard(score: dict[str, Any]) -> str:
             "scores on this scorecard; a candidate at these numbers is at ceiling."
         )
         lines.append("")
-        lines.append("| annotator | items | topic P / R / F1 | topic F1 adjacent | frame F1 | evidence F1 | claim P / R / F1 | product F1 |")
-        lines.append("| --- | --- | --- | --- | --- | --- | --- | --- |")
+        extra = [g for g in ("detection:narrative", "detection:population") if g in present]
+        lines.append(
+            "| annotator | items | topic P / R / F1 | topic F1 adjacent | "
+            + "".join(f"{g.split(':')[1]} F1 | " for g in extra)
+            + "frame F1 | evidence F1 | claim P / R / F1 | product F1 |"
+        )
+        lines.append("| --- " * (8 + len(extra)) + "|")
         for annotator, entry in sorted(loo.items()):
             g = entry.get("groups", {})
             t, c = g.get("detection:topic", {}), g.get("claim", {})
             lines.append(
                 f"| {annotator} | {entry.get('items')} | {_fmt(t.get('precision'))} / {_fmt(t.get('recall_strict'))} / {_fmt(t.get('f1_strict'))} "
-                f"| {_fmt(t.get('f1_adjacent'))} | {_fmt(g.get('detection:frame', {}).get('f1_strict'))} | {_fmt(g.get('detection:evidence', {}).get('f1_strict'))} "
+                f"| {_fmt(t.get('f1_adjacent'))} | "
+                + "".join(f"{_fmt(g.get(x, {}).get('f1_strict'))} | " for x in extra)
+                + f"{_fmt(g.get('detection:frame', {}).get('f1_strict'))} | {_fmt(g.get('detection:evidence', {}).get('f1_strict'))} "
                 f"| {_fmt(c.get('precision'))} / {_fmt(c.get('recall_strict'))} / {_fmt(c.get('f1_strict'))} | {_fmt(g.get('product', {}).get('f1_strict'))} |"
             )
         lines.append("")
@@ -188,20 +256,16 @@ def scorecard(score: dict[str, Any]) -> str:
         lines.append("")
         lines.append("## Candidate as a fourth annotator (pairwise F1 with each reference)")
         lines.append("")
-        lines.append("| annotator | topic | frame | evidence | claim | product |")
-        lines.append("| --- | --- | --- | --- | --- | --- |")
+        lines.append("| annotator | " + " | ".join(g.split(":")[-1] for g in present) + " |")
+        lines.append("| --- " * (len(present) + 1) + "|")
         for annotator, groups in sorted(agreement.items()):
             lines.append(
-                f"| {annotator} | " + " | ".join(
-                    _fmt(groups.get(g, {}).get("f1")) for g in ("detection:topic", "detection:frame", "detection:evidence", "claim", "product")
-                ) + " |"
+                f"| {annotator} | " + " | ".join(_fmt(groups.get(g, {}).get("f1")) for g in present) + " |"
             )
         pairwise = score.get("reference_pairwise", {})
         for pair, groups in sorted(pairwise.items()):
             lines.append(
-                f"| ref {pair} | " + " | ".join(
-                    _fmt(groups.get(g, {}).get("f1")) for g in ("detection:topic", "detection:frame", "detection:evidence", "claim", "product")
-                ) + " |"
+                f"| ref {pair} | " + " | ".join(_fmt(groups.get(g, {}).get("f1")) for g in present) + " |"
             )
     return "\n".join(lines) + "\n"
 

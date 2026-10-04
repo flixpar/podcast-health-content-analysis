@@ -15,15 +15,34 @@ nothing enters the benchmark unvalidated.
 
 from __future__ import annotations
 
+import os
+import tomllib
 from pathlib import Path
 
-BENCHMARK_VERSION = "v1"
 # Repository root, resolved from this file so the CLI works from anywhere.
 REPO_ROOT = Path(__file__).resolve().parents[2]
-# Tracked benchmark data. Not under ``analysis/`` because the root .gitignore
-# ignores every path named ``data`` and ``output``.
-DATA_DIR = REPO_ROOT / "benchmark"
+# Which benchmark: its tracked data directory. ``benchmark/`` holds v1 (the
+# flat 91-label taxonomy); ``benchmark/v2/`` holds v2 (the granular v7
+# taxonomy). Select one with BENCHMARK_DIR, relative to the repository root or
+# absolute. Not under ``analysis/`` because the root .gitignore ignores every
+# path named ``data`` and ``output``.
+DATA_DIR_ENV = "BENCHMARK_DIR"
+_selected = Path(os.environ.get(DATA_DIR_ENV) or "benchmark")
+DATA_DIR = _selected if _selected.is_absolute() else REPO_ROOT / _selected
 CONFIG_PATH = DATA_DIR / "config.toml"
+
+
+def _config_value(section: str, key: str) -> str | None:
+    try:
+        with CONFIG_PATH.open("rb") as handle:
+            return tomllib.load(handle).get(section, {}).get(key)
+    except FileNotFoundError:
+        return None
+
+
+# The version and the codebook are properties of the benchmark directory, so
+# a v2 task bundle can never be written with v1's codebook or stamped v1.
+BENCHMARK_VERSION = _config_value("benchmark", "version") or "v1"
 ITEMS_PATH = DATA_DIR / "items.jsonl"
 GOLD_PATH = DATA_DIR / "gold.jsonl"
 TAXONOMY_PATH = DATA_DIR / "taxonomy.json"
@@ -34,4 +53,5 @@ MANIFEST_PATH = DATA_DIR / "manifest.json"
 REFERENCES_DIR = DATA_DIR / "references"
 RUNS_DIR = DATA_DIR / "runs"
 POOL_DIR = DATA_DIR / "pool"
-CODEBOOK_PATH = Path(__file__).resolve().parent / "codebook.md"
+_codebook = _config_value("paths", "codebook")
+CODEBOOK_PATH = REPO_ROOT / _codebook if _codebook else Path(__file__).resolve().parent / "codebook.md"

@@ -66,10 +66,14 @@ STRATA = (
     "ad_read",
     "discourse",
     "rare_label",
+    "narrative",
     "synthetic",
     "contrast",
 )
-CORPUS_STRATA = STRATA[:6]
+CORPUS_STRATA = STRATA[:7]
+# Strata drawn label by label from the lexical scan: windows are chosen for a
+# specific scan label, round-robin across labels, with per-label caps.
+LABEL_KEYED_STRATA = ("rare_label", "narrative")
 SOURCES = ("corpus", "synthetic", "contrast")
 SPLITS = ("dev", "test")
 
@@ -390,22 +394,25 @@ def choose_episodes(
         (eid, None) for eid in _sample_with_caps(rng, disc_other, episodes, count - half, max_per_show)
     ]
 
-    rare_cfg = strata_cfg["rare_label"]
-    keys = (
-        [f"topics:{label}" for label in rare_cfg["topics"]]
-        + [f"frames:{label}" for label in rare_cfg["frames"]]
-        + [f"narratives:{label}" for label in rare_cfg["narratives"]]
-    )
-    per_key = per_label[per_label["key"].isin(keys)]
-    rare: list[tuple[int, str | None]] = []
-    seen: set[int] = set()
-    for key in keys:
-        eids = [int(e) for e in per_key[per_key["key"] == key]["episode_id"] if int(e) in usable.index]
-        eids = [e for e in eids if e not in seen]
-        for eid in _sample_with_caps(rng, eids, episodes, int(rare_cfg["episodes_per_label"]), max_per_show):
-            rare.append((eid, key))
-            seen.add(eid)
-    chosen["rare_label"] = rare
+    for stratum in LABEL_KEYED_STRATA:
+        if stratum not in strata_cfg:
+            continue
+        keyed_cfg = strata_cfg[stratum]
+        keys = (
+            [f"topics:{label}" for label in keyed_cfg.get("topics", [])]
+            + [f"frames:{label}" for label in keyed_cfg.get("frames", [])]
+            + [f"narratives:{label}" for label in keyed_cfg.get("narratives", [])]
+        )
+        per_key = per_label[per_label["key"].isin(keys)]
+        keyed: list[tuple[int, str | None]] = []
+        seen: set[int] = set()
+        for key in keys:
+            eids = [int(e) for e in per_key[per_key["key"] == key]["episode_id"] if int(e) in usable.index]
+            eids = [e for e in eids if e not in seen]
+            for eid in _sample_with_caps(rng, eids, episodes, int(keyed_cfg["episodes_per_label"]), max_per_show):
+                keyed.append((eid, key))
+                seen.add(eid)
+        chosen[stratum] = keyed
     return chosen
 
 
@@ -438,7 +445,7 @@ def _window_qualifies(
         )
     if stratum == "discourse":
         return health >= int(cfg["min_health_units"]) and discourse >= int(cfg["min_discourse_units"])
-    if stratum == "rare_label":
+    if stratum in LABEL_KEYED_STRATA:
         return rare_key is not None and features["label_units"].get(rare_key, 0) > 0
     raise BenchmarkError(f"unknown stratum {stratum}")
 
@@ -460,9 +467,12 @@ def build_pool(
     transcripts_dir = resolve_path(paths["transcripts"])
     chosen = choose_episodes(config, stats, per_label, episodes, rng)
     quotas = config["quotas"]
+    # A stratum the config does not define (the narrative stratum in v1) has
+    # no quota and draws nothing.
     targets = {
-        stratum: int(math.ceil(quotas[stratum] * float(pool_cfg["oversample"])))
+        stratum: int(math.ceil(quotas.get(stratum, 0) * float(pool_cfg["oversample"])))
         for stratum in CORPUS_STRATA
+        if stratum in config["strata"]
     }
     max_per_episode = int(pool_cfg["max_windows_per_episode"])
     min_words = int(pool_cfg["min_window_words"])
@@ -486,12 +496,12 @@ def build_pool(
         feature_cache[episode_id] = (windows, features)
         return feature_cache[episode_id]
 
-    for stratum in CORPUS_STRATA:
+    for stratum in targets:
         cfg = config["strata"][stratum]
         taken = 0
         per_label_taken: Counter[str] = Counter()
         candidates = list(chosen[stratum])
-        if stratum == "rare_label":
+        if stratum in LABEL_KEYED_STRATA:
             # Round-robin across labels so the least common ones are not
             # crowded out by whichever label came first in the list.
             by_key: dict[str, list[tuple[int, str | None]]] = defaultdict(list)
@@ -506,7 +516,7 @@ def build_pool(
         for episode_id, rare_key in candidates:
             if taken >= targets[stratum]:
                 break
-            if stratum == "rare_label" and per_label_taken[rare_key] >= int(config["strata"]["rare_label"].get("pool_windows_per_label", 3)):
+            if stratum in LABEL_KEYED_STRATA and per_label_taken[rare_key] >= int(cfg.get("pool_windows_per_label", 3)):
                 continue
             windows, features = windows_and_features(episode_id)
             qualifying: list[int] = []
@@ -517,7 +527,7 @@ def build_pool(
                 if _window_qualifies(stratum, feats, neighbours, cfg, rare_key):
                     qualifying.append(index)
             rng.shuffle(qualifying)
-            per_episode_limit = 1 if stratum == "rare_label" else max_per_episode
+            per_episode_limit = 1 if stratum in LABEL_KEYED_STRATA else max_per_episode
             for index in qualifying[:per_episode_limit]:
                 window = windows[index]
                 feats = features[index]
@@ -557,7 +567,7 @@ def build_pool(
             "target": targets[stratum],
             "taken": taken,
             "episodes_offered": len(candidates),
-            **({"per_label": dict(per_label_taken)} if stratum == "rare_label" else {}),
+            **({"per_label": dict(per_label_taken)} if stratum in LABEL_KEYED_STRATA else {}),
         }
         if log:
             print(f"pool {stratum}: {taken}/{targets[stratum]} windows", file=log)
@@ -612,7 +622,7 @@ def screening_fit(stratum: str, verdict: dict[str, Any]) -> int | None:
         if density == "none":
             return None
         return 2 if tags & discourse_tags else (1 if "checkable_claims" in tags else 0)
-    if stratum == "rare_label":
+    if stratum in LABEL_KEYED_STRATA:
         if density == "none":
             return None
         return 2 if int(verdict.get("interest") or 0) >= 2 else 1
@@ -668,7 +678,7 @@ def select_items(
         by_stratum[window["pool_stratum"]].append(window)
     existing_ids = {item["item_id"] for item in kept}
     for stratum in CORPUS_STRATA:
-        need = int(quotas[stratum]) - per_stratum[stratum]
+        need = int(quotas.get(stratum, 0)) - per_stratum[stratum]
         if need <= 0:
             continue
         candidates = sorted(by_stratum.get(stratum, []), key=item_id_for)
@@ -693,7 +703,7 @@ def select_items(
             show = window["provenance"].get("podcast_id")
             if per_show[show] >= max_per_show or per_episode[window["episode_id"]] >= max_per_episode:
                 continue
-            if stratum == "rare_label" and rare_taken[window["pool_rare_label"]] >= int(config["strata"]["rare_label"].get("items_per_label", 2)):
+            if stratum in LABEL_KEYED_STRATA and rare_taken[window["pool_rare_label"]] >= int(config["strata"][stratum].get("items_per_label", 2)):
                 continue
             tags = sorted(set(window.get("tags", [])) | set(verdict.get("tags", [])))
             item = {
@@ -713,7 +723,7 @@ def select_items(
             per_show[show] += 1
             per_episode[window["episode_id"]] += 1
             per_stratum[stratum] += 1
-            if stratum == "rare_label":
+            if stratum in LABEL_KEYED_STRATA:
                 rare_taken[window["pool_rare_label"]] += 1
             need -= 1
     unsplit = [item for item in kept if not item.get("split")]

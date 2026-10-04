@@ -92,7 +92,13 @@ def read_bundle_outputs(run_dir: Path, pattern: str) -> list[tuple[Path, Any]]:
 
 
 def taxonomy_tables(taxonomy: dict[str, Any]) -> str:
-    """The label tables as markdown, one per axis, from the frozen taxonomy."""
+    """The label tables as markdown, one per axis, from the frozen taxonomy.
+
+    A v7 taxonomy renders exactly as the labeling prompt renders it, so
+    annotators and candidates read the same tables.
+    """
+    if tl.is_hierarchical(taxonomy):
+        return tl.render_label_tables(taxonomy)
     lines: list[str] = ["# Label tables", ""]
     for axis, title in (("topic", "Topic axis"), ("frame", "Frame axis"), ("evidence", "Evidence axis")):
         lines.append(f"## {title}")
@@ -180,8 +186,10 @@ object per item, in any order) with exactly these fields:
   English, mostly unintelligible ASR, a duplicate of another item, or an
   obvious mismatch for the stratum given in `stratum_hint` (for example a
   `null` hint on a window that plainly discusses health, or a `health_dense`
-  hint on a window with no health content). Everything else is "keep": the
-  benchmark needs ordinary windows too.
+  hint on a window with no health content, or a `narrative` hint on a window
+  where no contested health claim of any kind is discussed because the
+  keyword match was incidental). Everything else is "keep": the benchmark
+  needs ordinary windows too.
 - `notes`: at most two sentences on what makes this window interesting or why
   it was dropped. Name the phenomenon, not the labels you would assign.
 
@@ -294,45 +302,48 @@ where careful readers agree and disagree, so work carefully and independently:
 take the reading a careful colleague would defend, be exhaustive, and do not
 guess. Quality matters far more than speed.
 
-Work ONLY with the files in this directory, plus the one validation command
-below. Do not search the filesystem, read other directories, or look anything
-up. Do not use any other knowledge of how these transcripts might have been
-labeled before.
+Work ONLY with the files in this directory, plus the one command below. Do not
+search the filesystem, read other directories, or look anything up. Do not use
+any other knowledge of how these transcripts might have been labeled before.
 
 ## Files
 
 - `codebook.md`: the task definition. Read all of it before starting,
   including the label tables at the end: those are the only label IDs you may
-  use, spelled exactly as listed (`topic:...`, `cross_cutting:...`).
+  use, spelled exactly as listed.
 - `items.json`: the windows to label. Each has `window_id` and `units`
   (`unit_id`, `text`). Label each window on its own.
 - `schema.json`: the JSON Schema of one result object.
 
 ## Procedure
 
-1. Read `codebook.md` fully.
+1. Read `codebook.md` fully, including every label table.
 2. For each window, in order: read the whole window first, then produce one
-   result object following the codebook. Work through the three tasks
-   (detections, verification candidates, product mentions) for the window.
-   Choose spans by unit IDs from that window. Copy quotes and certainty
-   markers verbatim from the units.
-3. Write all result objects, one per window, as a JSON array to
-   `results.raw.json`. This is your first complete answer; do not edit it
-   afterwards.
-4. Copy it to `results.json` and validate:
+   result object following the codebook (detections on all axes,
+   verification candidates, product mentions). Choose spans by unit IDs from
+   that window. Copy quotes and certainty markers verbatim from the units.
+   Write the object to `windows/<window_id>.json` (create the `windows`
+   directory), one file per window. Do not write several windows' results in
+   one go: a result is long, and one file per window keeps each write small.
+3. When every window has its file, assemble and validate:
 
        {validate_command}
 
-   The command prints, for each window, either `ok` or the rejection kinds and
-   messages. Fix ONLY what it reports (a quote that is not verbatim, a unit ID
-   outside the window, a reversed span, certainty markers that do not agree
-   with the level, a duplicate) by correcting `results.json`, and re-run until
-   every window is `ok`. Do not drop an annotation just because it was
-   rejected; fix its quote or span. Do not add or remove annotations for any
-   other reason.
-5. Stop when every window validates. Report the number of windows, the total
-   detections, candidates and product mentions, and anything in the codebook
-   you found ambiguous (one line each).
+   This combines the window files into `results.json`, keeps the first
+   complete assembly as `results.raw.json` (your unrepaired answer), and
+   prints, for each window, either `ok` or the rejection kinds and messages.
+   Fix ONLY what it reports (a quote that is not verbatim, a unit ID outside
+   the window, a reversed span, certainty markers that do not agree with the
+   level, a label from two axes, a duplicate) by editing that window's file,
+   and re-run until every window is `ok`. Do not drop an annotation just
+   because it was rejected; fix its quote or span. Do not add or remove
+   annotations for any other reason.
+4. Stop when every window validates. Write `notes.md` with: the number of
+   windows and the total detections, candidates and product mentions; then,
+   one line each, every place the codebook or the label set was ambiguous,
+   missing a label you needed, or forced a choice between two labels you
+   could not separate. Name the label IDs involved and the window. Report the
+   same in your final message.
 
 ## Reminders
 
@@ -346,11 +357,15 @@ labeled before.
 
 
 def result_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
-    """One result object's schema, with the benchmark's claim ``relevance``."""
+    """One result object's schema, with the benchmark's claim ``relevance``.
+
+    v7 claims carry ``relevance`` in the pipeline schema itself.
+    """
     result = json.loads(json.dumps(tl.response_schema(taxonomy)))
     claim = result["properties"]["verification_candidates"]["items"]
-    claim["properties"]["relevance"] = {"type": "string", "enum": list(tl.ALLOWED_RELEVANCE)}
-    claim["required"].append("relevance")
+    if "relevance" not in claim["properties"]:
+        claim["properties"]["relevance"] = {"type": "string", "enum": list(tl.ALLOWED_RELEVANCE)}
+        claim["required"].append("relevance")
     return result
 
 
