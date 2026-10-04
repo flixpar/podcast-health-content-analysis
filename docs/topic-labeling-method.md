@@ -303,6 +303,22 @@ the server chosen once at the start of a run, not as a knob to tune.
 `--api-base` may be written as the bare `/v1` root or with either route
 appended; both are accepted.
 
+### TypeSafe: a third option that is not a request shape
+
+`--api typesafe` labels with TypeSafe's System One API, which answers typed
+yes/no and multiple-choice questions and generates no text. It therefore does
+not send the rubric and schema at all: `analysis/typesafe_labeling.py` screens
+each window for every label, localizes what screened in, composes spans in
+code and asks the closed-set fields, then hands the result to the same
+validator and store. `claim_text` is the claim's own sentence verbatim and
+`summary` is templated, because nothing can be written. Its fingerprint is the
+pinned model, the question templates and the policy rather than the decoding
+settings, `verify` has no counterpart for it, and its measured quality, cost
+and limits are in `docs/typesafe-labeling.md`. Cloudflare's open-weight Clef
+models speak the same API: `analysis/serving/clef_server.py` serves one on a
+local GPU, a loopback `api_base` needs no key, and `docs/clef-labeling.md` has
+what they measured, as labelers and as a screen in front of the LLM.
+
 ### Several servers
 
 `--api-base` repeats, and `[model] api_base` in the config takes a list, so a
@@ -656,6 +672,7 @@ verified negatives.
 | `labels.sqlite` | Crash-safe raw-label response checkpoints keyed by window ID |
 | `label_manifest.json` | Model, endpoint, prompt/settings fingerprint, server-reported effective sampling, and completion counts |
 | `window_labels.jsonl.zst` | Validated raw window decisions |
+| `typesafe_judgments.jsonl` | `--api typesafe` only: every probability behind each window's result, so thresholds can be changed without re-labeling |
 | `label_annotations.jsonl` | Canonical one-label spans across all three taxonomy axes |
 | `clips.jsonl` | Topic clips with overlapping frame/evidence annotations and claim IDs |
 | `verification_candidates.jsonl` | Atomic unverified possible-misinformation review candidates with expressed certainty and linked product mentions |

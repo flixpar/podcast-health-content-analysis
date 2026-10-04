@@ -2188,3 +2188,35 @@ def test_rubric_is_the_benchmark_codebook():
         ]
     }
     assert labeling.taxonomy_instructions(taxonomy).startswith(codebook)
+
+
+def test_a_validated_result_survives_its_own_validator():
+    """merge re-validates what label stored, including the axis validation added."""
+    window = {
+        "window_id": "w",
+        "units": [{"unit_id": "u000001", "text": "The guest discusses sleep."}],
+    }
+    result = {
+        "window_id": "w",
+        "detections": [
+            {
+                "start_unit_id": "u000001",
+                "end_unit_id": "u000001",
+                "label_ids": ["topic:sleep"],
+                "relevance": "substantive",
+                "discourse_role": "asserted_or_endorsed",
+                "confidence": 0.9,
+                "summary": "Sleep.",
+                "evidence_quote": "discusses sleep",
+            }
+        ],
+        "verification_candidates": [],
+        "product_mentions": [],
+    }
+    axes = {"topic:sleep": "topic"}
+    once = labeling.validate_window_result(result, window, axes)
+    assert once["detections"][0]["axis"] == "topic"
+    assert labeling.validate_window_result(once, window, axes) == once
+    once["detections"][0]["axis"] = "frame"
+    with pytest.raises(labeling.TopicLabelingError, match="contradicts"):
+        labeling.validate_window_result(once, window, axes)

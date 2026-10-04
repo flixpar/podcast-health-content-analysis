@@ -219,6 +219,18 @@ TOML tables and flags:
 .venv/bin/python -m analysis.benchmark compare benchmark/runs/ds-low benchmark/runs/ds-high
 ```
 
+A TypeSafe run (`--pipeline-config benchmark/pipeline-typesafe.toml`) is the
+same command; it takes no `--rubric-file`, keeps its raw probabilities in each
+repeat's `typesafe_judgments.jsonl`, and
+`python -m analysis.benchmark.typesafe_tune <run_dir>` sweeps its composition
+thresholds against the dev gold from those, without requests. Its results, and
+the first candidate numbers on the test split, are in
+`docs/typesafe-labeling.md`. The same method runs on Cloudflare's open-weight
+Clef models through a local server (`benchmark/pipeline-clef.toml`,
+`benchmark/pipeline-clef-flash.toml`); `analysis.benchmark.clef_quick`
+re-scores a stored run under any policy, and the results, with the screening
+evaluation, are in `docs/clef-labeling.md`.
+
 Runs made on the 84-label taxonomy score through `--alias v5-84`, which
 collapses the seven v6 topics onto the labels the older taxonomy would have
 used, on both sides.

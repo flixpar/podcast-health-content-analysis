@@ -1,0 +1,34 @@
+# Candidate configuration for benchmark runs of the TypeSafe (System One)
+# labeling method. See docs/typesafe-labeling.md.
+#
+#   .venv/bin/python -m analysis.benchmark run --name ts-v1 \
+#       --pipeline-config benchmark/pipeline-typesafe.toml --repeats 2
+#
+# The decoding keys the other candidates set (reasoning_effort, temperature,
+# max_output_tokens) mean nothing here and are left at their defaults; they are
+# not in this method's run fingerprint. What is: the pinned model, the question
+# set, and the policy -- typesafe_labeling.Policy, or the file named by
+# `typesafe_policy` under [label].
+
+[model]
+api = "typesafe"
+api_base = ["https://api.typesafe.ai/v1"]
+api_key_env = "TYPESAFE_API_KEY"
+env_file = ".env"
+# Pinned: `jev-latest` moves with each release, and the policy thresholds were
+# tuned against this version's probabilities.
+model = "jev-1.13.0"
+timeout = 120
+attempts = 3
+
+[usage]
+usage_limits = "analysis/usage-limits.toml"
+provider = "typesafe"
+experiment = "typesafe-eval"
+
+[label]
+# One window is four or five sequential requests of about half a second, and
+# the account is limited to 1,200 requests a minute: eight windows at a time
+# stays under it.
+concurrency = 8
+# typesafe_policy = "benchmark/typesafe-policy.toml"
