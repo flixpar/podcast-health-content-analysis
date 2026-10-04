@@ -540,6 +540,12 @@ For every singleton write one object into `adjudication.json` (a JSON array):
   contain the labeled material). A candidate labeler that produces it will be
   penalised.
 
+Two singletons on the same span are often competing readings (two sibling
+subtopics, a subtopic and its bare parent, two certainty levels). Judge each
+on its own: both can be acceptable when the codebook supports both. Where the
+codebook decides between them (for example, the bare parent ID is wrong when
+a listed subtopic fits), reject the one it rules out.
+
 Judge the annotation, not the coder. Do not add annotations of your own and
 do not revisit the settled ones. When unsure, prefer `acceptable`: the cost of
 rejecting a defensible reading is higher than the cost of accepting a weak one.

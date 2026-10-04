@@ -158,3 +158,19 @@ def test_explode_keeps_the_chosen_label_as_the_atom_identity():
     parent_topic = next(a for a in parent if a.axis == "topic")
     assert parent_topic.label == "topic:vaccines" and parent_topic.origin_label == "topic:vaccines.hep_b"
     assert parent_topic.member_key("x") == leaf_topic.member_key("x")
+
+
+def test_benchmark_runs_use_the_v7_prompt_and_a_rubric_file_replaces_only_the_rubric(tmp_path):
+    from analysis.benchmark import runner
+
+    instructions, version, _ = runner.build_instructions(TAXONOMY, None)
+    assert instructions == tl.taxonomy_instructions(TAXONOMY)
+    assert version == tl.prompt_version(TAXONOMY)
+    rubric = tmp_path / "rubric-x.md"
+    rubric.write_text("# A different procedure\n")
+    variant, variant_version, rubric_sha = runner.build_instructions(TAXONOMY, rubric)
+    assert variant.startswith("# A different procedure")
+    assert tl.DEFAULT_V7_CODEBOOK.read_text(encoding="utf-8").strip()[:200] in variant
+    assert "topic:vaccines.hep_b" in variant
+    assert variant_version.startswith("file:rubric-x.md:") and variant_version != version
+    assert rubric_sha == tl.sha256_bytes(rubric.read_bytes())
