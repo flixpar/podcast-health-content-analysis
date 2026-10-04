@@ -727,3 +727,37 @@ next taxonomy revision.
   singletons became acceptable, which a candidate gets credit for producing
   and is not penalised for missing. Strict recall is over `required` atoms
   only, so this makes precision forgiving without inflating recall.
+
+### Where the v7 codebook runs out
+
+Each reference agent wrote down the ambiguities it hit (222 `notes.md`
+files, about 3,400 notes). An Opus agent read all of them and grouped them
+into `benchmark/v2/codebook-v8-proposal.md`: 22 recurring ambiguities with
+counts, quotes, the competing readings and proposed codebook wording; the
+gaps in the label set; 61 overlapping label pairs with boundary sentences;
+and 26 places where coders departed from the codebook or found it
+contradictory. The largest themes:
+
+- **Certainty markers read by form instead of function** (about 75 notes):
+  minimizing "only", scope "every", factual superlatives and "a lot of"
+  counting studies were coded `absolute` or `hedged` by some coders and
+  `unhedged` by others on identical text. About 40 more unlisted boosters
+  and hedges recur ("the truth is", "suggests", "apparently", "nearly
+  every").
+- **Attribution and relayed speech:** when hearsay is a hedge, how to code a
+  rebutted claim, and the discourse role of mockery, played clips and
+  relayed rebuttals.
+- **Narratives with bundled clauses** (a window invokes one clause of a
+  multi-part definition), and the implicature threshold (product attributes
+  like "no seed oils" vs coined terms like "turbo cancer").
+- **Gaps:** mitochondria/energy, blood work, general nutrition, mind-body,
+  and ten other subtopics; ten narratives all three coders independently
+  coded `unlisted_narrative` (moderate alcohol is protective, stealth
+  infections, vitamin A toxicity, the heart is not a pump, autism is
+  recoverable, Alzheimer's is reversible, cancer as a metabolic disease,
+  among others).
+
+The attribute disagreement in `agreement.json` is concentrated in these
+places, so a candidate's errors there should be read against the reference
+alpha. Adopting the proposal is a new benchmark version (v3): the codebook
+defines the gold.
