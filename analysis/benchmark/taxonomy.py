@@ -99,6 +99,10 @@ def alias_map(taxonomy: dict[str, Any], name: str | None) -> dict[str, str]:
     """The collapse map for a named alias set, or empty for none."""
     if not name:
         return {}
+    if name.endswith(".json") and Path(name).is_file():
+        # A map from another revision of the label set onto this one, kept
+        # outside the frozen taxonomy; an empty target drops the label.
+        return dict(json.loads(Path(name).read_text(encoding="utf-8")))
     aliases = taxonomy.get("label_aliases", {})
     if name not in aliases:
         raise tl.TopicLabelingError(f"unknown label alias set {name!r}; have {sorted(aliases)}")

@@ -124,6 +124,8 @@ def explode(result: dict[str, Any], index: WindowIndex, aliases: dict[str, str] 
         quote_range = index.locate(detection.get("evidence_quote", ""), start, end)
         origins: dict[str, str] = {}
         for label in sorted(detection["label_ids"]):
+            if aliases.get(label) == "":
+                continue  # no counterpart in the scored label set
             origins.setdefault(aliases.get(label, label), label)
         for label in sorted(origins):
             atoms.append(

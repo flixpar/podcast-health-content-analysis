@@ -1,0 +1,373 @@
+{
+ "source": "v8 corpus review report queries",
+ "labels": {
+  "topic:vaccines": {
+   "terms": [],
+   "regex": [
+    "\\b(vaccin\\w*|unvaccinated|anti-?vax\\w*)\\b",
+    "need a vaccine|live vaccines|\u2026scheduled to receive a vaccine"
+   ]
+  },
+  "topic:vaccines.hep_b": {
+   "terms": [],
+   "regex": [
+    "hep(atitis)? ?b (vaccine|shot|\u2026)|birth dose"
+   ]
+  },
+  "topic:vaccines.mmr": {
+   "terms": [],
+   "regex": [
+    "\\bMMR\\b|measles (vaccine|shot|vaccination)"
+   ]
+  },
+  "topic:vaccines.hpv_vaccine": {
+   "terms": [],
+   "regex": [
+    "gardasil|hpv (vaccine|shot)|cervical cancer vaccine"
+   ]
+  },
+  "topic:vaccines.flu_vaccine": {
+   "terms": [],
+   "regex": [
+    "\\bflu (shot|vaccine|jab)s?\\b|influenza vaccin\\w*"
+   ]
+  },
+  "topic:covid": {
+   "terms": [],
+   "regex": [
+    "\\b(covid|corona ?virus|sars.cov|pandemic)\\b"
+   ]
+  },
+  "topic:infectious.measles": {
+   "terms": [],
+   "regex": [
+    "\\bmeasles\\b"
+   ]
+  },
+  "topic:infectious.antibiotics_resistance": {
+   "terms": [],
+   "regex": [
+    "\\bantibiotics?\\b|superbugs?|MRSA|C. diff|antimicrobial resistance"
+   ]
+  },
+  "topic:food.ultra_processed": {
+   "terms": [],
+   "regex": [
+    "ultra[- ]?processed|\\bupfs?\\b|bliss point|hyper[- ]?palatab|food[- ]like (products?|substances?)|highly processed|processed (foods?|junk)"
+   ]
+  },
+  "topic:food.additives_dyes": {
+   "terms": [],
+   "regex": [
+    "\\bred (dye )?(no|number )?(40|forty)"
+   ]
+  },
+  "topic:supplements": {
+   "terms": [],
+   "regex": [
+    "\\bsupplement(s|ing|ation)?\\b"
+   ]
+  },
+  "topic:supplements.vitamin_d": {
+   "terms": [],
+   "regex": [
+    "\\bvitamin d\\b|\\bd3\\b|vitamin d3"
+   ]
+  },
+  "topic:supplements.magnesium": {
+   "terms": [],
+   "regex": [
+    "\\bmagnesium\\b"
+   ]
+  },
+  "topic:supplements.vitamin_c": {
+   "terms": [],
+   "regex": [
+    "vitamin c\\b"
+   ]
+  },
+  "topic:supplements.omega3": {
+   "terms": [],
+   "regex": [
+    "\\bepa\\b"
+   ]
+  },
+  "topic:supplements.creatine": {
+   "terms": [],
+   "regex": [
+    "\\bcreatine\\b"
+   ]
+  },
+  "topic:supplements.other_compounds": {
+   "terms": [],
+   "regex": [
+    "\\bpea\\b"
+   ]
+  },
+  "topic:peptides": {
+   "terms": [],
+   "regex": [
+    "\\bpeptides?\\b"
+   ]
+  },
+  "topic:peptides.healing_peptides": {
+   "terms": [],
+   "regex": [
+    "bpc|tb.?500|tb ?4\\b|thymosin beta|thymazin beta|wolverine stack|b p c"
+   ]
+  },
+  "topic:cardiovascular": {
+   "terms": [],
+   "regex": [
+    "heart health|cardiovascular health|healthy heart|cardiovascular disease|heart disease"
+   ]
+  },
+  "topic:cardiovascular.cholesterol_lipids": {
+   "terms": [],
+   "regex": [
+    "ldl|hdl|apo b|triglycerides"
+   ]
+  },
+  "topic:cardiovascular.blood_pressure": {
+   "terms": [],
+   "regex": [
+    "blood pressure|hypertension|hypotension"
+   ]
+  },
+  "topic:metabolic.diabetes": {
+   "terms": [],
+   "regex": [
+    "type (2|two|1|one) diabet*|diabetics?|diabetes"
+   ]
+  },
+  "topic:weight": {
+   "terms": [],
+   "regex": [
+    "obes*|bmi|body mass index|overweight"
+   ]
+  },
+  "topic:weight.obesity_rates": {
+   "terms": [],
+   "regex": [
+    "obes*|bmi|body mass index|overweight"
+   ]
+  },
+  "topic:gut": {
+   "terms": [],
+   "regex": [
+    "\\bgut health\\b",
+    "microbiome|gut bacteria|gut flora|dysbiosis|gut.brain axis",
+    "fecal transplant|FMT|poop transplant"
+   ]
+  },
+  "topic:immune": {
+   "terms": [],
+   "regex": [
+    "\\bimmune system"
+   ]
+  },
+  "topic:mental": {
+   "terms": [],
+   "regex": [
+    "\\bmental health\\b"
+   ]
+  },
+  "topic:mental.depression": {
+   "terms": [],
+   "regex": [
+    "\\bdepress(ion|ed|ive)\\b",
+    "so depressed|I'm depressed|that's depressing"
+   ]
+  },
+  "topic:mental.anxiety": {
+   "terms": [],
+   "regex": [
+    "anxiety|panic attacks?|anxious"
+   ]
+  },
+  "topic:mental.trauma_ptsd": {
+   "terms": [],
+   "regex": [
+    "\\bptsd\\b"
+   ]
+  },
+  "topic:mental.ocd_personality": {
+   "terms": [],
+   "regex": [
+    "little bit OCD|so OCD|I'm OCD|my OCD",
+    "malignant narcissis*|Goldwater rule|armchair diagnos*"
+   ]
+  },
+  "topic:mental.therapy": {
+   "terms": [],
+   "regex": [
+    "therapist|therapy|CBT|DBT|EMDR|counseling|BetterHelp|Talkspace"
+   ]
+  },
+  "topic:mental.pop_psychology": {
+   "terms": [],
+   "regex": [
+    "therapy-speak|attachment style|anxious/avoidant attach*|trauma bond*|self-diagnos*|love bomb*",
+    "narcissistic abuse/parent/ex|covert narcissist|dating a narcissist|narcissists do\u2026",
+    "everyone has ADHD/anxiety\u2026|overdiagnos*|overmedicat*|pathologiz*"
+   ]
+  },
+  "topic:mental.causes_models": {
+   "terms": [],
+   "regex": [
+    "chemical imbalance|social determinants of mental|root of mental|biopsychosocial|mental illness is"
+   ]
+  },
+  "topic:neurodevelopment": {
+   "terms": [],
+   "regex": [
+    "neurodivergen*|neurodiver*|neurotypical|stimming"
+   ]
+  },
+  "topic:cognition": {
+   "terms": [],
+   "regex": [
+    "dopamine hit/rush/spike|hit of dopamine|cheap dopamine"
+   ]
+  },
+  "topic:mental.psychiatric_care": {
+   "terms": [],
+   "regex": [
+    "involuntary commit*|5150|Baker Act|psych ward|psychiatric hospital/ward/facility/hold/care/beds|mental hospital/institution|deinstitutionaliz*|mental health system/care/services/treatment"
+   ]
+  },
+  "topic:womens": {
+   "terms": [],
+   "regex": [
+    "\\b(menstrual|menstruat\\w*|PMS|PMDD|cycle syncing|luteal phase|follicular phase|irregular periods?|heavy periods?|period cramps|period pain)\\b",
+    "amenorrh\\w*|hypothalamic amenorrhea|RED-S|relative energy deficiency|female athlete triad|lost my period",
+    "peri ?menopaus\\w*|menopaus\\w*|hot flash\\w*|vaginal atrophy|vaginal dryness|genitourinary syndrome",
+    "hormone replacement|bioidentical|estradiol|black box warning|women's health initiative|HRT|MHT",
+    "\\b(pcos|pmos|polycystic)\\b",
+    "tampons?|menstrual cups?|period underwear|knix|thinx|toxic shock",
+    "(tampons?|pads|period products?).{0,80}(toxic|heavy metals?|lead|arsenic|chemicals?|dioxins?|organic|pfas)|toxic shock|menstrual cups?|period underwear",
+    "pelvic floor|kegels?|organ prolapse|urinary incontinence|incontinence|bladder leak\\w*"
+   ]
+  },
+  "topic:pregnancy": {
+   "terms": [],
+   "regex": [
+    "prenatal|gestational diabetes|pre ?eclampsia|miscarr\\w*|morning sickness|stillbirths?|ectopic|hyperemesis|high-risk pregnancy",
+    "post ?partum|postnatal|placenta encapsulation|fourth trimester|diastasis",
+    "maternal (mortality|deaths?|health)|maternity care deserts?|obstetric violence|died (in|during) childbirth"
+   ]
+  },
+  "topic:fertility": {
+   "terms": [],
+   "regex": [
+    "abortions?|mifepristone|misoprostol|dobbs"
+   ]
+  },
+  "topic:sexual": {
+   "terms": [],
+   "regex": [
+    "HIV|PrEP|herpes|\u2026"
+   ]
+  },
+  "topic:mens": {
+   "terms": [],
+   "regex": [
+    "testosterone|low t|TRT|enclomiphene|clomid",
+    "prostate|BPH"
+   ]
+  },
+  "topic:gender": {
+   "terms": [],
+   "regex": [
+    "\\bdetrans\\w*"
+   ]
+  },
+  "topic:drugs_addiction": {
+   "terms": [],
+   "regex": [
+    "fentanyl\\|heroin\\|oxycontin\\|oxycodone\\|opioids?\\|opiates?\\|percocet\\|vicodin\\|xylazine\\|hydrocodone",
+    "cocaine\\|methamphetamine\\|crack cocaine\\|crystal meth",
+    "addict(ed\\|ion)?\\|rehab\\|relapse\\|12 steps\\|AA\\|NA\\|suboxone\\|methadone\\|in recovery\\|sober(ity)?",
+    "narcan\\|naloxone\\|needle exchange\\|safe supply\\|safe injection\\|test strips\\|harm reduction",
+    "overdose deaths\\|overdoses\\|decriminali[sz]\\|war on drugs\\|measure 110\\|cartels?\\|drug (policy\\|laws\\|trafficking\\|dealers?\\|war)\\|precursor",
+    "doing drugs\\|did drugs\\|on drugs\\|drug use\\|drug habit\\|drug problem\\|hard drugs\\|recreational drugs\\|party drugs\\|substance (ab)use",
+    "overdosed\\|overdoses?\\|overdosing",
+    "drug (dealers?\\|deals?\\|busts?\\|money\\|trafficking\\|smuggling\\|cartels?\\|lords?\\|charges)",
+    "xanax|benzos|percs|percocet|codeine|pill popping",
+    "drug (tests?|tested|testing|screen)"
+   ]
+  },
+  "topic:psychoactives": {
+   "terms": [],
+   "regex": [
+    "weed\\|marijuana\\|cannabis\\|thc\\|cbd\\|edibles?\\|stoned\\|blunts?\\|delta-8\\|dispensar(y\\|ies)\\|hemp",
+    "psilocybin\\|psychedelics?\\|magic mushrooms\\|shrooms\\|lsd\\|acid trip\\|ayahuasca\\|ibogaine\\|dmt\\|5-meo\\|mescaline\\|peyote",
+    "psychedelic-assisted\\|psilocybin therapy\\|mdma-assisted\\|psychedelic therapy\\|ibogaine treatment",
+    "ketamine\\|spravato\\|esketamine\\|k-hole",
+    "micro-?dos",
+    "kratom\\|7-oh\\|7-hydroxy\\|tianeptine\\|gas station heroin",
+    "molly\\|ecstasy\\|mdma"
+   ]
+  },
+  "topic:alcohol": {
+   "terms": [],
+   "regex": [
+    "alcohol\\|drunk\\|booze\\|hangover\\|hungover",
+    "dry january\\|sober-curious\\|binge drink\\|quit/stopped drinking\\|gave up drinking\\|don't drink anymore",
+    "alcoholics?\\|alcoholism\\|alcohol use disorder\\|alcohol abuse\\|alcohol withdrawal\\|delirium tremens\\|functioning alcoholic",
+    "non-?alcoholic\\|mocktails?\\|athletic brewing\\|thc drinks\\|hemp-derived\\|alcohol-free",
+    "drunk driv\\|dui\\|dwi\\|driving drunk\\|drinking and driving",
+    "drinking age\\|alcohol tax\\|alcohol warning label\\|alcohol laws/guidelines"
+   ]
+  },
+  "topic:stimulants": {
+   "terms": [],
+   "regex": [
+    "cigarettes?\\|cigs\\|tobacco\\|chain smok\\|quit smoking",
+    "big tobacco\\|tobacco compan(y\\|ies)\\|philip morris\\|menthol ban\\|flavored vape ban\\|vape ban",
+    "vapes?\\|vaping\\|juul\\|e-cigs?\\|elf bar",
+    "zyn\\|nicotine pouch\\|snus\\|nicotine",
+    "caffeine\\|caffeinated\\|decaf\\|matcha",
+    "energy drinks?\\|red bull\\|monster energy\\|pre-?workout\\|bang\\|ghost energy\\|alani nu\\|c4"
+   ]
+  },
+  "topic:medications": {
+   "terms": [],
+   "regex": [
+    "tylenol\\|acetaminophen\\|paracetamol\\|ibuprofen\\|advil\\|motrin\\|aspirin\\|aleve\\|naproxen\\|nsaids?\\|excedrin",
+    "overmedicat\\|polypharmacy\\|over-?prescrib\\|pills for everything\\|black-box warning\\|drug recalls?",
+    "ivermectin\\|low-dose naltrexone\\|ldn\\|metformin\\|methylene blue\\|dmso\\|off-label",
+    "blood thinners\\|eliquis\\|warfarin\\|prednisone\\|ppis\\|accutane\\|biologics\\|humira\\|dupixent\\|cortisone\\|muscle relaxers\\|ambien\\|sleeping pills",
+    "tremfya\\|trumphia\\|tremphia"
+   ]
+  },
+  "topic:health_system": {
+   "terms": [],
+   "regex": [
+    "health insurance\\|insurance compan(y\\|ies)\\|medicaid\\|medicare\\|obamacare\\|aca\\|medical debt\\|medical bills\\|drug prices\\|unitedhealth\\|prior authorization\\|single-payer\\|universal health care",
+    "medicaid (cuts\\|work requirements\\|expansion)\\|cuts to medicaid\\|aca subsidies",
+    "medicare fraud\\|medicaid fraud\\|health care fraud\\|hospice fraud\\|defrauding medicare/medicaid",
+    "big pharma\\|pharma(ceutical) compan(y\\|ies)/industry/lobby\\|drug compan(y\\|ies)\\|purdue pharma\\|sacklers?",
+    "medical school\\|med school\\|residency\\|doctor burnout\\|second opinion\\|doctors don't learn",
+    "hospital closures\\|wait times\\|rural hospitals\\|primary care\\|urgent care",
+    "fda\\|cdc\\|nih\\|world health organization",
+    "peer review\\|retracted\\|retraction\\|preprints\\|clinical trials\\|replication crisis\\|industry-funded",
+    "telehealth\\|telemedicine\\|concierge medicine\\|compounding pharmac(y\\|ies)\\|direct primary care",
+    "malpractice\\|medical errors\\|misdiagnos\\|iatrogenic\\|medical negligence",
+    "informed consent\\|hipaa\\|medical ethics\\|right to try\\|medical freedom",
+    "usaid\\|pepfar\\|global health\\|malaria nets\\|bed nets\\|gavi",
+    "disabilit(y\\|ies)\\|wheelchairs?\\|americans with disabilities",
+    "nursing shortage\\|veterans affairs\\|va hospitals?\\|pharmacy benefit managers?\\|pbms"
+   ]
+  },
+  "topic:policy": {
+   "terms": [],
+   "regex": [
+    "rfk\\|robert f. kennedy\\|hhs secretary\\|health secretary\\|surgeon general\\|makary\\|bhattacharya",
+    "maha\\|make america healthy again",
+    "public health\\|health officials\\|dietary guidelines\\|emergency powers",
+    "precautionary principle\\|banned in europe\\|banned in other countries\\|eu bans?"
+   ]
+  }
+ }
+}

@@ -19,7 +19,7 @@ exec "$VLLM" serve deepseek-ai/DeepSeek-V4-Flash-0731 \
     --kv-cache-dtype fp8 --block-size 256 \
     --enable-expert-parallel --tensor-parallel-size 4 \
     --gpu-memory-utilization 0.93 \
-    --max-model-len 96K --max-num-seqs "${MAX_NUM_SEQS:-256}" \
+    --max-model-len "${MAX_MODEL_LEN:-96K}" --max-num-seqs "${MAX_NUM_SEQS:-256}" \
     --enable-prefix-caching \
     --tokenizer-mode deepseek_v4 \
     --tool-call-parser deepseek_v4 --enable-auto-tool-choice \
