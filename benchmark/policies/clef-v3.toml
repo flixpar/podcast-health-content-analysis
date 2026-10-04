@@ -1,0 +1,6 @@
+# clef-v3: clef-v2 (fan-out 0.1, pre-gate) with coarse-to-fine localization of
+# the unit-level axes, which cut unit-localization tokens by 37% on clef-flash
+# dev for about -0.015 F1 on frames, claims and products before re-tuning.
+fanout_threshold = 0.1
+pregate = true
+refine = true

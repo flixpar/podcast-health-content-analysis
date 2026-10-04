@@ -1,0 +1,25 @@
+# Candidate configuration for benchmark runs of the TypeSafe (System One)
+# labeling method against Cloudflare's open-weight clef, served locally by
+# analysis/serving/clef_server.py. See docs/clef-labeling.md.
+#
+#   CUDA_VISIBLE_DEVICES=0 .venv/bin/python -m analysis.serving.clef_server \
+#       --model clef --port 8302
+#   .venv/bin/python -m analysis.benchmark run --name clef-v1 \
+#       --pipeline-config benchmark/pipeline-clef.toml --repeats 1
+#
+# Same method and question set as benchmark/pipeline-typesafe.toml; only the
+# model behind /v1/systemone differs. A local server bills nothing, so there is
+# no key and no [usage] table.
+
+[model]
+api = "typesafe"
+api_base = ["http://127.0.0.1:8302/v1"]
+model = "clef"
+timeout = 600
+attempts = 3
+
+[label]
+# One window is two to five sequential requests; the server queues them on one
+# GPU and batches the short ones, so more windows in flight keeps it busy.
+concurrency = 8
+# typesafe_policy = "benchmark/clef-policy.toml"

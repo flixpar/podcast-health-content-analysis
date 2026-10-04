@@ -289,7 +289,10 @@ validator and store. `claim_text` is the claim's own sentence verbatim and
 `summary` is templated, because nothing can be written. Its fingerprint is the
 pinned model, the question templates and the policy rather than the decoding
 settings, `verify` has no counterpart for it, and its measured quality, cost
-and limits are in `docs/typesafe-labeling.md`.
+and limits are in `docs/typesafe-labeling.md`. Cloudflare's open-weight Clef
+models speak the same API: `analysis/serving/clef_server.py` serves one on a
+local GPU, a loopback `api_base` needs no key, and `docs/clef-labeling.md` has
+what they measured, as labelers and as a screen in front of the LLM.
 
 ### Several servers
 

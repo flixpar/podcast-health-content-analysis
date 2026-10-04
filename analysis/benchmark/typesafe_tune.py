@@ -42,7 +42,7 @@ from analysis.benchmark.taxonomy import label_axes, load_benchmark_taxonomy
 # Rare-label windows are in: they are where most labels have any gold at all.
 STRATA = ("health_dense", "mixed", "null", "ad_read", "discourse", "rare_label")
 DETECTION_GRID: dict[str, list[Any]] = {
-    "window_threshold": [0.3, 0.5, 0.7, 0.85],
+    "window_threshold": [0.1, 0.2, 0.3, 0.5, 0.7, 0.85],
     "seed_threshold": [0.5, 0.6, 0.7, 0.8, 0.9],
     "extend_threshold": [0.2, 0.3, 0.5],
     "bridge_units": [0, 1],
