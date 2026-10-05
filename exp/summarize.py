@@ -25,6 +25,31 @@ def level_f1(score: dict, level: str, split: str) -> float | None:
     return (block or {}).get("f1_strict")
 
 
+HEADLINE = ("health_dense", "mixed", "null", "ad_read", "discourse")
+
+
+def headline_tokens(run_dir: Path) -> tuple[float | None, float | None]:
+    """Mean output and reasoning tokens per window over the headline items only
+    (last ok attempt per window, repeat 0), so runs over different item sets compare."""
+    manifest = json.loads((run_dir / "run_manifest.json").read_text()) if (run_dir / "run_manifest.json").exists() else {}
+    bench = manifest.get("bench") or ("v3" if "/v3/" in str(run_dir) else "v2")
+    items_path = Path(__file__).resolve().parents[1] / f"benchmark/{bench}/items.jsonl"
+    attempts = run_dir / "repeat_0" / "attempts.jsonl"
+    if not attempts.exists() or not items_path.exists():
+        return None, None
+    wanted = {json.loads(l)["window_id"] for l in open(items_path) if json.loads(l)["stratum"] in HEADLINE}
+    last: dict[str, dict] = {}
+    for line in open(attempts):
+        r = json.loads(line)
+        if r.get("ok") and r.get("usage") and r["window_id"] in wanted:
+            last[r["window_id"]] = r["usage"]
+    if not last:
+        return None, None
+    out = [u.get("completion_tokens", 0) for u in last.values()]
+    rea = [((u.get("completion_tokens_details") or {}).get("reasoning_tokens") or 0) for u in last.values()]
+    return sum(out) / len(out), sum(rea) / len(rea)
+
+
 def row(run_dir: Path, split: str, stratum: str | None) -> dict | None:
     path = run_dir / "score.json"
     if not path.exists():
@@ -54,6 +79,8 @@ def row(run_dir: Path, split: str, stratum: str | None) -> dict | None:
         "topic yield": g("detection:topic", "yield_ratio"),
         "null atoms/w": null.get("atoms_per_window"),
         "out tok/w": usage.get("output_tokens_per_accepted_window"),
+        "hl tok/w": headline_tokens(run_dir)[0],
+        "hl think/w": headline_tokens(run_dir)[1],
         "1st valid": usage.get("first_attempt_validity"),
         "self-agree topic": ((score.get("repeat_agreement") or {}).get("detection:topic") or {}).get("f1"),
     }

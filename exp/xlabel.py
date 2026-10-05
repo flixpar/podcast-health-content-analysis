@@ -144,6 +144,54 @@ def post(payload: dict[str, Any], timeout: float) -> dict[str, Any]:
         return json.loads(response.read())
 
 
+METRICS = (
+    "vllm:num_requests_running", "vllm:num_requests_waiting", "vllm:kv_cache_usage_perc",
+    "vllm:generation_tokens_total", "vllm:prompt_tokens_total", "vllm:prompt_tokens_cached_total",
+    "vllm:prefix_cache_hits_total", "vllm:prefix_cache_queries_total", "vllm:num_preemptions_total",
+    "vllm:spec_decode_num_accepted_tokens_total", "vllm:spec_decode_num_draft_tokens_total",
+)
+
+
+def scrape_metrics(base: str) -> dict[str, float]:
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+    text = opener.open(base + "/metrics", timeout=10).read().decode()
+    out: dict[str, float] = {}
+    for line in text.splitlines():
+        if line.startswith("#"):
+            continue
+        name = line.split("{")[0].split(" ")[0]
+        if name in METRICS:
+            out[name] = out.get(name, 0.0) + float(line.rsplit(" ", 1)[-1])
+    return out
+
+
+def start_metrics_sampler(path: Path, every: float = 5.0) -> None:
+    base = API.split("/v1/")[0]
+
+    def loop() -> None:
+        with open(path, "a") as handle:
+            while True:
+                try:
+                    handle.write(json.dumps({"t": round(time.time(), 3), **scrape_metrics(base)}) + "\n")
+                    handle.flush()
+                except Exception:  # noqa: BLE001 - a missed sample is fine
+                    pass
+                time.sleep(every)
+
+    threading.Thread(target=loop, daemon=True).start()
+
+
+def nothink_template() -> str:
+    """GLM-5.3's chat template with the generation prompt closing an empty think
+    block, so the reasoning parser sees the end of thinking in the prompt and
+    structured output applies from the first generated token."""
+    path = next(Path("/tmp/huggingface2/hub/models--canada-quant--GLM-5.3-Flash-W4A16-MTP/snapshots").glob("*/chat_template.jinja"))
+    text = path.read_text()
+    tail = "<|assistant|>{{- '<think>' -}}"
+    assert tail in text
+    return text.replace(tail, "<|assistant|>{{- '<think></think>' -}}")
+
+
 def lexicon_cues(window: dict[str, Any], matcher: Any, max_cues: int) -> str:
     rows = []
     seen = set()
@@ -181,7 +229,14 @@ def main() -> int:
     parser.add_argument("--max-cues", type=int, default=60)
     parser.add_argument("--notes", default="")
     parser.add_argument("--model", default=MODEL, help="served model name")
+    parser.add_argument("--metrics-log", help="sample the server's /metrics every 5 s into this jsonl")
+    parser.add_argument("--note-file", help="text inserted before the rubric's Procedure section")
+    parser.add_argument("--prefill-nothink", action="store_true", help="GLM: continue an assistant turn that opens with an empty think block (thinking off)")
+    parser.add_argument("--drop", default="", help="comma list of components to leave out (exp/variants.py)")
+    parser.add_argument("--extra", default="{}", help="JSON merged into every request body (e.g. chat_template_kwargs)")
     args = parser.parse_args()
+    if args.metrics_log:
+        start_metrics_sampler(Path(args.metrics_log))
 
     taxonomy = json.loads((REPO / f"benchmark/{args.bench}/taxonomy.json").read_text())
     label_axes = {label["label_id"]: label["axis"] for label in taxonomy["labels"]}
@@ -190,6 +245,15 @@ def main() -> int:
         schema, schema_name = SCREEN_SCHEMA, "health_screen"
     else:
         instructions, schema, schema_name = tl.taxonomy_instructions(taxonomy), tl.response_schema(taxonomy), "podcast_topic_clips"
+        if args.drop:
+            sys.path.insert(0, str(REPO / "exp"))
+            import variants
+
+            instructions, schema, label_axes = variants.build(taxonomy, set(args.drop.split(",")))
+    if args.note_file:
+        note = Path(args.note_file).read_text().strip()
+        assert "\n## Procedure" in instructions
+        instructions = instructions.replace("\n## Procedure", "\n" + note + "\n\n## Procedure", 1)
     settings = tl.ModelSettings(
         max_output_tokens=args.max_tokens,
         reasoning_effort=args.effort,
@@ -216,6 +280,10 @@ def main() -> int:
         "settings": settings.fingerprint(),
         "base_run": args.base_run,
         "lexicon": args.lexicon,
+        "drop": args.drop,
+        "note_file": args.note_file,
+        "prefill_nothink": args.prefill_nothink,
+        "extra": json.loads(args.extra),
         "windows": args.windows,
         "items": len(windows),
         "repeats": args.repeats,
@@ -233,22 +301,35 @@ def main() -> int:
             if first is None:
                 return False
             user += REFINE_NOTE + tl.canonical_json(first)
-        payload = {"model": args.model, **tl.API_FLAVORS["chat_completions"].payload(instructions, user, schema_name, schema, settings)}
+        payload = {"model": args.model, **tl.API_FLAVORS["chat_completions"].payload(instructions, user, schema_name, schema, settings), **json.loads(args.extra)}
+        if args.prefill_nothink:
+            payload["chat_template"] = nothink_template()
+            payload.pop("thinking_token_budget", None)
+            # The glm45 reasoning parser files everything before an output
+            # </think> as reasoning, and a grammar applied there garbles the
+            # keys, so this mode asks for JSON in the prompt only and reads
+            # the text from whichever field the parser put it in.
+            payload.pop("response_format", None)
         for attempt in range(args.attempts):
             started = time.monotonic()
-            record: dict[str, Any] = {"attempt": attempt, "window_id": window["window_id"]}
+            record: dict[str, Any] = {"attempt": attempt, "window_id": window["window_id"], "t_start": round(time.time(), 3)}
             try:
                 response = post(payload, args.timeout)
                 record["usage"] = response.get("usage")
                 tl.raise_for_chat_status(response)
-                parsed = tl.parse_json_output(tl.extract_chat_output_text(response))
+                if args.prefill_nothink:
+                    message = response["choices"][0]["message"]
+                    text = message.get("content") or message.get("reasoning_content") or message.get("reasoning") or ""
+                else:
+                    text = tl.extract_chat_output_text(response)
+                parsed = tl.parse_json_output(text)
                 if args.mode.startswith("screen"):
                     result = {"window_id": window["window_id"], "screen": parsed}
                     changes: dict[str, Any] = {}
                 else:
                     result, changes = tl.validate_response_lenient(parsed, window, label_axes)
                 store.put(window["window_id"], result)
-                record.update(ok=True, seconds=round(time.monotonic() - started, 3), validation={"mode": "lenient", **changes})
+                record.update(ok=True, t_end=round(time.time(), 3), seconds=round(time.monotonic() - started, 3), validation={"mode": "lenient", **changes})
                 store.attempt(record)
                 return True
             except Exception as error:  # noqa: BLE001 - every failure is logged and retried
