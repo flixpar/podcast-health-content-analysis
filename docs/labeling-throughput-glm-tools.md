@@ -4,7 +4,7 @@ Follow-up to `docs/labeling-methods-v7-v8.md`. Four questions:
 
 - (a) how fast each labeling method is on real traffic, and how to make it faster;
 - (b) whether a GLM-5.3-Flash configuration (reasoning level, thinking budget,
-  system prompt, temperature, serving config) balances quality and throughput
+  system prompt, thinking on/off, serving config) balances quality and throughput
   better than the single run so far;
 - (c) whether a tool-based labeler (labels submitted through tools, reasoning
   interleaved with tool calls) helps;
@@ -45,7 +45,8 @@ made it worse (requests restored from CPU do not share the prefix).
   is capped, because its per-request state is 70% larger.
 Qwen3.8-Flash-Next (xhigh) matches GLM on topics and has the best one-pass
 claim F1, but thinks 2.5x as long and runs ~4x slower; its union with GLM is
-a quality option (best narrative F1 of any GLM configuration) at refine's cost.
+a quality option (best narrative F1 of any GLM configuration) at ~1.6x the
+tokens of GLM + GLM refine.
 
 **(c) Tool-based labeling** (incremental add-tools with validation feedback,
 submit-and-revise, and a lookup tool replacing the label tables) is not
@@ -93,7 +94,8 @@ completions of a complete 1,500-window run, which is what a continuous
 | GLM high, no claims | 6,690; 5,410 | 230-285 | 1.9k | 0.718 / - |
 | GLM high, topics only | 7,450 | ~205 | 1.6k | 0.733 / - |
 | GLM as first run (uncapped, no checkpoint) | ~1,500-2,100 (fixed horizon) | ~750-1,000 | | |
-| Qwen3.8-Flash-Next xhigh | ~980 (fixed horizon, optimistic) | >1,500 | ~2.5x GLM | 0.705 / 0.794 |
+| Qwen3.8-Flash-Next xhigh (uncapped, recipe serving) | ~980 (fixed horizon, optimistic) | >1,500 | ~2.5x GLM | 0.705 / 0.794 |
+| Qwen3.8-Flash-Next low (uncapped) | ~3,450 (fixed horizon, optimistic) | >450 | | 0.627 / 0.691 |
 | GLM + GLM refine on non-empty windows | ~0.45x one GLM pass | ~560-640 | | 0.741 / 0.827 |
 | GLM + Clef-flash screen in front | ~1.12x one GLM pass | ~230-260 + 33 | | loses ~1% of substantive content |
 
@@ -184,6 +186,31 @@ throughput with an 87k-token shared prompt:
   instead of sharing it, so only ~15 fit. It would help a workload without a
   long shared prefix; it does not help this one.
 
+### Request variants on real traffic (G1 server, complete runs of 1,500 windows)
+
+| variant | out tok/w (mean / p95) | windows/h steady (10-90%) | windows/h wall | vs high |
+| --- | --- | --- | --- | --- |
+| high, 24k budget | 2,180 / 10.4k | 6,040 | 5,300 | - |
+| high, 8k budget | 2,000 / 9.8k | 6,280 | 5,700 | +4% steady |
+| no claims | 1,880 / 8.5k | 6,690 | 5,410 | +11% steady |
+| topics only | 1,580 / 6.5k | 7,450 | 3,950* | +23% steady |
+
+\* Two of the 1,500 topic-only windows ran away to the 80,000-token
+`max_tokens` limit (the answer looped after thinking ended), holding a slot
+for ~50 minutes each and setting the wall-clock end. Runaway answers happen in
+~0.1-0.3% of GLM windows across runs (also 1 of 321 in the first GLM run);
+production requests should cap `max_tokens` near the thinking budget plus
+~16k and retry a truncated answer. The fixed-horizon throughput runs of the
+same variants were all within 2% of each other (and topic-only, hit by one of
+the runaways early, came out lower), because a 20-minute horizon hardly sees
+the long windows where these variants save tokens; complete runs are the
+measure to use for request-level changes.
+
+On real traffic the savings are smaller than on the benchmark because 58% of
+windows have no health content and cost little either way, and per-window
+fixed costs (prefill of the window and the uncached prompt tail, ~3.5k tokens;
+a slot in a capped server) do not shrink.
+
 ### Other GLM serving options from the model card and recipes
 
 - **DFlash2-G drafter** (`canada-quant/GLM-5.3-Flash-DFlash2-G`, K=4): does not
@@ -221,21 +248,27 @@ accepts `reasoning_effort` xhigh (default), medium or low (not "high").
 | GLM-5.3-Flash high | 0.810 | 0.602 | 0.703 | 0.757 | 0.680 | 0.752 | 0.618 | 0.764 | 0.770 | 0.811 | 6.7k | 5.1k |
 | DeepSeek-V4-Flash high | 0.820 | 0.562 | 0.678 | 0.714 | 0.676 | 0.749 | 0.657 | 0.760 | 0.755 | 0.859 | 13.1k | 11.5k |
 | Qwen3.8-Flash-Next xhigh | 0.690 | 0.701 | 0.705 | 0.750 | 0.638 | 0.713 | 0.693 | 0.743 | 0.794 | 0.862 | 15.6k | 12.8k |
+| Qwen3.8-Flash-Next medium | 0.829 | 0.501 | 0.639 | 0.679 | 0.643 | 0.694 | 0.639 | 0.744 | 0.720 | 0.806 | 6.4k | 5.0k |
 | Qwen3.8-Flash-Next low | 0.855 | 0.478 | 0.627 | 0.678 | 0.569 | 0.699 | 0.613 | 0.624 | 0.691 | 0.771 | 5.4k | 4.1k |
 | GLM high ∪ Qwen xhigh | 0.729 | 0.744 | 0.746 | 0.750 | 0.735 | 0.780 | 0.716 | 0.784 | 0.822 | 0.830 | 22.3k | |
-| GLM + GLM refine (first write-up) | 0.800 | 0.673 | 0.741 | 0.796 | 0.687 | 0.788 | 0.686 | 0.787 | 0.827 | 0.849 | 20.1k | |
+| GLM + GLM refine (first write-up) | 0.800 | 0.673 | 0.741 | 0.796 | 0.687 | 0.788 | 0.686 | 0.787 | 0.827 | 0.849 | 13.8k | |
 
 At xhigh, Qwen3.8 ties GLM on topics with a very different error profile
 (recall 0.70, precision 0.69: it labels more, including more that the gold
 does not), has the best single-pass claim F1 measured (0.794), and is weaker
 on narratives. It thinks 2.5x as long as GLM, and on real windows it ran at
-~980 windows/h against GLM's ~3,900 (fixed horizon; 135 preemptions in 20
+~980 windows/h against ~3,900 for GLM served the same way (uncapped; fixed horizon; 135 preemptions in 20
 minutes, MTP-3 acceptance 0.45). At low effort it is cheaper than GLM but
-clearly worse. Its union with GLM ties GLM + GLM refine on topics and claims
-and has the best narrative F1 of any GLM-based configuration (0.735), at the
-same token cost; it is a quality option, not a throughput one.
+clearly worse, and at medium it spends what GLM high spends (6.4k tokens a
+window) for much less (topic F1 0.639 vs 0.709, claims 0.720 vs 0.783). Its union with GLM ties GLM + GLM refine on topics and claims
+and has the best narrative F1 of any GLM-based configuration (0.735), at
+~1.6x refine's tokens (22.3k vs 13.8k a window); it is a quality option, not a throughput one. Qwen was
+served per the vLLM recipe (256 sequences, MTP-3) and preempted heavily
+(135-209 preemptions in 20 minutes); a concurrency cap would likely help it as
+it helped GLM, but at the efforts where it would be fast (low, medium) its
+quality is below GLM high at the same token cost, so this was not pursued.
 
-## GLM-5.3-Flash: reasoning level, budget, prompt, thinking off
+## (b) GLM-5.3-Flash: reasoning level, budget, prompt, thinking off
 
 GLM-5.3's chat template takes `reasoning_effort` low, high or max (anything
 else, including omitting it, means max) and writes "Reasoning Effort: X" as
@@ -284,57 +317,6 @@ averaged: topic F1 0.709, claim F1 0.783, populations 0.748, evidence 0.611.
   answer without structured output (the `glm45` parser files everything as
   reasoning and a grammar applied there garbles the keys), and 2% of answers
   were not JSON on the first try.
-
-## (d) What each part of the label set costs
-
-Two views. **Correlational** (`exp/costparts.py`): split every window's output
-into thinking and answer tokens, the answer by section, and regress thinking
-tokens on per-window label counts (non-negative least squares). **Causal**:
-ablation runs that leave a component out of the prompt, the schema and the
-output (`exp/variants.py`, `--drop`), scored on what remains.
-
-Where GLM's output goes (v8, 600 real corpus windows): thinking is 77% of
-output tokens (DeepSeek 91%); windows with no health content (42%) take 2%
-of all output tokens. Of the answer itself, claims are 44%, topic detections
-32%, evidence 9%, frames 6%, products, narratives and populations ~2% each.
-The regression attributes ~26% of thinking to claims (+370 thinking tokens per
-claim), ~10% to the mind/mental-health topics, ~9% to body systems and
-chronic conditions, 7% to frames, 5% each to evidence and populations
-(the benchmark run and DeepSeek's corpus run give the same ordering).
-
-Prompt tokens by component (85.6k total): topic tables ~37k, narratives 15.1k
-(section 5.2 plus their table), frames 4.0k, claims 3.5k, evidence 3.1k,
-populations 1.5k, products 1.4k; the rest is the rubric, ground rules and
-boundary tests.
-
-Ablations (GLM high/24k, v8 headline; deltas against the repeat run, which
-has the same server and settings):
-
-| left out | prompt tokens | out tok/w | change in tokens | remaining axes |
-| --- | --- | --- | --- | --- |
-| nothing (two runs) | 85.6k | 6.6k | - | topic 0.709, claims 0.783 |
-| claims | 82.2k | 5.1k | -23% | all within noise; evidence +0.077 [0.030, 0.128] |
-| frames, evidence, populations | 77.1k | 5.9k | -11% | all within noise |
-| narratives | 70.6k | 6.5k | -1% | all within noise (claim precision -0.030) |
-| everything but topics | 57.2k | 4.2k | -36% | topic recall +0.051 [0.023, 0.082], F1 +0.019 |
-
-- **Claims are the one component with a large, separable cost**: ~23% of
-  output tokens, and leaving them out does not hurt anything else (evidence
-  detections even improve). If claim extraction is needed only for a subset
-  (e.g. windows with narratives, or a later verification stage), running it
-  as a separate pass on the windows that need it is the obvious saving.
-- **Narratives cost prompt, not output**: 15k prompt tokens (18% of the
-  prompt) but ~1% of output. On GLM the prompt is shared and cached, so they
-  are nearly free per window; they matter on models without long-prefix
-  sharing and for preemption recompute.
-- **Frames, evidence and populations** together are ~11% of output tokens.
-  Populations are the noisiest axis run to run (±0.03-0.10).
-- **Topic-only labeling** is 36% cheaper and slightly better on topics; the
-  other axes cost little individually but add up.
-- Within topics, the mental-health and body-systems domains draw the most
-  thinking per label; they are also the bulk of the health content, so this
-  is not a case for dropping them (see the first write-up for the v8 boundary
-  rules that already trimmed loose psychiatric and crime/death talk).
 
 ## (c) Tool-based labeling
 
@@ -396,30 +378,56 @@ for windows whose answer failed validation (rare), or refine framed as a tool
 is. Lookup would make sense only with a model that actually consults it, or if
 the full label tables were too long to serve at all.
 
-### Request variants on real traffic (G1 server, complete runs of 1,500 windows)
+## (d) What each part of the label set costs
 
-| variant | out tok/w (mean / p95) | windows/h steady (10-90%) | windows/h wall | vs high |
+Two views. **Correlational** (`exp/costparts.py`): split every window's output
+into thinking and answer tokens, the answer by section, and regress thinking
+tokens on per-window label counts (non-negative least squares). **Causal**:
+ablation runs that leave a component out of the prompt, the schema and the
+output (`exp/variants.py`, `--drop`), scored on what remains.
+
+Where GLM's output goes (v8, 600 real corpus windows): thinking is 77% of
+output tokens (DeepSeek 91%); windows with no health content (42%) take 2%
+of all output tokens. Of the answer itself, claims are 44%, topic detections
+32%, evidence 9%, frames 6%, products, narratives and populations ~2% each.
+The regression attributes ~26% of thinking to claims (+370 thinking tokens per
+claim), ~10% to the mind/mental-health topics, ~9% to body systems and
+chronic conditions, 7% to frames, 5% each to evidence and populations
+(the benchmark run and DeepSeek's corpus run give the same ordering).
+
+Prompt tokens by component (85.6k total): topic tables ~37k, narratives 15.1k
+(section 5.2 plus their table), frames 4.0k, claims 3.5k, evidence 3.1k,
+populations 1.5k, products 1.4k; the rest is the rubric, ground rules and
+boundary tests.
+
+Ablations (GLM high/24k, v8 headline; deltas against the repeat run, which
+has the same server and settings):
+
+| left out | prompt tokens | out tok/w | change in tokens | remaining axes |
 | --- | --- | --- | --- | --- |
-| high, 24k budget | 2,180 / 10.4k | 6,040 | 5,300 | - |
-| high, 8k budget | 2,000 / 9.8k | 6,280 | 5,700 | +4% steady |
-| no claims | 1,880 / 8.5k | 6,690 | 5,410 | +11% steady |
-| topics only | 1,580 / 6.5k | 7,450 | 3,950* | +23% steady |
+| nothing (two runs) | 85.6k | 6.6k | - | topic 0.709, claims 0.783 |
+| claims | 82.2k | 5.1k | -23% | all within noise; evidence +0.077 [0.030, 0.128] |
+| frames, evidence, populations | 77.1k | 5.9k | -11% | all within noise |
+| narratives | 70.6k | 6.5k | -1% | all within noise (claim precision -0.030) |
+| everything but topics | 57.2k | 4.2k | -36% | topic recall +0.051 [0.023, 0.082], F1 +0.019 |
 
-\* Two of the 1,500 topic-only windows ran away to the 80,000-token
-`max_tokens` limit (the answer looped after thinking ended), holding a slot
-for ~50 minutes each and setting the wall-clock end. Runaway answers happen in
-~0.1-0.3% of GLM windows across runs (also 1 of 321 in the first GLM run);
-production requests should cap `max_tokens` near the thinking budget plus
-~16k and retry a truncated answer. The fixed-horizon throughput runs of the
-same variants were all within 2% of each other (and topic-only, hit by one of
-the runaways early, came out lower), because a 20-minute horizon hardly sees
-the long windows where these variants save tokens; complete runs are the
-measure to use for request-level changes.
-
-On real traffic the savings are smaller than on the benchmark because 58% of
-windows have no health content and cost little either way, and per-window
-fixed costs (prefill of the window and the uncached prompt tail, ~3.5k tokens;
-a slot in a capped server) do not shrink.
+- **Claims are the one component with a large, separable cost**: ~23% of
+  output tokens, and leaving them out does not hurt anything else (evidence
+  detections even improve). If claim extraction is needed only for a subset
+  (e.g. windows with narratives, or a later verification stage), running it
+  as a separate pass on the windows that need it is the obvious saving.
+- **Narratives cost prompt, not output**: 15k prompt tokens (18% of the
+  prompt) but ~1% of output. On GLM the prompt is shared and cached, so they
+  are nearly free per window; they matter on models without long-prefix
+  sharing and for preemption recompute.
+- **Frames, evidence and populations** together are ~11% of output tokens.
+  Populations are the noisiest axis run to run (±0.03-0.10).
+- **Topic-only labeling** is 36% cheaper and slightly better on topics; the
+  other axes cost little individually but add up.
+- Within topics, the mental-health and body-systems domains draw the most
+  thinking per label; they are also the bulk of the health content, so this
+  is not a case for dropping them (see the first write-up for the v8 boundary
+  rules that already trimmed loose psychiatric and crime/death talk).
 
 ## Caveats
 
