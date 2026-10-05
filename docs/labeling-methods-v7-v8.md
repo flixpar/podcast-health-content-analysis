@@ -3,8 +3,7 @@
 What was measured, on gpu313 (4x H100), about how to label transcript windows
 with the granular taxonomies: DeepSeek-V4-Flash configurations, ensembles and a
 second pass, keyword methods, Clef and Clef-flash, Qwen3.5-397B, GLM-5.3-Flash,
-and screens in
-front of the labeler. Code is in `exp/` on branch `exp/v7-v8-labeling-methods`
+and screens in front of the labeler. Code is in `exp/` on branch `exp/v7-v8-labeling-methods`
 (the `labeling-v8` branch plus the serving scripts from
 `labeling-codebook-throughput` and the TypeSafe/Clef code from
 `feat/clef-labeling`); run directories are under `benchmark/v2/runs/`,
