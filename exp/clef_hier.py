@@ -192,6 +192,13 @@ def localize(window, t, policy, session, judgments) -> None:
 
 
 def compose(window, taxonomy, judgments, policy) -> dict[str, Any]:
+    """The validated window result (as `run` stores it) for stored judgments under `policy`."""
+    result = _compose(window, taxonomy, judgments, policy)
+    axes = {label["label_id"]: label["axis"] for label in taxonomy["labels"]}
+    return tl.validate_response_lenient(result, window, axes)[0]
+
+
+def _compose(window, taxonomy, judgments, policy) -> dict[str, Any]:
     result = ts.compose_result(window, taxonomy, judgments, policy)
     # v7/v8 claims carry narrative links and relevance.
     index = {unit["unit_id"]: n for n, unit in enumerate(window["units"])}
@@ -215,7 +222,7 @@ def label_window(window, taxonomy, t, policy, ask) -> tuple[dict[str, Any], dict
     draft = ts.draft_annotations(window, taxonomy, judgments, policy)
     judgments["attributes"] = ts.judge_attributes(window, taxonomy, draft, policy, session)
     judgments["usage"] = {**session.usage, "input_tokens_by_stage": dict(session.by_stage)}
-    return compose(window, taxonomy, judgments, policy), judgments
+    return _compose(window, taxonomy, judgments, policy), judgments
 
 
 def make_ask(apis: list[str], model: str = "clef"):
@@ -273,7 +280,7 @@ def cmd_run(args) -> int:
         started = time.monotonic()
         try:
             result, judgments = label_window(window, taxonomy, t, policy, ask)
-            result, changes = tl.validate_response_lenient(result, window, axes)
+            result, changes = tl.validate_response_lenient(result, window, axes)  # already valid; recorded for the log
             usage = judgments["usage"]
             with lock:
                 con.execute("INSERT OR REPLACE INTO window_labels VALUES (?, ?)", (window["window_id"], json.dumps(result)))
@@ -356,6 +363,32 @@ def cmd_tune(args) -> int:
     return 0
 
 
+def policy_from(manifest_path: Path) -> ts.Policy:
+    stored = json.loads(Path(manifest_path).read_text())["policy"]
+    return ts.Policy(**{k: v for k, v in stored.items() if k in {f.name for f in __import__("dataclasses").fields(ts.Policy)}})
+
+
+def cmd_apply(args) -> int:
+    """Recompose a run's stored judgments under the policy another (tuned) run recorded."""
+    bench = REPO / f"benchmark/{args.bench}"
+    taxonomy = json.loads((bench / "taxonomy.json").read_text())
+    items = {i["window_id"]: i for i in map(json.loads, open(bench / "items.jsonl"))}
+    policy = policy_from(Path(args.policy_run) / "run_manifest.json")
+    run_dir = Path(args.run_dir)
+    judg = {r["window_id"]: r for r in map(json.loads, open(run_dir / "repeat_0/judgments.jsonl"))}
+    results = {w: compose(items[w], taxonomy, j, policy) for w, j in judg.items() if w in items}
+    sys.path.insert(0, str(REPO / "exp"))
+    from keywords import write_run
+    import shutil
+    out = Path(args.out)
+    manifest = json.loads((run_dir / "run_manifest.json").read_text())
+    manifest.update(name=out.name, policy=asdict(policy), policy_from=str(args.policy_run))
+    write_run(out, manifest, [results])
+    shutil.copy(run_dir / "repeat_0/attempts.jsonl", out / "repeat_0/attempts.jsonl")
+    print("wrote", out)
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -375,8 +408,13 @@ def main() -> int:
     u.add_argument("run_dir")
     u.add_argument("--bench", default="v2")
     u.add_argument("--out")
+    a = sub.add_parser("apply")
+    a.add_argument("run_dir")
+    a.add_argument("--policy-run", required=True)
+    a.add_argument("--bench", default="v3")
+    a.add_argument("--out", required=True)
     args = parser.parse_args()
-    return cmd_run(args) if args.cmd == "run" else cmd_tune(args)
+    return {"run": cmd_run, "tune": cmd_tune, "apply": cmd_apply}[args.cmd](args)
 
 
 if __name__ == "__main__":

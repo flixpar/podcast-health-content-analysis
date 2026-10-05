@@ -2,7 +2,8 @@
 
 What was measured, on gpu313 (4x H100), about how to label transcript windows
 with the granular taxonomies: DeepSeek-V4-Flash configurations, ensembles and a
-second pass, keyword methods, Clef and Clef-flash, Qwen3.5-397B, and screens in
+second pass, keyword methods, Clef and Clef-flash, Qwen3.5-397B, GLM-5.3-Flash,
+and screens in
 front of the labeler. Code is in `exp/` on branch `exp/v7-v8-labeling-methods`
 (the `labeling-v8` branch plus the serving scripts from
 `labeling-codebook-throughput` and the TypeSafe/Clef code from
@@ -11,8 +12,9 @@ front of the labeler. Code is in `exp/` on branch `exp/v7-v8-labeling-methods`
 
 ## Summary
 
-1. **DeepSeek-V4-Flash at high effort with a 24k thinking budget is still the
-   right single-pass labeler.** On v7: topic F1 0.740 (parent 0.767), claims
+1. **DeepSeek-V4-Flash at high effort with a 24k thinking budget is a strong
+   single-pass labeler** (GLM-5.3-Flash matches it on topics for under half the
+   tokens; item 7). On v7: topic F1 0.740 (parent 0.767), claims
    0.798, against a leave-one-out reference ceiling of ~0.92. Unbounded thinking
    is not better (evidence +0.04, nothing else moves, +12% tokens); `low` effort
    costs 0.05 topic F1 and 0.07 claim recall; thinking off is unusable (topic F1
@@ -47,13 +49,45 @@ front of the labeler. Code is in `exp/` on branch `exp/v7-v8-labeling-methods`
    (median 972 output tokens), so skipping 57% of windows saves only ~9% of its
    decode. Keyword screens look excellent on the benchmark and are much leakier
    on real windows (the benchmark was sampled with the same lexicon).
-6. CLEF_SUMMARY
-7. QWEN_SUMMARY
+6. **Clef is a good screen and a weak labeler on the granular sets.** The
+   TypeSafe cascade had to be asked down the topic tree (60 parents and 9
+   narrative families, then the subtopics and narratives of the ones that pass;
+   `exp/clef_hier.py`). Thresholds tuned on v7 dev, read on test: Clef (27B)
+   topic F1 0.654 (DeepSeek high 0.735), claims 0.70 (0.81), frames 0.63 (0.76),
+   products 0.56 (0.87); Clef-flash 0.545. Both cost 110-130k prefill tokens on a
+   dense window, so neither is cheaper per GPU than DeepSeek where it matters.
+7. **GLM-5.3-Flash (W4A16, MTP) is the first open model level with DeepSeek on
+   topics**, at well under half the output tokens: v7 topic F1 0.748 vs 0.740
+   (paired delta +0.004 [-0.023, +0.028]), narratives level, claim precision
+   higher (+0.036), but frames (-0.033), populations (-0.055) and claim recall
+   (-0.047) lower; 8.2k output tokens a window against 19.5k. A union of one
+   DeepSeek pass and one GLM pass ties DeepSeek + refine on every axis for ~2/3
+   of refine's tokens. Qwen3.5-397B-A17B under-labels badly (topic F1 0.54).
+   **GLM plus a GLM refine pass is the best configuration measured**: v7 topic
+   F1 0.809 (parent 0.839), narratives 0.836, claim F1 0.839 (test split
+   0.801 / 0.849), above DeepSeek + refine, for ~16.8k output tokens in total,
+   less than one DeepSeek pass. On real corpus windows GLM spends 3.7k output
+   tokens a window against DeepSeek's 8.0k. On v8 (mapped) it is also the best:
+   topic F1 0.741, parent 0.796, claims 0.827 against 0.720 / 0.764 / 0.802 for
+   DeepSeek + refine, except narratives (0.687 vs 0.736).
 
-What to do with it: label with DeepSeek high/24k plus a refine pass on non-empty
-windows if the ~2.2x decode is affordable; otherwise one pass. Do not put a
-screen in front of it unless decode is the binding constraint and losing ~10% of
-passing mentions is acceptable.
+What to do with it:
+
+- **Best quality per token: GLM-5.3-Flash with a refine pass on non-empty
+  windows.** It beat every DeepSeek configuration on topics and claims on both
+  label sets for about half of DeepSeek + refine's tokens. Before adopting it:
+  confirm it with a second repeat (every GLM number here is one pass), check
+  v8 narratives (its one clear weakness), and fix serving. On this node it ran
+  only on a vLLM nightly with CUDA forward compatibility, and it was KV-bound
+  (~725 benchmark windows an hour against ~1,000 for DeepSeek), so its token
+  advantage did not turn into wall-clock speed here. A newer driver, or two TP2
+  replicas, may change that.
+- **Staying on DeepSeek:** high effort, 24k budget, plus a refine pass on
+  non-empty windows (~2.2x decode) if affordable; otherwise one pass. A second
+  pass by GLM over DeepSeek's output is as good as DeepSeek refining itself and
+  cheaper.
+- **No screen** unless decode is the binding constraint and losing ~10% of
+  passing mentions is acceptable; Clef-flash's broad gate is the one to use.
 
 ## How each label set was measured
 
@@ -203,7 +237,6 @@ check shows they preserve large gaps.
 | v8 silver: keyword hints | 0.816 | 0.839 | 0.823 | 0.847 | 0.798 | 0.880 |
 | v8 silver: thinking off | 0.540 | 0.580 | 0.483 | 0.457 | 0.324 | 0.603 |
 | v8 silver: keyword labeler | 0.268 | 0.338 | 0.289 | 0.299 | 0.212 | - |
-CLEF_SILVER
 
 ## Keyword methods
 
@@ -273,9 +306,115 @@ boundary rules and misses mental health, sport and ad-with-a-claim windows the
 labeler then labels; the broad one ("when in doubt, pass it") fixes that and
 passes 70%.
 
-CLEF_SECTION
+## Clef and Clef-flash as labelers
 
-QWEN_SECTION
+The flat TypeSafe cascade asks one screening question per label; at ~116 tokens
+a question on Clef, 577-630 labels do not fit a request. `exp/clef_hier.py`
+asks down the tree instead, and gates on the broad health question rather than
+the method's own (precise) health gate, which drops ~13% of substantive content:
+
+1. gates: health, broad health (decides; >= 0.5), claim, product;
+2. screen 1: the 60 topic parents (with their subtopic names), the 9 narrative
+   families (with their narrative names), every frame, evidence signal and
+   population;
+3. screen 2: the subtopics of up to 8 parents and the narratives of up to 4
+   families that reached 0.3; a parent with no subtopic over the fan-out
+   threshold is labeled with its bare ID;
+4. localization, attributes and composition as in the flat method (coarse-to-fine
+   for unit-level axes), with narrative and population added as axes.
+
+Composition thresholds were tuned per axis on v7 dev (`clef_hier.py tune`) and
+the v7 policy applied unchanged to v8 (`clef_hier.py apply`).
+
+| run | topic P | topic R | topic F1 | parent F1 | narr F1 | frame F1 | evid F1 | pop F1 | claim P | claim R | claim F1 | prod F1 | null atoms/w |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| DeepSeek high, v7 (test) | 0.871 | 0.622 | 0.735 | 0.754 | 0.694 | 0.762 | 0.683 | 0.765 | 0.882 | 0.748 | 0.813 | 0.872 | 0.35 |
+| Clef 27B, v7, tuned (test) | 0.759 | 0.554 | 0.654 | 0.680 | 0.667 | 0.625 | 0.523 | 0.458 | 0.676 | 0.706 | 0.699 | 0.559 | 0.33 |
+| Clef-flash, v7, tuned (test) | 0.676 | 0.439 | 0.545 | 0.598 | 0.581 | 0.531 | 0.537 | 0.429 | 0.587 | 0.622 | 0.616 | 0.500 | 0.68 |
+| Clef 27B, v7, untuned (headline) | 0.677 | 0.597 | 0.648 | 0.660 | 0.637 | 0.557 | 0.561 | 0.604 | 0.683 | 0.706 | 0.705 | 0.570 | 0.40 |
+| DeepSeek high, v8 (test, mapped) | 0.833 | 0.565 | 0.683 | 0.708 | 0.565 | 0.725 | 0.650 | 0.750 | 0.907 | 0.641 | 0.755 | 0.845 | 0.09 |
+| Clef 27B, v8, v7 policy (test, mapped) | 0.752 | 0.537 | 0.637 | 0.658 | 0.550 | 0.625 | 0.530 | 0.421 | 0.675 | 0.713 | 0.702 | 0.542 | 0.30 |
+
+Cost: Clef 27B averaged 113k (v7) / 120k (v8) prefill tokens per benchmark
+window and Clef-flash 122k / 130k (54-63 of 320 windows stop at the gate). At
+~7k (Clef) and ~19k (Clef-flash) prefill tokens/s per H100 that is roughly 200
+and 550 dense windows per hour per GPU, against ~1,000 per GPU for DeepSeek on
+real windows. Most of a window's tokens go to localization (one question per
+label per passage) and attributes, which is what the flat-taxonomy evaluation
+found too. Clef's real use is the screen above.
+
+## Other open models
+
+Same production prompt and request (chat completions, structured output,
+lenient validation, `reasoning_effort` high, 24k thinking budget), one pass over
+all 320 items, served TP4 on the same node.
+
+| run | topic P | topic R | topic F1 | parent F1 | narr F1 | frame F1 | evid F1 | pop F1 | claim P | claim R | claim F1 | prod F1 | null atoms/w | out tok/w |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| DeepSeek-V4-Flash high, v7 | 0.858 | 0.636 | 0.740 | 0.767 | 0.803 | 0.796 | 0.695 | 0.828 | 0.881 | 0.720 | 0.798 | 0.854 | 0.35 | 19.5k |
+| Qwen3.5-397B-A17B, v7 | 0.729 | 0.412 | 0.540 | 0.590 | 0.556 | 0.530 | 0.389 | 0.594 | 0.694 | 0.535 | 0.613 | 0.727 | 0.08 | 5.7k |
+| DeepSeek-V4-Flash high, v8 (mapped) | 0.820 | 0.562 | 0.678 | 0.714 | 0.676 | 0.749 | 0.657 | 0.760 | 0.920 | 0.632 | 0.755 | 0.859 | 0.09 | 17.6k |
+| Qwen3.5-397B-A17B, v8 (mapped) | 0.756 | 0.412 | 0.545 | 0.606 | 0.472 | 0.448 | 0.347 | 0.556 | 0.709 | 0.562 | 0.635 | 0.742 | 0.03 | 5.8k |
+
+Qwen3.5-397B agrees with DeepSeek-high about as well as Clef does (silver topic
+F1 0.60 on v7, 0.62 on v8) and is precise but leaves most frames and evidence
+signals off. It was KV-bound on this node (125 of 512 sequences running at 99.8%
+KV, ~1.3k tok/s aggregate early in the run), so it is also far slower per
+window than DeepSeek.
+
+### GLM-5.3-Flash
+
+`canada-quant/GLM-5.3-Flash-W4A16-MTP` (INT4 routed experts, BF16 attention and
+MTP head) on a vLLM nightly (0.30.1rc1.dev630, cu129), TP4 + EP, MTP with 2
+speculative tokens, `glm45` reasoning parser, prefix caching on. Making the
+nightly run on this node's 570 driver took CUDA forward compatibility and a
+user-space CUDA 12.9 compiler; see the serving notes below.
+
+| run | topic P | topic R | topic F1 | parent F1 | narr F1 | frame F1 | evid F1 | pop F1 | claim P | claim R | claim F1 | prod F1 | null atoms/w | out tok/w |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| DeepSeek high, v7 | 0.858 | 0.636 | 0.740 | 0.767 | 0.803 | 0.796 | 0.695 | 0.828 | 0.881 | 0.720 | 0.798 | 0.854 | 0.35 | 19.5k |
+| GLM-5.3-Flash, v7 | 0.881 | 0.631 | 0.748 | 0.772 | 0.805 | 0.744 | 0.662 | 0.779 | 0.915 | 0.678 | 0.786 | 0.849 | 0.30 | 8.2k |
+| DeepSeek + GLM union, v7 | 0.849 | 0.741 | 0.800 | 0.802 | 0.819 | 0.824 | 0.759 | 0.848 | 0.839 | 0.794 | 0.821 | 0.859 | 0.43 | 27.7k |
+| DeepSeek high, v8 (mapped) | 0.820 | 0.562 | 0.678 | 0.714 | 0.676 | 0.749 | 0.657 | 0.760 | 0.920 | 0.632 | 0.755 | 0.859 | 0.09 | 17.6k |
+| GLM-5.3-Flash, v8 (mapped) | 0.810 | 0.602 | 0.703 | 0.757 | 0.680 | 0.752 | 0.618 | 0.764 | 0.910 | 0.659 | 0.770 | 0.811 | 0.15 | 9.7k |
+| DeepSeek + GLM union, v8 | 0.784 | 0.660 | 0.727 | 0.745 | 0.707 | 0.817 | 0.719 | 0.841 | 0.876 | 0.759 | 0.819 | 0.845 | 0.15 | 27.3k |
+
+Test split only (v7): GLM topic F1 0.750 vs DeepSeek 0.735, claim F1 0.808 vs
+0.813. The union of the two models ties DeepSeek + refine (paired: every delta
+within noise, claim precision +0.018 for the union) and is the strongest
+two-request configuration measured: two different model families disagree in
+more useful places than two DeepSeek repeats do (union of two DeepSeek repeats:
+topic F1 0.787, narratives 0.771).
+
+Throughput on this node was lower than the token count suggests: GLM was
+KV-bound (64 sequences running at 99.8% KV with 45-87k-token prompts; the
+model card notes fp8 KV is not available on Hopper for it), ~3.6k tok/s
+aggregate, and the 640 benchmark windows took ~53 minutes, about 725 windows an
+hour against ~1,000 for DeepSeek on the same windows.
+
+**Refine with GLM.** The same refine prompt, served by GLM:
+
+| run | topic P | topic R | topic F1 | parent F1 | narr F1 | frame F1 | evid F1 | pop F1 | claim P | claim R | claim F1 | prod F1 | out tok/w (both passes) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| DeepSeek + DeepSeek refine, v7 | 0.828 | 0.741 | 0.790 | 0.821 | 0.809 | 0.814 | 0.732 | 0.862 | 0.822 | 0.817 | 0.824 | 0.848 | 41.7k |
+| **GLM + GLM refine, v7** | 0.872 | 0.738 | **0.809** | **0.839** | **0.836** | 0.814 | 0.731 | 0.855 | 0.891 | 0.782 | **0.839** | 0.867 | **16.8k** |
+| DeepSeek + GLM refine, v7 | 0.866 | 0.752 | 0.813 | 0.836 | 0.796 | 0.829 | 0.752 | 0.863 | 0.846 | 0.815 | 0.834 | 0.869 | 28.9k |
+| DeepSeek + DeepSeek refine, v8 (mapped) | 0.791 | 0.645 | 0.720 | 0.764 | 0.736 | 0.789 | 0.717 | 0.794 | 0.883 | 0.723 | 0.802 | 0.910 | 38.4k |
+| **GLM + GLM refine, v8 (mapped)** | 0.800 | 0.673 | **0.741** | **0.796** | 0.687 | 0.788 | 0.686 | 0.787 | 0.892 | 0.763 | **0.827** | 0.849 | **20.1k** |
+
+Paired, GLM refine against GLM alone (v7): topic F1 +0.058 [0.045, 0.075],
+narratives +0.051, frames +0.075, evidence +0.079, populations +0.035, claim
+recall +0.096 [0.079, 0.115], products +0.047; topic precision -0.013, claim
+precision -0.026. DeepSeek + GLM refine against DeepSeek + DeepSeek refine:
+topic precision +0.025, frames +0.025, claim precision +0.023, products +0.028,
+everything else within noise. Test split (v7): GLM + GLM refine topic F1 0.801,
+claim F1 0.849; DeepSeek + DeepSeek refine 0.780, 0.822.
+
+**On real windows** (503 corpus windows, v8, one pass): GLM 3.7k output tokens
+a window (median 1.1k) against DeepSeek 8.0k (median 2.1k); GLM labels 55.1% of
+windows (DeepSeek 51.5%), 3.12 topics and 1.94 claims per window (2.56, 1.79);
+the two agree on whether a window has any health content for 93.2% of windows
+(8 DeepSeek-only, 26 GLM-only).
 
 ## Cost per window on real traffic (v8, DeepSeek-V4-Flash, one node)
 
@@ -308,12 +447,30 @@ single-configuration throughput test.
 - v8 numbers are not v8 quality. The label map, silver gold and behavioural
   measures say how methods compare under v8 and how v8 differs from v7; whether
   v8's boundary decisions are right needs the v3 reference pass.
+- GLM, Qwen, refine and hints runs are one pass each; DeepSeek high has three.
+  Run-to-run noise for DeepSeek is ~0.74 topic self-agreement, and paired
+  intervals above account for item-level variation but not for repeat noise
+  of the candidate.
 - All references are Opus, and silver is DeepSeek; a method of another family
   (Clef, Qwen) is judged against those readings.
 - Corpus retention is retention of DeepSeek-high's labels, so a screen is
   credited for keeping DeepSeek's false positives too.
 - Throughput was measured on a shared server running several configurations
   at once.
+
+## Serving notes for GLM-5.3-Flash on this node
+
+The node's driver is 570 (CUDA 12.8). The model needs a vLLM nightly from
+2026-09-08 or later, published for cu129 (no cu128 index). What it took:
+`uv pip install vllm --pre` from `https://wheels.vllm.ai/nightly/cu129` into
+`/scratch/fparker9/vllm-nightly-venv`; `torchcodec` removed and
+`--language-model-only` (text only); NVIDIA's CUDA 12.9 forward-compatibility
+`libcuda` (rpm `cuda-compat-12-9`, unpacked to `/scratch/fparker9/cuda-compat-12-9`)
+on `LD_LIBRARY_PATH`, because the driver cannot JIT the wheel's PTX; and a
+user-space CUDA 12.9 compiler (rpms unpacked to `/scratch/fparker9/cuda129-rpm`)
+as `CUDA_HOME`, because DeepGEMM (used by the sparse-attention indexer) JIT
+compiles with nvcc >= 12.9 and FlashInfer JIT needs cuRAND headers. The launch
+line is in `exp/phase5.sh`.
 
 ## Reproducing
 
@@ -329,6 +486,10 @@ BENCHMARK_DIR=benchmark/v2 .venv/bin/python -m analysis.benchmark run --name v7-
 .venv/bin/python exp/combine.py union --out benchmark/v2/runs/v7-union2 benchmark/v2/runs/v7-high-b24k:0 benchmark/v2/runs/v7-high-b24k:1
 # v8 against the v7 gold
 BENCHMARK_DIR=benchmark/v2 .venv/bin/python -m analysis.benchmark score --alias exp/alias-v8-to-v7.json benchmark/v3/runs/v8-refine
+# GLM-5.3-Flash (see exp/phase5.sh for the server), then e.g.
+BENCHMARK_DIR=benchmark/v2 .venv/bin/python -m analysis.benchmark run --name v7-glm53-b24k \
+    --pipeline-config benchmark/pipeline-local.toml --repeats 1 --split all -- --model glm53-w4
+.venv/bin/python exp/xlabel.py --bench v2 --name v7-glm-refine-glm --mode refine --base-run benchmark/v2/runs/v7-glm53-b24k --model glm53-w4
 # screens
 .venv/bin/python exp/clef_screen.py --prefix clef-flash --model clef-flash --api http://127.0.0.1:8301/v1 --windows <windows> --ids-file exp/corpus/sample4000.ids
 .venv/bin/python exp/operating_points.py clef-flash-broad ds-screen tfidf-any

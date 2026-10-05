@@ -180,6 +180,7 @@ def main() -> int:
     parser.add_argument("--lexicon", help="hints: keyword lexicon JSON (exp/keywords.py format)")
     parser.add_argument("--max-cues", type=int, default=60)
     parser.add_argument("--notes", default="")
+    parser.add_argument("--model", default=MODEL, help="served model name")
     args = parser.parse_args()
 
     taxonomy = json.loads((REPO / f"benchmark/{args.bench}/taxonomy.json").read_text())
@@ -207,7 +208,7 @@ def main() -> int:
     run_dir.mkdir(parents=True, exist_ok=True)
     manifest = {
         "name": args.name,
-        "model": MODEL,
+        "model": args.model,
         "provider": "local",
         "mode": args.mode,
         "bench": args.bench,
@@ -232,7 +233,7 @@ def main() -> int:
             if first is None:
                 return False
             user += REFINE_NOTE + tl.canonical_json(first)
-        payload = {"model": MODEL, **tl.API_FLAVORS["chat_completions"].payload(instructions, user, schema_name, schema, settings)}
+        payload = {"model": args.model, **tl.API_FLAVORS["chat_completions"].payload(instructions, user, schema_name, schema, settings)}
         for attempt in range(args.attempts):
             started = time.monotonic()
             record: dict[str, Any] = {"attempt": attempt, "window_id": window["window_id"]}

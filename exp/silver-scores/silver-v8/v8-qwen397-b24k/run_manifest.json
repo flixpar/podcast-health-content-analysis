@@ -1,0 +1,83 @@
+{
+  "api": "chat_completions",
+  "benchmark_version": "v3",
+  "completed_at": "2026-10-05T01:54:01.298521+00:00",
+  "concurrency": 256,
+  "config": "benchmark/pipeline-local.toml",
+  "created_at": "2026-10-05T01:13:18.737685+00:00",
+  "endpoints": {
+    "http://127.0.0.1:8222/v1": "Qwen/Qwen3.5-397B-A17B-GPTQ-Int4"
+  },
+  "experiment": null,
+  "git_commit": "3eba6a0430da8c0f04d13e706894f2186deb17ab",
+  "items": 320,
+  "items_hash": "44b9fa900dffd792bb695f88c8fbf4d6b646073a7c603bcf83fa51f3818ef6d8",
+  "max_output_tokens": 80000,
+  "model": "Qwen/Qwen3.5-397B-A17B-GPTQ-Int4",
+  "name": "v8-qwen397-b24k",
+  "no_auth": true,
+  "notes": null,
+  "prompt_version": "granular-v8:445123e19aed0c47",
+  "provider": null,
+  "reasoning_effort": "high",
+  "repeat_summaries": [
+    {
+      "attempts": {
+        "accepted": 320,
+        "attempts": 320
+      },
+      "exported": 320,
+      "repeat": 0,
+      "stopped_by_usage_limit": null,
+      "unresolved_windows": 0,
+      "unresolved_windows_by_kind": {},
+      "validation_changes": {
+        "dropped": {
+          "certainty_markers_mismatch": 104,
+          "duplicate_annotation": 2,
+          "mixed_or_unknown_labels": 47,
+          "non_verbatim_quote": 427,
+          "reversed_span": 28,
+          "span_out_of_window": 17
+        },
+        "repaired": {
+          "certainty_set_unhedged": 88,
+          "span_widened_for_certainty_marker": 17,
+          "span_widened_for_quote": 475
+        }
+      },
+      "wall_seconds": 2442.5,
+      "window_labels_sha256": "ece4fa013008dc30b93339e9bac5ed2a410ad37176552c4d1d16a92f87eecd73",
+      "windows_labeled": 320
+    }
+  ],
+  "repeats": 1,
+  "rubric_file": null,
+  "rubric_sha256": "c2996aaabcb2202b22871e6b378de4d4be7107bb22b58872df7e3c7e2cb957dc",
+  "run_fingerprint": "4cf8ec4d62927c57c2b7f4d7767b33ae2226d8f114a9d2befb58b55f77cc2d43",
+  "schema_version": "topic-labeling-v5",
+  "seed": null,
+  "stopped_by_usage_limit": null,
+  "taxonomy_sha256": "4ebb17a50b2179e8549d773aa5a3d52d51536b8fec12cac193887556e75c6182",
+  "temperature": 1.0,
+  "thinking_token_budget": 24000,
+  "top_p": 0.95,
+  "usage_limits": null,
+  "validation": "lenient",
+  "validation_changes": {
+    "dropped": {
+      "certainty_markers_mismatch": 104,
+      "duplicate_annotation": 2,
+      "mixed_or_unknown_labels": 47,
+      "non_verbatim_quote": 427,
+      "reversed_span": 28,
+      "span_out_of_window": 17
+    },
+    "repaired": {
+      "certainty_set_unhedged": 88,
+      "span_widened_for_certainty_marker": 17,
+      "span_widened_for_quote": 475
+    }
+  },
+  "validator_sha256": "e74161b4d1980b357a06e1d7e7eed1b8f05de441c5b106a923b76497c581a929"
+}
