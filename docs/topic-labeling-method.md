@@ -71,6 +71,18 @@ to contradict itself -- and a model asked for it will sometimes take it. The
 axis is derived from the labels during validation, which still rejects a label
 set that straddles two axes, the rule that carries the meaning.
 
+The instructions are the benchmark codebook itself (`analysis/benchmark/codebook.md`,
+the task definition the reference annotators labeled from) followed by every
+label's axis, definition and example terms. An earlier hand-written rubric
+paraphrased the codebook and never listed the `claim_type` or `product_type`
+values -- the response schema constrained them, but the model had no
+description to choose by, and it matched the annotators on claim type only 36%
+of the time (the annotators agree with each other on 80%). On the benchmark dev
+split, two repeats, the codebook raised topic recall by 0.11, topic F1 by 0.05
+and claim recall by 0.08, lowered topic precision by 0.05, and cost no extra
+tokens; claim type agreement rose to 81%. The codebook's sha256 is part of the
+run fingerprint, so editing it starts a new run.
+
 The same response extracts atomic claims whose falsity, exaggeration, or missing
 context would materially affect health understanding or behavior. It includes
 claims being quoted, questioned, or rebutted, retaining their discourse role so
@@ -114,7 +126,7 @@ rejection that measures whether the model can ground the certainty coding
 rather than assert it.
 
 Validation rejects a whole response, which is why a request carries one window
-rather than several. The ~11,500-token instruction prefix is prompt-cached by
+rather than several. The ~12,500-token instruction prefix is prompt-cached by
 the server, so packing windows together saved little, while one bad annotation
 or one truncation threw away every window in the request. `verify` likewise
 sends one candidate per request. Failed windows are durable and retryable; they
@@ -237,6 +249,19 @@ vllm serve deepseek-ai/DeepSeek-V4-Flash-0731 \
 ```
 
 The first three flags are what this pipeline depends on; the rest are sizing.
+
+In production use `analysis/serving/serve-deepseek-v4.sh` instead, which adds a
+reasoning-parser plugin (`analysis/serving/fast_reasoning_end_plugin.py`). In
+vLLM 0.29 the parser-engine reasoning adapters (DeepSeek-V4, Qwen3, Gemma 4)
+decide whether a structured-output request has finished thinking by copying
+and rescanning its whole token history on every decode step. At 64 concurrent
+thinking requests that loop was 92% of the scheduler's time: the GPUs sat near
+35% utilisation and aggregate decode stayed at 1-2k tokens/s however many
+requests ran. The plugin registers `deepseek_v4_fast` (and `qwen3_fast`,
+`gemma4_fast`), which checks only the tokens decoded in the step; with it the
+same node decodes 3.4k tokens/s at 64 requests and 10.3k at 512, with the GPUs
+at 100%. The script also raises `--max-model-len` to 96K and
+`--max-num-seqs` to what `MAX_NUM_SEQS` asks for.
 
 ### Responses or Chat Completions
 
@@ -371,6 +396,26 @@ is not in doubt, and it is why the shipped config sets `high`.
 
 Read label prevalence, span quality and candidate yield too, not only the
 rejection counts: a setting can be accepted more often and still code worse.
+
+`--thinking-token-budget` caps the thinking rather than the effort: after that
+many reasoning tokens vLLM forces the end-of-thinking marker and the model
+writes its answer. It is sent only on Chat Completions (vLLM's Responses
+endpoint does not accept it) and is fingerprinted when set. Thinking length on
+this task tracks how much a window contains, not how ambiguous it is (reasoning
+tokens correlate 0.89 with the number of reference annotations), so a cap
+mostly shortens the dense windows. On the benchmark dev split, two repeats:
+
+| budget | output tokens per window | against unbounded |
+| --- | --- | --- |
+| none | ~22k | -- |
+| 24,000 | ~19k (-15%) | no significant change |
+| 16,000 | ~14k (-37%) | frame F1 -0.07, claim recall -0.06 |
+| 8,000 (70-item sample) | ~8k (-65%) | frame, evidence and claims each about -0.1 |
+
+The 16k loss sits entirely on windows whose unbounded thinking ran past 16k,
+mostly frames left off a span that still got its topic. The shipped config uses
+24,000. Lowering `--reasoning-effort` instead is worse: `low` cost 0.16 topic
+recall and 0.14 claim recall for a 56% token cut.
 
 DeepSeek recommends `--temperature 1.0` with `--top-p 1.0`, or `--top-p 0.95`
 for the 0731 checkpoint. Every one of these settings is in the fingerprint, so

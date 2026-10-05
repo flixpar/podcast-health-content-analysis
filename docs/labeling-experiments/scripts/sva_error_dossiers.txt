@@ -1,0 +1,545 @@
+### E01 detection:topic miss | c181249w0003 (health_dense, SuperLife with Darin Olien)
+GOLD t:functional_nutrition_supplements span (72, 75) env (72, 76) annotators ['opus-r1', 'opus-r2', 'sonnet-r2'] (3of4) DS matched in 1/2 samples votes {'discourse_role': {'asserted_or_endorsed': 3}, 'relevance': {'substantive': 3}}
+  quote: "Avoid sleep medications"
+  quote: "Avoid sleep medications. These things are freaking harmful"
+  non-supporting sonnet-r1 on span: t:sleep(72, 76)
+  DS on span: t:sleep(72, 76) q='Avoid sleep medications. These things are freaking harmful'
+  TEXT: [71] (ctx) great time doing it. [72] Avoid sleep medications. [73] These things are freaking harmful. [74] Also, I am not a fan of melatonin supplements. [75] Ditch them. [76] (ctx) Make sure you go back and get through all of these things, all of these recommendations, and you won't need it.
+
+### E02 detection:topic miss | c380025w0001 (discourse, Decoded | Unlock The Secrets of Human Be)
+GOLD t:mental_health span (33, 40) env (33, 42) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 3/8 samples votes {'discourse_role': {'asserted_or_endorsed': 2}, 'relevance': {'substantive': 2}}
+  quote: "Held with a level of conviction that is resistant to contradictory evidence and is disconnected from consensual reality"
+  quote: "That is not necessarily psychosis, although repeatedly in a sustained manner, that could eventually lead to psychosis"
+  non-supporting sonnet-r1 on span: t:mental_health(12, 42)
+  non-supporting sonnet-r2 on span: t:mental_health(0, 55)
+  DS on span: t:mental_health(0, 55) q='today's episode is all about understanding delusion and psychosis'; x:misinformation_correction_debunking(33, 42) q='This is the first misconception: people believe things every single day that are'
+  TEXT: [32] (ctx) In the end, I want to give you a very practical framework for how to differentiate an intrusive thought from psychosis, and how you can protect your own ability to remain anchored firmly, two feet in the ground in objective reality. [33] This is the first misconception: people believe things every single day that are inaccurate. [34] You might remember an argument incorrectly. [35] You might assume that somebody doesn't like you, even when they say they do. [36] You might convince yourself that your boss. [37] Is angry because an email sounded short, even if that's not ..... you think they really meant. [39] That is not necessarily psychosis, although repeatedly in a sustained manner, that could eventually lead to psychosis. [40] These are building blocks moving toward delusion. [41] (ctx) A delusion involves a belief that is.
+
+### E03 detection:topic miss | c331158w0017 (mixed, Breaking Points with Krystal and Saagar)
+GOLD t:cardiometabolic_health span (26, 26) env (25, 29) annotators ['opus-r1', 'opus-r2', 'sonnet-r1', 'sonnet-r2'] (4of4) DS matched in 1/2 samples votes {'discourse_role': {'reported_or_quoted': 4}, 'relevance': {'passing': 4}}
+  quote: "Murdoch has suffered a broken back, seizures, two bounds of pneumonia, atrial fibrillation, and a torn achilles tendon"
+  quote: "Murdoch has suffered a broken back, seizures, two bounds of pneumonia, atrial fibrillation, and a torn achilles tendon, as well as a terrible bout with COVID nineteen"
+  DS on span: t:other_health_topic(26, 26) q='Murdoch has suffered a broken back, seizures, two bounds of pneumonia, atrial fi'; t:dementia_cognitive_decline_ageing(27, 29) q='whether he's even in the right state of mind to be doing this'
+  TEXT: [25] (ctx) Here's what they say. [26] Quote Murdoch has suffered a broken back, seizures, two bounds of pneumonia, atrial fibrillation, and a torn achilles tendon, as well as a terrible bout with COVID nineteen. [27] (ctx) So he's ninety one or ninety two years old.
+
+### E04 detection:topic miss | c176979w0018 (rare_label, The Ultimate Human with Gary Brecka)
+GOLD t:peptides_experimental_optimization_compounds span (12, 14) env (12, 14) annotators ['opus-r1', 'opus-r2', 'sonnet-r2'] (3of4) DS matched in 0/2 samples votes {'discourse_role': {'asserted_or_endorsed': 3}, 'relevance': {'substantive': 3}}
+  quote: "if you want to go back to the original peptide therapy, it was taking glandulars and organs"
+  quote: "peptide therapy, if you want to go back to the original peptide therapy, it was taking glandulars and organs"
+  non-supporting sonnet-r1 on span: t:peptides_experimental_optimization_compounds(6, 44)
+  DS on span: t:peptides_experimental_optimization_compounds(2, 79) q='I I'm a huge fan of peptides'
+  TEXT: [11] (ctx) Literature and combining that, I always try and do this, and I really try and have what does the medical literature say, what does the ancient medicine say, and combine those two and take the greatest sort of ideas from from those. [12] But but peptide therapy, if you want to go back to the original peptide therapy, it was taking glandulars and organs. [13] I mean, that's where they're found in the highest levels in the body, and so thymosin alpha one, like before we had thymosin. [14] Or even TB 500. [15] (ctx) That's from the thymus gland, and so one of the oldest cancer protocols is taking thymus gland in order to fight cancer because of all of what it does boosting your immune system exactly.
+
+### E05 detection:topic miss | c177172w0003 (health_dense, The Ultimate Human with Gary Brecka)
+GOLD t:wearables_self_tracking_digital_health span (11, 15) env (11, 15) annotators ['opus-r1', 'sonnet-r2'] (OS) DS matched in 0/8 samples votes {'discourse_role': {'asserted_or_endorsed': 2}, 'relevance': {'advertisement': 2}}
+  quote: "And you can also sign up for your genetic test"
+  quote: "sign up for your genetic test"
+  non-supporting opus-r2 on span: t:genetics_inheritance(11, 15)
+  non-supporting sonnet-r1 on span: t:genetics_inheritance(11, 11), t:genetics_inheritance(15, 15), t:other_health_topic(14, 14)
+  DS on span: t:longevity_anti_aging(5, 16) q='On this website, you can sign up for a completely free newsletter that I write e'; x:commercialization(5, 16) q='the most important website that I think you may ever go to is theultimatehuman'; x:naturalness_appeal(10, 14) q='products that I've reviewed and recommend for chemical-free, healthy living'; t:genetics_inheritance(11, 11) q='you can also sign up for your genetic test'
+  TEXT: [10] (ctx) If you want to see all of the products that I've reviewed and recommend for chemical-free, healthy living, I've got those listed on the website. [11] And you can also sign up for your genetic test. [12] But most of all, the information in that newsletter is completely and totally free. [13] I do it every single week in an effort to touch the face of humanity because I know that this information needs to reach the masses. [14] If you want to see chemical-free living products, they're there. [15] And if you want to get your genetic test, it's also available on theultimatehuman.com. [16] (ctx) And now back to the Ultimate Human podcast.
+
+### E06 detection:topic miss | c181249w0003 (health_dense, SuperLife with Darin Olien)
+GOLD t:fitness_exercise span (77, 81) env (77, 81) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 1/2 samples votes {'discourse_role': {'asserted_or_endorsed': 2}, 'relevance': {'substantive': 2}}
+  quote: "on practicing yoga consistently for eight weeks improved better sleep"
+  quote: "practicing yoga consistently for eight weeks improved better sleep"
+  non-supporting sonnet-r1 on span: t:sleep(77, 81)
+  non-supporting sonnet-r2 on span: t:recovery_physical_optimization(77, 81), t:sleep(77, 81)
+  DS on span: t:sleep(77, 81) q='you can do this slow stretching right before bed, and it's fantastic'; x:prestige_science_invocation(77, 77) q='there was a great study, Harvard study, on practicing yoga consistently for eigh'; x:scientific_study_citation(77, 77) q='there was a great study, Harvard study, on practicing yoga consistently for eigh'
+  TEXT: [76] (ctx) Make sure you go back and get through all of these things, all of these recommendations, and you won't need it. [77] Also, there was a great study, Harvard study, on practicing yoga consistently for eight weeks improved better sleep. [78] That's probably more to physical activity and the the system of doing it regularly, but it shows improved sleep. [79] Also. [80] Efficacious drainage of just things of like raising your legs with a wall pose and restorative yoga, slow-paced meditative styles. [81] Also, you can do this slow stretching right before bed, and it's fantastic. [82] (ctx) Another great one: meditation.
+
+### E07 detection:topic miss | c192522w0001 (health_dense, Dr. Jockers Functional Nutrition)
+GOLD t:hearing_vision_sensory_health span (70, 70) env (69, 70) annotators ['opus-r2', 'sonnet-r2'] (OS) DS matched in 0/8 samples votes {'discourse_role': {'asserted_or_endorsed': 1, 'questioned': 1}, 'relevance': {'passing': 1, 'substantive': 1}}
+  quote: "Have you struggled with a weak immune system"
+  quote: "trouble tasting things or smelling things"
+  non-supporting opus-r1 on span: t:autoimmune_immune_health(67, 70), t:functional_nutrition_supplements(67, 70)
+  non-supporting sonnet-r1 on span: t:functional_nutrition_supplements(69, 70)
+  DS on span: t:functional_nutrition_supplements(69, 70) q='Have you struggled with a weak immune system? Maybe you've had hormone problems,'
+  TEXT: [69] (ctx) And question: Have you struggled with a weak immune system? [70] Maybe you've had hormone problems, trouble tasting things or smelling things.
+
+### E08 detection:topic miss | c175341w0013 (rare_label, Rooted in Wellness with Mona Sharma)
+GOLD t:diet_tribes_food_ideologies span (62, 65) env (62, 69) annotators ['opus-r1', 'opus-r2', 'sonnet-r2'] (3of4) DS matched in 0/2 samples votes {'discourse_role': {'asserted_or_endorsed': 3}, 'relevance': {'substantive': 3}}
+  quote: "whole foods, pure ingredients, all organic"
+  quote: "they basically did an overhaul on diet and went, you know, kind of that ancestral, whole foods, pure ingredients, all organic, pastured"
+  non-supporting sonnet-r1 on span: t:neurodevelopment_autism_discourse(42, 100), t:detox_cleanses_parasites(66, 68)
+  DS on span: t:neurodevelopment_autism_discourse(48, 100) q='that have been talking about how you reverse autism'; x:naturalness_appeal(62, 66) q='that ancestral, whole foods, pure ingredients, all organic, pastured, all these '; x:purity_contamination_framing(62, 66) q='that ancestral, whole foods, pure ingredients, all organic, pastured, all these '; x:toxin_framing(62, 66) q='that ancestral, whole foods, pure ingredients, all organic, pastured, all these '
+  TEXT: [61] (ctx) They were gonna reverse this in their kids. [62] So they basically did an overhaul on diet [63] and went, you know, kind of that ancestral, [64] whole foods, pure ingredients, all organic, [65] pastured, all these kinds of important parts of food. [66] (ctx) They took all the toxins out of the home,
+
+### E09 detection:topic false_positive | c181355w0013 (rare_label, SuperLife with Darin Olien)
+PRED t:functional_nutrition_supplements span (15, 16) class span_only attrs {'relevance': 'substantive', 'discourse_role': 'asserted_or_endorsed'}
+  quote: "much more bioavailable than even just. The vitamin C powder, ascorbic acid"
+  same atom in 7/7 other DS samples
+  gold on span: t:functional_nutrition_supplements(7, 16)/(0, 27) required 4ann; t:food_nutrition(9, 16)/(7, 16) required 2ann; t:diet_tribes_food_ideologies(15, 15)/(15, 15) required 2ann
+  TEXT: [14] (ctx) Like it's so abundant. [15] So if you're eating a plant based diet and you're eating lots of fruits and vegetables, you're getting abundant vitamin C, and in fact, you're getting vitamin C in a whole food matrix that is much more bioavailable than even just. [16] The vitamin C powder, ascorbic acid. [17] (ctx) But having said that, there's value into taking ascorbic acid too, because the sicker you are, the more your body can use and absorb.
+
+### E10 detection:topic false_positive | c178272w0003 (discourse, Maintenance Phase)
+PRED t:emf_technology_exposure span (47, 50) class span_only attrs {'relevance': 'passing', 'discourse_role': 'rebutted'}
+  quote: "Yeah, blood brain barrier, normal"
+  same atom in 3/7 other DS samples
+  gold on span: t:emf_technology_exposure(29, 41)/(29, 51) required 3ann
+  TEXT: [46] (ctx) Michael: Yeah. [47] Aubrey: That is exactly what Joe Rogan did is just like, ask the next clarifying question that's sitting in front of him and just immediate stumper. [48] Michael: "Sorry, can you say a little bit more about that?" [49] And then he just immediately fucking punts. [50] Aubrey: Yeah, blood brain barrier, normal. [51] (ctx) Michael: So, then another thing that you might notice about this clip is that his voice sounds a little bit weird.
+
+### E11 detection:topic false_positive | c192615w0006 (health_dense, Dr. Jockers Functional Nutrition)
+PRED t:functional_nutrition_supplements span (32, 56) class same_axis_wrong_label attrs {'relevance': 'substantive', 'discourse_role': 'asserted_or_endorsed'}
+  quote: "all of them after six months had normal heart function"
+  same atom in 4/7 other DS samples
+  gold on span: t:cardiometabolic_health(33, 42)/(33, 45) required 2ann; t:cardiometabolic_health(47, 59)/(16, 68) required 3ann; t:regenerative_aesthetic_medicine(47, 59)/(47, 59) acceptable 1ann; t:other_health_topic(47, 56)/(47, 56) rejected 1ann
+  TEXT: [31] (ctx) So let's see what happens when we put more stem cells in circulation with that blend of plants. [32] Yeah, really interesting. [33] And did you say that with the congestive heart failure study? [34] Obviously, it's not finished yet, but you said that there were ten of the patients that went from having congestive heart failure to normal heart function. [35] Correct. [36] And and what is even more impressive in that. [37] Study is that it's ten out of ten. [38] So these are the first ten patients, and all of them after six months had ..... those ten individuals were they doing both? [54] Were they getting stem cell injections as well as stem regen? [55] Just stem regen. [56] Just stem regen. [57] (ctx) Yeah, and no, no other lifestyle counseling that they were given.
+
+### E12 detection:topic false_positive | c179765w0001 (health_dense, Afterpause)
+PRED t:natural_alternative_functional_medicine span (36, 36) class same_axis_wrong_label attrs {'relevance': 'passing', 'discourse_role': 'asserted_or_endorsed'}
+  quote: "That's where a health coach can make all the difference"
+  same atom in 0/7 other DS samples
+  gold on span: t:weight_loss_metabolic_health(28, 31)/(28, 42) required 3ann; t:weight_loss_metabolic_health(33, 34)/(33, 42) required 3ann; t:food_nutrition(33, 42)/(28, 42) required 2ann
+  TEXT: [35] (ctx) So much conflicting advice that it's paralyzing. [36] That's where a health coach can make all the difference. [37] (ctx) A coach can help you cut through the noise and, alongside you, create a food plan that actually works for you—your needs, your preferences, your longevity goals, and your real life, whether that includes work, family, or travel.
+
+### E13 detection:topic false_positive | c154859w0023 (mixed, The Team House)
+PRED t:substance_use_addiction_harm_reduction span (0, 8) class span_only attrs {'relevance': 'substantive', 'discourse_role': 'questioned'}
+  quote: "are they even thinking about the drug trade"
+  same atom in 6/7 other DS samples
+  gold on span: t:substance_use_addiction_harm_reduction(24, 38)/(0, 39) required 3ann
+  TEXT: [0] I've heard that much of these chemicals come from or [1] they did from India. [2] And China, and I believe Tylian [3] may have been involved. [4] Also are they manufacturing these chemicals [5] like like in their in their mind, are they even [6] thinking about the drug trade or that's like they're manufacturing [7] industrial chemicals in their mind and then it gets hijacked [8] along the way by bad actors. [9] (ctx) Well, there's many there's many issues with China, like the
+
+### E14 detection:topic false_positive | c78401w0009 (rare_label, The Weekly Show with Jon Stewart)
+PRED t:pregnancy_maternal_postpartum_health span (49, 51) class same_axis_wrong_label attrs {'relevance': 'passing', 'discourse_role': 'asserted_or_endorsed'}
+  quote: "the differences between a vaccination, even one that is you know very. Quickly rolled out, and pregnancy, and and the real harms of pregnancy"
+  same atom in 2/7 other DS samples
+  gold on span: t:public_health_policy(41, 43)/(41, 64) required 4ann; t:vaccines_immunization(44, 51)/(42, 57) required 2ann; t:covid_19_pandemic_health(57, 60)/(49, 64) required 3ann; t:vaccines_immunization(52, 64)/(41, 64) required 3ann
+  TEXT: [48] (ctx) Yeah, yeah. [49] I think the differences between a vaccination, even one that is you know very. [50] Quickly rolled out, and pregnancy, and and the real harms of pregnancy. [51] I think you can make a pretty clear distinction between those. [52] (ctx) But I think that's the example that they use, and in fact, Amy Coney Barrett in the Dobbs.
+
+### E15 detection:frame miss | c13214w0015 (discourse, The Megyn Kelly Show)
+GOLD x:government_institution_distrust span (17, 18) env (16, 18) annotators ['opus-r1', 'opus-r2', 'sonnet-r1', 'sonnet-r2'] (4of4) DS matched in 1/8 samples votes {'discourse_role': {'asserted_or_endorsed': 4}, 'relevance': {'substantive': 4}}
+  quote: "were smeared as you know being part of a death cult"
+  quote: "Companies have globed on to Fauciism as the only perspective you can have on the pandemic and how to respond to it"
+  DS on span: t:covid_19_pandemic_health(16, 18) q='Fauciism as the only perspective you can have on the pandemic'
+  TEXT: [16] (ctx) The people who said those things for about two years were smeared as you know being part of a death cult, like that Georgetown professor you're quoting, quoting a little bit. [17] When they actually had the more holistic view of the cost and the benefits that always should have factored into these decisions and haven't for a long time, in large part because of Fauciism and the way the media and social media. [18] Companies have globed on to Fauciism as the only perspective you can have on the pandemic and how to respond to it. [19] (ctx) When I heard him on the Daily, when I've heard him in other interviews, when I what was the magazine that did the big Fauci spread made him like like Rihanna?
+
+### E16 detection:frame miss | c185982w0005 (rare_label, Chiro Hustle)
+GOLD x:optimization_framing span (74, 76) env (73, 76) annotators ['opus-r2', 'sonnet-r1'] (OS) DS matched in 0/2 samples votes {'discourse_role': {'asserted_or_endorsed': 2}, 'relevance': {'substantive': 2}}
+  quote: "So you can layer different things on with people, depending on you know how far they want to go with it"
+  quote: "I'm looking at doing like upper cervical chiropractic with hyperbaric, with red light"
+  non-supporting opus-r1 on span: x:commercialization(74, 76)
+  non-supporting sonnet-r2 on span: x:commercialization(74, 76)
+  DS on span: t:fitness_exercise(71, 73) q='movement, period, is one of the most important things you can do to prevent it'; t:natural_alternative_functional_medicine(71, 73) q='movement, period, is one of the most important things you can do to prevent it'; t:natural_alternative_functional_medicine(74, 74) q='I'm looking at doing like upper cervical chiropractic with hyperbaric, with red '; t:recovery_physical_optimization(74, 74) q='I'm looking at doing like upper cervical chiropractic with hyperbaric, with red '; x:commercialization(75, 76) q='people are willing to pay for their brain, I think, and at the same time, their '
+  TEXT: [73] (ctx) Upper cervical. [74] So again, I'm looking at doing like upper cervical chiropractic with hyperbaric, with red light, and I do this stuff for me. [75] But you know, people are willing to pay for their brain, I think, and at the same time, their spine. [76] So you can layer different things on with people, depending on you know how far they want to go with it. [77] (ctx) It's not only that nutrition.
+
+### E17 detection:frame miss | c90375w0014 (rare_label, Watch What Crappens)
+GOLD x:maha_adjacent_online_vocabulary span (159, 159) env (150, 160) annotators ['opus-r1', 'opus-r2', 'sonnet-r2'] (3of4) DS matched in 0/2 samples votes {'discourse_role': {'asserted_or_endorsed': 3}, 'relevance': {'advertisement': 3}}
+  quote: "There are no seed oils"
+  quote: "There are no seed oils and no artificial ingredients"
+  non-supporting sonnet-r1 on span: x:commercialization(146, 163), x:naturalness_appeal(146, 163)
+  DS on span: t:food_nutrition(158, 161) q='nature-raised farms is free from gluten, dairy, and soy'; x:commercialization(146, 163) q='This episode is sponsored by Nature Raised Farms'; x:purity_contamination_framing(158, 159) q='nature-raised farms is free from gluten, dairy, and soy'
+  TEXT: [158] (ctx) And nature-raised farms is free from gluten, dairy, and soy. [159] There are no seed oils and no artificial ingredients. [160] (ctx) Also, nature-raised farms.
+
+### E18 detection:frame miss | c185631w0006 (health_dense, Culture Apothecary with Alex Clark)
+GOLD x:naturalness_appeal span (27, 31) env (27, 32) annotators ['opus-r1', 'opus-r2', 'sonnet-r1', 'sonnet-r2'] (4of4) DS matched in 1/2 samples votes {'discourse_role': {'asserted_or_endorsed': 4}, 'relevance': {'substantive': 4}}
+  quote: "The tongue is kind of like God's retainer"
+  quote: "That's God's plan to help us grow forward and wide"
+  DS on span: t:fluoride_oral_health(20, 33) q='if you're mouth breathing, then The whole face can kind of shrink back because t'; t:sleep(20, 33) q='if you're mouth breathing, then The whole face can kind of shrink back because t'
+  TEXT: [26] (ctx) They didn't used to be like this." [27] The tongue is kind of like God's retainer. [28] It's meant to be pushing on the palate and maintain your architecture. [29] And if you're mouth breathing, then The whole face can kind of shrink back because there's nothing pushing. [30] So the tongue and the lips kind of do this game. [31] That's God's plan to help us grow forward and wide. [32] (ctx) And if they aren't in balance, and we just have the face, the lips and cheeks pulling in, then the actual jaw will decrease, and the chin can come back, and the the maxilla can shrink back as well.
+
+### E19 detection:frame miss | c71184w0031 (rare_label, The Joe Rogan Experience)
+GOLD x:government_institution_distrust span (27, 31) env (27, 32) annotators ['opus-r1', 'sonnet-r1'] (OS) DS matched in 0/2 samples votes {'discourse_role': {'rebutted': 2}, 'relevance': {'substantive': 2}}
+  quote: "The CDC and this company and and"
+  quote: "Big, powerful people, corporations, and government agents. The CDC and this company and and"
+  non-supporting opus-r2 on span: x:big_pharma_medical_industrial_complex(27, 32), x:conspiracy_cover_up(27, 32), x:misinformation_correction_debunking(31, 32)
+  non-supporting sonnet-r2 on span: x:anti_mainstream_medicine_framing(27, 31), x:big_pharma_medical_industrial_complex(27, 31), x:conspiracy_cover_up(27, 31), x:misinformation_correction_debunking(31, 32)
+  DS on span: t:health_care_system_medical_trust(27, 27) q='anti-medical establishment, anti-big pharma, you know, anti-vaccination'; t:vaccines_immunization(27, 27) q='anti-medical establishment, anti-big pharma, you know, anti-vaccination'; t:health_care_system_medical_trust(28, 30) q='The CDC and this company and and'; t:health_care_system_medical_trust(31, 32) q='these people are not trying to keep us poisoned or keep us sick so they can make'; x:conspiracy_cover_up(28, 30) q='The CDC and this company and and'; x:misinformation_correction_debunking(31, 32) q='these people are not trying to keep us poisoned or keep us sick so they can make'
+  TEXT: [26] (ctx) They love the investigative journalism aspect of blowing the lid off this global conspiracy. [27] Well, I think that's what drives some of the you know kind of anti-medical establishment, anti-big pharma, you know, anti-vaccination. [28] You know, those guys they're behind closed doors. [29] Big, powerful people, corporations, and government agents. [30] The CDC and this company and and. [31] CEO and the politician, you know, they're all and they want to make money, and you know, and and they first they think they're more powerful than they really are, and second, that's not how the world works. [32] (ctx) I mean, these people are not trying to keep us poisoned or keep us sick so they can make money.
+
+### E20 detection:frame miss | c185744w0001 (rare_label, Culture Apothecary with Alex Clark)
+GOLD x:biohacking_framing span (8, 8) env (8, 9) annotators ['opus-r1', 'sonnet-r2'] (OS) DS matched in 0/2 samples votes {'discourse_role': {'asserted_or_endorsed': 2}, 'relevance': {'passing': 2}}
+  quote: "harness the power of circadian rhythms for peak performance and vibrant health"
+  quote: "helping people harness the power of circadian rhythms for peak performance and vibrant health"
+  non-supporting opus-r2 on span: x:optimization_framing(8, 8), x:commercialization(9, 9)
+  non-supporting sonnet-r1 on span: nothing
+  DS on span: t:sleep(8, 8) q='harness the power of circadian rhythms for peak performance and vibrant health'; t:sleep(9, 9) q='creating groundbreaking tools that promote deep, restorative sleep'; x:commercialization(9, 9) q='As the co-founder of Dreamwalkers, he's on the cutting edge of creating groundbr'
+  TEXT: [7] (ctx) How are sunlight, artificial light, and the timing of our eating and sleeping habits silently shaping our health in powerful, often overlooked ways? [8] Thaddeus Owen is a visionary biohacker, engineer, and wellness expert who has dedicated his life to helping people harness the power of circadian rhythms for peak performance and vibrant health. [9] (ctx) As the co-founder of Dreamwalkers, he's on the cutting edge of creating groundbreaking tools that promote deep, restorative sleep.
+
+### E21 detection:frame false_positive | c185744w0001 (rare_label, Culture Apothecary with Alex Clark)
+PRED x:misinformation_correction_debunking span (31, 32) class same_axis_wrong_label attrs {'relevance': 'substantive', 'discourse_role': 'rebutted'}
+  quote: "Optometrists and doctors that UV is bad for the eyes, and in fact, our eyes have receptors to read the ultraviolet light"
+  same atom in 0/1 other DS samples
+  gold on span: x:anti_mainstream_medicine_framing(31, 32)/(31, 34) required 4ann
+  TEXT: [30] (ctx) Well, the reason things are too bright for most people is because they don't get out at dawn to see the sunrise, and if they did, their eyes would adjust to the sun, and they wouldn't need sunglasses. [31] The second reason people wear them is because of the ultraviolet, and we've been told forever from up. [32] Optometrists and doctors that UV is bad for the eyes, and in fact, our eyes have receptors to read the ultraviolet light. [33] (ctx) And when we cover them with sunglasses, we cannot read how much UV is in the sun, and so we get sunburned.
+
+### E22 detection:frame false_positive | c192374w0001 (rare_label, Dr. Jockers Functional Nutrition)
+PRED x:optimization_framing span (51, 69) class same_axis_wrong_label attrs {'relevance': 'substantive', 'discourse_role': 'asserted_or_endorsed'}
+  quote: "how to break the lock on fat burning"
+  same atom in 0/1 other DS samples
+  gold on span: x:big_food_food_system_distrust(62, 63)/(62, 63) required 2ann
+  TEXT: [50] (ctx) That's Pureance dot com to shop and save today. [51] Hey, today we're talking about how to break the lock on fat burning. [52] There's a key hormone called insulin. [53] Insulin is your fat storage hormone. [54] As long as insulin's elevated, you're not going to be able to burn fat. [55] So, what is insulin? [56] Insulin do in the body. [57] Insulin's job is to take sugar out of your bloodstream, put it into the cells where it can be used for energy. [58] The issue is, as long as insulin is elevated beyond a ..... you can even call your doctor right now and say, "I want some blood work." [67] Ask for a fasted insulin test. [68] Now, by fasted, it means you eat dinner. [69] Let's say you finish dinner at 7 p.m.
+
+### E23 detection:frame false_positive | c185982w0005 (rare_label, Chiro Hustle)
+PRED x:misinformation_correction_debunking span (51, 55) class same_axis_wrong_label attrs {'relevance': 'substantive', 'discourse_role': 'asserted_or_endorsed'}
+  quote: "the whole medical profession has been brainwashed into thinking chiropractic's dangerous or it's quackery"
+  same atom in 1/1 other DS samples
+  gold on span: x:anti_mainstream_medicine_framing(51, 55)/(51, 60) required 4ann
+  TEXT: [50] (ctx) reality. [51] But like that's why people have all these preconceived ideas about chiropractic. [52] Oh, you're going to have a stroke! [53] Oh my God, he's going to paralyze you! [54] And I still, you know, I still see that in practice. [55] Today, but that's all just been brainwashed into people, because the whole medical profession has been brainwashed into thinking chiropractic's dangerous or it's quackery. [56] (ctx) So I want people to understand why people have.
+
+### E24 detection:frame false_positive | c78401w0009 (rare_label, The Weekly Show with Jon Stewart)
+PRED x:medical_freedom span (56, 64) class span_only attrs {'relevance': 'substantive', 'discourse_role': 'asserted_or_endorsed'}
+  quote: "this question of bodily autonomy can go both ways"
+  same atom in 6/7 other DS samples
+  gold on span: x:medical_freedom(43, 43)/(32, 64) required 4ann
+  TEXT: [55] (ctx) And I was like, oh, here we go again. [56] So, you know, this question of bodily autonomy can go both ways. [57] Like, they have made a lot about this in the context of masking and vaccinations. [58] Right. [59] And well, masking, I would say, is not. [60] But but vaccinations. [61] Well, but I mean, they do make the claim. [62] Yeah. [63] But I mean, they make that claim in those two contexts and. [64] Seem completely oblivious that you could make the very same arguments in the context of abortion. [65] (ctx) All right, we'll we'll be right back.
+
+### E25 detection:evidence miss | c185631w0006 (health_dense, Culture Apothecary with Alex Clark)
+GOLD x:mechanistic_scientific_language span (58, 58) env (54, 71) annotators ['opus-r1', 'opus-r2', 'sonnet-r1', 'sonnet-r2'] (4of4) DS matched in 1/2 samples votes {'discourse_role': {'asserted_or_endorsed': 4}, 'relevance': {'substantive': 4}}
+  quote: "restore their arch width to, you know, what it should have been before modern diets and epigenetic changes"
+  quote: "So, if your upper jaw is locking in the lower and it's a little bit too narrow, your lower teeth are really prone to collapsing"
+  DS on span: t:fluoride_oral_health(53, 66) q='So the lower arch is a victim of the upper arch'; t:fluoride_oral_health(67, 71) q='if you look at a CT scan, you can see the TMJ is like really close to the ear an'; t:pain_musculoskeletal_health(67, 71) q='if you look at a CT scan, you can see the TMJ is like really close to the ear an'; t:sleep(67, 71) q='if you look at a CT scan, you can see the TMJ is like really close to the ear an'
+  TEXT: [57] (ctx) So, we usually those kind of patients. [58] We need to really restore their arch width to, you know, what it should have been before modern diets and epigenetic changes. [59] (ctx) And when we make enough room for the teeth and have a little extra space in there, they're way less likely to collapse in.
+
+### E26 detection:evidence miss | c176979w0018 (rare_label, The Ultimate Human with Gary Brecka)
+GOLD x:personal_experience_evidence span (34, 35) env (34, 35) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 0/2 samples votes {'discourse_role': {'asserted_or_endorsed': 2}, 'relevance': {'substantive': 2}}
+  quote: "seen those work miracles in people, legitimately"
+  non-supporting sonnet-r1 on span: x:personal_experience_evidence(34, 41)
+  non-supporting sonnet-r2 on span: x:personal_experience_evidence(34, 41)
+  DS on span: t:peptides_experimental_optimization_compounds(2, 79) q='I I'm a huge fan of peptides'; x:personal_experience_evidence(33, 41) q='seen those work miracles in people, legitimately'; x:weak_evidence_extrapolation_signal(33, 41) q='seen those work miracles in people, legitimately'
+  TEXT: [33] (ctx) Yeah, that's so impactful. [34] You know, when I went through my, seen those work miracles in people, legitimately. [35] Yeah, seen it work miracles. [36] (ctx) Yeah, you know, when I when I had my my spinal infection, didn't walk for a year, and I'm just going on that was three years ago.
+
+### E27 detection:evidence miss | c6736w0002 (rare_label, The Megyn Kelly Show)
+GOLD x:credential_appeal span (0, 0) env (0, 0) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 0/2 samples votes {'discourse_role': {'asserted_or_endorsed': 2}, 'relevance': {'passing': 1, 'substantive': 1}}
+  quote: "Casey is his brilliant surgeon sister"
+  non-supporting sonnet-r1 on span: nothing
+  non-supporting sonnet-r2 on span: nothing
+  DS on span: t:weight_loss_metabolic_health(0, 0) q='author of this New York Times bestseller, "Good Energy: The Surprising Connectio'
+  TEXT: [0] Callie has been advising RFKJ, and Casey is his brilliant surgeon sister, who is author of this New York Times bestseller, "Good Energy: The Surprising Connection Between Metabolism and Limitless Health." [1] (ctx) And she joins me for the full show today.
+
+### E28 detection:evidence miss | c176579w0010 (rare_label, Extend Podcast with Darshan Shah, MD)
+GOLD x:personal_experience_evidence span (16, 24) env (16, 31) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 6/8 samples votes {'discourse_role': {'asserted_or_endorsed': 2}, 'relevance': {'substantive': 2}}
+  quote: "not one of those genes is actually manifested"
+  quote: "if if you were to just look at her genetics, you would think this is a sickly child"
+  non-supporting sonnet-r1 on span: nothing
+  non-supporting sonnet-r2 on span: nothing
+  DS on span: t:genetics_inheritance(14, 24) q='not one of those genes is actually manifested'; t:childrens_health(25, 31) q='Her eyes start getting red, and eczema will flare'
+  TEXT: [15] (ctx) Yep. [16] And it's actually so promising, you know, because you look at my genes and my kids' genes. [17] Like my daughter, who. [18] The same age as your daughter. [19] She, on paper, according to her genetics, does not have a good stack. [20] She does not have. [21] I mean, if if you were to just look at her genetics, you would think this is a sickly child. [22] This, there's no way she is not on, you know, total like learning disability, you know, issues, ADHD medication, Alzheimer, all the things. [23] Yeah, but she doesn't suffer from any of it. [24] Yeah, not one of those genes is actually manifested. [25] (ctx) And but but when we kind of veer off of our diet, if we're traveling, if she's not.
+
+### E29 detection:evidence miss | c6736w0002 (rare_label, The Megyn Kelly Show)
+GOLD x:mechanistic_scientific_language span (30, 30) env (28, 30) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 1/2 samples votes {'discourse_role': {'asserted_or_endorsed': 2}, 'relevance': {'substantive': 2}}
+  quote: "we're talking about how our cells power themselves, which might be something that people have never thought about before"
+  quote: "we're talking about how our cells power themselves"
+  non-supporting sonnet-r1 on span: nothing
+  non-supporting sonnet-r2 on span: nothing
+  DS on span: t:weight_loss_metabolic_health(27, 31) q='metabolic dysfunction is the root cause of nearly every chronic disease torturin'; x:root_cause_framing(30, 31) q='metabolic dysfunction is the root cause of nearly every chronic disease'
+  TEXT: [29] (ctx) We're talking about metabolic health, a word that fortunately we're hearing more about these days. [30] But we're talking about how our cells power themselves, which might be something that people have never thought about before. [31] (ctx) And yet, metabolic dysfunction is the root cause of nearly every chronic disease torturing American lives.
+
+### E30 detection:evidence miss | c176740w0013 (discourse, Hello Hormones with Dr. Carrie Jones)
+GOLD x:personal_experience_evidence span (18, 49) env (18, 50) annotators ['opus-r1', 'opus-r2', 'sonnet-r1', 'sonnet-r2'] (4of4) DS matched in 7/8 samples votes {'discourse_role': {'asserted_or_endorsed': 4}, 'relevance': {'substantive': 4}}
+  quote: "So I had a patient, and a lovely woman, and she had a polyp, and then she had it removed"
+  quote: "Her vagina looks like nothing ever happened, and it looks like a 21 year old"
+  DS on span: t:womens_health_female_hormones(18, 43) q='She saw me, and I added oxytocin because it's such a healer'; x:weak_evidence_extrapolation_signal(18, 43) q='So I had a patient, and a lovely woman, and she had a polyp, and then she had it'; x:mechanistic_scientific_language(27, 29) q='the two molecules that drive extra scar tissue fibrosis are galectin three and T'; t:womens_health_female_hormones(45, 50) q='In comes oxytocin, and so you can use it for some things that nothing else'
+  TEXT: [17] (ctx) Because if you put oxytocin in there, it literally turns back the clock of the vagina. [18] So I had a patient, and a lovely woman, and she had a polyp, and then she had it removed. [19] It was in her vaginal vault, so she had a polypectomy. [20] And after the polypectomy, she developed all the scar tissue. [21] And she went to the Mayo Clinic and had it removed. [22] In fact, in Scottsdale, and it grew back, and it was painful, and she couldn't sit, she couldn't make love, and she was getting more ..... in three weeks, I mean, so oxytocin, when it's done right, and everything else is ready, so the hormones are balanced and the nutrients are balanced, et cetera, it works fast if it's going to work for [50] (ctx) you.
+
+### E31 detection:evidence false_positive | c36549w0004 (health_dense, The Mel Robbins Podcast)
+PRED x:mechanistic_scientific_language span (20, 31) class span_only attrs {'relevance': 'substantive', 'discourse_role': 'asserted_or_endorsed'}
+  quote: "because your estrogen just went from 3,000 to zero"
+  same atom in 6/7 other DS samples
+  gold on span: x:mechanistic_scientific_language(0, 19)/(0, 44) required 4ann
+  TEXT: [19] (ctx) So you are regularly having these irregular sort of shifts of estrogen in the first half, estrogen and progesterone in the second half. [20] When you are pregnant, your estrogen is 3,000. [21] Okay, an estrogen of 3,000 for about nine months, and then as soon as you have the baby, that 3,000 crashes to zero. [22] Okay, crashes to zero, and that's brief menopause. [23] So if you and while you are breastfeeding, you are in menopause often that whole time. [24] Sometimes your periods come back and you start to fluctuate again. [25] But if you ..... remembers their birth, you know, because you have so much brain fog because your estrogen just went from 3,000 to zero. [32] (ctx) And so the symptoms, the vaginal symptoms, the genital symptoms, the dryness, the irritation, the leakage—that's worse.
+
+### E32 detection:evidence false_positive | c318639w0005 (discourse, Science Vs)
+PRED x:evidence_strength_claim span (11, 12) class same_axis_wrong_label attrs {'relevance': 'substantive', 'discourse_role': 'reported_or_quoted'}
+  quote: "The American Academy of Dermatology guidelines, which Jonathan helped write, called clinical trials into salicylic acid, limited"
+  same atom in 0/1 other DS samples
+  gold on span: x:scientific_study_citation(11, 13)/(10, 13) required 4ann; x:credential_appeal(11, 12)/(7, 34) required 3ann; x:prestige_science_invocation(11, 13)/(10, 13) required 2ann; x:weak_evidence_extrapolation_signal(10, 16)/(10, 16) acceptable 1ann
+  TEXT: [10] (ctx) Around the world, the problem is that salicylic acid has not been studied that well. [11] The American Academy of Dermatology guidelines, which Jonathan [12] helped write, called clinical trials into salicylic acid, limited. [13] (ctx) And another paper published in Nature Reviews noted that we don't have sufficient medical literature to say that salicylic acid is effective for acne.
+
+### E33 detection:evidence false_positive | c192615w0006 (health_dense, Dr. Jockers Functional Nutrition)
+PRED x:evidence_strength_claim span (15, 16) class same_axis_wrong_label attrs {'relevance': 'substantive', 'discourse_role': 'asserted_or_endorsed'}
+  quote: "we know that there's good documentation that by increasing the number of stem cells in circulation, you can help the heart repair"
+  same atom in 6/7 other DS samples
+  gold on span: x:scientific_study_citation(15, 16)/(15, 22) required 4ann; x:weak_evidence_extrapolation_signal(20, 23)/(15, 28) required 3ann
+  TEXT: [14] (ctx) The way that all these plants blend together makes it very difficult to test the product itself. [15] So what we did is that once that blend is done, we then moved on to clinical trials that we're doing with various conditions. [16] So if you release stem cells, and we know that there's good documentation that by increasing the number of stem cells in circulation, you can help the heart repair. [17] (ctx) So we started the study on chronic congestive heart failure.
+
+### E34 detection:evidence false_positive | c4558w0003 (ad_read, The Tucker Carlson Show)
+PRED x:credential_appeal span (55, 55) class cross_axis attrs {'relevance': 'advertisement', 'discourse_role': 'asserted_or_endorsed'}
+  quote: "Dutch has vets who can handle any pet under any circumstance in a ten-minute call"
+  same atom in 1/7 other DS samples
+  gold on span: nothing
+  TEXT: [54] (ctx) We actually use this. [55] Dutch has vets who can handle any pet under any circumstance in a ten-minute call. [56] (ctx) It's pretty amazing, actually.
+
+### E35 claim miss | c185631w0006 (health_dense, Culture Apothecary with Alex Clark)
+GOLD claim span (59, 59) env (58, 59) annotators ['opus-r1', 'opus-r2', 'sonnet-r1'] (3of4) DS matched in 0/2 samples votes {'claim_type': {'treatment_or_prevention': 3}, 'discourse_role': {'asserted_or_endorsed': 3}, 'expressed_certainty': {'hedged': 2, 'unhedged': 1}, 'relevance': {'substantive': 3}}
+  claim_text: Restoring arch width and making extra room for the teeth makes them much less likely to collapse back in.
+  claim_text: Making extra room for the teeth makes them far less likely to collapse inward.
+  quote: "when we make enough room for the teeth and have a little extra space in there, they're way less likely to collapse in"
+  quote: "they're way less likely to collapse in"
+  non-supporting sonnet-r2 on span: nothing
+  DS on span: nothing
+  TEXT: [58] (ctx) We need to really restore their arch width to, you know, what it should have been before modern diets and epigenetic changes. [59] And when we make enough room for the teeth and have a little extra space in there, they're way less likely to collapse in. [60] (ctx) So, if your upper jaw is locking in the lower and it's a little bit too narrow, your lower teeth are really prone to collapsing.
+
+### E36 claim miss | c71184w0031 (rare_label, The Joe Rogan Experience)
+GOLD claim span (32, 32) env (31, 32) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 1/2 samples votes {'claim_type': {'institutional_or_conspiracy': 2}, 'discourse_role': {'asserted_or_endorsed': 1, 'rebutted': 1}, 'expressed_certainty': {'unhedged': 2}, 'relevance': {'substantive': 2}}
+  claim_text: Drug companies, the CDC and politicians deliberately keep people poisoned and sick so that they can make money.
+  claim_text: Pharmaceutical companies, corporations and government agencies are not trying to keep people poisoned or sick so that they can make money.
+  quote: "these people are not trying to keep us poisoned or keep us sick so they can make money"
+  non-supporting sonnet-r1 on span: claim(27, 33) 'Pharmaceutical companies, corporations and government agenci'
+  non-supporting sonnet-r2 on span: nothing
+  DS on span: nothing
+  TEXT: [31] (ctx) CEO and the politician, you know, they're all and they want to make money, and you know, and and they first they think they're more powerful than they really are, and second, that's not how the world works. [32] I mean, these people are not trying to keep us poisoned or keep us sick so they can make money. [33] (ctx) You know, it's the real conspiracies are.
+
+### E37 claim miss | c178272w0010 (discourse, Maintenance Phase)
+GOLD claim span (26, 28) env (26, 28) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 1/8 samples votes {'claim_type': {'other_factual': 2}, 'discourse_role': {'asserted_or_endorsed': 2}, 'expressed_certainty': {'unhedged': 2}, 'relevance': {'substantive': 2}}
+  claim_text: In 1986 Congress passed a law called the National Childhood Vaccine Injury Act.
+  claim_text: In 1986 Congress passed a law called the National Childhood Vaccine Injury Act.
+  quote: "It's called the National Childhood Vaccine Injury Act"
+  non-supporting sonnet-r1 on span: nothing
+  non-supporting sonnet-r2 on span: nothing
+  DS on span: nothing
+  TEXT: [25] (ctx) What starts happening in the 1980s is the number of companies that make vaccines goes from over 20 to less than 4, because they're like, "We can't afford the litigation." [26] So, in 1986, Congress passes a law with a name that will ring in the fucking ears of the anti-vax. [27] The anti-vax people love the fucking name of this law. [28] It's called the National Childhood Vaccine Injury Act. [29] (ctx) Aubrey: Okay.
+
+### E38 claim miss | c182721w0002 (health_dense, The Dr. Hyman Show)
+GOLD claim span (62, 62) env (62, 62) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 5/8 samples votes {'claim_type': {'treatment_or_prevention': 2}, 'discourse_role': {'asserted_or_endorsed': 2}, 'expressed_certainty': {'unhedged': 2}, 'relevance': {'substantive': 2}}
+  claim_text: Eating fat cuts cravings and prevents swings in blood sugar.
+  claim_text: Eating fat cuts cravings and prevents swings in blood sugar.
+  quote: "eating fat helps cut cravings and prevents these swings in blood sugar"
+  non-supporting sonnet-r1 on span: nothing
+  non-supporting sonnet-r2 on span: nothing
+  DS on span: nothing
+  TEXT: [61] (ctx) So, eat real food, have fats and protein and real whole food carbohydrates at every meal. [62] See, eating fat is the key because eating fat helps cut cravings and prevents these swings in blood sugar. [63] (ctx) Even if you do time-restricted eating, you need to have enough of these slow-burning fuels like fat and protein.
+
+### E39 claim miss | c5436w0023 (rare_label, The Megyn Kelly Show)
+GOLD claim span (48, 48) env (48, 48) annotators ['opus-r1', 'sonnet-r2'] (OS) DS matched in 0/2 samples votes {'claim_type': {'other_factual': 1, 'treatment_or_prevention': 1}, 'discourse_role': {'asserted_or_endorsed': 2}, 'expressed_certainty': {'unhedged': 2}, 'relevance': {'substantive': 2}}
+  claim_text: A person should get at least an hour and a half of REM sleep each night.
+  claim_text: At least ninety minutes of REM sleep per night is needed.
+  quote: "You want to have at least an hour and a half of REM each night"
+  non-supporting opus-r2 on span: claim(47, 50) 'Brain health requires at least seven hours of sleep a night,'
+  non-supporting sonnet-r1 on span: claim(47, 50) 'Optimal nightly sleep includes at least seven hours total, a'
+  DS on span: claim(47, 50) q='you want to have at least seven hours of sleep at night. You want to have at lea' ct='People should have at least seven hours of sleep, an hour and a half of REM, one hour of d'
+  TEXT: [47] (ctx) So you want to have at least seven hours of sleep at night. [48] You want to have at least an hour and a half of REM each night. [49] (ctx) You want to have at least one hour of deep sleep each night, and you want to have an oxygen concentration.
+
+### E40 claim miss | c4171w0010 (rare_label, The Tucker Carlson Show)
+GOLD claim span (29, 29) env (28, 29) annotators ['opus-r1', 'opus-r2', 'sonnet-r2'] (3of4) DS matched in 0/2 samples votes {'claim_type': {'causal': 1, 'treatment_or_prevention': 2}, 'discourse_role': {'asserted_or_endorsed': 3}, 'expressed_certainty': {'absolute': 2, 'unhedged': 1}, 'relevance': {'advertisement': 3}}
+  claim_text: There is no better way to be alert, productive and happy than sleeping well.
+  claim_text: There is no better way to be alert, productive and happy than by sleeping well.
+  quote: "there's no better way to be alert. Productive and happy than by sleeping well"
+  quote: "there's no better way to be alert"
+  non-supporting sonnet-r1 on span: nothing
+  DS on span: nothing
+  TEXT: [28] (ctx) Everybody who works here will tell you, because they all use it, that there's no better way to be alert. [29] Productive and happy than by sleeping well, and eight sleep really does help. [30] (ctx) Visit eightsleep dot com slash tucker.
+
+### E41 claim miss | c179765w0001 (health_dense, Afterpause)
+GOLD claim span (22, 22) env (22, 22) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 0/8 samples votes {'claim_type': {'causal': 2}, 'discourse_role': {'asserted_or_endorsed': 2}, 'expressed_certainty': {'absolute': 2}, 'relevance': {'substantive': 2}}
+  claim_text: Nothing else in health falls into place without consistent restorative sleep.
+  claim_text: Nothing else in health falls into place without consistent restorative sleep.
+  quote: "The truth is, nothing else falls into place without consistent restorative sleep"
+  non-supporting sonnet-r1 on span: nothing
+  non-supporting sonnet-r2 on span: nothing
+  DS on span: nothing
+  TEXT: [21] (ctx) Maybe even sleep apnea or a partner who snores. [22] The truth is, nothing else falls into place without consistent restorative sleep. [23] (ctx) And while there are countless strategies out there, it can feel overwhelming to figure out where to start.
+
+### E42 claim miss | c179765w0001 (health_dense, Afterpause)
+GOLD claim span (16, 17) env (16, 17) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 5/8 samples votes {'claim_type': {'causal': 2}, 'discourse_role': {'asserted_or_endorsed': 2}, 'expressed_certainty': {'hedged': 1, 'speculative': 1}, 'relevance': {'substantive': 2}}
+  claim_text: One bad night of sleep can throw off your food choices, your mood and your energy.
+  claim_text: One bad night of sleep can throw off a person's food choices, mood and energy.
+  quote: "One bad night can throw off your food choices"
+  non-supporting sonnet-r1 on span: nothing
+  non-supporting sonnet-r2 on span: nothing
+  DS on span: nothing
+  TEXT: [15] (ctx) Let's start with sleep because it really is the foundation of everything else. [16] One bad night can throw off your food choices. [17] Your mood and your energy, and for many women in midlife, sleep can feel impossible. [18] (ctx) Your brain won't shut off.
+
+### E43 claim miss | c190562w0004 (health_dense, The Thyroid (and Hormone) Fixer Podcast:)
+GOLD claim span (43, 43) env (43, 43) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 0/2 samples votes {'claim_type': {'mechanism': 2}, 'discourse_role': {'asserted_or_endorsed': 2}, 'expressed_certainty': {'unhedged': 2}, 'relevance': {'substantive': 2}}
+  claim_text: Coleus forskohlii is a plant in the mint family that contains a bioactive compound called forskolin.
+  claim_text: Coleus forskohlii is a plant in the mint family containing a bioactive compound called forskolin that has been studied for decades for its effects on weight loss.
+  quote: "Coleus for scoli is actually a plant in the mint family, and it contains a bioactive compound called forscolin"
+  non-supporting sonnet-r1 on span: claim(43, 43) 'Forskolin has been studied for decades for its effects on we'
+  non-supporting sonnet-r2 on span: nothing
+  DS on span: claim(43, 43) q='this has been studied for decades, decades, for its effects on weight loss' ct='Forskolin has been studied for decades for its effects on weight loss.'
+  TEXT: [42] (ctx) Coleus for scoli. [43] Coleus for scoli is actually a plant in the mint family, and it contains a bioactive compound called forscolin, which this has been studied for decades, decades, for its effects on weight loss. [44] (ctx) So what are the keys to coleus for scoli?
+
+### E44 claim miss | c176579w0010 (rare_label, Extend Podcast with Darshan Shah, MD)
+GOLD claim span (77, 77) env (77, 77) annotators ['opus-r1', 'opus-r2', 'sonnet-r1', 'sonnet-r2'] (4of4) DS matched in 5/8 samples votes {'claim_type': {'causal': 4}, 'discourse_role': {'asserted_or_endorsed': 4}, 'expressed_certainty': {'hedged': 1, 'speculative': 2, 'unhedged': 1}, 'relevance': {'advertisement': 4}}
+  claim_text: Poor sleep, stress and processed foods can drain the cell's energy battery far faster than it should.
+  claim_text: Poor sleep, stress and processed foods can drain cellular energy much faster than it should be drained.
+  quote: "Poor sleep, stress, processed foods—all of these things can drain that battery way faster than it should"
+  DS on span: nothing
+  TEXT: [76] (ctx) Your cells, you see, are like phones, and they have limited cell phone battery. [77] Poor sleep, stress, processed foods—all of these things can drain that battery way faster than it should. [78] (ctx) So, this is the reason why I partnered with IME.
+
+### E45 claim false_positive | c179765w0001 (health_dense, Afterpause)
+PRED claim span (65, 65) class spurious attrs {'discourse_role': 'reported_or_quoted', 'claim_type': 'causal', 'expressed_certainty': 'unhedged', 'relevance': None}
+  claim_text: High-intensity interval training optimizes VO2 max.
+  quote: "optimize your VO2 max with HIT training"
+  same atom in 0/7 other DS samples
+  gold on span: nothing
+  TEXT: [64] (ctx) Movement's a non-negotiable part of your health equation, but the noise online can make it overwhelming. [65] You'll hear everything from "walk 10,000 steps a day" to "wear a weighted vest, lift heavy to failure," or "optimize your VO2 max with HIT training." [66] (ctx) And while there's truth in all of those, what if that's not where you are right now?
+
+### E46 claim false_positive | c36549w0004 (health_dense, The Mel Robbins Podcast)
+PRED claim span (39, 40) class different_claim attrs {'discourse_role': 'asserted_or_endorsed', 'claim_type': 'mechanism', 'expressed_certainty': 'unhedged', 'relevance': None}
+  claim_text: In perimenopause, cycles change from every 28 days to 35 days, 18 days, or continuous bleeding.
+  quote: "Instead of every 28 days, now it's 35 days, then it's 18 days, then I'm bleeding all the time"
+  same atom in 1/7 other DS samples
+  gold on span: claim(41, 41)/(39, 41) required 2ann 'In perimenopause estrogen swings very high and very low, as it does in'
+  TEXT: [38] (ctx) Low libido, increase in UTIs, increase in pain with sex. [39] This is what we're calling perimenopause, and then your regular irregularity of your cycle starts to change. [40] Instead of every 28 days, now it's 35 days, then it's 18 days, then I'm bleeding all the time. [41] (ctx) And what's happening there is the same thing that was happening in puberty, where your estrogen is going super high and super low, and it's this chaos.
+
+### E47 claim false_positive | c160971w0001 (ad_read, Serialously with Annie Elise)
+PRED claim span (14, 14) class different_claim attrs {'discourse_role': 'asserted_or_endorsed', 'claim_type': 'institutional_or_conspiracy', 'expressed_certainty': 'unhedged', 'relevance': None}
+  claim_text: Beam Dream Sleep Tea has zero added sugar.
+  quote: "it has zero added sugar"
+  same atom in 0/1 other DS samples
+  gold on span: claim(14, 14)/(14, 14) required 3ann 'Beam's Dream sleep tea has only 15 calories and zero added sugar.'
+  TEXT: [13] (ctx) But it's something I literally legit use every single night, and it is Beam Dream Sleep Tea. [14] Now, let me tell you about this tea, guys, because it's only 15 calories, it has zero added sugar, and it tastes like hot chocolate straight up. [15] (ctx) They have so many amazing flavors, and while I used to be a sea salt caramel girl, I'm now obsessed with the peanut butter dream or the brownie batter dream.
+
+### E48 claim false_positive | c128911w0034 (rare_label, Pardon My Take)
+PRED claim span (26, 26) class spurious attrs {'discourse_role': 'asserted_or_endorsed', 'claim_type': 'causal', 'expressed_certainty': 'absolute', 'relevance': None}
+  claim_text: Every doctor is busy injecting people with 5G.
+  quote: "every doctor is busy shooting people up with 5G"
+  same atom in 7/7 other DS samples
+  gold on span: claim(26, 26)/(26, 26) rejected 1ann 'Every doctor is busy injecting people with 5G.'
+  TEXT: [25] (ctx) It's not good, and I don't know what I. [26] I can't go to a doctor now because every doctor is busy shooting people up with 5G. [27] (ctx) Yeah.
+
+### E49 claim false_positive | c199989w0021 (rare_label, The Prosecutors)
+PRED claim span (31, 31) class spurious attrs {'discourse_role': 'reported_or_quoted', 'claim_type': 'treatment_or_prevention', 'expressed_certainty': 'hedged', 'relevance': None}
+  claim_text: Lindsay's health records showed that she said she used one marijuana gummy and did not continue because it was not effective for her.
+  quote: "she did say she used, I think, one marijuana gummy, and said she didn't continue to use it because it wasn't effective for her"
+  same atom in 0/1 other DS samples
+  gold on span: nothing
+  TEXT: [30] (ctx) She didn't tell me she was using marijuana. [31] So then the defense introduces the women' health records, where she did say she used, I think, one marijuana gummy, and said she didn't continue to use it because it wasn't effective for her. [32] (ctx) I don't want the prosecution keeps bringing this up.
+
+### E50 claim false_positive | c181134w0003 (rare_label, SuperLife with Darin Olien)
+PRED claim span (32, 34) class different_claim attrs {'discourse_role': 'asserted_or_endorsed', 'claim_type': 'causal', 'expressed_certainty': 'unhedged', 'relevance': None}
+  claim_text: Having a purpose in life and a positive outlook has a big impact on health.
+  quote: "you have a purpose, and that's what they talked about in the Blue Zones too"
+  same atom in 0/1 other DS samples
+  gold on span: claim(28, 29)/(28, 34) required 2ann 'Neuroscience and studies show that nutrition, lifestyle, outlook and h'; claim(32, 33)/(32, 33) acceptable 1ann 'The Blue Zones work identified having a purpose, called Ikigai in Japa'; claim(35, 35)/(34, 35) required 4ann 'Wearing glasses makes the eyesight condition worse.'; claim(32, 34)/(32, 34) acceptable 1ann 'Having a purpose or reason to get up every morning has a big impact on'
+  TEXT: [31] (ctx) Do you have a vision for your life? [32] Because all these things—you have a purpose, and that's what they talked about in the Blue Zones too, right? [33] And they call it Ikigai in Japanese or Plan de Vida in in Costa Rica—that idea of like, I have a reason to get up every morning, and all these. [34] Factors have a have a big impact, and obviously, once you get into glasses, we've kind of accepted them as the treatment. [35] (ctx) But they make the condition worse, and pretty much all the people I talk to can attest to that.
+
+### E51 product miss | c180821w0010 (rare_label, Live Beyond the Norms)
+GOLD product span (50, 50) env (50, 50) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 0/2 samples votes {'mention_role': {'neutral': 2}, 'product_name': {'iTunes': 2}, 'product_type': {'app_or_digital_service': 2}}
+  product: iTunes
+  quote: "a review on iTunes send us a notification"
+  quote: "a review on iTunes"
+  non-supporting sonnet-r1 on span: product(47, 50)
+  non-supporting sonnet-r2 on span: nothing
+  DS on span: nothing
+  TEXT: [49] (ctx) MCT's an amazing oil at the ESS60 molecule to it it's even more amazing all you got to do is leave [50] a review on iTunes send us a notification that you've left that review we'll get you a coupon code
+
+### E52 product miss | c176740w0013 (discourse, Hello Hormones with Dr. Carrie Jones)
+GOLD product span (61, 63) env (61, 63) annotators ['opus-r1', 'opus-r2', 'sonnet-r1', 'sonnet-r2'] (4of4) DS matched in 1/8 samples votes {'mention_role': {'own_product': 4}, 'product_name': {'The Top Seven Perimenopause Myths guide': 1, 'Top Seven Perimenopause Myths': 1, 'Top Seven Perimenopause Myths guide': 2}, 'product_type': {'book_or_media': 4}}
+  product: The Top Seven Perimenopause Myths guide
+  product: Top Seven Perimenopause Myths
+  quote: "I put together a free guide that busts the seven biggest perimenopause myths I hear every single day"
+  quote: "click the link in the show notes to download the top seven perimenopause myths you need to stop believing ASAP"
+  DS on span: product(61, 63) q='Head to drkaryjones.com/backslashmyths'
+  TEXT: [60] (ctx) And they're keeping women stuck, confused, and suffering way longer than they need to. [61] I put together a free guide that busts the seven biggest perimenopause myths I hear every single day, and it gives you the actual science so you can stop second-guessing yourself. [62] And start making informed decisions about your body. [63] Head to drkaryjones.com/backslashmyths, or click the link in the show notes to download the top seven perimenopause myths you need to stop believing ASAP. [64] (ctx) Because honestly, you deserve the truth, not this outdated garbage that most women, including myself, are still being told.
+
+### E53 product miss | c178240w0010 (rare_label, Biohack-it)
+GOLD product span (18, 19) env (18, 19) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 7/8 samples votes {'mention_role': {'own_product': 1, 'recommended': 1}, 'product_name': {'Athletic BBL': 2}, 'product_type': {'clinic_or_practitioner_service': 2}}
+  product: Athletic BBL
+  quote: "The athletic BBL"
+  non-supporting sonnet-r1 on span: nothing
+  non-supporting sonnet-r2 on span: nothing
+  DS on span: nothing
+  TEXT: [17] (ctx) It's a million details. [18] I want to talk about a procedure that you guys do here, and the results have been incredible. [19] The athletic BBL. [20] (ctx) How do you guys do it?
+
+### E54 product miss | c6736w0002 (rare_label, The Megyn Kelly Show)
+GOLD product span (22, 49) env (22, 49) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 1/2 samples votes {'mention_role': {'own_product': 2}, 'product_name': {'Good Energy': 2}, 'product_type': {'book_or_media': 2}}
+  product: Good Energy
+  quote: "haven't read the book, because you know, good energy"
+  non-supporting sonnet-r1 on span: nothing
+  non-supporting sonnet-r2 on span: nothing
+  DS on span: nothing
+  TEXT: [21] (ctx) I have so much I want to ask you. [22] So let's get folks up to speed who haven't heard the interview that I refer to or haven't read the book, because you know, good energy. [23] They may be like. [24] What is that like? [25] Vibes? [26] Is there sick of vibes at this point in this election cycle? [27] It's not vibes. [28] So when we're talking about good energy, we are talking about the very foundational way that our bodies work. [29] We're talking about metabolic health, a word that fortunately we're hearing more ..... focus of our American healthcare system. [48] And right now, it is the intentional blind spot of the American healthcare system. [49] And so that's what this book is is all about. [50] (ctx) And so it covers a lot.
+
+### E55 product miss | c4558w0011 (ad_read, The Tucker Carlson Show)
+GOLD product span (15, 27) env (14, 27) annotators ['opus-r1', 'opus-r2'] (OO) DS matched in 1/8 samples votes {'mention_role': {'advertised': 2}, 'product_name': {'Pod 5': 2}, 'product_type': {'device_or_wearable': 2}}
+  product: Pod 5
+  quote: "It's called the Pod Five"
+  non-supporting sonnet-r1 on span: product(14, 27)
+  non-supporting sonnet-r2 on span: product(11, 31)
+  DS on span: product(11, 32) q='It's called the Pod Five'
+  TEXT: [14] (ctx) We just got word that their team is launching a new product. [15] It's called the Pod Five. [16] It's an original and innovative mattress cover plus a blanket that uses precision temperature. [17] Control to regulate your body's sleep cycles and give you the perfect sleep, which really, really matters. [18] They can range all the way from fifty-five degrees to a hundred and ten degrees, meaning that you're covered no matter what. [19] It's like electric blanket to the next level, but also a cooling blanket, so it makes you sleep better. [20] Temperature has a ..... by sleeping well. [25] And eight sleep really does help. [26] Visit eightsleep.com/tucker. [27] Use the code Tucker to get 350 bucks off your Pod Five Ultra. [28] (ctx) If you don't like it, you return it within a month.
+
+### E56 product miss | c73957w0010 (ad_read, Armchair Expert with Dax Shepard)
+GOLD product span (42, 60) env (42, 70) annotators ['opus-r1', 'opus-r2', 'sonnet-r1', 'sonnet-r2'] (4of4) DS matched in 1/2 samples votes {'mention_role': {'advertised': 4}, 'product_name': {'Hers': 4}, 'product_type': {'app_or_digital_service': 2, 'clinic_or_practitioner_service': 2}}
+  product: Hers
+  quote: "We get support from hers"
+  DS on span: product(42, 70) q='Visit forhers dot com slash armchair to meet the new hers app'; product(53, 67) q='including the Wegovy pill and the Wegovy'
+  TEXT: [41] (ctx) helixsleep.com/armchair. [42] We get support from hers. [43] If you're on a weight loss journey, you know the appointment is the smallest part. [44] The real work happens between visits. [45] The side effects at 9 p.m. [46] The dosing question on a Sunday. [47] The food that isn't sitting right. [48] That's where most care just stops. [49] The new Hers care experience is built for those moments. [50] Your provider, AI informed by doctors who've guided women like you and your care team, all in one conversation, all working toward your goal. [51] No repeating yourself. ..... dot com slash armchair to meet the new hers app. [59] That's f o r h e r s dot com slash armchair. [60] Forhers dot com slash armchair. [61] (ctx) Weight loss by hers is not available in all.
+
+### E57 product false_positive | c190223w0001 (health_dense, LONGEVITY with Nathalie Niddam)
+PRED product span (26, 26) class different_product attrs {'product_type': 'supplement', 'mention_role': 'advertised'}
+  product: Mitopure
+  quote: "Timeline nutrition's mitochondria is the first product to offer precise dose of uralythane"
+  same atom in 1/1 other DS samples
+  gold on span: product(8, 8)/(8, 42) required 4ann '['Mitopure', 'Timeline Nutrition']'
+  TEXT: [25] (ctx) 300 scientific studies. [26] Timeline nutrition's mitochondria is the first product to offer precise dose of uralythane [27] (ctx) that upgrades mitochondrial function, increasing cellular energy.
+
+### E58 product false_positive | c329733w0001 (rare_label, Behind the Bastards)
+PRED product span (32, 33) class spurious attrs {'product_type': 'other_product', 'mention_role': 'criticized'}
+  product: Black salve
+  quote: "Black sav enthusiasts and like s a l V, which is like a medicated ointment basically"
+  same atom in 0/1 other DS samples
+  gold on span: product(32, 40)/(32, 40) rejected 1ann '['black salve']'
+  TEXT: [31] (ctx) Really, you know how I love these little online communities that like start as Facebook groups and wind up killing a bunch of people, Like that's one of my favorite things in the world. [32] Um So, I was looking into one of those little groups Black sav enthusiasts and like s a l V, which is like a medicated ointment basically, Um, yeah, have you heard of Black Save Billy? [33] I've seen it, like, you know, like on you know, just on the Yeah, yeah, it's obvious this is bullshit that kind of stuff. [34] (ctx) Yeah, yeah, it hops around like that.
+
+### E59 product false_positive | c176979w0018 (rare_label, The Ultimate Human with Gary Brecka)
+PRED product span (77, 77) class spurious attrs {'product_type': 'other_product', 'mention_role': 'recommended'}
+  product: Livogen
+  quote: "livogen heals the liver, cardiolipin heals the heart"
+  same atom in 1/1 other DS samples
+  gold on span: nothing
+  TEXT: [76] (ctx) But in higher concentrations, and you take those for healing organs. [77] So, livogen heals the liver, cardiolipin heals the heart. [78] (ctx) So, so these are these are organ-derived peptides to support that organ's function, which is you know, BPC is a gastric pentadeca peptide.
+
+### E60 product false_positive | c175341w0013 (rare_label, Rooted in Wellness with Mona Sharma)
+PRED product span (113, 113) class different_product attrs {'product_type': 'other_product', 'mention_role': 'neutral'}
+  product: YouTube
+  quote: "we actually have a YouTube channel"
+  same atom in 0/1 other DS samples
+  gold on span: product(113, 116)/(113, 117) required 2ann '['Documenting Hope']'
+  TEXT: [112] (ctx) and look to see how you can course correct. [113] So we actually have a YouTube channel. [114] (ctx) If you go to app document, you hope on YouTube.
+
+## Glossary
+- x:anti_mainstream_medicine_framing: Conventional medicine or ordinary doctors are portrayed as ignorant, captured, or unable to help. Discussing the health system as a subject is the Health-Care System topic; this label is for the rhetoric.
+- x:big_food_food_system_distrust: The food industry is cast as deliberately or negligently harming health. An allegation that the food supply is intentionally poisoned goes to Food conspiracy.
+- x:biohacking_framing: Self-experimentation framing specifically: n-of-1 trials, stacks, protocols, quantified routines.
+- x:commercialization: The passage sells or monetises: sponsorship, discount codes, affiliate links, or the speaker’s own product, clinic, programme or book. Applies to a host’s own products as well as paid reads; set relevance to advertisement only inside a delimited ad break.
+- x:conspiracy_cover_up: A coordinated, hidden and malign effort is alleged. Requires an actual allegation of coordination or concealment; criticism, distrust or incompetence alone is not enough.
+- x:credential_appeal: A person’s title, training or professional identity is invoked as grounds for believing a claim.
+- x:evidence_strength_claim: An explicit assertion about how well established something is: proven, clinically proven, science-backed, evidence-based, FDA approved.
+- x:government_institution_distrust: Public agencies, regulators or official science are portrayed as corrupt, lying or not to be trusted.
+- x:maha_adjacent_online_vocabulary: The online shorthand cluster that signals alignment without the movement’s formal vocabulary: seed oils, fluoride, medical freedom, vaccine injury, corporate capture.
+- x:mechanistic_scientific_language: Biological mechanism vocabulary is used to explain a claim or make it sound plausible, without a study being cited.
+- x:medical_freedom: Health decisions are framed in terms of autonomy, informed consent, parental rights or freedom from mandate.
+- x:misinformation_correction_debunking: The speaker corrects, fact-checks or debunks a health claim. Apply regardless of whether the correction is itself accurate.
+- x:naturalness_appeal: Something is recommended or condemned on the grounds of being natural, ancestral, traditional, clean or chemical-free.
+- x:optimization_framing: Health is framed as a performance problem to be maximised, with protocols, stacks, targets and peak states.
+- x:personal_experience_evidence: Personal or second-hand experience is offered as grounds for a general conclusion. Apply only where experience functions as evidence, not to every anecdote.
+- x:prestige_science_invocation: A prestigious institution, journal or affiliation is named to lend authority, rather than a specific finding being discussed on its content.
+- x:purity_contamination_framing: Moral or aesthetic clean-versus-dirty, pure-versus-poisoned language applied to foods, products or bodies.
+- x:root_cause_framing: Getting to an underlying cause is contrasted with merely treating symptoms, or reversal is promised in place of management.
+- x:scientific_study_citation: A study, trial or research literature is invoked as support for a point. Applies whether or not the study is named, real or correctly described.
+- x:toxin_framing: Health problems are attributed to accumulated toxins or chemical burden in general terms. A named exposure discussed on its evidence is the Environmental Health topic.
+- x:weak_evidence_extrapolation_signal: The evidence actually offered is preliminary, indirect or anecdotal — animal or cell studies, observational association, preprints, single cases. Code the evidence the speaker offers, not your judgement of whether their conclusion is warranted.
+- t:cardiometabolic_health: Cardiovascular and metabolic disease and its clinical markers and drugs: blood pressure, lipids, ApoB, statins, diabetes, fatty liver. Weight and dieting as such go to Weight Loss & Metabolic Health.
+- t:childrens_health: Health of infants, children and adolescents, and the products, medications and exposures specific to them. Autism causation goes to Neurodevelopment / Autism Discourse; the childhood vaccine schedule to Vaccines & Immunization.
+- t:covid_19_pandemic_health: SARS-CoV-2 infection, long COVID, pandemic-era measures and policies, and COVID treatments. COVID vaccines belong to Vaccines & Immunization unless the subject is the disease, the pandemic response, or its origin.
+- t:dementia_cognitive_decline_ageing: Age-related cognitive decline and the conditions and care around it. Longevity and anti-ageing protocols go to Longevity / Anti-Ageing.
+- t:diet_tribes_food_ideologies: Named dietary patterns and the identities and arguments around them. Discussion of a single food or nutrient on its merits goes to Food & Nutrition.
+- t:emf_technology_exposure: Health effects attributed to electromagnetic fields, wireless technology, and screen or blue-light exposure.
+- t:fitness_exercise: Exercise itself: modality, dose, programming, technique and fitness metrics. Post-exercise recovery modalities go to Recovery & Physical Optimization.
+- t:fluoride_oral_health: Teeth, gums, the oral microbiome, and fluoride in water and dental products.
+- t:food_nutrition: Foods, nutrients, additives and the health effects attributed to them. A named dietary pattern or identity goes to Diet Tribes; pills, powders and nutraceuticals to Functional Nutrition & Supplements.
+- t:functional_nutrition_supplements: Supplements, powders and nutraceuticals: what is in them, what they are claimed to do, and how they are sold. Nutrients as eaten in food go to Food & Nutrition.
+- t:genetics_inheritance: Heredity and genetic explanation: what is inherited, how traits and blood types pass on, genetic testing and conditions with a genetic cause.
+- t:health_care_system_medical_trust: Medicine’s institutions, costs, incentives, regulators and trustworthiness discussed as a subject. Distrust expressed as rhetoric rather than discussed as a subject is coded on the frame axis.
+- t:hearing_vision_sensory_health: The senses and their loss, correction and aids.
+- t:longevity_anti_aging: Lifespan and healthspan extension: biological-age testing, longevity drugs, clinics and protocols aimed explicitly at ageing. General self-optimisation with no longevity goal goes to Biohacking / Human Optimization.
+- t:mental_health: Psychiatric conditions, their diagnosis and treatment, therapy, and popular psychology vocabulary. Cortisol and nervous-system framing goes to Stress / Nervous-System Regulation.
+- t:natural_alternative_functional_medicine: Alternative, integrative and complementary systems of care and their practitioners. Apply when a modality or practice is actually discussed; the anti-mainstream rhetoric that often accompanies it is a separate frame label.
+- t:neurodevelopment_autism_discourse: Autism and neurodevelopmental conditions: causes, prevalence, treatment and cure claims, and the debate around them.
+- t:other_health_topic: Substantive health, medicine or wellness content that no other topic label fits. Name the subject in the summary. Never use it as a second-choice label when a listed topic applies — it exists to make gaps in the taxonomy visible.
+- t:pain_musculoskeletal_health: Musculoskeletal pain and injury and their treatment, including manual therapy and rehabilitation.
+- t:peptides_experimental_optimization_compounds: Research peptides and growth-hormone secretagogues used for recovery, fat loss, cognition or longevity. Anabolic steroids and SARMs go to Performance-Enhancing Drugs; incretin peptides to GLP-1 / Incretin Drugs.
+- t:pregnancy_maternal_postpartum_health: Conception onward: pregnancy, birth, the postpartum period, infant feeding, and medications or exposures during pregnancy. Fertility treatment and abortion go to Reproductive & Sexual Health.
+- t:public_health_policy: Government and institutional health policy: mandates, regulation, guidelines, funding and their politics.
+- t:recovery_physical_optimization: Modalities used to recover or feel better physically — heat, cold, compression, light, bodywork, mobility work. The systematic-optimisation framing around them is coded on the frame axis, not here.
+- t:regenerative_aesthetic_medicine: Platelet, stem-cell, exosome and related regenerative injections for aesthetic or orthopaedic use. Topical skincare and standard dermatology go to Beauty / Dermatology / Skincare.
+- t:sleep: Sleep quality, duration, timing and disorders, and the practices and products sold to improve them. Fatigue attributed to a named chronic illness goes to Chronic / Complex Symptom Communities.
+- t:substance_use_addiction_harm_reduction: Dependence, overdose, treatment, recovery and harm reduction for drugs of misuse. Cannabis and psychedelics, nicotine and caffeine, and alcohol each have their own topic.
+- t:vaccines_immunization: Vaccines themselves: specific vaccines, the childhood schedule, mandates and exemptions, efficacy, ingredients, and alleged adverse effects. Apply to vaccine content whatever the stance; conspiracy or distrust framing is coded separately on the frame axis.
+- t:wearables_self_tracking_digital_health: Devices, at-home tests and apps used to measure the body, and the interpretation of what they report.
+- t:weight_loss_metabolic_health: Body weight, dieting for weight loss, obesity, and metabolic dysfunction discussed as a weight or lifestyle matter. Clinical cardiovascular and diabetes markers and their drugs go to Cardiometabolic Health.
+- t:womens_health_female_hormones: Female reproductive endocrinology and conditions across the life course, including menopause and hormone therapy. Pregnancy and postpartum go to Pregnancy / Maternal / Postpartum Health; contraception, abortion and fertility treatment to Reproductive & Sexual Health.

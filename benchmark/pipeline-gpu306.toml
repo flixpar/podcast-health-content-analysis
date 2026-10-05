@@ -1,0 +1,14 @@
+# Candidate configuration for alternative models served on gpu306 by
+# analysis/serving/serve-model.sh. The model is discovered from /v1/models, and
+# temperature/top_p are left to each model's own generation_config.
+[model]
+api_base = ["http://gpu306.cm.cluster:8222/v1"]
+api = "responses"
+reasoning_effort = "high"
+max_output_tokens = 80000
+timeout = 7200
+attempts = 3
+
+[label]
+concurrency = 70
+validation = "lenient"
