@@ -8,7 +8,7 @@ from collections import defaultdict
 from functools import lru_cache
 from pathlib import Path
 
-ROOT = Path("/scratch/fparker9/podcasts/podcast-health-content-analysis-01")
+ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
 
 from analysis.benchmark import references as refs_mod  # noqa: E402

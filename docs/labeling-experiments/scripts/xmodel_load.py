@@ -11,7 +11,7 @@ from analysis.benchmark import AGREEMENT_PATH, TAXONOMY_PATH
 
 RUNS = ["s70-high-lenient", "gptoss-high-lenient", "gptoss-medium-lenient", "q35-think-lenient",
         "q35-none-lenient", "gemma4-think-lenient", "s70-none-lenient"]
-root = Path(__file__).resolve().parents[1]
+root = Path(__file__).resolve().parents[3] / "benchmark" / "runs"
 items = [json.loads(l) for l in open(root / "sample-dev70.jsonl")]
 gold = refs_mod.load_gold()
 taxonomy = load_benchmark_taxonomy(TAXONOMY_PATH)

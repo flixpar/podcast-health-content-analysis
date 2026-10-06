@@ -57,7 +57,7 @@ def test_flat_taxonomy_keeps_its_schema_and_prompt_identity():
     flat = labeling.compile_taxonomy(ROOT / "topics.md")
     assert flat["schema_version"] == labeling.SCHEMA_VERSION
     assert "format" not in flat
-    assert labeling.prompt_version(flat) == labeling.PROMPT_VERSION
+    assert labeling.prompt_version(flat).startswith(labeling.PROMPT_VERSION + ":")
     schema = labeling.response_schema(flat)
     claim = schema["properties"]["verification_candidates"]["items"]
     assert "narrative_ids" not in claim["properties"]

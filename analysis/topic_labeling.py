@@ -1343,15 +1343,15 @@ def hierarchical_instructions(
 def prompt_version(taxonomy: dict[str, Any], instructions: str | None = None) -> str:
     """The prompt identity that goes into the run fingerprint.
 
-    The flat taxonomy's rubric is a constant in this module, versioned by hand.
-    The v7 prompt is assembled from files, so its identity includes a hash of
-    the assembled text: editing the rubric or codebook is a new prompt.
+    All prompts include a hash of their assembled text: editing a loaded
+    rubric, codebook or label table is a new prompt.
     """
-    if not is_hierarchical(taxonomy):
-        return PROMPT_VERSION
     text = instructions if instructions is not None else taxonomy_instructions(taxonomy)
-    version = taxonomy.get("taxonomy_version") or DEFAULT_HIERARCHICAL_VERSION
-    prefix = HIERARCHICAL_PROMPT_VERSION if version == DEFAULT_HIERARCHICAL_VERSION else f"granular-{version}"
+    if not is_hierarchical(taxonomy):
+        prefix = PROMPT_VERSION
+    else:
+        version = taxonomy.get("taxonomy_version") or DEFAULT_HIERARCHICAL_VERSION
+        prefix = HIERARCHICAL_PROMPT_VERSION if version == DEFAULT_HIERARCHICAL_VERSION else f"granular-{version}"
     return f"{prefix}:{sha256_bytes(text.encode('utf-8'))[:16]}"
 
 

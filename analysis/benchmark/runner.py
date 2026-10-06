@@ -84,7 +84,7 @@ def build_instructions(taxonomy: dict[str, Any], rubric_file: Path | None) -> tu
         return instructions, version, tl.sha256_bytes(rubric_path.read_bytes())
     if rubric_file is None:
         instructions = tl.taxonomy_instructions(taxonomy)
-        version = tl.PROMPT_VERSION
+        version = tl.prompt_version(taxonomy, instructions)
         rubric = tl.SYSTEM_RUBRIC
     else:
         rubric = Path(rubric_file).read_text(encoding="utf-8")
