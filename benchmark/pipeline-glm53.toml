@@ -4,6 +4,8 @@
 #
 #   BENCHMARK_DIR=benchmark/v3 .venv/bin/python -m analysis.benchmark run --name glm53-high \
 #       --pipeline-config benchmark/pipeline-glm53.toml --repeats 1 --split all
+# BENCHMARK_DIR selects the tracked v3 specification; its generated items,
+# gold and candidate runs live under ignored local/benchmark/v3.
 
 [model]
 api_base = ["http://127.0.0.1:8222/v1"]

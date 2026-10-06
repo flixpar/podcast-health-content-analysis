@@ -4,18 +4,18 @@
 #   analysis/serving/serve-model.sh qwen3.5-35b-a3b [extra vllm flags]
 #
 # Models: qwen3.5-35b-a3b, qwen3.8-flash-next, gpt-oss-120b, gemma-4-26b-a4b.
-# Common flags follow tmp/vllm-launch-commands.md. PARALLEL=dp runs one replica
+# PARALLEL=dp runs one replica
 # per GPU (data parallel) instead of tensor parallel across all four, for models
 # that fit on one card. Parsers built on vLLM's parser engine load the
 # *_fast variants from fast_reasoning_end_plugin.py.
 set -eo pipefail
-export VLLM_CACHE_ROOT=/tmp/vllm_cache HF_HOME=/tmp/huggingface2
-export VLLM_ENGINE_READY_TIMEOUT_S=1800 VLLM_FLASHINFER_ALLREDUCE_BACKEND=trtllm
-source /etc/profile.d/lmod.sh 2>/dev/null || true
-ml restore gpu >/dev/null 2>&1 || true
+export VLLM_CACHE_ROOT="${VLLM_CACHE_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/vllm}"
+export HF_HOME="${HF_HOME:-${XDG_CACHE_HOME:-$HOME/.cache}/huggingface}"
+export VLLM_ENGINE_READY_TIMEOUT_S="${VLLM_ENGINE_READY_TIMEOUT_S:-1800}"
+export VLLM_FLASHINFER_ALLREDUCE_BACKEND="${VLLM_FLASHINFER_ALLREDUCE_BACKEND:-trtllm}"
 set -u
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-VLLM="${VLLM:-/scratch/fparker9/vllm-29-venv/bin/vllm}"
+VLLM="${VLLM:-vllm}"
 NAME="${1:?model name}"
 shift
 
@@ -38,7 +38,8 @@ case "$NAME" in
         # blob store from the compute nodes; point it at a pre-downloaded copy of
         # o200k_base.tiktoken and cl100k_base.tiktoken from
         # https://openaipublic.blob.core.windows.net/encodings/
-        export TIKTOKEN_ENCODINGS_BASE="${TIKTOKEN_ENCODINGS_BASE:-/scratch/fparker9/tiktoken_encodings}"
+        # Set TIKTOKEN_ENCODINGS_BASE to that directory when offline; otherwise
+        # leave the tokenizer's normal download/cache behavior in place.
         FLAGS=(--reasoning-parser openai_gptoss --tool-call-parser openai --enable-auto-tool-choice)
         ;;
     gemma-4-26b-a4b)
@@ -63,9 +64,9 @@ fi
 exec "$VLLM" serve "$MODEL" \
     "${PAR[@]}" \
     --gpu-memory-utilization 0.93 \
-    --max-model-len 96K --max-num-seqs "${MAX_NUM_SEQS:-256}" \
+    --max-model-len "${MAX_MODEL_LEN:-96K}" --max-num-seqs "${MAX_NUM_SEQS:-256}" \
     --enable-prefix-caching --trust-remote-code \
     --api-server-count "${API_SERVER_COUNT:-4}" \
     --async-scheduling \
-    --host 0.0.0.0 --port 8222 \
+    --host 0.0.0.0 --port "${PORT:-8222}" \
     "${FLAGS[@]}" "$@"

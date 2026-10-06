@@ -26,37 +26,37 @@
 #   MAX_MODEL_LEN  context (196608): the v8 prompt plus a 40k output budget.
 #   GPU_MEMORY_UTILIZATION (0.95; boots on 80 GB H100s and adds ~8% to the KV pool)
 #
-# This model needs a vLLM nightly from 2026-09-08 or later (VLLM below). On a
-# node whose driver is older than the wheel's CUDA (gpu313: driver 570, cu129
-# wheel) set CUDA_COMPAT to NVIDIA's cuda-compat libcuda directory and
-# CUDA_HOME to a CUDA >= 12.9 toolkit for DeepGEMM/FlashInfer JIT; the defaults
-# below are the user-space copies on gpu313 and are skipped when absent.
+# Use a compatible vLLM installation on PATH, or set VLLM to its executable.
+# If your driver/toolkit needs CUDA compatibility libraries, explicitly set
+# CUDA_COMPAT and CUDA_HOME to the matching installed directories.
 set -eo pipefail
-export VLLM_CACHE_ROOT=/tmp/vllm_cache HF_HOME=/tmp/huggingface2
-export VLLM_ENGINE_READY_TIMEOUT_S=2400
+export VLLM_CACHE_ROOT="${VLLM_CACHE_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/vllm}"
+export HF_HOME="${HF_HOME:-${XDG_CACHE_HOME:-$HOME/.cache}/huggingface}"
+export VLLM_ENGINE_READY_TIMEOUT_S="${VLLM_ENGINE_READY_TIMEOUT_S:-2400}"
 # Rendering the 350k-character prompt for hundreds of queued requests can take
 # longer than vLLM's 30 s default, which then answers 500.
-export VLLM_CHAT_TEMPLATE_RENDER_TIMEOUT=600
-# One CPU thread per worker: an inherited OMP_NUM_THREADS (16 on gpu313) makes
+export VLLM_CHAT_TEMPLATE_RENDER_TIMEOUT="${VLLM_CHAT_TEMPLATE_RENDER_TIMEOUT:-600}"
+# One CPU thread per worker: an inherited OMP_NUM_THREADS=16 makes
 # every GPU worker spin ~3 cores in torch CPU ops for nothing, which throttles
 # the server when it shares or is pinned to a few cores.
 export OMP_NUM_THREADS="${VLLM_OMP_NUM_THREADS:-1}"
 set -u
-VLLM="${VLLM:-/scratch/fparker9/vllm-nightly-venv/bin/vllm}"
-CUDA_COMPAT="${CUDA_COMPAT:-/scratch/fparker9/cuda-compat-12-9/usr/local/cuda-12.9/compat}"
-CUDA_TOOLKIT="${CUDA_HOME:-/scratch/fparker9/cuda129-rpm/usr/local/cuda-12.9}"
-if [ -d "$CUDA_COMPAT" ]; then
-    export LD_LIBRARY_PATH="$CUDA_COMPAT:${LD_LIBRARY_PATH:-}"
+VLLM="${VLLM:-vllm}"
+CUDA_TOOLKIT="${CUDA_HOME:-}"
+if [ -n "${CUDA_COMPAT:-}" ] && [ -d "$CUDA_COMPAT" ]; then
+    export LD_LIBRARY_PATH="$CUDA_COMPAT${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 fi
 if [ -d "$CUDA_TOOLKIT" ]; then
     export CUDA_HOME="$CUDA_TOOLKIT" PATH="$CUDA_TOOLKIT/bin:$PATH"
-    export LD_LIBRARY_PATH="$CUDA_TOOLKIT/targets/x86_64-linux/lib:$LD_LIBRARY_PATH"
+    export LD_LIBRARY_PATH="$CUDA_TOOLKIT/targets/x86_64-linux/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 fi
 
 KDA_STATE_DTYPE="${KDA_STATE_DTYPE:-float32}"
 DEFAULT_SEQS=160
 if [ "$KDA_STATE_DTYPE" = bfloat16 ]; then
-    GLM_KDA="$("$(dirname "$VLLM")/python" -c 'import os, vllm; print(os.path.join(os.path.dirname(vllm.__file__), "models/glm5next/common/kda.py"))')"
+    VLLM_EXECUTABLE="$(command -v "$VLLM")"
+    VLLM_PYTHON="${VLLM_PYTHON:-$(dirname "$VLLM_EXECUTABLE")/python}"
+    GLM_KDA="$("$VLLM_PYTHON" -c 'import os, vllm; print(os.path.join(os.path.dirname(vllm.__file__), "models/glm5next/common/kda.py"))')"
     if ! grep -q "mamba_ssm_cache_dtype" "$GLM_KDA"; then
         SITE="$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$GLM_KDA")")")")")"
         echo "KDA_STATE_DTYPE=bfloat16 needs the vLLM patch; without it vLLM keeps the state" >&2
