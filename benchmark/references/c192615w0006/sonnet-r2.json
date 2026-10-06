@@ -1,0 +1,552 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c192615w0006",
+  "provenance": {
+    "bundle": "bundle_026",
+    "ingested_at": "2026-09-09T20:27:03.849976+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000273",
+        "evidence_quote": "So we blended them. The way that all these plants blend together makes it very difficult to test the product itself.",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000259",
+        "summary": "Guest explains how blending multiple plant ingredients to release stem cells makes the resulting product hard to test."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000271",
+        "evidence_quote": "blue-green algae will trigger a release that will be like a an increase of about 25% at one hour",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000259",
+        "summary": "Mechanistic language about triggering stem cell release and specific percentage/timing curves is used to explain the product."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000326",
+        "evidence_quote": "after analyzing ten patients or participants that have been in the study after six months, they have normal heart function.",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000274",
+        "summary": "Discussion of an ongoing clinical study using the product for chronic congestive heart failure, comparing outcomes to standard medications."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000280",
+        "evidence_quote": "So what we did is that once that blend is done, we then moved on to clinical trials that we're doing with various conditions.",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000273",
+        "summary": "An ongoing clinical trial is invoked as support for the product's effect on heart failure."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000286",
+        "evidence_quote": "We're too early, too early right now to have data.",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000274",
+        "summary": "The cited evidence is an ongoing, unpublished, small-sample (ten patient) study with no data yet on newer trials."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000283",
+        "evidence_quote": "We have started one in January on Parkinson.",
+        "label_ids": [
+          "topic:neurology_seizures_brain_conditions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000282",
+        "summary": "A new, too-early-for-data study on Parkinson's is mentioned briefly."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000284",
+        "evidence_quote": "We're starting one also on COPD, like emphysema, and we're preparing, preparing studies on diabetes, spinal cord lesions, and other conditions",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000284",
+        "summary": "COPD/emphysema, diabetes, and spinal cord lesions are named as other conditions the product will be studied for."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000288",
+        "evidence_quote": "There's tons of scientific documentation that many aspects of human health can improve when you put more stem cells in circulation.",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000288",
+        "summary": "A vague appeal to 'tons of scientific documentation' is made to support the stem-cell-circulation claim."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000287",
+        "evidence_quote": "So individuals with whom medicine has done everything that could be done for them, and all we do is that we add stem regen.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000274",
+        "summary": "Guest promotes his own product, Stem Regen, as the intervention used in his clinical study."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000315",
+        "evidence_quote": "we add stem regen",
+        "mention_role": "own_product",
+        "product_name": "Stem Regen",
+        "product_type": "supplement",
+        "start_unit_id": "u000279"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Blue-green algae causes about a 25% increase in circulating stem cells one hour after ingestion.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000264",
+        "evidence_quote": "blue-green algae will trigger a release that will be like a an increase of about 25% at one hour",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific, quantified mechanistic claim about a supplement ingredient's effect on stem cell counts.",
+        "relevance": "substantive",
+        "start_unit_id": "u000264",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Panax notoginseng, seabuckthorn berry, and Aloe macrorrhiza cause a longer-lasting increase in circulating stem cells that is still rising at three hours.",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000266",
+        "evidence_quote": "There's an increase in number of stem cells, and by three hours it's still increasing.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific mechanistic claim about supplement ingredients' effect on stem cell release timing.",
+        "relevance": "substantive",
+        "start_unit_id": "u000265",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Increasing the number of circulating stem cells helps the heart repair itself.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000274",
+        "evidence_quote": "if you release stem cells, and we know that there's good documentation that by increasing the number of stem cells in circulation, you can help the heart repair.",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific causal claim linking circulating stem cell counts to heart repair that could be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000274",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In an ongoing study, all ten of the first ten congestive heart failure patients treated with Stem Regen had normal heart function after six months.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000296",
+        "evidence_quote": "So these are the first ten patients, and all of them after six months had normal heart function, which I was impressed.",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A specific efficacy claim about a proprietary supplement's effect on heart failure that needs verification against the trial's actual data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000295",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Standard congestive heart failure medications such as beta blockers, blood pressure medication, and diuretics do not repair the heart; they only reduce the pressure placed on it.",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000325",
+        "evidence_quote": "it's all it's nothing to help prepare the heart. It's it's all things to reduce the pressure that is.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about the mechanism and limits of standard heart failure medications.",
+        "relevance": "substantive",
+        "start_unit_id": "u000319",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Standard heart failure treatment increases quality of life to some extent but causes physical performance to decline.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000326",
+        "evidence_quote": "Put on the heart, so their quality of life increase to some extent, but at the same time, their performance goes down.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about the trade-off between standard heart failure treatment and physical performance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000326",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Increasing the number of circulating stem cells can improve many aspects of human health.",
+        "claim_type": "causal",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000288",
+        "evidence_quote": "There's tons of scientific documentation that many aspects of human health can improve when you put more stem cells in circulation.",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A broad causal health claim justified by a vague appeal to documentation that should be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000288",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      }
+    ],
+    "window_id": "episode_192615_window_0006"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000273",
+        "evidence_quote": "So we blended them. The way that all these plants blend together makes it very difficult to test the product itself",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000259",
+        "summary": "Guest explains how blending multiple plant ingredients to release stem cells makes the resulting product hard to test."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000271",
+        "evidence_quote": "blue-green algae will trigger a release that will be like a an increase of about 25% at one hour",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000259",
+        "summary": "Mechanistic language about triggering stem cell release and specific percentage/timing curves is used to explain the product."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000326",
+        "evidence_quote": "after analyzing ten patients or participants that have been in the study after six months, they have normal heart function",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000274",
+        "summary": "Discussion of an ongoing clinical study using the product for chronic congestive heart failure, comparing outcomes to standard medications."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000280",
+        "evidence_quote": "So what we did is that once that blend is done, we then moved on to clinical trials that we're doing with various conditions",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000273",
+        "summary": "An ongoing clinical trial is invoked as support for the product's effect on heart failure."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000286",
+        "evidence_quote": "We're too early, too early right now to have data",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000274",
+        "summary": "The cited evidence is an ongoing, unpublished, small-sample (ten patient) study with no data yet on newer trials."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000283",
+        "evidence_quote": "We have started one in January on Parkinson",
+        "label_ids": [
+          "topic:neurology_seizures_brain_conditions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000282",
+        "summary": "A new, too-early-for-data study on Parkinson's is mentioned briefly."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000284",
+        "evidence_quote": "We're starting one also on COPD, like emphysema, and we're preparing, preparing studies on diabetes, spinal cord lesions, and other conditions",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000284",
+        "summary": "COPD/emphysema, diabetes, and spinal cord lesions are named as other conditions the product will be studied for."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000288",
+        "evidence_quote": "There's tons of scientific documentation that many aspects of human health can improve when you put more stem cells in circulation",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000288",
+        "summary": "A vague appeal to 'tons of scientific documentation' is made to support the stem-cell-circulation claim."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000287",
+        "evidence_quote": "So individuals with whom medicine has done everything that could be done for them, and all we do is that we add stem regen",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000274",
+        "summary": "Guest promotes his own product, Stem Regen, as the intervention used in his clinical study."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000315",
+        "evidence_quote": "we add stem regen",
+        "mention_role": "own_product",
+        "product_name": "Stem Regen",
+        "product_type": "supplement",
+        "start_unit_id": "u000279"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Blue-green algae causes about a 25% increase in circulating stem cells one hour after ingestion.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000264",
+        "evidence_quote": "blue-green algae will trigger a release that will be like a an increase of about 25% at one hour",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific, quantified mechanistic claim about a supplement ingredient's effect on stem cell counts.",
+        "relevance": "substantive",
+        "start_unit_id": "u000264",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Panax notoginseng, seabuckthorn berry, and Aloe macrorrhiza cause a longer-lasting increase in circulating stem cells that is still rising at three hours.",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000266",
+        "evidence_quote": "There's an increase in number of stem cells, and by three hours it's still increasing",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific mechanistic claim about supplement ingredients' effect on stem cell release timing.",
+        "relevance": "substantive",
+        "start_unit_id": "u000265",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Increasing the number of circulating stem cells helps the heart repair itself.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000274",
+        "evidence_quote": "if you release stem cells, and we know that there's good documentation that by increasing the number of stem cells in circulation, you can help the heart repair",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific causal claim linking circulating stem cell counts to heart repair that could be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000274",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In an ongoing study, all ten of the first ten congestive heart failure patients treated with Stem Regen had normal heart function after six months.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000296",
+        "evidence_quote": "So these are the first ten patients, and all of them after six months had normal heart function, which I was impressed",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A specific efficacy claim about a proprietary supplement's effect on heart failure that needs verification against the trial's actual data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000295",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Standard congestive heart failure medications such as beta blockers, blood pressure medication, and diuretics do not repair the heart; they only reduce the pressure placed on it.",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000325",
+        "evidence_quote": "it's all it's nothing to help prepare the heart. It's it's all things to reduce the pressure that is",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about the mechanism and limits of standard heart failure medications.",
+        "relevance": "substantive",
+        "start_unit_id": "u000319",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Standard heart failure treatment increases quality of life to some extent but causes physical performance to decline.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000326",
+        "evidence_quote": "Put on the heart, so their quality of life increase to some extent, but at the same time, their performance goes down",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about the trade-off between standard heart failure treatment and physical performance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000326",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Increasing the number of circulating stem cells can improve many aspects of human health.",
+        "claim_type": "causal",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000288",
+        "evidence_quote": "There's tons of scientific documentation that many aspects of human health can improve when you put more stem cells in circulation",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A broad causal health claim justified by a vague appeal to documentation that should be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000288",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      }
+    ],
+    "window_id": "episode_192615_window_0006"
+  },
+  "stored_at": "2026-09-09T20:27:03.850057+00:00"
+}

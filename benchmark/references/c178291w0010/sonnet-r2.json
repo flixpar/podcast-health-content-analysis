@@ -1,0 +1,440 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c178291w0010",
+  "provenance": {
+    "bundle": "bundle_011",
+    "ingested_at": "2026-09-09T20:27:03.090024+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "These people in the studies are called \"sick quitters.\"",
+        "label_ids": [
+          "topic:alcohol_sober_wellness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000509",
+        "summary": "Speakers explain how alcohol epidemiology is confounded by 'sick quitters' and 'healthy user' effects, demographic differences between nondrinkers and moderate drinkers, and self-reported drinking data."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "that's not a remotely representative sample either",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000509",
+        "summary": "Speakers debunk the naive reading of alcohol studies that moderate drinkers are healthier than nondrinkers, pointing to confounds in who counts as a nondrinker."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "There's no evidence that they do anything.",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000569",
+        "summary": "Speakers debunk synthetic antioxidant supplements and resveratrol, saying there's no evidence antioxidant pills do anything and resveratrol is poorly absorbed."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "Okay, the next sort of debunkery is the antioxidants stuff.",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000569",
+        "summary": "Speaker frames the antioxidant/resveratrol discussion explicitly as debunking."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "all of the studies on resveratrol, since the 1990s have found",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000577",
+        "summary": "Speaker cites studies on resveratrol since the 1990s regarding its absorption."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Black people are twice as likely as white people to be nondrinkers.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "black people are twice as likely to be nondrinkers as white people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Specific demographic prevalence statistic about nondrinkers is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000523",
+        "topic_ids": [
+          "topic:alcohol_sober_wellness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People without health insurance are 1.5 times more likely to be nondrinkers than those with insurance.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "people without health insurance are 1.5 times more likely to be nondrinkers",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Specific demographic prevalence statistic about nondrinkers is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000523",
+        "topic_ids": [
+          "topic:alcohol_sober_wellness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People who earn less than $25,000 a year are three times more likely to be nondrinkers than higher earners.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000525",
+        "evidence_quote": "People who earn less than $25,000 a year are three times more likely to be nondrinkers.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Specific demographic prevalence statistic about nondrinkers is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000525",
+        "topic_ids": [
+          "topic:alcohol_sober_wellness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nondrinkers in alcohol studies include a disproportionate number of people with serious preexisting health conditions.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000536",
+        "evidence_quote": "Nondrinkers, it turns out, includes a disproportionate number of people with fairly serious preexisting conditions.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Claim about confounding health status differences between nondrinkers and drinkers in epidemiological studies is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000536",
+        "topic_ids": [
+          "topic:alcohol_sober_wellness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Surveys of drinking behavior rely on self-reported data, and people who drink only rarely often still describe themselves as moderate drinkers.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000545",
+        "evidence_quote": "all of these surveys of drinking behavior are based on self-reported data",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Claim about self-report measurement bias in alcohol survey research is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000545",
+        "topic_ids": [
+          "topic:alcohol_sober_wellness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Synthetic antioxidant vitamin supplements have no evidence of doing anything beneficial.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000572",
+        "evidence_quote": "There's no evidence that they do anything.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Checkable claim about lack of evidence for synthesized antioxidant supplements.",
+        "relevance": "substantive",
+        "start_unit_id": "u000572",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "roughly"
+        ],
+        "claim_text": "Studies since the 1990s have found resveratrol is poorly absorbed, producing only a brief spike lasting about 30 minutes.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "you don't really absorb it, you get a spike of it for roughly 30 minutes",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Specific pharmacokinetic claim about resveratrol absorption is checkable against research literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000577",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      }
+    ],
+    "window_id": "episode_178291_window_0010"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "These people in the studies are called \"sick quitters",
+        "label_ids": [
+          "topic:alcohol_sober_wellness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000509",
+        "summary": "Speakers explain how alcohol epidemiology is confounded by 'sick quitters' and 'healthy user' effects, demographic differences between nondrinkers and moderate drinkers, and self-reported drinking data."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "that's not a remotely representative sample either",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000509",
+        "summary": "Speakers debunk the naive reading of alcohol studies that moderate drinkers are healthier than nondrinkers, pointing to confounds in who counts as a nondrinker."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "There's no evidence that they do anything",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000569",
+        "summary": "Speakers debunk synthetic antioxidant supplements and resveratrol, saying there's no evidence antioxidant pills do anything and resveratrol is poorly absorbed."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "Okay, the next sort of debunkery is the antioxidants stuff",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000569",
+        "summary": "Speaker frames the antioxidant/resveratrol discussion explicitly as debunking."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "all of the studies on resveratrol, since the 1990s have found",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000577",
+        "summary": "Speaker cites studies on resveratrol since the 1990s regarding its absorption."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Black people are twice as likely as white people to be nondrinkers.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "black people are twice as likely to be nondrinkers as white people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Specific demographic prevalence statistic about nondrinkers is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000523",
+        "topic_ids": [
+          "topic:alcohol_sober_wellness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People without health insurance are 1.5 times more likely to be nondrinkers than those with insurance.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "people without health insurance are 1.5 times more likely to be nondrinkers",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Specific demographic prevalence statistic about nondrinkers is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000523",
+        "topic_ids": [
+          "topic:alcohol_sober_wellness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People who earn less than $25,000 a year are three times more likely to be nondrinkers than higher earners.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000525",
+        "evidence_quote": "People who earn less than $25,000 a year are three times more likely to be nondrinkers",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Specific demographic prevalence statistic about nondrinkers is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000525",
+        "topic_ids": [
+          "topic:alcohol_sober_wellness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nondrinkers in alcohol studies include a disproportionate number of people with serious preexisting health conditions.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000536",
+        "evidence_quote": "Nondrinkers, it turns out, includes a disproportionate number of people with fairly serious preexisting conditions",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Claim about confounding health status differences between nondrinkers and drinkers in epidemiological studies is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000536",
+        "topic_ids": [
+          "topic:alcohol_sober_wellness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Surveys of drinking behavior rely on self-reported data, and people who drink only rarely often still describe themselves as moderate drinkers.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000545",
+        "evidence_quote": "all of these surveys of drinking behavior are based on self-reported data",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Claim about self-report measurement bias in alcohol survey research is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000545",
+        "topic_ids": [
+          "topic:alcohol_sober_wellness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Synthetic antioxidant vitamin supplements have no evidence of doing anything beneficial.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000572",
+        "evidence_quote": "There's no evidence that they do anything",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Checkable claim about lack of evidence for synthesized antioxidant supplements.",
+        "relevance": "substantive",
+        "start_unit_id": "u000572",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "roughly"
+        ],
+        "claim_text": "Studies since the 1990s have found resveratrol is poorly absorbed, producing only a brief spike lasting about 30 minutes.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000577",
+        "evidence_quote": "you don't really absorb it, you get a spike of it for roughly 30 minutes",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "Specific pharmacokinetic claim about resveratrol absorption is checkable against research literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000577",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      }
+    ],
+    "window_id": "episode_178291_window_0010"
+  },
+  "stored_at": "2026-09-09T20:27:03.090068+00:00"
+}

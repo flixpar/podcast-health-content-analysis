@@ -6,6 +6,7 @@ network is a fake session injected at ``capture.make_session``.
 
 import importlib.util
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -151,29 +152,116 @@ def entries(conn, snapshot_id):
         "SELECT * FROM chart_entries WHERE snapshot_id = ? ORDER BY rank", (snapshot_id,))}
 
 
-def test_same_day_captures_merge_and_earliest_rank_wins(tmp_path, config, conn):
+def test_same_day_captures_select_one_complete_snapshot(tmp_path, config, conn):
     day = "2016-05-01"
     early = [row("chartable_itunes", "us-all-podcasts-podcasts", "all-podcasts", r,
                  f"{day}T08:00:00+00:00", entity_id=f"slug-{r}", name=f"Early {r}",
-                 path="raw/chartable/p1-early.html.gz") for r in (1, 2, 3)]
+                 path="raw/chartable/early.html.gz") for r in (1, 2, 3)]
     late = [row("chartable_itunes", "us-all-podcasts-podcasts", "all-podcasts", r,
                 f"{day}T20:00:00+00:00", entity_id=f"slug-{r}", name=f"Late {r}",
-                path="raw/chartable/p2-late.html.gz") for r in (2, 3, 4, 6)]
-    # the late page is listed first in the file: order in the file must not matter
-    archive = write_archive(tmp_path, late + early)
-    summary = archive_import.run(config, conn, archive_dir=archive)
-
+                path="raw/chartable/late.html.gz") for r in (1, 2, 3, 4)]
+    summary = archive_import.run(config, conn, archive_dir=write_archive(tmp_path, early + late))
     snap = snapshot(conn, "chartable_itunes", "apple:us:podcast:all", day)
-    assert snap["captured_at"] == f"{day}T08:00:00+00:00"
-    assert snap["raw_path"] == "raw/chartable/p1-early.html.gz"
-    assert (snap["depth"], snap["n_entries"], snap["complete_to"]) == (6, 5, 4)
-    assert snap["origin"] == "wayback" and snap["trusted"] == 1
+    assert snap["captured_at"] == f"{day}T20:00:00+00:00"
+    assert snap["raw_path"] == "raw/chartable/late.html.gz"
+    assert (snap["depth"], snap["n_entries"], snap["complete_to"]) == (4, 4, 4)
     got = entries(conn, snap["id"])
-    assert [got[r]["name"] for r in (1, 2, 3, 4, 6)] == ["Early 1", "Early 2", "Early 3",
-                                                         "Late 4", "Late 6"]
-    assert got[2]["apple_id"] is None and got[2]["source_entity_id"] == "slug-2"   # Chartable slug
-    assert got[2]["title_key"] == "early2"
-    assert summary["entries"] == 5 and summary["rows_merged_away"] == 2
+    assert [got[r]["name"] for r in (1, 2, 3, 4)] == [f"Late {r}" for r in (1, 2, 3, 4)]
+    assert got[2]["apple_id"] is None and got[2]["source_entity_id"] == "slug-2"
+    assert summary["entries"] == 4 and summary["rows_merged_away"] == 3
+
+
+def test_disjoint_partial_captures_do_not_create_a_trusted_day(tmp_path, config, conn):
+    day = "2016-05-01"
+    rows = podbay_day(day, range(1, 51), hour="08") + podbay_day(day, range(51, 101), hour="20")
+    archive_import.run(config, conn, archive_dir=write_archive(tmp_path, rows))
+    snap = snapshot(conn, "podbay", "apple:us:podcast:all", day)
+    assert (snap["n_entries"], snap["depth"]) == (50, 50)
+    assert archive_import.trusted_flagship_days(conn) == []
+
+
+@pytest.mark.parametrize("metadata", ["page", "slug", "path", "plain_slug_path"])
+@pytest.mark.parametrize("hour, origin, expected", [("08", "wayback", 100),
+                                                    ("20", "wayback", 50),
+                                                    ("08", "commoncrawl", 50)])
+def test_chartable_pages_require_matching_archive_and_nearby_capture(
+        tmp_path, config, conn, metadata, hour, origin, expected):
+    rows = []
+    for page, ranks, at, archive in [(1, range(1, 51), "08:00", "wayback"),
+                                    (2, range(51, 101), f"{hour}:30", origin)]:
+        for rank in ranks:
+            item = row("chartable_itunes", "us-all-podcasts-podcasts", "all-podcasts", rank,
+                       f"2016-05-01T{at}:00+00:00", archive=archive,
+                       path=f"raw/chartable/capture-page{page}-{at}.html.gz")
+            item["page"] = page if metadata == "page" else None
+            if metadata == "slug":
+                item["slug"] += f"?page={page}"
+            if metadata in {"path", "plain_slug_path"}:
+                item["path"] = f"raw/chartable/us-all-podcasts-podcasts_page={page}-abc/{at}.gz"
+                if metadata == "path":
+                    item.pop("slug")
+            rows.append(item)
+    rows += [row("chartable_itunes", "us-politics-podcasts", "politics", rank,
+                 "2016-05-01T08:00:00+00:00") for rank in range(1, 101)]
+    if metadata != "page":
+        for item in rows:
+            item.pop("page", None)  # Legacy exports omit this column entirely.
+    archive_import.run(config, conn, archive_dir=write_archive(tmp_path, rows))
+    snap = snapshot(conn, "chartable_itunes", "apple:us:podcast:all", "2016-05-01")
+    assert snap["n_entries"] == snap["depth"] == expected
+    assert archive_import.trusted_flagship_days(conn) == (
+        [("2016-05-01", "chartable_itunes")] if expected == 100 else [])
+
+
+def test_flagship_verification_uses_regenerated_summary(tmp_path, config, conn):
+    rows = (podbay_day("2016-01-01", range(1, 96))
+            + podbay_day("2016-01-02", range(1, 95))
+            + [row("apple_charts_page", "Top Shows", "All Podcasts", rank,
+                   "2016-01-03T00:00:00+00:00") for rank in range(1, 25)])
+    archive = write_archive(tmp_path, rows)
+    result = archive_import.run(config, conn, archive_dir=archive)["flagship_verification"]
+    assert result["matches_research"] is None
+    assert "regenerate" in result["comparison_unavailable"]
+    # Independent eligibility: 95 ranks meet the mirror cut, 94 do not, and
+    # the separate 24-deep Apple day qualifies. Historical 941 is irrelevant.
+    expected = {"total": 2, "podbay": 1, "chartable_itunes": 0, "apple_charts_page": 1}
+    summary = archive / "parsed/population/summary.json"
+    summary.parent.mkdir()
+    summary.write_text(json.dumps({"snapshot_days": 2,
+                                  "days_by_series": {"apple/podbay": 1, "apple/charts_page": 1},
+                                  "rule": {"deep_cut": 50, "shallow_cut": 24}}))
+    result = archive_import.verify_flagship(conn, archive)
+    assert result["trusted_days"] == result["research"] == expected
+    assert result["matches_research"] is True
+    changed = json.loads(summary.read_text())
+    changed["snapshot_days"] = 3
+    summary.write_text(json.dumps(changed))
+    assert archive_import.verify_flagship(conn, archive)["matches_research"] is False
+    changed["rule"]["deep_cut"] = 24
+    summary.write_text(json.dumps(changed))
+    assert "different depth policy" in archive_import.verify_flagship(conn, archive)["comparison_unavailable"]
+    changed["rule"]["deep_cut"] = 50
+    summary.write_text(json.dumps(changed))
+    old = (archive / "parsed/chart_rows.parquet").stat().st_mtime_ns - 1_000_000
+    os.utime(summary, ns=(old, old))
+    result = archive_import.verify_flagship(conn, archive)
+    assert result["matches_research"] is None and "predates" in result["comparison_unavailable"]
+
+
+@pytest.mark.parametrize("contents", ["{broken json", "{}", '{"rule": {}}',
+                                     '{"rule": {"deep_cut": 50, "shallow_cut": 24}, '
+                                     '"snapshot_days": 1, "days_by_series": []}'])
+def test_unusable_population_summary_does_not_fail_after_import(
+        tmp_path, config, conn, contents):
+    archive = write_archive(tmp_path, podbay_day("2016-01-01", range(1, 96)))
+    summary = archive / "parsed/population/summary.json"
+    summary.parent.mkdir()
+    summary.write_text(contents)
+    result = archive_import.run(config, conn, archive_dir=archive)
+    assert result["entries"] == 95
+    verification = result["flagship_verification"]
+    assert verification["matches_research"] is None
+    assert "invalid or incomplete" in verification["comparison_unavailable"]
 
 
 def test_origin_ids_and_skips(tmp_path, config, conn):

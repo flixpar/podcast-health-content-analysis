@@ -1,0 +1,428 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c181805w0001",
+  "provenance": {
+    "bundle": "bundle_015",
+    "ingested_at": "2026-09-09T19:40:19.359400+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "you certainly APOE would be one of the longevity genes",
+        "label_ids": [
+          "topic:longevity_anti_aging",
+          "topic:genetics_inheritance"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000011",
+        "summary": "Discusses using blood biomarkers and longevity genes like APOE and Lp(a) to estimate disease risk categories relevant to lifespan."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "we can see specific and non-specific markers of inflammation",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000023",
+        "summary": "Details blood biomarkers for cardiovascular risk: lipoprotein particle number, inflammation markers (CRP, fibrinogen, ox-LDL), and endothelial dysfunction markers including insulin, homocysteine, and ADMA/SDMA."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "inhibitors of nitric oxide synthase",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Uses biological mechanism vocabulary (lipoproteins, inflammation, endothelial dysfunction, nitric oxide synthase) to explain cardiovascular risk."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000035",
+        "evidence_quote": "James O'Keefe just recently was on a paper that looked at cardiovascular health in patients with type 1 diabetes",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "summary": "Cites a paper by James O'Keefe on insulin doses and cardiovascular/endothelial impact in type 1 diabetes patients."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "fifty percent of patients that had that had events",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000039",
+        "summary": "Discusses using CT angiograms and coronary calcium scores for cardiovascular risk assessment, noting a recent study questioning calcium score's value since many events occur at non-calcified lesions."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000045",
+        "evidence_quote": "based on a study in one of the atherosclerosis journals",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000043",
+        "summary": "Cites a recent editorial based on a study in an atherosclerosis journal finding many cardiac events occur at sites of non-calcified lesions."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000054",
+        "evidence_quote": "virtually every cancer is a result of a somatic mutation, not a germline mutation",
+        "label_ids": [
+          "topic:cancer",
+          "topic:genetics_inheritance"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000046",
+        "summary": "Discusses the limits of blood/liquid-biopsy-based cancer risk assessment (e.g., GRAIL), the somatic-vs-germline mutation distinction that limits genetic testing's value except for outliers like BRCA/Lynch, and the roles of inflammation and metabolic health in cancer risk."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u000047",
+        "evidence_quote": "until companies like GRAIL have fully functioning liquid biopsies",
+        "mention_role": "neutral",
+        "product_name": "GRAIL",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000047"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A lower Lp(a) level is associated with a greater chance of cardiovascular mortality.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "the lower your LP little A, the greater your chance of cardiovascular mortality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about the direction of Lp(a)'s association with cardiovascular mortality risk.",
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:longevity_anti_aging"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Insulin is toxic to the endothelium at high levels.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "I think that insulin is, in and of itself, actually toxic at high levels to the endothelium",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable mechanistic claim about insulin's toxicity to blood vessel lining.",
+        "relevance": "substantive",
+        "start_unit_id": "u000032",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fifty percent of patients who had cardiovascular events had them at sites of non-calcified lesions, based on a recent study in an atherosclerosis journal.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "fifty percent of patients that had that had events",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about how often cardiac events occur at non-calcified lesions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000043",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "virtually"
+        ],
+        "claim_text": "Virtually every cancer results from a somatic mutation rather than a germline mutation.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000051",
+        "evidence_quote": "virtually every cancer is a result of a somatic mutation, not a germline mutation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about the genetic basis of cancer causation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000051",
+        "topic_ids": [
+          "topic:cancer",
+          "topic:genetics_inheritance"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think",
+          "probably"
+        ],
+        "claim_text": "GRAIL's liquid biopsy technology looks mostly at RNA and DNA to detect cancer.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000047",
+        "evidence_quote": "I think GRAIL is probably looking mostly at RNA and DNA",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about the biomarker basis of GRAIL's liquid biopsy test.",
+        "relevance": "substantive",
+        "start_unit_id": "u000047",
+        "topic_ids": [
+          "topic:cancer"
+        ]
+      }
+    ],
+    "window_id": "episode_181805_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000022",
+        "evidence_quote": "you certainly APOE would be one of the longevity genes",
+        "label_ids": [
+          "topic:genetics_inheritance",
+          "topic:longevity_anti_aging"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000011",
+        "summary": "Discusses using blood biomarkers and longevity genes like APOE and Lp(a) to estimate disease risk categories relevant to lifespan."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "we can see specific and non-specific markers of inflammation",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000023",
+        "summary": "Details blood biomarkers for cardiovascular risk: lipoprotein particle number, inflammation markers (CRP, fibrinogen, ox-LDL), and endothelial dysfunction markers including insulin, homocysteine, and ADMA/SDMA."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000038",
+        "evidence_quote": "inhibitors of nitric oxide synthase",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Uses biological mechanism vocabulary (lipoproteins, inflammation, endothelial dysfunction, nitric oxide synthase) to explain cardiovascular risk."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000035",
+        "evidence_quote": "James O'Keefe just recently was on a paper that looked at cardiovascular health in patients with type 1 diabetes",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "summary": "Cites a paper by James O'Keefe on insulin doses and cardiovascular/endothelial impact in type 1 diabetes patients."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "fifty percent of patients that had that had events",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000039",
+        "summary": "Discusses using CT angiograms and coronary calcium scores for cardiovascular risk assessment, noting a recent study questioning calcium score's value since many events occur at non-calcified lesions."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000045",
+        "evidence_quote": "based on a study in one of the atherosclerosis journals",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000043",
+        "summary": "Cites a recent editorial based on a study in an atherosclerosis journal finding many cardiac events occur at sites of non-calcified lesions."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000054",
+        "evidence_quote": "virtually every cancer is a result of a somatic mutation, not a germline mutation",
+        "label_ids": [
+          "topic:cancer",
+          "topic:genetics_inheritance"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000046",
+        "summary": "Discusses the limits of blood/liquid-biopsy-based cancer risk assessment (e.g., GRAIL), the somatic-vs-germline mutation distinction that limits genetic testing's value except for outliers like BRCA/Lynch, and the roles of inflammation and metabolic health in cancer risk."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u000047",
+        "evidence_quote": "until companies like GRAIL have fully functioning liquid biopsies",
+        "mention_role": "neutral",
+        "product_name": "GRAIL",
+        "product_type": "test_or_diagnostic",
+        "start_unit_id": "u000047"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "A lower Lp(a) level is associated with a greater chance of cardiovascular mortality.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "the lower your LP little A, the greater your chance of cardiovascular mortality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about the direction of Lp(a)'s association with cardiovascular mortality risk.",
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:longevity_anti_aging"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Insulin is toxic to the endothelium at high levels.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "I think that insulin is, in and of itself, actually toxic at high levels to the endothelium",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable mechanistic claim about insulin's toxicity to blood vessel lining.",
+        "relevance": "substantive",
+        "start_unit_id": "u000032",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Fifty percent of patients who had cardiovascular events had them at sites of non-calcified lesions, based on a recent study in an atherosclerosis journal.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000045",
+        "evidence_quote": "fifty percent of patients that had that had events",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about how often cardiac events occur at non-calcified lesions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000043",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "virtually"
+        ],
+        "claim_text": "Virtually every cancer results from a somatic mutation rather than a germline mutation.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000051",
+        "evidence_quote": "virtually every cancer is a result of a somatic mutation, not a germline mutation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about the genetic basis of cancer causation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000051",
+        "topic_ids": [
+          "topic:cancer",
+          "topic:genetics_inheritance"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think",
+          "probably"
+        ],
+        "claim_text": "GRAIL's liquid biopsy technology looks mostly at RNA and DNA to detect cancer.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000047",
+        "evidence_quote": "I think GRAIL is probably looking mostly at RNA and DNA",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about the biomarker basis of GRAIL's liquid biopsy test.",
+        "relevance": "substantive",
+        "start_unit_id": "u000047",
+        "topic_ids": [
+          "topic:cancer"
+        ]
+      }
+    ],
+    "window_id": "episode_181805_window_0001"
+  },
+  "stored_at": "2026-09-09T19:40:19.359424+00:00"
+}

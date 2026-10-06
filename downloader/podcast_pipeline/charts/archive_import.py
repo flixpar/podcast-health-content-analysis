@@ -5,9 +5,9 @@ Input is the output of ``analysis/chart_archive/parse.py``:
 ``chart_rows_cc.parquet`` (Common Crawl), one row per (capture, rank).
 
 Each (source, chart id, UTC capture date) becomes one ``chart_snapshots`` row:
-Chartable paginates and some charts were captured several times a day, so
-captures from the same day are merged, and where two captures give the same
-rank the earliest capture's row is kept.
+The archive selector chooses one coherent capture or nearby Chartable page
+set before ranks are imported; unrelated same-day captures never form a hybrid
+chart. This is the same policy used by archive summaries and population scoring.
 
 The import is idempotent and all-or-nothing: one transaction deletes every
 non-live snapshot (and its entries) and inserts the archive again. Live
@@ -18,6 +18,8 @@ Snapshot ids are therefore not stable across re-imports.
 
 from __future__ import annotations
 
+import importlib.util
+import json
 import logging
 import sqlite3
 import time
@@ -49,9 +51,6 @@ FULL_TOP100_MIN = 95
 DEEP_CUT, SHALLOW_CUT = 50, 24
 FLAGSHIP_SERIES = {"podbay": DEEP_CUT, "chartable_itunes": DEEP_CUT,
                    "apple_charts_page": SHALLOW_CUT}
-# What the research reported (data/chart-archive/parsed/population/summary.json).
-RESEARCH_TRUSTED_DAYS = {"total": 941, "podbay": 361, "chartable_itunes": 121,
-                         "apple_charts_page": 459}
 
 ORIGINS = {"wayback": "wayback", "commoncrawl": "common_crawl"}
 APPLE_ID_SOURCES = {"podbay", "apple_charts_page", "itunes_rss"}
@@ -75,7 +74,12 @@ def load_rows(archive_dir: Path):
         files.append(cc)
     else:
         logger.warning(f"{cc} not found; importing Wayback captures only")
-    frames = [pd.read_parquet(f, columns=COLUMNS) for f in files]
+    frames = []
+    for file in files:
+        frame = pd.read_parquet(file)
+        # Older exports may omit page metadata; keep it when available.
+        extra = [name for name in ("page", "slug") if name in frame]
+        frames.append(frame[COLUMNS + extra])
     df = pd.concat(frames, ignore_index=True)
     logger.info(f"Read {len(df):,} rows from {', '.join(f.name for f in files)}")
     return df
@@ -111,17 +115,25 @@ def build(df):
     import pandas as pd
 
     df = df.copy()
-    df["captured_on"] = df["captured_at"].str[:10]
-    if not df["captured_at"].str.endswith("+00:00").all():
-        # parse.py writes UTC; anything else would put captures on the wrong day
-        stamps = pd.to_datetime(df["captured_at"], utc=True, format="ISO8601")
-        df["captured_on"] = stamps.dt.strftime("%Y-%m-%d")
-        df["captured_at"] = stamps.dt.strftime("%Y-%m-%dT%H:%M:%S+00:00")
-    df["order"] = range(len(df))
+    # File-based loading works from downloader/ and does not require an installed
+    # analysis package. The selector remains owned by the archive implementation.
+    path = Path(__file__).resolve().parents[3] / "analysis/chart_archive/snapshots.py"
+    spec = importlib.util.spec_from_file_location("archive_daily_snapshots", path)
+    selector = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(selector)
+    page_pattern = r"(?:^|[?&_])page=(\d+)"
+    slug_page = df.get("slug", pd.Series(index=df.index, dtype="string")).astype(
+        "string").str.extract(page_pattern, expand=False)
+    path_page = df["path"].astype("string").str.extract(page_pattern, expand=False)
+    derived_page = slug_page.fillna(path_page)
+    df["page"] = df.get("page", pd.Series(index=df.index, dtype=object)).fillna(
+        derived_page).fillna(1).astype(int)
+    df = selector.select_daily(df, keys=["snap_source", "chart_id"])
+    df["captured_at"] = pd.to_datetime(df["captured_at"], utc=True, format="ISO8601")
+    df["captured_on"] = df["captured_at"].dt.strftime("%Y-%m-%d")
+    df["captured_at"] = df["captured_at"].dt.strftime("%Y-%m-%dT%H:%M:%S+00:00")
     key = ["snap_source", "chart_id", "captured_on"]
-    df = df.sort_values(key + ["captured_at", "path", "order"], kind="stable")
-    # one row per rank per day: the earliest capture wins
-    df = df.drop_duplicates(key + ["rank"], keep="first")
+    df = df.sort_values(key + ["captured_at", "page", "path"], kind="stable")
 
     first = df.drop_duplicates(key, keep="first").set_index(key)
     by_rank = df.sort_values(key + ["rank"], kind="stable")
@@ -167,8 +179,8 @@ def run(config: Config, conn: sqlite3.Connection, archive_dir: Path | None = Non
     logger.info(f"Imported {len(snapshot_ids):,} snapshots / {n_entries:,} entries "
                 f"in {elapsed:.0f}s")
 
-    verification = verify_flagship(conn)
-    if not verification["matches_research"]:
+    verification = verify_flagship(conn, archive_dir)
+    if verification["matches_research"] is False:
         logger.warning(f"Flagship trusted days differ from the research: {verification}")
     return {
         "archive_dir": str(archive_dir),
@@ -305,9 +317,37 @@ def trusted_flagship_days(conn: sqlite3.Connection) -> list[tuple[str, str]]:
     return sorted((day, source) for day, (_, source) in best.items())
 
 
-def verify_flagship(conn: sqlite3.Connection) -> dict:
+def verify_flagship(conn: sqlite3.Connection, archive_dir: Path | None = None) -> dict:
     days = trusted_flagship_days(conn)
     counts = Counter(source for _, source in days)
     got = {"total": len(days), **{s: counts.get(s, 0) for s in FLAGSHIP_SERIES}}
-    return {"trusted_days": got, "research": RESEARCH_TRUSTED_DAYS,
-            "matches_research": got == RESEARCH_TRUSTED_DAYS}
+    expected, summary_path, unavailable = None, None, "archive directory not provided"
+    if archive_dir is not None:
+        summary_path = Path(archive_dir) / "parsed/population/summary.json"
+        if not summary_path.exists():
+            unavailable = "regenerate archive population summary to compare trusted days"
+        else:
+            parsed = summary_path.parents[1]
+            inputs = [parsed / name for name in ("chart_rows.parquet", "chart_rows_cc.parquet")
+                      if (parsed / name).exists()]
+            try:
+                summary = json.loads(summary_path.read_text())
+                rule = summary["rule"]
+                if rule["deep_cut"] != DEEP_CUT or rule["shallow_cut"] != SHALLOW_CUT:
+                    unavailable = "population summary uses a different depth policy"
+                elif any(file.stat().st_mtime_ns > summary_path.stat().st_mtime_ns
+                         for file in inputs):
+                    unavailable = "population summary predates parsed inputs; regenerate it"
+                else:
+                    series = {"podbay": "apple/podbay", "chartable_itunes": "apple/chartable",
+                              "apple_charts_page": "apple/charts_page"}
+                    expected = {"total": int(summary["snapshot_days"]),
+                                **{source: int(summary["days_by_series"].get(name, 0))
+                                   for source, name in series.items()}}
+                    unavailable = None
+            except (AttributeError, KeyError, OSError, TypeError, ValueError):
+                unavailable = "population summary is invalid or incomplete; regenerate it"
+    return {"trusted_days": got, "research": expected,
+            "research_path": str(summary_path) if summary_path is not None else None,
+            "comparison_unavailable": unavailable,
+            "matches_research": got == expected if expected is not None else None}

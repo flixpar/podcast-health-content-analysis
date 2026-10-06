@@ -32,6 +32,7 @@ TARGETS = {
 }
 
 FIELDS = "timestamp,original,urlkey,mimetype,statuscode,digest,length"
+INDEX_POLICY = "all-capture-timestamps-v1"
 
 
 def valid_index(body: str) -> bool:
@@ -49,7 +50,7 @@ def cdx(prefix: str, attempts: int = 6) -> str | None:
     url = (
         "https://web.archive.org/cdx/search/cdx"
         f"?url={prefix}&matchType=prefix&fl={FIELDS}"
-        "&filter=statuscode:200&collapse=digest&limit=400000"
+        "&filter=statuscode:200&limit=400000"
     )
     delay = 10
     for attempt in range(1, attempts + 1):
@@ -72,8 +73,10 @@ def main() -> int:
     failed = []
     for name, prefix in TARGETS.items():
         out = INDEX_DIR / f"{name}.cdx"
+        policy = INDEX_DIR / f"{name}.policy.json"
         cached = out.read_text() if out.exists() else ""
-        if valid_index(cached):
+        if (policy.exists() and policy.read_text() == json.dumps(INDEX_POLICY)
+                and valid_index(cached)):
             summary[name] = sum(bool(line.strip()) for line in cached.splitlines())
             print(f"{name}: cached ({summary[name]} rows)", flush=True)
             continue
@@ -87,6 +90,7 @@ def main() -> int:
         tmp = out.with_suffix(".cdx.tmp")
         tmp.write_text(body)
         tmp.replace(out)
+        policy.write_text(json.dumps(INDEX_POLICY))
         rows = len([ln for ln in body.splitlines() if ln.strip()])
         summary[name] = rows
         print(f"{name}: {rows} captures", flush=True)

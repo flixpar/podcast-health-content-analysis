@@ -58,8 +58,9 @@ receiving invented timestamps.
 
 ### 2. Label independent dimensions and extract claims
 
-`label` submits eight windows per request by default to an OpenAI-compatible
-endpoint. It requests strict JSON Schema output. Each
+`label` submits one window per request to an OpenAI-compatible endpoint, and
+the response schema is a single result object for that window. It requests
+strict JSON Schema output. Each
 label detection must contain one axis only and use the narrowest accurate span,
 so a brief “a study shows” phrase does not inherit the boundaries of a long
 sleep discussion.
@@ -102,21 +103,37 @@ media, personal care, other) and a `mention_role` (`advertised`,
 containing the name as transcribed. One continuous stretch naming a product is
 one mention, so a sponsor read is one row however often it repeats the name.
 
-The client rejects omitted windows, unknown or mixed-axis labels, reversed or
-out-of-window spans, duplicate annotations, non-verbatim quotes, empty required
-strings, truncated or incomplete responses, and malformed JSON. Every rejection carries a `kind`, and
+The client rejects a mismatched `window_id`, unknown or mixed-axis labels,
+reversed or out-of-window spans, duplicate annotations, non-verbatim quotes,
+empty required strings, truncated or incomplete responses, and malformed JSON.
+Every rejection carries a `kind`, and
 `label_manifest.json` reports `unresolved_windows_by_kind` so a pilot can tell a
 prompt problem from a transport problem without reading a thousand messages. A
 pilot should watch `certainty_markers_mismatch` in particular: it is the one
 rejection that measures whether the model can ground the certainty coding
 rather than assert it.
 
-Validation rejects a whole response, so a batch that fails is retried one window
-at a time. Without that, a single unlabelable window would keep the rest of its
-batch permanently unresolved and the next run would re-batch them together and
-fail identically. The manifest reports `batches_isolated_this_invocation` and
-`windows_recovered_by_isolation`. Failed batches are durable and retryable; they
+Validation rejects a whole response, which is why a request carries one window
+rather than several. The ~11,500-token instruction prefix is prompt-cached by
+the server, so packing windows together saved little, while one bad annotation
+or one truncation threw away every window in the request. `verify` likewise
+sends one candidate per request. Failed windows are durable and retryable; they
 never become implicit negatives.
+
+Even one window per request is expensive to reject: with thinking on, a retry
+repeats a full reasoning pass of 25-45k tokens, and on the local
+DeepSeek-V4-Flash server about half of all output tokens went to responses
+rejected for a single bad annotation -- most often a quote that was verbatim in
+the window but sat a unit or two outside its own span. `label --validation`
+therefore has two modes. `strict`, the default, is the behaviour above.
+`lenient` still rejects a response with the wrong shape or `window_id`, but
+judges each annotation on its own: a quote or certainty marker found elsewhere
+in the window widens the span to cover it, an annotation that cannot be repaired
+unambiguously (a paraphrased quote, an invalid span or field, a duplicate) is
+dropped, and the per-window caps truncate. The stored result has the same shape
+in both modes; what lenient repaired and dropped is counted beside it, in the
+attempts log and the run manifests, so its acceptance rate is never read
+without that cost. The mode is part of the run fingerprint.
 
 ### 3. Merge overlap duplicates without collapsing axes
 
@@ -292,15 +309,13 @@ and `label_manifest.json` records the endpoint list under `endpoints`.
 - Structured outputs need no extra flags. The response schema uses `enum`,
   `pattern`, `minItems`/`maxItems` and numeric bounds, all of which the default
   `xgrammar` backend compiles.
-- `--max-model-len` has to cover one whole request, and this is the constraint
-  that decides the batch size. A real 900-word window measures about 2,275 input
-  tokens, so a batch of eight plus the ~11,500-token instruction prefix is
-  roughly 29,700 tokens. At `--max-model-len 65536` that leaves under 36,000 for
-  output, which thinking alone can exhaust; the server then rejects the request
-  with HTTP 400 rather than truncating. Raising the context is what buys back
-  batch size, and batch size is what amortises the per-request reasoning cost.
-  Leave automatic prefix caching on so the instruction prefix is not recomputed
-  for every batch, and confirm the hit rate in the server metrics before scaling.
+- `--max-model-len` has to cover one whole request. A real 900-word window
+  measures about 2,275 input tokens, so one window plus the ~11,500-token
+  instruction prefix is roughly 13,800 tokens. At `--max-model-len 65536` that
+  leaves about 51,000 for output, including reasoning; a budget above that is
+  rejected by the server with HTTP 400 rather than truncated. Leave automatic
+  prefix caching on so the instruction prefix is not recomputed for every
+  request, and confirm the hit rate in the server metrics before scaling.
 - Tool calling is unused, so `--tool-call-parser` and `--enable-auto-tool-choice`
   are unnecessary.
 - Throughput flags -- tensor parallelism, fp8 KV cache, and the speculative
@@ -388,10 +403,10 @@ reasoning_effort = "none"
 max_output_tokens = 12000
 
 [label]
-batch_size = 8
+concurrency = 128
 
 [verify]
-batch_size = 4
+concurrency = 8
 ```
 
 `[paths]` and `[model]` are shared; a `[label]` or `[verify]` key overrides them
@@ -496,7 +511,7 @@ SMOKE=/tmp/topic-labeling-smoke
 
 Inspect omission/error rates, label frequency, span boundaries, claim-screening
 recall, and audio-aligned examples before a full run. Use a fresh output
-directory whenever the model, taxonomy, prompt, windowing, batch size, reasoning
+directory whenever the model, taxonomy, prompt, windowing, reasoning
 effort, or temperature changes.
 
 For the full corpus, the shorter default-path form is:
@@ -632,7 +647,7 @@ the keyword-list definitions were replaced with written ones, which makes prefix
 cache hits matter more, not less. Confirm prefix
 cache hits in server metrics before scaling. A several-hundred-episode pilot
 should measure input/output tokens, windows/hour, latency, retries, malformed or
-omitted results, GPU utilization, label prevalence, and candidate yield.
+truncated results, GPU utilization, label prevalence, and candidate yield.
 
 ## Validation and analysis rules
 

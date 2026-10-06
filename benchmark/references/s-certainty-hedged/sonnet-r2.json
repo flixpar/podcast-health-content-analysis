@@ -1,0 +1,246 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "s-certainty-hedged",
+  "provenance": {
+    "bundle": "bundle_003",
+    "ingested_at": "2026-09-09T19:55:08.565226+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-sonnet-r2-synthetic-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "probiotics probably help reduce bloating for a lot of people and i think it tends to have to do with balancing out the bacteria in your gut",
+        "label_ids": [
+          "topic:gut_health_microbiome",
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Speaker describes ongoing daily bloating, starting a probiotic two weeks ago, believing it is helping by balancing gut bacteria, and casually picking a shelf-stable brand."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000047",
+        "evidence_quote": "a coworker mentioned she takes something similar and i just grabbed one that seemed reasonable",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000041",
+        "summary": "Speakers casually discuss picking a probiotic brand based on a coworker's mention, without discussing efficacy."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000046",
+        "evidence_quote": "i think ill just keep taking it for another few weeks and see how i feel",
+        "label_ids": [
+          "topic:gut_health_microbiome",
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000046",
+        "summary": "Speaker plans to keep taking the probiotic a few more weeks and see how they feel."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "it tends to have to do with balancing out the bacteria in your gut",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Speaker explains probiotics' presumed mechanism as balancing the bacteria in the gut."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "it seems to be making a difference for me so far",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000026",
+        "summary": "Speaker cites their own experience of it making a difference so far as support that the probiotic is working."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "probably",
+          "tends to"
+        ],
+        "claim_text": "Probiotics probably help reduce bloating for a lot of people.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "probiotics probably help reduce bloating for a lot of people",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Whether probiotics generally reduce bloating is a checkable claim about supplement efficacy.",
+        "start_unit_id": "u000024",
+        "topic_ids": [
+          "topic:gut_health_microbiome",
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "tends to"
+        ],
+        "claim_text": "Probiotics work by balancing the bacteria in the gut.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "it tends to have to do with balancing out the bacteria in your gut",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "The mechanistic claim that probiotics work by balancing gut bacteria is a checkable physiological proposition.",
+        "start_unit_id": "u000024",
+        "topic_ids": [
+          "topic:gut_health_microbiome"
+        ]
+      }
+    ],
+    "window_id": "synthetic_certainty_hedged_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000037",
+        "evidence_quote": "probiotics probably help reduce bloating for a lot of people and i think it tends to have to do with balancing out the bacteria in your gut",
+        "label_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:gut_health_microbiome"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Speaker describes ongoing daily bloating, starting a probiotic two weeks ago, believing it is helping by balancing gut bacteria, and casually picking a shelf-stable brand."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000047",
+        "evidence_quote": "a coworker mentioned she takes something similar and i just grabbed one that seemed reasonable",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000041",
+        "summary": "Speakers casually discuss picking a probiotic brand based on a coworker's mention, without discussing efficacy."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000046",
+        "evidence_quote": "i think ill just keep taking it for another few weeks and see how i feel",
+        "label_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:gut_health_microbiome"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000046",
+        "summary": "Speaker plans to keep taking the probiotic a few more weeks and see how they feel."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "it tends to have to do with balancing out the bacteria in your gut",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Speaker explains probiotics' presumed mechanism as balancing the bacteria in the gut."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000026",
+        "evidence_quote": "it seems to be making a difference for me so far",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000026",
+        "summary": "Speaker cites their own experience of it making a difference so far as support that the probiotic is working."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "probably",
+          "tends to"
+        ],
+        "claim_text": "Probiotics probably help reduce bloating for a lot of people.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "probiotics probably help reduce bloating for a lot of people",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Whether probiotics generally reduce bloating is a checkable claim about supplement efficacy.",
+        "relevance": null,
+        "start_unit_id": "u000024",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "tends to"
+        ],
+        "claim_text": "Probiotics work by balancing the bacteria in the gut.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "it tends to have to do with balancing out the bacteria in your gut",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "The mechanistic claim that probiotics work by balancing gut bacteria is a checkable physiological proposition.",
+        "relevance": null,
+        "start_unit_id": "u000024",
+        "topic_ids": [
+          "topic:gut_health_microbiome"
+        ]
+      }
+    ],
+    "window_id": "synthetic_certainty_hedged_window_0001"
+  },
+  "stored_at": "2026-09-09T19:55:08.565244+00:00"
+}

@@ -381,7 +381,17 @@ def parse_itunes_rss(path: Path, slug: str) -> list[dict]:
             feed = json.loads(text).get("feed", {})
         except json.JSONDecodeError:
             return []
-        for i, e in enumerate(feed.get("entry", []) or [], start=1):
+        if "results" in feed:
+            for i, e in enumerate(feed.get("results") or [], start=1):
+                rows.append({
+                    "name": e.get("name"), "publisher": e.get("artistName"),
+                    "entity_id": str(e["id"]) if e.get("id") else _apple_id(e.get("url")),
+                    "entity_url": e.get("url"), "rank": i,
+                })
+        entries = feed.get("entry") or []
+        if isinstance(entries, dict):
+            entries = [entries]
+        for i, e in enumerate(entries if "results" not in feed else [], start=1):
             rows.append({
                 "name": (e.get("im:name") or {}).get("label"),
                 "publisher": (e.get("im:artist") or {}).get("label"),

@@ -1,13 +1,17 @@
 # Deeper US Apple chart data for 2024–2026: scouting report
 
-**Collected 2026-09-04.** Follow-up to `docs/chart-archive-findings.md`, which left
+**Collected 2026-09-04.** This is a historical probe record: endpoint behavior,
+access, and archive availability were checked on that date. Operating
+instructions live in the [archive guide](../analysis/chart_archive/README.md).
+
+Follow-up to [the archive findings](chart-archive-findings.md), which left
 one hole: from 2024-08 our Apple series is dense (464 days, 1-day median gap) but
 only **24 ranks deep**, so ranks 25–100 are invisible for the most recent two
 years and 199 shows that held a top-24 slot in 2025–26 are outside the population.
 
-**Headline: the prospective problem is solved.** Apple still serves its old
-public chart feeds. `rss.marketingtools.apple.com` gives a **top 100** and
-`itunes.apple.com/us/rss/toppodcasts` gives a **top 200**, both live today, both
+**Headline: live capture can close the prospective gap.** On the probe date,
+Apple served its public chart feeds. `rss.marketingtools.apple.com` gave a
+**top 100** and `itunes.apple.com/us/rss/toppodcasts` a **top 200**, both
 free, both unauthenticated, and both — verified below — the *same* chart in the
 *same* order as `podcasts.apple.com/us/charts`.
 
@@ -284,9 +288,9 @@ next step.
 
 ---
 
-## 7. Recommendations
+## 7. Recommendations from the September investigation
 
-### Prospective — start tomorrow, ~15 lines of code
+### Prospective capture
 
 Capture **both** Apple feeds daily, so losing one does not lose the series:
 
@@ -298,8 +302,9 @@ https://itunes.apple.com/us/rss/toppodcasts/limit=200/json                      
 - **Depth 100 alone already closes the gap**, because the historical population
   is defined on the top 100. Depth 200 is a bonus, and comes with the robots
   caveat in §4 — your call whether to take it.
-- Store the feed's own `updated` timestamp alongside the fetch time; use it to
-  dedupe (the feed refreshes on its own cadence, not on ours).
+- Store the feed's own `updated` timestamp alongside each fetch time. Repeated
+  rankings still provide dates for exposure weighting, so retain every capture
+  timestamp even when the payload is unchanged.
 - Both give **adamIds directly**, so rows join to the Podbay-era population with
   no title matching.
 - Add the genre feeds if genre charts matter:

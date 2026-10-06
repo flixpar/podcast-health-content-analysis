@@ -1346,6 +1346,11 @@ dependencies = [
 ]
 
 [package.dev-dependencies]
+analysis = [
+    { name = "pandas", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "pyarrow", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "scipy", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+]
 dev = [
     { name = "pytest", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
@@ -1367,6 +1372,11 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
+analysis = [
+    { name = "pandas", specifier = ">=2.2" },
+    { name = "pyarrow", specifier = ">=17" },
+    { name = "scipy", specifier = ">=1.14" },
+]
 dev = [{ name = "pytest", specifier = ">=8" }]
 
 [[package]]

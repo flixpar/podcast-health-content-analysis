@@ -1,0 +1,137 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c74574w0001",
+  "provenance": {
+    "bundle": "bundle_011",
+    "ingested_at": "2026-09-09T19:40:19.133927+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000051",
+        "evidence_quote": "This episode is sponsored by BetterHelp.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000040",
+        "summary": "A sponsor read for the therapy service BetterHelp touting its ratings and ease of getting matched with a therapist."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000051",
+        "evidence_quote": "Visit BetterHelp.com/Dax.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000040",
+        "summary": "A paid sponsor read for BetterHelp with a tracked signup link."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000051",
+        "evidence_quote": "This episode is sponsored by BetterHelp.",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000040"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp has an average live therapy session rating of 4.9 out of 5, based on over 1.7 million client session reviews.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000042",
+        "evidence_quote": "BetterHelp has an average live therapy session rating of 4.9 out of 5, based on over 1.7 million client session reviews.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A specific numeric rating and review count for a health service that could be verified against BetterHelp's actual data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000042",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_74574_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000051",
+        "evidence_quote": "This episode is sponsored by BetterHelp",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000040",
+        "summary": "A sponsor read for the therapy service BetterHelp touting its ratings and ease of getting matched with a therapist."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000051",
+        "evidence_quote": "Visit BetterHelp.com/Dax",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000040",
+        "summary": "A paid sponsor read for BetterHelp with a tracked signup link."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000051",
+        "evidence_quote": "This episode is sponsored by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000040"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp has an average live therapy session rating of 4.9 out of 5, based on over 1.7 million client session reviews.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000042",
+        "evidence_quote": "BetterHelp has an average live therapy session rating of 4.9 out of 5, based on over 1.7 million client session reviews",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A specific numeric rating and review count for a health service that could be verified against BetterHelp's actual data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000042",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_74574_window_0001"
+  },
+  "stored_at": "2026-09-09T19:40:19.133943+00:00"
+}

@@ -1,0 +1,603 @@
+{
+  "annotator_id": "opus-r2",
+  "benchmark_version": "v1",
+  "item_id": "t-c380025w0001--add_hedge",
+  "provenance": {
+    "bundle": "bundle_003",
+    "ingested_at": "2026-09-12T22:24:39.181418+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r2-contrast-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "When you're in these types of delusion, every billboard, every Bible verse, license plate, song, everything can become a personal message for you.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000001",
+        "summary": "Cold open describing how delusional belief turns doubt and contradiction into confirmation."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000010",
+        "evidence_quote": "Your brain is wired for deception",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000010",
+        "summary": "Brain-wiring vocabulary used to explain susceptibility to deception."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000033",
+        "evidence_quote": "today's episode is all about understanding delusion and psychosis",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000013",
+        "summary": "Episode framing: what delusion and psychosis are, and how they bear on the Lindsay Clancy trial."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "And I want to be clear: these things are not interchangeable.",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000016",
+        "summary": "The host corrects the popular equating of delusion, conspiracy belief, intrusive thoughts and psychosis."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000043",
+        "evidence_quote": "A delusion involves a belief that is.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "summary": "Everyday inaccurate beliefs distinguished from delusion, with a clinical definition of delusion."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000041",
+        "evidence_quote": "This is the first misconception: people believe things every single day that are inaccurate.",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "summary": "A named misconception about believing inaccurate things is corrected."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "reality testing to somebody who is in delusion will actually make them more angry or more emotionally.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000044",
+        "summary": "Reality testing, gaslighting accusations, narcissistic abuse cycles and gray rocking."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "the person who believes they're being gaslit is the one gaslighting the person who is desperately trying to ask the right questions",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000049",
+        "summary": "The host pushes back on social media labelling reality-testing questions as narcissism and gaslighting."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000013",
+        "evidence_quote": "Welcome back to season three of Decoded.",
+        "mention_role": "own_product",
+        "product_name": "Decoded",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000013"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "can become"
+        ],
+        "claim_text": "In this type of delusion, everyday things such as billboards, Bible verses, license plates and songs can become personal messages for the person.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000001",
+        "evidence_quote": "every billboard, every Bible verse, license plate, song, everything can become a personal message for you",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A description of how a psychiatric symptom presents that can be checked against clinical descriptions of delusions of reference.",
+        "relevance": "substantive",
+        "start_unit_id": "u000001",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Every confirmation",
+          "every contradiction"
+        ],
+        "claim_text": "In a delusional closed loop, both confirming evidence and contradicting evidence end up confirming the belief.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "Every confirmation now confirms the belief, and even worse, now every contradiction also confirms the belief.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A mechanistic claim about how delusional belief processes evidence, checkable against psychological research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000008",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The human brain is wired for deception.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000010",
+        "evidence_quote": "Your brain is wired for deception",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A general claim about brain function offered as fact that can be checked against neuroscience.",
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "not necessarily",
+          "could"
+        ],
+        "claim_text": "Repeatedly and in a sustained manner misreading other people's intentions could eventually lead to psychosis.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "That is not necessarily psychosis, although repeatedly in a sustained manner, that could eventually lead to psychosis.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "A causal claim about what leads to psychosis that could change how a listener interprets their own thinking.",
+        "relevance": "substantive",
+        "start_unit_id": "u000040",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Everyday misinterpretations of other people are building blocks moving toward delusion.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000041",
+        "evidence_quote": "These are probably building blocks moving toward delusion.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A hedged causal claim linking ordinary cognitive errors to delusion that can be checked against psychiatric evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000041",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A delusion is a belief held with a level of conviction that is resistant to contradictory evidence and disconnected from consensual reality.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000043",
+        "evidence_quote": "Held with a level of conviction that is resistant to contradictory evidence and is disconnected from consensual reality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A definitional claim about a psychiatric term that can be checked against diagnostic criteria.",
+        "relevance": "substantive",
+        "start_unit_id": "u000042",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "In so many"
+        ],
+        "claim_text": "In many cases the person who believes they are being gaslit is the one doing the gaslighting.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000051",
+        "evidence_quote": "Cases, the person who believes they're being gaslit is the one gaslighting the person who is desperately trying to ask the right questions",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A generalisation about how often a pattern occurs that would change how listeners interpret their relationships.",
+        "relevance": "substantive",
+        "start_unit_id": "u000050",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Reality testing someone who is in delusion will make them more angry or more emotionally aroused.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000054",
+        "evidence_quote": "reality testing to somebody who is in delusion will actually make them more angry or more emotionally.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A causal claim about how a person in delusion reacts, which listeners would act on.",
+        "relevance": "substantive",
+        "start_unit_id": "u000054",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "anything that you do will only"
+        ],
+        "claim_text": "Gray rocking, staying neutral rather than trying to pull the person out of the delusion or correct the record, is recommended for dealing with someone deep in delusion or a narcissistic abuse cycle, because anything else only escalates them.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000056",
+        "evidence_quote": "this is why they suggest gray rocking, which is to kind of just be so neutral",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A recommended handling strategy with a stated causal consequence that can be checked against clinical guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000055",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_380025_window_0001_add_hedge"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "When you're in these types of delusion, every billboard, every Bible verse, license plate, song, everything can become a personal message for you",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000001",
+        "summary": "Cold open describing how delusional belief turns doubt and contradiction into confirmation."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000010",
+        "evidence_quote": "Your brain is wired for deception",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000010",
+        "summary": "Brain-wiring vocabulary used to explain susceptibility to deception."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000033",
+        "evidence_quote": "today's episode is all about understanding delusion and psychosis",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000013",
+        "summary": "Episode framing: what delusion and psychosis are, and how they bear on the Lindsay Clancy trial."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "And I want to be clear: these things are not interchangeable",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000016",
+        "summary": "The host corrects the popular equating of delusion, conspiracy belief, intrusive thoughts and psychosis."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000043",
+        "evidence_quote": "A delusion involves a belief that is",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "summary": "Everyday inaccurate beliefs distinguished from delusion, with a clinical definition of delusion."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000041",
+        "evidence_quote": "This is the first misconception: people believe things every single day that are inaccurate",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "summary": "A named misconception about believing inaccurate things is corrected."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "reality testing to somebody who is in delusion will actually make them more angry or more emotionally",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000044",
+        "summary": "Reality testing, gaslighting accusations, narcissistic abuse cycles and gray rocking."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000052",
+        "evidence_quote": "the person who believes they're being gaslit is the one gaslighting the person who is desperately trying to ask the right questions",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000049",
+        "summary": "The host pushes back on social media labelling reality-testing questions as narcissism and gaslighting."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000013",
+        "evidence_quote": "Welcome back to season three of Decoded",
+        "mention_role": "own_product",
+        "product_name": "Decoded",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000013"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "can become"
+        ],
+        "claim_text": "In this type of delusion, everyday things such as billboards, Bible verses, license plates and songs can become personal messages for the person.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000001",
+        "evidence_quote": "every billboard, every Bible verse, license plate, song, everything can become a personal message for you",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A description of how a psychiatric symptom presents that can be checked against clinical descriptions of delusions of reference.",
+        "relevance": "substantive",
+        "start_unit_id": "u000001",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Every confirmation",
+          "every contradiction"
+        ],
+        "claim_text": "In a delusional closed loop, both confirming evidence and contradicting evidence end up confirming the belief.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000009",
+        "evidence_quote": "Every confirmation now confirms the belief, and even worse, now every contradiction also confirms the belief",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A mechanistic claim about how delusional belief processes evidence, checkable against psychological research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000008",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The human brain is wired for deception.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000010",
+        "evidence_quote": "Your brain is wired for deception",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A general claim about brain function offered as fact that can be checked against neuroscience.",
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "not necessarily",
+          "could"
+        ],
+        "claim_text": "Repeatedly and in a sustained manner misreading other people's intentions could eventually lead to psychosis.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000040",
+        "evidence_quote": "That is not necessarily psychosis, although repeatedly in a sustained manner, that could eventually lead to psychosis",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "A causal claim about what leads to psychosis that could change how a listener interprets their own thinking.",
+        "relevance": "substantive",
+        "start_unit_id": "u000040",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "probably"
+        ],
+        "claim_text": "Everyday misinterpretations of other people are building blocks moving toward delusion.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000041",
+        "evidence_quote": "These are probably building blocks moving toward delusion",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A hedged causal claim linking ordinary cognitive errors to delusion that can be checked against psychiatric evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000041",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A delusion is a belief held with a level of conviction that is resistant to contradictory evidence and disconnected from consensual reality.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000043",
+        "evidence_quote": "Held with a level of conviction that is resistant to contradictory evidence and is disconnected from consensual reality",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A definitional claim about a psychiatric term that can be checked against diagnostic criteria.",
+        "relevance": "substantive",
+        "start_unit_id": "u000042",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "In so many"
+        ],
+        "claim_text": "In many cases the person who believes they are being gaslit is the one doing the gaslighting.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000051",
+        "evidence_quote": "Cases, the person who believes they're being gaslit is the one gaslighting the person who is desperately trying to ask the right questions",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A generalisation about how often a pattern occurs that would change how listeners interpret their relationships.",
+        "relevance": "substantive",
+        "start_unit_id": "u000050",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Reality testing someone who is in delusion will make them more angry or more emotionally aroused.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000054",
+        "evidence_quote": "reality testing to somebody who is in delusion will actually make them more angry or more emotionally",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A causal claim about how a person in delusion reacts, which listeners would act on.",
+        "relevance": "substantive",
+        "start_unit_id": "u000054",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "anything that you do will only"
+        ],
+        "claim_text": "Gray rocking, staying neutral rather than trying to pull the person out of the delusion or correct the record, is recommended for dealing with someone deep in delusion or a narcissistic abuse cycle, because anything else only escalates them.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000056",
+        "evidence_quote": "this is why they suggest gray rocking, which is to kind of just be so neutral",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A recommended handling strategy with a stated causal consequence that can be checked against clinical guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000055",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_380025_window_0001_add_hedge"
+  },
+  "stored_at": "2026-09-12T22:24:39.181440+00:00"
+}

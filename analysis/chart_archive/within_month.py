@@ -11,9 +11,16 @@ from __future__ import annotations
 
 import itertools
 import json
+import sys
 from pathlib import Path
 
 import pandas as pd
+
+if __package__:
+    from .snapshots import load_canonical, select_daily
+else:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from snapshots import load_canonical, select_daily
 
 ROOT = Path(__file__).resolve().parents[2] / "data" / "chart-archive"
 PARSED = ROOT / "parsed"
@@ -42,7 +49,7 @@ def series_frames(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
 
 def daily_maps(sub: pd.DataFrame, depth: int) -> dict[pd.Timestamp, dict[str, int]]:
     """date -> {entity: rank}, keeping the deepest capture of each day."""
-    sub = sub.dropna(subset=["entity_id"])
+    sub = select_daily(sub, keys=["source"]).dropna(subset=["entity_id"])
     out: dict[pd.Timestamp, dict[str, int]] = {}
     for date, g in sub.groupby("date"):
         g = g[g["rank"] <= depth].sort_values("rank").drop_duplicates("entity_id")
@@ -112,8 +119,7 @@ def month_coverage(maps: dict, depth: int, min_days: int = 4) -> pd.DataFrame:
 
 def main() -> int:
     SUMMARY.mkdir(parents=True, exist_ok=True)
-    df = pd.concat([pd.read_parquet(p) for p in sorted(PARSED.glob("chart_rows*.parquet"))],
-                   ignore_index=True)
+    df = load_canonical(PARSED)
     df["captured_at"] = pd.to_datetime(df["captured_at"], utc=True)
     df["date"] = df["captured_at"].dt.date
 

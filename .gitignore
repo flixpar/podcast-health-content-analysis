@@ -4,6 +4,7 @@
 
 results/
 outputs/
+output/
 data
 /local/
 
@@ -220,3 +221,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+##########################################
+# Benchmark
+##########################################
+
+# Candidate runs and the candidate pool are regenerable; items, references,
+# gold and agreement are the benchmark and stay tracked.
+benchmark/runs/
+benchmark/pool/
+benchmark/pool-grow/

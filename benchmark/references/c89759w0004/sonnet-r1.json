@@ -1,0 +1,342 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c89759w0004",
+  "provenance": {
+    "bundle": "bundle_005",
+    "ingested_at": "2026-09-09T19:40:18.849766+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000366",
+        "evidence_quote": "the mints do contain nicotine, which is an addictive chemical",
+        "label_ids": [
+          "topic:nicotine_tobacco_stimulants"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "summary": "Sponsor read for Quit with Jones, a nicotine mint product and companion app marketed to help people quit vaping/nicotine."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000366",
+        "evidence_quote": "Visit quitwithjones.com/tost to take the free quiz, and then use code TOST to get ten dollars off your personalized.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "summary": "Paid sponsor read for Quit with Jones with a discount code."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000334",
+        "evidence_quote": "So Jones is a science-backed alternative.",
+        "label_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000334",
+        "summary": "Ad asserts that the Jones quitting product is 'science-backed'."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000384",
+        "evidence_quote": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand.",
+        "label_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:beauty_dermatology_skincare"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000367",
+        "summary": "Sponsor read for Nutrafol, a hair-growth supplement marketed for hair thinning/shedding related to menopause, postpartum, and general hair health."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000384",
+        "evidence_quote": "with Nutrafol, they're offering our listeners $10 off your first month subscription, plus free shipping",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000367",
+        "summary": "Paid sponsor read for Nutrafol including a discount and promo code."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000371",
+        "evidence_quote": "the number one dermatologist-recommended hair growth supplement brand",
+        "label_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000371",
+        "summary": "Ad asserts Nutrafol is the number-one dermatologist-recommended hair growth supplement."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000378",
+        "evidence_quote": "It's really a wonderful experience to go on. I've gone on it.",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000377",
+        "summary": "Host offers a personal testimonial of having used Nutrafol."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u000366",
+        "evidence_quote": "Today's episode is also brought to you by Quit with Jones.",
+        "mention_role": "advertised",
+        "product_name": "Jones",
+        "product_type": "medication",
+        "start_unit_id": "u000326"
+      },
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000343",
+        "evidence_quote": "you can play Quitle, connect with ten thousand more than ten thousand others who are on the same path",
+        "mention_role": "advertised",
+        "product_name": "Quitle",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000343"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000384",
+        "evidence_quote": "Today's episode is also brought to you by Nutrafol.",
+        "mention_role": "advertised",
+        "product_name": "Nutrafol",
+        "product_type": "supplement",
+        "start_unit_id": "u000367"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Using digital support while quitting nicotine increases quit rates by forty percent.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000346",
+        "evidence_quote": "digital support boosts quit rates by forty percent",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "The specific 40% improvement in quit rates attributed to digital support is a checkable statistic.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000346",
+        "topic_ids": [
+          "topic:nicotine_tobacco_stimulants"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nutrafol users, over one and a half million of them, see thicker, stronger, faster-growing hair with less shedding within three to six months.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000372",
+        "evidence_quote": "trusted by over one and a half million people who see thicker, stronger, faster-growing hair with less shedding in just three to six months",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "The specific timeframe and user count for hair-growth results are checkable marketing claims.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000372",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements",
+          "topic:beauty_dermatology_skincare"
+        ]
+      }
+    ],
+    "window_id": "episode_89759_window_0004"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000366",
+        "evidence_quote": "the mints do contain nicotine, which is an addictive chemical",
+        "label_ids": [
+          "topic:nicotine_tobacco_stimulants"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "summary": "Sponsor read for Quit with Jones, a nicotine mint product and companion app marketed to help people quit vaping/nicotine."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000366",
+        "evidence_quote": "Visit quitwithjones.com/tost to take the free quiz, and then use code TOST to get ten dollars off your personalized",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000326",
+        "summary": "Paid sponsor read for Quit with Jones with a discount code."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000334",
+        "evidence_quote": "So Jones is a science-backed alternative",
+        "label_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000334",
+        "summary": "Ad asserts that the Jones quitting product is 'science-backed'."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000384",
+        "evidence_quote": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand",
+        "label_ids": [
+          "topic:beauty_dermatology_skincare",
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000367",
+        "summary": "Sponsor read for Nutrafol, a hair-growth supplement marketed for hair thinning/shedding related to menopause, postpartum, and general hair health."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000384",
+        "evidence_quote": "with Nutrafol, they're offering our listeners $10 off your first month subscription, plus free shipping",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000367",
+        "summary": "Paid sponsor read for Nutrafol including a discount and promo code."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000371",
+        "evidence_quote": "the number one dermatologist-recommended hair growth supplement brand",
+        "label_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000371",
+        "summary": "Ad asserts Nutrafol is the number-one dermatologist-recommended hair growth supplement."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000378",
+        "evidence_quote": "It's really a wonderful experience to go on. I've gone on it",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000377",
+        "summary": "Host offers a personal testimonial of having used Nutrafol."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u000366",
+        "evidence_quote": "Today's episode is also brought to you by Quit with Jones",
+        "mention_role": "advertised",
+        "product_name": "Jones",
+        "product_type": "medication",
+        "start_unit_id": "u000326"
+      },
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000343",
+        "evidence_quote": "you can play Quitle, connect with ten thousand more than ten thousand others who are on the same path",
+        "mention_role": "advertised",
+        "product_name": "Quitle",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000343"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000384",
+        "evidence_quote": "Today's episode is also brought to you by Nutrafol",
+        "mention_role": "advertised",
+        "product_name": "Nutrafol",
+        "product_type": "supplement",
+        "start_unit_id": "u000367"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Using digital support while quitting nicotine increases quit rates by forty percent.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000346",
+        "evidence_quote": "digital support boosts quit rates by forty percent",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "The specific 40% improvement in quit rates attributed to digital support is a checkable statistic.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000346",
+        "topic_ids": [
+          "topic:nicotine_tobacco_stimulants"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Nutrafol users, over one and a half million of them, see thicker, stronger, faster-growing hair with less shedding within three to six months.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000372",
+        "evidence_quote": "trusted by over one and a half million people who see thicker, stronger, faster-growing hair with less shedding in just three to six months",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "The specific timeframe and user count for hair-growth results are checkable marketing claims.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000372",
+        "topic_ids": [
+          "topic:beauty_dermatology_skincare",
+          "topic:functional_nutrition_supplements"
+        ]
+      }
+    ],
+    "window_id": "episode_89759_window_0004"
+  },
+  "stored_at": "2026-09-09T19:40:18.849788+00:00"
+}

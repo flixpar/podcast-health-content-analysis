@@ -1,0 +1,463 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c175341w0013",
+  "provenance": {
+    "bundle": "bundle_001",
+    "ingested_at": "2026-09-12T23:30:30.892291+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001167",
+        "evidence_quote": "move your body, ground, right?",
+        "label_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001158",
+        "summary": "Speaker envisions a school day with regular nature breaks, grounding, and sky-gazing as support for children's nervous systems."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001196",
+        "evidence_quote": "an entirely nature-based school",
+        "label_ids": [
+          "topic:childrens_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001168",
+        "summary": "Speaker describes a startup nature-based school incorporating food, natural lighting, and movement, and hopes the model could scale to public schools like in LA."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001178",
+        "evidence_quote": "we've been talking about in terms of food and natural lighting and movement",
+        "label_ids": [
+          "cross_cutting:naturalness_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001177",
+        "summary": "The school's food, natural lighting, and movement practices are framed favorably as natural."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001203",
+        "evidence_quote": "those diseases from their doctor were often considered chronic or lifelong",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001200",
+        "summary": "The children's diagnosing doctors are portrayed as having wrongly written off their conditions as permanent, ahead of describing how the guest's methods reversed them."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001259",
+        "evidence_quote": "with level three or severe autism",
+        "label_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001200",
+        "summary": "Guest describes a published case report of twins diagnosed with severe autism at Walter Reed whose family used her nonprofit's diet, detox, and neurodevelopment protocol to reportedly fully reverse the diagnosis."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001208",
+        "evidence_quote": "So we just published a paper this summer in the Journal of Personalized Medicine and this was a case report of a set of twins",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001204",
+        "summary": "Guest cites a published case report in the Journal of Personalized Medicine as evidence, itself a weak single-case evidence type."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001210",
+        "evidence_quote": "who were diagnosed at Walter Reed, which is a legitimate diagnostic location",
+        "label_ids": [
+          "cross_cutting:prestige_science_invocation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001209",
+        "summary": "Walter Reed is named to establish the legitimacy of the twins' autism diagnosis."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001227",
+        "evidence_quote": "you know, kind of that ancestral, whole foods, pure ingredients, all organic, pastured",
+        "label_ids": [
+          "topic:diet_tribes_food_ideologies",
+          "topic:detox_cleanses_parasites"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001220",
+        "summary": "The family's protocol is described as an ancestral, whole-foods, organic diet overhaul plus removing household toxins like personal care and cleaning products."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001226",
+        "evidence_quote": "They took all the toxins out of the home",
+        "label_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001224",
+        "summary": "Removing personal care and cleaning products from the home is framed as removing toxins."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001244",
+        "evidence_quote": "they were dealing with putting the inflammation and the fire out",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001242",
+        "summary": "Inflammation is invoked as the mechanism preventing normal vision-system development in autism."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001247",
+        "evidence_quote": "they were dealing with the screening toxins from their body",
+        "label_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001245",
+        "summary": "Impaired motor development in autism is attributed to the body dealing with toxins."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001263",
+        "evidence_quote": "We have tons of stories, rheumatoid arthritis, life threatening, food allergies, eczema, ADHD",
+        "label_ids": [
+          "topic:childrens_health",
+          "topic:autoimmune_immune_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001260",
+        "summary": "Guest claims she has documented many more children reversing conditions like rheumatoid arthritis, food allergies, eczema and ADHD using similar methods."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "fully reversed",
+          "indistinguishable"
+        ],
+        "claim_text": "A set of twins diagnosed with level three (severe) autism at Walter Reed fully reversed their diagnosis after a two-year diet-and-detox protocol, becoming indistinguishable from their peers.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001258",
+        "evidence_quote": "this family worked really hard for two years and they have fully reversed their diagnosis in this kid and these kids, they are indistinguishable from their peers",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "This specific, checkable claim that a diet and detox protocol fully reversed a documented severe-autism diagnosis is central to the guest's treatment claims and needs verification.",
+        "relevance": "substantive",
+        "start_unit_id": "u001255",
+        "topic_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Autism results from a child's total load of stressors during development being too great, preventing normal development of systems such as vision and sensory integration.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001241",
+        "evidence_quote": "because their total load of stressors was too great during that time period",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "This causal theory attributing autism's developmental features to stressor overload is a specific, checkable etiological claim outside mainstream consensus.",
+        "relevance": "substantive",
+        "start_unit_id": "u001229",
+        "topic_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Children with conditions including rheumatoid arthritis, life-threatening food allergies, eczema, and ADHD have reversed their conditions using similar diet-and-detox protocols.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001263",
+        "evidence_quote": "We have tons of stories, rheumatoid arthritis, life threatening, food allergies, eczema, ADHD, all these kids that have reversed their condition by doing similar things",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "This broad claim that multiple serious pediatric conditions have been reversed via the same protocol is checkable and consequential for parents' treatment decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u001260",
+        "topic_ids": [
+          "topic:childrens_health",
+          "topic:autoimmune_immune_health"
+        ]
+      }
+    ],
+    "window_id": "episode_175341_window_0013"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001167",
+        "evidence_quote": "move your body, ground, right",
+        "label_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001158",
+        "summary": "Speaker envisions a school day with regular nature breaks, grounding, and sky-gazing as support for children's nervous systems."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001196",
+        "evidence_quote": "an entirely nature-based school",
+        "label_ids": [
+          "topic:childrens_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001168",
+        "summary": "Speaker describes a startup nature-based school incorporating food, natural lighting, and movement, and hopes the model could scale to public schools like in LA."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001178",
+        "evidence_quote": "we've been talking about in terms of food and natural lighting and movement",
+        "label_ids": [
+          "cross_cutting:naturalness_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001177",
+        "summary": "The school's food, natural lighting, and movement practices are framed favorably as natural."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001203",
+        "evidence_quote": "those diseases from their doctor were often considered chronic or lifelong",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001200",
+        "summary": "The children's diagnosing doctors are portrayed as having wrongly written off their conditions as permanent, ahead of describing how the guest's methods reversed them."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001259",
+        "evidence_quote": "with level three or severe autism",
+        "label_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001200",
+        "summary": "Guest describes a published case report of twins diagnosed with severe autism at Walter Reed whose family used her nonprofit's diet, detox, and neurodevelopment protocol to reportedly fully reverse the diagnosis."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001208",
+        "evidence_quote": "So we just published a paper this summer in the Journal of Personalized Medicine and this was a case report of a set of twins",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001204",
+        "summary": "Guest cites a published case report in the Journal of Personalized Medicine as evidence, itself a weak single-case evidence type."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001210",
+        "evidence_quote": "who were diagnosed at Walter Reed, which is a legitimate diagnostic location",
+        "label_ids": [
+          "cross_cutting:prestige_science_invocation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001209",
+        "summary": "Walter Reed is named to establish the legitimacy of the twins' autism diagnosis."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001227",
+        "evidence_quote": "you know, kind of that ancestral, whole foods, pure ingredients, all organic, pastured",
+        "label_ids": [
+          "topic:detox_cleanses_parasites",
+          "topic:diet_tribes_food_ideologies"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001220",
+        "summary": "The family's protocol is described as an ancestral, whole-foods, organic diet overhaul plus removing household toxins like personal care and cleaning products."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001226",
+        "evidence_quote": "They took all the toxins out of the home",
+        "label_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001224",
+        "summary": "Removing personal care and cleaning products from the home is framed as removing toxins."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001244",
+        "evidence_quote": "they were dealing with putting the inflammation and the fire out",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001242",
+        "summary": "Inflammation is invoked as the mechanism preventing normal vision-system development in autism."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001247",
+        "evidence_quote": "they were dealing with the screening toxins from their body",
+        "label_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001245",
+        "summary": "Impaired motor development in autism is attributed to the body dealing with toxins."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001263",
+        "evidence_quote": "We have tons of stories, rheumatoid arthritis, life threatening, food allergies, eczema, ADHD",
+        "label_ids": [
+          "topic:autoimmune_immune_health",
+          "topic:childrens_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001260",
+        "summary": "Guest claims she has documented many more children reversing conditions like rheumatoid arthritis, food allergies, eczema and ADHD using similar methods."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "fully reversed",
+          "indistinguishable"
+        ],
+        "claim_text": "A set of twins diagnosed with level three (severe) autism at Walter Reed fully reversed their diagnosis after a two-year diet-and-detox protocol, becoming indistinguishable from their peers.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001258",
+        "evidence_quote": "this family worked really hard for two years and they have fully reversed their diagnosis in this kid and these kids, they are indistinguishable from their peers",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "This specific, checkable claim that a diet and detox protocol fully reversed a documented severe-autism diagnosis is central to the guest's treatment claims and needs verification.",
+        "relevance": "substantive",
+        "start_unit_id": "u001255",
+        "topic_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Autism results from a child's total load of stressors during development being too great, preventing normal development of systems such as vision and sensory integration.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001241",
+        "evidence_quote": "because their total load of stressors was too great during that time period",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "This causal theory attributing autism's developmental features to stressor overload is a specific, checkable etiological claim outside mainstream consensus.",
+        "relevance": "substantive",
+        "start_unit_id": "u001229",
+        "topic_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Children with conditions including rheumatoid arthritis, life-threatening food allergies, eczema, and ADHD have reversed their conditions using similar diet-and-detox protocols.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001263",
+        "evidence_quote": "We have tons of stories, rheumatoid arthritis, life threatening, food allergies, eczema, ADHD, all these kids that have reversed their condition by doing similar things",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "This broad claim that multiple serious pediatric conditions have been reversed via the same protocol is checkable and consequential for parents' treatment decisions.",
+        "relevance": "substantive",
+        "start_unit_id": "u001260",
+        "topic_ids": [
+          "topic:autoimmune_immune_health",
+          "topic:childrens_health"
+        ]
+      }
+    ],
+    "window_id": "episode_175341_window_0013"
+  },
+  "stored_at": "2026-09-12T23:30:30.892336+00:00"
+}

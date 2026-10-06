@@ -1,0 +1,629 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c181355w0013",
+  "provenance": {
+    "bundle": "bundle_006",
+    "ingested_at": "2026-09-12T23:30:31.126242+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000753",
+        "evidence_quote": "you're getting vitamin C in a whole food matrix that is much more bioavailable than even just. The vitamin C powder, ascorbic acid.",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000736",
+        "summary": "Speakers discuss vitamin C broadly: the body's inability to synthesize it, its abundance in fruits and vegetables versus supplement forms like ascorbic acid, and bioavailability differences."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000757",
+        "evidence_quote": "when I had cancer, I did IV vitamin C treatment several times a week for an extended period of time.",
+        "label_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000754",
+        "summary": "Speaker describes using high-dose IV vitamin C as an anti-inflammatory, antioxidant, anti-cancer treatment during his own cancer."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000763",
+        "evidence_quote": "I've been taking amla and kambu kambu powder alternately for years.",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000758",
+        "summary": "Speaker names camu camu and amla powder as his favorite natural whole-food vitamin C supplements, taken for years."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000779",
+        "evidence_quote": "It took two hundred years for them to admit that vitamin C was the cure for scurvy.",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000764",
+        "summary": "Speaker recounts the history of vitamin C's discovery as the cure for scurvy and claims the medical community took roughly two hundred years to accept it."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000803",
+        "evidence_quote": "the system is very, very, very specifically designed to extract the most money possible from every patient.",
+        "label_ids": [
+          "topic:health_care_system_medical_trust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000780",
+        "summary": "Speaker argues the medical and pharmaceutical industries are corrupt and designed to extract money rather than train doctors to heal, while distinguishing individual doctors as generally good people."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000786",
+        "evidence_quote": "they develop this sort of hubris and arrogance about what they know to be true, what the science says.",
+        "label_ids": [
+          "cross_cutting:anti_expert_populist_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000781",
+        "summary": "Speaker criticizes 'scientism' and the notion that science is ever settled, framing expert consensus as hubris."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000796",
+        "evidence_quote": "they're the most corrupt industry on earth.",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing",
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000789",
+        "summary": "Speaker frames the medical and pharmaceutical industries as untrustworthy, profit-driven, and the most corrupt industry on earth."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000763",
+        "evidence_quote": "it's rich in nature.",
+        "label_ids": [
+          "cross_cutting:naturalness_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000757",
+        "summary": "Speaker praises vitamin C and his preferred sources as natural and whole-food."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000757",
+        "evidence_quote": "when I had cancer, I did IV vitamin C treatment several times a week for an extended period of time.",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000754",
+        "summary": "Speaker offers his own cancer treatment experience with IV vitamin C as evidence of its value."
+      },
+      {
+        "confidence": 0.45,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000741",
+        "evidence_quote": "Because I know I've looked at Dr. Otto Warburg's work, and for the last 25 years I've been fascinated with this.",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000739",
+        "summary": "Speaker references having studied Dr. Otto Warburg's research as grounding for his interest in vitamin C and cancer."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The human body cannot produce its own vitamin C.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000745",
+        "evidence_quote": "For anybody that doesn't know, your body can't make it.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A basic physiological claim about vitamin C synthesis that is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000745",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Animals that can produce their own vitamin C make more of it when sick to combat free radicals produced by disease.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000747",
+        "evidence_quote": "Animals can produce their own vitamin C, and when they get sick, they produce more vitamin C in their bodies to combat the",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific physiological claim about animal vitamin C synthesis and immune response that is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000746",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vitamin C obtained from a whole food matrix is more bioavailable than vitamin C powder (ascorbic acid).",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000752",
+        "evidence_quote": "you're getting vitamin C in a whole food matrix that is much more bioavailable than even just. The vitamin C powder, ascorbic acid.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A comparative bioavailability claim about nutrient forms that is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000751",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The sicker a person is, the more vitamin C their body can use and absorb.",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000753",
+        "evidence_quote": "the sicker you are, the more your body can use and absorb.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable dose-response claim about illness and vitamin C absorption.",
+        "relevance": "substantive",
+        "start_unit_id": "u000753",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "High-dose IV vitamin C functions as an anti-inflammatory, antioxidant, anti-cancer treatment.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000756",
+        "evidence_quote": "it's an anti-inflammatory, antioxidant, anti-cancer molecule.",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific therapeutic-mechanism claim about vitamin C and cancer that is checkable against clinical evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000754",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Unless someone's made a new discovery"
+        ],
+        "claim_text": "Camu camu powder is the highest vitamin C food on Earth, and amla (Indian gooseberry) is second highest.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000760",
+        "evidence_quote": "Unless someone's made a new discovery, is the highest vitamin C food on Earth, and the amla, the Indian gooseberry, is number two.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A specific, checkable ranking claim about vitamin C content of foods.",
+        "relevance": "substantive",
+        "start_unit_id": "u000759",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Dr. James Lind discovered that limes, lemons, or citrus fruit could cure scurvy.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000769",
+        "evidence_quote": "Doctor James Lind discovered that limes or lemons or citrus fruit would cure scurvy.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific, checkable historical medical claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000768",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "It took about two hundred years for the medical community to accept that vitamin C (citrus fruit) cured scurvy.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000778",
+        "evidence_quote": "It took two hundred years for them to admit that vitamin C was the cure for scurvy.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "rationale": "A specific, checkable historical claim about the medical community's acceptance timeline.",
+        "relevance": "substantive",
+        "start_unit_id": "u000772",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "very, very, very specifically designed",
+          "most corrupt industry on earth"
+        ],
+        "claim_text": "The medical and pharmaceutical industries are the most corrupt industry on earth, deliberately designed to extract maximum money from patients rather than train doctors to heal.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000796",
+        "evidence_quote": "the system is very, very, very specifically designed to extract the most money possible from every patient.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "rationale": "A sweeping claim about institutional misconduct in medicine and pharma that is checkable and contestable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000789",
+        "topic_ids": [
+          "topic:health_care_system_medical_trust"
+        ]
+      }
+    ],
+    "window_id": "episode_181355_window_0013"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000753",
+        "evidence_quote": "you're getting vitamin C in a whole food matrix that is much more bioavailable than even just. The vitamin C powder, ascorbic acid",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000736",
+        "summary": "Speakers discuss vitamin C broadly: the body's inability to synthesize it, its abundance in fruits and vegetables versus supplement forms like ascorbic acid, and bioavailability differences."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000757",
+        "evidence_quote": "when I had cancer, I did IV vitamin C treatment several times a week for an extended period of time",
+        "label_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000754",
+        "summary": "Speaker describes using high-dose IV vitamin C as an anti-inflammatory, antioxidant, anti-cancer treatment during his own cancer."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000763",
+        "evidence_quote": "I've been taking amla and kambu kambu powder alternately for years",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000758",
+        "summary": "Speaker names camu camu and amla powder as his favorite natural whole-food vitamin C supplements, taken for years."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000779",
+        "evidence_quote": "It took two hundred years for them to admit that vitamin C was the cure for scurvy",
+        "label_ids": [
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000764",
+        "summary": "Speaker recounts the history of vitamin C's discovery as the cure for scurvy and claims the medical community took roughly two hundred years to accept it."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000803",
+        "evidence_quote": "the system is very, very, very specifically designed to extract the most money possible from every patient",
+        "label_ids": [
+          "topic:health_care_system_medical_trust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000780",
+        "summary": "Speaker argues the medical and pharmaceutical industries are corrupt and designed to extract money rather than train doctors to heal, while distinguishing individual doctors as generally good people."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000786",
+        "evidence_quote": "they develop this sort of hubris and arrogance about what they know to be true, what the science says",
+        "label_ids": [
+          "cross_cutting:anti_expert_populist_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000781",
+        "summary": "Speaker criticizes 'scientism' and the notion that science is ever settled, framing expert consensus as hubris."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000796",
+        "evidence_quote": "they're the most corrupt industry on earth",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing",
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000789",
+        "summary": "Speaker frames the medical and pharmaceutical industries as untrustworthy, profit-driven, and the most corrupt industry on earth."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000763",
+        "evidence_quote": "it's rich in nature",
+        "label_ids": [
+          "cross_cutting:naturalness_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000757",
+        "summary": "Speaker praises vitamin C and his preferred sources as natural and whole-food."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000757",
+        "evidence_quote": "when I had cancer, I did IV vitamin C treatment several times a week for an extended period of time",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000754",
+        "summary": "Speaker offers his own cancer treatment experience with IV vitamin C as evidence of its value."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.45,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000741",
+        "evidence_quote": "Because I know I've looked at Dr. Otto Warburg's work, and for the last 25 years I've been fascinated with this",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000739",
+        "summary": "Speaker references having studied Dr. Otto Warburg's research as grounding for his interest in vitamin C and cancer."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The human body cannot produce its own vitamin C.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000745",
+        "evidence_quote": "For anybody that doesn't know, your body can't make it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A basic physiological claim about vitamin C synthesis that is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000745",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Animals that can produce their own vitamin C make more of it when sick to combat free radicals produced by disease.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000747",
+        "evidence_quote": "Animals can produce their own vitamin C, and when they get sick, they produce more vitamin C in their bodies to combat the",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific physiological claim about animal vitamin C synthesis and immune response that is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000746",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Vitamin C obtained from a whole food matrix is more bioavailable than vitamin C powder (ascorbic acid).",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000752",
+        "evidence_quote": "you're getting vitamin C in a whole food matrix that is much more bioavailable than even just. The vitamin C powder, ascorbic acid",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A comparative bioavailability claim about nutrient forms that is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000751",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The sicker a person is, the more vitamin C their body can use and absorb.",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000753",
+        "evidence_quote": "the sicker you are, the more your body can use and absorb",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable dose-response claim about illness and vitamin C absorption.",
+        "relevance": "substantive",
+        "start_unit_id": "u000753",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "High-dose IV vitamin C functions as an anti-inflammatory, antioxidant, anti-cancer treatment.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000756",
+        "evidence_quote": "it's an anti-inflammatory, antioxidant, anti-cancer molecule",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific therapeutic-mechanism claim about vitamin C and cancer that is checkable against clinical evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000754",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Unless someone's made a new discovery"
+        ],
+        "claim_text": "Camu camu powder is the highest vitamin C food on Earth, and amla (Indian gooseberry) is second highest.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000760",
+        "evidence_quote": "Unless someone's made a new discovery, is the highest vitamin C food on Earth, and the amla, the Indian gooseberry, is number two",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A specific, checkable ranking claim about vitamin C content of foods.",
+        "relevance": "substantive",
+        "start_unit_id": "u000759",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Dr. James Lind discovered that limes, lemons, or citrus fruit could cure scurvy.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000769",
+        "evidence_quote": "Doctor James Lind discovered that limes or lemons or citrus fruit would cure scurvy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific, checkable historical medical claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000768",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "It took about two hundred years for the medical community to accept that vitamin C (citrus fruit) cured scurvy.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000778",
+        "evidence_quote": "It took two hundred years for them to admit that vitamin C was the cure for scurvy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "rationale": "A specific, checkable historical claim about the medical community's acceptance timeline.",
+        "relevance": "substantive",
+        "start_unit_id": "u000772",
+        "topic_ids": [
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "very, very, very specifically designed",
+          "most corrupt industry on earth"
+        ],
+        "claim_text": "The medical and pharmaceutical industries are the most corrupt industry on earth, deliberately designed to extract maximum money from patients rather than train doctors to heal.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000796",
+        "evidence_quote": "the system is very, very, very specifically designed to extract the most money possible from every patient",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing",
+          "cross_cutting:big_pharma_medical_industrial_complex"
+        ],
+        "rationale": "A sweeping claim about institutional misconduct in medicine and pharma that is checkable and contestable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000789",
+        "topic_ids": [
+          "topic:health_care_system_medical_trust"
+        ]
+      }
+    ],
+    "window_id": "episode_181355_window_0013"
+  },
+  "stored_at": "2026-09-12T23:30:31.126276+00:00"
+}

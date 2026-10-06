@@ -1,0 +1,316 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "s-discourse-rebutted",
+  "provenance": {
+    "bundle": "bundle_002",
+    "ingested_at": "2026-09-09T19:54:51.418886+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-sonnet-r1-synthetic-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "it gives you the flu every single time i got it in the past i was sick for like a week straight",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Guest explains he no longer gets the flu shot because he believes it gives him the flu every time."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000044",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body so it cannot give you the flu itself",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Host corrects the belief that the flu shot causes the flu, explaining the vaccine's mechanism, why side effects occur, and the timing coincidence with other illnesses."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000033",
+        "evidence_quote": "i hear that a lot but thats actually not accurate and i want to push back on it a bit",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Host explicitly pushes back on and corrects the misconception that the flu shot causes flu."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body so it cannot give you the flu itself",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "Host uses a mechanistic explanation (no live virus, immune system reaction) to explain why the flu shot cannot cause the flu."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000039",
+        "evidence_quote": "i do pretty much every fall usually right when the pharmacies start advertising it",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000035",
+        "summary": "Host reports his own experience getting the flu shot every year with only mild soreness afterward."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "every single time"
+        ],
+        "claim_text": "The flu shot gives the person the flu every time they get it.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000018",
+        "evidence_quote": "it gives you the flu every single time i got it in the past i was sick for like a week straight",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A specific, checkable safety claim about the flu vaccine that the host goes on to rebut.",
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The flu shot does not contain a live virus that can replicate in the body, so it cannot cause the flu.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body so it cannot give you the flu itself",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable mechanistic claim about vaccine composition used to correct a misconception.",
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "usually"
+        ],
+        "claim_text": "Soreness, mild fatigue, or a low fever after a flu shot are usually the immune system reacting to the vaccine, not the flu itself.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "usually its your immune system reacting to the shot so you might get a sore arm or mild fatigue or a low fever for a day or two and thats different from actually having the flu",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about the physiological cause of post-vaccination symptoms.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "usually"
+        ],
+        "claim_text": "Many people get the flu shot right as flu season is starting, so they catch an unrelated virus around the same time and mistakenly blame the shot.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000029",
+        "evidence_quote": "a lot of people get the shot right as cold and flu season is ramping up so they catch an unrelated virus right around the same time and blame the shot",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about a timing coincidence that explains a common misattribution.",
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      }
+    ],
+    "window_id": "synthetic_discourse_rebutted_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000018",
+        "evidence_quote": "it gives you the flu every single time i got it in the past i was sick for like a week straight",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "summary": "Guest explains he no longer gets the flu shot because he believes it gives him the flu every time."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000044",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body so it cannot give you the flu itself",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Host corrects the belief that the flu shot causes the flu, explaining the vaccine's mechanism, why side effects occur, and the timing coincidence with other illnesses."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000033",
+        "evidence_quote": "i hear that a lot but thats actually not accurate and i want to push back on it a bit",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000019",
+        "summary": "Host explicitly pushes back on and corrects the misconception that the flu shot causes flu."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body so it cannot give you the flu itself",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "summary": "Host uses a mechanistic explanation (no live virus, immune system reaction) to explain why the flu shot cannot cause the flu."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000039",
+        "evidence_quote": "i do pretty much every fall usually right when the pharmacies start advertising it",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000035",
+        "summary": "Host reports his own experience getting the flu shot every year with only mild soreness afterward."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "every single time"
+        ],
+        "claim_text": "The flu shot gives the person the flu every time they get it.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000018",
+        "evidence_quote": "it gives you the flu every single time i got it in the past i was sick for like a week straight",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A specific, checkable safety claim about the flu vaccine that the host goes on to rebut.",
+        "relevance": "substantive",
+        "start_unit_id": "u000018",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The flu shot does not contain a live virus that can replicate in the body, so it cannot cause the flu.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000021",
+        "evidence_quote": "the flu shot doesnt contain a live virus that can replicate in your body so it cannot give you the flu itself",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable mechanistic claim about vaccine composition used to correct a misconception.",
+        "relevance": "substantive",
+        "start_unit_id": "u000021",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "usually"
+        ],
+        "claim_text": "Soreness, mild fatigue, or a low fever after a flu shot are usually the immune system reacting to the vaccine, not the flu itself.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000025",
+        "evidence_quote": "usually its your immune system reacting to the shot so you might get a sore arm or mild fatigue or a low fever for a day or two and thats different from actually having the flu",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about the physiological cause of post-vaccination symptoms.",
+        "relevance": "substantive",
+        "start_unit_id": "u000025",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "usually"
+        ],
+        "claim_text": "Many people get the flu shot right as flu season is starting, so they catch an unrelated virus around the same time and mistakenly blame the shot.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000029",
+        "evidence_quote": "a lot of people get the shot right as cold and flu season is ramping up so they catch an unrelated virus right around the same time and blame the shot",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about a timing coincidence that explains a common misattribution.",
+        "relevance": "substantive",
+        "start_unit_id": "u000027",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      }
+    ],
+    "window_id": "synthetic_discourse_rebutted_window_0001"
+  },
+  "stored_at": "2026-09-09T19:54:51.418966+00:00"
+}

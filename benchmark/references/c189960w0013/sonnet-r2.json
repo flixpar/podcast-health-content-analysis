@@ -1,0 +1,467 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c189960w0013",
+  "provenance": {
+    "bundle": "bundle_012",
+    "ingested_at": "2026-09-09T20:27:03.100979+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000897",
+        "evidence_quote": "it it is a sensory organ in the senses are emotional state",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000880",
+        "summary": "Speakers describe an alternative theory of heart physiology: a hydraulic-ramp pumping mechanism and the heart as an electromagnetic sensory organ tied to emotion."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000893",
+        "evidence_quote": "and it does that because it has a giant electromagnetic field that's bigger than any",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000888",
+        "summary": "Mechanistic language (electromagnetic field, mitochondria, vortexing) explains the heart's claimed sensory role."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000893",
+        "evidence_quote": "and we've shown that in science before",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000892",
+        "summary": "Speaker vaguely invokes 'science' having shown the electromagnetic/vortex effect, without naming a study."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000909",
+        "evidence_quote": "they first earned by trust years ago with pharmaceutical grade copper peptides",
+        "label_ids": [
+          "topic:beauty_dermatology_skincare"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000898",
+        "summary": "Sponsor read for a skincare product containing copper peptides and exosomes, marketed as supporting the skin's own repair signaling."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000909",
+        "evidence_quote": "all you have to do to get your hands on some is visit vitalyskincare.com and use code",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000898",
+        "summary": "Sponsor read gives a product website and discount code."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000905",
+        "evidence_quote": "one of the most research regenerative signaling molecules that we can get access to",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000901",
+        "summary": "Ad uses mechanistic language (signaling molecules, exosomes) to explain how the skincare product works."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000913",
+        "evidence_quote": "really it's about managing your stress really it's about circadian rhythm it's about",
+        "label_ids": [
+          "topic:biohacking_human_optimization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000911",
+        "summary": "Guest lists lifestyle levers (diet, environment, stress, circadian rhythm, grounding, structured water) as parts of a healthier way of being, without elaborating."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000930",
+        "evidence_quote": "it was a 75 to 99% blockage plaque and then in",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000915",
+        "summary": "Guest recounts a leg plaque/clot blockage that went from 75-99% to normal within about two years via lifestyle changes (low-carb diet), despite doctors saying it was impossible."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000927",
+        "evidence_quote": "doctors looking at it going yeah well that's not possible and you're like okay but it is",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000916",
+        "summary": "Doctors are portrayed as dismissive, insisting reversal wasn't supposed to be possible and declining to investigate why it happened."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000930",
+        "evidence_quote": "even then I came back a year later and it was completely normal",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000915",
+        "summary": "Guest offers his own repeatedly-confirmed case of reversed arterial plaque as evidence that reversal is possible."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000909",
+        "evidence_quote": "visit vitalyskincare.com and use code",
+        "mention_role": "advertised",
+        "product_name": "Vitaly Skincare",
+        "product_type": "personal_care_or_cosmetic",
+        "start_unit_id": "u000898"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The heart has a larger electromagnetic field than any other organ in the body.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000889",
+        "evidence_quote": "it has a giant electromagnetic field that's bigger than any",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Comparative claim about the heart's electromagnetic field size relative to other organs is checkable against biophysical measurement.",
+        "relevance": "substantive",
+        "start_unit_id": "u000888",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "GHK-Cu copper peptides are among the most researched regenerative signaling molecules and occur naturally in the body.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000902",
+        "evidence_quote": "one of the most research regenerative signaling molecules that we can get access to",
+        "evidence_signal_ids": [
+          "cross_cutting:evidence_strength_claim",
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Checkable claim about how well-studied GHK-Cu copper peptides are and whether they occur naturally in the body.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000901",
+        "topic_ids": [
+          "topic:beauty_dermatology_skincare"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Zero Age exosomes make the skin's repair signaling cleaner and more efficient.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000905",
+        "evidence_quote": "which means the signals driving repair are cleaner and more efficient",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Claim about an exosome product's effect on repair signaling could be checked against evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000904",
+        "topic_ids": [
+          "topic:beauty_dermatology_skincare"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "impossible"
+        ],
+        "claim_text": "Reversal of arterial plaque is not possible.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000929",
+        "evidence_quote": "the plaque reversal because that in theory is impossible",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "Whether arterial plaque reversal is possible is a checkable medical claim relevant to listeners considering lifestyle interventions, here rebutted by the guest's own case.",
+        "relevance": "substantive",
+        "start_unit_id": "u000928",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_189960_window_0013"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000897",
+        "evidence_quote": "it it is a sensory organ in the senses are emotional state",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000880",
+        "summary": "Speakers describe an alternative theory of heart physiology: a hydraulic-ramp pumping mechanism and the heart as an electromagnetic sensory organ tied to emotion."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000893",
+        "evidence_quote": "and it does that because it has a giant electromagnetic field that's bigger than any",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000888",
+        "summary": "Mechanistic language (electromagnetic field, mitochondria, vortexing) explains the heart's claimed sensory role."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000893",
+        "evidence_quote": "and we've shown that in science before",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000892",
+        "summary": "Speaker vaguely invokes 'science' having shown the electromagnetic/vortex effect, without naming a study."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000909",
+        "evidence_quote": "they first earned by trust years ago with pharmaceutical grade copper peptides",
+        "label_ids": [
+          "topic:beauty_dermatology_skincare"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000898",
+        "summary": "Sponsor read for a skincare product containing copper peptides and exosomes, marketed as supporting the skin's own repair signaling."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000909",
+        "evidence_quote": "all you have to do to get your hands on some is visit vitalyskincare.com and use code",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000898",
+        "summary": "Sponsor read gives a product website and discount code."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000905",
+        "evidence_quote": "one of the most research regenerative signaling molecules that we can get access to",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000901",
+        "summary": "Ad uses mechanistic language (signaling molecules, exosomes) to explain how the skincare product works."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000913",
+        "evidence_quote": "really it's about managing your stress really it's about circadian rhythm it's about",
+        "label_ids": [
+          "topic:biohacking_human_optimization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000911",
+        "summary": "Guest lists lifestyle levers (diet, environment, stress, circadian rhythm, grounding, structured water) as parts of a healthier way of being, without elaborating."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000930",
+        "evidence_quote": "it was a 75 to 99% blockage plaque and then in",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000915",
+        "summary": "Guest recounts a leg plaque/clot blockage that went from 75-99% to normal within about two years via lifestyle changes (low-carb diet), despite doctors saying it was impossible."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000927",
+        "evidence_quote": "doctors looking at it going yeah well that's not possible and you're like okay but it is",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000916",
+        "summary": "Doctors are portrayed as dismissive, insisting reversal wasn't supposed to be possible and declining to investigate why it happened."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000930",
+        "evidence_quote": "even then I came back a year later and it was completely normal",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000915",
+        "summary": "Guest offers his own repeatedly-confirmed case of reversed arterial plaque as evidence that reversal is possible."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u000909",
+        "evidence_quote": "visit vitalyskincare.com and use code",
+        "mention_role": "advertised",
+        "product_name": "Vitaly Skincare",
+        "product_type": "personal_care_or_cosmetic",
+        "start_unit_id": "u000898"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The heart has a larger electromagnetic field than any other organ in the body.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000889",
+        "evidence_quote": "it has a giant electromagnetic field that's bigger than any",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Comparative claim about the heart's electromagnetic field size relative to other organs is checkable against biophysical measurement.",
+        "relevance": "substantive",
+        "start_unit_id": "u000888",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "GHK-Cu copper peptides are among the most researched regenerative signaling molecules and occur naturally in the body.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000902",
+        "evidence_quote": "one of the most research regenerative signaling molecules that we can get access to",
+        "evidence_signal_ids": [
+          "cross_cutting:evidence_strength_claim",
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Checkable claim about how well-studied GHK-Cu copper peptides are and whether they occur naturally in the body.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000901",
+        "topic_ids": [
+          "topic:beauty_dermatology_skincare"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Zero Age exosomes make the skin's repair signaling cleaner and more efficient.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000905",
+        "evidence_quote": "which means the signals driving repair are cleaner and more efficient",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Claim about an exosome product's effect on repair signaling could be checked against evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000904",
+        "topic_ids": [
+          "topic:beauty_dermatology_skincare"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "impossible"
+        ],
+        "claim_text": "Reversal of arterial plaque is not possible.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000929",
+        "evidence_quote": "the plaque reversal because that in theory is impossible",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "Whether arterial plaque reversal is possible is a checkable medical claim relevant to listeners considering lifestyle interventions, here rebutted by the guest's own case.",
+        "relevance": "substantive",
+        "start_unit_id": "u000928",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_189960_window_0013"
+  },
+  "stored_at": "2026-09-09T20:27:03.101020+00:00"
+}

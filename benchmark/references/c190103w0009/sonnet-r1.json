@@ -1,0 +1,430 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c190103w0009",
+  "provenance": {
+    "bundle": "bundle_004",
+    "ingested_at": "2026-09-12T23:16:54.271684+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000655",
+        "evidence_quote": "compounds are powerful and they work and they really, they've been a godsend for people who are",
+        "label_ids": [
+          "topic:glp_1_incretin_drugs",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000642",
+        "summary": "Argues that powerful weight-loss compounds are a legitimate 'godsend' for people with metabolism broken by chronic yo-yo dieting, but stresses the choice to build lifestyle change or rely on them long-term."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000677",
+        "evidence_quote": "the big thing with mental health is it, you know, psychological is it physiological and it's like,",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000662",
+        "summary": "Discusses mental health as a complex mix of psychological and physiological factors, and floats chronic disease as possibly more of a spiritual/purpose crisis."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000694",
+        "evidence_quote": "Lyme and EBD, these underlying, these underlying infections that really plague people,",
+        "label_ids": [
+          "topic:chronic_complex_symptom_communities"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000678",
+        "summary": "Speculates whether relapse of chronic Lyme/EBV-type infections is driven by emotional/immune triggers or by the pathogens reactivating."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000701",
+        "evidence_quote": "try this SSRI, use this, that, and the other",
+        "label_ids": [
+          "topic:mental_health",
+          "topic:health_care_system_medical_trust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000696",
+        "summary": "Criticizes the conventional mental-health system for defaulting to trial-and-error SSRI prescribing rather than addressing root causes."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000701",
+        "evidence_quote": "I think the system, the conventional system really fails.",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000696",
+        "summary": "Portrays the conventional medical system as failing people with mental health issues by offering only trial-and-error medication."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000707",
+        "evidence_quote": "him on a FODMAP diet, which shockingly had a massive impact on his ability to function.",
+        "label_ids": [
+          "topic:gut_health_microbiome",
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000702",
+        "summary": "Anecdote that a FODMAP diet dramatically improved a relative's ability to function after years of unsuccessful conventional mental-health treatment."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000707",
+        "evidence_quote": "which shockingly had a massive impact on his ability to function.",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000702",
+        "summary": "Second-hand personal anecdote about a relative offered as evidence that a diet change can resolve serious functional impairment."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000713",
+        "evidence_quote": "maybe could it have been repeated concussions layered with some kind of lime or other infection layered with, right?",
+        "label_ids": [
+          "topic:chronic_complex_symptom_communities",
+          "topic:neurology_seizures_brain_conditions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000709",
+        "summary": "Speculates that layered concussions and an infection (e.g. Lyme) combined to produce a complex, hard-to-diagnose array of symptoms in a specific case."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000723",
+        "evidence_quote": "with a mental health issue and you would know this way better than me, to sleep better, eat better,",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000714",
+        "summary": "Host asks for concrete starting points for serious mental health issues, arguing generic advice like 'sleep better, eat better, exercise' is unhelpfully vague for people already struggling."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Weight-loss compounds help people whose metabolism is broken from years of yo-yo dieting to lose weight.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000648",
+        "evidence_quote": "compounds are powerful and they work and they really, they've been a godsend for people who are",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Asserts effectiveness of weight-loss compounds for a population with damaged metabolism, checkable against clinical evidence on these medications.",
+        "relevance": "substantive",
+        "start_unit_id": "u000645",
+        "topic_ids": [
+          "topic:glp_1_incretin_drugs",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Or is it really",
+          "I'll bet you"
+        ],
+        "claim_text": "Emotional upheaval or shock can suppress the immune system and allow chronic infections such as Lyme disease to reactivate.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000693",
+        "evidence_quote": "Or is it really like a re-triggering somehow of the bugs?",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Proposes a specific immune-mediated mechanism for relapse of chronic Lyme/EBV-type infections, checkable against clinical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000688",
+        "topic_ids": [
+          "topic:chronic_complex_symptom_communities"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A FODMAP diet had a major positive impact on this person's ability to function after years of unsuccessful treatment.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000705",
+        "evidence_quote": "which shockingly had a massive impact on his ability to function.",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Personal anecdote asserting a specific dietary intervention dramatically improved functioning, a checkable claim about diet-mental health causation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000702",
+        "topic_ids": [
+          "topic:gut_health_microbiome",
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "maybe",
+          "could it have been"
+        ],
+        "claim_text": "Repeated concussions combined with a chronic infection such as Lyme can together produce a complex, hard-to-diagnose array of symptoms.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000711",
+        "evidence_quote": "maybe could it have been repeated concussions layered with some kind of lime or other infection layered with, right?",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Proposes a specific causal mechanism (concussion plus infection layering) for a complex symptom presentation, checkable against clinical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000709",
+        "topic_ids": [
+          "topic:chronic_complex_symptom_communities",
+          "topic:neurology_seizures_brain_conditions"
+        ]
+      }
+    ],
+    "window_id": "episode_190103_window_0009"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000655",
+        "evidence_quote": "compounds are powerful and they work and they really, they've been a godsend for people who are",
+        "label_ids": [
+          "topic:glp_1_incretin_drugs",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000642",
+        "summary": "Argues that powerful weight-loss compounds are a legitimate 'godsend' for people with metabolism broken by chronic yo-yo dieting, but stresses the choice to build lifestyle change or rely on them long-term."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000677",
+        "evidence_quote": "the big thing with mental health is it, you know, psychological is it physiological and it's like",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000662",
+        "summary": "Discusses mental health as a complex mix of psychological and physiological factors, and floats chronic disease as possibly more of a spiritual/purpose crisis."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000694",
+        "evidence_quote": "Lyme and EBD, these underlying, these underlying infections that really plague people",
+        "label_ids": [
+          "topic:chronic_complex_symptom_communities"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000678",
+        "summary": "Speculates whether relapse of chronic Lyme/EBV-type infections is driven by emotional/immune triggers or by the pathogens reactivating."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000701",
+        "evidence_quote": "try this SSRI, use this, that, and the other",
+        "label_ids": [
+          "topic:health_care_system_medical_trust",
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000696",
+        "summary": "Criticizes the conventional mental-health system for defaulting to trial-and-error SSRI prescribing rather than addressing root causes."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000701",
+        "evidence_quote": "I think the system, the conventional system really fails",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000696",
+        "summary": "Portrays the conventional medical system as failing people with mental health issues by offering only trial-and-error medication."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000707",
+        "evidence_quote": "him on a FODMAP diet, which shockingly had a massive impact on his ability to function",
+        "label_ids": [
+          "topic:gut_health_microbiome",
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000702",
+        "summary": "Anecdote that a FODMAP diet dramatically improved a relative's ability to function after years of unsuccessful conventional mental-health treatment."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000707",
+        "evidence_quote": "which shockingly had a massive impact on his ability to function",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000702",
+        "summary": "Second-hand personal anecdote about a relative offered as evidence that a diet change can resolve serious functional impairment."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000713",
+        "evidence_quote": "maybe could it have been repeated concussions layered with some kind of lime or other infection layered with, right",
+        "label_ids": [
+          "topic:chronic_complex_symptom_communities",
+          "topic:neurology_seizures_brain_conditions"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000709",
+        "summary": "Speculates that layered concussions and an infection (e.g. Lyme) combined to produce a complex, hard-to-diagnose array of symptoms in a specific case."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000723",
+        "evidence_quote": "with a mental health issue and you would know this way better than me, to sleep better, eat better",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000714",
+        "summary": "Host asks for concrete starting points for serious mental health issues, arguing generic advice like 'sleep better, eat better, exercise' is unhelpfully vague for people already struggling."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Weight-loss compounds help people whose metabolism is broken from years of yo-yo dieting to lose weight.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000648",
+        "evidence_quote": "compounds are powerful and they work and they really, they've been a godsend for people who are",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Asserts effectiveness of weight-loss compounds for a population with damaged metabolism, checkable against clinical evidence on these medications.",
+        "relevance": "substantive",
+        "start_unit_id": "u000645",
+        "topic_ids": [
+          "topic:glp_1_incretin_drugs",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Or is it really",
+          "I'll bet you"
+        ],
+        "claim_text": "Emotional upheaval or shock can suppress the immune system and allow chronic infections such as Lyme disease to reactivate.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000693",
+        "evidence_quote": "Or is it really like a re-triggering somehow of the bugs",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Proposes a specific immune-mediated mechanism for relapse of chronic Lyme/EBV-type infections, checkable against clinical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000688",
+        "topic_ids": [
+          "topic:chronic_complex_symptom_communities"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A FODMAP diet had a major positive impact on this person's ability to function after years of unsuccessful treatment.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000705",
+        "evidence_quote": "which shockingly had a massive impact on his ability to function",
+        "evidence_signal_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Personal anecdote asserting a specific dietary intervention dramatically improved functioning, a checkable claim about diet-mental health causation.",
+        "relevance": "substantive",
+        "start_unit_id": "u000702",
+        "topic_ids": [
+          "topic:gut_health_microbiome",
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "maybe",
+          "could it have been"
+        ],
+        "claim_text": "Repeated concussions combined with a chronic infection such as Lyme can together produce a complex, hard-to-diagnose array of symptoms.",
+        "claim_type": "causal",
+        "confidence": 0.55,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000711",
+        "evidence_quote": "maybe could it have been repeated concussions layered with some kind of lime or other infection layered with, right",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Proposes a specific causal mechanism (concussion plus infection layering) for a complex symptom presentation, checkable against clinical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000709",
+        "topic_ids": [
+          "topic:chronic_complex_symptom_communities",
+          "topic:neurology_seizures_brain_conditions"
+        ]
+      }
+    ],
+    "window_id": "episode_190103_window_0009"
+  },
+  "stored_at": "2026-09-12T23:16:54.271714+00:00"
+}

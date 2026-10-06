@@ -9,12 +9,24 @@ the harvesters and parsers are in `analysis/chart_archive/`.
 source-coverage tables retain their original September 3/4 measurement dates;
 §6 and §6a use the corrected Apple-ID policy and refreshed recovery evidence.
 
+**Archive-policy caveat (PR review fixes).** The measurements below predate
+retaining repeated capture timestamps, coherent daily capture/page selection,
+and Marketing Tools JSON parsing. Regenerate the archive and downstream
+outputs using the [archive guide](../analysis/chart_archive/README.md) before
+treating the quoted snapshot counts, exposure estimates, or population
+membership as current.
+
+This report records the September investigation and its exploratory population
+rule. Operating instructions and downloader integration requirements live in
+the [archive guide](../analysis/chart_archive/README.md).
+
 The question this answers: *can we reconstruct historical top-podcast lists well
 enough to define a study population, and which series should define it?*
 
-Short answer: **the Apple US top 100 is recoverable, near-continuously, from
-mid-2012 to the present** — through three different third parties, none of them
-Apple. Spotify is recoverable daily for 2024 and patchily otherwise. The two
+Short answer: **the Apple US overall chart is recoverable, near-continuously, from
+mid-2012 through the collected window** — through Podbay, Chartable, and Apple's
+own charts page. The mirrors provide depth 100; Apple's page provides depth 24.
+Spotify is recoverable daily for 2024 and patchily otherwise. The two
 platforms rank differently enough that the choice of platform decides the
 sample.
 
@@ -167,7 +179,7 @@ insufficient for a top-100-defined one.** If the study population is "the shows
 that charted", monthly snapshots undercount the real membership by roughly
 40%, and almost all of the shortfall is in the bottom half of the chart.
 
-## 6. The study population
+## 6. Exploratory population by chart tenure
 
 ### The rule
 
@@ -241,7 +253,9 @@ The corrected policy selects 340 shows from the same archive. It resolves
 `1619` to Apple ID `1476928106`, removes episode-ID evidence from shows such as
 Betrayal, and preserves IDs carried directly by chart observations. Some
 entities merge or split; this is an identity correction, not a threshold change.
-The exposure rule and 941-day snapshot schedule are unchanged.
+The exposure rule and 941-day snapshot schedule were unchanged in that
+September 29 identity correction. Later capture-policy fixes require a fresh
+measurement; see the caveat at the top of this report.
 
 ## 6a. How much of the population can actually be collected
 
@@ -326,17 +340,18 @@ already covers at 464 days — it is not a fix for anything that was missing. Th
 same salvage does matter for Wayback, where a handful of captures are truncated
 too, and it removes a silent failure mode from the parser.
 
-The Common Crawl crawl walk is still **incomplete**: `index.commoncrawl.org`
+The September Common Crawl walk was **incomplete**: `index.commoncrawl.org`
 began refusing connections partway through, so only two of seven URL patterns
-were enumerated; `analysis/chart_archive/run_cc_index.sh` retries in the
-background.
+were enumerated. Rerun `analysis/chart_archive/run_cc_index.sh` to resume the
+missing queries; completed query caches are reused.
 
 ## 9. What is still missing
 
-- **Apple's own top 100 is archived nowhere.** The `podcasts.apple.com` page
+- **No dense first-party top-100 archive was found in this investigation.**
+  The `podcasts.apple.com` page
   server-renders 24 items per shelf; "see all" is an `amp-api` call needing a
-  bearer token. Every route to Apple's full 100 runs through a third party —
-  Podbay, then Chartable, then nothing.
+  bearer token. The deep historical captures found here came from Podbay and
+  Chartable; Apple's own archived page provides only the partial chart.
 - **2019-2021 is the thinnest stretch of the Apple record**: Podbay stops in
   August 2019, Chartable is only just ramping, and 2019 has 25 + 12 days
   between them.
@@ -349,7 +364,7 @@ background.
 - **Capture date ≈ chart date.** Nothing on these pages states which day's
   chart it is; the Wayback timestamp is the only date. Both Podbay and
   Chartable refreshed daily, so this is accurate to within a day.
-- **All three Apple sources are third-party mirrors** and can go stale — see
+- **The Podbay and Chartable sources are third-party mirrors** and can go stale — see
   the 2024-10-07 Chartable outlier in §4. Podbay's stability is inferred from
   its internal turnover curve matching Chartable's and Spotify's, not from a
   large direct overlap; only two days overlap.
@@ -364,7 +379,7 @@ background.
 - The locked environment includes lxml, pandas 3.0.5, and pyarrow. Population
   and turnover generation were checked with that environment.
 
-## 11. Recommendations
+## 11. Recommendations from the September investigation
 
 **1. Define the population by estimated chart tenure, not snapshot count:
 ≥90 estimated days on ≥3 observations, 2012-2026, mixed depth.** That is 340
@@ -403,9 +418,11 @@ daily, alongside `podcastcharts.byspotify.com/api/charts/top-podcasts?region=us`
 and the charts page for genre and episode charts. Scouting report:
 [`docs/chart-2024-sources.md`](chart-2024-sources.md).
 
-**6. Backfill `podcast_charts` from the parsed table.** Podbay rows can be
-inserted directly on their Apple id; Chartable rows need an iTunes Search
-lookup on the slug.
+**6. Import the parsed charts into dedicated chart-history tables.** Preserve
+source and date evidence, apply coherent daily selection, and resolve Chartable
+entities by title and publisher rather than treating their slugs as Apple IDs.
+The downloader studies implementation owns the schema and collection policy;
+see the [integration requirements](../analysis/chart_archive/README.md#integration-with-downloader-studies).
 
 ---
 
@@ -417,6 +434,6 @@ lookup on the slug.
 | `data/chart-archive/raw/<source>/<url-slug>/<ts>.<ext>.gz` | Wayback captures |
 | `data/chart-archive/raw_cc/…` | Common Crawl captures |
 | `data/chart-archive/manifest/*.jsonl` | One row per fetch, with result and served timestamp |
-| `data/chart-archive/parsed/chart_rows*.parquet` | 1,375,824 ranked rows, one per (capture, rank) |
+| `data/chart-archive/parsed/chart_rows.parquet`, `chart_rows_cc.parquet` | Canonical ranked rows, one per (capture, rank); targeted shards are excluded |
 | `data/chart-archive/parsed/summary/within_month_*.csv` | Turnover by gap; per-month union and coverage |
 | `data/chart-archive/parsed/summary/*.csv`, `findings.json` | Coverage, cadence, gaps, genre, agreement |

@@ -1,0 +1,281 @@
+{
+  "annotator_id": "opus-r2",
+  "benchmark_version": "v1",
+  "item_id": "c27447w0012",
+  "provenance": {
+    "bundle": "bundle_007",
+    "ingested_at": "2026-09-12T22:15:54.926246+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r2-opus-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000919",
+        "evidence_quote": "If you're ready to find the right therapist for you, BetterHelp can help you start that journey.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000906",
+        "summary": "Sponsor read for an online therapy service tied to World Mental Health Day."
+      },
+      {
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000919",
+        "evidence_quote": "Our listeners get 10 off their first month at BetterHelp.com/lastpod.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000908",
+        "summary": "Paid sponsor read with a listener discount and a dedicated URL."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000911",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified.",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000911",
+        "summary": "Therapists' qualifications invoked as grounds for trusting the service."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000968",
+        "evidence_quote": "And apparently, it almost completely severed the head of his cock.",
+        "label_ids": [
+          "topic:injury_wound_care_first_aid"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000962",
+        "summary": "Narrative description of a near-amputating bite injury to the genitals."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000986",
+        "evidence_quote": "he beat Pearson with a stick until he was unconscious.",
+        "label_ids": [
+          "topic:injury_wound_care_first_aid"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000985",
+        "summary": "Beating to unconsciousness and a hospital visit for the bite injury."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000992",
+        "evidence_quote": "Bob spent two days at the hospital",
+        "label_ids": [
+          "topic:injury_wound_care_first_aid"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000992",
+        "summary": "Two-day hospital stay and a victim in and out of consciousness from head blows."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000919",
+        "evidence_quote": "But that's where BetterHelp comes in.",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000908"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp's therapists are fully qualified and work according to a strict code of conduct.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000911",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified.",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A checkable sponsor claim about the credentialing and conduct standards of the therapists listeners would be matched with.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000911",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp's therapists have helped millions of people take a step forward.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000916",
+        "evidence_quote": "Celebrating the therapists who've helped millions of people take a step forward.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A quantitative reach claim in sponsor copy that could be checked against the service's actual user numbers.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000916",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_27447_window_0012"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000919",
+        "evidence_quote": "If you're ready to find the right therapist for you, BetterHelp can help you start that journey",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000906",
+        "summary": "Sponsor read for an online therapy service tied to World Mental Health Day."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000919",
+        "evidence_quote": "Our listeners get 10 off their first month at BetterHelp.com/lastpod",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000908",
+        "summary": "Paid sponsor read with a listener discount and a dedicated URL."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000911",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000911",
+        "summary": "Therapists' qualifications invoked as grounds for trusting the service."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000968",
+        "evidence_quote": "And apparently, it almost completely severed the head of his cock",
+        "label_ids": [
+          "topic:injury_wound_care_first_aid"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000962",
+        "summary": "Narrative description of a near-amputating bite injury to the genitals."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000986",
+        "evidence_quote": "he beat Pearson with a stick until he was unconscious",
+        "label_ids": [
+          "topic:injury_wound_care_first_aid"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000985",
+        "summary": "Beating to unconsciousness and a hospital visit for the bite injury."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000992",
+        "evidence_quote": "Bob spent two days at the hospital",
+        "label_ids": [
+          "topic:injury_wound_care_first_aid"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000992",
+        "summary": "Two-day hospital stay and a victim in and out of consciousness from head blows."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000919",
+        "evidence_quote": "But that's where BetterHelp comes in",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000908"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp's therapists are fully qualified and work according to a strict code of conduct.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000911",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A checkable sponsor claim about the credentialing and conduct standards of the therapists listeners would be matched with.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000911",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp's therapists have helped millions of people take a step forward.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000916",
+        "evidence_quote": "Celebrating the therapists who've helped millions of people take a step forward",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A quantitative reach claim in sponsor copy that could be checked against the service's actual user numbers.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000916",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_27447_window_0012"
+  },
+  "stored_at": "2026-09-12T22:15:54.926292+00:00"
+}

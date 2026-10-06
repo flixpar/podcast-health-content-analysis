@@ -1,0 +1,342 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c24869w0011",
+  "provenance": {
+    "bundle": "bundle_002",
+    "ingested_at": "2026-09-12T23:09:28.771600+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000816",
+        "evidence_quote": "after six days, Walter died of dehydration",
+        "label_ids": [
+          "topic:natural_alternative_functional_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000812",
+        "summary": "Account of a man dying of dehydration during a days-long exorcism."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000831",
+        "evidence_quote": "they say thousands of exorcisms are done every single year now",
+        "label_ids": [
+          "topic:natural_alternative_functional_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000826",
+        "summary": "Reported figures on how many exorcisms are performed and how often they succeed."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000877",
+        "evidence_quote": "an eight-year-old autistic boy named Terrence Cotrell died during church when members of his congregation attempted to all heal him",
+        "label_ids": [
+          "topic:neurodevelopment_autism_discourse",
+          "topic:childrens_health",
+          "topic:natural_alternative_functional_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000867",
+        "summary": "An autistic eight-year-old died during a congregation's attempt to heal him."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000881",
+        "evidence_quote": "we will heal his autism",
+        "label_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000878",
+        "summary": "A church member's promise that they could fix and heal the boy's autism is quoted."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000896",
+        "evidence_quote": "you physically make it impossible for the demon to exist inside this body, so it has to come out",
+        "label_ids": [
+          "topic:natural_alternative_functional_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000890",
+        "summary": "The laying-on-of-hands rationale for driving a demon out of the body is explained."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Walter died of dehydration after six days strapped to a chair and denied food and water during an exorcism.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000814",
+        "evidence_quote": "after six days, Walter died of dehydration",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific account of a death caused by an exorcism practice, checkable against the case record.",
+        "relevance": "substantive",
+        "start_unit_id": "u000812",
+        "topic_ids": [
+          "topic:natural_alternative_functional_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "they say"
+        ],
+        "claim_text": "Thousands of exorcisms are performed every year.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000826",
+        "evidence_quote": "they say thousands of exorcisms are done every single year now",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "A prevalence figure for a practice that is checkable against reporting on exorcism.",
+        "relevance": "substantive",
+        "start_unit_id": "u000824",
+        "topic_ids": [
+          "topic:natural_alternative_functional_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "God wins ninety-nine percent of exorcisms, with the demons giving in.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000831",
+        "evidence_quote": "And how many times does God win? Ninety-nine percent.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A quoted success rate for exorcism that could be checked against whatever the priest was relying on.",
+        "relevance": "substantive",
+        "start_unit_id": "u000828",
+        "topic_ids": [
+          "topic:natural_alternative_functional_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In 2003 in Milwaukee, an eight-year-old autistic boy named Terrence Cotrell died during church while members of his congregation attempted to heal him.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000868",
+        "evidence_quote": "an eight-year-old autistic boy named Terrence Cotrell died during church when members of his congregation attempted to all heal him",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A dated, named case of a child dying during a faith-healing attempt, checkable against the record.",
+        "relevance": "substantive",
+        "start_unit_id": "u000867",
+        "topic_ids": [
+          "topic:neurodevelopment_autism_discourse",
+          "topic:childrens_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The church could fix the boy and heal his autism.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000881",
+        "evidence_quote": "you need to come to my church where we will show you where we can fix him",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A cure claim for autism attributed to a church, checkable against evidence on autism treatment.",
+        "relevance": "substantive",
+        "start_unit_id": "u000878",
+        "topic_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ]
+      }
+    ],
+    "window_id": "episode_24869_window_0011"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000816",
+        "evidence_quote": "after six days, Walter died of dehydration",
+        "label_ids": [
+          "topic:natural_alternative_functional_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000812",
+        "summary": "Account of a man dying of dehydration during a days-long exorcism."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000831",
+        "evidence_quote": "they say thousands of exorcisms are done every single year now",
+        "label_ids": [
+          "topic:natural_alternative_functional_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000826",
+        "summary": "Reported figures on how many exorcisms are performed and how often they succeed."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000877",
+        "evidence_quote": "an eight-year-old autistic boy named Terrence Cotrell died during church when members of his congregation attempted to all heal him",
+        "label_ids": [
+          "topic:childrens_health",
+          "topic:natural_alternative_functional_medicine",
+          "topic:neurodevelopment_autism_discourse"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000867",
+        "summary": "An autistic eight-year-old died during a congregation's attempt to heal him."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000881",
+        "evidence_quote": "we will heal his autism",
+        "label_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000878",
+        "summary": "A church member's promise that they could fix and heal the boy's autism is quoted."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000896",
+        "evidence_quote": "you physically make it impossible for the demon to exist inside this body, so it has to come out",
+        "label_ids": [
+          "topic:natural_alternative_functional_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000890",
+        "summary": "The laying-on-of-hands rationale for driving a demon out of the body is explained."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Walter died of dehydration after six days strapped to a chair and denied food and water during an exorcism.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000814",
+        "evidence_quote": "after six days, Walter died of dehydration",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific account of a death caused by an exorcism practice, checkable against the case record.",
+        "relevance": "substantive",
+        "start_unit_id": "u000812",
+        "topic_ids": [
+          "topic:natural_alternative_functional_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "they say"
+        ],
+        "claim_text": "Thousands of exorcisms are performed every year.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000826",
+        "evidence_quote": "they say thousands of exorcisms are done every single year now",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "A prevalence figure for a practice that is checkable against reporting on exorcism.",
+        "relevance": "substantive",
+        "start_unit_id": "u000824",
+        "topic_ids": [
+          "topic:natural_alternative_functional_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "God wins ninety-nine percent of exorcisms, with the demons giving in.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000831",
+        "evidence_quote": "And how many times does God win? Ninety-nine percent",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A quoted success rate for exorcism that could be checked against whatever the priest was relying on.",
+        "relevance": "substantive",
+        "start_unit_id": "u000828",
+        "topic_ids": [
+          "topic:natural_alternative_functional_medicine"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In 2003 in Milwaukee, an eight-year-old autistic boy named Terrence Cotrell died during church while members of his congregation attempted to heal him.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000868",
+        "evidence_quote": "an eight-year-old autistic boy named Terrence Cotrell died during church when members of his congregation attempted to all heal him",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A dated, named case of a child dying during a faith-healing attempt, checkable against the record.",
+        "relevance": "substantive",
+        "start_unit_id": "u000867",
+        "topic_ids": [
+          "topic:childrens_health",
+          "topic:neurodevelopment_autism_discourse"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The church could fix the boy and heal his autism.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000881",
+        "evidence_quote": "you need to come to my church where we will show you where we can fix him",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A cure claim for autism attributed to a church, checkable against evidence on autism treatment.",
+        "relevance": "substantive",
+        "start_unit_id": "u000878",
+        "topic_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ]
+      }
+    ],
+    "window_id": "episode_24869_window_0011"
+  },
+  "stored_at": "2026-09-12T23:09:28.771645+00:00"
+}

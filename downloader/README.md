@@ -47,6 +47,10 @@ source ../.venv/bin/activate
 cp config.example.json config.json     # then edit
 ```
 
+For `import-chart-archive`, run `uv sync --group analysis` from the repository
+root to include pandas and pyarrow, as described in the
+[archive guide](../analysis/chart_archive/README.md).
+
 `ffmpeg`/`ffprobe` must be on `PATH` (`apt install ffmpeg`); the pipeline shells
 out to them for every conversion and for ASR decoding.
 

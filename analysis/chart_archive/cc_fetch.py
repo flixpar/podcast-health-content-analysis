@@ -92,7 +92,7 @@ def load_rows() -> list[dict]:
                 norm = normalize(target, rec["url"])
                 if norm is None:
                     continue
-                key = (target, norm, rec.get("digest"))
+                key = (target, norm, rec["timestamp"])
                 if key in seen:
                     continue
                 seen.add(key)

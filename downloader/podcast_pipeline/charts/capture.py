@@ -6,7 +6,7 @@ Sources (no authentication):
 * ``apple_marketing_tools``: Apple's Marketing Tools feed, the US top 100 with
   Apple ids -> ``apple:<country>:podcast:all``. Cross-validated 100/100 against
   the legacy iTunes RSS and 24/24 against podcasts.apple.com
-  (docs/chart-population-handoff.md section 6).
+  (docs/chart-2024-sources.md, the dated source investigation).
 * ``spotify_api``: podcastcharts.byspotify.com, the top 200 shows ->
   ``spotify:<country>:podcast:all``. Spotify ids only, no feeds.
 

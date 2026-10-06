@@ -1,0 +1,377 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c22784w0014",
+  "provenance": {
+    "bundle": "bundle_006",
+    "ingested_at": "2026-09-09T18:04:00.700346+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001239",
+        "evidence_quote": "Wow, I just did not know you could just get estrogen at the gym.",
+        "label_ids": [
+          "topic:mens_health_male_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001233",
+        "summary": "Hosts recall estrogen being sold at a gym until it was made illegal, and that you would normally need a doctor."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001258",
+        "evidence_quote": "the guy was suffering from all these maladies.",
+        "label_ids": [
+          "topic:mens_health_male_hormones"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001256",
+        "summary": "Passing reference to a man suffering unnoticed effects as his body changed."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001266",
+        "evidence_quote": "I was trying to make my boobies smaller by doing chest exercises.",
+        "label_ids": [
+          "topic:fitness_exercise"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001260",
+        "summary": "Comic exchange about chest exercises changing the shape of the chest while getting stronger."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001316",
+        "evidence_quote": "It's very important, you know, because you only got two, and you're not a doctor in the U.K.",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001283",
+        "summary": "Foot care used as the health framing of a sock advertisement."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001316",
+        "evidence_quote": "use code L P O T L for twenty percent off your first purchase.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001287",
+        "summary": "Sponsor read for Bombas socks with a discount code."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001338",
+        "evidence_quote": "It's shining the spotlight on therapists, people who truly make the world a better place, because the right therapist can change everything.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001323",
+        "summary": "BetterHelp ad about therapy and World Mental Health Day."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001338",
+        "evidence_quote": "Our listeners get 10% off their first month at BetterHelp.com/lastpod.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001328",
+        "summary": "Sponsor read for BetterHelp with a listener discount."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001330",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified.",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001330",
+        "summary": "Therapists' qualifications and code of conduct invoked as grounds for trusting the service."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u001316",
+        "evidence_quote": "I love my Bombas.",
+        "mention_role": "advertised",
+        "product_name": "Bombas",
+        "product_type": "other_product",
+        "start_unit_id": "u001287"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001338",
+        "evidence_quote": "This is an ad by BetterHelp.",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u001323"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Estrogen could be bought at the gym rather than obtained from a doctor.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001238",
+        "evidence_quote": "Wow, I just did not know you could just get estrogen at the gym.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A claim about unsupervised access to a prescription hormone.",
+        "relevance": "passing",
+        "start_unit_id": "u001236",
+        "topic_ids": [
+          "topic:mens_health_male_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Chest exercises make the top of the chest bigger, and the top then pushes the bottom down.",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001265",
+        "evidence_quote": "Well, and the bottoms, but the tops push the bottom down.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A claim about what chest training does to chest shape.",
+        "relevance": "passing",
+        "start_unit_id": "u001263",
+        "topic_ids": [
+          "topic:fitness_exercise"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp therapists work according to a strict code of conduct and are fully qualified.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001330",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified.",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about a therapy service's practitioners made in sponsor copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001330",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_22784_window_0014"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001239",
+        "evidence_quote": "Wow, I just did not know you could just get estrogen at the gym",
+        "label_ids": [
+          "topic:mens_health_male_hormones"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001233",
+        "summary": "Hosts recall estrogen being sold at a gym until it was made illegal, and that you would normally need a doctor."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001258",
+        "evidence_quote": "the guy was suffering from all these maladies",
+        "label_ids": [
+          "topic:mens_health_male_hormones"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001256",
+        "summary": "Passing reference to a man suffering unnoticed effects as his body changed."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001266",
+        "evidence_quote": "I was trying to make my boobies smaller by doing chest exercises",
+        "label_ids": [
+          "topic:fitness_exercise"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001260",
+        "summary": "Comic exchange about chest exercises changing the shape of the chest while getting stronger."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001316",
+        "evidence_quote": "It's very important, you know, because you only got two, and you're not a doctor in the U.K",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001283",
+        "summary": "Foot care used as the health framing of a sock advertisement."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001316",
+        "evidence_quote": "use code L P O T L for twenty percent off your first purchase",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001287",
+        "summary": "Sponsor read for Bombas socks with a discount code."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001338",
+        "evidence_quote": "It's shining the spotlight on therapists, people who truly make the world a better place, because the right therapist can change everything",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001323",
+        "summary": "BetterHelp ad about therapy and World Mental Health Day."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001338",
+        "evidence_quote": "Our listeners get 10% off their first month at BetterHelp.com/lastpod",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001328",
+        "summary": "Sponsor read for BetterHelp with a listener discount."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001330",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001330",
+        "summary": "Therapists' qualifications and code of conduct invoked as grounds for trusting the service."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u001316",
+        "evidence_quote": "I love my Bombas",
+        "mention_role": "advertised",
+        "product_name": "Bombas",
+        "product_type": "other_product",
+        "start_unit_id": "u001287"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001338",
+        "evidence_quote": "This is an ad by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u001323"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Estrogen could be bought at the gym rather than obtained from a doctor.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001238",
+        "evidence_quote": "Wow, I just did not know you could just get estrogen at the gym",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A claim about unsupervised access to a prescription hormone.",
+        "relevance": "passing",
+        "start_unit_id": "u001236",
+        "topic_ids": [
+          "topic:mens_health_male_hormones"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Chest exercises make the top of the chest bigger, and the top then pushes the bottom down.",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001265",
+        "evidence_quote": "Well, and the bottoms, but the tops push the bottom down",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A claim about what chest training does to chest shape.",
+        "relevance": "passing",
+        "start_unit_id": "u001263",
+        "topic_ids": [
+          "topic:fitness_exercise"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp therapists work according to a strict code of conduct and are fully qualified.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001330",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim about a therapy service's practitioners made in sponsor copy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001330",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_22784_window_0014"
+  },
+  "stored_at": "2026-09-09T18:04:00.700393+00:00"
+}

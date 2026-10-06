@@ -1,0 +1,145 @@
+{
+  "annotator_id": "opus-r2",
+  "benchmark_version": "v1",
+  "item_id": "c92992w0007",
+  "provenance": {
+    "bundle": "bundle_004",
+    "ingested_at": "2026-09-12T23:15:38.229821+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000642",
+        "evidence_quote": "Real Coca-Cola taste, zero sugar.",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000630",
+        "summary": "Sponsor read for a zero-sugar soft drink, touting taste with no sugar."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000642",
+        "evidence_quote": "Enjoy an ice cold Coca-Cola Zero sugar today.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000630",
+        "summary": "Delimited sponsor read selling Coca-Cola Zero Sugar."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000672",
+        "evidence_quote": "When it comes to cancer, he's got the answers.",
+        "label_ids": [
+          "topic:cancer"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000649",
+        "summary": "A comedy sketch about an oncologist is recounted, with cancer and a liver tumour as punchlines."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000682",
+        "evidence_quote": "Yes, the brain, the brain tumor comedian, and it's your comedy.",
+        "label_ids": [
+          "topic:neurology_seizures_brain_conditions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000679",
+        "summary": "An old sketch about a comedian with a brain tumour who gets progressively sicker is recalled."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000642",
+        "evidence_quote": "Enjoy an ice cold Coca-Cola Zero sugar today.",
+        "mention_role": "advertised",
+        "product_name": "Coca-Cola Zero Sugar",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000630"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_92992_window_0007"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000642",
+        "evidence_quote": "Real Coca-Cola taste, zero sugar",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000630",
+        "summary": "Sponsor read for a zero-sugar soft drink, touting taste with no sugar."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000642",
+        "evidence_quote": "Enjoy an ice cold Coca-Cola Zero sugar today",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000630",
+        "summary": "Delimited sponsor read selling Coca-Cola Zero Sugar."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000672",
+        "evidence_quote": "When it comes to cancer, he's got the answers",
+        "label_ids": [
+          "topic:cancer"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000649",
+        "summary": "A comedy sketch about an oncologist is recounted, with cancer and a liver tumour as punchlines."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000682",
+        "evidence_quote": "Yes, the brain, the brain tumor comedian, and it's your comedy",
+        "label_ids": [
+          "topic:neurology_seizures_brain_conditions"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000679",
+        "summary": "An old sketch about a comedian with a brain tumour who gets progressively sicker is recalled."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000642",
+        "evidence_quote": "Enjoy an ice cold Coca-Cola Zero sugar today",
+        "mention_role": "advertised",
+        "product_name": "Coca-Cola Zero Sugar",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000630"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_92992_window_0007"
+  },
+  "stored_at": "2026-09-12T23:15:38.229843+00:00"
+}

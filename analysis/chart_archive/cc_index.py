@@ -62,6 +62,7 @@ def main() -> int:
     crawls = [c["id"] for c in json.loads(cache.read_text())]
     print(f"{len(crawls)} crawls x {len(PATTERNS)} patterns", flush=True)
 
+    failed = []
     for name, pattern in PATTERNS.items():
         out_dir = CC_DIR / name
         out_dir.mkdir(parents=True, exist_ok=True)
@@ -75,6 +76,7 @@ def main() -> int:
                    f"?url={quote(pattern, safe='')}&output=json")
             body = get(session, url)
             if body is None:
+                failed.append((name, crawl))
                 print(f"  {name} {crawl}: gave up", flush=True)
                 continue
             lines = [ln for ln in body.splitlines()
@@ -85,7 +87,7 @@ def main() -> int:
                 print(f"  {name} {crawl}: {len(lines)}", flush=True)
             time.sleep(1.0)
         print(f"{name}: {total} captures across all crawls", flush=True)
-    return 0
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":

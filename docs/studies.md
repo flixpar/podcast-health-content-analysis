@@ -165,10 +165,17 @@ The list grows by itself as `capture-charts` adds days; refresh the study.
 
 ## Chart data
 
-* `import-chart-archive` loads `data/chart-archive/parsed/chart_rows*.parquet`
-  (every source, chart and genre, ~1.4M rows) into `chart_snapshots` /
-  `chart_entries`. It can be re-run: it replaces archive rows and never
-  touches live ones.
+* `import-chart-archive` loads the canonical `chart_rows.parquet` and optional
+  `chart_rows_cc.parquet` under `data/chart-archive/parsed/` into
+  `chart_snapshots` / `chart_entries`. It selects one coherent daily capture or
+  nearby Chartable page set using the
+  [archive policy](../analysis/chart_archive/README.md), preserving explicit page
+  metadata or deriving it from older saved slugs.
+  It replaces archive rows and leaves live rows intact. Verification compares
+  trusted-day counts with a regenerated `parsed/population/summary.json` using
+  the same depth policy; missing, older, malformed or incompatible summaries are reported
+  as unavailable. Historical report counts are dated evidence. Regenerate,
+  reimport, then refresh studies before collecting from corrected measurements.
 * `capture-charts` should run **daily** (`downloader/tools/capture_charts_daily.sh`
   is cron-ready). It stores the raw response, records the snapshot, and adds
   newly charting Apple shows to the catalog, reusing known current/historical

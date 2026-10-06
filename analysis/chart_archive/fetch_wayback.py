@@ -99,10 +99,8 @@ def load_rows() -> list[dict]:
             norm = normalize(target, original)
             if norm is None:
                 continue
-            # One fetch per (url, content) pair: repeated identical captures of
-            # the same chart add nothing, but the same digest under a different
-            # URL (a genre chart mirroring the overall one) is worth keeping.
-            key = (target, norm, digest)
+            # Repeated payloads still provide dates for exposure weighting.
+            key = (target, norm, ts)
             if key in seen:
                 continue
             seen.add(key)

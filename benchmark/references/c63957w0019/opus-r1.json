@@ -1,0 +1,284 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c63957w0019",
+  "provenance": {
+    "bundle": "bundle_026",
+    "ingested_at": "2026-09-09T18:04:01.722622+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001236",
+        "evidence_quote": "The right window treatments change everything: your sleep, your privacy",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001236",
+        "summary": "Sleep named as something the right window treatments improve, inside a sponsor read."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001243",
+        "evidence_quote": "At Blinds.com, we've spent 30 years making it surprisingly simple to get exactly what your home needs.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001236",
+        "summary": "Sponsor read for a blinds retailer that sells on improved sleep among other benefits."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001256",
+        "evidence_quote": "Total Healthcare provides care for the entire community, offering adult.",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001252",
+        "summary": "Sponsor read for a community health-care provider and the clinical services it offers."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001254",
+        "evidence_quote": "Primary care, pediatrics, dental, mental health, OB/GYN, podiatry, Ryan White Services, on-site pharmacies, and more.",
+        "label_ids": [
+          "topic:childrens_health",
+          "topic:mental_health",
+          "topic:fluoride_oral_health",
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001254",
+        "summary": "Pediatrics, dental, mental health and OB/GYN listed among the advertised services."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001256",
+        "evidence_quote": "Visit TotalHealthCare.org or call us at 410-383-8300 to schedule your appointment today.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001252",
+        "summary": "Paid read directing listeners to book an appointment with the advertiser."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.5,
+        "end_unit_id": "u001243",
+        "evidence_quote": "At Blinds.com, we've spent 30 years making it surprisingly simple to get exactly what your home needs.",
+        "mention_role": "advertised",
+        "product_name": "Blinds.com",
+        "product_type": "other_product",
+        "start_unit_id": "u001236"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u001256",
+        "evidence_quote": "Total Healthcare provides care for the entire community, offering adult.",
+        "mention_role": "advertised",
+        "product_name": "Total Health Care",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u001252"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "change everything"
+        ],
+        "claim_text": "The right window treatments change your sleep.",
+        "claim_type": "causal",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001236",
+        "evidence_quote": "The right window treatments change everything: your sleep, your privacy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Sponsor copy asserting a product improves sleep, which can be checked against evidence on light, noise and sleep.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001236",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Total Health Care offers adult primary care, pediatrics, dental, mental health, OB/GYN, podiatry, Ryan White Services and on-site pharmacies.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001254",
+        "evidence_quote": "Primary care, pediatrics, dental, mental health, OB/GYN, podiatry, Ryan White Services, on-site pharmacies, and more.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "An advertised list of clinical services a listener could rely on, checkable against the provider.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001253",
+        "topic_ids": [
+          "topic:other_health_topic",
+          "topic:childrens_health",
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_63957_window_0019"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001236",
+        "evidence_quote": "The right window treatments change everything: your sleep, your privacy",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001236",
+        "summary": "Sleep named as something the right window treatments improve, inside a sponsor read."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001243",
+        "evidence_quote": "At Blinds.com, we've spent 30 years making it surprisingly simple to get exactly what your home needs",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001236",
+        "summary": "Sponsor read for a blinds retailer that sells on improved sleep among other benefits."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001256",
+        "evidence_quote": "Total Healthcare provides care for the entire community, offering adult",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001252",
+        "summary": "Sponsor read for a community health-care provider and the clinical services it offers."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001254",
+        "evidence_quote": "Primary care, pediatrics, dental, mental health, OB/GYN, podiatry, Ryan White Services, on-site pharmacies, and more",
+        "label_ids": [
+          "topic:childrens_health",
+          "topic:fluoride_oral_health",
+          "topic:mental_health",
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001254",
+        "summary": "Pediatrics, dental, mental health and OB/GYN listed among the advertised services."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001256",
+        "evidence_quote": "Visit TotalHealthCare.org or call us at 410-383-8300 to schedule your appointment today",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001252",
+        "summary": "Paid read directing listeners to book an appointment with the advertiser."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.5,
+        "end_unit_id": "u001243",
+        "evidence_quote": "At Blinds.com, we've spent 30 years making it surprisingly simple to get exactly what your home needs",
+        "mention_role": "advertised",
+        "product_name": "Blinds.com",
+        "product_type": "other_product",
+        "start_unit_id": "u001236"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u001256",
+        "evidence_quote": "Total Healthcare provides care for the entire community, offering adult",
+        "mention_role": "advertised",
+        "product_name": "Total Health Care",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u001252"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "change everything"
+        ],
+        "claim_text": "The right window treatments change your sleep.",
+        "claim_type": "causal",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001236",
+        "evidence_quote": "The right window treatments change everything: your sleep, your privacy",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Sponsor copy asserting a product improves sleep, which can be checked against evidence on light, noise and sleep.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001236",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Total Health Care offers adult primary care, pediatrics, dental, mental health, OB/GYN, podiatry, Ryan White Services and on-site pharmacies.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001254",
+        "evidence_quote": "Primary care, pediatrics, dental, mental health, OB/GYN, podiatry, Ryan White Services, on-site pharmacies, and more",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "An advertised list of clinical services a listener could rely on, checkable against the provider.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001253",
+        "topic_ids": [
+          "topic:childrens_health",
+          "topic:mental_health",
+          "topic:other_health_topic"
+        ]
+      }
+    ],
+    "window_id": "episode_63957_window_0019"
+  },
+  "stored_at": "2026-09-09T18:04:01.722716+00:00"
+}

@@ -1,0 +1,404 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c199989w0021",
+  "provenance": {
+    "bundle": "bundle_002",
+    "ingested_at": "2026-09-12T23:16:54.081881+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001200",
+        "evidence_quote": "there's no reason to suspect psychosis, no reason to hospitalize her",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001195",
+        "summary": "Recounts a treating doctor's trial testimony that she saw no signs of psychosis and no reason to hospitalize the defendant the day before the killings."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001225",
+        "evidence_quote": "she used, I think, one marijuana gummy, and said she didn't continue to use it because it wasn't effective for her",
+        "label_ids": [
+          "topic:cannabis_psychedelics_emerging_psychoactive_substances"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001218",
+        "summary": "Recounts contested trial testimony about whether the defendant used marijuana or a CBD gummy before the killings, and whether it was effective for her."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001200",
+        "evidence_quote": "Knows Lindsay probably the best.",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001195",
+        "summary": "The treating doctor's long, close relationship with the patient is invoked to lend weight to her assessment that there were no signs of psychosis."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001234",
+        "evidence_quote": "their cookware is made without forever chemicals, and has been since day one.",
+        "label_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001234",
+        "summary": "Ad claims Our Place cookware is made without 'forever chemicals' (PFAS)."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001245",
+        "evidence_quote": "every cooking surface is made without forever chemicals",
+        "label_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001245",
+        "summary": "Ad claims the Wonder Oven Pro's cooking surfaces are made without 'forever chemicals' (PFAS)."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001235",
+        "evidence_quote": "It's third-party tested to meet global safety standards.",
+        "label_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001235",
+        "summary": "Ad claims the cookware is third-party tested to meet global safety standards."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001261",
+        "evidence_quote": "use code PROSECUTE for ten percent off site wide",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001228",
+        "summary": "Sponsor read for Our Place cookware and the Wonder Oven Pro, with a discount code and website."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u001236",
+        "evidence_quote": "Our place makes beautiful, high-performance kitchenware designed to make home cooking easier, simpler.",
+        "mention_role": "advertised",
+        "product_name": "Our Place",
+        "product_type": "other_product",
+        "start_unit_id": "u001228"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u001260",
+        "evidence_quote": "I got the Wonder Oven Pro, and I can honestly say it has now become one of my most used appliances in my kitchen.",
+        "mention_role": "advertised",
+        "product_name": "Wonder Oven Pro",
+        "product_type": "other_product",
+        "start_unit_id": "u001237"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The treating doctor who saw Lindsay most consistently found no reason to suspect psychosis or to hospitalize her the day before the killings.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001198",
+        "evidence_quote": "there's no reason to suspect psychosis, no reason to hospitalize her",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific clinical assessment about the absence of psychosis symptoms that is central to the case and could be checked against the medical record.",
+        "relevance": "substantive",
+        "start_unit_id": "u001197",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Our Place cookware is made without forever chemicals (PFAS).",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001234",
+        "evidence_quote": "their cookware is made without forever chemicals, and has been since day one.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A composition/safety claim about the cookware's chemical content that could be checked against independent product testing.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001234",
+        "topic_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Wonder Oven Pro's cooking surfaces are made without forever chemicals (PFAS).",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001245",
+        "evidence_quote": "every cooking surface is made without forever chemicals",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A composition/safety claim about the Wonder Oven Pro that could be checked against independent product testing.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001245",
+        "topic_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Our Place products are third-party tested to meet global safety standards.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001235",
+        "evidence_quote": "It's third-party tested to meet global safety standards.",
+        "evidence_signal_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A certification/testing claim about the product's safety compliance that could be checked against actual test records.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001235",
+        "topic_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ]
+      }
+    ],
+    "window_id": "episode_199989_window_0021"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001200",
+        "evidence_quote": "there's no reason to suspect psychosis, no reason to hospitalize her",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001195",
+        "summary": "Recounts a treating doctor's trial testimony that she saw no signs of psychosis and no reason to hospitalize the defendant the day before the killings."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001225",
+        "evidence_quote": "she used, I think, one marijuana gummy, and said she didn't continue to use it because it wasn't effective for her",
+        "label_ids": [
+          "topic:cannabis_psychedelics_emerging_psychoactive_substances"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001218",
+        "summary": "Recounts contested trial testimony about whether the defendant used marijuana or a CBD gummy before the killings, and whether it was effective for her."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001200",
+        "evidence_quote": "Knows Lindsay probably the best",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001195",
+        "summary": "The treating doctor's long, close relationship with the patient is invoked to lend weight to her assessment that there were no signs of psychosis."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001234",
+        "evidence_quote": "their cookware is made without forever chemicals, and has been since day one",
+        "label_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001234",
+        "summary": "Ad claims Our Place cookware is made without 'forever chemicals' (PFAS)."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001245",
+        "evidence_quote": "every cooking surface is made without forever chemicals",
+        "label_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001245",
+        "summary": "Ad claims the Wonder Oven Pro's cooking surfaces are made without 'forever chemicals' (PFAS)."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001235",
+        "evidence_quote": "It's third-party tested to meet global safety standards",
+        "label_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001235",
+        "summary": "Ad claims the cookware is third-party tested to meet global safety standards."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001261",
+        "evidence_quote": "use code PROSECUTE for ten percent off site wide",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001228",
+        "summary": "Sponsor read for Our Place cookware and the Wonder Oven Pro, with a discount code and website."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u001236",
+        "evidence_quote": "Our place makes beautiful, high-performance kitchenware designed to make home cooking easier, simpler",
+        "mention_role": "advertised",
+        "product_name": "Our Place",
+        "product_type": "other_product",
+        "start_unit_id": "u001228"
+      },
+      {
+        "confidence": 0.85,
+        "end_unit_id": "u001260",
+        "evidence_quote": "I got the Wonder Oven Pro, and I can honestly say it has now become one of my most used appliances in my kitchen",
+        "mention_role": "advertised",
+        "product_name": "Wonder Oven Pro",
+        "product_type": "other_product",
+        "start_unit_id": "u001237"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The treating doctor who saw Lindsay most consistently found no reason to suspect psychosis or to hospitalize her the day before the killings.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001198",
+        "evidence_quote": "there's no reason to suspect psychosis, no reason to hospitalize her",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific clinical assessment about the absence of psychosis symptoms that is central to the case and could be checked against the medical record.",
+        "relevance": "substantive",
+        "start_unit_id": "u001197",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Our Place cookware is made without forever chemicals (PFAS).",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001234",
+        "evidence_quote": "their cookware is made without forever chemicals, and has been since day one",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A composition/safety claim about the cookware's chemical content that could be checked against independent product testing.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001234",
+        "topic_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Wonder Oven Pro's cooking surfaces are made without forever chemicals (PFAS).",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001245",
+        "evidence_quote": "every cooking surface is made without forever chemicals",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A composition/safety claim about the Wonder Oven Pro that could be checked against independent product testing.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001245",
+        "topic_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Our Place products are third-party tested to meet global safety standards.",
+        "claim_type": "other_factual",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001235",
+        "evidence_quote": "It's third-party tested to meet global safety standards",
+        "evidence_signal_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A certification/testing claim about the product's safety compliance that could be checked against actual test records.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001235",
+        "topic_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ]
+      }
+    ],
+    "window_id": "episode_199989_window_0021"
+  },
+  "stored_at": "2026-09-12T23:16:54.081938+00:00"
+}

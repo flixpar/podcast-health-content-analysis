@@ -1,0 +1,435 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "t-c4558w0003--brand_to_generic",
+  "provenance": {
+    "bundle": "bundle_001",
+    "ingested_at": "2026-09-12T22:33:10.260062+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-contrast-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000120",
+        "evidence_quote": "So those records would have all the records of vaccination and then the subsequent health claims, and you can do a cluster analysis and look at see if there's an association.",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "Speaker describes a plan for new observational, retrospective, and epidemiological vaccine-safety studies using CDC, CMS, and Vaccine Safety Data Link records, promising answers within months."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000113",
+        "evidence_quote": "we're going to make the databases public for the first time.",
+        "label_ids": [
+          "cross_cutting:suppressed_science_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "Speaker frames existing vaccine-safety data as previously withheld, now being made public for real independent study for the first time."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000119",
+        "evidence_quote": "we're going to do all the kind of studies that the Institute of Medicine originally recommended",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:prestige_science_invocation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "Speaker invokes the Institute of Medicine's recommended study designs and describes forthcoming observational and epidemiological studies as evidence of rigor."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "unlike the rest of this country's corrupted food supply, corn chips have no seed oils whatsoever.",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000121",
+        "summary": "Sponsor read for a 'corn chips' brand contrasts it with ordinary seed-oil-containing chips, pitching it as a healthier snack."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "you just stuffed hundreds of calories of chemically-laced, seed oil-infused crap into your mouth.",
+        "label_ids": [
+          "cross_cutting:naturalness_appeal",
+          "cross_cutting:purity_contamination_framing",
+          "cross_cutting:big_food_food_system_distrust",
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000121",
+        "summary": "Ad copy uses clean-versus-contaminated language and broader food-system distrust rhetoric to sell corn chips over seed-oil competitors."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000140",
+        "evidence_quote": "endorsed by nutrition experts around the country.",
+        "label_ids": [
+          "cross_cutting:credential_appeal",
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000138",
+        "summary": "Ad claims the snack is endorsed by nutrition experts, invoking expert authority to legitimize the product."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000142",
+        "evidence_quote": "It's called corn chips.",
+        "mention_role": "advertised",
+        "product_name": "Corn Chips",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000129"
+      },
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000152",
+        "evidence_quote": "It's the fastest-growing pet telehealth service.",
+        "mention_role": "advertised",
+        "product_name": "Dutch",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000150"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The Vaccine Safety Data Link is the largest repository of HMO health records.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000110",
+        "evidence_quote": "which is the biggest repository for HMO health records.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific factual claim about a named database's scope is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000110",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "definitive answers"
+        ],
+        "claim_text": "Roughly fifteen independent research teams will produce definitive answers on the vaccine safety question within six months after September.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000120",
+        "evidence_quote": "And within six months, we'll have definitive answers after September.",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "Specific, falsifiable prediction about study outcomes and timeline is checkable against what is later delivered.",
+        "relevance": "substantive",
+        "start_unit_id": "u000119",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Institute of Medicine originally recommended observational, retrospective, and epidemiological studies for this vaccine safety question.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000106",
+        "evidence_quote": "all the kind of studies that the Institute of Medicine originally recommended",
+        "evidence_signal_ids": [
+          "cross_cutting:prestige_science_invocation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Attributed institutional recommendation is checkable against the Institute of Medicine's actual published reports.",
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "no seed oils whatsoever"
+        ],
+        "claim_text": "The advertised corn chips contain no seed oils whatsoever, unlike the rest of the country's food supply.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "corn chips have no seed oils whatsoever.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:naturalness_appeal"
+        ],
+        "rationale": "Specific compositional claim about the product is directly checkable against its ingredient label.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000134",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The advertised corn chips are endorsed by nutrition experts around the country.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "endorsed by nutrition experts around the country.",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal",
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Advertisement's claim of expert endorsement is a checkable factual assertion relevant to consumer trust.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000139",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      }
+    ],
+    "window_id": "episode_4558_window_0003_brand_to_generic"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000120",
+        "evidence_quote": "So those records would have all the records of vaccination and then the subsequent health claims, and you can do a cluster analysis and look at see if there's an association",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "Speaker describes a plan for new observational, retrospective, and epidemiological vaccine-safety studies using CDC, CMS, and Vaccine Safety Data Link records, promising answers within months."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000113",
+        "evidence_quote": "we're going to make the databases public for the first time",
+        "label_ids": [
+          "cross_cutting:suppressed_science_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "Speaker frames existing vaccine-safety data as previously withheld, now being made public for real independent study for the first time."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000119",
+        "evidence_quote": "we're going to do all the kind of studies that the Institute of Medicine originally recommended",
+        "label_ids": [
+          "cross_cutting:prestige_science_invocation",
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "summary": "Speaker invokes the Institute of Medicine's recommended study designs and describes forthcoming observational and epidemiological studies as evidence of rigor."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "unlike the rest of this country's corrupted food supply, corn chips have no seed oils whatsoever",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000121",
+        "summary": "Sponsor read for a 'corn chips' brand contrasts it with ordinary seed-oil-containing chips, pitching it as a healthier snack."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000145",
+        "evidence_quote": "You just stuffed hundreds of calories of chemically-laced, seed oil-infused crap into your mouth",
+        "label_ids": [
+          "cross_cutting:big_food_food_system_distrust",
+          "cross_cutting:commercialization",
+          "cross_cutting:naturalness_appeal",
+          "cross_cutting:purity_contamination_framing"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000121",
+        "summary": "Ad copy uses clean-versus-contaminated language and broader food-system distrust rhetoric to sell corn chips over seed-oil competitors."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000140",
+        "evidence_quote": "endorsed by nutrition experts around the country",
+        "label_ids": [
+          "cross_cutting:credential_appeal",
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000138",
+        "summary": "Ad claims the snack is endorsed by nutrition experts, invoking expert authority to legitimize the product."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000142",
+        "evidence_quote": "It's called corn chips",
+        "mention_role": "advertised",
+        "product_name": "Corn Chips",
+        "product_type": "food_or_beverage",
+        "start_unit_id": "u000129"
+      },
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000152",
+        "evidence_quote": "It's the fastest-growing pet telehealth service",
+        "mention_role": "advertised",
+        "product_name": "Dutch",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000150"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The Vaccine Safety Data Link is the largest repository of HMO health records.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000110",
+        "evidence_quote": "which is the biggest repository for HMO health records",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific factual claim about a named database's scope is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000110",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "definitive answers"
+        ],
+        "claim_text": "Roughly fifteen independent research teams will produce definitive answers on the vaccine safety question within six months after September.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000120",
+        "evidence_quote": "And within six months, we'll have definitive answers after September",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "Specific, falsifiable prediction about study outcomes and timeline is checkable against what is later delivered.",
+        "relevance": "substantive",
+        "start_unit_id": "u000119",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The Institute of Medicine originally recommended observational, retrospective, and epidemiological studies for this vaccine safety question.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000106",
+        "evidence_quote": "all the kind of studies that the Institute of Medicine originally recommended",
+        "evidence_signal_ids": [
+          "cross_cutting:prestige_science_invocation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Attributed institutional recommendation is checkable against the Institute of Medicine's actual published reports.",
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "no seed oils whatsoever"
+        ],
+        "claim_text": "The advertised corn chips contain no seed oils whatsoever, unlike the rest of the country's food supply.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "corn chips have no seed oils whatsoever",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:naturalness_appeal"
+        ],
+        "rationale": "Specific compositional claim about the product is directly checkable against its ingredient label.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000134",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The advertised corn chips are endorsed by nutrition experts around the country.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000139",
+        "evidence_quote": "endorsed by nutrition experts around the country",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal",
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Advertisement's claim of expert endorsement is a checkable factual assertion relevant to consumer trust.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000139",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      }
+    ],
+    "window_id": "episode_4558_window_0003_brand_to_generic"
+  },
+  "stored_at": "2026-09-12T22:33:10.260106+00:00"
+}

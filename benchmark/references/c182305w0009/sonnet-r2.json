@@ -1,0 +1,398 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c182305w0009",
+  "provenance": {
+    "bundle": "bundle_012",
+    "ingested_at": "2026-09-12T23:30:31.397686+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000538",
+        "evidence_quote": "there are also a lot of drugs that interfere with histamine breakdown through this DAO enzyme",
+        "label_ids": [
+          "topic:gut_health_microbiome"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000529",
+        "summary": "Explains histamine intolerance via the DAO enzyme, listing drugs that inhibit it and nutrients needed to run it."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000548",
+        "evidence_quote": "who really never seen a functional medicine doctor, who have, you know, low lower socioeconomic status, underserved patients",
+        "label_ids": [
+          "topic:natural_alternative_functional_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000539",
+        "summary": "Describes the clinic's nutritional testing approach and finding massive nutrient deficiencies even in an affluent population."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000548",
+        "evidence_quote": "take out the bad stuff, whether it's foods or drugs, and we can add in the good stuff",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000546",
+        "summary": "Frames functional medicine as removing bad inputs and adding good ones as the source of its power."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000579",
+        "evidence_quote": "It felt like a curse at the time because I could barely function. I couldn't get out of bed.",
+        "label_ids": [
+          "topic:chronic_complex_symptom_communities"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000549",
+        "summary": "Personal case study of debilitating chronic fatigue: unable to function, barely able to work, layered with psychological stress from divorce."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000558",
+        "evidence_quote": "at lunch I could go get a massage or do a steamer, a sauna, an ice dip",
+        "label_ids": [
+          "topic:recovery_physical_optimization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000558",
+        "summary": "Mentions using massage, sauna and ice dips at lunch to get through the day, in passing."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000580",
+        "evidence_quote": "And most doctors have no clue how to deal with it.",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000580",
+        "summary": "Asserts that most doctors have no clue how to deal with chronic fatigue."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000583",
+        "evidence_quote": "There's a lot of literature and science about the biology and the inflammatory cytokines and all the things that we actually can measure",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000583",
+        "summary": "Cites literature and science on inflammatory cytokines as measurable biology behind chronic fatigue."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000590",
+        "evidence_quote": "I discovered that I had mercury poisoning. That was the first thing, and that was huge for me to get rid of the mercury.",
+        "label_ids": [
+          "topic:detox_cleanses_parasites",
+          "topic:environmental_health_chemical_exposures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000586",
+        "summary": "Describes discovering mercury poisoning and spending years removing it through chelation, IV therapy and avoiding fish."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000590",
+        "evidence_quote": "Took me probably five years or more to get rid of the mercury through chelation and IV therapy and avoiding fish",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000586",
+        "summary": "Offers his own multi-year mercury chelation and detox process as evidence for the approach."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000539",
+        "evidence_quote": "the nutritional testing we do here at the El Chovano Center",
+        "mention_role": "own_product",
+        "product_name": "El Chovano Center",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000539"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "can"
+        ],
+        "claim_text": "Common medications including antibiotics, antidepressants, antipsychotics, diuretics, muscle relaxants, pain medications, acid blockers, aspirin and naproxen can inhibit the DAO enzyme that breaks down histamine.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000531",
+        "evidence_quote": "naproxen, like Aleve, Altearin, anti-inflammatories, all can be really driving this inhibition of this enzyme that breaks down histamine",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific pharmacological mechanism claim linking common medication classes to DAO enzyme inhibition is checkable against pharmacology literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000530",
+        "topic_ids": [
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Many people are deficient in nutrients needed to break down histamine via DAO, such as vitamin B6, vitamin C, copper, magnesium, manganese, zinc, calcium, B1, B12 and folic acid.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000538",
+        "evidence_quote": "All these are critical nutrients, and many of us are deficient.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Prevalence claim about widespread deficiency in specific nutrients is checkable against nutritional survey data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000537",
+        "topic_ids": [
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There is scientific literature showing measurable biological markers, including inflammatory cytokines, in people who are chronically fatigued.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000583",
+        "evidence_quote": "the inflammatory cytokines and all the things that we actually can measure in people who are chronically fatigued",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "General claim about measurable inflammatory markers in chronic fatigue is checkable against the clinical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000583",
+        "topic_ids": [
+          "topic:chronic_complex_symptom_communities"
+        ]
+      }
+    ],
+    "window_id": "episode_182305_window_0009"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000538",
+        "evidence_quote": "there are also a lot of drugs that interfere with histamine breakdown through this DAO enzyme",
+        "label_ids": [
+          "topic:gut_health_microbiome"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000529",
+        "summary": "Explains histamine intolerance via the DAO enzyme, listing drugs that inhibit it and nutrients needed to run it."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000548",
+        "evidence_quote": "who really never seen a functional medicine doctor, who have, you know, low lower socioeconomic status, underserved patients",
+        "label_ids": [
+          "topic:natural_alternative_functional_medicine"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000539",
+        "summary": "Describes the clinic's nutritional testing approach and finding massive nutrient deficiencies even in an affluent population."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000548",
+        "evidence_quote": "take out the bad stuff, whether it's foods or drugs, and we can add in the good stuff",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000546",
+        "summary": "Frames functional medicine as removing bad inputs and adding good ones as the source of its power."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000579",
+        "evidence_quote": "It felt like a curse at the time because I could barely function. I couldn't get out of bed",
+        "label_ids": [
+          "topic:chronic_complex_symptom_communities"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000549",
+        "summary": "Personal case study of debilitating chronic fatigue: unable to function, barely able to work, layered with psychological stress from divorce."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000558",
+        "evidence_quote": "at lunch I could go get a massage or do a steamer, a sauna, an ice dip",
+        "label_ids": [
+          "topic:recovery_physical_optimization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000558",
+        "summary": "Mentions using massage, sauna and ice dips at lunch to get through the day, in passing."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000580",
+        "evidence_quote": "And most doctors have no clue how to deal with it",
+        "label_ids": [
+          "cross_cutting:anti_mainstream_medicine_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000580",
+        "summary": "Asserts that most doctors have no clue how to deal with chronic fatigue."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000583",
+        "evidence_quote": "There's a lot of literature and science about the biology and the inflammatory cytokines and all the things that we actually can measure",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language",
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000583",
+        "summary": "Cites literature and science on inflammatory cytokines as measurable biology behind chronic fatigue."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000590",
+        "evidence_quote": "I discovered that I had mercury poisoning. That was the first thing, and that was huge for me to get rid of the mercury",
+        "label_ids": [
+          "topic:detox_cleanses_parasites",
+          "topic:environmental_health_chemical_exposures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000586",
+        "summary": "Describes discovering mercury poisoning and spending years removing it through chelation, IV therapy and avoiding fish."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000590",
+        "evidence_quote": "Took me probably five years or more to get rid of the mercury through chelation and IV therapy and avoiding fish",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000586",
+        "summary": "Offers his own multi-year mercury chelation and detox process as evidence for the approach."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000539",
+        "evidence_quote": "the nutritional testing we do here at the El Chovano Center",
+        "mention_role": "own_product",
+        "product_name": "El Chovano Center",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000539"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "can"
+        ],
+        "claim_text": "Common medications including antibiotics, antidepressants, antipsychotics, diuretics, muscle relaxants, pain medications, acid blockers, aspirin and naproxen can inhibit the DAO enzyme that breaks down histamine.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000531",
+        "evidence_quote": "naproxen, like Aleve, Altearin, anti-inflammatories, all can be really driving this inhibition of this enzyme that breaks down histamine",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific pharmacological mechanism claim linking common medication classes to DAO enzyme inhibition is checkable against pharmacology literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000530",
+        "topic_ids": [
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Many people are deficient in nutrients needed to break down histamine via DAO, such as vitamin B6, vitamin C, copper, magnesium, manganese, zinc, calcium, B1, B12 and folic acid.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000538",
+        "evidence_quote": "All these are critical nutrients, and many of us are deficient",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Prevalence claim about widespread deficiency in specific nutrients is checkable against nutritional survey data.",
+        "relevance": "substantive",
+        "start_unit_id": "u000537",
+        "topic_ids": [
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "There is scientific literature showing measurable biological markers, including inflammatory cytokines, in people who are chronically fatigued.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000583",
+        "evidence_quote": "the inflammatory cytokines and all the things that we actually can measure in people who are chronically fatigued",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language",
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "General claim about measurable inflammatory markers in chronic fatigue is checkable against the clinical literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000583",
+        "topic_ids": [
+          "topic:chronic_complex_symptom_communities"
+        ]
+      }
+    ],
+    "window_id": "episode_182305_window_0009"
+  },
+  "stored_at": "2026-09-12T23:30:31.397704+00:00"
+}
