@@ -245,22 +245,32 @@ def update_catalog(config: Config, conn: sqlite3.Connection, session: requests.S
 
 def _catalog_apple(config: Config, conn: sqlite3.Connection, session: requests.Session,
                    chart: str, day: str, entries: list[Entry]) -> dict:
-    ids = [e.apple_id for e in entries]
-    known: dict[str, int] = {}
-    # lowest id wins where two rows share an Apple id (as db.podcast_for_entity)
-    for row in conn.execute(f"""
-            SELECT id, apple_podcasts_id FROM podcasts
-            WHERE apple_podcasts_id IN ({",".join("?" * len(ids))}) ORDER BY id DESC
-            """, ids):
-        known[row[1]] = row[0]
-    new = [e for e in entries if e.apple_id not in known]
+    manual_unresolved = {r[0] for r in conn.execute(
+        "SELECT entity FROM entity_links WHERE method = 'manual' AND podcast_id IS NULL")}
+    blocked = {e.apple_id for e in entries if f"apple:{e.apple_id}" in manual_unresolved}
+    known = {e.apple_id: pid for e in entries
+             if (pid := db.podcast_for_entity(conn, f"apple:{e.apple_id}")) is not None}
+    new = [e for e in entries if e.apple_id not in known and e.apple_id not in blocked]
     details = (apple.lookup_many(session, [e.apple_id for e in new],
                                  batch_size=config.resolve.lookup_batch_size,
                                  delay=config.resolve.lookup_delay_seconds) if new else {})
     no_lookup = []
+    added = 0
     for e in new:
         record = apple._to_record(e.raw, details.get(e.apple_id))
-        podcast_id = db.upsert_podcast(conn, record)
+        holder = conn.execute("""
+            SELECT id FROM podcasts WHERE rss_url = ?
+            UNION SELECT podcast_id FROM podcast_feeds WHERE url = ?
+            ORDER BY 1 LIMIT 1
+        """, (record.rss_url, record.rss_url)).fetchone() if record.rss_url else None
+        if holder is not None:
+            podcast_id = holder[0]
+            db.link_entity(conn, f"apple:{e.apple_id}", podcast_id, "itunes_lookup",
+                           {"existing_podcast_by_feed": podcast_id, "feed": record.rss_url,
+                            "chart": chart, "captured_on": day})
+        else:
+            podcast_id = db.upsert_podcast(conn, record)
+            added += 1
         if record.rss_url:
             db.record_feed_url(conn, podcast_id, record.rss_url, "itunes_lookup")
         else:
@@ -270,9 +280,12 @@ def _catalog_apple(config: Config, conn: sqlite3.Connection, session: requests.S
         logger.warning(f"{len(no_lookup)} charting Apple ids have no feed in the iTunes lookup "
                        f"(added from the chart alone): {no_lookup}")
     for e in entries:
+        if e.apple_id in blocked:
+            continue  # Manual "unresolvable" decisions are final, as in resolve.
         db.record_podcast_source(conn, known[e.apple_id], db.SourceKind.CHART_CAPTURE, chart,
                                  {"rank": e.rank, "captured_on": day})
-    return {"seen": len(entries), "added": len(new), "already_known": len(entries) - len(new),
+    return {"seen": len(entries), "added": added, "already_known": len(entries) - added - len(blocked),
+            "skipped_manual": len(blocked),
             "added_without_feed": len(no_lookup)}
 
 

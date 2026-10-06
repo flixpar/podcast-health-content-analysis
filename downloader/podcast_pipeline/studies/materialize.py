@@ -8,8 +8,8 @@ podcast), ``discover`` / ``discover-archived`` (podcasts gain episodes).
 Membership is fully derived, so the member and window tables are rewritten on
 every refresh. Episode rows keep the revision that first added them, and the
 study's ``revision`` is bumped (with a ``study_revisions`` row) whenever the
-selected episode set, an episode's member or window, or the definition changes, so an exported manifest can be
-tied to exactly the membership it came from.
+selected episode set, member/window state, or definition changes, so an exported
+manifest can be tied to exactly the membership it came from.
 """
 
 from __future__ import annotations
@@ -65,20 +65,38 @@ def refresh(conn: sqlite3.Connection, study: Study) -> dict:
     removed = set(previous) - {s.episode_id for s in selected}
     moved = sum(1 for s in selected if s.episode_id in placed
                 and placed[s.episode_id] != (s.entity, s.window_label))
-    changed = (bool(added or removed or moved) or row is None
-               or row["definition_hash"] != definition_hash)
-    revision = old_revision + 1 if changed else old_revision
-
     by_podcast: dict[int, list[str]] = defaultdict(list)
     for entity, pid in resolved.items():
         if pid is not None:
             by_podcast[pid].append(entity)
     merged = {e: ents for ents in by_podcast.values() if len(ents) > 1 for e in ents}
 
+    member_rows = [(m.entity, resolved[m.entity], m.name, m.scope,
+                    json.dumps({**m.attrs, **({"merged_with": sorted(merged[m.entity])}
+                                             if m.entity in merged else {})}, sort_keys=True))
+                   for m in members]
+    window_rows = [(m.entity, w.label, w.start, w.end, json.dumps(w.attrs, sort_keys=True))
+                   for m in members for w in m.windows or []]
+
+    def previous_rows(table, columns):
+        return {(*tuple(r)[:-1], json.dumps(json.loads(r["attrs"] or "{}"), sort_keys=True))
+                for r in conn.execute(f"SELECT {columns}, attrs FROM {table} WHERE study = ?",
+                                      (study.name,))}
+
+    members_changed = set(member_rows) != previous_rows(
+        "study_members", "entity, podcast_id, name, scope")
+    windows_changed = set(window_rows) != previous_rows(
+        "study_windows", "entity, label, start_date, end_date")
+    changed = (bool(added or removed or moved) or members_changed or windows_changed
+               or row is None or row["definition_hash"] != definition_hash)
+    revision = old_revision + 1 if changed else old_revision
+
     summary = {
         "revision": revision,
         "definition_hash": definition_hash,
         "members": len(members),
+        "members_changed": members_changed,
+        "windows_changed": windows_changed,
         "members_resolved": sum(pid is not None for pid in resolved.values()),
         "members_merged": len(merged),
         "windows": sum(len(m.windows or []) for m in members),
@@ -95,14 +113,11 @@ def refresh(conn: sqlite3.Connection, study: Study) -> dict:
         conn.executemany("""
             INSERT INTO study_members (study, entity, podcast_id, name, scope, attrs)
             VALUES (?, ?, ?, ?, ?, ?)
-        """, [(study.name, m.entity, resolved[m.entity], m.name, m.scope,
-               json.dumps({**m.attrs, **({"merged_with": merged[m.entity]} if m.entity in merged else {})}))
-              for m in members])
+        """, [(study.name, *r) for r in member_rows])
         conn.executemany("""
             INSERT INTO study_windows (study, entity, label, start_date, end_date, attrs)
             VALUES (?, ?, ?, ?, ?, ?)
-        """, [(study.name, m.entity, w.label, w.start, w.end, json.dumps(w.attrs))
-              for m in members for w in m.windows or []])
+        """, [(study.name, *r) for r in window_rows])
         conn.execute("DELETE FROM study_episodes WHERE study = ?", (study.name,))
         conn.executemany("""
             INSERT INTO study_episodes (study, episode_id, entity, window_label, priority, added_revision)

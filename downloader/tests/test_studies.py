@@ -120,6 +120,91 @@ def test_unresolved_members_are_kept_without_episodes(conn):
                                             [Window("2019-01", "2019-01-01", "2019-02-01")])]))["episodes"] == 1
 
 
+@pytest.mark.parametrize("change", ["add_member", "remove_member", "name", "member_attrs",
+                                   "scope", "window_dates", "window_attrs", "add_window",
+                                   "remove_window", "resolve"])
+def test_member_or_empty_window_changes_bump_revision(conn, config, change):
+    member = Member("title:show", "Show", [Window("2020-01", "2020-01-01", "2020-02-01")],
+                    {"publisher": "Publisher"})
+    study = FixedStudy([member])
+    assert refresh(conn, study)["revision"] == 1
+    first = export(config, conn, study.name)
+    first_metadata = (config.study_export_dir / study.name / "rev1" / "study.json").read_bytes()
+    if change == "add_member":
+        study._members.append(Member("title:other", "Other"))
+    elif change == "remove_member":
+        study._members.clear()
+    elif change == "name":
+        member.name = "New name"
+    elif change == "member_attrs":
+        member.attrs["publisher"] = "New publisher"
+    elif change == "scope":
+        member.windows = None
+    elif change == "window_dates":
+        member.windows = [Window("2020-01", "2020-01-02", "2020-02-01")]
+    elif change == "window_attrs":
+        member.windows = [Window("2020-01", "2020-01-01", "2020-02-01", {"provisional": True})]
+    elif change == "add_window":
+        member.windows.append(Window("2020-02", "2020-02-01", "2020-03-01"))
+    elif change == "remove_window":
+        member.windows.clear()
+    elif change == "resolve":
+        db.link_entity(conn, member.entity, add_podcast(conn, 7), "manual")
+        conn.commit()
+    summary = refresh(conn, study)
+    assert summary["revision"] == 2 and summary["episodes"] == 0
+    assert summary["episodes_added"] == summary["episodes_removed"] == 0
+    second = export(config, conn, study.name)
+    assert first["manifest"] != second["manifest"]
+    assert (config.study_export_dir / study.name / "rev1" / "study.json").read_bytes() == first_metadata
+    assert refresh(conn, study)["revision"] == 2
+    assert conn.execute("SELECT COUNT(*) FROM study_revisions").fetchone()[0] == 2
+
+
+def test_member_order_and_json_key_order_do_not_bump_revision(conn):
+    study = FixedStudy([Member("title:a", attrs={"x": 1, "y": 2}), Member("title:b")])
+    assert refresh(conn, study)["revision"] == 1
+    study._members.reverse()
+    study._members[1].attrs = {"y": 2, "x": 1}
+    assert refresh(conn, study)["revision"] == 1
+
+
+@pytest.mark.parametrize("duration", [None, 0, -1])
+def test_storage_estimates_unknown_durations_without_double_counting(conn, config, duration):
+    p = add_podcast(conn, 1)
+    measured = add_episode(conn, p, "measured", "2020-01-01T00:00:00", audio=True)
+    known = add_episode(conn, p, "known", "2020-01-02T00:00:00")
+    unknown = add_episode(conn, p, "unknown", "2020-01-03T00:00:00")
+    conn.execute("UPDATE episodes SET duration_seconds = 3600, compressed_file_size_mb = 1024 WHERE id = ?", (measured,))
+    conn.execute("UPDATE episodes SET duration_seconds = 7200 WHERE id = ?", (known,))
+    conn.execute("UPDATE episodes SET duration_seconds = ? WHERE id = ?", (duration, unknown))
+    conn.commit()
+    refresh(conn, FixedStudy([Member(f"podcast:{p}")]))
+    s = status(config, conn, "fixed")
+    assert s["storage"]["pending_download_episodes"] == 2
+    # Two known pending hours plus one unknown at the catalog mean (1.5 hours).
+    assert s["storage"]["pending_download_gb_estimate"] == 3.5
+    assert s["hours"]["awaiting_download"] == 2.0
+
+
+def test_storage_uses_configured_fallback_and_warns_when_all_durations_unknown(conn, config, monkeypatch):
+    import shutil
+    import importlib
+    status_module = importlib.import_module("podcast_pipeline.studies.status")
+    monkeypatch.setattr(status_module.shutil, "disk_usage", lambda path:
+                        shutil._ntuple_diskusage(1024 ** 4, 0, 101 * 1024 ** 3))
+    config.storage.estimated_episode_duration_seconds = 7200
+    p = add_podcast(conn, 1)
+    for n in range(100):
+        add_episode(conn, p, str(n), "2020-01-01T00:00:00")
+    conn.commit()
+    refresh(conn, FixedStudy([Member(f"podcast:{p}")]))
+    s = status(config, conn, "fixed")
+    assert s["storage"]["pending_download_gb_estimate"] == 2.1
+    assert s["storage"]["pending_download_episodes"] == 100
+    assert any("WARNING" in step for step in s["next_steps"])
+
+
 def test_two_entities_for_one_podcast_share_its_episodes_once(conn):
     p = add_podcast(conn, 5)
     e = add_episode(conn, p, "e", "2019-01-05T00:00:00")

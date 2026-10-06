@@ -152,6 +152,8 @@ class TranscriptionConfig:
 @dataclass
 class StorageConfig:
     transcript_compression_level: int = 3   # zstd level for transcript files
+    # Study storage estimates use this only when no positive feed durations exist.
+    estimated_episode_duration_seconds: int = 3600
 
 
 @dataclass

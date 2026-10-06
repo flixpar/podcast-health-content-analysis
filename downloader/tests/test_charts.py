@@ -359,7 +359,7 @@ def test_capture_catalog_adds_apple_and_links_spotify(config, conn, fake_net, mo
 
     assert asked == [["1200361736", "999"]]          # only ids the catalog lacks
     assert summary["captured"]["apple_marketing_tools"]["catalog"] == {
-        "seen": 3, "added": 2, "already_known": 1, "added_without_feed": 1}
+        "seen": 3, "added": 2, "already_known": 1, "skipped_manual": 0, "added_without_feed": 1}
     assert summary["captured"]["spotify_api"]["catalog"] == {
         "seen": 2, "linked": 1, "not_in_catalog": 1}
     daily = conn.execute("SELECT * FROM podcasts WHERE apple_podcasts_id = '1200361736'").fetchone()
@@ -386,6 +386,65 @@ def test_failing_source_is_recorded_others_still_captured(config, conn, fake_net
         capture.run(config, conn, catalog=False)
     rows = conn.execute("SELECT source FROM chart_snapshots").fetchall()
     assert [r["source"] for r in rows] == ["apple_marketing_tools"]
+
+
+@pytest.mark.parametrize("historical_feed", [False, True])
+def test_capture_reuses_feed_owner_and_retains_entity_link(config, conn, fake_net, monkeypatch, historical_feed):
+    from podcast_pipeline.models import PodcastRecord
+    feed = "https://feeds/daily"
+    existing = db.upsert_podcast(conn, PodcastRecord(
+        source_id="spotify_DAILY", title="Original title", spotify_id="DAILY",
+        rss_url="https://feeds/current" if historical_feed else feed))
+    if historical_feed:
+        db.record_feed_url(conn, existing, feed, "old_feed")
+    conn.commit()
+    original = dict(conn.execute("SELECT * FROM podcasts WHERE id = ?", (existing,)).fetchone())
+    lookup = {"1200361736": {"collectionId": 1200361736, "collectionName": "The Daily",
+                              "artistName": "The New York Times", "feedUrl": feed}}
+    _, asked = fake_net(apple={"feed": {"results": APPLE_FEED["feed"]["results"][:1]}}, lookup=lookup)
+    monkeypatch.setattr(capture, "_now", at(9))
+    first = capture.run(config, conn, sources=["apple_marketing_tools"])
+    assert first["captured"]["apple_marketing_tools"]["catalog"] == {
+        "seen": 1, "added": 0, "already_known": 1, "skipped_manual": 0, "added_without_feed": 0}
+    assert conn.execute("SELECT COUNT(*) FROM podcasts").fetchone()[0] == 1
+    assert dict(conn.execute("SELECT * FROM podcasts WHERE id = ?", (existing,)).fetchone()) == original
+    assert db.podcast_for_entity(conn, "apple:1200361736") == existing
+    link = conn.execute("SELECT detail FROM entity_links WHERE entity = 'apple:1200361736'").fetchone()
+    assert json.loads(link["detail"])["existing_podcast_by_feed"] == existing
+    assert conn.execute("SELECT podcast_id FROM podcast_sources WHERE source = 'chart_capture'").fetchone()[0] == existing
+    monkeypatch.setattr(capture, "_now", at(15))
+    capture.run(config, conn, sources=["apple_marketing_tools"])
+    assert asked == [["1200361736"]]
+    assert conn.execute("SELECT COUNT(*) FROM podcasts").fetchone()[0] == 1
+
+
+@pytest.mark.parametrize("manual_target", ["blocked", "linked"])
+def test_capture_preserves_manual_apple_decisions(config, conn, fake_net, monkeypatch, manual_target):
+    from podcast_pipeline.models import PodcastRecord
+    holder = db.upsert_podcast(conn, PodcastRecord(
+        source_id="spotify_DAILY", title="Feed owner", rss_url="https://feeds/daily"))
+    target = None
+    if manual_target == "linked":
+        target = db.upsert_podcast(conn, PodcastRecord(
+            source_id="manual_DAILY", title="Manual identity", rss_url="https://feeds/manual"))
+    db.link_entity(conn, "apple:1200361736", target, "manual", {"reason": "Reviewed identity"})
+    conn.commit()
+    original = dict(conn.execute("SELECT * FROM entity_links WHERE entity = 'apple:1200361736'").fetchone())
+    lookup = {"1200361736": {"collectionId": 1200361736, "feedUrl": "https://feeds/daily"}}
+    _, asked = fake_net(apple={"feed": {"results": APPLE_FEED["feed"]["results"][:1]}}, lookup=lookup)
+    monkeypatch.setattr(capture, "_now", at(9))
+    summary = capture.run(config, conn, sources=["apple_marketing_tools"])
+    assert asked == []
+    assert dict(conn.execute("SELECT * FROM entity_links WHERE entity = 'apple:1200361736'").fetchone()) == original
+    assert db.podcast_for_entity(conn, "apple:1200361736") == target
+    catalog = summary["captured"]["apple_marketing_tools"]["catalog"]
+    assert catalog["added"] == 0
+    assert catalog["skipped_manual"] == (target is None)
+    assert catalog["already_known"] == (target is not None)
+    provenance = [r[0] for r in conn.execute("SELECT podcast_id FROM podcast_sources WHERE source = 'chart_capture'")]
+    assert provenance == ([] if target is None else [target])
+    assert holder not in provenance
+    assert conn.execute("SELECT COUNT(*) FROM podcasts").fetchone()[0] == (1 if target is None else 2)
 
 
 def test_unexpected_payload_is_a_source_failure(config, conn, fake_net, monkeypatch):

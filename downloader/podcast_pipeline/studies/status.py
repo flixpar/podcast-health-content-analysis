@@ -61,7 +61,8 @@ def status(config: Config, conn: sqlite3.Connection, name: str, by: str = "year"
 
     states = conn.execute(f"""
         SELECT {EPISODE_STATE_SQL} AS state, COUNT(*) AS n,
-               COALESCE(SUM(e.duration_seconds), 0) / 3600.0 AS hours
+               SUM(e.duration_seconds IS NULL OR e.duration_seconds <= 0) AS unknown_duration,
+               COALESCE(SUM(CASE WHEN e.duration_seconds > 0 THEN e.duration_seconds END), 0) / 3600.0 AS hours
         FROM study_episodes se JOIN episodes e ON e.id = se.episode_id
         LEFT JOIN transcripts t ON t.episode_id = e.id
         WHERE se.study = ? GROUP BY state
@@ -82,8 +83,10 @@ def status(config: Config, conn: sqlite3.Connection, name: str, by: str = "year"
         WHERE se.study = ? GROUP BY o.study
     """, (name,))}
 
-    out["storage"] = _storage(config, conn, out["hours"].get("awaiting_download", 0.0),
-                              out["episodes"].get("awaiting_download", 0))
+    pending = next((r for r in states if r["state"] == "awaiting_download"), None)
+    out["storage"] = _storage(config, conn, pending["hours"] if pending else 0.0,
+                              pending["n"] if pending else 0,
+                              pending["unknown_duration"] if pending else 0)
 
     windowed = conn.execute("SELECT COUNT(*) FROM study_windows WHERE study = ?", (name,)).fetchone()[0]
     classified = classify_study(conn, name) if windowed else []
@@ -112,18 +115,24 @@ def status(config: Config, conn: sqlite3.Connection, name: str, by: str = "year"
     return out
 
 
-def _storage(config: Config, conn, pending_hours: float, pending_episodes: int) -> dict:
+def _storage(config: Config, conn, pending_hours: float, pending_episodes: int,
+             unknown_duration_episodes: int) -> dict:
     """Projected audio volume for what is still to download.
 
     The rate is measured on this archive's own downloads (24 kbps Opus plus
     files kept as-is), not assumed. Episodes without a declared duration are
-    costed at the mean declared duration.
+    costed at the mean positive declared duration, with a configured fallback
+    when the catalog has no durations yet.
     """
     rate = conn.execute("""
         SELECT SUM(compressed_file_size_mb) / (SUM(duration_seconds) / 3600.0)
         FROM episodes
         WHERE compressed_file_size_mb > 0 AND duration_seconds > 0
     """).fetchone()[0] or 11.0
+    mean_seconds = conn.execute("SELECT AVG(duration_seconds) FROM episodes "
+                                "WHERE duration_seconds > 0").fetchone()[0]
+    mean_seconds = mean_seconds or config.storage.estimated_episode_duration_seconds
+    pending_hours += unknown_duration_episodes * mean_seconds / 3600.0
     usage = shutil.disk_usage(config.audio_dir if config.audio_dir.exists() else config.data_path)
     return {
         "mb_per_hour_measured": round(rate, 2),
