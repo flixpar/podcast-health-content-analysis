@@ -1,0 +1,26 @@
+--- a/vllm/models/glm5next/common/kda.py	2026-10-05 17:18:39.702658039 -0400
++++ b/vllm/models/glm5next/common/kda.py	2026-10-05 17:18:39.809641025 -0400
+@@ -181,7 +181,9 @@
+         if self.model_config is None or self.cache_config is None:
+             raise ValueError("model_config and cache_config must be set")
+         return MambaStateDtypeCalculator.kda_state_dtype(
+-            self.model_config.dtype, self.cache_config.mamba_cache_dtype
++            self.model_config.dtype,
++            self.cache_config.mamba_cache_dtype,
++            self.cache_config.mamba_ssm_cache_dtype,
+         )
+ 
+     def get_state_shape(
+--- a/vllm/models/glm5next/common/model.py	2026-10-05 17:18:39.726643154 -0400
++++ b/vllm/models/glm5next/common/model.py	2026-10-05 17:18:39.811640974 -0400
+@@ -1032,7 +1032,9 @@
+         vllm_config: "VllmConfig",
+     ) -> tuple[torch.dtype, torch.dtype]:
+         return MambaStateDtypeCalculator.kda_state_dtype(
+-            vllm_config.model_config.dtype, vllm_config.cache_config.mamba_cache_dtype
++            vllm_config.model_config.dtype,
++            vllm_config.cache_config.mamba_cache_dtype,
++            vllm_config.cache_config.mamba_ssm_cache_dtype,
+         )
+ 
+     @classmethod

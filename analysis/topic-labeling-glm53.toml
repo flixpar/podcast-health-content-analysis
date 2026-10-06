@@ -37,8 +37,9 @@ temperature = 1.0
 top_p = 0.95
 
 [label]
-# Per node: the server runs MAX_NUM_SEQS=128 at once; twice that keeps it fed.
-concurrency = 256
+# Per node: the server runs 160-224 requests at once (MAX_NUM_SEQS); twice
+# that keeps it fed.
+concurrency = 448
 validation = "lenient"
 # vLLM forces the end of thinking after this many reasoning tokens. On the v8
 # benchmark an 8k budget saved 8% of tokens on real traffic and lost population
