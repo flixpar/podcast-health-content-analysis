@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 from types import SimpleNamespace
 from unittest.mock import Mock
 
@@ -566,3 +567,19 @@ echo "$count" > "$CHECK_COUNTER"
     assert ("CC index complete" in result.stdout) == (expected_code == 0)
     if expected_code:
         assert "still incomplete after 24 attempts" in result.stderr
+
+
+@pytest.mark.parametrize("name", ["analyze", "population", "within_month"])
+def test_archive_modules_load_by_file_path_outside_repository(tmp_path, name):
+    root = Path(__file__).resolve().parents[2]
+    script = root / f"analysis/chart_archive/{name}.py"
+    code = '''import importlib.util, sys
+spec = importlib.util.spec_from_file_location("file_loaded_archive", sys.argv[1])
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+assert callable(module.load_canonical)
+assert callable(module.select_daily)
+'''
+    result = subprocess.run([sys.executable, "-c", code, str(script)], cwd=tmp_path,
+                            capture_output=True, text=True, timeout=10)
+    assert result.returncode == 0, result.stderr

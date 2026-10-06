@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import itertools
 import json
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -18,6 +19,7 @@ import pandas as pd
 if __package__:
     from .snapshots import load_canonical, select_daily
 else:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
     from snapshots import load_canonical, select_daily
 
 ROOT = Path(__file__).resolve().parents[2] / "data" / "chart-archive"
