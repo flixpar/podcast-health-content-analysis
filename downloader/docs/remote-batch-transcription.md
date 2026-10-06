@@ -156,9 +156,9 @@ The segmentation model is gated. Point both Hugging Face variables at a cache
 and token available on the worker, then plan across the available GPUs:
 
 ```bash
-HF_HOME=/tmp/huggingface2 \
-HF_TOKEN_PATH=/home/fparker9/.config/huggingface/token \
-/tmp/fparker9/podcasts/pyannote-vad-venv/bin/python \
+HF_HOME=/path/to/worker/model-cache \
+HF_TOKEN_PATH=/path/to/worker/token \
+/path/to/pyannote-venv/bin/python \
   tools/plan_pyannote_vad.py \
   /srv/podcast-work/audio-batch-<ID> \
   /srv/podcast-work/audio-batch-<ID>.pyannote-vad.jsonl \

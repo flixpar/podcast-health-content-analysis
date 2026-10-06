@@ -23,13 +23,29 @@ dependencies = [
 dev = [
     "pytest>=8",
 ]
-# analysis/benchmark reads the lexical scan's parquet and uses Hungarian
-# matching; these were already in the venv but undeclared.
+# Parquet, chart analysis, and benchmark matching.
 analysis = [
     "pyarrow>=17",
     "scipy>=1.14",
     "pandas>=2.2",
 ]
+# The offline suite uses fake model/HTTP clients and ffmpeg-generated audio.
+# Install with --only-group test to omit the production CUDA/NeMo stack.
+test = [
+    { include-group = "dev" },
+    { include-group = "analysis" },
+    "beautifulsoup4>=4.13.4",
+    "feedparser>=6.0.11",
+    "lxml>=6.1.2",
+    "numpy>=2.0",
+    "requests>=2.32.4",
+    "tqdm>=4.67.1",
+    "zstandard>=0.23.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["analysis/tests", "downloader/tests"]
+norecursedirs = [".*", "build", "dist", "local", "data"]
 
 [tool.uv]
 environments = [

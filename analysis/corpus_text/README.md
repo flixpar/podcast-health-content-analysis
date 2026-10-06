@@ -1,7 +1,7 @@
 # Plain-text transcript corpus and keyword search
 
-`build.py` reads compressed transcripts from `downloader/data/transcripts/`
-and the read-only metadata database, then writes 64 text shards and
+`build.py` reads compressed or plain JSONL transcripts from `downloader/data/transcripts/`
+and the read-only metadata database, then writes 64 text shards, a completion manifest and
 `episodes.tsv`. Each shard line is `episode_id<TAB>segment_index<TAB>text`;
 the shard number is `episode_id % 64`. All generated data defaults to the
 ignored repository directory `local/corpus-text/`.
@@ -26,6 +26,24 @@ export CORPUS_TEXT_DIR=/path/to/corpus-text
 .venv/bin/python analysis/corpus_text/build.py
 .venv/bin/python analysis/corpus_text/cq.py count 'pattern'
 ```
+
+Builds require a new destination. All shards are staged together and published
+only after every selected transcript succeeds. Missing catalog membership,
+corrupt JSON/compression and invalid segment indexes fail loudly; a failed
+staging directory is retained for inspection. Existing corpora are never
+overwritten. Compressed transcripts take precedence when both formats exist;
+summary-only transcripts become one untimed segment with index zero.
+
+Use `build.py --help` to select `--transcripts`, `--metadata-db`, `--out-dir`
+and `--workers`. For a small exported study, point at its linked transcript
+directory and the corresponding shared catalog. Select the same
+`CORPUS_TEXT_DIR` when querying an output built with `--out-dir`.
+
+Search patterns use syntax supported by both Python regex and ripgrep. They
+match segment text only, including when anchored with `^`; anchored queries
+scan every segment without the ripgrep prefilter. Missing corpus files,
+invalid patterns and ripgrep failures return a nonzero exit code. Hit counts
+refer to the selected corpus, without a fixed historical population count.
 
 The tools remain useful for inspecting taxonomy coverage. The completed v8
 review's working reports and patches are preserved under `local/`; the

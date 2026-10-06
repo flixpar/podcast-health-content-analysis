@@ -41,7 +41,7 @@ Dependencies are managed by `uv` from the repository root (`../pyproject.toml`):
 
 ```bash
 cd ..            # repository root
-uv sync          # creates .venv with torch, NeMo, etc.; add --group dev for pytest
+uv sync --locked # creates .venv with torch, NeMo, etc.; dev is included by default
 cd downloader
 source ../.venv/bin/activate
 cp config.example.json config.json     # then edit
@@ -307,6 +307,9 @@ python -m podcast_pipeline download                        # resume
 ```bash
 pytest tests            # from downloader/, with the venv active
 ```
+
+For a lightweight environment and the complete repository suite, follow
+[the development guide](../docs/development.md).
 
 The suite needs no network or GPU; the ffmpeg tests generate their own audio and
 skip when ffmpeg is missing. Stages are tested end-to-end against a temporary
