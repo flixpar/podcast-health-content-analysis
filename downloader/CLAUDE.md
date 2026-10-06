@@ -1,193 +1,107 @@
-# CLAUDE.md
+# Downloader development guidance
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Run from `downloader/` with the repository's `../.venv` interpreter (managed
+by root `pyproject.toml`). In a worktree without its own environment, use an
+existing repository environment explicitly. Operator commands and setup are
+in [README.md](README.md); study definitions and scope are in
+[docs/studies.md](../docs/studies.md); the remote batch protocol is in
+[docs/remote-batch-transcription.md](docs/remote-batch-transcription.md).
 
-## Project Overview
+## Project constraints
 
-A podcast transcription pipeline: fetch top podcasts, record episodes from RSS,
-download audio (archived as 24 kbps Opus), ingest publisher transcripts where
-feeds offer them, and transcribe the rest with NVIDIA Parakeet (NeMo). State
-lives in SQLite; transcripts are zstd-compressed JSONL. The output feeds the
-misinformation analysis in `../fact-check`.
+- This is a research pipeline. Prefer small, clear changes and loud failures;
+  compatibility with the large existing database and archive is essential.
+- Per-item network/ASR failures are recorded and processing continues. Disk,
+  database, configuration and programming errors propagate.
+- Tunable defaults belong in `podcast_pipeline/config.py`; keep
+  `config.example.json` synchronized. Unknown configuration keys are rejected.
+- Keep generated reports, benchmarks, scratch outputs and handoff evidence
+  under ignored repository `local/` or the configured data volume.
+- Ask when an unresolved choice could compromise data or research validity.
 
-## Key Instructions
+## Source map
 
-- Use the virtual environment at `../.venv` (managed by `uv` from the repository
-  root's `pyproject.toml`). Run commands from this directory.
-- This is a research project, so do not be afraid to make breaking changes to
-  the code. Don't worry about backwards compatibility -- except for the data:
-  the database and archive are large and must keep working.
-- The code does not have to be production-ready, so ensure the code fails loudly
-  and with a clear error message. Don't try to catch errors or suppress them.
-  Per-item failures (one bad feed, one failed download) are recorded on the row
-  and the run continues; anything else should propagate.
-- Please ask questions if you are unsure about what to do.
+- `cli.py` parses commands and dispatches into `pipeline/`, `studies/`,
+  `charts/`, and `catalog/`.
+- `db.py` owns schema and shared write helpers. Helpers never commit; callers
+  own transactions. `models.py` defines podcast, feed-episode and segment data.
+- `rss.py` and `sources/` read feeds/charts. `catalog/` resolves chart entities
+  and records identity evidence. Apple genre charts use the legacy iTunes
+  endpoint; Marketing Tools is the overall chart, capped at 100.
+- `studies/base.py` defines `Study`, `Member`, and `Window`; register each
+  definition in `studies/__init__.py`. `materialize.py` maintains membership,
+  `scope.py` applies filters, and status/export/gaps/quality derive diagnostics.
+- `charts/` imports historical charts and captures live raw responses.
+  `archive/wayback.py` and `pipeline/discover_archived.py` recover old episodes.
+- `paths.py` owns conversion between portable stored paths and archive paths.
+- `audio/` owns download, naming, ffmpeg conversion/decode, and disk checks.
+  `transcripts/` owns the JSONL/zstd format and publisher transcript parsers.
+- `asr/` imports GPU dependencies lazily. `batches.py` and batch stages own
+  the verified remote round trip.
+- `tools/alternate_sources/` and `tools/tal_archive.py` produce importable
+  JSONL with evidence. `tools/audit/` reads the catalog for quality diagnostics.
+  Retain `tools/ab_format_test.py` for validating changes to audio bitrate.
 
-## Running
+## Data and concurrency invariants
 
-```bash
-python -m podcast_pipeline --help
-python -m podcast_pipeline stats
-python -m podcast_pipeline fetch-podcasts --limit 100              # Apple US overall
-python -m podcast_pipeline fetch-podcasts --genre 1512 --limit 50  # Apple US Health & Fitness
-python -m podcast_pipeline fetch-podcasts --source spotify --limit 100
-python -m podcast_pipeline discover
-python -m podcast_pipeline fetch-rss-transcripts
-python -m podcast_pipeline download            # resumable; re-run after an interruption
-python -m podcast_pipeline transcribe
-python -m podcast_pipeline convert-audio --dry-run
-python -m podcast_pipeline audit --fix
-python -m podcast_pipeline export-audio-batch /path/to/transfer-disk --dry-run
-python -m podcast_pipeline ingest-audio-batch /path/to/audio-batch.tar /remote/work
-python -m podcast_pipeline transcribe-audio-batch /remote/work/audio-batch-ID
-python -m podcast_pipeline export-transcript-batch /remote/work/audio-batch-ID /path/to/return
-python -m podcast_pipeline import-transcript-batch /path/to/transcript-batch.tar --dry-run
-pytest tests
-```
+- Never share a SQLite connection between threads. Workers return results;
+  all catalog writes happen on the main thread.
+- Queue writing stages between long `download` runs. The 300-second busy
+  timeout absorbs short bursts, not concurrent writing workflows. Batch audio
+  export is read-only and may run alongside downloads; transcript import writes.
+- Podcast upserts preserve IDs: key on source ID, then Apple ID. Never use
+  `INSERT OR REPLACE` to replace a podcast and orphan its episodes. Reuse
+  existing current/historical feed owners when resolving new identities.
+- Manual entity links override automatic rules, including a NULL decision
+  marking an entity unresolvable. Keep their evidence intact.
+- Studies select; the catalog owns audio, transcripts and episode state.
+  Refresh only rewrites its study membership tables. Bump a study's `version`
+  when selection logic changes. Revision changes include members, windows,
+  selected episodes and their assignments, even when there are no episodes.
+- `discover` and `download` default to the union of studies. `--all` widens to
+  the full catalog; `--study` narrows. Refresh after chart, identity or episode
+  changes. RSS transcript collection, ASR and batch export default to all
+  eligible episodes unless a study is requested.
+- File paths stored on episodes/transcripts are relative to `Config.data_path`.
+  Writers use `paths.to_stored`, readers use `paths.resolve`, including tools
+  and downstream analysis. Keep `migrate-paths` and `path_migration_backup` for
+  legacy datasets; never silently remap a personal path in an individual reader.
+- `DiskSpaceError` is fatal. Wind down workers and preserve consistent state.
+- Verify audio conversion before deleting the original; commit the converted
+  path before unlinking. Match both legacy title-only names and GUID-hashed
+  names, across archive formats, before declaring audio absent.
+- Batch manifests are immutable identity contracts. Retain completed source
+  receipts outside SQLite and validate batch/episode identity, audio hashes,
+  returned metadata, archive checksums and member checksums before import.
+- Pace iTunes searches through shared `catalog/itunes_search.py`; exhausted
+  throttling raises instead of recording the show as feedless. Wayback CDX
+  requests are sequential; retain successful listings and raw captures.
 
-Every command prints a JSON summary and logs to `logs/pipeline.log`.
+## Audio and transcription invariants
 
-## Layout
+- Decode from sample zero before selecting windows. Seeking MP3 and Opus
+  independently can misalign comparisons. Re-run the format A/B tool before
+  changing the 24 kbps Opus policy.
+- Choose remux containers from codecs; MP3 plus cover art requires a container
+  such as Matroska, rather than Ogg.
+- Declared duration is not decoded duration. Count decoded samples for chunk
+  preparation and omit empty tails as `NO_AUDIO` instead of making ASR requests.
+- Chunk long audio and merge by word timestamps at overlap midpoints. Model
+  responses must include word timestamps; missing timestamps are an error.
+- Preserve original episode timestamps after VAD. Inline Silero is intended
+  for targeted recovery; precomputed pyannote plans belong to a separate GPU
+  environment and must pass batch/audio/plan validation before use.
+- Explicit Qwen markers and `omitted_audio_spans` record `ASR_FAILURE`,
+  `LOW_SIGNAL`, and `NO_AUDIO`. Consumers treat these as gaps in speech.
+- Targeted gain applies only to prepared ASR audio, never the archive; record
+  preprocessing in transcript provenance. Measure volume after gain and limit
+  peaks. Heavy NeMo/torch imports must stay off ordinary CLI startup paths.
 
-- `podcast_pipeline/cli.py` -- argparse subcommands; dispatches to `pipeline/*.run(config, conn, ...)`.
-- `podcast_pipeline/config.py` -- dataclass config. **Every default lives here and
-  nowhere else.** `Config.load` rejects unknown keys. `config.example.json` must
-  be kept in sync when keys change.
-- `podcast_pipeline/db.py` -- schema and the write helpers stages share
-  (`upsert_podcast`, `insert_episode`, `record_download`, `record_transcript`, ...).
-  Helpers never commit; the caller owns the transaction.
-- `podcast_pipeline/models.py` -- `PodcastRecord`, `FeedEpisode`, `Segment`.
-- `podcast_pipeline/rss.py`, `sources/` -- network readers that return models.
-  One `fetch-podcasts` run reads one chart; the collection is the union of
-  several runs, and `podcast_charts` records which chart each podcast came
-  from so a subset can be selected later.
-- `podcast_pipeline/audio/` -- `download.py` (resume via `.part` files),
-  `naming.py` (slug + GUID hash), `ffmpeg.py` (the only module that shells out
-  to ffmpeg/ffprobe), `disk.py` (`DiskSpaceError`).
-- `podcast_pipeline/transcripts/` -- `store.py` is the single writer/reader of
-  the transcript format; `parsers.py` handles publisher formats.
-- `podcast_pipeline/asr/` -- `chunking.py` is pure and unit-tested;
-  `parakeet.py` imports torch/NeMo and is only imported inside `transcribe`.
-- `podcast_pipeline/pipeline/` -- one module per command. Workers (threads) do
-  network/GPU/ffmpeg work and return results; **all database writes happen on
-  the main thread** as results arrive.
-- `pipeline/export_audio_batch.py` -- read-only SQLite snapshot to an
-  uncompressed, checksummed transfer tar. Completed receipts under
-  `data/audio_batches/manifests` prevent duplicate batches.
-- `batches.py`, `pipeline/{ingest_audio_batch,transcribe_audio_batch,
-  export_transcript_batch,import_transcript_batch}.py` -- the verified remote
-  transcription round trip. The audio manifest is the immutable identity
-  contract; the remote machine never receives or constructs the source DB.
-- `tests/` -- pytest; fakes are injected at module boundaries (`monkeypatch.setattr(discover, "fetch_feed", ...)`).
-- `tools/ab_format_test.py` -- the MP3-vs-Opus measurement behind the storage policy.
+## Validation
 
-## Rules That Exist Because Something Broke
-
-- **Never share a `sqlite3.Connection` between threads.** The stages avoid the
-  question entirely: worker threads return results, the main thread writes.
-  Sharing one connection produced "cannot start a transaction within a
-  transaction" and "API misuse" errors in the 2025-10-14 run.
-- **`DiskSpaceError` is fatal on purpose.** `download` and `convert-audio` set a
-  stop flag and wind down. A full disk previously produced thousands of
-  zero-byte files and a corrupted SQLite session. Do not catch and continue.
-- **Never delete an original on the strength of an unverified conversion.**
-  `ffmpeg.encode_opus` probes the output and compares its duration to the
-  source; `convert-audio` commits the DB row *before* unlinking the MP3, so an
-  interruption can only leave a converted file that is still recorded.
-- **Never compare audio windows obtained by seeking** (`ffmpeg`/`librosa`
-  offsets are frame-approximate on MP3, sample-accurate on Opus). `decode_pcm`
-  decodes from sample zero; slice identical sample ranges and cross-correlate.
-  A seek-based comparison once reported 24% WER from misalignment alone.
-- **Audio naming checks both schemes.** New files are
-  `{title-slug}_{md5(guid)[:8]}.{ext}`; most of the archive is `{title-slug}.{ext}`.
-  `naming.find_existing_audio` checks both stems and both `.ogg`/`.mp3` before
-  declaring an episode missing. Checking only the configured extension would
-  re-download the entire MP3 archive.
-- **Podcast upserts key on the source id and fall back to the Apple id.** The
-  old pipeline wrote `podchaser_id = NULL` and used `INSERT OR REPLACE`, which
-  would have orphaned every episode on a re-run. Keep podcast ids stable.
-- **Do not run a writing stage while `download` is running.** `download` takes
-  days. A concurrent `discover` + `fetch-rss-transcripts` pass held the write
-  lock past the old 60 s busy timeout and killed it with "database is locked"
-  after an hour. `db.BUSY_TIMEOUT_SECONDS` is now 300 s, which absorbs a burst,
-  but the rule stands: queue write stages between download runs, not during one.
-  Read-only `stats` is always safe.
-- **Batch export is intentionally not database state.** It can run alongside
-  `download`; only rows with a finalized audio path are selected. Do not move
-  its completed-manifest ledger into SQLite or select `.part` files.
-- **Transcript batch import is a writing stage.** Pause `download` before it.
-  Never accept a return batch unless it matches the retained source audio
-  manifest, per-episode audio hashes, database episode GUID/podcast identity,
-  transcript metadata, and both archive/member checksums.
-- **A throttled iTunes search is not a podcast without a feed.** The search
-  API (used to give Spotify's chart, which carries no RSS URLs, a feed) answers
-  403 after ~20 requests a minute and stays throttled for many minutes. The
-  first Spotify run burned the quota in under 30 seconds and recorded 41
-  charting shows -- The Ezra Klein Show, This American Life -- as feedless.
-  Searches are paced by `spotify.search_delay_seconds`; a throttle that
-  outlasts the retries raises `SpotifyResolveError` and stops the run.
-- **Apple's per-genre charts need the old endpoint.** The Marketing Tools feed
-  (`rss.marketingtools.apple.com`) takes no genre and caps at 100. Genre charts
-  come from `itunes.apple.com/{cc}/rss/toppodcasts/limit=N/genre=G/json`, whose
-  ordering was verified position-for-position against the Health & Fitness
-  chart on podcasts.apple.com.
-- **Re-run `tools/ab_format_test.py` before changing the Opus bitrate.** Current
-  result: 1.26% WER / 0.85% CER divergence vs MP3 for an 82.7% size saving.
-- **Pick the remux container from the codec, never a fixed one.** Ogg carries
-  only Opus/Vorbis/FLAC/Speex. `_audio_only_remux` hardcoded `-f ogg`, so every
-  cover-art MP3 died on "Unsupported codec id in stream 0" and lost the whole
-  episode. It now falls back to Matroska (`.mka`), which holds anything.
-- **A declared duration is not decodable audio.** A truncated MP3 can advertise
-  more than it holds (episode 205562: 2,515.5 s declared, 2,337.9 s real). The
-  planned tail span then encodes to a header-only FLAC, and FLAC spells
-  "unknown length" as a zero sample count, which libsndfile hands vLLM as 2**63
-  samples and vLLM rejects as a 5.8e14 second clip -- discarding an otherwise
-  complete episode over an empty tail. `_encode_flac_chunk` reads volumedetect's
-  `n_samples` (taking the max; it also logs a zero at filter init) and an empty
-  span becomes a `NO_AUDIO` omission instead of an ASR request.
-
-## Transcription
-
-- Long audio is chunked (`chunk_duration_seconds`, `overlap_seconds`) and merged
-  on word timestamps at each overlap's midpoint (`asr/chunking.py`). The model
-  must return word timestamps (`timestamps=True`); it is an error if it does not.
-- The GPU is a 12 GB card shared with other services (~6 GB usable). 300 s chunks
-  need `batch_size: 1` (5 GB peak; batch 2 OOMs). RTF is ~0.004, so the GPU is
-  not the bottleneck.
-- NeMo accepts numpy arrays directly; audio is decoded with ffmpeg to memory and
-  never cached on disk.
-- Audio Qwen cannot honestly transcribe is left as a single-token marker,
-  `[UNTRANSCRIBED_AUDIO_<start>-<end>s_<REASON>]`, and the same interval is
-  recorded in `omitted_audio_spans`. Downstream consumers should treat these as
-  gaps, not speech. The reasons are `ASR_FAILURE` (output stayed implausible at
-  the minimum span size), `LOW_SIGNAL` (measured at or below -50 dB), and
-  `NO_AUDIO` (the container declares the span but holds no samples there).
-- `vllm_audio_gain_db` (0-60, default 0) is a targeted recovery knob for
-  abnormally quiet source media, not a production default. It amplifies only the
-  FLAC prepared for the request -- the stored audio is untouched -- and is
-  recorded in transcript provenance and in the plan's `input_preprocessing`.
-  Because the gain precedes `volumedetect`, mean volume is measured after
-  amplification, so a boosted span is no longer flagged `LOW_SIGNAL`; an
-  `alimiter` keeps recovered peaks from clipping.
-- Optional Silero VAD runs on that same decoded 16 kHz audio and produces
-  absolute-time speech spans. Each speech span is chunked independently so
-  skipped silence is not reintroduced and transcript timestamps remain on the
-  original episode timeline.
-
-## Database
-
-`data/podcast_metadata.db` (`data` is a symlink to the big volume; disk space is
-the binding constraint).
-
-- `podcasts.status`: `pending` -> `discovered` | `error` (feed errors are retried next `discover`).
-- `podcast_charts`: (podcast_id, chart, rank). Charts recorded so far:
-  `apple_us_top_20251013` (the original 100), `apple_us_top`,
-  `apple_us_genre_1512` (health), `spotify_us_top`.
-- `episodes.status`: `pending` -> `downloaded` -> `transcribed`, or `error`. An
-  `error` row *with* `audio_file_path` failed transcription; *without* it, download.
-  `has_rss_transcript = 1` rows are never downloaded.
-- `transcripts.metadata.source`: `asr` or `rss`.
-
-```bash
-sqlite3 data/podcast_metadata.db "SELECT status, COUNT(*) FROM episodes GROUP BY status;"
-```
+Use `../.venv/bin/python -m pytest -q tests` for the full downloader suite, or
+select the relevant files. Fixtures use temporary catalogs, faked network and
+model boundaries, and generated audio; ffmpeg tests skip when unavailable.
+Never use the production database or archive as a test fixture. Keep path
+migration, import, identity and batch-contract tests when changing shared data
+handling.

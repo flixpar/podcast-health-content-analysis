@@ -17,7 +17,7 @@ from pathlib import Path
 
 from tqdm import tqdm
 
-from podcast_pipeline import db
+from podcast_pipeline import db, paths
 from podcast_pipeline.audio.disk import DiskSpaceError, ensure_free_space
 from podcast_pipeline.audio.ffmpeg import EncodeError, check_conversion, encode_opus
 from podcast_pipeline.config import Config
@@ -46,14 +46,20 @@ class Conversion:
     reused: bool   # a complete .ogg from an earlier interrupted run was already there
 
 
-def candidates(conn: sqlite3.Connection, min_size_mb: float, reconcile_only: bool) -> list[Candidate]:
+def candidates(config: Config, conn: sqlite3.Connection, min_size_mb: float,
+               reconcile_only: bool) -> list[Candidate]:
     rows = conn.execute("""
         SELECT id, audio_file_path FROM episodes
         WHERE audio_file_path IS NOT NULL AND is_compressed = 0 AND status != 'error'
     """).fetchall()
     found = []
     for row in rows:
-        source = Path(row["audio_file_path"])
+        source = paths.resolve(config, row["audio_file_path"])
+        if source.suffix == ".ogg":
+            # Already the conversion target: "converting" it would reuse the
+            # file as its own conversion and then unlink it as the original.
+            logger.warning(f"Episode {row['id']}: is_compressed = 0 but already .ogg: {source}")
+            continue
         if not source.exists():
             logger.warning(f"Episode {row['id']}: file missing on disk: {source}")
             continue
@@ -90,7 +96,7 @@ def run(config: Config, conn: sqlite3.Connection, threshold_mb: float | None = N
     threshold_mb = compression.size_threshold_mb if threshold_mb is None else threshold_mb
     keep_original = compression.keep_original if keep_original is None else keep_original
 
-    todo = candidates(conn, threshold_mb, reconcile_only)
+    todo = candidates(config, conn, threshold_mb, reconcile_only)
     if limit:
         todo = todo[:limit]
     total_mb = sum(c.size_mb for c in todo)
@@ -133,7 +139,7 @@ def run(config: Config, conn: sqlite3.Connection, threshold_mb: float | None = N
                     continue
 
                 # Commit before unlinking: see module docstring.
-                db.record_conversion(conn, candidate.episode_id, candidate.target,
+                db.record_conversion(conn, candidate.episode_id, paths.to_stored(config, candidate.target),
                                      candidate.size_mb, conversion.compressed_mb)
                 conn.commit()
                 if not keep_original:

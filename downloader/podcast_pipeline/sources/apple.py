@@ -129,6 +129,44 @@ class AppleChartsSource:
         return None
 
 
+def lookup_many(session: requests.Session, apple_ids: list[str], batch_size: int = 150,
+                delay: float = 1.0, attempts: int = 4) -> dict[str, dict]:
+    """iTunes lookup records for many podcasts, ``batch_size`` ids per request.
+
+    Returns ``{apple_id: record}`` for the ids Apple still knows; an id missing
+    from the result was asked about and not found. A request that keeps
+    failing raises: an outage must not read as "these shows do not exist".
+    """
+    found: dict[str, dict] = {}
+    ids = list(dict.fromkeys(str(i) for i in apple_ids))
+    for start in range(0, len(ids), batch_size):
+        chunk = ids[start:start + batch_size]
+        url = "https://itunes.apple.com/lookup"
+        params = {"id": ",".join(chunk), "entity": "podcast"}
+        for attempt in range(attempts):
+            try:
+                response = session.get(url, params=params, timeout=30)
+            except requests.RequestException as e:
+                logger.warning(f"iTunes batch lookup failed (attempt {attempt + 1}): {e}")
+                time.sleep(delay * 2 ** (attempt + 1))
+                continue
+            if response.status_code in (403, 429):
+                wait = float(response.headers.get("Retry-After", delay * 10 * 2 ** attempt))
+                logger.warning(f"iTunes lookup throttled ({response.status_code}); waiting {wait:.0f}s")
+                time.sleep(wait)
+                continue
+            response.raise_for_status()
+            for record in response.json().get("results") or []:
+                if record.get("kind") == "podcast" or record.get("wrapperType") == "track":
+                    found[str(record["collectionId"])] = record
+            break
+        else:
+            raise RuntimeError(f"iTunes lookup unavailable after {attempts} attempts "
+                               f"(ids {chunk[0]}..{chunk[-1]}); retry later")
+        time.sleep(delay)
+    return found
+
+
 def _normalise_genre_entry(entry: dict) -> dict:
     """One ``toppodcasts`` RSS entry in the shape the Marketing Tools feed uses."""
     def label(node, default=""):

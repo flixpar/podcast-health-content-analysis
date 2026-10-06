@@ -3,7 +3,7 @@ import json
 import tarfile
 from pathlib import Path
 
-from podcast_pipeline import db
+from podcast_pipeline import db, paths
 from podcast_pipeline.audio import MIN_AUDIO_BYTES
 from podcast_pipeline.models import FeedEpisode, PodcastRecord
 from podcast_pipeline.pipeline import export_audio_batch
@@ -14,8 +14,8 @@ def _seed_episode(conn, podcast_id: int, guid: str, title: str) -> int:
     return conn.execute("SELECT id FROM episodes WHERE episode_guid = ?", (guid,)).fetchone()[0]
 
 
-def _downloaded(conn, episode_id: int, path: Path, *, status: str = "downloaded") -> None:
-    db.record_download(conn, episode_id, path, 1.0, 1.0, False)
+def _downloaded(config, conn, episode_id: int, path: Path, *, status: str = "downloaded") -> None:
+    db.record_download(conn, episode_id, paths.to_stored(config, path), 1.0, 1.0, False)
     if status != "downloaded":
         conn.execute("UPDATE episodes SET status = ? WHERE id = ?", (status, episode_id))
 
@@ -44,11 +44,11 @@ def test_export_creates_self_describing_tar_and_skips_it_next_time(config, conn,
     tiny_path.write_bytes(b"small")
     (audio_dir / "still.mp3.part").write_bytes(b"partial")
 
-    _downloaded(conn, first, first_path)
-    _downloaded(conn, retry, retry_path, status="error")
-    _downloaded(conn, transcribed, transcribed_path)
-    _downloaded(conn, missing, audio_dir / "absent.mp3")
-    _downloaded(conn, tiny, tiny_path)
+    _downloaded(config, conn, first, first_path)
+    _downloaded(config, conn, retry, retry_path, status="error")
+    _downloaded(config, conn, transcribed, transcribed_path)
+    _downloaded(config, conn, missing, audio_dir / "absent.mp3")
+    _downloaded(config, conn, tiny, tiny_path)
     # A path on a pending row does not make an in-progress download eligible.
     conn.execute("UPDATE episodes SET audio_file_path = ? WHERE id = ?",
                  (str(audio_dir / "still.mp3.part"), pending))
@@ -99,7 +99,7 @@ def test_dry_run_does_not_write_and_target_is_a_payload_cap(config, conn, tmp_pa
         path = config.audio_dir / f"episode-{index}.mp3"
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(bytes([index]) * size)
-        _downloaded(conn, episode_id, path)
+        _downloaded(config, conn, episode_id, path)
     conn.commit()
 
     # Greedy selection skips the 150 kB file after taking 180 kB, then takes
