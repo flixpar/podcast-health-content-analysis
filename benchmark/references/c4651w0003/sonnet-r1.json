@@ -1,0 +1,257 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c4651w0003",
+  "provenance": {
+    "bundle": "bundle_009",
+    "ingested_at": "2026-09-12T23:16:54.689403+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000163",
+        "evidence_quote": "Like those are the things that we will never automate in this loneliness epidemic.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000132",
+        "summary": "Guest discusses the loneliness epidemic and humans' neurobiological need for connection and eye contact, including its role in empathy and emotional regulation, and a claim about declining parent-child eye contact."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000135",
+        "evidence_quote": "we're neurobiologically wired for connection",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000135",
+        "summary": "Guest describes humans as 'neurobiologically wired' for connection, using biological-mechanism language to back the claim."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000158",
+        "evidence_quote": "What about kids on the spec or people on the spectrum and on the autism spectrum? Still, we use this",
+        "label_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000156",
+        "summary": "Brief aside raising whether people on the autism spectrum still rely on eye contact to judge safety."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "With a new Galaxy Watch 8, sleep tracking and personalized insights from Samsung Health help you improve, so you can wake up to a whole new you.",
+        "label_ids": [
+          "topic:sleep",
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000164",
+        "summary": "Ad for the Samsung Galaxy Watch 8 touting its sleep tracking and personalized insights to help improve sleep."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "Train your sleep with Galaxy Watch 8.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000164",
+        "summary": "Sponsored ad segment promoting the Galaxy Watch 8's sleep-tracking feature."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000190",
+        "evidence_quote": "The physical presence of another human being is what we need when we are in our most dire straits, and we don't need somebody to tell us what to do.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000179",
+        "summary": "Guest explains that infants and people in extreme distress need the physical presence of another person, not verbal instruction, to feel calm."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000173",
+        "evidence_quote": "With a new Galaxy Watch 8, sleep tracking and personalized insights from Samsung Health help you improve",
+        "mention_role": "advertised",
+        "product_name": "Galaxy Watch 8",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000164"
+      },
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000173",
+        "evidence_quote": "Requires compatible Samsung Galaxy phone, Samsung Health app, and Samsung account.",
+        "mention_role": "advertised",
+        "product_name": "Samsung Health app",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000167"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "it is estimated"
+        ],
+        "claim_text": "It is estimated that our great-grandparents looked at their children seventy-two percent more of the time than parents look at their babies today.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000160",
+        "evidence_quote": "it is estimated that our great grandparents looked at their children seventy-two percent more of the time than we look at our babies today.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A specific quantified historical comparison of parent-child eye contact that could be checked against its source.",
+        "relevance": "substantive",
+        "start_unit_id": "u000160",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_4651_window_0003"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000163",
+        "evidence_quote": "Like those are the things that we will never automate in this loneliness epidemic",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000132",
+        "summary": "Guest discusses the loneliness epidemic and humans' neurobiological need for connection and eye contact, including its role in empathy and emotional regulation, and a claim about declining parent-child eye contact."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000135",
+        "evidence_quote": "we're neurobiologically wired for connection",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000135",
+        "summary": "Guest describes humans as 'neurobiologically wired' for connection, using biological-mechanism language to back the claim."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000158",
+        "evidence_quote": "What about kids on the spec or people on the spectrum and on the autism spectrum? Still, we use this",
+        "label_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000156",
+        "summary": "Brief aside raising whether people on the autism spectrum still rely on eye contact to judge safety."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "With a new Galaxy Watch 8, sleep tracking and personalized insights from Samsung Health help you improve, so you can wake up to a whole new you",
+        "label_ids": [
+          "topic:sleep",
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000164",
+        "summary": "Ad for the Samsung Galaxy Watch 8 touting its sleep tracking and personalized insights to help improve sleep."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "Train your sleep with Galaxy Watch 8",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000164",
+        "summary": "Sponsored ad segment promoting the Galaxy Watch 8's sleep-tracking feature."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000190",
+        "evidence_quote": "The physical presence of another human being is what we need when we are in our most dire straits, and we don't need somebody to tell us what to do",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000179",
+        "summary": "Guest explains that infants and people in extreme distress need the physical presence of another person, not verbal instruction, to feel calm."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000173",
+        "evidence_quote": "With a new Galaxy Watch 8, sleep tracking and personalized insights from Samsung Health help you improve",
+        "mention_role": "advertised",
+        "product_name": "Galaxy Watch 8",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u000164"
+      },
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000173",
+        "evidence_quote": "Requires compatible Samsung Galaxy phone, Samsung Health app, and Samsung account",
+        "mention_role": "advertised",
+        "product_name": "Samsung Health app",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000167"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "it is estimated"
+        ],
+        "claim_text": "It is estimated that our great-grandparents looked at their children seventy-two percent more of the time than parents look at their babies today.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000160",
+        "evidence_quote": "it is estimated that our great grandparents looked at their children seventy-two percent more of the time than we look at our babies today",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A specific quantified historical comparison of parent-child eye contact that could be checked against its source.",
+        "relevance": "substantive",
+        "start_unit_id": "u000160",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_4651_window_0003"
+  },
+  "stored_at": "2026-09-12T23:16:54.689467+00:00"
+}

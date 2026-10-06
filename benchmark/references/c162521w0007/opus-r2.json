@@ -1,0 +1,529 @@
+{
+  "annotator_id": "opus-r2",
+  "benchmark_version": "v1",
+  "item_id": "c162521w0007",
+  "provenance": {
+    "bundle": "bundle_006",
+    "ingested_at": "2026-09-12T23:15:38.499764+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000573",
+        "evidence_quote": "That's why I'm excited about Parify, Kim Rogers' 30-day full-spectrum parasite cleanse.",
+        "label_ids": [
+          "topic:detox_cleanses_parasites"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000553",
+        "summary": "Sponsor read for a 30-day parasite cleanse, including how common parasites are said to be and how the kit works."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000560",
+        "evidence_quote": "Millions of Americans carry parasites right now, often without symptoms.",
+        "label_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000553",
+        "summary": "Parasites presented as a widespread hidden cause of poor energy and digestion, with cleansing as the answer."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "What if I told you that the idea that you only get parasites when you travel to some exotic country is flat wrong?",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000553",
+        "summary": "The belief that parasites only come from exotic travel is called flat wrong."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000558",
+        "evidence_quote": "Some strains live in all stages: eggs, larvae, adults, hidden in your gut, releasing toxins that sabotage your energy and digestion.",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "summary": "Life-stage and toxin-release vocabulary used to explain how parasites harm you."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000560",
+        "evidence_quote": "supporting gut health, detox pathways, and toxin removal.",
+        "label_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "summary": "Toxins, detox pathways and toxin removal invoked as the problem the kit solves."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000560",
+        "evidence_quote": "The kit works by clearing parasites, worms, candida, and heavy metals, targeting parasites in all life stages, supporting gut health, detox pathways, and toxin removal.",
+        "label_ids": [
+          "topic:gut_health_microbiome"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "summary": "Gut, candida and digestion named as what the cleanse targets and supports."
+      },
+      {
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000573",
+        "evidence_quote": "go to rogershood.com and use the code Rachel to get 10% off of your order.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000559",
+        "summary": "Sponsor read with website and discount code for the parasite cleanse."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000563",
+        "evidence_quote": "I'm actually doing it myself right now.",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000562",
+        "summary": "Host says she is taking the cleanse herself as part of the endorsement."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000573",
+        "evidence_quote": "That's why I'm excited about Parify, Kim Rogers' 30-day full-spectrum parasite cleanse.",
+        "mention_role": "advertised",
+        "product_name": "Parify",
+        "product_type": "supplement",
+        "start_unit_id": "u000559"
+      },
+      {
+        "confidence": 0.5,
+        "end_unit_id": "u000563",
+        "evidence_quote": "I started with the lymph cleanse, then I'm doing the paraffy.",
+        "mention_role": "advertised",
+        "product_name": "Lymph Cleanse",
+        "product_type": "supplement",
+        "start_unit_id": "u000563"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "flat wrong"
+        ],
+        "claim_text": "It is wrong that you only get parasites when you travel to an exotic country.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000553",
+        "evidence_quote": "What if I told you that the idea that you only get parasites when you travel to some exotic country is flat wrong?",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:parasite_framework",
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "rationale": "A claim about how parasitic infection is acquired that shapes whether listeners think they are at risk.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000553",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Millions of Americans currently carry parasites, often without symptoms.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000554",
+        "evidence_quote": "Millions of Americans carry parasites right now",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "rationale": "A prevalence claim used to sell a cleanse; it can be checked against surveillance data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000554",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Millions of people in the United States are estimated to have been exposed to the parasitic worm Toxocara, and most never know it.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000555",
+        "evidence_quote": "it's estimated that millions in the United States have been exposed to Toxocara, a parasitic worm, yet most never even know it.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "rationale": "A specific exposure statistic that can be checked against published estimates.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000555",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Parasites can enter the body through tap water, sushi, undercooked foods or contaminated produce.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000557",
+        "evidence_quote": "Parasites do not need a plane ticket; they can enter through tap water.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "rationale": "A transmission-route claim that could change what listeners eat or drink.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000556",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites",
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Some parasite strains live in the gut at all life stages and release toxins that sabotage energy and digestion.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000558",
+        "evidence_quote": "Some strains live in all stages: eggs, larvae, adults, hidden in your gut, releasing toxins that sabotage your energy and digestion.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:toxin_framing",
+          "cross_cutting:parasite_framework"
+        ],
+        "rationale": "A mechanistic claim about parasites causing fatigue and digestive problems that needs evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites",
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "all life stages"
+        ],
+        "claim_text": "The Parify kit clears parasites, worms, candida and heavy metals, targets parasites at all life stages, and supports gut health and detox pathways.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000560",
+        "evidence_quote": "The kit works by clearing parasites, worms, candida, and heavy metals, targeting parasites in all life stages, supporting gut health, detox pathways, and toxin removal.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:commercialization",
+          "cross_cutting:toxin_framing"
+        ],
+        "rationale": "A product efficacy claim in sponsor copy that a listener could act on.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000559",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites",
+          "topic:gut_health_microbiome"
+        ]
+      }
+    ],
+    "window_id": "episode_162521_window_0007"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000573",
+        "evidence_quote": "That's why I'm excited about Parify, Kim Rogers' 30-day full-spectrum parasite cleanse",
+        "label_ids": [
+          "topic:detox_cleanses_parasites"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000553",
+        "summary": "Sponsor read for a 30-day parasite cleanse, including how common parasites are said to be and how the kit works."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000560",
+        "evidence_quote": "Millions of Americans carry parasites right now, often without symptoms",
+        "label_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000553",
+        "summary": "Parasites presented as a widespread hidden cause of poor energy and digestion, with cleansing as the answer."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "What if I told you that the idea that you only get parasites when you travel to some exotic country is flat wrong",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000553",
+        "summary": "The belief that parasites only come from exotic travel is called flat wrong."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000558",
+        "evidence_quote": "Some strains live in all stages: eggs, larvae, adults, hidden in your gut, releasing toxins that sabotage your energy and digestion",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "summary": "Life-stage and toxin-release vocabulary used to explain how parasites harm you."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000560",
+        "evidence_quote": "supporting gut health, detox pathways, and toxin removal",
+        "label_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "summary": "Toxins, detox pathways and toxin removal invoked as the problem the kit solves."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000560",
+        "evidence_quote": "The kit works by clearing parasites, worms, candida, and heavy metals, targeting parasites in all life stages, supporting gut health, detox pathways, and toxin removal",
+        "label_ids": [
+          "topic:gut_health_microbiome"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "summary": "Gut, candida and digestion named as what the cleanse targets and supports."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000573",
+        "evidence_quote": "go to rogershood.com and use the code Rachel to get 10% off of your order",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000559",
+        "summary": "Sponsor read with website and discount code for the parasite cleanse."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000563",
+        "evidence_quote": "I'm actually doing it myself right now",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000562",
+        "summary": "Host says she is taking the cleanse herself as part of the endorsement."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u000573",
+        "evidence_quote": "That's why I'm excited about Parify, Kim Rogers' 30-day full-spectrum parasite cleanse",
+        "mention_role": "advertised",
+        "product_name": "Parify",
+        "product_type": "supplement",
+        "start_unit_id": "u000559"
+      },
+      {
+        "confidence": 0.5,
+        "end_unit_id": "u000563",
+        "evidence_quote": "I started with the lymph cleanse, then I'm doing the paraffy",
+        "mention_role": "advertised",
+        "product_name": "Lymph Cleanse",
+        "product_type": "supplement",
+        "start_unit_id": "u000563"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "flat wrong"
+        ],
+        "claim_text": "It is wrong that you only get parasites when you travel to an exotic country.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000553",
+        "evidence_quote": "What if I told you that the idea that you only get parasites when you travel to some exotic country is flat wrong",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:misinformation_correction_debunking",
+          "cross_cutting:parasite_framework"
+        ],
+        "rationale": "A claim about how parasitic infection is acquired that shapes whether listeners think they are at risk.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000553",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Millions of Americans currently carry parasites, often without symptoms.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000554",
+        "evidence_quote": "Millions of Americans carry parasites right now",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "rationale": "A prevalence claim used to sell a cleanse; it can be checked against surveillance data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000554",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Millions of people in the United States are estimated to have been exposed to the parasitic worm Toxocara, and most never know it.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000555",
+        "evidence_quote": "it's estimated that millions in the United States have been exposed to Toxocara, a parasitic worm, yet most never even know it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "rationale": "A specific exposure statistic that can be checked against published estimates.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000555",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Parasites can enter the body through tap water, sushi, undercooked foods or contaminated produce.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000557",
+        "evidence_quote": "Parasites do not need a plane ticket; they can enter through tap water",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:parasite_framework"
+        ],
+        "rationale": "A transmission-route claim that could change what listeners eat or drink.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000556",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites",
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Some parasite strains live in the gut at all life stages and release toxins that sabotage energy and digestion.",
+        "claim_type": "mechanism",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000558",
+        "evidence_quote": "Some strains live in all stages: eggs, larvae, adults, hidden in your gut, releasing toxins that sabotage your energy and digestion",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:parasite_framework",
+          "cross_cutting:toxin_framing"
+        ],
+        "rationale": "A mechanistic claim about parasites causing fatigue and digestive problems that needs evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000558",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites",
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "all life stages"
+        ],
+        "claim_text": "The Parify kit clears parasites, worms, candida and heavy metals, targets parasites at all life stages, and supports gut health and detox pathways.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000560",
+        "evidence_quote": "The kit works by clearing parasites, worms, candida, and heavy metals, targeting parasites in all life stages, supporting gut health, detox pathways, and toxin removal",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:commercialization",
+          "cross_cutting:toxin_framing"
+        ],
+        "rationale": "A product efficacy claim in sponsor copy that a listener could act on.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000559",
+        "topic_ids": [
+          "topic:detox_cleanses_parasites",
+          "topic:gut_health_microbiome"
+        ]
+      }
+    ],
+    "window_id": "episode_162521_window_0007"
+  },
+  "stored_at": "2026-09-12T23:15:38.499818+00:00"
+}

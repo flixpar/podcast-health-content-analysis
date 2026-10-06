@@ -14,8 +14,8 @@ results predate the latest capture and selection policies and need regeneration.
 
 ## Pipeline
 
-Run from the repository root after `uv sync`; activate `.venv` so the Python
-commands and shell runners use the same locked environment. The analysis needs
+Run from the repository root after `uv sync --group analysis`; activate `.venv`
+so the Python commands and shell runners use the same locked environment. The analysis needs
 pandas, pyarrow (Parquet), and lxml (XML), all present in the lockfile. Population
 and turnover analysis have been checked with the locked pandas 3.0.5.
 
@@ -41,7 +41,9 @@ python analysis/chart_archive/population.py       # -> parsed/population/*.csv, 
 python analysis/chart_archive/recoverability.py   # -> population/recoverability.csv and .md
 ```
 
-Everything writes under `data/chart-archive/` and every stage is resumable:
+Generated captures, manifests, measurements, and caches stay in ignored
+`data/chart-archive/`; a fresh checkout starts without these outputs. Every stage
+is resumable:
 downloads skip files already on disk, and the Common Crawl walk caches one
 JSONL per (pattern, crawl).
 

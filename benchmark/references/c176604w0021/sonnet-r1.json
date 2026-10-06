@@ -1,0 +1,349 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c176604w0021",
+  "provenance": {
+    "bundle": "bundle_010",
+    "ingested_at": "2026-09-12T23:16:54.768789+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001131",
+        "evidence_quote": "if you swallow more than a pea-sized amount of it, contact your poison control center",
+        "label_ids": [
+          "topic:fluoride_oral_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001108",
+        "summary": "Discusses the historical rationale for water fluoridation, argues it is no longer necessary given fluoride toothpaste availability and better diets, frames it as an informed-consent issue, and raises a claimed fluoride-IQ link."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001124",
+        "evidence_quote": "a greater sense of informed consent about these decisions that are unwittingly being made for us",
+        "label_ids": [
+          "cross_cutting:medical_freedom"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001123",
+        "summary": "Frames mandatory water fluoridation as a matter of informed consent and personal decision-making autonomy."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001131",
+        "evidence_quote": "as mounting data is suggesting, at least epidemiologically, a link between fluoride exposure in drinking water and lower IQ in our children",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001131",
+        "summary": "Invokes epidemiological data linking fluoride exposure in water to lower IQ in children, an observational/associative form of evidence."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001148",
+        "evidence_quote": "the burden of proof has to be on the chemical",
+        "label_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001132",
+        "summary": "Uses the retroactive banning of lead paint, asbestos, and trans fats to argue for a precautionary-principle approach to new chemical exposures, with the burden of proof on the chemical rather than the consumer."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001148",
+        "evidence_quote": "perhaps they do in the EU, which is what is referred to as the precautionary principle",
+        "label_ids": [
+          "cross_cutting:maha_environmental_vocabulary"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001132",
+        "summary": "Frames new chemical exposures using precautionary-principle rhetoric associated with MAHA-adjacent environmental-health discourse."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001161",
+        "evidence_quote": "I can't tell you the number of conversations I had because of that about ultra-processed food, about refined grains",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001150",
+        "summary": "Discusses the red food dye controversy as a gateway to broader conversations about ultra-processed food and refined grains."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001161",
+        "evidence_quote": "one of the benefits of what's happening now, for example, the red food dye thing, right",
+        "label_ids": [
+          "cross_cutting:maha_food_vocabulary"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001150",
+        "summary": "Uses MAHA-style food vocabulary (red food dye, ultra-processed food, refined grains) to frame the food system as needing systemic change."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001170",
+        "evidence_quote": "making America healthy again has to be a a bottom up move, a ground up movement",
+        "label_ids": [
+          "topic:maha_root_cause_health_politics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001167",
+        "summary": "Discusses the Make America Healthy Again movement itself, arguing it must be a bottom-up, individual-driven movement rather than government-led."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Fluoride toothpaste packaging warns that swallowing more than a pea-sized amount requires contacting poison control.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001122",
+        "evidence_quote": "there's warnings like if you swallow more than a pea-sized amount of it, contact your poison control center",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific, checkable claim about the warning language on fluoride toothpaste packaging.",
+        "relevance": "substantive",
+        "start_unit_id": "u001122",
+        "topic_ids": [
+          "topic:fluoride_oral_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "mounting data is suggesting",
+          "at least epidemiologically"
+        ],
+        "claim_text": "Mounting epidemiological data suggests a link between fluoride exposure in drinking water and lower IQ in children.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001131",
+        "evidence_quote": "as mounting data is suggesting, at least epidemiologically, a link between fluoride exposure in drinking water and lower IQ in our children",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Actively-debated claim linking water fluoridation to children's IQ; checkable against the epidemiological literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u001131",
+        "topic_ids": [
+          "topic:fluoride_oral_health",
+          "topic:childrens_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The United States retroactively removed partially hydrogenated (trans) fats from the food supply after determining they were harmful, similar to its earlier removal of lead from paint and asbestos from building materials.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001138",
+        "evidence_quote": "we removed partially hydrogenated fats from the food supply once we realized that those were poisonous",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Cites specific historical regulatory bans as a factual predicate for a precautionary-principle argument; checkable against regulatory history.",
+        "relevance": "substantive",
+        "start_unit_id": "u001134",
+        "topic_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ]
+      }
+    ],
+    "window_id": "episode_176604_window_0021"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001131",
+        "evidence_quote": "if you swallow more than a pea-sized amount of it, contact your poison control center",
+        "label_ids": [
+          "topic:fluoride_oral_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001108",
+        "summary": "Discusses the historical rationale for water fluoridation, argues it is no longer necessary given fluoride toothpaste availability and better diets, frames it as an informed-consent issue, and raises a claimed fluoride-IQ link."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001124",
+        "evidence_quote": "a greater sense of informed consent about these decisions that are unwittingly being made for us",
+        "label_ids": [
+          "cross_cutting:medical_freedom"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001123",
+        "summary": "Frames mandatory water fluoridation as a matter of informed consent and personal decision-making autonomy."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001131",
+        "evidence_quote": "as mounting data is suggesting, at least epidemiologically, a link between fluoride exposure in drinking water and lower IQ in our children",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation",
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001131",
+        "summary": "Invokes epidemiological data linking fluoride exposure in water to lower IQ in children, an observational/associative form of evidence."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001148",
+        "evidence_quote": "the burden of proof has to be on the chemical",
+        "label_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001132",
+        "summary": "Uses the retroactive banning of lead paint, asbestos, and trans fats to argue for a precautionary-principle approach to new chemical exposures, with the burden of proof on the chemical rather than the consumer."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001148",
+        "evidence_quote": "perhaps they do in the EU, which is what is referred to as the precautionary principle",
+        "label_ids": [
+          "cross_cutting:maha_environmental_vocabulary"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001132",
+        "summary": "Frames new chemical exposures using precautionary-principle rhetoric associated with MAHA-adjacent environmental-health discourse."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001161",
+        "evidence_quote": "I can't tell you the number of conversations I had because of that about ultra-processed food, about refined grains",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001150",
+        "summary": "Discusses the red food dye controversy as a gateway to broader conversations about ultra-processed food and refined grains."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001161",
+        "evidence_quote": "one of the benefits of what's happening now, for example, the red food dye thing, right",
+        "label_ids": [
+          "cross_cutting:maha_food_vocabulary"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001150",
+        "summary": "Uses MAHA-style food vocabulary (red food dye, ultra-processed food, refined grains) to frame the food system as needing systemic change."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001170",
+        "evidence_quote": "making America healthy again has to be a a bottom up move, a ground up movement",
+        "label_ids": [
+          "topic:maha_root_cause_health_politics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001167",
+        "summary": "Discusses the Make America Healthy Again movement itself, arguing it must be a bottom-up, individual-driven movement rather than government-led."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Fluoride toothpaste packaging warns that swallowing more than a pea-sized amount requires contacting poison control.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001122",
+        "evidence_quote": "there's warnings like if you swallow more than a pea-sized amount of it, contact your poison control center",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific, checkable claim about the warning language on fluoride toothpaste packaging.",
+        "relevance": "substantive",
+        "start_unit_id": "u001122",
+        "topic_ids": [
+          "topic:fluoride_oral_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "mounting data is suggesting",
+          "at least epidemiologically"
+        ],
+        "claim_text": "Mounting epidemiological data suggests a link between fluoride exposure in drinking water and lower IQ in children.",
+        "claim_type": "causal",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001131",
+        "evidence_quote": "as mounting data is suggesting, at least epidemiologically, a link between fluoride exposure in drinking water and lower IQ in our children",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Actively-debated claim linking water fluoridation to children's IQ; checkable against the epidemiological literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u001131",
+        "topic_ids": [
+          "topic:childrens_health",
+          "topic:fluoride_oral_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The United States retroactively removed partially hydrogenated (trans) fats from the food supply after determining they were harmful, similar to its earlier removal of lead from paint and asbestos from building materials.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001138",
+        "evidence_quote": "we removed partially hydrogenated fats from the food supply once we realized that those were poisonous",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Cites specific historical regulatory bans as a factual predicate for a precautionary-principle argument; checkable against regulatory history.",
+        "relevance": "substantive",
+        "start_unit_id": "u001134",
+        "topic_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ]
+      }
+    ],
+    "window_id": "episode_176604_window_0021"
+  },
+  "stored_at": "2026-09-12T23:16:54.768820+00:00"
+}

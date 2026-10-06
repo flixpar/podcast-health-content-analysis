@@ -1,0 +1,384 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c156860w0007",
+  "provenance": {
+    "bundle": "bundle_021",
+    "ingested_at": "2026-09-09T18:04:01.454854+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000494",
+        "evidence_quote": "I'm immediately out like a light",
+        "label_ids": [
+          "topic:sleep",
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000489",
+        "summary": "Speaker describes falling asleep immediately as her body's response to adversity."
+      },
+      {
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000532",
+        "evidence_quote": "Plus free shipping when you go to Nutrafol.com and use promo code Giggly.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000520",
+        "summary": "Nutrafol sponsor read with a discount and promo code."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000532",
+        "evidence_quote": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand",
+        "label_ids": [
+          "topic:beauty_dermatology_skincare",
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000522",
+        "summary": "Sponsor read for Nutrafol, a hair-growth supplement."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "science-backed support",
+        "label_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000522",
+        "summary": "Ad copy asserts the product is science-backed and dermatologist-recommended."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000527",
+        "evidence_quote": "a friend who just had a baby and is experiencing postpartum hair shedding",
+        "label_ids": [
+          "topic:womens_health_female_hormones",
+          "topic:pregnancy_maternal_postpartum_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000526",
+        "summary": "Menopause and postpartum hair shedding named as conditions the product is for."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000542",
+        "evidence_quote": "my adrenaline spikes",
+        "label_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000534",
+        "summary": "Rideshare discomfort described as an adrenaline spike the sponsor's service avoids."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "download the Waymo app and use code Giggly to get twenty percent off your next two rides",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000542",
+        "summary": "Waymo sponsor read with a promo code for discounted rides."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000548",
+        "evidence_quote": "as someone with social anxiety, this is incredible",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000544",
+        "summary": "Host cites her social anxiety as the reason a driverless ride suits her."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000560",
+        "evidence_quote": "an actual bedtime again with healthier routines",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000559",
+        "summary": "An actual bedtime named in passing as part of a back-to-school reset."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000532",
+        "evidence_quote": "With Nutrafol, give the gift of stronger and faster-growing hair",
+        "mention_role": "advertised",
+        "product_name": "Nutrafol",
+        "product_type": "supplement",
+        "start_unit_id": "u000522"
+      },
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000556",
+        "evidence_quote": "which is why Waymo has genuinely changed the game for us",
+        "mention_role": "advertised",
+        "product_name": "Waymo",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000542"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand and is trusted by over one and a half million people.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand",
+        "evidence_signal_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A market-leadership and endorsement claim in sponsor copy that can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000523",
+        "topic_ids": [
+          "topic:beauty_dermatology_skincare",
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Taking Nutrafol produces thicker, stronger, faster-growing hair with less shedding within three to six months.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000524",
+        "evidence_quote": "See thicker, stronger, faster-growing hair with less shedding in just three to six months.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A specific efficacy and timeline claim for a supplement that can be checked against evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000524",
+        "topic_ids": [
+          "topic:beauty_dermatology_skincare",
+          "topic:functional_nutrition_supplements"
+        ]
+      }
+    ],
+    "window_id": "episode_156860_window_0007"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000494",
+        "evidence_quote": "I'm immediately out like a light",
+        "label_ids": [
+          "topic:sleep",
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000489",
+        "summary": "Speaker describes falling asleep immediately as her body's response to adversity."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000532",
+        "evidence_quote": "Plus free shipping when you go to Nutrafol.com and use promo code Giggly",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000520",
+        "summary": "Nutrafol sponsor read with a discount and promo code."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000532",
+        "evidence_quote": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand",
+        "label_ids": [
+          "topic:beauty_dermatology_skincare",
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000522",
+        "summary": "Sponsor read for Nutrafol, a hair-growth supplement."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "science-backed support",
+        "label_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000522",
+        "summary": "Ad copy asserts the product is science-backed and dermatologist-recommended."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000527",
+        "evidence_quote": "a friend who just had a baby and is experiencing postpartum hair shedding",
+        "label_ids": [
+          "topic:pregnancy_maternal_postpartum_health",
+          "topic:womens_health_female_hormones"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000526",
+        "summary": "Menopause and postpartum hair shedding named as conditions the product is for."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000542",
+        "evidence_quote": "my adrenaline spikes",
+        "label_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000534",
+        "summary": "Rideshare discomfort described as an adrenaline spike the sponsor's service avoids."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000556",
+        "evidence_quote": "download the Waymo app and use code Giggly to get twenty percent off your next two rides",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000542",
+        "summary": "Waymo sponsor read with a promo code for discounted rides."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000548",
+        "evidence_quote": "as someone with social anxiety, this is incredible",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000544",
+        "summary": "Host cites her social anxiety as the reason a driverless ride suits her."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000560",
+        "evidence_quote": "an actual bedtime again with healthier routines",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000559",
+        "summary": "An actual bedtime named in passing as part of a back-to-school reset."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u000532",
+        "evidence_quote": "With Nutrafol, give the gift of stronger and faster-growing hair",
+        "mention_role": "advertised",
+        "product_name": "Nutrafol",
+        "product_type": "supplement",
+        "start_unit_id": "u000522"
+      },
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u000556",
+        "evidence_quote": "which is why Waymo has genuinely changed the game for us",
+        "mention_role": "advertised",
+        "product_name": "Waymo",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000542"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand and is trusted by over one and a half million people.",
+        "claim_type": "other_factual",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000523",
+        "evidence_quote": "Nutrafol is the number one dermatologist-recommended hair growth supplement brand",
+        "evidence_signal_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A market-leadership and endorsement claim in sponsor copy that can be checked.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000523",
+        "topic_ids": [
+          "topic:beauty_dermatology_skincare",
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Taking Nutrafol produces thicker, stronger, faster-growing hair with less shedding within three to six months.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000524",
+        "evidence_quote": "See thicker, stronger, faster-growing hair with less shedding in just three to six months",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A specific efficacy and timeline claim for a supplement that can be checked against evidence.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000524",
+        "topic_ids": [
+          "topic:beauty_dermatology_skincare",
+          "topic:functional_nutrition_supplements"
+        ]
+      }
+    ],
+    "window_id": "episode_156860_window_0007"
+  },
+  "stored_at": "2026-09-09T18:04:01.454886+00:00"
+}

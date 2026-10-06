@@ -1,0 +1,1694 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c5436w0023",
+  "provenance": {
+    "bundle": "bundle_001",
+    "ingested_at": "2026-09-12T23:09:28.668797+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001343",
+        "evidence_quote": "Your lifespan, unfortunately, is not met often by your brain span.",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:longevity_anti_aging"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001339",
+        "summary": "Lifespan outruns brain span, with cognitive collapse in middle age and in younger people."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001349",
+        "evidence_quote": "But you also lower the support for the brain.",
+        "label_ids": [
+          "topic:cardiometabolic_health",
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001344",
+        "summary": "Statins lower inflammation and cholesterol but are said to reduce support for the brain."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001348",
+        "evidence_quote": "You lower the cholesterol, and to be fair, you make some in the brain as well.",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001345",
+        "summary": "Inflammation, cholesterol and brain cholesterol synthesis used to explain the statin argument."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001355",
+        "evidence_quote": "There are things like Zetia and bergamot, and just changing your diet and exercise.",
+        "label_ids": [
+          "topic:cardiometabolic_health",
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001350",
+        "summary": "Alternatives before statins (Zetia, bergamot, diet, exercise, PCSK9 inhibitors) and a preference for hydrophilic statins."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001358",
+        "evidence_quote": "The book is called \"The Ageless Brain\" by Dr.",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001356",
+        "summary": "The guest's book on the ageing brain is named."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001358",
+        "evidence_quote": "The book is called \"The Ageless Brain\" by Dr.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001357",
+        "summary": "Host promotes the guest's book by title and author."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001358",
+        "evidence_quote": "by Dr. Dale Bredesen, who I completely respect in support.",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001357",
+        "summary": "The author's doctor title and the host's respect for him are invoked."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u001362",
+        "evidence_quote": "dairy, like you're saying, like Greek yogurt every day is not good for preventing Alzheimer's",
+        "label_ids": [
+          "topic:food_nutrition",
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001359",
+        "summary": "Host puts the dairy question: is daily Greek yogurt bad for preventing Alzheimer's?"
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001360",
+        "evidence_quote": "diet, exercise, supplements, and toxins.",
+        "label_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001359",
+        "summary": "Toxins listed as one of the big categories driving brain health."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001367",
+        "evidence_quote": "when you have any sort of dairy, can produce some degree of inflammation",
+        "label_ids": [
+          "topic:food_nutrition",
+          "topic:inflammation_as_a_general_health_narrative",
+          "topic:gut_health_microbiome",
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "summary": "Dairy is said to cause inflammation and grains to damage the gut lining, so both should be removed."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001366",
+        "evidence_quote": "You want to get rid of grains, which can damage your lining of your gut.",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001364",
+        "summary": "Inflammation and gut-lining damage offered as the mechanism against dairy and grains."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001365",
+        "evidence_quote": "If you're trying to optimize your brain span, then you want to take that into account.",
+        "label_ids": [
+          "cross_cutting:optimization_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001365",
+        "summary": "Brain span framed as something to optimize."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001372",
+        "evidence_quote": "only one of two things will happen: either you will help them to improve",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001368",
+        "summary": "Cognitive decline is said to end in improvement or death from Alzheimer's, with reversal claimed as published work."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001368",
+        "evidence_quote": "we've published that many times",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001368",
+        "summary": "Own publications invoked as support for improvement being possible."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001372",
+        "evidence_quote": "And we were the first to publish that back in 2014.",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001372",
+        "summary": "Priority claim to a 2014 publication invoked as support."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001371",
+        "evidence_quote": "We want to pull out, you know, all the stops to get the optimal reversal of cognitive decline.",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001370",
+        "summary": "Optimal reversal of cognitive decline promised rather than management."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001380",
+        "evidence_quote": "And then you want to have a plant-rich. Mildly ketogenic diet.",
+        "label_ids": [
+          "topic:food_nutrition",
+          "topic:diet_tribes_food_ideologies",
+          "topic:fitness_exercise",
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001373",
+        "summary": "Protocol: remove grains, dairy and simple carbs, eat a plant-rich mildly ketogenic diet, exercise appropriately."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001391",
+        "evidence_quote": "So you want to have at least seven hours of sleep at night.",
+        "label_ids": [
+          "topic:sleep",
+          "topic:stress_nervous_system_regulation_neurowellness",
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001381",
+        "summary": "Stress management and sleep targets: seven hours, REM, deep sleep and blood oxygen saturation, tracked by wearables."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001389",
+        "evidence_quote": "You want to have at least an hour and a half of REM each night.",
+        "label_ids": [
+          "cross_cutting:optimization_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001386",
+        "summary": "Numeric sleep and oxygen targets set as things to hit."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001396",
+        "evidence_quote": "all that information Dale just mentioned is comes to me every morning on this Aura ring",
+        "label_ids": [
+          "topic:wearables_self_tracking_digital_health",
+          "topic:sleep"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001392",
+        "summary": "Host says his Oura ring reports all those sleep metrics, and names Fitbit and Apple Watch as alternatives."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u001398",
+        "evidence_quote": "the best aerobic exercise for somebody trying to stave off Alzheimer's includes at least a couple times a week interval training",
+        "label_ids": [
+          "topic:fitness_exercise",
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001397",
+        "summary": "Host asks whether a specific kind of exercise, interval training, is best against Alzheimer's."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001405",
+        "evidence_quote": "high intensity interval training has turned out to be the one that seems to be the most effective at reducing your risk for cognitive.",
+        "label_ids": [
+          "topic:fitness_exercise",
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001399",
+        "summary": "HIIT called most effective against cognitive decline, plus restriction bands and strength training for insulin sensitivity."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001405",
+        "evidence_quote": "when you do strength training, you are improving your insulin sensitivity, which is critical for your brain",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001404",
+        "summary": "Different mechanisms and insulin sensitivity invoked to explain the exercise benefit."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u001350",
+        "evidence_quote": "There are things like Zetia and bergamot",
+        "mention_role": "recommended",
+        "product_name": "Zetia",
+        "product_type": "medication",
+        "start_unit_id": "u001350"
+      },
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u001355",
+        "evidence_quote": "That would be like a Crestor",
+        "mention_role": "recommended",
+        "product_name": "Crestor",
+        "product_type": "medication",
+        "start_unit_id": "u001354"
+      },
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u001355",
+        "evidence_quote": "a hydrophobic statin, which would be like a Lipitor",
+        "mention_role": "criticized",
+        "product_name": "Lipitor",
+        "product_type": "medication",
+        "start_unit_id": "u001355"
+      },
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u001358",
+        "evidence_quote": "The book is called \"The Ageless Brain\" by Dr.",
+        "mention_role": "own_product",
+        "product_name": "The Ageless Brain",
+        "product_type": "book_or_media",
+        "start_unit_id": "u001356"
+      },
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u001395",
+        "evidence_quote": "I have an Aura ring on here.",
+        "mention_role": "recommended",
+        "product_name": "Oura Ring",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001392"
+      },
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u001396",
+        "evidence_quote": "You can get a Fitbit",
+        "mention_role": "recommended",
+        "product_name": "Fitbit",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001396"
+      },
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u001396",
+        "evidence_quote": "you can get an Apple Watch",
+        "mention_role": "recommended",
+        "product_name": "Apple Watch",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001396"
+      },
+      {
+        "confidence": 0.5,
+        "end_unit_id": "u001403",
+        "evidence_quote": "there are things like katsu bands",
+        "mention_role": "recommended",
+        "product_name": "KAATSU bands",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001402"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "often"
+        ],
+        "claim_text": "A person's brain span often falls short of their lifespan, with function collapsing at 40, 50 or 60.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001341",
+        "evidence_quote": "Your lifespan, unfortunately, is not met often by your brain span.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A general claim about when cognitive decline sets in that can be checked against population data.",
+        "relevance": "substantive",
+        "start_unit_id": "u001340",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:longevity_anti_aging"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Statins lower inflammation, but inflammation can be lowered by other means without statins.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001346",
+        "evidence_quote": "which, by the way, you can do with other things. You don't need statins to do that.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Whether other interventions lower inflammation as statins do is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001345",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Statins lower the support for the brain.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001347",
+        "evidence_quote": "But you also lower the support for the brain.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A harm claim about a widely prescribed drug that could change whether listeners take it.",
+        "relevance": "substantive",
+        "start_unit_id": "u001347",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Some cholesterol is made in the brain itself.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001348",
+        "evidence_quote": "You lower the cholesterol, and to be fair, you make some in the brain as well.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A physiological claim about brain cholesterol synthesis that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001348",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Zetia, bergamot, diet change and exercise can be used before statins are needed.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001352",
+        "evidence_quote": "There are things like Zetia and bergamot, and just changing your diet and exercise.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Whether these alternatives lower cholesterol enough to defer statins is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001350",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can be"
+        ],
+        "claim_text": "PCSK9 inhibitors can be even better than statins.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001353",
+        "evidence_quote": "PCSK9 inhibitors can be even better than this.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "A comparative efficacy claim between drug classes that can be checked against trials.",
+        "relevance": "substantive",
+        "start_unit_id": "u001353",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A hydrophilic statin such as Crestor should be used rather than a hydrophobic statin such as Lipitor.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001355",
+        "evidence_quote": "That would be like a Crestor, instead of one that is a hydrophobic statin, which would be like a Lipitor.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "The classification and comparative brain effects of these statins are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001354",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Eating dairy such as Greek yogurt every day is not good for preventing Alzheimer's.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "questioned",
+        "end_unit_id": "u001362",
+        "evidence_quote": "Greek yogurt every day is not good for preventing Alzheimer's",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A dietary claim about dairy and Alzheimer's prevention that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001361",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can produce",
+          "some degree of"
+        ],
+        "claim_text": "Any sort of dairy can produce some degree of inflammation.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001364",
+        "evidence_quote": "when you have any sort of dairy, can produce some degree of inflammation",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A causal claim that dairy is inflammatory, checkable against nutrition research.",
+        "relevance": "substantive",
+        "start_unit_id": "u001364",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:inflammation_as_a_general_health_narrative"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can damage"
+        ],
+        "claim_text": "Grains can damage the lining of the gut.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001366",
+        "evidence_quote": "You want to get rid of grains, which can damage your lining of your gut.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A causal claim about grains harming the gut lining that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001366",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "only one of two things will happen"
+        ],
+        "claim_text": "For someone beginning to have cognitive decline only two outcomes are possible: they improve, or they develop Alzheimer's disease and die.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001369",
+        "evidence_quote": "only one of two things will happen: either you will help them to improve",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A prognostic dichotomy about cognitive decline that can be checked against outcome data.",
+        "relevance": "substantive",
+        "start_unit_id": "u001368",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The speaker's group has published many times that people with cognitive decline can be helped to improve.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001368",
+        "evidence_quote": "either you will help them to improve, and we've published that many times",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "The existence and content of the cited publications can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001368",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The speaker's group was the first to publish reversal of cognitive decline, in 2014.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001372",
+        "evidence_quote": "And we were the first to publish that back in 2014.",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A priority claim about a 2014 publication that can be checked against the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u001372",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Removing grains, dairy and simple carbs and eating a plant-rich, mildly ketogenic diet helps reverse cognitive decline.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001379",
+        "evidence_quote": "And then you want to have a plant-rich. Mildly ketogenic diet.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A dietary protocol claimed to reverse cognitive decline, checkable against trials.",
+        "relevance": "substantive",
+        "start_unit_id": "u001374",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:diet_tribes_food_ideologies",
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A person should get at least seven hours of sleep a night.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001386",
+        "evidence_quote": "So you want to have at least seven hours of sleep at night.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A numeric sleep threshold that can be checked against sleep research.",
+        "relevance": "substantive",
+        "start_unit_id": "u001386",
+        "topic_ids": [
+          "topic:sleep",
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A person should get at least an hour and a half of REM sleep each night.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001387",
+        "evidence_quote": "You want to have at least an hour and a half of REM each night.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific REM sleep target that can be checked against sleep physiology.",
+        "relevance": "substantive",
+        "start_unit_id": "u001387",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A person should get at least one hour of deep sleep each night.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001388",
+        "evidence_quote": "You want to have at least one hour of deep sleep each night",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific deep-sleep target that can be checked against sleep research.",
+        "relevance": "substantive",
+        "start_unit_id": "u001388",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Blood oxygen saturation while sleeping should be at least 94%.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001389",
+        "evidence_quote": "you want to have an oxygen concentration. Saturation in your blood of at least 94% while you're sleeping.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A numeric oxygen saturation threshold during sleep that can be checked clinically.",
+        "relevance": "substantive",
+        "start_unit_id": "u001388",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "clearly"
+        ],
+        "claim_text": "Many people fail to meet those sleep targets, and that is why brain span in America does not equal lifespan, something that can clearly be improved.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001391",
+        "evidence_quote": "This is why the brain span in America does not equal the lifespan in America",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A causal attribution of population cognitive decline to poor sleep that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001390",
+        "topic_ids": [
+          "topic:sleep",
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The best aerobic exercise for staving off Alzheimer's includes interval training at least a couple of times a week.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001398",
+        "evidence_quote": "the best aerobic exercise for somebody trying to stave off Alzheimer's includes at least a couple times a week interval training",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A claim about the most effective exercise for Alzheimer's prevention that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001398",
+        "topic_ids": [
+          "topic:fitness_exercise",
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "seems to be"
+        ],
+        "claim_text": "High intensity interval training seems to be the most effective exercise for reducing the risk of cognitive decline.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001402",
+        "evidence_quote": "high intensity interval training has turned out to be the one that seems to be the most effective at reducing your risk for cognitive.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A comparative efficacy claim about HIIT and dementia risk that can be checked against trials.",
+        "relevance": "substantive",
+        "start_unit_id": "u001401",
+        "topic_ids": [
+          "topic:fitness_exercise",
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Restriction bands worn on the arms and legs give more benefit per session because they engage different mechanisms.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001404",
+        "evidence_quote": "they actually give you more bang for your buck because what happens, Megan, is you get different mechanisms",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A claim about blood-flow restriction training giving extra benefit that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001403",
+        "topic_ids": [
+          "topic:fitness_exercise"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Strength training improves insulin sensitivity, which is critical for the brain and for preventing cognitive decline and Alzheimer's disease.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001405",
+        "evidence_quote": "when you do strength training, you are improving your insulin sensitivity, which is critical for your brain",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A causal chain from strength training to insulin sensitivity to dementia prevention that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001405",
+        "topic_ids": [
+          "topic:fitness_exercise",
+          "topic:cardiometabolic_health",
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      }
+    ],
+    "window_id": "episode_5436_window_0023"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001343",
+        "evidence_quote": "Your lifespan, unfortunately, is not met often by your brain span",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:longevity_anti_aging"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001339",
+        "summary": "Lifespan outruns brain span, with cognitive collapse in middle age and in younger people."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001349",
+        "evidence_quote": "But you also lower the support for the brain",
+        "label_ids": [
+          "topic:cardiometabolic_health",
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001344",
+        "summary": "Statins lower inflammation and cholesterol but are said to reduce support for the brain."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001348",
+        "evidence_quote": "You lower the cholesterol, and to be fair, you make some in the brain as well",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001345",
+        "summary": "Inflammation, cholesterol and brain cholesterol synthesis used to explain the statin argument."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001355",
+        "evidence_quote": "There are things like Zetia and bergamot, and just changing your diet and exercise",
+        "label_ids": [
+          "topic:cardiometabolic_health",
+          "topic:functional_nutrition_supplements"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001350",
+        "summary": "Alternatives before statins (Zetia, bergamot, diet, exercise, PCSK9 inhibitors) and a preference for hydrophilic statins."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001358",
+        "evidence_quote": "The book is called \"The Ageless Brain\" by Dr",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001356",
+        "summary": "The guest's book on the ageing brain is named."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001358",
+        "evidence_quote": "The book is called \"The Ageless Brain\" by Dr",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001357",
+        "summary": "Host promotes the guest's book by title and author."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001358",
+        "evidence_quote": "by Dr. Dale Bredesen, who I completely respect in support",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001357",
+        "summary": "The author's doctor title and the host's respect for him are invoked."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u001362",
+        "evidence_quote": "dairy, like you're saying, like Greek yogurt every day is not good for preventing Alzheimer's",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001359",
+        "summary": "Host puts the dairy question: is daily Greek yogurt bad for preventing Alzheimer's?"
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001360",
+        "evidence_quote": "diet, exercise, supplements, and toxins",
+        "label_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001359",
+        "summary": "Toxins listed as one of the big categories driving brain health."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001367",
+        "evidence_quote": "when you have any sort of dairy, can produce some degree of inflammation",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:food_nutrition",
+          "topic:gut_health_microbiome",
+          "topic:inflammation_as_a_general_health_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001363",
+        "summary": "Dairy is said to cause inflammation and grains to damage the gut lining, so both should be removed."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001366",
+        "evidence_quote": "You want to get rid of grains, which can damage your lining of your gut",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001364",
+        "summary": "Inflammation and gut-lining damage offered as the mechanism against dairy and grains."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001365",
+        "evidence_quote": "If you're trying to optimize your brain span, then you want to take that into account",
+        "label_ids": [
+          "cross_cutting:optimization_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001365",
+        "summary": "Brain span framed as something to optimize."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001372",
+        "evidence_quote": "only one of two things will happen: either you will help them to improve",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001368",
+        "summary": "Cognitive decline is said to end in improvement or death from Alzheimer's, with reversal claimed as published work."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001368",
+        "evidence_quote": "we've published that many times",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001368",
+        "summary": "Own publications invoked as support for improvement being possible."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001372",
+        "evidence_quote": "And we were the first to publish that back in 2014",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001372",
+        "summary": "Priority claim to a 2014 publication invoked as support."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001371",
+        "evidence_quote": "We want to pull out, you know, all the stops to get the optimal reversal of cognitive decline",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001370",
+        "summary": "Optimal reversal of cognitive decline promised rather than management."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001380",
+        "evidence_quote": "And then you want to have a plant-rich. Mildly ketogenic diet",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:diet_tribes_food_ideologies",
+          "topic:fitness_exercise",
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001373",
+        "summary": "Protocol: remove grains, dairy and simple carbs, eat a plant-rich mildly ketogenic diet, exercise appropriately."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001391",
+        "evidence_quote": "So you want to have at least seven hours of sleep at night",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:sleep",
+          "topic:stress_nervous_system_regulation_neurowellness",
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001381",
+        "summary": "Stress management and sleep targets: seven hours, REM, deep sleep and blood oxygen saturation, tracked by wearables."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001389",
+        "evidence_quote": "You want to have at least an hour and a half of REM each night",
+        "label_ids": [
+          "cross_cutting:optimization_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001386",
+        "summary": "Numeric sleep and oxygen targets set as things to hit."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001396",
+        "evidence_quote": "all that information Dale just mentioned is comes to me every morning on this Aura ring",
+        "label_ids": [
+          "topic:sleep",
+          "topic:wearables_self_tracking_digital_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001392",
+        "summary": "Host says his Oura ring reports all those sleep metrics, and names Fitbit and Apple Watch as alternatives."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "questioned",
+        "end_unit_id": "u001398",
+        "evidence_quote": "the best aerobic exercise for somebody trying to stave off Alzheimer's includes at least a couple times a week interval training",
+        "label_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:fitness_exercise"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001397",
+        "summary": "Host asks whether a specific kind of exercise, interval training, is best against Alzheimer's."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001405",
+        "evidence_quote": "high intensity interval training has turned out to be the one that seems to be the most effective at reducing your risk for cognitive",
+        "label_ids": [
+          "topic:cardiometabolic_health",
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:fitness_exercise"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001399",
+        "summary": "HIIT called most effective against cognitive decline, plus restriction bands and strength training for insulin sensitivity."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001405",
+        "evidence_quote": "when you do strength training, you are improving your insulin sensitivity, which is critical for your brain",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001404",
+        "summary": "Different mechanisms and insulin sensitivity invoked to explain the exercise benefit."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u001350",
+        "evidence_quote": "There are things like Zetia and bergamot",
+        "mention_role": "recommended",
+        "product_name": "Zetia",
+        "product_type": "medication",
+        "start_unit_id": "u001350"
+      },
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u001355",
+        "evidence_quote": "That would be like a Crestor",
+        "mention_role": "recommended",
+        "product_name": "Crestor",
+        "product_type": "medication",
+        "start_unit_id": "u001354"
+      },
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u001355",
+        "evidence_quote": "a hydrophobic statin, which would be like a Lipitor",
+        "mention_role": "criticized",
+        "product_name": "Lipitor",
+        "product_type": "medication",
+        "start_unit_id": "u001355"
+      },
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u001358",
+        "evidence_quote": "The book is called \"The Ageless Brain\" by Dr",
+        "mention_role": "own_product",
+        "product_name": "The Ageless Brain",
+        "product_type": "book_or_media",
+        "start_unit_id": "u001356"
+      },
+      {
+        "confidence": 0.8,
+        "end_unit_id": "u001395",
+        "evidence_quote": "I have an Aura ring on here",
+        "mention_role": "recommended",
+        "product_name": "Oura Ring",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001392"
+      },
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u001396",
+        "evidence_quote": "You can get a Fitbit",
+        "mention_role": "recommended",
+        "product_name": "Fitbit",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001396"
+      },
+      {
+        "confidence": 0.75,
+        "end_unit_id": "u001396",
+        "evidence_quote": "you can get an Apple Watch",
+        "mention_role": "recommended",
+        "product_name": "Apple Watch",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001396"
+      },
+      {
+        "confidence": 0.5,
+        "end_unit_id": "u001403",
+        "evidence_quote": "there are things like katsu bands",
+        "mention_role": "recommended",
+        "product_name": "KAATSU bands",
+        "product_type": "device_or_wearable",
+        "start_unit_id": "u001402"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "often"
+        ],
+        "claim_text": "A person's brain span often falls short of their lifespan, with function collapsing at 40, 50 or 60.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001341",
+        "evidence_quote": "Your lifespan, unfortunately, is not met often by your brain span",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A general claim about when cognitive decline sets in that can be checked against population data.",
+        "relevance": "substantive",
+        "start_unit_id": "u001340",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:longevity_anti_aging"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Statins lower inflammation, but inflammation can be lowered by other means without statins.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001346",
+        "evidence_quote": "which, by the way, you can do with other things. You don't need statins to do that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Whether other interventions lower inflammation as statins do is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001345",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Statins lower the support for the brain.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001347",
+        "evidence_quote": "But you also lower the support for the brain",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A harm claim about a widely prescribed drug that could change whether listeners take it.",
+        "relevance": "substantive",
+        "start_unit_id": "u001347",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Some cholesterol is made in the brain itself.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001348",
+        "evidence_quote": "You lower the cholesterol, and to be fair, you make some in the brain as well",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A physiological claim about brain cholesterol synthesis that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001348",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Zetia, bergamot, diet change and exercise can be used before statins are needed.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001352",
+        "evidence_quote": "There are things like Zetia and bergamot, and just changing your diet and exercise",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Whether these alternatives lower cholesterol enough to defer statins is checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001350",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:functional_nutrition_supplements"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can be"
+        ],
+        "claim_text": "PCSK9 inhibitors can be even better than statins.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001353",
+        "evidence_quote": "PCSK9 inhibitors can be even better than this",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "A comparative efficacy claim between drug classes that can be checked against trials.",
+        "relevance": "substantive",
+        "start_unit_id": "u001353",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A hydrophilic statin such as Crestor should be used rather than a hydrophobic statin such as Lipitor.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001355",
+        "evidence_quote": "That would be like a Crestor, instead of one that is a hydrophobic statin, which would be like a Lipitor",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "The classification and comparative brain effects of these statins are checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u001354",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Eating dairy such as Greek yogurt every day is not good for preventing Alzheimer's.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "questioned",
+        "end_unit_id": "u001362",
+        "evidence_quote": "Greek yogurt every day is not good for preventing Alzheimer's",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A dietary claim about dairy and Alzheimer's prevention that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001361",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can produce",
+          "some degree of"
+        ],
+        "claim_text": "Any sort of dairy can produce some degree of inflammation.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001364",
+        "evidence_quote": "when you have any sort of dairy, can produce some degree of inflammation",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A causal claim that dairy is inflammatory, checkable against nutrition research.",
+        "relevance": "substantive",
+        "start_unit_id": "u001364",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:inflammation_as_a_general_health_narrative"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "can damage"
+        ],
+        "claim_text": "Grains can damage the lining of the gut.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001366",
+        "evidence_quote": "You want to get rid of grains, which can damage your lining of your gut",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A causal claim about grains harming the gut lining that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001366",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "only one of two things will happen"
+        ],
+        "claim_text": "For someone beginning to have cognitive decline only two outcomes are possible: they improve, or they develop Alzheimer's disease and die.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001369",
+        "evidence_quote": "only one of two things will happen: either you will help them to improve",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A prognostic dichotomy about cognitive decline that can be checked against outcome data.",
+        "relevance": "substantive",
+        "start_unit_id": "u001368",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The speaker's group has published many times that people with cognitive decline can be helped to improve.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001368",
+        "evidence_quote": "either you will help them to improve, and we've published that many times",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "The existence and content of the cited publications can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001368",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The speaker's group was the first to publish reversal of cognitive decline, in 2014.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001372",
+        "evidence_quote": "And we were the first to publish that back in 2014",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A priority claim about a 2014 publication that can be checked against the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u001372",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Removing grains, dairy and simple carbs and eating a plant-rich, mildly ketogenic diet helps reverse cognitive decline.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001379",
+        "evidence_quote": "And then you want to have a plant-rich. Mildly ketogenic diet",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A dietary protocol claimed to reverse cognitive decline, checkable against trials.",
+        "relevance": "substantive",
+        "start_unit_id": "u001374",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:diet_tribes_food_ideologies",
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A person should get at least seven hours of sleep a night.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001386",
+        "evidence_quote": "So you want to have at least seven hours of sleep at night",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A numeric sleep threshold that can be checked against sleep research.",
+        "relevance": "substantive",
+        "start_unit_id": "u001386",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A person should get at least an hour and a half of REM sleep each night.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001387",
+        "evidence_quote": "You want to have at least an hour and a half of REM each night",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific REM sleep target that can be checked against sleep physiology.",
+        "relevance": "substantive",
+        "start_unit_id": "u001387",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "A person should get at least one hour of deep sleep each night.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001388",
+        "evidence_quote": "You want to have at least one hour of deep sleep each night",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific deep-sleep target that can be checked against sleep research.",
+        "relevance": "substantive",
+        "start_unit_id": "u001388",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Blood oxygen saturation while sleeping should be at least 94%.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001389",
+        "evidence_quote": "you want to have an oxygen concentration. Saturation in your blood of at least 94% while you're sleeping",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A numeric oxygen saturation threshold during sleep that can be checked clinically.",
+        "relevance": "substantive",
+        "start_unit_id": "u001388",
+        "topic_ids": [
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "clearly"
+        ],
+        "claim_text": "Many people fail to meet those sleep targets, and that is why brain span in America does not equal lifespan, something that can clearly be improved.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001391",
+        "evidence_quote": "This is why the brain span in America does not equal the lifespan in America",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A causal attribution of population cognitive decline to poor sleep that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001390",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:sleep"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The best aerobic exercise for staving off Alzheimer's includes interval training at least a couple of times a week.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u001398",
+        "evidence_quote": "the best aerobic exercise for somebody trying to stave off Alzheimer's includes at least a couple times a week interval training",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A claim about the most effective exercise for Alzheimer's prevention that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001398",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:fitness_exercise"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "seems to be"
+        ],
+        "claim_text": "High intensity interval training seems to be the most effective exercise for reducing the risk of cognitive decline.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001402",
+        "evidence_quote": "high intensity interval training has turned out to be the one that seems to be the most effective at reducing your risk for cognitive",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A comparative efficacy claim about HIIT and dementia risk that can be checked against trials.",
+        "relevance": "substantive",
+        "start_unit_id": "u001401",
+        "topic_ids": [
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:fitness_exercise"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Restriction bands worn on the arms and legs give more benefit per session because they engage different mechanisms.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001404",
+        "evidence_quote": "they actually give you more bang for your buck because what happens, Megan, is you get different mechanisms",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A claim about blood-flow restriction training giving extra benefit that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001403",
+        "topic_ids": [
+          "topic:fitness_exercise"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Strength training improves insulin sensitivity, which is critical for the brain and for preventing cognitive decline and Alzheimer's disease.",
+        "claim_type": "causal",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001405",
+        "evidence_quote": "when you do strength training, you are improving your insulin sensitivity, which is critical for your brain",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A causal chain from strength training to insulin sensitivity to dementia prevention that can be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u001405",
+        "topic_ids": [
+          "topic:cardiometabolic_health",
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:fitness_exercise"
+        ]
+      }
+    ],
+    "window_id": "episode_5436_window_0023"
+  },
+  "stored_at": "2026-09-12T23:09:28.668850+00:00"
+}

@@ -1,0 +1,376 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c174933w0002",
+  "provenance": {
+    "bundle": "bundle_026",
+    "ingested_at": "2026-09-09T19:40:19.903431+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000130",
+        "evidence_quote": "No one had any idea if the gut was leaky.",
+        "label_ids": [
+          "topic:gut_health_microbiome"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000074",
+        "summary": "Recounts the discovery and early research establishing that the gut can become 'leaky,' including pig and cell-culture studies on ATP and gut barrier integrity, and skepticism the concept faced from doctors."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000115",
+        "evidence_quote": "there's all these articles by Harvard.",
+        "label_ids": [
+          "cross_cutting:prestige_science_invocation",
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000115",
+        "summary": "Cites published articles by Harvard-affiliated physicians on intestinal permeability to counter skeptics who denied leaky gut existed."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000101",
+        "evidence_quote": "there's very little oxygen at the tip of the cells",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000081",
+        "summary": "Uses mechanistic language about oxygen, ATP, cytokines and gut barrier integrity to explain the leaky-gut findings."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000090",
+        "evidence_quote": "I built a system using cells, not pigs",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000075",
+        "summary": "The leaky-gut findings were based on pig experiments and then a cell-culture model rather than human studies."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000106",
+        "evidence_quote": "We published all of that.",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000102",
+        "summary": "States that the early leaky-gut and ATP findings were published."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "a repair enzyme inside the nucleus called PARP could get activated if your DNA is damaged",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "summary": "Explains a DNA-damage-repair enzyme (PARP) that, once activated, depletes NAD and then ATP; subject is a cellular energy/DNA-repair mechanism, not fitting any listed topic. Drawn from a Johns Hopkins neuro-injury research paper."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "then if there was no NAD, then there would be no ATP that you could make",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "summary": "Describes the PARP-NAD-ATP depletion pathway following DNA damage using mechanistic biochemical language."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "Paper coming out of Hopkins by Solomon Snyder's group.",
+        "label_ids": [
+          "cross_cutting:prestige_science_invocation",
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "summary": "References a paper out of Johns Hopkins from Solomon Snyder's lab as the source of the PARP/NAD idea."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000135",
+        "evidence_quote": "Solomon Snyder is one of the great neuroscientists of the 20th century",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000135",
+        "summary": "Invokes Solomon Snyder's stature as one of the great 20th-century neuroscientists to lend authority to the finding."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Septic shock dramatically increases the leakiness of the gut.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000080",
+        "evidence_quote": "septic shock increases the leakiness of the gut quite dramatically",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific causal claim from early pig research linking septic shock to increased gut permeability that could be checked against the published literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000080",
+        "topic_ids": [
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could"
+        ],
+        "claim_text": "A repair enzyme called PARP, located in the cell nucleus, can be activated when DNA is damaged.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000136",
+        "evidence_quote": "a repair enzyme inside the nucleus called PARP could get activated if your DNA is damaged",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "A specific biochemical mechanism claim attributed to a research group that could be checked against the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000136",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Giving cytokines that mimic inflammation to a gut cell monolayer causes a large increase in its permeability.",
+        "claim_type": "causal",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000098",
+        "evidence_quote": "we had a big leak in in the monolayer",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific causal claim from a cell-culture model that inflammatory cytokines increase gut barrier permeability, checkable against the published research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000098",
+        "topic_ids": [
+          "topic:gut_health_microbiome"
+        ]
+      }
+    ],
+    "window_id": "episode_174933_window_0002"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000130",
+        "evidence_quote": "No one had any idea if the gut was leaky",
+        "label_ids": [
+          "topic:gut_health_microbiome"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000074",
+        "summary": "Recounts the discovery and early research establishing that the gut can become 'leaky,' including pig and cell-culture studies on ATP and gut barrier integrity, and skepticism the concept faced from doctors."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000115",
+        "evidence_quote": "there's all these articles by Harvard",
+        "label_ids": [
+          "cross_cutting:prestige_science_invocation",
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000115",
+        "summary": "Cites published articles by Harvard-affiliated physicians on intestinal permeability to counter skeptics who denied leaky gut existed."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000101",
+        "evidence_quote": "there's very little oxygen at the tip of the cells",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000081",
+        "summary": "Uses mechanistic language about oxygen, ATP, cytokines and gut barrier integrity to explain the leaky-gut findings."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000090",
+        "evidence_quote": "I built a system using cells, not pigs",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000075",
+        "summary": "The leaky-gut findings were based on pig experiments and then a cell-culture model rather than human studies."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000106",
+        "evidence_quote": "We published all of that",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000102",
+        "summary": "States that the early leaky-gut and ATP findings were published."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "a repair enzyme inside the nucleus called PARP could get activated if your DNA is damaged",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "summary": "Explains a DNA-damage-repair enzyme (PARP) that, once activated, depletes NAD and then ATP; subject is a cellular energy/DNA-repair mechanism, not fitting any listed topic. Drawn from a Johns Hopkins neuro-injury research paper."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "then if there was no NAD, then there would be no ATP that you could make",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "summary": "Describes the PARP-NAD-ATP depletion pathway following DNA damage using mechanistic biochemical language."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000134",
+        "evidence_quote": "Paper coming out of Hopkins by Solomon Snyder's group",
+        "label_ids": [
+          "cross_cutting:prestige_science_invocation",
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000134",
+        "summary": "References a paper out of Johns Hopkins from Solomon Snyder's lab as the source of the PARP/NAD idea."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000135",
+        "evidence_quote": "Solomon Snyder is one of the great neuroscientists of the 20th century",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000135",
+        "summary": "Invokes Solomon Snyder's stature as one of the great 20th-century neuroscientists to lend authority to the finding."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Septic shock dramatically increases the leakiness of the gut.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000080",
+        "evidence_quote": "septic shock increases the leakiness of the gut quite dramatically",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific causal claim from early pig research linking septic shock to increased gut permeability that could be checked against the published literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000080",
+        "topic_ids": [
+          "topic:gut_health_microbiome"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "could"
+        ],
+        "claim_text": "A repair enzyme called PARP, located in the cell nucleus, can be activated when DNA is damaged.",
+        "claim_type": "mechanism",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000136",
+        "evidence_quote": "a repair enzyme inside the nucleus called PARP could get activated if your DNA is damaged",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "A specific biochemical mechanism claim attributed to a research group that could be checked against the literature.",
+        "relevance": "substantive",
+        "start_unit_id": "u000136",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Giving cytokines that mimic inflammation to a gut cell monolayer causes a large increase in its permeability.",
+        "claim_type": "causal",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000098",
+        "evidence_quote": "we had a big leak in in the monolayer",
+        "evidence_signal_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific causal claim from a cell-culture model that inflammatory cytokines increase gut barrier permeability, checkable against the published research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000098",
+        "topic_ids": [
+          "topic:gut_health_microbiome"
+        ]
+      }
+    ],
+    "window_id": "episode_174933_window_0002"
+  },
+  "stored_at": "2026-09-09T19:40:19.903452+00:00"
+}

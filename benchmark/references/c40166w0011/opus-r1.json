@@ -1,0 +1,186 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c40166w0011",
+  "provenance": {
+    "bundle": "bundle_009",
+    "ingested_at": "2026-09-12T23:09:29.290501+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000623",
+        "evidence_quote": "Because they're all paid to do this.",
+        "label_ids": [
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000622",
+        "summary": "Fact checkers who criticise him are dismissed as unqualified and paid to do so."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000688",
+        "evidence_quote": "And so, what we've got now is vaccines.",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000682",
+        "summary": "Repeat-dose vaccines are discussed as a recurring-revenue product."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters, which are these huge investment funds that also control the media and control Big Tech",
+        "label_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000686",
+        "summary": "Big Pharma and investment funds that also control media and Big Tech are cast as profiting from vaccines."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Vaccines are given every six months so that investment funds receive recurring revenue from them.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000682",
+        "evidence_quote": "they want to pick it every month, or in the case of these vaccines, every six months.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex"
+        ],
+        "rationale": "A checkable assertion about vaccine dosing frequency and the financial motive behind it.",
+        "relevance": "substantive",
+        "start_unit_id": "u000681",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Big Pharma is controlled by huge investment funds that also control the media and Big Tech.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Big Pharma and their corporate masters, which are these huge investment funds that also control the media and control Big Tech",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "rationale": "An ownership and control claim about pharma, media and technology firms that can be checked against corporate records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      }
+    ],
+    "window_id": "episode_40166_window_0011"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000623",
+        "evidence_quote": "Because they're all paid to do this",
+        "label_ids": [
+          "cross_cutting:conflict_of_interest_framing"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000622",
+        "summary": "Fact checkers who criticise him are dismissed as unqualified and paid to do so."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000688",
+        "evidence_quote": "And so, what we've got now is vaccines",
+        "label_ids": [
+          "topic:vaccines_immunization"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000682",
+        "summary": "Repeat-dose vaccines are discussed as a recurring-revenue product."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Vaccines as rent-seeking behavior from Big Pharma and their corporate masters, which are these huge investment funds that also control the media and control Big Tech",
+        "label_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000686",
+        "summary": "Big Pharma and investment funds that also control media and Big Tech are cast as profiting from vaccines."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Vaccines are given every six months so that investment funds receive recurring revenue from them.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000682",
+        "evidence_quote": "they want to pick it every month, or in the case of these vaccines, every six months",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex"
+        ],
+        "rationale": "A checkable assertion about vaccine dosing frequency and the financial motive behind it.",
+        "relevance": "substantive",
+        "start_unit_id": "u000681",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Big Pharma is controlled by huge investment funds that also control the media and Big Tech.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000687",
+        "evidence_quote": "Big Pharma and their corporate masters, which are these huge investment funds that also control the media and control Big Tech",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:big_pharma_medical_industrial_complex",
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "rationale": "An ownership and control claim about pharma, media and technology firms that can be checked against corporate records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000687",
+        "topic_ids": [
+          "topic:vaccines_immunization"
+        ]
+      }
+    ],
+    "window_id": "episode_40166_window_0011"
+  },
+  "stored_at": "2026-09-12T23:09:29.290553+00:00"
+}

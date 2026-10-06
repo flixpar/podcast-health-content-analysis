@@ -1,0 +1,281 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "s-citation-mundane",
+  "provenance": {
+    "bundle": "bundle_003",
+    "ingested_at": "2026-09-09T19:55:08.555613+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-sonnet-r2-synthetic-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "There was a study out of Ohio State that looked at people drinking a glass of water about twenty minutes before lunch",
+        "label_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000009",
+        "summary": "Host describes an Ohio State study finding that drinking water before lunch reduces calorie intake at that meal, and explains the proposed mechanism."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000027",
+        "evidence_quote": "the study did not really separate that out, they just had people drink a glass of water, that is it",
+        "label_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Discussion resumes on the water-before-meals study, noting it did not test water temperature or sparkling water, and restating that it might reduce snacking."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000014",
+        "evidence_quote": "There was a study out of Ohio State that looked at people drinking a glass of water about twenty minutes before lunch",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "summary": "A study from Ohio State is cited, with its design and findings on pre-meal water and calorie intake described."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "filling your stomach a little with water takes the edge off your hunger before the food arrives",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000012",
+        "summary": "The proposed mechanism is that water fills the stomach and reduces hunger before food arrives."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "I have started doing it myself honestly and it does seem to help me not go back for seconds at dinner most nights",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000016",
+        "summary": "Speaker offers their own experience of the habit helping as informal corroboration."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "something like"
+        ],
+        "claim_text": "Drinking a glass of water about twenty minutes before lunch causes people to eat fifty to a hundred fewer calories at that meal on average.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000011",
+        "evidence_quote": "ended up eating a bit less at the meal, something like fifty to a hundred fewer calories on average",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "The specific calorie-reduction effect attributed to a named study is checkable against the actual research literature.",
+        "start_unit_id": "u000011",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Drinking water before a meal fills the stomach and reduces hunger before the food arrives.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "filling your stomach a little with water takes the edge off your hunger before the food arrives",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "The proposed satiety mechanism for pre-meal water is a checkable physiological claim.",
+        "start_unit_id": "u000012",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Drinking a glass of water before meals might curb snacking over time.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000027",
+        "evidence_quote": "it might curb some snacking over time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Whether pre-meal water reduces snacking over time is a checkable behavioral claim.",
+        "start_unit_id": "u000027",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ]
+      }
+    ],
+    "window_id": "synthetic_citation_mundane_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000019",
+        "evidence_quote": "There was a study out of Ohio State that looked at people drinking a glass of water about twenty minutes before lunch",
+        "label_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000009",
+        "summary": "Host describes an Ohio State study finding that drinking water before lunch reduces calorie intake at that meal, and explains the proposed mechanism."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000027",
+        "evidence_quote": "the study did not really separate that out, they just had people drink a glass of water, that is it",
+        "label_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000024",
+        "summary": "Discussion resumes on the water-before-meals study, noting it did not test water temperature or sparkling water, and restating that it might reduce snacking."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000014",
+        "evidence_quote": "There was a study out of Ohio State that looked at people drinking a glass of water about twenty minutes before lunch",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000010",
+        "summary": "A study from Ohio State is cited, with its design and findings on pre-meal water and calorie intake described."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "filling your stomach a little with water takes the edge off your hunger before the food arrives",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000012",
+        "summary": "The proposed mechanism is that water fills the stomach and reduces hunger before food arrives."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000016",
+        "evidence_quote": "I have started doing it myself honestly and it does seem to help me not go back for seconds at dinner most nights",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000016",
+        "summary": "Speaker offers their own experience of the habit helping as informal corroboration."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "something like"
+        ],
+        "claim_text": "Drinking a glass of water about twenty minutes before lunch causes people to eat fifty to a hundred fewer calories at that meal on average.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000011",
+        "evidence_quote": "ended up eating a bit less at the meal, something like fifty to a hundred fewer calories on average",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "The specific calorie-reduction effect attributed to a named study is checkable against the actual research literature.",
+        "relevance": null,
+        "start_unit_id": "u000011",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Drinking water before a meal fills the stomach and reduces hunger before the food arrives.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000012",
+        "evidence_quote": "filling your stomach a little with water takes the edge off your hunger before the food arrives",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "The proposed satiety mechanism for pre-meal water is a checkable physiological claim.",
+        "relevance": null,
+        "start_unit_id": "u000012",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "might"
+        ],
+        "claim_text": "Drinking a glass of water before meals might curb snacking over time.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000027",
+        "evidence_quote": "it might curb some snacking over time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "Whether pre-meal water reduces snacking over time is a checkable behavioral claim.",
+        "relevance": null,
+        "start_unit_id": "u000027",
+        "topic_ids": [
+          "topic:food_nutrition",
+          "topic:weight_loss_metabolic_health"
+        ]
+      }
+    ],
+    "window_id": "synthetic_citation_mundane_window_0001"
+  },
+  "stored_at": "2026-09-09T19:55:08.555633+00:00"
+}

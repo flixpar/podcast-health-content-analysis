@@ -1,0 +1,479 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c77764w0010",
+  "provenance": {
+    "bundle": "bundle_004",
+    "ingested_at": "2026-09-12T23:09:28.867878+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "Surgeons who don't have a checklist kill forty-two percent more people.",
+        "label_ids": [
+          "topic:surgery_medical_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000565",
+        "summary": "Surgical safety checklists and operating on the wrong side of the body, with a mortality statistic."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000565",
+        "evidence_quote": "The research is insane.",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000565",
+        "summary": "Research is invoked as the basis for the surgical checklist statistic."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "80 of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000591",
+        "summary": "Prevalence of anxiety, depression, suicide and self-harm is discussed."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000610",
+        "evidence_quote": "it's not just recovering from COVID; it's pandemic levels of anxiety, depression, cancer, diabetes, political polarization, etc.",
+        "label_ids": [
+          "topic:mental_health",
+          "topic:cancer",
+          "topic:cardiometabolic_health",
+          "topic:covid_19_pandemic_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000610",
+        "summary": "A list of societal ills names COVID recovery, anxiety, depression, cancer and diabetes in passing."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000622",
+        "evidence_quote": "Can you go deeper on the different sorts of motivation, specifically intrinsic versus extrinsic?",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000619",
+        "summary": "Host asks about intrinsic versus extrinsic motivation and why accomplishment may not feel fulfilling."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000635",
+        "evidence_quote": "Intrinsic motivation, on the other hand, is what's been shown to lead to deep levels of sustainable happiness.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "Intrinsic versus extrinsic motivation and their effect on happiness and psychological stability."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000624",
+        "evidence_quote": "So scientists have studied motivation",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "Research on motivation is invoked as support."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000628",
+        "evidence_quote": "is what's been shown to lead to deep levels of sustainable happiness",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000628",
+        "summary": "Findings are invoked for the happiness benefit of intrinsic motivation."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000620",
+        "evidence_quote": "You talk about David Brooks's book, \"The The First Mountain,\"",
+        "mention_role": "neutral",
+        "product_name": "The First Mountain",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000620"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Surgeons who do not use a checklist kill forty-two percent more people.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "Surgeons who don't have a checklist kill forty-two percent more people.",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific quantitative mortality figure attributed to research that can be checked against the surgical-checklist literature.",
+        "start_unit_id": "u000565",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "the unfortunate fact is"
+        ],
+        "claim_text": "Eighty percent of people are struggling mentally, psychologically and emotionally with problems such as anxiety and depression.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000591",
+        "evidence_quote": "And the unfortunate fact is, 80 of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A specific prevalence figure for mental illness that can be checked against population survey data.",
+        "start_unit_id": "u000591",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Suicide and self-harm rates are extremely high, especially among the younger generation.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "I mean, the suicide rates, the self harm rates, especially among the next generation, are horrific.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "An assertion about suicide and self-harm rates in young people that can be checked against public-health statistics.",
+        "start_unit_id": "u000594",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Anxiety, depression, cancer and diabetes are occurring at pandemic levels.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000610",
+        "evidence_quote": "it's pandemic levels of anxiety, depression, cancer, diabetes, political polarization, etc.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A prevalence claim about several diseases that can be checked against epidemiological data.",
+        "start_unit_id": "u000610",
+        "topic_ids": [
+          "topic:mental_health",
+          "topic:cancer",
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Intrinsic motivation has been shown to lead to deep, sustainable levels of happiness.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000628",
+        "evidence_quote": "Intrinsic motivation, on the other hand, is what's been shown to lead to deep levels of sustainable happiness.",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A research-backed psychological claim about what produces lasting happiness that can be checked against the motivation literature.",
+        "start_unit_id": "u000628",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People who pursue predominantly extrinsic goals are less psychologically stable than people who pursue intrinsic ones, even when they succeed.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000635",
+        "evidence_quote": "If you are predominantly focused on the extrinsic stuff, even if you are successfully pursuing them, you will be.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A comparative claim about psychological stability that can be checked against research on goal pursuit.",
+        "start_unit_id": "u000633",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_77764_window_0010"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "Surgeons who don't have a checklist kill forty-two percent more people",
+        "label_ids": [
+          "topic:surgery_medical_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000565",
+        "summary": "Surgical safety checklists and operating on the wrong side of the body, with a mortality statistic."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000565",
+        "evidence_quote": "The research is insane",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000565",
+        "summary": "Research is invoked as the basis for the surgical checklist statistic."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "80 of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000591",
+        "summary": "Prevalence of anxiety, depression, suicide and self-harm is discussed."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000610",
+        "evidence_quote": "it's not just recovering from COVID; it's pandemic levels of anxiety, depression, cancer, diabetes, political polarization, etc",
+        "label_ids": [
+          "topic:cancer",
+          "topic:cardiometabolic_health",
+          "topic:covid_19_pandemic_health",
+          "topic:mental_health"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000610",
+        "summary": "A list of societal ills names COVID recovery, anxiety, depression, cancer and diabetes in passing."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "questioned",
+        "end_unit_id": "u000622",
+        "evidence_quote": "Can you go deeper on the different sorts of motivation, specifically intrinsic versus extrinsic",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000619",
+        "summary": "Host asks about intrinsic versus extrinsic motivation and why accomplishment may not feel fulfilling."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000635",
+        "evidence_quote": "Intrinsic motivation, on the other hand, is what's been shown to lead to deep levels of sustainable happiness",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "Intrinsic versus extrinsic motivation and their effect on happiness and psychological stability."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000624",
+        "evidence_quote": "So scientists have studied motivation",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000624",
+        "summary": "Research on motivation is invoked as support."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000628",
+        "evidence_quote": "is what's been shown to lead to deep levels of sustainable happiness",
+        "label_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000628",
+        "summary": "Findings are invoked for the happiness benefit of intrinsic motivation."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.55,
+        "end_unit_id": "u000620",
+        "evidence_quote": "You talk about David Brooks's book, \"The The First Mountain",
+        "mention_role": "neutral",
+        "product_name": "The First Mountain",
+        "product_type": "book_or_media",
+        "start_unit_id": "u000620"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Surgeons who do not use a checklist kill forty-two percent more people.",
+        "claim_type": "causal",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000569",
+        "evidence_quote": "Surgeons who don't have a checklist kill forty-two percent more people",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific quantitative mortality figure attributed to research that can be checked against the surgical-checklist literature.",
+        "relevance": null,
+        "start_unit_id": "u000565",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "the unfortunate fact is"
+        ],
+        "claim_text": "Eighty percent of people are struggling mentally, psychologically and emotionally with problems such as anxiety and depression.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000591",
+        "evidence_quote": "And the unfortunate fact is, 80 of us are struggling mentally and psychologically and emotionally with anxiety, depression, etc",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [],
+        "rationale": "A specific prevalence figure for mental illness that can be checked against population survey data.",
+        "relevance": null,
+        "start_unit_id": "u000591",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Suicide and self-harm rates are extremely high, especially among the younger generation.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000594",
+        "evidence_quote": "I mean, the suicide rates, the self harm rates, especially among the next generation, are horrific",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "An assertion about suicide and self-harm rates in young people that can be checked against public-health statistics.",
+        "relevance": null,
+        "start_unit_id": "u000594",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Anxiety, depression, cancer and diabetes are occurring at pandemic levels.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000610",
+        "evidence_quote": "it's pandemic levels of anxiety, depression, cancer, diabetes, political polarization, etc",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A prevalence claim about several diseases that can be checked against epidemiological data.",
+        "relevance": null,
+        "start_unit_id": "u000610",
+        "topic_ids": [
+          "topic:cancer",
+          "topic:cardiometabolic_health",
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Intrinsic motivation has been shown to lead to deep, sustainable levels of happiness.",
+        "claim_type": "causal",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000628",
+        "evidence_quote": "Intrinsic motivation, on the other hand, is what's been shown to lead to deep levels of sustainable happiness",
+        "evidence_signal_ids": [
+          "cross_cutting:scientific_study_citation"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A research-backed psychological claim about what produces lasting happiness that can be checked against the motivation literature.",
+        "relevance": null,
+        "start_unit_id": "u000628",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "People who pursue predominantly extrinsic goals are less psychologically stable than people who pursue intrinsic ones, even when they succeed.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000635",
+        "evidence_quote": "If you are predominantly focused on the extrinsic stuff, even if you are successfully pursuing them, you will be",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A comparative claim about psychological stability that can be checked against research on goal pursuit.",
+        "relevance": null,
+        "start_unit_id": "u000633",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_77764_window_0010"
+  },
+  "stored_at": "2026-09-12T23:09:28.867913+00:00"
+}

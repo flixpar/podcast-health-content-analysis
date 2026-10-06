@@ -1,0 +1,510 @@
+{
+  "annotator_id": "opus-r2",
+  "benchmark_version": "v1",
+  "item_id": "c24869w0011",
+  "provenance": {
+    "bundle": "bundle_009",
+    "ingested_at": "2026-09-12T23:15:38.798983+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000815",
+        "evidence_quote": "He joined in, and after six days, Walter died of dehydration.",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000812",
+        "summary": "Faith healing: a boy dies of dehydration after six days of exorcism with food and water withheld."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000837",
+        "evidence_quote": "they say thousands of exorcisms are done every single year now",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000826",
+        "summary": "Exorcism as a practice: how many are performed yearly and a priest's claimed success rate."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000858",
+        "evidence_quote": "Like, you just killed a little boy.",
+        "label_ids": [
+          "topic:other_health_topic",
+          "topic:childrens_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000851",
+        "summary": "Hosts on the child's death from the exorcism and the family's lack of remorse."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000858",
+        "evidence_quote": "Like, no, you just killed a boy.",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000852",
+        "summary": "Hosts reject the religious account of the death and insist the boy simply needed water."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000877",
+        "evidence_quote": "an eight-year-old autistic boy named Terrence Cotrell died during church when members of his congregation attempted to all heal him",
+        "label_ids": [
+          "topic:neurodevelopment_autism_discourse",
+          "topic:childrens_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000867",
+        "summary": "An eight-year-old autistic boy dies during a church healing attempt; his emerging autism symptoms described."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000885",
+        "evidence_quote": "Sure, like we can go and like you, we will heal his autism.",
+        "label_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000878",
+        "summary": "Church member's promise that they can fix the boy and heal his autism."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000896",
+        "evidence_quote": "their idea is that you physically make it impossible for the demon to exist inside this body, so it has to come out",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000890",
+        "summary": "The laying-on-of-hands rationale for physically forcing a demon out of a body."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.5,
+        "end_unit_id": "u000889",
+        "evidence_quote": "Church in a strip mall called the Faith Temple Church of the Apostolic Faith.",
+        "mention_role": "criticized",
+        "product_name": "Faith Temple Church of the Apostolic Faith",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000884"
+      },
+      {
+        "confidence": 0.45,
+        "end_unit_id": "u000889",
+        "evidence_quote": "You can go to Gadzooks.",
+        "mention_role": "neutral",
+        "product_name": "Gadzooks",
+        "product_type": "other_product",
+        "start_unit_id": "u000888"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Walter was strapped to a chair and denied food and water during an exorcism and died of dehydration after six days.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000814",
+        "evidence_quote": "He joined in, and after six days, Walter died of dehydration.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific account of a death caused by an exorcism that can be checked against the case record.",
+        "relevance": "substantive",
+        "start_unit_id": "u000812",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "they say"
+        ],
+        "claim_text": "Thousands of exorcisms are performed every year.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000826",
+        "evidence_quote": "they say thousands of exorcisms are done every single year now",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "A prevalence figure for exorcisms that can be checked against reporting on the practice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000826",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Exorcisms succeed ninety-nine percent of the time, with the demons giving in.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000831",
+        "evidence_quote": "And how many times does God win? Ninety-nine percent. These demons just give in.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A quoted success rate for exorcism that can be checked against any evidence offered for it.",
+        "relevance": "substantive",
+        "start_unit_id": "u000828",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In 2003 in Milwaukee, an eight-year-old autistic boy named Terrence Cottrell died during a church healing attempt by his congregation.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000868",
+        "evidence_quote": "an eight-year-old autistic boy named Terrence Cotrell died during church when members of his congregation attempted to all heal him at the same time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A named case of a death during faith healing that can be checked against news and court records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000867",
+        "topic_ids": [
+          "topic:neurodevelopment_autism_discourse",
+          "topic:childrens_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "sort of",
+          "kind of"
+        ],
+        "claim_text": "The boy was beginning to exhibit behavioral symptoms of autism, being out of control.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000875",
+        "evidence_quote": "he was beginning to exhibit the what the sort of behavioral symptoms of autism",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A description of how autism presents behaviourally that can be checked against diagnostic descriptions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000874",
+        "topic_ids": [
+          "topic:neurodevelopment_autism_discourse",
+          "topic:childrens_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The church can fix the boy and heal his autism.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000881",
+        "evidence_quote": "you need to come to my church where we will show you where we can fix him.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A cure claim for autism through church healing, relayed here, that can be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000878",
+        "topic_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Physically making it impossible for a demon to remain inside a body forces it out, after which it dies in the air.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000893",
+        "evidence_quote": "their idea is that you physically make it impossible for the demon to exist inside this body, so it has to come out.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A stated mechanism for how the healing practice works on the body, checkable against the church's teaching and evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000890",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      }
+    ],
+    "window_id": "episode_24869_window_0011"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000815",
+        "evidence_quote": "He joined in, and after six days, Walter died of dehydration",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000812",
+        "summary": "Faith healing: a boy dies of dehydration after six days of exorcism with food and water withheld."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000837",
+        "evidence_quote": "they say thousands of exorcisms are done every single year now",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000826",
+        "summary": "Exorcism as a practice: how many are performed yearly and a priest's claimed success rate."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000858",
+        "evidence_quote": "Like, you just killed a little boy",
+        "label_ids": [
+          "topic:childrens_health",
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000851",
+        "summary": "Hosts on the child's death from the exorcism and the family's lack of remorse."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000858",
+        "evidence_quote": "Like, no, you just killed a boy",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000852",
+        "summary": "Hosts reject the religious account of the death and insist the boy simply needed water."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000877",
+        "evidence_quote": "an eight-year-old autistic boy named Terrence Cotrell died during church when members of his congregation attempted to all heal him",
+        "label_ids": [
+          "topic:childrens_health",
+          "topic:neurodevelopment_autism_discourse"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000867",
+        "summary": "An eight-year-old autistic boy dies during a church healing attempt; his emerging autism symptoms described."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000885",
+        "evidence_quote": "Sure, like we can go and like you, we will heal his autism",
+        "label_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000878",
+        "summary": "Church member's promise that they can fix the boy and heal his autism."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000896",
+        "evidence_quote": "their idea is that you physically make it impossible for the demon to exist inside this body, so it has to come out",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000890",
+        "summary": "The laying-on-of-hands rationale for physically forcing a demon out of a body."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.5,
+        "end_unit_id": "u000889",
+        "evidence_quote": "Church in a strip mall called the Faith Temple Church of the Apostolic Faith",
+        "mention_role": "criticized",
+        "product_name": "Faith Temple Church of the Apostolic Faith",
+        "product_type": "clinic_or_practitioner_service",
+        "start_unit_id": "u000884"
+      },
+      {
+        "confidence": 0.45,
+        "end_unit_id": "u000889",
+        "evidence_quote": "You can go to Gadzooks",
+        "mention_role": "neutral",
+        "product_name": "Gadzooks",
+        "product_type": "other_product",
+        "start_unit_id": "u000888"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Walter was strapped to a chair and denied food and water during an exorcism and died of dehydration after six days.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000814",
+        "evidence_quote": "He joined in, and after six days, Walter died of dehydration",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific account of a death caused by an exorcism that can be checked against the case record.",
+        "relevance": "substantive",
+        "start_unit_id": "u000812",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "they say"
+        ],
+        "claim_text": "Thousands of exorcisms are performed every year.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000826",
+        "evidence_quote": "they say thousands of exorcisms are done every single year now",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "A prevalence figure for exorcisms that can be checked against reporting on the practice.",
+        "relevance": "substantive",
+        "start_unit_id": "u000826",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Exorcisms succeed ninety-nine percent of the time, with the demons giving in.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000831",
+        "evidence_quote": "And how many times does God win? Ninety-nine percent. These demons just give in",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A quoted success rate for exorcism that can be checked against any evidence offered for it.",
+        "relevance": "substantive",
+        "start_unit_id": "u000828",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "In 2003 in Milwaukee, an eight-year-old autistic boy named Terrence Cottrell died during a church healing attempt by his congregation.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000868",
+        "evidence_quote": "an eight-year-old autistic boy named Terrence Cotrell died during church when members of his congregation attempted to all heal him at the same time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A named case of a death during faith healing that can be checked against news and court records.",
+        "relevance": "substantive",
+        "start_unit_id": "u000867",
+        "topic_ids": [
+          "topic:childrens_health",
+          "topic:neurodevelopment_autism_discourse"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "sort of",
+          "kind of"
+        ],
+        "claim_text": "The boy was beginning to exhibit behavioral symptoms of autism, being out of control.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000875",
+        "evidence_quote": "he was beginning to exhibit the what the sort of behavioral symptoms of autism",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A description of how autism presents behaviourally that can be checked against diagnostic descriptions.",
+        "relevance": "substantive",
+        "start_unit_id": "u000874",
+        "topic_ids": [
+          "topic:childrens_health",
+          "topic:neurodevelopment_autism_discourse"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The church can fix the boy and heal his autism.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.85,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000881",
+        "evidence_quote": "you need to come to my church where we will show you where we can fix him",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A cure claim for autism through church healing, relayed here, that can be checked against evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000878",
+        "topic_ids": [
+          "topic:neurodevelopment_autism_discourse"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Physically making it impossible for a demon to remain inside a body forces it out, after which it dies in the air.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000893",
+        "evidence_quote": "their idea is that you physically make it impossible for the demon to exist inside this body, so it has to come out",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A stated mechanism for how the healing practice works on the body, checkable against the church's teaching and evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000890",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      }
+    ],
+    "window_id": "episode_24869_window_0011"
+  },
+  "stored_at": "2026-09-12T23:15:38.799010+00:00"
+}

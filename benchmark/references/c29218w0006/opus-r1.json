@@ -1,0 +1,252 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c29218w0006",
+  "provenance": {
+    "bundle": "bundle_004",
+    "ingested_at": "2026-09-09T18:04:00.552886+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000414",
+        "evidence_quote": "It's shining the spotlight on therapists, people who truly make the world a better place, because the right therapists can change everything.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000399",
+        "summary": "BetterHelp sponsor read about therapy, therapists and World Mental Health Day."
+      },
+      {
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000414",
+        "evidence_quote": "Our listeners get 10% off their first month at BetterHelp.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000399",
+        "summary": "Paid BetterHelp read with a listener discount and sign-up URL."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000406",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified.",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000406",
+        "summary": "Ad invokes therapists' qualifications and code of conduct as grounds for trust."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000466",
+        "evidence_quote": "No, that is that is a good way to avoid seasickness.",
+        "label_ids": [
+          "topic:alcohol_sober_wellness"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000455",
+        "summary": "Comedic riff on sea captains drinking, drunk driving and drinking to avoid seasickness."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000466",
+        "evidence_quote": "Yeah, it's not proven, but do not agree.",
+        "label_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000466",
+        "summary": "Speaker notes the drink-for-seasickness idea is not proven."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000414",
+        "evidence_quote": "This is an ad by BetterHelp.",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000399"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp's therapists work according to a strict code of conduct and are fully qualified.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000406",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified.",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Whether the platform's therapists are all fully qualified and bound by a code of conduct is checkable and bears on choosing therapy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000406",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Getting drunk is a good way to avoid seasickness.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000464",
+        "evidence_quote": "No, that is that is a good way to avoid seasickness.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Whether alcohol prevents seasickness is checkable and could influence what listeners do.",
+        "relevance": "passing",
+        "start_unit_id": "u000463",
+        "topic_ids": [
+          "topic:alcohol_sober_wellness"
+        ]
+      }
+    ],
+    "window_id": "episode_29218_window_0006"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000414",
+        "evidence_quote": "It's shining the spotlight on therapists, people who truly make the world a better place, because the right therapists can change everything",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000399",
+        "summary": "BetterHelp sponsor read about therapy, therapists and World Mental Health Day."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000414",
+        "evidence_quote": "Our listeners get 10% off their first month at BetterHelp",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000399",
+        "summary": "Paid BetterHelp read with a listener discount and sign-up URL."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000406",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u000406",
+        "summary": "Ad invokes therapists' qualifications and code of conduct as grounds for trust."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000466",
+        "evidence_quote": "No, that is that is a good way to avoid seasickness",
+        "label_ids": [
+          "topic:alcohol_sober_wellness"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000455",
+        "summary": "Comedic riff on sea captains drinking, drunk driving and drinking to avoid seasickness."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000466",
+        "evidence_quote": "Yeah, it's not proven, but do not agree",
+        "label_ids": [
+          "cross_cutting:evidence_strength_claim"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000466",
+        "summary": "Speaker notes the drink-for-seasickness idea is not proven."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u000414",
+        "evidence_quote": "This is an ad by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000399"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp's therapists work according to a strict code of conduct and are fully qualified.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000406",
+        "evidence_quote": "BetterHelp therapists work according to a strict code of conduct and are fully qualified",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Whether the platform's therapists are all fully qualified and bound by a code of conduct is checkable and bears on choosing therapy.",
+        "relevance": "advertisement",
+        "start_unit_id": "u000406",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Getting drunk is a good way to avoid seasickness.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000464",
+        "evidence_quote": "No, that is that is a good way to avoid seasickness",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Whether alcohol prevents seasickness is checkable and could influence what listeners do.",
+        "relevance": "passing",
+        "start_unit_id": "u000463",
+        "topic_ids": [
+          "topic:alcohol_sober_wellness"
+        ]
+      }
+    ],
+    "window_id": "episode_29218_window_0006"
+  },
+  "stored_at": "2026-09-09T18:04:00.552919+00:00"
+}

@@ -127,3 +127,33 @@ tokens_total = 50_000_000
 # stronger model than the production pass uses.
 [experiment.validation-sample]
 cost_total = 40.0
+
+# DeepSeek's own hosted API (https://api.deepseek.com). Prices are the *peak*
+# rates from https://api-docs.deepseek.com/quick_start/pricing, read
+# 2026-09-08. Off-peak is half, so charging every request at peak over-states
+# spending by up to 2x -- the safe direction for a cap.
+[provider.deepseek]
+max_concurrent = 64
+cost_per_day = 25.0
+
+# deepseek-v4-flash == DeepSeek-V4-Flash-0731, the checkpoint the local vLLM
+# nodes serve. Cache hits are ~30x cheaper than misses, and the ~11.5k-token
+# instruction prefix is identical on every request, so the cached rate is what
+# most of the input costs once the run is warm.
+[model.deepseek."deepseek-v4-flash"]
+input_per_mtok = 0.44          # cache miss, peak
+cached_input_per_mtok = 0.014  # cache hit, peak
+output_per_mtok = 1.32         # peak
+
+# Validating the benchmark itself (docs/benchmark.md): does it separate a
+# setting known to be worse (low effort) from one known to be better (high)
+# beyond its own repeat-to-repeat noise? Capped so an overrun stops and resumes
+# rather than overspends.
+[experiment.benchmark-validation]
+cost_total = 20.0
+
+# Any later candidate evaluation on the hosted API charges here; raise the
+# allocation deliberately rather than by editing a run.
+[experiment.benchmark-candidates]
+cost_total = 30.0
+cost_per_day = 15.0

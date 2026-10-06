@@ -1,0 +1,246 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c329733w0001",
+  "provenance": {
+    "bundle": "bundle_001",
+    "ingested_at": "2026-09-12T23:30:30.861869+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000041",
+        "evidence_quote": "Harry Haxey, the father of the fake cancer industry",
+        "label_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "Hosts introduce today's episode on the online Black Salve community and Harry Hoxsey, mocking the caustic alternative cancer treatment as quackery."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000058",
+        "evidence_quote": "black s as an alternative topical therapy that was initially used back in the day to treat skin cancer",
+        "label_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000054",
+        "summary": "Host explains what black salve is, its two main ingredients, and how it works by chemically burning skin down to an open wound."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000040",
+        "evidence_quote": "it's obvious this is bullshit",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "summary": "Hosts explicitly call the Black Salve community's practice bullshit while introducing it."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Black salve is an alternative topical therapy that was historically used to treat skin cancer.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000055",
+        "evidence_quote": "black s as an alternative topical therapy that was initially used back in the day to treat skin cancer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Whether black salve is genuinely an effective skin-cancer treatment, versus merely caustic tissue destruction, is a specific checkable claim central to this episode's subject.",
+        "relevance": "substantive",
+        "start_unit_id": "u000054",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Black salve's main ingredients are bloodroot (Sanguinaria canadensis) and zinc chloride.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000056",
+        "evidence_quote": "One of them is blood root Sanguinaria canadensis like Canada, and the other is zinc chloride",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "The specific composition claim about black salve's ingredients is checkable and relevant to understanding the caustic mechanism it relies on.",
+        "relevance": "substantive",
+        "start_unit_id": "u000056",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Black salve works by burning through layers of skin until the dead tissue falls off, leaving an open wound.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000058",
+        "evidence_quote": "it all basically works by just burning layers of your skin to death at a time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "This mechanistic claim about how black salve damages skin is checkable and central to understanding the harm the practice causes.",
+        "relevance": "substantive",
+        "start_unit_id": "u000057",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Online communities that promote treatments like black salve have caused deaths.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "these little online communities that like start as Facebook groups and wind up killing a bunch of people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "The claim that these online alternative-medicine communities have caused deaths is a serious, checkable harm claim underlying the episode's premise.",
+        "relevance": "substantive",
+        "start_unit_id": "u000031",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      }
+    ],
+    "window_id": "episode_329733_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000041",
+        "evidence_quote": "Harry Haxey, the father of the fake cancer industry",
+        "label_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "Hosts introduce today's episode on the online Black Salve community and Harry Hoxsey, mocking the caustic alternative cancer treatment as quackery."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000058",
+        "evidence_quote": "black s as an alternative topical therapy that was initially used back in the day to treat skin cancer",
+        "label_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000054",
+        "summary": "Host explains what black salve is, its two main ingredients, and how it works by chemically burning skin down to an open wound."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000040",
+        "evidence_quote": "it's obvious this is bullshit",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000034",
+        "summary": "Hosts explicitly call the Black Salve community's practice bullshit while introducing it."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Black salve is an alternative topical therapy that was historically used to treat skin cancer.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.7,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000055",
+        "evidence_quote": "black s as an alternative topical therapy that was initially used back in the day to treat skin cancer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Whether black salve is genuinely an effective skin-cancer treatment, versus merely caustic tissue destruction, is a specific checkable claim central to this episode's subject.",
+        "relevance": "substantive",
+        "start_unit_id": "u000054",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Black salve's main ingredients are bloodroot (Sanguinaria canadensis) and zinc chloride.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000056",
+        "evidence_quote": "One of them is blood root Sanguinaria canadensis like Canada, and the other is zinc chloride",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "The specific composition claim about black salve's ingredients is checkable and relevant to understanding the caustic mechanism it relies on.",
+        "relevance": "substantive",
+        "start_unit_id": "u000056",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Black salve works by burning through layers of skin until the dead tissue falls off, leaving an open wound.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000058",
+        "evidence_quote": "it all basically works by just burning layers of your skin to death at a time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "This mechanistic claim about how black salve damages skin is checkable and central to understanding the harm the practice causes.",
+        "relevance": "substantive",
+        "start_unit_id": "u000057",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Online communities that promote treatments like black salve have caused deaths.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000032",
+        "evidence_quote": "these little online communities that like start as Facebook groups and wind up killing a bunch of people",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "The claim that these online alternative-medicine communities have caused deaths is a serious, checkable harm claim underlying the episode's premise.",
+        "relevance": "substantive",
+        "start_unit_id": "u000031",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      }
+    ],
+    "window_id": "episode_329733_window_0001"
+  },
+  "stored_at": "2026-09-12T23:30:30.861907+00:00"
+}

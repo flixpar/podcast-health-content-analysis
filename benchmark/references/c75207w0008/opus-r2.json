@@ -1,0 +1,416 @@
+{
+  "annotator_id": "opus-r2",
+  "benchmark_version": "v1",
+  "item_id": "c75207w0008",
+  "provenance": {
+    "bundle": "bundle_027",
+    "ingested_at": "2026-09-12T22:15:55.974389+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r2-opus-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000408",
+        "evidence_quote": "about half of the population, after age seventy, gets happier and happier all the way to the end",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000379",
+        "summary": "Extended argument about later-life happiness and the 'Strivers' Curse' in which worldly high achievers end up unhappy."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000381",
+        "evidence_quote": "I've studied a lot of biography to see this question.",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000380",
+        "summary": "Biographies of famous people are offered as the evidence base for the happiness claims."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000419",
+        "evidence_quote": "the sooner you think about these issues, the more likely you're going to have the whole cadence of your life in order",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000410",
+        "summary": "Describes advising late-career executives and urges planning early to be happy at every life stage."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000418",
+        "evidence_quote": "Like, okay, buddy, I read your book.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000410",
+        "summary": "The guest refers to his own book and his paid advisory work."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000430",
+        "evidence_quote": "for the last twenty years of his career, he wasn't able to make any new innovations, and he was very depressed",
+        "label_ids": [
+          "topic:mental_health",
+          "topic:brain_cognition_productivity",
+          "topic:dementia_cognitive_decline_ageing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000420",
+        "summary": "Darwin presented as a case of late-career decline in creative ability and of depression."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000424",
+        "evidence_quote": "Fluid intelligence curve of inventing new stuff, and he couldn't anymore.",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000422",
+        "summary": "The fluid-intelligence curve is invoked to explain the decline in innovation."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000430",
+        "evidence_quote": "And a lot of people wind up that way.",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000420",
+        "summary": "A single biographical case is generalised to a wider pattern."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000436",
+        "evidence_quote": "You find Nobel Prize winners in this category.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000431",
+        "summary": "Says the pattern of late-life unhappiness recurs, citing Nobel Prize winners in his book."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000436",
+        "evidence_quote": "I've got tons of them in my book that I talk about.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000435",
+        "summary": "The guest points listeners to his own book for the cases."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "about half",
+          "basically"
+        ],
+        "claim_text": "About half of people get happier and happier after age seventy until the end of life, and the other half get unhappier.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000394",
+        "evidence_quote": "You find that about half of the population, after age seventy, gets happier and happier all the way to the end",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A population statistic about later-life wellbeing that can be checked against longitudinal happiness research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000393",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "tend to"
+        ],
+        "claim_text": "People who are most successful in worldly terms tend to be among those who grow unhappier in later life.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000396",
+        "evidence_quote": "It turns out the people who are most successful in worldly terms they tend to be on the lower branch.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "An empirical association between worldly success and later-life unhappiness that needs evidence checking.",
+        "relevance": "substantive",
+        "start_unit_id": "u000395",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "more likely"
+        ],
+        "claim_text": "People identified as high performers before age 20 are more likely to be disappointed with their lives after age 80.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000403",
+        "evidence_quote": "if you were identified as a high performer before 20, you're more likely to be.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A predictive claim about early achievement and later-life dissatisfaction that is checkable against research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000402",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "For the last twenty years of his career Charles Darwin was unable to make new innovations and was very depressed.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000424",
+        "evidence_quote": "for the last twenty years of his career, he wasn't able to make any new innovations, and he was very depressed",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A biographical claim used as evidence for late-career decline and depression, checkable against the historical record.",
+        "relevance": "substantive",
+        "start_unit_id": "u000424",
+        "topic_ids": [
+          "topic:mental_health",
+          "topic:brain_cognition_productivity"
+        ]
+      }
+    ],
+    "window_id": "episode_75207_window_0008"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000408",
+        "evidence_quote": "about half of the population, after age seventy, gets happier and happier all the way to the end",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000379",
+        "summary": "Extended argument about later-life happiness and the 'Strivers' Curse' in which worldly high achievers end up unhappy."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000381",
+        "evidence_quote": "I've studied a lot of biography to see this question",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000380",
+        "summary": "Biographies of famous people are offered as the evidence base for the happiness claims."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000419",
+        "evidence_quote": "the sooner you think about these issues, the more likely you're going to have the whole cadence of your life in order",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000410",
+        "summary": "Describes advising late-career executives and urges planning early to be happy at every life stage."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000418",
+        "evidence_quote": "Like, okay, buddy, I read your book",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000410",
+        "summary": "The guest refers to his own book and his paid advisory work."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000430",
+        "evidence_quote": "for the last twenty years of his career, he wasn't able to make any new innovations, and he was very depressed",
+        "label_ids": [
+          "topic:brain_cognition_productivity",
+          "topic:dementia_cognitive_decline_ageing",
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000420",
+        "summary": "Darwin presented as a case of late-career decline in creative ability and of depression."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000424",
+        "evidence_quote": "Fluid intelligence curve of inventing new stuff, and he couldn't anymore",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000422",
+        "summary": "The fluid-intelligence curve is invoked to explain the decline in innovation."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000430",
+        "evidence_quote": "And a lot of people wind up that way",
+        "label_ids": [
+          "cross_cutting:weak_evidence_extrapolation_signal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000420",
+        "summary": "A single biographical case is generalised to a wider pattern."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000436",
+        "evidence_quote": "You find Nobel Prize winners in this category",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000431",
+        "summary": "Says the pattern of late-life unhappiness recurs, citing Nobel Prize winners in his book."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000436",
+        "evidence_quote": "I've got tons of them in my book that I talk about",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000435",
+        "summary": "The guest points listeners to his own book for the cases."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "about half",
+          "basically"
+        ],
+        "claim_text": "About half of people get happier and happier after age seventy until the end of life, and the other half get unhappier.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000394",
+        "evidence_quote": "You find that about half of the population, after age seventy, gets happier and happier all the way to the end",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A population statistic about later-life wellbeing that can be checked against longitudinal happiness research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000393",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "tend to"
+        ],
+        "claim_text": "People who are most successful in worldly terms tend to be among those who grow unhappier in later life.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000396",
+        "evidence_quote": "It turns out the people who are most successful in worldly terms they tend to be on the lower branch",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "An empirical association between worldly success and later-life unhappiness that needs evidence checking.",
+        "relevance": "substantive",
+        "start_unit_id": "u000395",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "more likely"
+        ],
+        "claim_text": "People identified as high performers before age 20 are more likely to be disappointed with their lives after age 80.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000403",
+        "evidence_quote": "if you were identified as a high performer before 20, you're more likely to be",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A predictive claim about early achievement and later-life dissatisfaction that is checkable against research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000402",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "For the last twenty years of his career Charles Darwin was unable to make new innovations and was very depressed.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000424",
+        "evidence_quote": "for the last twenty years of his career, he wasn't able to make any new innovations, and he was very depressed",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A biographical claim used as evidence for late-career decline and depression, checkable against the historical record.",
+        "relevance": "substantive",
+        "start_unit_id": "u000424",
+        "topic_ids": [
+          "topic:brain_cognition_productivity",
+          "topic:mental_health"
+        ]
+      }
+    ],
+    "window_id": "episode_75207_window_0008"
+  },
+  "stored_at": "2026-09-12T22:15:55.974421+00:00"
+}

@@ -1,0 +1,607 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c192950w0002",
+  "provenance": {
+    "bundle": "bundle_011",
+    "ingested_at": "2026-09-09T19:40:19.153742+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000087",
+        "evidence_quote": "Inflammation affects every system of our body: our brain, our cardiovascular system, our muscles, bones, skin.",
+        "label_ids": [
+          "topic:inflammation_as_a_general_health_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000055",
+        "summary": "Chronic inflammation from oxidative stress and lifestyle factors is presented as the root driver of aging, senescent 'zombie cells,' and damage across body systems."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000081",
+        "evidence_quote": "Inflammation is at the root, and we've got to keep inflammation under control.",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000079",
+        "summary": "Inflammation is framed as the underlying root cause that must be controlled."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000066",
+        "evidence_quote": "We want to thrive, and that's really, you know, what this is all about.",
+        "label_ids": [
+          "cross_cutting:optimization_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000057",
+        "summary": "Health is framed as a performance goal of moving beyond mere survival to 'thrive' and 'age successfully.'"
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000073",
+        "evidence_quote": "these organelles, like our mitochondria, become damaged by oxidative stress",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000061",
+        "summary": "Dense biological mechanism vocabulary (oxidative stress, mitochondria, senescent cells, cytokines, DNA damage) is used to explain aging."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000125",
+        "evidence_quote": "here are top foods and food ingredients that really promote inflammation and inflaming that accelerate the aging process",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000088",
+        "summary": "A list of foods and ingredients said to promote inflammation and aging: gluten, sugar, conventional meat/dairy, farmed seafood, processed meats, trans fats, seed oils, and artificial sweeteners."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000104",
+        "evidence_quote": "That has lots of glyphosate and other pesticides on it, and then they bioaccumulate that into their dairy, into their meat.",
+        "label_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000099",
+        "summary": "Glyphosate and pesticides in animal feed are said to bioaccumulate into conventional meat and dairy."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000124",
+        "evidence_quote": "these things can be loaded with toxins",
+        "label_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000098",
+        "summary": "Conventional meat, dairy, farmed seafood and seed oils are repeatedly described as 'loaded with toxins' or 'toxic.'"
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000105",
+        "evidence_quote": "We want wild-caught.",
+        "label_ids": [
+          "cross_cutting:naturalness_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000102",
+        "summary": "Grass-fed, organic and wild-caught foods are recommended as the natural alternative to conventional products."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "prolonged bouts of high blood sugar, hyperglycemia, result in a large production of these AGEs, which damage the endothelial lining of the blood vessels",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000126",
+        "summary": "Insulin resistance and insufficient insulin are linked to advanced glycation end products (AGEs) that damage collagen and blood vessel linings, accelerating aging."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "These glycation Glycation end products—they actually create damage to our proteins, like collagen, for example.",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000130",
+        "summary": "Glycation, AGEs, collagen and endothelial mechanism language is used to explain how blood sugar accelerates aging."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Osteoporosis is caused by a mineral deficiency, such as a calcium deficiency.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000076",
+        "evidence_quote": "a lot of people think that osteoporosis is a mineral deficiency, like a calcium deficiency",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A common belief about the cause of osteoporosis that is explicitly disputed here and could be checked against the evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000076",
+        "topic_ids": [
+          "topic:pain_musculoskeletal_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Osteoporosis is caused by inflammation rather than a calcium deficiency.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000076",
+        "evidence_quote": "really, it's inflammation that's impacting the bones",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A causal claim substituting inflammation for calcium deficiency as the cause of osteoporosis, checkable against bone-health research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000076",
+        "topic_ids": [
+          "topic:pain_musculoskeletal_health",
+          "topic:inflammation_as_a_general_health_narrative"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "oftentimes"
+        ],
+        "claim_text": "Conventionally raised meat and dairy often contain glyphosate and pesticide residue that bioaccumulates from the animals' feed.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000101",
+        "evidence_quote": "we're these animals are eating all of this toxic grain, oftentimes",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "rationale": "A specific contamination pathway claim about pesticide residue in meat and dairy that could be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000098",
+        "topic_ids": [
+          "topic:environmental_health_chemical_exposures",
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most farmed fish and seafood are fed genetically modified grains loaded with chemicals.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000103",
+        "evidence_quote": "most seafood farms, most fish farms, are feeding the animals genetically modified grains, and they're loaded with chemicals",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "rationale": "A specific prevalence and contamination claim about farmed seafood that could be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000103",
+        "topic_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "oftentimes",
+          "a lot of times"
+        ],
+        "claim_text": "Processed conventional meats often contain nitrates and are frequently cooked in unhealthy oils.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000110",
+        "evidence_quote": "they also oftentimes have nitrates",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "rationale": "A specific composition claim about processed meats that could be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Highly processed vegetable and seed oils, such as corn, soybean, peanut, cottonseed, canola and sunflower oil, are toxic and cause inflammation.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000122",
+        "evidence_quote": "They are toxic.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "rationale": "A specific safety claim about seed oils causing toxicity and inflammation that could be checked against the evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000117",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Insufficient insulin leads to the formation of advanced glycation end products (AGEs), which damage proteins like collagen.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000133",
+        "evidence_quote": "When we don't have enough insulin, we end up creating advanced glycation end products",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific biochemical mechanism claim linking insulin levels to AGE formation and collagen damage that could be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000130",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Prolonged episodes of high blood sugar (hyperglycemia) cause a buildup of AGEs that damages the endothelial lining of blood vessels.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "prolonged bouts of high blood sugar, hyperglycemia, result in a large production of these AGEs, which damage the endothelial lining of the blood vessels",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific causal mechanism claim about hyperglycemia and vascular damage that could be checked against the evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000137",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_192950_window_0002"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000087",
+        "evidence_quote": "Inflammation affects every system of our body: our brain, our cardiovascular system, our muscles, bones, skin",
+        "label_ids": [
+          "topic:inflammation_as_a_general_health_narrative"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000055",
+        "summary": "Chronic inflammation from oxidative stress and lifestyle factors is presented as the root driver of aging, senescent 'zombie cells,' and damage across body systems."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000081",
+        "evidence_quote": "Inflammation is at the root, and we've got to keep inflammation under control",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000079",
+        "summary": "Inflammation is framed as the underlying root cause that must be controlled."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000066",
+        "evidence_quote": "We want to thrive, and that's really, you know, what this is all about",
+        "label_ids": [
+          "cross_cutting:optimization_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000057",
+        "summary": "Health is framed as a performance goal of moving beyond mere survival to 'thrive' and 'age successfully.'"
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000073",
+        "evidence_quote": "these organelles, like our mitochondria, become damaged by oxidative stress",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000061",
+        "summary": "Dense biological mechanism vocabulary (oxidative stress, mitochondria, senescent cells, cytokines, DNA damage) is used to explain aging."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000125",
+        "evidence_quote": "here are top foods and food ingredients that really promote inflammation and inflaming that accelerate the aging process",
+        "label_ids": [
+          "topic:food_nutrition"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000088",
+        "summary": "A list of foods and ingredients said to promote inflammation and aging: gluten, sugar, conventional meat/dairy, farmed seafood, processed meats, trans fats, seed oils, and artificial sweeteners."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000104",
+        "evidence_quote": "That has lots of glyphosate and other pesticides on it, and then they bioaccumulate that into their dairy, into their meat",
+        "label_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000099",
+        "summary": "Glyphosate and pesticides in animal feed are said to bioaccumulate into conventional meat and dairy."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000124",
+        "evidence_quote": "these things can be loaded with toxins",
+        "label_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000098",
+        "summary": "Conventional meat, dairy, farmed seafood and seed oils are repeatedly described as 'loaded with toxins' or 'toxic.'"
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000105",
+        "evidence_quote": "We want wild-caught",
+        "label_ids": [
+          "cross_cutting:naturalness_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000102",
+        "summary": "Grass-fed, organic and wild-caught foods are recommended as the natural alternative to conventional products."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "prolonged bouts of high blood sugar, hyperglycemia, result in a large production of these AGEs, which damage the endothelial lining of the blood vessels",
+        "label_ids": [
+          "topic:cardiometabolic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000126",
+        "summary": "Insulin resistance and insufficient insulin are linked to advanced glycation end products (AGEs) that damage collagen and blood vessel linings, accelerating aging."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "These glycation Glycation end products—they actually create damage to our proteins, like collagen, for example",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000130",
+        "summary": "Glycation, AGEs, collagen and endothelial mechanism language is used to explain how blood sugar accelerates aging."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Osteoporosis is caused by a mineral deficiency, such as a calcium deficiency.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000076",
+        "evidence_quote": "a lot of people think that osteoporosis is a mineral deficiency, like a calcium deficiency",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A common belief about the cause of osteoporosis that is explicitly disputed here and could be checked against the evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000076",
+        "topic_ids": [
+          "topic:pain_musculoskeletal_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Osteoporosis is caused by inflammation rather than a calcium deficiency.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000076",
+        "evidence_quote": "really, it's inflammation that's impacting the bones",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A causal claim substituting inflammation for calcium deficiency as the cause of osteoporosis, checkable against bone-health research.",
+        "relevance": "substantive",
+        "start_unit_id": "u000076",
+        "topic_ids": [
+          "topic:inflammation_as_a_general_health_narrative",
+          "topic:pain_musculoskeletal_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "oftentimes"
+        ],
+        "claim_text": "Conventionally raised meat and dairy often contain glyphosate and pesticide residue that bioaccumulates from the animals' feed.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000101",
+        "evidence_quote": "we're these animals are eating all of this toxic grain, oftentimes",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "rationale": "A specific contamination pathway claim about pesticide residue in meat and dairy that could be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000098",
+        "topic_ids": [
+          "topic:environmental_health_chemical_exposures",
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most"
+        ],
+        "claim_text": "Most farmed fish and seafood are fed genetically modified grains loaded with chemicals.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000103",
+        "evidence_quote": "most seafood farms, most fish farms, are feeding the animals genetically modified grains, and they're loaded with chemicals",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "rationale": "A specific prevalence and contamination claim about farmed seafood that could be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000103",
+        "topic_ids": [
+          "topic:environmental_health_chemical_exposures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "oftentimes",
+          "a lot of times"
+        ],
+        "claim_text": "Processed conventional meats often contain nitrates and are frequently cooked in unhealthy oils.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000110",
+        "evidence_quote": "they also oftentimes have nitrates",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "rationale": "A specific composition claim about processed meats that could be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000106",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Highly processed vegetable and seed oils, such as corn, soybean, peanut, cottonseed, canola and sunflower oil, are toxic and cause inflammation.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000122",
+        "evidence_quote": "They are toxic",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:toxin_framing"
+        ],
+        "rationale": "A specific safety claim about seed oils causing toxicity and inflammation that could be checked against the evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000117",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Insufficient insulin leads to the formation of advanced glycation end products (AGEs), which damage proteins like collagen.",
+        "claim_type": "mechanism",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000133",
+        "evidence_quote": "When we don't have enough insulin, we end up creating advanced glycation end products",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific biochemical mechanism claim linking insulin levels to AGE formation and collagen damage that could be checked.",
+        "relevance": "substantive",
+        "start_unit_id": "u000130",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Prolonged episodes of high blood sugar (hyperglycemia) cause a buildup of AGEs that damages the endothelial lining of blood vessels.",
+        "claim_type": "causal",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000137",
+        "evidence_quote": "prolonged bouts of high blood sugar, hyperglycemia, result in a large production of these AGEs, which damage the endothelial lining of the blood vessels",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific causal mechanism claim about hyperglycemia and vascular damage that could be checked against the evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000137",
+        "topic_ids": [
+          "topic:cardiometabolic_health"
+        ]
+      }
+    ],
+    "window_id": "episode_192950_window_0002"
+  },
+  "stored_at": "2026-09-09T19:40:19.153762+00:00"
+}

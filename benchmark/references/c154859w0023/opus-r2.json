@@ -1,0 +1,453 @@
+{
+  "annotator_id": "opus-r2",
+  "benchmark_version": "v1",
+  "item_id": "c154859w0023",
+  "provenance": {
+    "bundle": "bundle_004",
+    "ingested_at": "2026-09-12T22:15:54.801211+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r2-opus-r2-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002472",
+        "evidence_quote": "very difficult to get find chemicals fentonl precursors in in airshipments.",
+        "label_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002433",
+        "summary": "Where illicit drug precursor chemicals originate (India, China) and how fentanyl precursors reach the drug trade."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002459",
+        "evidence_quote": "they can try to you know, degrade the US from the inside without firing a shot.",
+        "label_ids": [
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002442",
+        "summary": "Open speculation that China is waging hybrid warfare to degrade the US from within via the drug trade."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002511",
+        "evidence_quote": "one hundred thousand Americans were dying a year and the",
+        "label_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002507",
+        "summary": "The annual American death toll from the drug problem is cited as the reason for the enforcement effort."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002527",
+        "evidence_quote": "just hear you, know, your perspective, with your expertise.",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002524",
+        "summary": "Host invokes the guest's recent experience in the field and his expertise as grounds for his views."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002542",
+        "evidence_quote": "you rank Venezuela as far as drug trafficking?",
+        "label_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002528",
+        "summary": "Drug smuggling from Venezuela, the strikes on drug boats, and how serious a trafficking threat Venezuela is."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002552",
+        "evidence_quote": "there's a former dea ASAK who was stationed in Venezuela",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002544",
+        "summary": "A former DEA official's posting and insight are invoked as authority on Venezuela."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "I've heard"
+        ],
+        "claim_text": "Much of the precursor chemicals for illicit drugs come from India and China.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002435",
+        "evidence_quote": "I've heard that much of these chemicals come from or",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "A sourcing claim about where illicit drug precursors originate, checkable against seizure and trade data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002433",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "you have to wonder"
+        ],
+        "claim_text": "China is engaged in hybrid warfare intended to degrade the United States from the inside.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002459",
+        "evidence_quote": "they can try to you know, degrade the US from the inside without firing a shot.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "rationale": "An allegation of state-directed covert harm underlying the fentanyl supply, checkable against the public record.",
+        "relevance": "substantive",
+        "start_unit_id": "u002442",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Chemicals from India's large chemical industry do get diverted to the illicit drug trade.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002454",
+        "evidence_quote": "you know, reference India, they just have massive chemical industry.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A supply-chain claim about diversion of legitimate chemicals, checkable against enforcement reporting.",
+        "relevance": "substantive",
+        "start_unit_id": "u002452",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "largely"
+        ],
+        "claim_text": "Fentanyl precursors are largely arriving by air shipment.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002461",
+        "evidence_quote": "we did you know, hit loads, but fentanyl precursors are largely coming through the air.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A factual claim about how fentanyl precursors enter the country, checkable against seizure data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002460",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "roughly"
+        ],
+        "claim_text": "Roughly one hundred thousand Americans are dying a year from the drug problem.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002508",
+        "evidence_quote": "one hundred thousand Americans were dying a year and the",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A mortality statistic central to the drug-policy argument, checkable against overdose death data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002507",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The drug problem killing Americans originates at the Southwest border.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002509",
+        "evidence_quote": "problem is originating on our doorstep, you know, the Southwest border,",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A claim about the entry point of the drugs killing Americans, checkable against interdiction data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002509",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Personally"
+        ],
+        "claim_text": "Venezuela is a serious or imminent drug-trafficking threat to the United States given the amount being smuggled.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002539",
+        "evidence_quote": "Yes, as far as the the amount being smuggled,",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A threat assessment about drug volumes from Venezuela, checkable against trafficking estimates.",
+        "relevance": "substantive",
+        "start_unit_id": "u002535",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      }
+    ],
+    "window_id": "episode_154859_window_0023"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002472",
+        "evidence_quote": "very difficult to get find chemicals fentonl precursors in in airshipments",
+        "label_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002433",
+        "summary": "Where illicit drug precursor chemicals originate (India, China) and how fentanyl precursors reach the drug trade."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002459",
+        "evidence_quote": "they can try to you know, degrade the US from the inside without firing a shot",
+        "label_ids": [
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002442",
+        "summary": "Open speculation that China is waging hybrid warfare to degrade the US from within via the drug trade."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002511",
+        "evidence_quote": "one hundred thousand Americans were dying a year and the",
+        "label_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002507",
+        "summary": "The annual American death toll from the drug problem is cited as the reason for the enforcement effort."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002527",
+        "evidence_quote": "just hear you, know, your perspective, with your expertise",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002524",
+        "summary": "Host invokes the guest's recent experience in the field and his expertise as grounds for his views."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002542",
+        "evidence_quote": "you rank Venezuela as far as drug trafficking",
+        "label_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u002528",
+        "summary": "Drug smuggling from Venezuela, the strikes on drug boats, and how serious a trafficking threat Venezuela is."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002552",
+        "evidence_quote": "there's a former dea ASAK who was stationed in Venezuela",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u002544",
+        "summary": "A former DEA official's posting and insight are invoked as authority on Venezuela."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "I've heard"
+        ],
+        "claim_text": "Much of the precursor chemicals for illicit drugs come from India and China.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u002435",
+        "evidence_quote": "I've heard that much of these chemicals come from or",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [],
+        "rationale": "A sourcing claim about where illicit drug precursors originate, checkable against seizure and trade data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002433",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "you have to wonder"
+        ],
+        "claim_text": "China is engaged in hybrid warfare intended to degrade the United States from the inside.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "questioned",
+        "end_unit_id": "u002459",
+        "evidence_quote": "they can try to you know, degrade the US from the inside without firing a shot",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "speculative",
+        "frame_ids": [
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "rationale": "An allegation of state-directed covert harm underlying the fentanyl supply, checkable against the public record.",
+        "relevance": "substantive",
+        "start_unit_id": "u002442",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Chemicals from India's large chemical industry do get diverted to the illicit drug trade.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002454",
+        "evidence_quote": "you know, reference India, they just have massive chemical industry",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A supply-chain claim about diversion of legitimate chemicals, checkable against enforcement reporting.",
+        "relevance": "substantive",
+        "start_unit_id": "u002452",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "largely"
+        ],
+        "claim_text": "Fentanyl precursors are largely arriving by air shipment.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002461",
+        "evidence_quote": "we did you know, hit loads, but fentanyl precursors are largely coming through the air",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A factual claim about how fentanyl precursors enter the country, checkable against seizure data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002460",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "roughly"
+        ],
+        "claim_text": "Roughly one hundred thousand Americans are dying a year from the drug problem.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002508",
+        "evidence_quote": "one hundred thousand Americans were dying a year and the",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A mortality statistic central to the drug-policy argument, checkable against overdose death data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002507",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The drug problem killing Americans originates at the Southwest border.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002509",
+        "evidence_quote": "problem is originating on our doorstep, you know, the Southwest border",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A claim about the entry point of the drugs killing Americans, checkable against interdiction data.",
+        "relevance": "substantive",
+        "start_unit_id": "u002509",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "Personally"
+        ],
+        "claim_text": "Venezuela is a serious or imminent drug-trafficking threat to the United States given the amount being smuggled.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u002539",
+        "evidence_quote": "Yes, as far as the the amount being smuggled",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A threat assessment about drug volumes from Venezuela, checkable against trafficking estimates.",
+        "relevance": "substantive",
+        "start_unit_id": "u002535",
+        "topic_ids": [
+          "topic:substance_use_addiction_harm_reduction"
+        ]
+      }
+    ],
+    "window_id": "episode_154859_window_0023"
+  },
+  "stored_at": "2026-09-12T22:15:54.801257+00:00"
+}

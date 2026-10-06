@@ -1,0 +1,571 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c94201w0016",
+  "provenance": {
+    "bundle": "bundle_016",
+    "ingested_at": "2026-09-09T18:04:01.180053+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001280",
+        "evidence_quote": "Like we're sleeping soundly in our queen size Tempurpedics.",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001275",
+        "summary": "Passing riff about Olympic athletes' sleeping accommodations and mattress quality."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001290",
+        "evidence_quote": "We all carry around different stressors, big and small.",
+        "label_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001289",
+        "summary": "Ad copy about carrying stressors and bottling them up."
+      },
+      {
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001312",
+        "evidence_quote": "Therapy is a safe space to get things off your chest",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001291",
+        "summary": "BetterHelp sponsor read about starting online therapy."
+      },
+      {
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001312",
+        "evidence_quote": "Our TV recap is brought to you by BetterHelp.",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001288",
+        "summary": "Delimited sponsor read for BetterHelp with a discount link."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001295",
+        "evidence_quote": "you'll get matched with a licensed therapist",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001295",
+        "summary": "Therapist licensure invoked as grounds for trusting the service."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001331",
+        "evidence_quote": "It is allergy season, and AstaPro is a first-of-its-kind nasal allergy spray.",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001313",
+        "summary": "AstePro sponsor read about seasonal nasal allergy symptoms and their relief."
+      },
+      {
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001331",
+        "evidence_quote": "Go to AstaProAllergy.com for a discount",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001313",
+        "summary": "Delimited sponsor read for the AstePro allergy spray with a discount URL."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001315",
+        "evidence_quote": "But we are suffering less thanks to AstaPro.",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001314",
+        "summary": "Hosts offer their own allergy relief as evidence the spray works."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u001279",
+        "evidence_quote": "Like we're sleeping soundly in our queen size Tempurpedics.",
+        "mention_role": "neutral",
+        "product_name": "Tempur-Pedic",
+        "product_type": "other_product",
+        "start_unit_id": "u001279"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001312",
+        "evidence_quote": "Our TV recap is brought to you by BetterHelp.",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u001288"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u001331",
+        "evidence_quote": "I need to let you know that today's episode is brought to you by AstaPro.",
+        "mention_role": "advertised",
+        "product_name": "Astepro",
+        "product_type": "medication",
+        "start_unit_id": "u001313"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "can"
+        ],
+        "claim_text": "Keeping stressors bottled up can start to affect us negatively.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001290",
+        "evidence_quote": "Where we keep them bottled up, it can start to affect us negatively.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A causal claim about bottled-up stress harming health that can be checked against stress research.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001289",
+        "topic_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp users fill out a brief questionnaire and are matched with a licensed therapist.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001295",
+        "evidence_quote": "Fill out a brief questionnaire, and you'll get matched with a licensed therapist.",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Whether the service matches users with licensed therapists is a checkable claim about a mental-health service.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001295",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp lets users switch therapists at any time for no additional charge.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001296",
+        "evidence_quote": "And you can switch therapists at any time for no additional charge.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A checkable claim about the terms of a mental-health service that could affect a listener's care decisions.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001296",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "AstePro is the fastest 24-hour over-the-counter allergy spray.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001317",
+        "evidence_quote": "It is the fastest 24-hour over-the-counter allergy spray.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A comparative superiority claim about an over-the-counter medication that can be checked against product data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001316",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "AstePro starts working in 30 minutes, while other allergy sprays take hours.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001318",
+        "evidence_quote": "It starts working in 30 minutes, while other allergy sprays take hours.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Onset-of-action compared with other sprays is checkable against clinical labelling data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001318",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "AstePro is the first and only 24-hour steroid-free allergy spray.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001320",
+        "evidence_quote": "24-hour steroid-free allergy spray",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A first-and-only market claim about a medication that can be checked against approved products.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001319",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "AstePro delivers full prescription strength indoor and outdoor allergy relief from nasal congestion, runny and itchy nose, and sneezing.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001320",
+        "evidence_quote": "AstaPro delivers full prescription strength indoor and outdoor allergy relief from nasal congestion, runny and itchy nose, and sneezing.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "An efficacy and potency claim for an over-the-counter medication that can be checked against its labelling.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001320",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      }
+    ],
+    "window_id": "episode_94201_window_0016"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001280",
+        "evidence_quote": "Like we're sleeping soundly in our queen size Tempurpedics",
+        "label_ids": [
+          "topic:sleep"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u001275",
+        "summary": "Passing riff about Olympic athletes' sleeping accommodations and mattress quality."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001290",
+        "evidence_quote": "We all carry around different stressors, big and small",
+        "label_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001289",
+        "summary": "Ad copy about carrying stressors and bottling them up."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.9,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001312",
+        "evidence_quote": "Therapy is a safe space to get things off your chest",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001291",
+        "summary": "BetterHelp sponsor read about starting online therapy."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001312",
+        "evidence_quote": "Our TV recap is brought to you by BetterHelp",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001288",
+        "summary": "Delimited sponsor read for BetterHelp with a discount link."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001295",
+        "evidence_quote": "you'll get matched with a licensed therapist",
+        "label_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001295",
+        "summary": "Therapist licensure invoked as grounds for trusting the service."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001331",
+        "evidence_quote": "It is allergy season, and AstaPro is a first-of-its-kind nasal allergy spray",
+        "label_ids": [
+          "topic:other_health_topic"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001313",
+        "summary": "AstePro sponsor read about seasonal nasal allergy symptoms and their relief."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.95,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001331",
+        "evidence_quote": "Go to AstaProAllergy.com for a discount",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001313",
+        "summary": "Delimited sponsor read for the AstePro allergy spray with a discount URL."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001315",
+        "evidence_quote": "But we are suffering less thanks to AstaPro",
+        "label_ids": [
+          "cross_cutting:personal_experience_evidence"
+        ],
+        "relevance": "advertisement",
+        "start_unit_id": "u001314",
+        "summary": "Hosts offer their own allergy relief as evidence the spray works."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.6,
+        "end_unit_id": "u001279",
+        "evidence_quote": "Like we're sleeping soundly in our queen size Tempurpedics",
+        "mention_role": "neutral",
+        "product_name": "Tempur-Pedic",
+        "product_type": "other_product",
+        "start_unit_id": "u001279"
+      },
+      {
+        "confidence": 0.95,
+        "end_unit_id": "u001312",
+        "evidence_quote": "Our TV recap is brought to you by BetterHelp",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u001288"
+      },
+      {
+        "confidence": 0.9,
+        "end_unit_id": "u001331",
+        "evidence_quote": "I need to let you know that today's episode is brought to you by AstaPro",
+        "mention_role": "advertised",
+        "product_name": "Astepro",
+        "product_type": "medication",
+        "start_unit_id": "u001313"
+      }
+    ],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "can"
+        ],
+        "claim_text": "Keeping stressors bottled up can start to affect us negatively.",
+        "claim_type": "causal",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001290",
+        "evidence_quote": "Where we keep them bottled up, it can start to affect us negatively",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A causal claim about bottled-up stress harming health that can be checked against stress research.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001289",
+        "topic_ids": [
+          "topic:stress_nervous_system_regulation_neurowellness"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp users fill out a brief questionnaire and are matched with a licensed therapist.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001295",
+        "evidence_quote": "Fill out a brief questionnaire, and you'll get matched with a licensed therapist",
+        "evidence_signal_ids": [
+          "cross_cutting:credential_appeal"
+        ],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Whether the service matches users with licensed therapists is a checkable claim about a mental-health service.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001295",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "BetterHelp lets users switch therapists at any time for no additional charge.",
+        "claim_type": "other_factual",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001296",
+        "evidence_quote": "And you can switch therapists at any time for no additional charge",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A checkable claim about the terms of a mental-health service that could affect a listener's care decisions.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001296",
+        "topic_ids": [
+          "topic:mental_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "AstePro is the fastest 24-hour over-the-counter allergy spray.",
+        "claim_type": "other_factual",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001317",
+        "evidence_quote": "It is the fastest 24-hour over-the-counter allergy spray",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A comparative superiority claim about an over-the-counter medication that can be checked against product data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001316",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "AstePro starts working in 30 minutes, while other allergy sprays take hours.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001318",
+        "evidence_quote": "It starts working in 30 minutes, while other allergy sprays take hours",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "Onset-of-action compared with other sprays is checkable against clinical labelling data.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001318",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "AstePro is the first and only 24-hour steroid-free allergy spray.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001320",
+        "evidence_quote": "24-hour steroid-free allergy spray",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "A first-and-only market claim about a medication that can be checked against approved products.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001319",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "AstePro delivers full prescription strength indoor and outdoor allergy relief from nasal congestion, runny and itchy nose, and sneezing.",
+        "claim_type": "treatment_or_prevention",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001320",
+        "evidence_quote": "AstaPro delivers full prescription strength indoor and outdoor allergy relief from nasal congestion, runny and itchy nose, and sneezing",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "rationale": "An efficacy and potency claim for an over-the-counter medication that can be checked against its labelling.",
+        "relevance": "advertisement",
+        "start_unit_id": "u001320",
+        "topic_ids": [
+          "topic:other_health_topic"
+        ]
+      }
+    ],
+    "window_id": "episode_94201_window_0016"
+  },
+  "stored_at": "2026-09-09T18:04:01.180107+00:00"
+}

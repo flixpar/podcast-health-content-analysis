@@ -1,0 +1,301 @@
+{
+  "annotator_id": "opus-r1",
+  "benchmark_version": "v1",
+  "item_id": "c329733w0001",
+  "provenance": {
+    "bundle": "bundle_006",
+    "ingested_at": "2026-09-12T23:09:29.031882+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r1-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000024",
+        "evidence_quote": "people burn off huge chunks of their face and other body parts with nonsense medicine from the internet",
+        "label_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "Hosts introduce the episode's subject: people using an internet-promoted alternative remedy that burns off skin, following their episode on Harry Hoxsey and fake cancer cures."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "The two part are on Harry Haxey, the father of the fake cancer industry.",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "The hosts frame the remedy and its promoters as fake medicine to be exposed."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000044",
+        "evidence_quote": "I was looking into one of those little groups Black sav enthusiasts and like s a l V, which is like a medicated ointment basically",
+        "label_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000031",
+        "summary": "The online black salve community and its practice of burning off skin with a caustic ointment is introduced and mocked."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000041",
+        "evidence_quote": "Yeah, there's a whole community about burning off large chunks of your skin with with bullshit poison.",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "summary": "Hosts explicitly call the black salve practice bullshit poison, debunking it."
+      },
+      {
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000058",
+        "evidence_quote": "black s as an alternative topical therapy that was initially used back in the day to treat skin cancer",
+        "label_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000054",
+        "summary": "Host describes black salve as an alternative topical skin-cancer therapy, its two main ingredients and what it does to skin."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000058",
+        "evidence_quote": "One of them is blood root Sanguinaria canadensis like Canada, and the other is zinc chloride.",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000055",
+        "summary": "Composition and physiological action are spelled out in botanical and chemical terms."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Black salve is an alternative topical therapy that was originally used to treat skin cancer.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000055",
+        "evidence_quote": "black s as an alternative topical therapy that was initially used back in the day to treat skin cancer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable historical claim about what black salve was used for.",
+        "relevance": "substantive",
+        "start_unit_id": "u000055",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most formulations"
+        ],
+        "claim_text": "Most black salve formulations contain two main ingredients, bloodroot (Sanguinaria canadensis) and zinc chloride.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "most formulations contain two main ingredients.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A stated composition that can be checked against what black salve products actually contain.",
+        "relevance": "substantive",
+        "start_unit_id": "u000055",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "basically"
+        ],
+        "claim_text": "Black salve works by burning layers of the skin to death, after which the dead skin falls off and leaves an open wound.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000058",
+        "evidence_quote": "And it all basically works by just burning layers of your skin to death at a time.",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A mechanistic claim about what the substance does to tissue that can be checked against dermatological evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000057",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      }
+    ],
+    "window_id": "episode_329733_window_0001"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000024",
+        "evidence_quote": "people burn off huge chunks of their face and other body parts with nonsense medicine from the internet",
+        "label_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "Hosts introduce the episode's subject: people using an internet-promoted alternative remedy that burns off skin, following their episode on Harry Hoxsey and fake cancer cures."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000024",
+        "evidence_quote": "The two part are on Harry Haxey, the father of the fake cancer industry",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000020",
+        "summary": "The hosts frame the remedy and its promoters as fake medicine to be exposed."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000044",
+        "evidence_quote": "I was looking into one of those little groups Black sav enthusiasts and like s a l V, which is like a medicated ointment basically",
+        "label_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000031",
+        "summary": "The online black salve community and its practice of burning off skin with a caustic ointment is introduced and mocked."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000041",
+        "evidence_quote": "Yeah, there's a whole community about burning off large chunks of your skin with with bullshit poison",
+        "label_ids": [
+          "cross_cutting:misinformation_correction_debunking"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000033",
+        "summary": "Hosts explicitly call the black salve practice bullshit poison, debunking it."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.85,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000058",
+        "evidence_quote": "black s as an alternative topical therapy that was initially used back in the day to treat skin cancer",
+        "label_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000054",
+        "summary": "Host describes black salve as an alternative topical skin-cancer therapy, its two main ingredients and what it does to skin."
+      },
+      {
+        "axis": "evidence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000058",
+        "evidence_quote": "One of them is blood root Sanguinaria canadensis like Canada, and the other is zinc chloride",
+        "label_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000055",
+        "summary": "Composition and physiological action are spelled out in botanical and chemical terms."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Black salve is an alternative topical therapy that was originally used to treat skin cancer.",
+        "claim_type": "other_factual",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000055",
+        "evidence_quote": "black s as an alternative topical therapy that was initially used back in the day to treat skin cancer",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable historical claim about what black salve was used for.",
+        "relevance": "substantive",
+        "start_unit_id": "u000055",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "most formulations"
+        ],
+        "claim_text": "Most black salve formulations contain two main ingredients, bloodroot (Sanguinaria canadensis) and zinc chloride.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000056",
+        "evidence_quote": "most formulations contain two main ingredients",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A stated composition that can be checked against what black salve products actually contain.",
+        "relevance": "substantive",
+        "start_unit_id": "u000055",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "basically"
+        ],
+        "claim_text": "Black salve works by burning layers of the skin to death, after which the dead skin falls off and leaves an open wound.",
+        "claim_type": "mechanism",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000058",
+        "evidence_quote": "And it all basically works by just burning layers of your skin to death at a time",
+        "evidence_signal_ids": [
+          "cross_cutting:mechanistic_scientific_language"
+        ],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A mechanistic claim about what the substance does to tissue that can be checked against dermatological evidence.",
+        "relevance": "substantive",
+        "start_unit_id": "u000057",
+        "topic_ids": [
+          "topic:cancer_alternative_treatments_cure_narratives"
+        ]
+      }
+    ],
+    "window_id": "episode_329733_window_0001"
+  },
+  "stored_at": "2026-09-12T23:09:29.031923+00:00"
+}

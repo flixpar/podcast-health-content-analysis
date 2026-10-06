@@ -1,0 +1,120 @@
+{
+  "annotator_id": "opus-r2",
+  "benchmark_version": "v1",
+  "item_id": "c58327w0007",
+  "provenance": {
+    "bundle": "bundle_011",
+    "ingested_at": "2026-09-12T23:15:39.008621+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "This is there's some like trauma here, maybe from childhood, the way she grew up.",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000565",
+        "summary": "Caller's wife's money fear attributed to childhood trauma, with counseling or therapy recommended."
+      },
+      {
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000574",
+        "evidence_quote": "connecting with our. Friends at BetterHelp",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000573",
+        "summary": "Therapy recommendation routed to the show's sponsor BetterHelp."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "I want to get to the root of this because I don't want to live like this.",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000575",
+        "summary": "Getting to the root of the problem framed as the goal of therapy."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000574",
+        "evidence_quote": "connecting with our. Friends at BetterHelp to go.",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000573"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_58327_window_0007"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "This is there's some like trauma here, maybe from childhood, the way she grew up",
+        "label_ids": [
+          "topic:mental_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000565",
+        "summary": "Caller's wife's money fear attributed to childhood trauma, with counseling or therapy recommended."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000574",
+        "evidence_quote": "connecting with our. Friends at BetterHelp",
+        "label_ids": [
+          "cross_cutting:commercialization"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000573",
+        "summary": "Therapy recommendation routed to the show's sponsor BetterHelp."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000576",
+        "evidence_quote": "I want to get to the root of this because I don't want to live like this",
+        "label_ids": [
+          "cross_cutting:root_cause_framing"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000575",
+        "summary": "Getting to the root of the problem framed as the goal of therapy."
+      }
+    ],
+    "product_mentions": [
+      {
+        "confidence": 0.7,
+        "end_unit_id": "u000574",
+        "evidence_quote": "connecting with our. Friends at BetterHelp to go",
+        "mention_role": "advertised",
+        "product_name": "BetterHelp",
+        "product_type": "app_or_digital_service",
+        "start_unit_id": "u000573"
+      }
+    ],
+    "verification_candidates": [],
+    "window_id": "episode_58327_window_0007"
+  },
+  "stored_at": "2026-09-12T23:15:39.008650+00:00"
+}

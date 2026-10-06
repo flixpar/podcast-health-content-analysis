@@ -1,0 +1,155 @@
+{
+  "annotator_id": "sonnet-r2",
+  "benchmark_version": "v1",
+  "item_id": "c208120w0004",
+  "provenance": {
+    "bundle": "bundle_006",
+    "ingested_at": "2026-09-12T23:30:31.096789+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000189",
+        "evidence_quote": "He had been killing infants outside the womb, chopping them up, leaving body parts.",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "summary": "Host recounts abortion provider Kermit Gosnell killing infants outside the womb in an unsanitary clinic and argues Democrats are unbothered by it."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000239",
+        "evidence_quote": "What Northam is saying is that the infant will be resuscitated only if the mother wants it.",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000190",
+        "summary": "Host argues that Governor Northam's remarks about resuscitating a born infant only if the mother wants it amount to describing infanticide, comparing it to letting a choking child die."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Kermit Gosnell's clinic left body parts strewn in a refrigerator and in buckets around the room.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000172",
+        "evidence_quote": "leaving body parts. Strewn about in the refrigerator, in buckets on the side of the room",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific, checkable factual allegation about unsanitary clinic conditions at a named abortion provider.",
+        "relevance": "substantive",
+        "start_unit_id": "u000171",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "not in the majority of cases",
+          "not an unheard of thing"
+        ],
+        "claim_text": "Newborn babies sometimes need immediate medical attention or resuscitation after delivery, though this is not the case in the majority of births.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "it's it's not an it's not a complete it's not an unheard of thing that a baby will come out and need some sort of immediate medical attention, even resuscitation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A claim about how often newborns require resuscitation after birth is a checkable clinical fact.",
+        "relevance": "substantive",
+        "start_unit_id": "u000209",
+        "topic_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ]
+      }
+    ],
+    "window_id": "episode_208120_window_0004"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000189",
+        "evidence_quote": "He had been killing infants outside the womb, chopping them up, leaving body parts",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "summary": "Host recounts abortion provider Kermit Gosnell killing infants outside the womb in an unsanitary clinic and argues Democrats are unbothered by it."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.55,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000239",
+        "evidence_quote": "what Northam is saying is that the infant will be resuscitated only if the mother wants it",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000190",
+        "summary": "Host argues that Governor Northam's remarks about resuscitating a born infant only if the mother wants it amount to describing infanticide, comparing it to letting a choking child die."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Kermit Gosnell's clinic left body parts strewn in a refrigerator and in buckets around the room.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000172",
+        "evidence_quote": "leaving body parts. Strewn about in the refrigerator, in buckets on the side of the room",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific, checkable factual allegation about unsanitary clinic conditions at a named abortion provider.",
+        "relevance": "substantive",
+        "start_unit_id": "u000171",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "not in the majority of cases",
+          "not an unheard of thing"
+        ],
+        "claim_text": "Newborn babies sometimes need immediate medical attention or resuscitation after delivery, though this is not the case in the majority of births.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "it's it's not an it's not a complete it's not an unheard of thing that a baby will come out and need some sort of immediate medical attention, even resuscitation",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A claim about how often newborns require resuscitation after birth is a checkable clinical fact.",
+        "relevance": "substantive",
+        "start_unit_id": "u000209",
+        "topic_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ]
+      }
+    ],
+    "window_id": "episode_208120_window_0004"
+  },
+  "stored_at": "2026-09-12T23:30:31.096819+00:00"
+}

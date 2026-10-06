@@ -1,0 +1,345 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c196115w0015",
+  "provenance": {
+    "bundle": "bundle_008",
+    "ingested_at": "2026-09-09T19:40:18.978745+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001242",
+        "evidence_quote": "we really we still kind of don't know how MRIs work",
+        "label_ids": [
+          "topic:surgery_medical_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001222",
+        "summary": "Hosts discuss, and partly contradict themselves about, how MRI machines work, describing it as a mystery involving an electromagnet and aligning atoms."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001267",
+        "evidence_quote": "the vibration can dislodge, bend, and break the dental restoration just from the magnets",
+        "label_ids": [
+          "topic:surgery_medical_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001255",
+        "summary": "Hosts describe MRI safety risks from metal (dental crowns, plates, ferromagnetic materials) and mention ultrasound or CT scan as alternative imaging."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "kind of"
+        ],
+        "claim_text": "Scientists still kind of don't know how MRI machines work.",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001227",
+        "evidence_quote": "we really we still kind of don't know how MRIs work",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about scientific understanding of MRI mechanism that could mislead listeners about how well-established MRI physics is.",
+        "relevance": "substantive",
+        "start_unit_id": "u001227",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "An MRI machine works by making the atoms in a person's body all point in one direction.",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001241",
+        "evidence_quote": "I think it takes your atoms and it makes them all point in one direction",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific mechanistic claim about how MRI works that can be checked against how MRI physics actually functions.",
+        "relevance": "substantive",
+        "start_unit_id": "u001240",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Having metal, including metal dental crowns, in an MRI machine is dangerous.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001255",
+        "evidence_quote": "So you should not have any metal, even metal crowns in your mouth.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific safety claim about MRI and metal that listeners could act on and that can be verified.",
+        "relevance": "substantive",
+        "start_unit_id": "u001255",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The vibration from an MRI's magnets can dislodge, bend, and break dental restorations.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001257",
+        "evidence_quote": "the vibration can dislodge, bend, and break the dental restoration just from the magnets",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific, checkable safety claim about a physical effect of MRI machines on dental work.",
+        "relevance": "substantive",
+        "start_unit_id": "u001257",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Loose metal objects near an MRI machine can injure a person.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001259",
+        "evidence_quote": "loose metal objects can injure you as that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable safety claim about MRI hazards from loose metal.",
+        "relevance": "substantive",
+        "start_unit_id": "u001259",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I would think"
+        ],
+        "claim_text": "Having a metal plate in your head or fillings in your teeth would make someone a bad candidate for an MRI.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001264",
+        "evidence_quote": "I would think if you have a metal plate in your head or you got fillings in your teeth, then you would be a bad candidate",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about MRI eligibility criteria based on metal implants.",
+        "relevance": "substantive",
+        "start_unit_id": "u001263",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Ferromagnetic materials such as iron, cobalt, manganese, and nickel are more responsive to an MRI's magnet than other metals.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001265",
+        "evidence_quote": "I think there's certain kinds of metals too that are more responsive to it than others",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific, checkable claim about the physics of which metals react to MRI magnets.",
+        "relevance": "substantive",
+        "start_unit_id": "u001264",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      }
+    ],
+    "window_id": "episode_196115_window_0015"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001242",
+        "evidence_quote": "we really we still kind of don't know how MRIs work",
+        "label_ids": [
+          "topic:surgery_medical_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001222",
+        "summary": "Hosts discuss, and partly contradict themselves about, how MRI machines work, describing it as a mystery involving an electromagnet and aligning atoms."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001267",
+        "evidence_quote": "the vibration can dislodge, bend, and break the dental restoration just from the magnets",
+        "label_ids": [
+          "topic:surgery_medical_procedures"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u001255",
+        "summary": "Hosts describe MRI safety risks from metal (dental crowns, plates, ferromagnetic materials) and mention ultrasound or CT scan as alternative imaging."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [
+          "kind of"
+        ],
+        "claim_text": "Scientists still kind of don't know how MRI machines work.",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001227",
+        "evidence_quote": "we really we still kind of don't know how MRIs work",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about scientific understanding of MRI mechanism that could mislead listeners about how well-established MRI physics is.",
+        "relevance": "substantive",
+        "start_unit_id": "u001227",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "An MRI machine works by making the atoms in a person's body all point in one direction.",
+        "claim_type": "mechanism",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001241",
+        "evidence_quote": "I think it takes your atoms and it makes them all point in one direction",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific mechanistic claim about how MRI works that can be checked against how MRI physics actually functions.",
+        "relevance": "substantive",
+        "start_unit_id": "u001240",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Having metal, including metal dental crowns, in an MRI machine is dangerous.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001255",
+        "evidence_quote": "So you should not have any metal, even metal crowns in your mouth",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific safety claim about MRI and metal that listeners could act on and that can be verified.",
+        "relevance": "substantive",
+        "start_unit_id": "u001255",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The vibration from an MRI's magnets can dislodge, bend, and break dental restorations.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001257",
+        "evidence_quote": "the vibration can dislodge, bend, and break the dental restoration just from the magnets",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Specific, checkable safety claim about a physical effect of MRI machines on dental work.",
+        "relevance": "substantive",
+        "start_unit_id": "u001257",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Loose metal objects near an MRI machine can injure a person.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.75,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001259",
+        "evidence_quote": "loose metal objects can injure you as that",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Checkable safety claim about MRI hazards from loose metal.",
+        "relevance": "substantive",
+        "start_unit_id": "u001259",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I would think"
+        ],
+        "claim_text": "Having a metal plate in your head or fillings in your teeth would make someone a bad candidate for an MRI.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001264",
+        "evidence_quote": "I would think if you have a metal plate in your head or you got fillings in your teeth, then you would be a bad candidate",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Checkable claim about MRI eligibility criteria based on metal implants.",
+        "relevance": "substantive",
+        "start_unit_id": "u001263",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "I think"
+        ],
+        "claim_text": "Ferromagnetic materials such as iron, cobalt, manganese, and nickel are more responsive to an MRI's magnet than other metals.",
+        "claim_type": "mechanism",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u001265",
+        "evidence_quote": "I think there's certain kinds of metals too that are more responsive to it than others",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "Specific, checkable claim about the physics of which metals react to MRI magnets.",
+        "relevance": "substantive",
+        "start_unit_id": "u001264",
+        "topic_ids": [
+          "topic:surgery_medical_procedures"
+        ]
+      }
+    ],
+    "window_id": "episode_196115_window_0015"
+  },
+  "stored_at": "2026-09-09T19:40:18.978766+00:00"
+}

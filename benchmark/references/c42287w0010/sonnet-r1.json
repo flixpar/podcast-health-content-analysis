@@ -1,0 +1,488 @@
+{
+  "annotator_id": "sonnet-r1",
+  "benchmark_version": "v1",
+  "item_id": "c42287w0010",
+  "provenance": {
+    "bundle": "bundle_026",
+    "ingested_at": "2026-09-09T19:40:19.883948+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/sonnet-r1-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000616",
+        "evidence_quote": "it is completely inappropriate that the FDA is finally studying the chemicals in our food",
+        "label_ids": [
+          "topic:maha_root_cause_health_politics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "summary": "Describes the soda/food industry lobbying the administration to preserve ultra-processed food funding and opposing FDA study of food chemicals, framed as the administration fighting entrenched food interests."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000616",
+        "evidence_quote": "We need to keep ultra-processed food in school lunches",
+        "label_ids": [
+          "cross_cutting:maha_food_vocabulary"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "summary": "Frames ultra-processed food in school lunches versus fresh food using MAHA-style food vocabulary."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000609",
+        "evidence_quote": "This is hurting jobs to take food stamp funding away from soda.",
+        "label_ids": [
+          "cross_cutting:big_food_food_system_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "summary": "Portrays soda and food companies as lobbying to protect profits at the expense of children's nutrition."
+      },
+      {
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000613",
+        "evidence_quote": "We have 10,000 more chemicals in our food today than Europe",
+        "label_ids": [
+          "cross_cutting:maha_environmental_vocabulary"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000611",
+        "summary": "Frames food chemicals as a health threat requiring FDA/NIH study, comparing the US unfavorably to Europe."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000651",
+        "evidence_quote": "they're sending around a CIA manual called \"How to Be a Bad Bureaucrat and Subvert an Institution from Within.\"",
+        "label_ids": [
+          "topic:health_care_system_medical_trust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000639",
+        "summary": "Discusses FDA, NIH and HHS staffing, political appointees, and long-tenured government employees resisting the administration's health agenda."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000651",
+        "evidence_quote": "90% of employees at HHS, which has 70,000 employees, are working and talking in the lunchroom about this manual",
+        "label_ids": [
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000643",
+        "summary": "Alleges that the vast majority of HHS employees are circulating a manual on subverting the administration from within to block the health agenda."
+      },
+      {
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000662",
+        "evidence_quote": "the CDC accidentally, in their guidance on school lockdowns, copy and pasted directly from the teacher union document",
+        "label_ids": [
+          "topic:covid_19_pandemic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000652",
+        "summary": "Criticizes the CDC's COVID-19 pandemic response (school lockdowns, masks) and blames NIH gain-of-function funding for creating the pandemic."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000658",
+        "evidence_quote": "They said that cloth masks were fine, right?",
+        "label_ids": [
+          "cross_cutting:government_institution_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000652",
+        "summary": "Portrays the CDC as having failed and colluded with the teachers' union during the pandemic response."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000660",
+        "evidence_quote": "with the NIH funding, literally the creation of the pandemic with the gain of function research",
+        "label_ids": [
+          "cross_cutting:covid_conspiracy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000659",
+        "summary": "Claims NIH funding of gain-of-function research literally created the COVID-19 pandemic."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The United States has 10,000 more chemicals in its food supply today than Europe does.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000612",
+        "evidence_quote": "We have 10,000 more chemicals in our food today than Europe",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:maha_environmental_vocabulary"
+        ],
+        "rationale": "A specific, checkable comparative statistic about chemical additives in the US versus European food supply.",
+        "relevance": "substantive",
+        "start_unit_id": "u000612",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The CDC's guidance on school lockdowns during COVID-19 copied language directly from a teachers' union document.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000654",
+        "evidence_quote": "the CDC accidentally, in their guidance on school lockdowns, copy and pasted directly from the teacher union document",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:government_institution_distrust"
+        ],
+        "rationale": "A specific allegation that the CDC copied its school-lockdown guidance from a teachers' union document is directly checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000654",
+        "topic_ids": [
+          "topic:covid_19_pandemic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The CDC said that cloth masks were fine (effective) against COVID-19.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000657",
+        "evidence_quote": "They said that cloth masks were fine, right?",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Whether the CDC stated cloth masks were effective is a checkable claim about public health guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000657",
+        "topic_ids": [
+          "topic:covid_19_pandemic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "literally"
+        ],
+        "claim_text": "NIH funding of gain-of-function research created the COVID-19 pandemic.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000660",
+        "evidence_quote": "with the NIH funding, literally the creation of the pandemic with the gain of function research",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:covid_conspiracy"
+        ],
+        "rationale": "The claim that NIH funding of gain-of-function research created the COVID-19 pandemic is a specific, checkable causal/institutional claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000660",
+        "topic_ids": [
+          "topic:covid_19_pandemic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "90% of the roughly 70,000 employees at HHS are circulating and discussing a manual on subverting institutions from within to resist the administration's health agenda.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000646",
+        "evidence_quote": "90% of employees at HHS, which has 70,000 employees, are working and talking in the lunchroom about this manual",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "rationale": "A specific, checkable statistic about the share of HHS staff allegedly circulating a manual to resist the administration.",
+        "relevance": "substantive",
+        "start_unit_id": "u000646",
+        "topic_ids": [
+          "topic:health_care_system_medical_trust"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The FDA had only around 10 political appointees under its commissioner for the first couple of months.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000640",
+        "evidence_quote": "for a couple months, he had just around 10 political appointees",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific, checkable claim about the number of political appointees at the FDA under a named commissioner.",
+        "relevance": "substantive",
+        "start_unit_id": "u000640",
+        "topic_ids": [
+          "topic:health_care_system_medical_trust"
+        ]
+      }
+    ],
+    "window_id": "episode_42287_window_0010"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000616",
+        "evidence_quote": "it is completely inappropriate that the FDA is finally studying the chemicals in our food",
+        "label_ids": [
+          "topic:maha_root_cause_health_politics"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "summary": "Describes the soda/food industry lobbying the administration to preserve ultra-processed food funding and opposing FDA study of food chemicals, framed as the administration fighting entrenched food interests."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000616",
+        "evidence_quote": "We need to keep ultra-processed food in school lunches",
+        "label_ids": [
+          "cross_cutting:maha_food_vocabulary"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "summary": "Frames ultra-processed food in school lunches versus fresh food using MAHA-style food vocabulary."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000609",
+        "evidence_quote": "This is hurting jobs to take food stamp funding away from soda",
+        "label_ids": [
+          "cross_cutting:big_food_food_system_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000605",
+        "summary": "Portrays soda and food companies as lobbying to protect profits at the expense of children's nutrition."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000613",
+        "evidence_quote": "We have 10,000 more chemicals in our food today than Europe",
+        "label_ids": [
+          "cross_cutting:maha_environmental_vocabulary"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000611",
+        "summary": "Frames food chemicals as a health threat requiring FDA/NIH study, comparing the US unfavorably to Europe."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000651",
+        "evidence_quote": "they're sending around a CIA manual called \"How to Be a Bad Bureaucrat and Subvert an Institution from Within",
+        "label_ids": [
+          "topic:health_care_system_medical_trust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000639",
+        "summary": "Discusses FDA, NIH and HHS staffing, political appointees, and long-tenured government employees resisting the administration's health agenda."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000651",
+        "evidence_quote": "90% of employees at HHS, which has 70,000 employees, are working and talking in the lunchroom about this manual",
+        "label_ids": [
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000643",
+        "summary": "Alleges that the vast majority of HHS employees are circulating a manual on subverting the administration from within to block the health agenda."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.65,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000662",
+        "evidence_quote": "the CDC accidentally, in their guidance on school lockdowns, copy and pasted directly from the teacher union document",
+        "label_ids": [
+          "topic:covid_19_pandemic_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000652",
+        "summary": "Criticizes the CDC's COVID-19 pandemic response (school lockdowns, masks) and blames NIH gain-of-function funding for creating the pandemic."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000658",
+        "evidence_quote": "They said that cloth masks were fine, right",
+        "label_ids": [
+          "cross_cutting:government_institution_distrust"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000652",
+        "summary": "Portrays the CDC as having failed and colluded with the teachers' union during the pandemic response."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000660",
+        "evidence_quote": "with the NIH funding, literally the creation of the pandemic with the gain of function research",
+        "label_ids": [
+          "cross_cutting:covid_conspiracy"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000659",
+        "summary": "Claims NIH funding of gain-of-function research literally created the COVID-19 pandemic."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "The United States has 10,000 more chemicals in its food supply today than Europe does.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000612",
+        "evidence_quote": "We have 10,000 more chemicals in our food today than Europe",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:maha_environmental_vocabulary"
+        ],
+        "rationale": "A specific, checkable comparative statistic about chemical additives in the US versus European food supply.",
+        "relevance": "substantive",
+        "start_unit_id": "u000612",
+        "topic_ids": [
+          "topic:food_nutrition"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The CDC's guidance on school lockdowns during COVID-19 copied language directly from a teachers' union document.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000654",
+        "evidence_quote": "the CDC accidentally, in their guidance on school lockdowns, copy and pasted directly from the teacher union document",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:government_institution_distrust"
+        ],
+        "rationale": "A specific allegation that the CDC copied its school-lockdown guidance from a teachers' union document is directly checkable.",
+        "relevance": "substantive",
+        "start_unit_id": "u000654",
+        "topic_ids": [
+          "topic:covid_19_pandemic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The CDC said that cloth masks were fine (effective) against COVID-19.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000657",
+        "evidence_quote": "They said that cloth masks were fine, right",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "Whether the CDC stated cloth masks were effective is a checkable claim about public health guidance.",
+        "relevance": "substantive",
+        "start_unit_id": "u000657",
+        "topic_ids": [
+          "topic:covid_19_pandemic_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "literally"
+        ],
+        "claim_text": "NIH funding of gain-of-function research created the COVID-19 pandemic.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.55,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000660",
+        "evidence_quote": "with the NIH funding, literally the creation of the pandemic with the gain of function research",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "absolute",
+        "frame_ids": [
+          "cross_cutting:covid_conspiracy"
+        ],
+        "rationale": "The claim that NIH funding of gain-of-function research created the COVID-19 pandemic is a specific, checkable causal/institutional claim.",
+        "relevance": "substantive",
+        "start_unit_id": "u000660",
+        "topic_ids": [
+          "topic:covid_19_pandemic_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "90% of the roughly 70,000 employees at HHS are circulating and discussing a manual on subverting institutions from within to resist the administration's health agenda.",
+        "claim_type": "institutional_or_conspiracy",
+        "confidence": 0.55,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000646",
+        "evidence_quote": "90% of employees at HHS, which has 70,000 employees, are working and talking in the lunchroom about this manual",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [
+          "cross_cutting:conspiracy_cover_up"
+        ],
+        "rationale": "A specific, checkable statistic about the share of HHS staff allegedly circulating a manual to resist the administration.",
+        "relevance": "substantive",
+        "start_unit_id": "u000646",
+        "topic_ids": [
+          "topic:health_care_system_medical_trust"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "The FDA had only around 10 political appointees under its commissioner for the first couple of months.",
+        "claim_type": "other_factual",
+        "confidence": 0.5,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000640",
+        "evidence_quote": "for a couple months, he had just around 10 political appointees",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific, checkable claim about the number of political appointees at the FDA under a named commissioner.",
+        "relevance": "substantive",
+        "start_unit_id": "u000640",
+        "topic_ids": [
+          "topic:health_care_system_medical_trust"
+        ]
+      }
+    ],
+    "window_id": "episode_42287_window_0010"
+  },
+  "stored_at": "2026-09-09T19:40:19.883963+00:00"
+}

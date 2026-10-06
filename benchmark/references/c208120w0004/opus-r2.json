@@ -1,0 +1,335 @@
+{
+  "annotator_id": "opus-r2",
+  "benchmark_version": "v1",
+  "item_id": "c208120w0004",
+  "provenance": {
+    "bundle": "bundle_012",
+    "ingested_at": "2026-09-12T23:15:39.051888+00:00",
+    "run_dir": "/home/felix/projects/podcast-misinfo-benchmark-tasks/reference/opus-r2-grow-v1"
+  },
+  "raw": {
+    "detections": [
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "He had been killing infants outside the womb, chopping them up, leaving body parts.",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "summary": "The hosts describe the Gosnell abortion clinic case: infants killed after birth, filthy equipment and women dying."
+      },
+      {
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000208",
+        "evidence_quote": "And what Northam is saying is that the infant will be resuscitated only if the mother wants it.",
+        "label_ids": [
+          "topic:pregnancy_maternal_postpartum_health",
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000190",
+        "summary": "Discussion of Northam's statement that an infant delivered would be resuscitated only if the mother wants it, argued to be infanticide."
+      },
+      {
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000220",
+        "evidence_quote": "Babies have to be resuscitated after they're delivered all the time.",
+        "label_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000209",
+        "summary": "Explanation that newborns sometimes need immediate medical attention or resuscitation after delivery, which hospitals routinely provide."
+      },
+      {
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000227",
+        "evidence_quote": "your four year old child starts choking to death on a piece of broccoli",
+        "label_ids": [
+          "topic:injury_wound_care_first_aid"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000224",
+        "summary": "A child choking on broccoli and the Heimlich manoeuvre are used as a moral analogy."
+      },
+      {
+        "confidence": 0.5,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000193",
+        "evidence_quote": "No longer there's no there's no more bodily autonomy.",
+        "label_ids": [
+          "cross_cutting:medical_freedom"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000191",
+        "summary": "The bodily-autonomy framing of abortion is invoked and argued against."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Gosnell killed infants outside the womb for thirty years at a clinic in a major American city.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "He had been killing infants outside the womb, chopping them up, leaving body parts.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific factual allegation about a named abortion provider that can be checked against the court record.",
+        "start_unit_id": "u000169",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Gosnell's clinic was in shambles and its equipment was not sanitized before use.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000172",
+        "evidence_quote": "the the the clinic was in was in shambles, and not even sanitizing the equipment ahead of time.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable safety claim about conditions at a named clinic.",
+        "start_unit_id": "u000172",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Women died at Gosnell's clinic.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "Women were dying, um, just a an absolute an absolute horror show",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim that patients died at a named clinic.",
+        "start_unit_id": "u000173",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Northam said that an infant delivered alive would be resuscitated only if the mother wants it.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000201",
+        "evidence_quote": "And what Northam is saying is that the infant will be resuscitated only if the mother wants it.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "An attributed statement about newborn resuscitation practice that can be checked against what Northam actually said.",
+        "start_unit_id": "u000200",
+        "topic_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "fortunately, not in not in the majority of cases",
+          "it's not an unheard of thing"
+        ],
+        "claim_text": "Newborns need resuscitation or immediate medical attention after delivery often enough not to be unheard of, though not in the majority of births.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "Babies have to be resuscitated after they're delivered all the time.",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A prevalence claim about how often newborns require resuscitation, checkable against obstetric data.",
+        "start_unit_id": "u000209",
+        "topic_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ]
+      }
+    ],
+    "window_id": "episode_208120_window_0004"
+  },
+  "result": {
+    "detections": [
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "He had been killing infants outside the womb, chopping them up, leaving body parts",
+        "label_ids": [
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000169",
+        "summary": "The hosts describe the Gosnell abortion clinic case: infants killed after birth, filthy equipment and women dying."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000208",
+        "evidence_quote": "And what Northam is saying is that the infant will be resuscitated only if the mother wants it",
+        "label_ids": [
+          "topic:pregnancy_maternal_postpartum_health",
+          "topic:reproductive_sexual_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000190",
+        "summary": "Discussion of Northam's statement that an infant delivered would be resuscitated only if the mother wants it, argued to be infanticide."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.8,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000220",
+        "evidence_quote": "Babies have to be resuscitated after they're delivered all the time",
+        "label_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000209",
+        "summary": "Explanation that newborns sometimes need immediate medical attention or resuscitation after delivery, which hospitals routinely provide."
+      },
+      {
+        "axis": "topic",
+        "confidence": 0.6,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000227",
+        "evidence_quote": "your four year old child starts choking to death on a piece of broccoli",
+        "label_ids": [
+          "topic:injury_wound_care_first_aid"
+        ],
+        "relevance": "passing",
+        "start_unit_id": "u000224",
+        "summary": "A child choking on broccoli and the Heimlich manoeuvre are used as a moral analogy."
+      },
+      {
+        "axis": "frame",
+        "confidence": 0.5,
+        "discourse_role": "rebutted",
+        "end_unit_id": "u000193",
+        "evidence_quote": "No longer there's no there's no more bodily autonomy",
+        "label_ids": [
+          "cross_cutting:medical_freedom"
+        ],
+        "relevance": "substantive",
+        "start_unit_id": "u000191",
+        "summary": "The bodily-autonomy framing of abortion is invoked and argued against."
+      }
+    ],
+    "product_mentions": [],
+    "verification_candidates": [
+      {
+        "certainty_markers": [],
+        "claim_text": "Gosnell killed infants outside the womb for thirty years at a clinic in a major American city.",
+        "claim_type": "other_factual",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000171",
+        "evidence_quote": "He had been killing infants outside the womb, chopping them up, leaving body parts",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A specific factual allegation about a named abortion provider that can be checked against the court record.",
+        "relevance": null,
+        "start_unit_id": "u000169",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Gosnell's clinic was in shambles and its equipment was not sanitized before use.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000172",
+        "evidence_quote": "the the the clinic was in was in shambles, and not even sanitizing the equipment ahead of time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable safety claim about conditions at a named clinic.",
+        "relevance": null,
+        "start_unit_id": "u000172",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Women died at Gosnell's clinic.",
+        "claim_type": "risk_or_safety",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000173",
+        "evidence_quote": "Women were dying, um, just a an absolute an absolute horror show",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "A checkable claim that patients died at a named clinic.",
+        "relevance": null,
+        "start_unit_id": "u000173",
+        "topic_ids": [
+          "topic:reproductive_sexual_health"
+        ]
+      },
+      {
+        "certainty_markers": [],
+        "claim_text": "Northam said that an infant delivered alive would be resuscitated only if the mother wants it.",
+        "claim_type": "other_factual",
+        "confidence": 0.6,
+        "discourse_role": "reported_or_quoted",
+        "end_unit_id": "u000201",
+        "evidence_quote": "And what Northam is saying is that the infant will be resuscitated only if the mother wants it",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "unhedged",
+        "frame_ids": [],
+        "rationale": "An attributed statement about newborn resuscitation practice that can be checked against what Northam actually said.",
+        "relevance": null,
+        "start_unit_id": "u000200",
+        "topic_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ]
+      },
+      {
+        "certainty_markers": [
+          "fortunately, not in not in the majority of cases",
+          "it's not an unheard of thing"
+        ],
+        "claim_text": "Newborns need resuscitation or immediate medical attention after delivery often enough not to be unheard of, though not in the majority of births.",
+        "claim_type": "diagnosis_or_prevalence",
+        "confidence": 0.7,
+        "discourse_role": "asserted_or_endorsed",
+        "end_unit_id": "u000211",
+        "evidence_quote": "Babies have to be resuscitated after they're delivered all the time",
+        "evidence_signal_ids": [],
+        "expressed_certainty": "hedged",
+        "frame_ids": [],
+        "rationale": "A prevalence claim about how often newborns require resuscitation, checkable against obstetric data.",
+        "relevance": null,
+        "start_unit_id": "u000209",
+        "topic_ids": [
+          "topic:pregnancy_maternal_postpartum_health"
+        ]
+      }
+    ],
+    "window_id": "episode_208120_window_0004"
+  },
+  "stored_at": "2026-09-12T23:15:39.051918+00:00"
+}
