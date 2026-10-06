@@ -42,7 +42,7 @@ def small_taxonomy():
 
 
 def test_compiles_only_canonical_topics_tables():
-    taxonomy = labeling.compile_taxonomy(ROOT / "docs" / "original" / "topics.md")
+    taxonomy = labeling.compile_taxonomy(ROOT / labeling.DEFAULT_TOPICS)
     assert len(taxonomy["labels"]) == 84
     assert {row["kind"] for row in taxonomy["labels"]} == {"topic", "cross_cutting"}
     assert {row["axis"] for row in taxonomy["labels"]} == {"topic", "frame", "evidence"}
@@ -157,7 +157,7 @@ def test_prepare_writes_fingerprinted_compressed_windows(tmp_path):
     output = tmp_path / "output"
     args = argparse.Namespace(
         output_dir=output,
-        topics=ROOT / "docs" / "original" / "topics.md",
+        topics=ROOT / labeling.DEFAULT_TOPICS,
         transcripts=transcript_dir,
         limit=None,
         manifest=None,

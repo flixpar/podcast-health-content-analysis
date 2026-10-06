@@ -1,10 +1,11 @@
 """Window-level lexicon matching, ported from the corpus scan.
 
-The whole-corpus scan (branch ``analysis/fast-lexical-scan``) is the sampling
+The whole-corpus scan (``python -m analysis.lexical_scan``) is the sampling
 frame for the item pool, but its sentence rows are hard to align with the
 pipeline's units. The pool therefore re-runs the same lexicon over the units of
 each candidate window, which gives per-unit hits with no alignment step and
-the same term semantics as the scan's per-episode counts.
+the same term semantics as the scan's per-episode counts. Both use this Matcher;
+see ``docs/lexical-scan.md`` for regeneration and the sampling-key contract.
 """
 
 from __future__ import annotations
