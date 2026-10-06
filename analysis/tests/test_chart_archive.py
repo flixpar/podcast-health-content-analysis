@@ -1,6 +1,9 @@
 """Regression checks for archive identity, retry, and recovery decisions."""
 import gzip
 import json
+import os
+from pathlib import Path
+import subprocess
 from types import SimpleNamespace
 from unittest.mock import Mock
 
@@ -530,3 +533,36 @@ def test_summary_and_population_trust_the_same_selected_snapshot(
     assert daily.full_top100.tolist() == [expected_top100 == 100]
     assert len(population.trusted_days()) == (1 if expected_top100 == 100 else 0)
     assert len(pd.read_parquet(tmp_path / "flagship_us_overall.parquet")) == expected_top100
+
+
+@pytest.mark.parametrize("success_at, expected_code, attempts", [(1, 0, 1), (3, 0, 3), (25, 1, 24)])
+def test_cc_wrapper_reports_retry_exhaustion(monkeypatch, tmp_path, success_at, expected_code, attempts):
+    root = Path(__file__).resolve().parents[2]
+    runner = tmp_path / "analysis/chart_archive/run_cc_index.sh"
+    runner.parent.mkdir(parents=True)
+    runner.write_text((root / "analysis/chart_archive/run_cc_index.sh").read_text())
+    python = tmp_path / ".venv/bin/python"
+    python.parent.mkdir(parents=True)
+    python.write_text('''#!/bin/sh
+count=$(cat "$CHECK_COUNTER" 2>/dev/null || echo 0)
+count=$((count + 1))
+echo "$count" > "$CHECK_COUNTER"
+[ "$count" -ge "$SUCCESS_AT" ]
+''')
+    python.chmod(0o755)
+    fake_bin = tmp_path / "bin"
+    fake_bin.mkdir()
+    sleep = fake_bin / "sleep"
+    sleep.write_text('#!/bin/sh\necho sleep >> "$CHECK_SLEEPS"\n')
+    sleep.chmod(0o755)
+    env = dict(os.environ, PATH=f"{fake_bin}:{os.environ['PATH']}",
+               CHECK_COUNTER=str(tmp_path / "calls"), CHECK_SLEEPS=str(tmp_path / "sleeps"),
+               SUCCESS_AT=str(success_at))
+    result = subprocess.run(["bash", str(runner)], env=env, capture_output=True, text=True, timeout=5)
+    assert result.returncode == expected_code
+    assert int((tmp_path / "calls").read_text()) == attempts
+    sleeps = (tmp_path / "sleeps").read_text().splitlines() if (tmp_path / "sleeps").exists() else []
+    assert len(sleeps) == attempts - 1
+    assert ("CC index complete" in result.stdout) == (expected_code == 0)
+    if expected_code:
+        assert "still incomplete after 24 attempts" in result.stderr

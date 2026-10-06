@@ -1,7 +1,16 @@
 # Chart archive harvester
 
 Reconstructs historical top-podcast charts from the Wayback Machine and Common
-Crawl. Findings and recommendations: `docs/chart-archive-findings.md`.
+Crawl. This is research and archive tooling; importing charts into the catalog,
+daily live capture, and study collection belong to the downloader.
+
+- [Archive findings](../../docs/chart-archive-findings.md): dated coverage,
+  agreement, turnover, and exploratory population/recovery measurements.
+- [Apple source investigation](../../docs/chart-2024-sources.md): dated endpoint
+  probes, schema examples, and leads for deeper 2024–2026 charts.
+
+These reports preserve the evidence behind the implementation. Their numeric
+results predate the latest capture and selection policies and need regeneration.
 
 ## Pipeline
 
@@ -9,6 +18,12 @@ Run from the repository root after `uv sync`; activate `.venv` so the Python
 commands and shell runners use the same locked environment. The analysis needs
 pandas, pyarrow (Parquet), and lxml (XML), all present in the lockfile. Population
 and turnover analysis have been checked with the locked pandas 3.0.5.
+
+Run the offline regression checks with:
+
+```bash
+.venv/bin/python -m pytest analysis/tests/test_chart_archive.py -q
+```
 
 ```bash
 source .venv/bin/activate
@@ -64,6 +79,58 @@ Wayback budget is 30 minutes; raise it with `--wayback-budget SECONDS` or rerun
 are generation dates; cached measurements may be older.
 Audio spot-checks retry when no cached probe returned usable bytes, and refresh
 when sampled enclosure URLs change; successful unchanged probe sets are reused.
+
+## Population rule and generated outputs
+
+`population.py` implements the exploratory mixed-depth tenure rule: at least
+90 estimated days on at least three observations, using ranks 1–50 for Podbay
+and Chartable and ranks 1–24 for Apple's page. `DEEP_CUT`, `SHALLOW_CUT`,
+`MIN_DAYS`, and `MIN_OBS` define those parameters.
+
+Mirror days need at least 95 distinct ranks in the top 100; Apple-page days
+need depth 24. `DISTRUSTED` excludes known stale Chartable dates. On dates
+covered by multiple sources, the deeper source takes precedence. Fractional
+midpoint weights estimate exposure between neighbouring selected dates.
+
+Apple show IDs take precedence over title matches. Only podcast rows from
+Podbay, Apple's page, and iTunes RSS provide direct Apple IDs; Chartable slugs,
+episode IDs, and channel IDs do not. Resolve identities and pool renamed shows
+before applying thresholds. `entity` is the identity key; `key` is a normalised
+title and should not be used as a persistent identity.
+
+| Output under `data/chart-archive/parsed/` | Contents |
+|---|---|
+| `chart_rows.parquet`, `chart_rows_cc.parquet` | Canonical ranked captures; preserve all timestamps for downstream selection |
+| `flagship_us_overall.parquet` | Selected daily US overall charts |
+| `summary/flagship_daily_snapshots.csv` | Daily depth and completeness before the population's stale-date exclusions |
+| `summary/*.csv`, `summary/findings.json` | Coverage, cadence, agreement, and turnover measurements |
+| `population/population.csv` | Qualifying entities with IDs, titles, ranks, estimated days, observation counts, and date ranges |
+| `population/all_scores.csv`, `population/threshold_curve.csv` | Scores for all entities and population sizes across thresholds |
+| `population/scores_top24_uniform.csv` | Uniform-depth sensitivity check |
+| `population/recoverability.csv`, `population/recoverability.md` | Per-show feed, audio, historical-window, and Wayback evidence |
+
+## Integration with downloader studies
+
+The follow-up [studies PR #8](https://github.com/flixpar/podcast-health-content-analysis/pull/8)
+adds chart history, daily capture, entity resolution, and collection by study.
+Its `apple-top24-monthly` definition selects 24 shows per month at uniform
+depth, rather than this exploratory 90-day mixed-depth population. Keep the
+two definitions explicit when comparing counts or collecting episodes.
+
+The importer must apply the same coherent capture/page policy as
+`snapshots.select_daily()` before forming daily chart entries. It must retain
+the page number (or derive it from the saved slug) for Chartable alignment;
+combining all ranks from a UTC day recreates the discarded intra-day union.
+Pass chart identity columns as the selector's `keys` when importing genres and
+other chart types. Canonical Parquet files retain every capture so importers
+can choose their daily snapshots without losing the underlying evidence.
+
+After regenerating the archive, compare imported trusted dates with the
+regenerated `summary/flagship_daily_snapshots.csv` and `population/summary.json`,
+applying `DISTRUSTED` and the source/depth policy. The historical 941-day count
+is a dated measurement, not a fixed invariant. Reimport and refresh studies
+before using regenerated data for collection. Operational commands and schema
+documentation belong with the downloader implementation.
 
 ## Notes for whoever runs this next
 

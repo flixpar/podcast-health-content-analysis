@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
-# index.commoncrawl.org rate-limits hard; keep retrying the crawl walk until it
-# lets us back in, then hand off to cc_index.py (which caches per crawl).
+# Retry incomplete crawl walks; cc_index.py caches the crawl list and each query.
 set -u
 cd "$(dirname "$0")/../.."
 mkdir -p data/chart-archive/cc_index || exit 1
-for attempt in $(seq 1 24); do
-  if curl -sf --max-time 120 https://index.commoncrawl.org/collinfo.json \
-       -o data/chart-archive/cc_index/collinfo.json; then
-    echo "=== crawl list fetched on attempt $attempt $(date -Is)"
-    .venv/bin/python analysis/chart_archive/cc_index.py && break
+for ((attempt = 1; attempt <= 24; attempt++)); do
+  if .venv/bin/python analysis/chart_archive/cc_index.py; then
+    echo "CC index complete $(date -Is)"
+    exit 0
   fi
-  echo "attempt $attempt: index.commoncrawl.org unavailable $(date -Is)"
-  sleep 300
+  echo "attempt $attempt: CC index incomplete $(date -Is)" >&2
+  if ((attempt < 24)); then
+    sleep 300
+  fi
 done
-echo "=== CC INDEX DONE $(date -Is)"
+echo "CC index still incomplete after 24 attempts $(date -Is)" >&2
+exit 1
