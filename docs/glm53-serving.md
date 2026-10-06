@@ -103,9 +103,9 @@ when JIT compilation needs one. Existing `LD_LIBRARY_PATH` entries are retained.
 ## Other launchers and throughput probe
 
 `serve-deepseek-v4.sh` retains the DeepSeek checkpoint and reasoning-parser
-plugin, with a default sequence cap of 512 and 96K context. Its standalone
-defaults target the earlier flat workload; increase `MAX_MODEL_LEN` and reduce
-the client output budget for the longer v8 prompt. The alternative-model
+plugin, with a default sequence cap of 512 and 196608-token context. The context
+fits the longer v8 prompt plus the configured output budget; `MAX_MODEL_LEN`
+remains overridable. The alternative-model
 `serve-model.sh` supports Qwen, GPT-OSS and Gemma configurations with either
 tensor or data parallelism. Select the model name as its first argument.
 For offline GPT-OSS tokenizer vocabularies, set `TIKTOKEN_ENCODINGS_BASE` to

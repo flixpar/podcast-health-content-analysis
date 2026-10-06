@@ -58,6 +58,7 @@ def test_launchers_find_vllm_on_path_and_keep_cache_overrides(stub_env, script, 
     default = json.loads(launch(script, stub_env, *model_args).stdout)
     assert default["args"][:2] == ["serve", model]
     assert flag(default["args"], "--max-num-seqs") == cap
+    assert flag(default["args"], "--max-model-len") == ("96K" if script == "serve-model.sh" else "196608")
     assert default["env"]["HF_HOME"] == str(Path(stub_env["XDG_CACHE_HOME"]) / "huggingface")
     assert default["env"]["VLLM_CACHE_ROOT"] == str(Path(stub_env["XDG_CACHE_HOME"]) / "vllm")
     assert "TIKTOKEN_ENCODINGS_BASE" not in default["env"]
