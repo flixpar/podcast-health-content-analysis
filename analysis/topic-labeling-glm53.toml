@@ -1,0 +1,54 @@
+# Labeling with GLM-5.3-Flash on the local vLLM server started by
+# analysis/serving/serve-glm53.sh. Same tables and keys as
+# analysis/topic-labeling.toml (the DeepSeek-V4-Flash settings); select it with
+#
+#   .venv/bin/python analysis/topic_labeling.py label --config analysis/topic-labeling-glm53.toml
+#
+# Flags typed on the command line still win, and every model setting is part of
+# the run fingerprint. The measurements behind these values are in
+# docs/glm53-serving.md.
+
+[paths]
+topics = "taxonomy/health-v8.md"
+transcripts = "downloader/data/transcripts"
+output_dir = "local/topic-labeling-glm53"
+
+[model]
+# One entry per node running serve-glm53.sh; all must serve the same model.
+api_base = ["http://127.0.0.1:8222/v1"]
+# Chat Completions, because only it takes vLLM's thinking_token_budget.
+api = "chat_completions"
+model = "glm53-w4"
+
+# GLM-5.3's chat template knows low, high and max (and treats anything else,
+# including leaving it out, as max). Historical v8 outputs mapped onto v7 gold
+# scored high topic F1 0.709 / claim F1 0.783 at 6.6k output tokens a window;
+# max 0.718 / 0.817 at 15.2k
+# (better evidence and claim recall, same topics); low 0.647 / 0.692 at 2.4k.
+# These figures do not validate revised v8 rules; v3 references are pending.
+reasoning_effort = "high"
+# The thinking budget (below) plus room for the answer. Answers stay under ~15k
+# tokens; about 0.1-0.3% of windows loop after thinking ends and would otherwise
+# run to the limit, holding a server slot for most of an hour. A truncated
+# response is rejected as output_truncated and retried.
+max_output_tokens = 40000
+timeout = 7200
+attempts = 3
+
+# The checkpoint's generation_config sampling.
+temperature = 1.0
+top_p = 0.95
+
+[label]
+# Per node: the server runs 160-224 requests at once (MAX_NUM_SEQS); twice
+# that keeps it fed.
+concurrency = 448
+validation = "lenient"
+# vLLM forces the end of thinking after this many reasoning tokens. An 8k
+# budget saved 8% of tokens on recorded real traffic but lost population F1
+# (-0.10) against the older mapped gold; 4k lost on every axis.
+# Few real windows think past 24k.
+thinking_token_budget = 24000
+
+[verify]
+concurrency = 8

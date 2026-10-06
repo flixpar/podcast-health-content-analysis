@@ -2155,6 +2155,69 @@ def test_validation_mode_is_a_label_setting_and_part_of_the_run_fingerprint(
     with pytest.raises(labeling.TopicLabelingError, match="different run"):
         run(tmp_path / "strict", "lenient")
 
+    # Identical loaded instructions resume; a changed codebook must not mix
+    # annotations into a checkpoint created under the old prompt.
+    resumed = run(tmp_path / "strict", "strict")
+    assert resumed["run_fingerprint"] == strict["run_fingerprint"]
+    assert resumed["requests_completed_this_invocation"] == 0
+    monkeypatch.setattr(labeling, "SYSTEM_RUBRIC", labeling.SYSTEM_RUBRIC + "\nChanged coding rule.")
+    with pytest.raises(labeling.TopicLabelingError, match="different run"):
+        run(tmp_path / "strict", "strict")
+    assert modes == ["strict", "lenient"]
+
+
+def test_thinking_token_budget_is_chat_only_and_fingerprinted_only_when_set():
+    unbounded = labeling.ModelSettings(max_output_tokens=1000, reasoning_effort="high")
+    budgeted = labeling.ModelSettings(
+        max_output_tokens=1000, reasoning_effort="high", thinking_token_budget=24000
+    )
+    assert "thinking_token_budget" not in unbounded.fingerprint()
+    assert "thinking_token_budget" not in unbounded.chat_payload()
+    assert budgeted.fingerprint()["thinking_token_budget"] == 24000
+    assert budgeted.chat_payload()["thinking_token_budget"] == 24000
+    with pytest.raises(labeling.TopicLabelingError, match="chat_completions"):
+        budgeted.responses_payload()
+    args = labeling.build_parser().parse_args(
+        ["label", "--thinking-token-budget", "12000"]
+    )
+    assert labeling.ModelSettings.from_args(args).thinking_token_budget == 12000
+
+
+def test_flat_prompt_identity_tracks_loaded_codebook_and_instruction_overrides(monkeypatch):
+    taxonomy = small_taxonomy()
+    original = labeling.taxonomy_instructions(taxonomy)
+    version = labeling.prompt_version(taxonomy)
+    assert version == labeling.prompt_version(taxonomy, original)
+    assert version.startswith(labeling.PROMPT_VERSION + ":")
+    monkeypatch.setattr(labeling, "SYSTEM_RUBRIC", labeling.SYSTEM_RUBRIC + "\nChanged coding rule.")
+    assert labeling.prompt_version(taxonomy) != version
+    # Hash the text sent to the model, including an explicit override.
+    assert labeling.prompt_version(taxonomy, original) == version
+    assert labeling.prompt_version(taxonomy, original + "\nOverride.") != version
+    assert labeling.prompt_version(taxonomy, "") != labeling.prompt_version(taxonomy)
+
+
+def test_rubric_is_the_benchmark_codebook():
+    codebook = labeling.CODEBOOK_PATH.read_text(encoding="utf-8")
+    assert labeling.SYSTEM_RUBRIC == codebook
+    # Enumerations the model has to choose from are spelled out in the prompt
+    # text, not only in the response schema it is constrained by.
+    for value in ("treatment_or_prevention", "diagnosis_or_prevalence", "other_product"):
+        assert value in labeling.SYSTEM_RUBRIC
+    taxonomy = {
+        "labels": [
+            {
+                "label_id": "topic:sleep",
+                "axis": "topic",
+                "name": "Sleep",
+                "definition": "Sleep.",
+                "concepts": ["insomnia"],
+            }
+        ]
+    }
+    assert labeling.taxonomy_instructions(taxonomy).startswith(codebook)
+
+
 
 def test_a_validated_result_survives_its_own_validator():
     """merge re-validates what label stored, including the axis validation added."""

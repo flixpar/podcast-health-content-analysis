@@ -321,6 +321,17 @@ def test_usage_summary_still_reads_attempts_from_batched_runs():
     assert usage["rejected_by_kind"] == {"omitted_windows": 1}
 
 
+def test_flat_benchmark_and_labeler_share_prompt_identity(monkeypatch):
+    instructions, version, rubric_sha = runner.build_instructions(TAXONOMY, None)
+    assert version == tl.prompt_version(TAXONOMY, instructions)
+    monkeypatch.setattr(tl, "SYSTEM_RUBRIC", tl.SYSTEM_RUBRIC + "\nChanged coding rule.")
+    changed, changed_version, changed_sha = runner.build_instructions(TAXONOMY, None)
+    assert changed != instructions
+    assert changed_version != version
+    assert changed_sha != rubric_sha
+    assert changed_version == tl.prompt_version(TAXONOMY, changed)
+
+
 def test_run_fingerprint_ignores_item_set_and_bookkeeping():
     from analysis.benchmark import runner
 
@@ -396,6 +407,8 @@ def test_runner_threads_validation_and_totals_what_lenient_changed(tmp_path, mon
 
     monkeypatch.setattr(tl.ResponsesClient, "classify", fake_classify)
     monkeypatch.setattr(tl.ResponsesClient, "served_models", lambda self: {"http://x/v1": "stub-model"})
+    # Keep the repository's own topic-labeling.toml (which sets lenient) out of it.
+    monkeypatch.setattr(tl, "DEFAULT_CONFIG", tmp_path / "absent.toml")
     flags = ["--api-base", "http://x/v1", "--model", "stub-model", "--concurrency", "1", "--reasoning-effort", "none"]
     strict = runner.run_benchmark(items, TAXONOMY, runner.label_args(flags, config=None), "strict", repeats=1, runs_dir=tmp_path)
     lenient = runner.run_benchmark(
