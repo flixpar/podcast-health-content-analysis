@@ -72,11 +72,11 @@ def label_args(argv: Sequence[str], config: Path | None) -> argparse.Namespace:
 def build_instructions(taxonomy: dict[str, Any], rubric_file: Path | None) -> tuple[str, str, str]:
     """(instructions, prompt_version, rubric_sha256) for the run.
 
-    Under the v7 taxonomy a rubric file replaces only the v7 rubric; the
-    codebook and label tables are appended as in production.
+    Under a hierarchical taxonomy a rubric file replaces only its version's
+    rubric; the codebook and label tables are appended as in production.
     """
     if tl.is_hierarchical(taxonomy):
-        rubric_path = Path(rubric_file) if rubric_file is not None else tl.DEFAULT_V7_RUBRIC
+        rubric_path = Path(rubric_file) if rubric_file is not None else tl.prompt_files(taxonomy)[0]
         instructions = tl.hierarchical_instructions(taxonomy, rubric_path)
         version = tl.prompt_version(taxonomy, instructions)
         if rubric_file is not None:

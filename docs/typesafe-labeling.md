@@ -8,7 +8,7 @@ document records the flat-scheme method and its historical benchmark
 (2026-09-17, `jev-1.13.0`). The cascade supports only the legacy flat
 topic/frame/evidence contract. It rejects hierarchical v7/v8 before endpoint
 discovery or inference; the current granular workflow remains the generative
-pipeline in [labeling-v7.md](labeling-v7.md).
+pipeline in [labeling.md](labeling.md).
 
 Recorded results below used the 91-label flat v6 benchmark. They do not validate
 the production 84-label source or the granular schemas. The separate production

@@ -15,7 +15,7 @@ from analysis.benchmark.taxonomy import load_benchmark_taxonomy
 ROOT = Path(__file__).resolve().parents[2]
 
 
-@pytest.mark.parametrize("spec,version", [("benchmark", "v1"), ("benchmark/v2", "v2")])
+@pytest.mark.parametrize("spec,version", [("benchmark", "v1"), ("benchmark/v2", "v2"), ("benchmark/v3", "v3")])
 def test_benchmark_cli_generates_local_taxonomy_and_preserves_roster(tmp_path, spec, version):
     env = {**os.environ, "BENCHMARK_DIR": spec}
     env.pop("BENCHMARK_OUTPUT_DIR", None)
@@ -79,11 +79,11 @@ def test_missing_benchmark_taxonomy_explains_generation(tmp_path):
         load_benchmark_taxonomy(tmp_path / "taxonomy.json")
 
 
-def test_shipped_pipeline_config_selects_v7_and_flat_source_remains_available(monkeypatch):
+def test_shipped_pipeline_config_selects_v8_and_flat_source_remains_available(monkeypatch):
     monkeypatch.chdir(ROOT)
     parser = tl.build_parser()
     current = parser.parse_args(tl.expand_config_args(["prepare"]))
-    assert current.topics == Path("taxonomy/health-v7.md")
+    assert current.topics == Path("taxonomy/health-v8.md")
     legacy = parser.parse_args(tl.expand_config_args(["prepare", "--topics", str(tl.DEFAULT_TOPICS)]))
     assert legacy.topics == Path("docs/original/topics.md")
     assert tl.compile_taxonomy(legacy.topics)["schema_version"] == tl.SCHEMA_VERSION

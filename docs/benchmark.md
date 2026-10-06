@@ -17,6 +17,7 @@ and historical experiment reports live under ignored `local/`.
 | --- | --- | --- |
 | `benchmark` (default) | flat v6, 91 labels | `local/benchmark/` |
 | `benchmark/v2` | granular v7, 577 labels | `local/benchmark/v2/` |
+| `benchmark/v3` | granular v8, 630 labels | `local/benchmark/v3/` |
 
 Set `BENCHMARK_DIR` to select a specification directory. Its `config.toml`
 defines quotas, seeds, corpus paths, taxonomy source, and `[benchmark] data_dir`.
@@ -24,7 +25,7 @@ defines quotas, seeds, corpus paths, taxonomy source, and `[benchmark] data_dir`
 selected scheme. Relative paths resolve from the repository root.
 
 Tracked source files include `benchmark/topics-v6.md`, `benchmark/lexicon-v2.json`,
-the configs, annotator rosters, `analysis/benchmark/codebook.md`, and the v7
+the configs, annotator rosters, `analysis/benchmark/codebook.md`, and the versioned
 taxonomy/codebook/rubric. Synthetic authoring specifications and controlled
 contrast edits are maintained in `analysis/benchmark/synthetic.py`.
 Annotator registration seeds from the tracked roster and writes its updated
@@ -50,13 +51,13 @@ Run from the repository root with the project environment. Taxonomy generation
 and tests are offline and need no corpus or model answers:
 
 ```bash
-export BENCHMARK_DIR=benchmark/v2
+export BENCHMARK_DIR=benchmark/v3
 .venv/bin/python -m analysis.benchmark taxonomy
 .venv/bin/python -m pytest analysis/tests
 ```
 
-The first command writes `local/benchmark/v2/taxonomy.json` using the benchmark
-compiler, including parent/domain alias maps. For the flat scheme, unset
+The first command writes `local/benchmark/v3/taxonomy.json` using the benchmark
+compiler, including parent/domain alias maps. Select `benchmark/v2` for v7. For the flat scheme, unset
 `BENCHMARK_DIR` or select `benchmark` instead. A compiled taxonomy is a generated
 run input; changing its source requires a new benchmark version and references.
 
@@ -72,8 +73,15 @@ To resume an existing dataset, copy its preserved artifacts into the selected
 local artifact directory. During repository cleanup, byte-for-byte copies were
 preserved under `local/pr-cleanup-archive/pr-9/benchmark/`, with an
 `archive-manifest.json` recording original paths, destination paths, sizes, and
-SHA-256 hashes. Historical method reports and revision proposals are in that
-archive too. These local archives are not part of a fresh checkout.
+SHA-256 hashes. The v3 items and v8 review artifacts are preserved under
+`local/pr-cleanup-archive/pr-10/`, with its own checksum manifest. Historical
+method reports and revision proposals are in these archives too. These local archives are not part of a fresh checkout.
+
+The v3 specification can reuse the archived 320 v2 input windows by copying
+only `items.jsonl` into `local/benchmark/v3/`. Generate the v3 taxonomy and
+collect new reference annotations against its v8 codebook; v2 reference
+answers and gold do not evaluate the changed v8 rules. V3 reference annotation
+and candidate evaluation remain to be performed.
 
 To build a new corpus benchmark, first make the transcripts, metadata database,
 and lexical scan available and configure `[paths]` in the selected spec.
@@ -128,13 +136,13 @@ recall targets. Raw pre-repair annotations are retained for audit.
 ## Candidate runs and scoring
 
 Candidate labeling uses the production pipeline and selected scheme's prompt.
-Endpoint, API, reasoning, sampling, validation mode, and rubric changes belong
-to the run fingerprint. Hosted inference incurs the provider's normal costs.
+Model, API, reasoning, sampling, validation mode, and rubric changes belong
+to the run fingerprint; server endpoints represent interchangeable capacity. Hosted inference incurs the provider's normal costs.
 
 ```bash
 .venv/bin/python -m analysis.benchmark run --name candidate \
     --pipeline-config benchmark/pipeline-deepseek.toml -- --reasoning-effort high
-.venv/bin/python -m analysis.benchmark score local/benchmark/v2/runs/candidate
+.venv/bin/python -m analysis.benchmark score local/benchmark/v3/runs/candidate
 .venv/bin/python -m analysis.benchmark compare <run-a> <run-b> --level parent
 ```
 

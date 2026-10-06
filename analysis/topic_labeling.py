@@ -80,8 +80,15 @@ HIERARCHICAL_FORMAT = "hierarchical-v7"
 HIERARCHICAL_PROMPT_VERSION = "granular-v7"
 SUPPORTED_TAXONOMY_SCHEMAS = (SCHEMA_VERSION, HIERARCHICAL_SCHEMA_VERSION)
 PROMPTS_DIR = Path(__file__).resolve().parent / "prompts"
+TAXONOMY_DIR = Path(__file__).resolve().parents[1] / "taxonomy"
+# Each revision of the hierarchical label set (``taxonomy/health-vN.md``) comes
+# with its own codebook (``taxonomy/codebook-vN.md``) and rubric
+# (``analysis/prompts/rubric-vN.md``); the version is read from the taxonomy
+# file name. Compiled taxonomies from before the version was recorded are v7.
+DEFAULT_HIERARCHICAL_VERSION = "v7"
 DEFAULT_V7_RUBRIC = PROMPTS_DIR / "rubric-v7.md"
-DEFAULT_V7_CODEBOOK = Path(__file__).resolve().parents[1] / "taxonomy" / "codebook-v7.md"
+DEFAULT_V7_CODEBOOK = TAXONOMY_DIR / "codebook-v7.md"
+_TAXONOMY_VERSION = re.compile(r"-(v\d+)\.md$")
 VERIFICATION_PROMPT_VERSION = "evidence-corpus-verification-v3"
 EVIDENCE_CORPUS_MANIFEST_VERSION = "evidence-corpus-validation-v1"
 DEFAULT_TOPICS = Path("docs/original/topics.md")
@@ -548,16 +555,17 @@ def write_jsonl_atomic(path: Path, rows: Iterable[dict[str, Any]]) -> tuple[int,
     return count, sha256_file(path)
 
 
-def _strip_markdown(value: str) -> str:
+def _strip_markdown(value: str, keep_emphasis: bool = False) -> str:
     value = value.strip().replace("\\-", "-")
-    value = re.sub(r"\*\*(.*?)\*\*", r"\1", value)
+    if not keep_emphasis:
+        value = re.sub(r"\*\*(.*?)\*\*", r"\1", value)
     return re.sub(r"\s+", " ", value).strip()
 
 
-def _markdown_cells(line: str) -> list[str]:
+def _markdown_cells(line: str, keep_emphasis: bool = False) -> list[str]:
     marker = "\x00PIPE\x00"
     escaped = line.strip().strip("|").replace("\\|", marker)
-    return [_strip_markdown(cell.replace(marker, "|")) for cell in escaped.split("|")]
+    return [_strip_markdown(cell.replace(marker, "|"), keep_emphasis) for cell in escaped.split("|")]
 
 
 def slugify(value: str) -> str:
@@ -599,7 +607,9 @@ def _table_rows(lines: Sequence[str], start: int) -> tuple[list[list[str]], int]
     rows: list[list[str]] = []
     header_seen = False
     while index < len(lines) and lines[index].lstrip().startswith("|"):
-        cells = _markdown_cells(lines[index])
+        # Bold survives in the hierarchical tables: a narrative's definition
+        # marks its core proposition in bold, and the prompt shows it.
+        cells = _markdown_cells(lines[index], keep_emphasis=True)
         index += 1
         if not header_seen:
             header_seen = True
@@ -653,10 +663,10 @@ def compile_hierarchical_taxonomy(path: Path) -> dict[str, Any]:
     def row_label(cells: list[str], width: int) -> tuple[str, str, str, list[str], list[str]]:
         if len(cells) < width:
             raise fail(f"row {cells!r} needs {width} columns")
-        slug = cells[0].strip("` ")
+        slug = cells[0].strip("` *")
         if not _LABEL_SLUG.fullmatch(slug):
             raise fail(f"label id {cells[0]!r} must be lowercase [a-z0-9_]")
-        name, definition, terms = cells[1], cells[2], cells[3]
+        name, definition, terms = _strip_markdown(cells[1]), cells[2], cells[3]
         if not name or not definition:
             raise fail(f"label {slug!r} needs a name and a definition")
         concepts = [_strip_markdown(item).strip(" ,") for item in terms.split(";")]
@@ -786,6 +796,7 @@ def compile_hierarchical_taxonomy(path: Path) -> dict[str, Any]:
         "source_path": str(path),
         "source_sha256": sha256_bytes(source.encode("utf-8")),
         "taxonomy_sha256": taxonomy_sha256,
+        "taxonomy_version": taxonomy_version(path),
         "domains": domains,
         "labels": labels,
     }
@@ -793,6 +804,22 @@ def compile_hierarchical_taxonomy(path: Path) -> dict[str, Any]:
 
 def is_hierarchical(taxonomy: dict[str, Any]) -> bool:
     return taxonomy.get("format") == HIERARCHICAL_FORMAT
+
+
+def taxonomy_version(path: Path) -> str:
+    """``v8`` for ``taxonomy/health-v8.md``; the default for an unversioned name."""
+    match = _TAXONOMY_VERSION.search(Path(path).name)
+    return match.group(1) if match else DEFAULT_HIERARCHICAL_VERSION
+
+
+def prompt_files(taxonomy: dict[str, Any]) -> tuple[Path, Path]:
+    """(rubric, codebook) that belong to this hierarchical taxonomy's version."""
+    version = taxonomy.get("taxonomy_version") or DEFAULT_HIERARCHICAL_VERSION
+    rubric, codebook = PROMPTS_DIR / f"rubric-{version}.md", TAXONOMY_DIR / f"codebook-{version}.md"
+    missing = [str(path) for path in (rubric, codebook) if not path.exists()]
+    if missing:
+        raise TopicLabelingError(f"taxonomy {version} has no prompt files: {missing}")
+    return rubric, codebook
 
 
 def has_v7_claim_fields(label_axes: dict[str, str]) -> bool:
@@ -1466,14 +1493,18 @@ def render_label_tables(taxonomy: dict[str, Any]) -> str:
 
 def hierarchical_instructions(
     taxonomy: dict[str, Any],
-    rubric_path: Path = DEFAULT_V7_RUBRIC,
-    codebook_path: Path = DEFAULT_V7_CODEBOOK,
+    rubric_path: Path | None = None,
+    codebook_path: Path | None = None,
 ) -> str:
     """Rubric (labeler procedure and worked examples), codebook, label tables.
 
     The codebook is the same file the benchmark's reference annotators label
     against, so the prompt and the definition of "right" cannot drift apart.
+    Both default to the files of the taxonomy's own version.
     """
+    default_rubric, default_codebook = prompt_files(taxonomy)
+    rubric_path = rubric_path or default_rubric
+    codebook_path = codebook_path or default_codebook
     rubric = Path(rubric_path).read_text(encoding="utf-8").rstrip()
     codebook = Path(codebook_path).read_text(encoding="utf-8").rstrip()
     return f"{rubric}\n\n{codebook}\n\n{render_label_tables(taxonomy)}"
@@ -1489,7 +1520,9 @@ def prompt_version(taxonomy: dict[str, Any], instructions: str | None = None) ->
     if not is_hierarchical(taxonomy):
         return PROMPT_VERSION
     text = instructions if instructions is not None else taxonomy_instructions(taxonomy)
-    return f"{HIERARCHICAL_PROMPT_VERSION}:{sha256_bytes(text.encode('utf-8'))[:16]}"
+    version = taxonomy.get("taxonomy_version") or DEFAULT_HIERARCHICAL_VERSION
+    prefix = HIERARCHICAL_PROMPT_VERSION if version == DEFAULT_HIERARCHICAL_VERSION else f"granular-{version}"
+    return f"{prefix}:{sha256_bytes(text.encode('utf-8'))[:16]}"
 
 
 def taxonomy_instructions(taxonomy: dict[str, Any]) -> str:

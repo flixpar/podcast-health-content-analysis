@@ -7,17 +7,17 @@
 #
 #   .venv/bin/python analysis/topic_labeling.py label --reasoning-effort high
 #
-# Pass --config to use a different file. Every setting below is part of the run
-# fingerprint, so changing one means a fresh output directory. The reasoning
-# they are set this way is in docs/labeling-v7.md.
+# Pass --config to use a different file. Output-affecting settings enter the run
+# fingerprint, so changing them requires a fresh output directory. See
+# docs/labeling.md for the current workflow.
 
 # Where the run reads and writes. Every command takes what applies to it, and
 # every artifact inside the run directory follows output_dir, so moving a run
 # means changing one line here rather than five flags per command.
 [paths]
-topics = "taxonomy/health-v7.md"
+topics = "taxonomy/health-v8.md"
 transcripts = "downloader/data/transcripts"
-output_dir = "analysis/output/topic-labeling"
+output_dir = "local/topic-labeling"
 # metadata_db = "downloader/data/podcast_metadata.db"
 
 # Shared by `label` and `verify`; a [label] or [verify] key below overrides it.
@@ -27,7 +27,7 @@ output_dir = "analysis/output/topic-labeling"
 # refuses to start otherwise, because a run split across two checkpoints cannot
 # be attributed afterwards. Endpoints are capacity, so they stay out of the run
 # fingerprint and a node can be added or lost without orphaning a run.
-api_base = ["http://127.0.0.1:8222/v1", "http://gpu312:8222/v1"]
+api_base = ["http://127.0.0.1:8222/v1"]
 # Which OpenAI-compatible API those endpoints speak: "responses" (the default)
 # or "chat_completions". vLLM serves both; some hosted providers only the
 # second. Prefer "responses" where there is a choice -- it reports truncation
@@ -38,8 +38,8 @@ api_base = ["http://127.0.0.1:8222/v1", "http://gpu312:8222/v1"]
 # Drop this line to discover the served model from /v1/models instead.
 model = "deepseek-ai/DeepSeek-V4-Flash-0731"
 
-# Pilot settings for reasoning on the granular v7 prompt. The cached prefix
-# is about 45k tokens; serve with at least 131072 context tokens so this output
+# Pilot settings for reasoning on the granular v8 prompt. The cached prefix
+# is about 85–90k tokens; serve with at least 196608 context tokens so this output
 # budget and a transcript window fit. Reasoning shares max_output_tokens.
 # Assess recall and validation losses on your own pilot before scaling up.
 reasoning_effort = "high"
@@ -83,7 +83,7 @@ concurrency = 128
 # One bad annotation still rejects the whole response and repeats a full
 # reasoning pass. "lenient" repairs an annotation where the fix is unambiguous
 # (a quote just outside its span widens the span) and drops it where it is not,
-# counting both; "strict" is the default. See docs/labeling-v7.md.
+# counting both; "strict" is the default. See docs/labeling.md.
 # validation = "lenient"
 
 [verify]
