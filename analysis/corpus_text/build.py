@@ -7,7 +7,7 @@ import zstandard
 
 REPO = Path(__file__).resolve().parents[2]
 SRC = REPO / "downloader/data/transcripts"
-OUT = Path(os.environ.get("CORPUS_TEXT_DIR", "/mnt/internal/felix/podcast-corpus-text"))
+OUT = Path(os.environ.get("CORPUS_TEXT_DIR", str(REPO / "local" / "corpus-text")))
 N = 64
 
 def work(shard):

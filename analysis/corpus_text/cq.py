@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Keyword search over the flattened podcast transcript corpus.
 
-Corpus: $CORPUS_TEXT_DIR/shard_NN.tsv (default /mnt/internal/felix/podcast-corpus-text), one transcript segment
+Corpus: $CORPUS_TEXT_DIR/shard_NN.tsv (default local/corpus-text), one transcript segment
 per line: `episode_id<TAB>segment_index<TAB>text`. Patterns are ripgrep (Rust)
 regexes matched case-insensitively against the segment text.
 
@@ -20,8 +20,9 @@ from pathlib import Path
 
 import os
 
-# The flattened corpus lives outside the repo (8 GB); see analysis/corpus_text/README.md.
-ROOT = Path(os.environ.get("CORPUS_TEXT_DIR", "/mnt/internal/felix/podcast-corpus-text"))
+# Generated shards are ignored; CORPUS_TEXT_DIR can select an external volume.
+REPO = Path(__file__).resolve().parents[2]
+ROOT = Path(os.environ.get("CORPUS_TEXT_DIR", str(REPO / "local" / "corpus-text")))
 SHARDS = sorted(str(p) for p in ROOT.glob("shard_*.tsv"))
 _meta = None
 

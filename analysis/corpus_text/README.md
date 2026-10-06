@@ -1,26 +1,32 @@
 # Plain-text transcript corpus and keyword search
 
-`build.py` flattens every transcript (`downloader/data/transcripts/*.jsonl.zst`)
-into 64 shards, one segment per line (`episode_id<TAB>segment_index<TAB>text`,
-shard = `episode_id % 64`), plus `episodes.tsv` (podcast, date, title) from the
-metadata DB. About 145.6k episodes, 8.1 GB; it takes ~20 minutes.
+`build.py` reads compressed transcripts from `downloader/data/transcripts/`
+and the read-only metadata database, then writes 64 text shards and
+`episodes.tsv`. Each shard line is `episode_id<TAB>segment_index<TAB>text`;
+the shard number is `episode_id % 64`. All generated data defaults to the
+ignored repository directory `local/corpus-text/`.
+
+Run from the repository root:
 
 ```bash
-CORPUS_TEXT_DIR=/mnt/internal/felix/podcast-corpus-text .venv/bin/python analysis/corpus_text/build.py
+.venv/bin/python analysis/corpus_text/build.py
+.venv/bin/python analysis/corpus_text/cq.py count '\b(ozempic|wegovy)\b'
+.venv/bin/python analysis/corpus_text/cq.py sample '\bseed oils?\b' -n 12 --ctx 1
+.venv/bin/python analysis/corpus_text/cq.py sample 'pattern' --podcast 'huberman'
+.venv/bin/python analysis/corpus_text/cq.py ctx EPISODE SEGMENT -k 4
+.venv/bin/python analysis/corpus_text/cq.py cooc 'pattern A' 'pattern B'
 ```
 
-The output lives outside the repo; the NVMe copy (default `CORPUS_TEXT_DIR`) is
-`/mnt/internal/felix/podcast-corpus-text`, with an HDD copy at
-`/mnt/data2/podcast-data/corpus-text`. Do not write it to the root volume.
-
-`cq.py` searches it with ripgrep (case-insensitive Rust regexes):
+`cq.py` requires ripgrep. Patterns are matched case-insensitively against
+segment text. Set `CORPUS_TEXT_DIR` for both commands to use an external
+volume; the existing full-corpus export is about 8 GB:
 
 ```bash
-python3 analysis/corpus_text/cq.py count  '\b(ozempic|wegovy)\b'          # segments, episodes, podcasts
-python3 analysis/corpus_text/cq.py sample '\bseed oils?\b' -n 12 --ctx 1   # random hits with context
-python3 analysis/corpus_text/cq.py sample 'pattern' --podcast 'huberman'  # restrict to shows
-python3 analysis/corpus_text/cq.py ctx EPISODE SEGMENT -k 4
-python3 analysis/corpus_text/cq.py cooc 'pattern A' 'pattern B'
+export CORPUS_TEXT_DIR=/path/to/corpus-text
+.venv/bin/python analysis/corpus_text/build.py
+.venv/bin/python analysis/corpus_text/cq.py count 'pattern'
 ```
 
-It was built for the v8 corpus review (`taxonomy/v8-corpus-review/`).
+The tools remain useful for inspecting taxonomy coverage. The completed v8
+review's working reports and patches are preserved under `local/`; the
+maintained scheme is described in `docs/labeling.md`.
