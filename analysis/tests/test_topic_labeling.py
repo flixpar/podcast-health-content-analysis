@@ -1241,6 +1241,7 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
     assert summary["verification_candidates"] == 1
     assert summary["product_mentions"] == 1
     # The two spellings merge into one mention; the higher-confidence name wins.
+    assert products[0]["schema_version"] == labeling.SCHEMA_VERSION
     assert products[0]["product_name"] == "Oura Ring"
     assert products[0]["product_key"] == "ouraring"
     assert products[0]["mention_role"] == "recommended"

@@ -208,6 +208,23 @@ def test_v7_schema_and_validation_require_claim_narratives_and_relevance(v7):
 
 def test_v7_merge_carries_parents_narratives_and_populations(v7, tmp_path):
     window, result = _worked_example()
+    for offset, product_name, product_type in [
+        (115, "Nicotine pouch", "nicotine_or_tobacco"),
+        (116, "Home air purifier", "household_or_home"),
+    ]:
+        unit_id = f"u{offset:06d}"
+        window["units"].append({"unit_id": unit_id, "text": product_name})
+        result["product_mentions"].append(
+            {
+                "start_unit_id": unit_id,
+                "end_unit_id": unit_id,
+                "product_name": product_name,
+                "product_type": product_type,
+                "mention_role": "neutral",
+                "evidence_quote": product_name,
+                "confidence": 0.9,
+            }
+        )
     taxonomy_path = tmp_path / "taxonomy.json"
     labeling.write_json(taxonomy_path, v7)
     common = {
@@ -267,6 +284,12 @@ def test_v7_merge_carries_parents_narratives_and_populations(v7, tmp_path):
     assert rebutted["narrative_names"] == ["Vaccines cause autism"]
     assert "topic:neurodevelopment" in rebutted["parent_topic_ids"]
     assert any(c["relevance"] == ["advertisement"] for c in claims)
+    products = list(labeling.iter_jsonl(tmp_path / "product_mentions.jsonl"))
+    assert len(products) == 3
+    assert all(row["schema_version"] == labeling.HIERARCHICAL_SCHEMA_VERSION for row in products)
+    assert {"nicotine_or_tobacco", "household_or_home"} <= {
+        row["product_type"] for row in products
+    }
     with (tmp_path / "review_queue.csv").open() as handle:
         rows = list(csv.DictReader(handle))
     assert "narrative_ids" in rows[0] and "population_ids" in rows[0]
