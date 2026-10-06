@@ -12,7 +12,7 @@ as reference. Near-zero divergence means the re-encode is ASR-transparent.
 Requires episodes that currently have BOTH a .mp3 and a .ogg on disk (run
 ``convert-audio --keep-original --limit N`` to make some).
 
-Usage (from the project root):
+Usage (from downloader/):
     python tools/ab_format_test.py --num-episodes 20 --segment-seconds 90
 """
 
@@ -150,7 +150,8 @@ def main():
     parser.add_argument("--check-durations", action="store_true",
                         help="Pre-screen every mp3/ogg pair by duration before sampling (slow)")
     parser.add_argument("--model", default=None, help="default: transcription.model_name from config")
-    parser.add_argument("--output", default=str(PROJECT_ROOT / "tools" / "ab_format_results.json"))
+    parser.add_argument("--output", type=Path,
+                        default=PROJECT_ROOT.parent / "local" / "ab_format_results.json")
     args = parser.parse_args()
 
     config = Config.load(args.config)
@@ -307,7 +308,8 @@ def main():
         "size_reduction_pct": (1 - ogg_mb / mp3_mb) * 100 if mp3_mb else 0.0,
     }
 
-    Path(args.output).write_text(json.dumps({"summary": summary, "results": results}, indent=2))
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps({"summary": summary, "results": results}, indent=2))
 
     print("\n" + "=" * 64)
     print("MP3 vs OPUS/OGG TRANSCRIPTION DIVERGENCE")

@@ -12,6 +12,7 @@ import hashlib
 import re
 import unicodedata
 from pathlib import Path
+from typing import Callable
 
 from podcast_pipeline.audio import AUDIO_EXTENSIONS, MIN_AUDIO_BYTES
 
@@ -41,13 +42,24 @@ def podcast_dir(audio_dir: Path, podcast_title: str) -> Path:
 
 
 def find_existing_audio(audio_dir: Path, podcast_title: str, episode_title: str,
-                        guid: str | None) -> Path | None:
-    """An already-downloaded, plausibly complete file for this episode, if any."""
+                        guid: str | None,
+                        claimed_by_other: Callable[[Path], bool] = lambda path: False) -> Path | None:
+    """An already-downloaded, plausibly complete file for this episode, if any.
+
+    A legacy title-only file is shared by every episode with that title (a
+    rerun, a re-issue), so it is only this episode's if no other episode
+    already owns it: ``claimed_by_other`` says whether one does. Treating it as
+    this episode's linked 37 reruns to the first airing's audio. A GUID-hashed
+    file is unique to its episode and always reusable.
+    """
     directory = podcast_dir(audio_dir, podcast_title)
-    stems = dict.fromkeys([episode_stem(episode_title, guid), normalize_id(episode_title)])
-    for stem in stems:
+    hashed, legacy = episode_stem(episode_title, guid), normalize_id(episode_title)
+    for stem in dict.fromkeys([hashed, legacy]):
         for ext in AUDIO_EXTENSIONS:
             candidate = directory / f"{stem}{ext}"
-            if candidate.exists() and candidate.stat().st_size >= MIN_AUDIO_BYTES:
-                return candidate
+            if not (candidate.exists() and candidate.stat().st_size >= MIN_AUDIO_BYTES):
+                continue
+            if stem != hashed and claimed_by_other(candidate):
+                continue
+            return candidate
     return None

@@ -35,3 +35,16 @@ def test_find_existing_audio_checks_both_schemes_and_formats(tmp_path):
     # A stub left by a failed download does not count.
     hashed_ogg.write_bytes(b"\0" * 10)
     assert find_existing_audio(tmp_path, "My Show", "Episode 1", "g") == legacy_mp3
+
+
+def test_a_legacy_file_owned_by_another_episode_is_not_reused(tmp_path):
+    show = tmp_path / "my-show"
+    show.mkdir()
+    legacy = show / "rerun-title.ogg"
+    legacy.write_bytes(b"x" * 200_000)
+    owned = lambda path: path == legacy
+    assert find_existing_audio(tmp_path, "My Show", "Rerun Title", "g2", owned) is None
+    assert find_existing_audio(tmp_path, "My Show", "Rerun Title", "g2") == legacy
+    hashed = show / f"{episode_stem('Rerun Title', 'g2')}.ogg"
+    hashed.write_bytes(b"x" * 200_000)
+    assert find_existing_audio(tmp_path, "My Show", "Rerun Title", "g2", owned) == hashed

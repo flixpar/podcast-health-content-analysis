@@ -8,9 +8,8 @@ from __future__ import annotations
 
 import logging
 import sqlite3
-from pathlib import Path
 
-from podcast_pipeline import db
+from podcast_pipeline import db, paths
 from podcast_pipeline.config import Config
 
 logger = logging.getLogger(__name__)
@@ -45,7 +44,7 @@ def run(config: Config, conn: sqlite3.Connection, episode_ids: list[int] | None 
 
     if not keep_files:
         for row in rows:
-            path = Path(row["transcript_file_path"])
+            path = paths.resolve(config, row["transcript_file_path"])
             if path.exists():
                 path.unlink()
                 stats["files_deleted"] += 1
