@@ -78,8 +78,9 @@ archive too. These local archives are not part of a fresh checkout.
 To build a new corpus benchmark, first make the transcripts, metadata database,
 and lexical scan available and configure `[paths]` in the selected spec.
 `transcripts` and `metadata_db` use the downloader's local data layout; set
-`scan_dir` to your lexical scan directory. Use [the lexical scanner](lexical-scan.md) to regenerate the sampling tables
-from the same selected specification. Its output must be a new directory;
+`scan_dir` to your lexical scan directory. Use
+[the lexical scanner](lexical-scan.md) to regenerate the sampling tables from
+the same selected specification. Its output must be a new directory;
 configure the selected spec's `scan_dir` when choosing another location.
 A limited smoke scan is not a complete sampling frame. Then draw and screen
 candidate windows:

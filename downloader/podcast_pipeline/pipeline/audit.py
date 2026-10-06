@@ -24,7 +24,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from pathlib import Path
 
-from podcast_pipeline import db
+from podcast_pipeline import db, paths
 from podcast_pipeline.audio import AUDIO_EXTENSIONS, MIN_AUDIO_BYTES
 from podcast_pipeline.audio.ffmpeg import probe_duration
 from podcast_pipeline.config import Config
@@ -36,7 +36,7 @@ REPAIRABLE = ("missing", "empty", "unreadable", "truncated")
 FINDING_KEYS = REPAIRABLE + ("shared_path", "orphan")
 
 
-def audit(conn: sqlite3.Connection, audio_dir: Path, newer_than: str | None = None,
+def audit(config: Config, conn: sqlite3.Connection, newer_than: str | None = None,
           workers: int = 8, skip_probe: bool = False) -> dict[str, list]:
     rows = conn.execute("""
         SELECT id, audio_file_path, duration_seconds FROM episodes
@@ -49,8 +49,8 @@ def audit(conn: sqlite3.Connection, audio_dir: Path, newer_than: str | None = No
     owners: dict[str, list[int]] = defaultdict(list)
     to_probe = []
     for row in rows:
-        path = Path(row["audio_file_path"])
-        owners[row["audio_file_path"]].append(row["id"])
+        path = paths.resolve(config, row["audio_file_path"])
+        owners[str(path)].append(row["id"])
         if not path.exists():
             findings["missing"].append({"episode_id": row["id"], "path": str(path)})
             continue
@@ -81,8 +81,8 @@ def audit(conn: sqlite3.Connection, audio_dir: Path, newer_than: str | None = No
                     "fraction": round(actual / declared, 3),
                 })
 
-    known = {Path(row["audio_file_path"]).resolve() for row in rows}
-    for file in audio_dir.rglob("*"):
+    known = {paths.resolve(config, row["audio_file_path"]).resolve() for row in rows}
+    for file in config.audio_dir.rglob("*"):
         if file.suffix.lower() not in AUDIO_EXTENSIONS or file.resolve() in known:
             continue
         try:
@@ -113,7 +113,7 @@ def apply_fix(conn: sqlite3.Connection, findings: dict[str, list]) -> int:
 
 def run(config: Config, conn: sqlite3.Connection, fix: bool = False, newer_than: str | None = None,
         workers: int = 8, skip_probe: bool = False, report: Path | None = None) -> dict:
-    findings = audit(conn, config.audio_dir, newer_than, workers, skip_probe)
+    findings = audit(config, conn, newer_than, workers, skip_probe)
     stats = {key: len(findings[key]) for key in FINDING_KEYS}
     for key in ("truncated", "unreadable"):
         for item in findings[key][:5]:

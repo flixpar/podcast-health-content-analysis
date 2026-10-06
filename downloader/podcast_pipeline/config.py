@@ -59,9 +59,15 @@ class SpotifyConfig:
 
 @dataclass
 class DiscoveryConfig:
-    max_episodes_per_podcast: int = 5000  # newest N episodes of each feed are recorded
+    max_episodes_per_podcast: int = 5000  # newest N episodes of each feed are recorded (all pages)
     max_parallel_feeds: int = 8
     feed_timeout_seconds: int = 60
+    # Paged feeds (rel="next"/"prev-archive"; Megaphone's limit/offset): at most
+    # this many documents per feed. The Moth needs 6 pages of 195; Dan Le
+    # Batard's Megaphone feed over 5 pages of 1000.
+    max_feed_pages: int = 50
+    feed_page_size: int = 1000            # items per page where the host takes a size (Megaphone)
+    feed_page_delay_seconds: float = 1.0  # between pages of one feed
 
 
 @dataclass
@@ -146,6 +152,8 @@ class TranscriptionConfig:
 @dataclass
 class StorageConfig:
     transcript_compression_level: int = 3   # zstd level for transcript files
+    # Study storage estimates use this only when no positive feed durations exist.
+    estimated_episode_duration_seconds: int = 3600
 
 
 @dataclass
@@ -153,6 +161,59 @@ class BatchExportConfig:
     # Decimal GB matches transfer-disk and archive-size conventions. The tar is
     # uncompressed because the MP3/Opus payload is already compressed.
     target_size_gb: float = 250.0
+
+
+@dataclass
+class ChartsConfig:
+    """Chart history: the reconstructed archive and live daily captures."""
+
+    # Output of analysis/chart_archive (parsed/chart_rows*.parquet). Relative
+    # paths resolve against the project root, like data_dir.
+    archive_dir: str = "../data/chart-archive"
+    # Live sources `capture-charts` reads when none are named on the command line.
+    capture_sources: list[str] = field(default_factory=lambda: ["apple_marketing_tools", "spotify_api"])
+    country: str = "us"
+
+
+@dataclass
+class ResolveConfig:
+    """Turning chart entities (Apple ids, bare titles) into catalog podcasts."""
+
+    # The iTunes lookup API accepts many ids per request; Apple documents no
+    # limit, and 150 stays well under URL-length trouble.
+    lookup_batch_size: int = 150
+    lookup_delay_seconds: float = 1.0
+    # Failed resolutions are recorded and not retried before this many days.
+    retry_after_days: float = 7.0
+    # iTunes search results considered per title. Searches are paced by
+    # spotify.search_delay_seconds / search_attempts (the same API and quota);
+    # chart-era titles are often generic, so more candidates than Spotify's.
+    search_candidates: int = 25
+
+
+@dataclass
+class WaybackConfig:
+    """Archived copies of feeds (and audio) from the Internet Archive."""
+
+    cdx_url: str = "https://web.archive.org/cdx/search/cdx"
+    # Snapshots are replayed from <replay_url>/<timestamp>id_/<original url>.
+    replay_url: str = "https://web.archive.org/web"
+    # The CDX API silently drops parallel requests (an empty body that reads as
+    # "never archived"), so CDX queries are strictly sequential and paced.
+    cdx_delay_seconds: float = 1.5
+    cdx_attempts: int = 5
+    # A failed attempt waits this long, doubling each time, before the next.
+    cdx_backoff_seconds: float = 5.0
+    # Stop the run when this many podcasts in a row could not be listed at all:
+    # CDX is down, and carrying on would only burn the budget on retries.
+    cdx_failure_limit: int = 5
+    # Snapshot fetches (/web/<ts>id_/<url>) tolerate modest parallelism.
+    fetch_workers: int = 4
+    # Archived feed copies fetched per podcast per run, across all its feed URLs.
+    max_captures_per_podcast: int = 16
+    timeout_seconds: int = 90
+    # Stop starting new work after this long; re-running resumes.
+    budget_minutes: float = 120.0
 
 
 @dataclass
@@ -167,6 +228,9 @@ class Config:
     transcription: TranscriptionConfig = field(default_factory=TranscriptionConfig)
     storage: StorageConfig = field(default_factory=StorageConfig)
     batch_export: BatchExportConfig = field(default_factory=BatchExportConfig)
+    charts: ChartsConfig = field(default_factory=ChartsConfig)
+    resolve: ResolveConfig = field(default_factory=ResolveConfig)
+    wayback: WaybackConfig = field(default_factory=WaybackConfig)
 
     # --- derived paths -----------------------------------------------------
 
@@ -186,6 +250,25 @@ class Config:
     @property
     def db_path(self) -> Path:
         return self.data_path / "podcast_metadata.db"
+
+    @property
+    def chart_archive_path(self) -> Path:
+        path = Path(self.charts.archive_dir)
+        return path if path.is_absolute() else PROJECT_ROOT / path
+
+    @property
+    def chart_capture_dir(self) -> Path:
+        """Raw responses from live chart captures, one file per source per day."""
+        return self.data_path / "charts" / "raw"
+
+    @property
+    def wayback_cache_dir(self) -> Path:
+        """CDX listings and archived feed captures, so a re-run does not refetch."""
+        return self.data_path / "wayback"
+
+    @property
+    def study_export_dir(self) -> Path:
+        return self.data_path / "studies"
 
     @property
     def batch_export_dir(self) -> Path:

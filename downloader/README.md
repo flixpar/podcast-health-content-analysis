@@ -1,10 +1,11 @@
 # Podcast Transcription Pipeline
 
-Fetches the top podcasts, records every episode from their RSS feeds, downloads
-the audio (archived as 24 kbps Opus), and transcribes it with NVIDIA Parakeet.
+Fetches top podcasts, records their RSS episodes, downloads the audio
+(archived as 24 kbps Opus), and transcribes with the configured Parakeet or Qwen backend.
 Publisher-provided transcripts are ingested directly when a feed offers them.
-Everything is tracked in a SQLite database so each stage can be re-run and
-resumed independently.
+Everything is tracked in a shared SQLite catalog so stages can be resumed
+independently. Named studies select catalog episodes for collection and analysis;
+see [the study workflow](../docs/studies.md) for definitions, scope and exports.
 
 ## Layout
 
@@ -18,6 +19,9 @@ downloader/
 │   ├── http.py, log.py      retrying requests session; logging setup
 │   ├── rss.py               feed -> FeedEpisode list
 │   ├── sources/             apple.py (overall + genre charts), spotify.py (chart + title match), podchaser.py (GraphQL)
+│   ├── studies/             versioned selections, refresh, status, and revision-pinned exports
+│   ├── charts/, catalog/   historical/live charts and evidence-bearing identity resolution
+│   ├── archive/, paths.py  Wayback recovery and portable stored file paths
 │   ├── audio/               download.py, naming.py, ffmpeg.py (probe/encode/decode), disk.py
 │   ├── transcripts/         store.py (JSONL+zstd format), parsers.py (SRT/VTT/JSON/HTML)
 │   ├── asr/                 chunking.py (pure), parakeet.py (NeMo model on one GPU)
@@ -27,7 +31,7 @@ downloader/
 ├── tests/                   pytest suite (no network, no GPU; ffmpeg tests skip if absent)
 ├── tools/ab_format_test.py  MP3-vs-Opus ASR divergence measurement
 ├── config.json              local settings (gitignored); config.example.json is the template
-├── data -> /mnt/data2/...   audio/, transcripts/, podcast_metadata.db
+├── data/                   configured archive directory (may be a symlink)
 └── logs/                    pipeline.log, audit_report.json (gitignored)
 ```
 
@@ -43,6 +47,10 @@ source ../.venv/bin/activate
 cp config.example.json config.json     # then edit
 ```
 
+For `import-chart-archive`, run `uv sync --group analysis` from the repository
+root to include pandas and pyarrow, as described in the
+[archive guide](../analysis/chart_archive/README.md).
+
 `ffmpeg`/`ffprobe` must be on `PATH` (`apt install ffmpeg`); the pipeline shells
 out to them for every conversion and for ASR decoding.
 
@@ -54,14 +62,20 @@ print a JSON summary when done. `--config PATH` and `--log-level` are global.
 | Command | What it does |
 |---|---|
 | `fetch-podcasts [--limit N] [--source apple\|spotify\|podchaser] [--genre ID] [--country CC]` | Record the top podcasts from one chart. Additive: re-running refreshes metadata without changing ids, and records the podcast's rank in `podcast_charts`. |
-| `discover [--max-episodes N]` | Read every podcast feed and record its episodes. Downloads nothing. |
-| `fetch-rss-transcripts [--limit N]` | Fetch transcripts publishers attach to their feeds (SRT/VTT/JSON/timestamped text/HTML). No GPU. |
-| `download [--limit N] [--workers N] [--skip-errors]` | Download audio for every pending episode. Resumable; re-run after an interruption. |
-| `transcribe [--limit N] [--retry-errors] [--vad\|--no-vad]` | Transcribe downloaded audio with Parakeet, one worker per configured GPU. |
+| `study list\|refresh\|status\|export` | Define, materialize, inspect, and export studies; see [studies](../docs/studies.md). |
+| `import-chart-archive [--archive-dir PATH]`, `capture-charts [--no-catalog]` | Import reconstructed charts or retain today's live snapshots and raw responses. |
+| `resolve --study NAME`, `link-entity ENTITY --note EVIDENCE ...` | Resolve study members or record authoritative manual identity decisions. |
+| `discover [--study NAME\|--all] [--max-episodes N]` | Read study podcasts' feeds and record episodes; defaults to the union of studies. |
+| `discover-archived --study NAME` | Recover older episodes from archived copies of known feeds. |
+| `import-episodes PATH --source SOURCE [--dry-run]` | Load evidence-bearing JSONL from a publisher or alternate feed. |
+| `fetch-rss-transcripts [--study NAME] [--limit N]` | Fetch publisher transcripts (SRT/VTT/JSON/text/HTML). Defaults to all eligible episodes. |
+| `download [--study NAME\|--all] [--wayback-fallback] [--limit N]` | Resumably download pending study episodes; defaults to the union of studies. |
+| `transcribe [--study NAME] [--retry-errors] [--vad\|--no-vad]` | Transcribe downloaded audio with the configured ASR backend. |
+| `migrate-paths [--dry-run]` | Convert legacy absolute paths to verified relative paths, retaining original values. |
 | `convert-audio [--dry-run] [--reconcile-only] [--threshold MB] [--limit N]` | Re-encode existing MP3s to Opus/OGG, verifying each before deleting the original. |
 | `audit [--fix] [--skip-probe] [--newer-than 'YYYY-MM-DD HH:MM']` | Reconcile the database against files on disk; `--fix` re-queues broken rows. |
 | `reset-transcripts (--all \| --episode-ids 1,2 \| --podcast-ids 3) [--dry-run]` | Delete ASR transcripts so `transcribe` runs again. Never touches publisher transcripts. |
-| `export-audio-batch OUTPUT_DIR [--target-gb GB] [--dry-run]` | Create a checksummed tar of completed audio that has no transcript and has not been exported before. |
+| `export-audio-batch OUTPUT_DIR [--study NAME] [--target-gb GB] [--dry-run]` | Create a checksummed tar of completed audio without transcripts, excluding earlier exported batches. |
 | `ingest-audio-batch ARCHIVE WORKSPACE` | On the remote server, checksum, safely extract, and verify every audio member. |
 | `transcribe-audio-batch BATCH_DIR [--retry-errors] [--vad\|--no-vad]` | Resumably transcribe a prepared batch without needing the source SQLite database. |
 | `export-transcript-batch BATCH_DIR OUTPUT_DIR` | Create a checksummed return tar; refuses an incomplete batch unless explicitly allowed. |
@@ -72,7 +86,9 @@ Recommended refresh cycle:
 
 ```bash
 python -m podcast_pipeline fetch-podcasts          # refresh the podcast list
-python -m podcast_pipeline discover                # catalogue new episodes
+python -m podcast_pipeline study refresh corpus-2025
+python -m podcast_pipeline discover               # catalogue study episodes
+python -m podcast_pipeline study refresh corpus-2025
 python -m podcast_pipeline fetch-rss-transcripts   # take publisher transcripts for free
 python -m podcast_pipeline download                # fetch the audio that's left
 python -m podcast_pipeline audit --fix             # reconcile DB against disk
@@ -81,6 +97,9 @@ python -m podcast_pipeline transcribe
 
 Fetching publisher transcripts before downloading matters: an episode whose
 feed carries a transcript never needs its audio fetched or transcribed.
+`corpus-2025` freezes the original chart population; choose another study or
+use `discover --all` / `download --all` to collect newly added catalog shows.
+Refresh each affected study after discovery or identity changes.
 
 ### Transfer batches for transcription
 
@@ -174,14 +193,19 @@ sqlite3 data/podcast_metadata.db \
 | `fetcher` | `type` (`apple`, `spotify`, or `podchaser`), `filter_health_only`, `default_limit`, `country`, `genre` (Apple genre id) |
 | `spotify` | `chart_url`, `match_candidates`, `search_delay_seconds`, `search_attempts` |
 | `podchaser` | `client_id`, `client_secret`, `api_url` (or `PODCHASER_CLIENT_ID`/`_SECRET` env vars) |
-| `discovery` | `max_episodes_per_podcast`, `max_parallel_feeds`, `feed_timeout_seconds` |
+| `discovery` | `max_episodes_per_podcast`, `max_parallel_feeds`, `feed_timeout_seconds`, `max_feed_pages`, `feed_page_size`, `feed_page_delay_seconds` |
 | `download` | `max_workers`, `timeout_seconds`, `min_free_gb` (downloads halt below this much free space) |
 | `audio_compression` | `enabled`, `size_threshold_mb`, `bitrate`, `keep_original` |
 | `transcription` | `model_name`, `gpu_ids`, `batch_size`, `chunk_duration_seconds`, `overlap_seconds` |
-| `storage` | `transcript_compression_level` (zstd) |
+| `storage` | `transcript_compression_level` (zstd), `estimated_episode_duration_seconds` (fallback for study disk estimates) |
 | `batch_export` | `target_size_gb` (default 250 decimal GB of audio payload) |
+| `charts` | `archive_dir` (relative to `downloader/`), `capture_sources`, `country` |
+| `resolve` | `lookup_batch_size`, `lookup_delay_seconds`, `retry_after_days`, `search_candidates` |
+| `wayback` | CDX/replay endpoints, request pacing, retries, capture and time budgets; see `config.example.json` |
 
 Unknown keys are rejected at startup, so a typo cannot silently fall back to a default.
+The complete current settings and defaults live in `podcast_pipeline/config.py`
+and `config.example.json`, including ASR backend and VAD options.
 
 ## Data
 
@@ -196,6 +220,11 @@ Unknown keys are rejected at startup, so a typo cannot silently fall back to a d
   (an error row with `audio_file_path` set failed at transcription, one without
   failed at download). `has_rss_transcript = 1` rows are never downloaded.
 - `transcripts` — one row per transcribed episode; `metadata.source` is `asr` or `rss`.
+- `study_*`, chart history, and provenance tables — described in [studies](../docs/studies.md).
+
+Audio/transcript paths in SQLite are relative to the configured data directory;
+read them with `podcast_pipeline.paths.resolve` and write them with `to_stored`.
+Back up a legacy catalog and review `migrate-paths --dry-run` before migrating.
 
 ```bash
 sqlite3 data/podcast_metadata.db "SELECT status, COUNT(*) FROM episodes GROUP BY status;"
@@ -217,15 +246,9 @@ Audio is archived as 24 kbps mono Opus. Before adopting that, `tools/ab_format_t
 transcribed identical windows of 20 episodes from both the MP3 and its Opus
 re-encode and compared the outputs:
 
-| Measure | Result |
-|---|---|
-| Aggregate WER (Opus vs MP3) | **1.26%** |
-| Aggregate CER | **0.85%** |
-| Median / max per-episode WER | 1.16% / 3.34% |
-| Size reduction | **82.7%** (1698 MB → 293 MB) |
-
-Parakeet's own benchmark WER is around 6%, so format-induced divergence sits well
-below the model's error floor. Re-run the tool before changing `bitrate`.
+The measured aggregate divergence was 1.26% WER / 0.85% CER, with 82.7% smaller
+files. Re-run the tool before changing `bitrate`; generated results default to
+ignored repository `local/ab_format_results.json`.
 
 Two rules learned while measuring this are now enforced in code:
 
@@ -254,26 +277,16 @@ Two rules learned while measuring this are now enforced in code:
   and edge padding are configurable with the adjacent `vad_*` settings in
   `config.example.json`. Transcripts record the settings and detected speech
   duration in their metadata.
-- **Inline Silero VAD is intended only for targeted quality recovery.** It
-  detects episodes serially on CPU. On `gpu313`, a 50-episode stress sample ran
-  at 2,288x real time without VAD, while Silero planning sustained only 122x
-  with one worker. A parallel CPU prototype reached 705x with 32 workers.
+- **Inline Silero VAD is intended for targeted quality recovery.** It
+  detects episodes serially on CPU and can become the batch bottleneck.
 - **Remote Qwen batches can instead use a precomputed pyannote plan.** Run
   `tools/plan_pyannote_vad.py` in its own GPU environment, then pass the result
   to `transcribe-audio-batch --vad-plan PLAN.jsonl`. The batch transcriber
   verifies the plan's batch ID, manifest digest, episode membership, audio
   SHA-256 values, durations, and spans before sending anything to ASR. Every
   transcript records the model, settings, and plan SHA-256.
-- The `pyannote/segmentation-3.0` planner processed 50 episodes (79.23 hours)
-  on four H100s in 81.5 seconds, including model startup and audio decode:
-  3,500x real time. A difficult 23-episode A/B removed all 14 pre-VAD
-  repetitive-tail failures. Pyannote planning plus Qwen ASR completed the 39.10
-  hours in 108.1 seconds (1,302x real time). It was much faster than inline
-  Silero, but two Qwen runs produced 33--34 fallback retries and 529--551
-  seconds of explicit omissions versus Silero's 16 retries and 381 seconds.
-  Pyannote is therefore a fast opt-in batch path, not the default; retain
-  Silero for small quality-recovery sets where the extra planning time is
-  acceptable.
+- Pyannote planning is an opt-in batch path. Compare quality on the intended
+  data before choosing it over Silero; neither VAD path is enabled by default.
 
 ## Troubleshooting
 
@@ -281,7 +294,6 @@ Two rules learned while measuring this are now enforced in code:
 volume fills. To clean up after an older run that did not:
 
 ```bash
-find data/audio -name '*.ogg' -size 0 -delete             # empty files ffmpeg left behind
 python -m podcast_pipeline convert-audio --reconcile-only  # record finished conversions
 python -m podcast_pipeline audit --fix                     # re-queue missing/truncated rows
 python -m podcast_pipeline download                        # resume

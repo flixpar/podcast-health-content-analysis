@@ -29,7 +29,9 @@ from podcast_pipeline.audio import MIN_AUDIO_BYTES
 from podcast_pipeline.batches import (AUDIO_BATCH_SCHEMA_VERSION, HashingReader,
                                       HashingWriter, add_bytes, atomic_write,
                                       tar_info)
-from podcast_pipeline.config import PROJECT_ROOT, Config
+from podcast_pipeline import paths
+from podcast_pipeline.config import Config
+from podcast_pipeline.studies.scope import episode_filter
 
 logger = logging.getLogger(__name__)
 
@@ -62,11 +64,6 @@ def _utc_now() -> datetime:
     return datetime.now(UTC)
 
 
-def _source_path(value: str) -> Path:
-    path = Path(value)
-    return path if path.is_absolute() else PROJECT_ROOT / path
-
-
 def _already_exported_episode_ids(manifest_dir: Path) -> set[int]:
     exported: set[int] = set()
     if not manifest_dir.exists():
@@ -87,9 +84,11 @@ def _already_exported_episode_ids(manifest_dir: Path) -> set[int]:
 
 
 def eligible_candidates(config: Config, conn: sqlite3.Connection,
-                        exported_ids: set[int]) -> tuple[list[Candidate], dict[str, int]]:
+                        exported_ids: set[int],
+                        study: str | None = None) -> tuple[list[Candidate], dict[str, int]]:
     """Return usable snapshot candidates and counts for rows rejected on disk."""
-    rows = conn.execute("""
+    study_clause, study_params = episode_filter(conn, study)
+    rows = conn.execute(f"""
         SELECT e.id, e.podcast_id, p.title AS podcast_title, e.title AS episode_title,
                e.episode_guid, e.published_date, e.duration_seconds, e.status,
                e.audio_file_path
@@ -99,8 +98,9 @@ def eligible_candidates(config: Config, conn: sqlite3.Connection,
           AND e.audio_file_path IS NOT NULL AND e.audio_file_path != ''
           AND (e.transcript_file_path IS NULL OR e.transcript_file_path = '')
           AND NOT EXISTS (SELECT 1 FROM transcripts t WHERE t.episode_id = e.id)
+          {study_clause}
         ORDER BY e.id
-    """).fetchall()
+    """, study_params).fetchall()
 
     rejected = {"already_exported": 0, "missing": 0, "not_regular": 0, "too_small": 0}
     candidates: list[Candidate] = []
@@ -109,7 +109,7 @@ def eligible_candidates(config: Config, conn: sqlite3.Connection,
         if episode_id in exported_ids:
             rejected["already_exported"] += 1
             continue
-        source = _source_path(row["audio_file_path"])
+        source = paths.resolve(config, row["audio_file_path"])
         try:
             stat = source.stat()
         except FileNotFoundError:
@@ -293,7 +293,7 @@ def _ensure_destination_space(config: Config, output_dir: Path, required_bytes: 
 
 def run(config: Config, conn: sqlite3.Connection, output_dir: Path,
         target_gb: float | None = None, include_exported: bool = False,
-        dry_run: bool = False) -> dict:
+        dry_run: bool = False, study: str | None = None) -> dict:
     target_gb = config.batch_export.target_size_gb if target_gb is None else target_gb
     if target_gb <= 0:
         raise BatchExportError("target_gb must be greater than zero")
@@ -303,7 +303,7 @@ def run(config: Config, conn: sqlite3.Connection, output_dir: Path,
 
     def select() -> tuple[list[Candidate], dict[str, int], int]:
         exported_ids = set() if include_exported else _already_exported_episode_ids(manifest_dir)
-        candidates, rejected = eligible_candidates(config, conn, exported_ids)
+        candidates, rejected = eligible_candidates(config, conn, exported_ids, study)
         return select_batch(candidates, target_bytes), rejected, len(candidates)
 
     if dry_run:
