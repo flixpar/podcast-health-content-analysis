@@ -11,6 +11,7 @@ shared by Python and ripgrep, matched case-insensitively against segment text.
   cq.py cooc 'pattern A' 'pattern B'      # episodes matching both, with a sample
 """
 import argparse
+import json
 import random
 import re
 import subprocess
@@ -23,7 +24,6 @@ import os
 # Generated shards are ignored; CORPUS_TEXT_DIR can select an external volume.
 REPO = Path(__file__).resolve().parents[2]
 ROOT = Path(os.environ.get("CORPUS_TEXT_DIR", str(REPO / "local" / "corpus-text")))
-SHARDS = sorted(str(p) for p in ROOT.glob("shard_*.tsv"))
 _meta = None
 
 
@@ -48,10 +48,31 @@ class CorpusQueryError(RuntimeError):
     pass
 
 
+def corpus_files():
+    """Reject failed builds and damaged corpora before returning search inputs."""
+    manifest_path = ROOT / "manifest.json"
+    try:
+        manifest = json.loads(manifest_path.read_text())
+    except (OSError, ValueError) as exc:
+        raise CorpusQueryError(f"Cannot read completion manifest {manifest_path}; rebuild the corpus") from exc
+    if not isinstance(manifest, dict) or manifest.get("schema_version") != "corpus-text-v1":
+        raise CorpusQueryError("Unsupported corpus manifest; rebuild the corpus")
+    if manifest.get("complete") is not True:
+        raise CorpusQueryError("Corpus build is incomplete; select a successfully published corpus")
+    # v1 assigns episode IDs modulo 64, including context lookups below.
+    if type(manifest.get("shards")) is not int or manifest["shards"] != 64:
+        raise CorpusQueryError("Unsupported corpus shard count; corpus-text-v1 requires 64 shards")
+    shards = [ROOT / f"shard_{i:02d}.tsv" for i in range(manifest["shards"])]
+    missing = [path.name for path in [ROOT / "episodes.tsv", *shards] if not path.is_file()]
+    if missing:
+        raise CorpusQueryError(f"Incomplete corpus files in {ROOT}: {', '.join(missing)}; rebuild the corpus")
+    return [str(path) for path in shards]
+
+
 def matches(pattern, files=None):
     # ripgrep finds candidate lines fast; the text column is re-checked here so
     # a pattern can never match an episode id or segment number.
-    files = SHARDS if files is None else files
+    files = corpus_files() if files is None else files
     if not files:
         raise CorpusQueryError(f"No corpus shards in {ROOT}; run corpus_text/build.py first")
     check = re.compile(pattern, re.I)
@@ -87,6 +108,7 @@ def snippet(text, pattern, width):
 
 
 def segments(ep, lo, hi):
+    corpus_files()
     shard = ROOT / f"shard_{ep % 64:02d}.tsv"
     result = subprocess.run(["rg", "--no-filename", "--no-line-number", f"^{ep}\t", str(shard)], capture_output=True, text=True)
     if result.returncode not in (0, 1):
@@ -170,6 +192,7 @@ def main():
     o = sub.add_parser("cooc"); o.add_argument("a"); o.add_argument("b"); o.set_defaults(f=cmd_cooc)
     a = p.parse_args()
     try:
+        corpus_files()
         a.f(a)
     except (CorpusQueryError, OSError, ValueError, re.error) as exc:
         p.exit(2, f"corpus query: {exc}; see analysis/corpus_text/README.md\n")

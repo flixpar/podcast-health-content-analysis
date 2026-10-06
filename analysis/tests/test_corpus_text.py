@@ -104,10 +104,10 @@ def test_spawn_workers_use_explicit_inputs_and_destination(corpus_inputs):
     assert (output / "shard_01.tsv").read_text() == "1\t0\tWorker speech.\n"
 
 
-def test_missing_shards_never_searches_the_repository_or_stdin(monkeypatch):
-    monkeypatch.setattr(cq, "SHARDS", [])
+def test_missing_shards_never_searches_the_repository_or_stdin(tmp_path, monkeypatch):
+    monkeypatch.setattr(cq, "ROOT", tmp_path)
     monkeypatch.setattr(cq.subprocess, "Popen", lambda *a, **k: pytest.fail("must not run ripgrep without files"))
-    with pytest.raises(cq.CorpusQueryError, match="No corpus shards"):
+    with pytest.raises(cq.CorpusQueryError, match="completion manifest"):
         list(cq.matches("Sleep"))
 
 
@@ -147,3 +147,90 @@ def test_query_cli_missing_corpus_is_actionable(tmp_path):
     assert result.returncode == 2
     assert "corpus query:" in result.stderr and "README.md" in result.stderr
     assert "Traceback" not in result.stderr
+
+
+@pytest.fixture
+def published_corpus(corpus_inputs):
+    transcripts, database, output = corpus_inputs
+    (transcripts / "episode_1.jsonl").write_text('{"type":"segment","text":"Sleep matters."}\n')
+    build.build_corpus(transcripts, database, output, workers=1)
+    return output
+
+
+@pytest.mark.parametrize("damage", [
+    "missing_shard", "failed_build", "missing_manifest", "invalid_json",
+    "unknown_schema", "wrong_shards", "numeric_complete", "missing_metadata",
+])
+@pytest.mark.parametrize("args", [
+    ["count", "Sleep"], ["sample", "Sleep"], ["cooc", "Sleep", "matters"], ["ctx", "1", "0"],
+])
+def test_all_queries_reject_incomplete_corpora_before_results(published_corpus, damage, args):
+    output = published_corpus
+    path = output / "manifest.json"
+    manifest = json.loads(path.read_text())
+    if damage == "missing_shard":
+        # Delete an empty shard: even apparently unaffected hits cannot be trusted.
+        (output / "shard_63.tsv").unlink()
+    elif damage == "failed_build":
+        manifest.update(complete=False, error="retained failed staging build")
+    elif damage == "missing_manifest":
+        path.unlink()
+    elif damage == "invalid_json":
+        path.write_text("not json")
+    elif damage == "unknown_schema":
+        manifest["schema_version"] = "corpus-text-v999"
+    elif damage == "wrong_shards":
+        manifest["shards"] = 1
+    elif damage == "numeric_complete":
+        manifest["complete"] = 1
+    elif damage == "missing_metadata":
+        (output / "episodes.tsv").unlink()
+    if damage not in {"missing_manifest", "invalid_json"}:
+        path.write_text(json.dumps(manifest))
+    result = subprocess.run([
+        sys.executable, str(ROOT / "analysis/corpus_text/cq.py"), *args,
+    ], env={**os.environ, "CORPUS_TEXT_DIR": str(output)}, capture_output=True, text=True)
+    assert result.returncode == 2
+    assert result.stdout == ""
+    assert "corpus query:" in result.stderr and "Traceback" not in result.stderr
+
+
+def test_default_search_checks_all_shards_before_invoking_ripgrep(published_corpus, monkeypatch):
+    monkeypatch.setattr(cq, "ROOT", published_corpus)
+    (published_corpus / "shard_63.tsv").unlink()
+    monkeypatch.setattr(cq.subprocess, "Popen", lambda *a, **k: pytest.fail("incomplete corpus must never reach ripgrep"))
+    with pytest.raises(cq.CorpusQueryError, match="shard_63.tsv"):
+        list(cq.matches("Sleep"))
+
+
+@pytest.mark.skipif(shutil.which("rg") is None, reason="ripgrep not installed")
+@pytest.mark.parametrize("args,expected", [
+    (["count", "Sleep"], "segments 1  episodes 1  podcasts 1"),
+    (["sample", "Sleep", "--ctx", "1"], "[0] Sleep matters."),
+    (["cooc", "Sleep", "matters"], "A: 1 episodes; A and B: 1 episodes"),
+    (["ctx", "1", "0"], "[0] Sleep matters."),
+])
+def test_all_queries_accept_a_complete_published_corpus(published_corpus, args, expected):
+    result = subprocess.run([
+        sys.executable, str(ROOT / "analysis/corpus_text/cq.py"), *args,
+    ], env={**os.environ, "CORPUS_TEXT_DIR": str(published_corpus)}, capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+    assert expected in result.stdout
+
+
+def test_retained_failed_build_cannot_be_queried(corpus_inputs):
+    transcripts, database, output = corpus_inputs
+    (transcripts / "episode_1.jsonl").write_text(
+        '{"type":"segment","text":"Sleep matters."}\nnot json\n'
+    )
+    with pytest.raises(build.CorpusError):
+        build.build_corpus(transcripts, database, output, workers=1)
+    staging, = output.parent.glob(".new corpus-*")
+    # A failed build can retain real hits and metadata, so file existence alone
+    # is insufficient to distinguish it from a successfully published corpus.
+    assert "Sleep matters." in (staging / "shard_01.tsv").read_text()
+    result = subprocess.run([
+        sys.executable, str(ROOT / "analysis/corpus_text/cq.py"), "count", "Sleep",
+    ], env={**os.environ, "CORPUS_TEXT_DIR": str(staging)}, capture_output=True, text=True)
+    assert result.returncode == 2 and result.stdout == ""
+    assert "build is incomplete" in result.stderr

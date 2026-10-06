@@ -39,6 +39,13 @@ and `--workers`. For a small exported study, point at its linked transcript
 directory and the corresponding shared catalog. Select the same
 `CORPUS_TEXT_DIR` when querying an output built with `--out-dir`.
 
+Every query requires a `corpus-text-v1` manifest with `complete: true`,
+all 64 declared shards, and `episodes.tsv`. Failed staging directories,
+missing shards and malformed manifests are rejected before any results are
+printed. Older exports without a completion manifest must be rebuilt in a
+new directory from their source transcripts; retain the original export
+while validating the replacement.
+
 Search patterns use syntax supported by both Python regex and ripgrep. They
 match segment text only, including when anchored with `^`; anchored queries
 scan every segment without the ripgrep prefilter. Missing corpus files,
