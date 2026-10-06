@@ -472,3 +472,24 @@ BENCHMARK_DIR=benchmark/v2 .venv/bin/python -m analysis.benchmark score --alias 
 TAG=q1 EXTRA="--enable-mamba-shared-prefix-checkpoint --api-server-count 4" exp/serve-qwen38.sh
 TAG=ds1 exp/serve-ds.sh
 ```
+
+## Addendum: bf16 linear-attention state and GPU memory utilization
+
+Patched vLLM so GLM-5.3-Flash honours `--mamba-ssm-cache-dtype` (patch and
+results on branch `labeling-glm53`, `docs/glm53-serving.md`). Complete runs of
+the same 1,500 corpus windows, vLLM and client pinned to 16 cores with
+`OMP_NUM_THREADS=1` (an inherited 16 made the pinned server CPU-bound; the
+first bf16 run, `exp/full/glm-bf16-128-cpubound`, is invalid for that reason):
+
+| config | windows/h steady (wall) | KV use | preemptions |
+| --- | --- | --- | --- |
+| fp32, memory 0.92, cap 128 | 6,050 (4,940) | 0.68 | 0 |
+| fp32, memory 0.95, cap 160 | 6,660 (5,250) | 0.75 | 0 |
+| bf16, 0.92, cap 128 | 6,430 (5,220) | 0.53 | 0 |
+| bf16, 0.92, cap 192 | 7,670 (6,140) | 0.74 | 0 |
+| bf16, 0.92, cap 256 | 5,700 (5,010) | 0.94 | 75 |
+| bf16, 0.95, cap 224 | 8,220 (6,340) | 0.76 | 0 |
+
+Quality (v8 headline, two runs each, pooled, paired): topic F1 -0.002
+[-0.018, 0.016]; no axis changed significantly (populations -0.037
+[-0.089, 0.014]). Corpus agreement bf16-vs-fp32 equals fp32-vs-fp32.
