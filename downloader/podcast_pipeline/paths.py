@@ -7,7 +7,7 @@ volume being mounted elsewhere. Every writer stores ``to_stored(...)`` and every
 reader opens ``resolve(...)``; nothing else should join or split these paths.
 
 Code outside the pipeline that reads the database (the analysis scripts) must
-do the same: join a stored path onto ``downloader/data/``.
+also call ``resolve(config, stored)`` so the configured data directory applies.
 """
 
 from __future__ import annotations

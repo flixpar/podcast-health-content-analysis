@@ -45,7 +45,7 @@ from tools.alternate_sources.common import (  # noqa: E402
 )
 
 SOURCE = "alternate_feed"
-CACHE = Path("/mnt/data2/podcast-data/scratch-gapfill/dead-links/wayback-cache")
+CACHE = Config().wayback_cache_dir / "alternate_feeds"
 # Fetch at most this many captures per (podcast, URL).
 MAX_FETCHES = 80
 # A capture taken this long after a window's end still counts as "just after".
@@ -227,6 +227,7 @@ def collect(conn, fetcher, config, study: str, podcast_id: int, feed_url: str,
 
 
 def main() -> None:
+    global CACHE
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("study")
     ap.add_argument("out_dir", type=Path)
@@ -234,6 +235,8 @@ def main() -> None:
     ap.add_argument("--probe-limit", type=int, default=1000,
                     help="probe at most this many enclosures per feed")
     ap.add_argument("--name", default=SOURCE, help="output file stem")
+    ap.add_argument("--cache-dir", type=Path,
+                    help="cache directory (default: configured data/wayback/alternate_feeds)")
     ap.add_argument("--max-fetches", type=int, default=MAX_FETCHES,
                     help="captures to read per (podcast, URL); a daily show with a short feed needs several a month")
     ap.add_argument("--all-gap-classes", type=int, action="append", default=[], metavar="PODCAST_ID",
@@ -242,7 +245,8 @@ def main() -> None:
     args = ap.parse_args()
 
     config = Config.load()
-    conn = open_db()
+    CACHE = args.cache_dir or config.wayback_cache_dir / "alternate_feeds"
+    conn = open_db(config.db_path)
     fetcher = Fetcher()
     rows, logs = [], []
     for spec in args.feed:

@@ -1,8 +1,6 @@
 # Studies: one shared catalog, many selections
 
-The pipeline used to have one implicit population: whatever podcasts the chart
-fetches had put in the database. Studies separate *what we know about* from
-*what an analysis is about*:
+Studies select an analysis population from the shared podcast catalog:
 
 ```
  sources ──► catalog ◄── shared work ──► studies ──► analyses
@@ -12,7 +10,7 @@ fetches had put in the database. Studies separate *what we know about* from
   Wayback)
 ```
 
-* **Catalog** (shared, append-only): `podcasts`, `episodes`, audio files,
+* **Catalog** (shared): `podcasts`, `episodes`, audio files,
   transcripts. Each artifact exists once. A study never owns audio or
   transcripts; it points at catalog episodes, so work done for one study is
   already done for every other study containing that episode.
@@ -45,12 +43,9 @@ knobs: `max_per_window` (cap per window, preferring already-transcribed
 episodes, then spreading evenly in time) and `dedupe` (drop re-issued copies
 of an episode under a new GUID, keeping the copy with the most work done).
 
-Why code rather than a config file? Selection rules worth studying are not
-declarative: the monthly top-24 needs a time-weighted ranking over a snapshot
-timeline. A class is the smallest thing that holds such a rule, its
-parameters and its documentation together. Bump `version` when the logic
-changes; the stored `definition_hash` records which rule produced a
-membership.
+Set `exclude_trailers` to apply the shared trailer/promo/short-item rules.
+Bump `version` when selection logic changes; the stored `definition_hash`
+records which rule produced a membership.
 
 ## Materializing
 
@@ -66,9 +61,10 @@ writes:
   priority order, so all windows get their first episode before any gets its
   second, and an interrupted run or a full disk leaves coverage spread evenly
   rather than front-loaded;
-* `studies` / `study_revisions`: the revision is bumped whenever the episode
-  set or the definition changes, and each `study_episodes` row keeps the
-  revision that added it.
+* `studies` / `study_revisions`: the revision advances whenever the selected
+  episode set, episode assignment, member/window state, or definition changes.
+  This includes unresolved members and empty windows. Each `study_episodes`
+  row keeps the revision that first added it.
 
 Refreshing takes seconds. Run it after anything that changes what a study can
 see: new chart data, `resolve`, `discover`, `discover-archived`.
@@ -77,18 +73,18 @@ see: new chart data, `resolve`, `discover`, `discover-archived`.
 
 ```bash
 cd downloader
-P="../.venv/bin/python -m podcast_pipeline"
-$P study refresh apple-top24-monthly
-$P study status apple-top24-monthly            # read-only; prints suggested next steps
-$P resolve --study apple-top24-monthly          # entities -> podcasts with feeds
-$P discover --study apple-top24-monthly         # live feeds -> episodes
-$P study refresh apple-top24-monthly
-$P discover-archived --study apple-top24-monthly  # Wayback copies of old feeds -> older episodes
-$P study refresh apple-top24-monthly
-$P fetch-rss-transcripts --study apple-top24-monthly
-$P download --study apple-top24-monthly --wayback-fallback
-$P export-audio-batch /mnt/transfer --study apple-top24-monthly   # remote ASR round trip
-$P study export apple-top24-monthly --link-transcripts ../analysis/work/top24-transcripts
+pipeline() { ../.venv/bin/python -m podcast_pipeline "$@"; }
+pipeline study refresh apple-top24-monthly
+pipeline study status apple-top24-monthly       # prints suggested next steps
+pipeline resolve --study apple-top24-monthly    # entities -> podcasts with feeds
+pipeline discover --study apple-top24-monthly   # live feeds -> episodes
+pipeline study refresh apple-top24-monthly
+pipeline discover-archived --study apple-top24-monthly
+pipeline study refresh apple-top24-monthly
+pipeline fetch-rss-transcripts --study apple-top24-monthly
+pipeline download --study apple-top24-monthly --wayback-fallback
+pipeline export-audio-batch /path/to/transfer --study apple-top24-monthly
+pipeline study export apple-top24-monthly --link-transcripts ../local/top24-transcripts
 ```
 
 Scope rules for stages:
@@ -109,7 +105,13 @@ hours, a disk projection measured from this archive's own MB/hour,
 window coverage (windows with episodes, with transcripts, imputed from
 neighbouring snapshots, gaps live feeds do not reach), provenance mix, overlap
 with other studies, and the commands to run next. It is read-only and safe
-during a download.
+during a download. Pending episodes without positive durations are estimated
+at the catalog's mean positive duration, or
+`storage.estimated_episode_duration_seconds` when none are available.
+
+Use `link-entity ENTITY --podcast-id ID --note EVIDENCE` to correct an identity,
+or `--unresolvable` to record that no defensible match exists. Manual decisions
+override automatic resolution and capture; refresh affected studies afterward.
 
 ## Analyses
 
@@ -120,12 +122,8 @@ manifest, not the live tables, and record the revision they used.
 
 `--link-transcripts DIR` fills a directory with symlinks named
 `episode_<id>.jsonl.zst`, which is the layout
-`analysis/topic_labeling.py --transcripts` already reads. **Follow-up:**
-topic labeling's run identity hashes the whole prepared windows file, so a new
-study relabels windows another study already labeled. Labels should be cached
-per window, keyed by the transcript hash and the windowing, prompt and model
-settings, so a study becomes a view over cached labels. That change belongs on
-`main`, where the labeling code has moved on.
+`analysis/topic_labeling.py --transcripts` reads. Label computation and reuse
+remain the analysis pipeline's responsibility.
 
 ## Defined studies
 
@@ -134,16 +132,15 @@ settings, so a study becomes a view over cached labels. That change belongs on
 The collection as it stood on 2026-10-02: every podcast from the four live
 charts fetched since 2025-10-13 (Apple US top 100 ×2, Apple US Health &
 Fitness top 50, Spotify US top 100), with every episode their feeds list. This
-is what the existing 131k transcripts, the lexical scan and the labeling
-pilots ran on. Podcast membership is frozen (first recorded before
-2026-10-03), while episodes keep flowing in from `discover`. 975 re-issued
-duplicates are excluded (corpus issue C2).
+is the original collection used by the lexical scan and labeling pilots.
+Podcast membership is frozen (first recorded before 2026-10-03), while
+episodes keep flowing in from `discover`; re-issued duplicates are excluded.
 
 ### `apple-top24-monthly`
 
 Apple US overall chart, top 24 per calendar month from 2016-01, with each
-show's episodes from the months it was in the list. The reasoning is in
-`studies/apple_top24_monthly.py`. In short:
+show's episodes from the months it was in the list. The scoring rationale is
+in `downloader/podcast_pipeline/studies/apple_top24_monthly.py`:
 
 * **Depth 24 throughout.** That is all Apple's own page shows, and the only
   record between Chartable's shutdown and the start of live capture. A
@@ -155,7 +152,7 @@ show's episodes from the months it was in the list. The reasoning is in
   (the midpoint partition the population analysis validated), clipped to the
   month. A show earns days × (25 − rank) per snapshot, and the top 24 scorers
   form the month's list.
-* **Gap months are imputed.** Months with no snapshot (16 since 2016) take
+* **Gap months are imputed.** Months with no snapshot take
   their list from the neighbouring snapshots and are flagged
   (`snapshots_in_month = 0`).
 * **Sources.** Apple's chart page and the live Marketing Tools feed come first,
@@ -174,8 +171,8 @@ The list grows by itself as `capture-charts` adds days; refresh the study.
   touches live ones.
 * `capture-charts` should run **daily** (`downloader/tools/capture_charts_daily.sh`
   is cron-ready). It stores the raw response, records the snapshot, and adds
-  newly charting Apple shows to the catalog. The archive cannot backfill: a day
-  not captured is lost.
+  newly charting Apple shows to the catalog, reusing known current/historical
+  feed owners. A missed live day cannot be fetched retrospectively.
 
 ## Older episodes
 
@@ -189,6 +186,13 @@ of the audio and records `wayback_audio` provenance on success. The CDX API is
 queried strictly sequentially, because parallel requests are silently dropped
 and look like "never archived".
 
+For sources outside known feeds, `downloader/tools/alternate_sources/` and
+`downloader/tools/tal_archive.py` produce evidence-bearing JSONL. These tools
+read the catalog without writing it; inspect their output before loading it
+with `import-episodes PATH --source SOURCE --dry-run`, then the real import.
+Keep caches and generated reports under ignored `local/` or the data volume.
+Read-only diagnostics live under `downloader/tools/audit/`.
+
 ## Invariants
 
 * Nothing in the catalog is deleted or rewritten by a study. Refresh rewrites
@@ -197,4 +201,10 @@ and look like "never archived".
   never copied into study tables, so it cannot drift.
 * `discover`, `discover-archived`, `resolve`, `study refresh` and
   `capture-charts` all write. Queue them between `download` runs, not during
-  one. `study status` and `study list` are read-only.
+  one. Manual linking, episode imports, and path migrations also write.
+  `study status` and `study list` are read-only apart from normal startup schema
+  initialization; use them against an already initialized catalog.
+* Stored audio/transcript paths are relative to `Config.data_path`. Use
+  `paths.to_stored` for writes and `paths.resolve` for reads. For legacy absolute
+  paths, back up the catalog and inspect `migrate-paths --dry-run` before applying
+  the migration; original values are retained in `path_migration_backup`.

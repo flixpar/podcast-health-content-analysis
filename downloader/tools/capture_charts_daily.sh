@@ -16,7 +16,7 @@ LOG=logs/capture-charts.log
 
 echo "=== capture-charts start $(date -u +%FT%TZ) ===" >>"$LOG"
 status=0
-$PY -m podcast_pipeline capture-charts "$@" >>"$LOG" 2>&1 || status=$?
+"$PY" -m podcast_pipeline capture-charts "$@" >>"$LOG" 2>&1 || status=$?
 echo "=== capture-charts end $(date -u +%FT%TZ) exit=$status ===" >>"$LOG"
 if [ "$status" -ne 0 ]; then
     echo "capture-charts failed (exit $status); see $(pwd)/$LOG" >&2

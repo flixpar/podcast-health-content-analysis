@@ -12,6 +12,7 @@ the member's first charting month. Writes one CSV row per member with a
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import re
@@ -20,7 +21,13 @@ import sys
 from difflib import SequenceMatcher
 from pathlib import Path
 
-DB = Path(__file__).resolve().parents[2] / "data" / "podcast_metadata.db"
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from podcast_pipeline.config import DEFAULT_CONFIG_PATH, Config  # noqa: E402
+
+FIELDS = ["entity", "podcast_id", "method", "chart_name", "chart_titles", "chart_publisher",
+          "podcast_title", "podcast_publisher", "podcast_apple_id", "title_sim", "pub_sim",
+          "first_chart_month", "last_chart_month", "months", "windows", "catalog_first_episode",
+          "catalog_last_episode", "catalog_episodes", "catalog_wayback_episodes", "in_scope_episodes", "flags"]
 STOP = {"the", "a", "an", "podcast", "show", "with", "and", "of", "inc", "llc", "media",
         "network", "studios", "productions", "podcasts", "radio", "news"}
 
@@ -44,8 +51,8 @@ def similarity(a: str | None, b: str | None) -> float:
     return max(ratio, contain)
 
 
-def main(study: str, out: str) -> None:
-    conn = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
+def main(study: str, out: str, config: Config) -> None:
+    conn = sqlite3.connect(f"file:{config.db_path}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
     links = {r["entity"]: r for r in conn.execute("SELECT * FROM entity_links")}
     title_links_by_podcast: dict[int, list[sqlite3.Row]] = {}
@@ -61,7 +68,7 @@ def main(study: str, out: str) -> None:
     """, (study,)):
         attrs = json.loads(m["attrs"] or "{}")
         chart_titles = [m["name"], *attrs.get("titles", [])]
-        title_sim = max(similarity(t, m["p_title"]) for t in chart_titles if t)
+        title_sim = max((similarity(t, m["p_title"]) for t in chart_titles if t), default=0.0)
         pub_sim = similarity(attrs.get("publisher"), m["p_pub"]) if attrs.get("publisher") else None
         link = links.get(m["entity"])
         method = link["method"] if link else ("title_link" if m["podcast_id"] in title_links_by_podcast
@@ -108,7 +115,7 @@ def main(study: str, out: str) -> None:
             "flags": ";".join(flags),
         })
     with open(out, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0]))
+        w = csv.DictWriter(f, fieldnames=FIELDS)
         w.writeheader()
         w.writerows(rows)
     print(json.dumps({"members": len(rows),
@@ -116,4 +123,9 @@ def main(study: str, out: str) -> None:
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("study")
+    parser.add_argument("out")
+    parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG_PATH)
+    args = parser.parse_args()
+    main(args.study, args.out, Config.load(args.config))

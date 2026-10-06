@@ -31,23 +31,17 @@ import random
 import re
 import sqlite3
 import subprocess
+import sys
 from concurrent.futures import ThreadPoolExecutor
+from functools import partial
 from pathlib import Path
 
-DATA = Path(__file__).resolve().parents[2] / "data"
-DB = DATA / "podcast_metadata.db"
-# audio_file_path values were written under the repository's former location
-LEGACY_DATA_PREFIXES = ("/home/felix/projects/podcast-misinfo/downloader/data/",)
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from podcast_pipeline import paths  # noqa: E402
+from podcast_pipeline.config import DEFAULT_CONFIG_PATH, Config  # noqa: E402
+
 RATE = 16000
-
-
-def local_path(stored: str) -> Path:
-    """Stored paths are relative to the data dir; legacy absolute ones are mapped."""
-    for prefix in LEGACY_DATA_PREFIXES:
-        if stored.startswith(prefix):
-            return DATA / stored[len(prefix):]
-    path = Path(stored)
-    return path if path.is_absolute() else DATA / path
 
 
 def probe(path: Path) -> dict:
@@ -81,10 +75,10 @@ def decode(path: Path) -> dict:
             "mean_volume_db": mean[0] if mean else None, "max_volume_db": mx[0] if mx else None}
 
 
-def check(row: dict) -> dict:
-    path = local_path(row["audio_file_path"])
-    rec = {**row, "local_path": str(path), "exists": path.exists()}
-    if not path.exists():
+def check(row: dict, config: Config) -> dict:
+    path = paths.resolve(config, row["audio_file_path"])
+    rec = {**row, "local_path": str(path) if path else "", "exists": bool(path and path.exists())}
+    if not rec["exists"]:
         rec["flags"] = "not_audio(missing)"
         return rec
     rec["size_mb"] = round(path.stat().st_size / 1e6, 2)
@@ -114,11 +108,13 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("study")
     ap.add_argument("out")
+    ap.add_argument("--config", type=Path, default=DEFAULT_CONFIG_PATH)
     ap.add_argument("--per-stratum", nargs="+", default=["feed=100", "wayback_audio=0", "unwrapped_audio=0"])
     ap.add_argument("--seed", type=int, default=20261003)
     ap.add_argument("--workers", type=int, default=12)
     args = ap.parse_args()
-    conn = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
+    config = Config.load(args.config)
+    conn = sqlite3.connect(f"file:{config.db_path}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
     rows = [dict(r) for r in conn.execute("""
         SELECT e.id AS episode_id, e.podcast_id, s.window_label, e.title, e.published_date,
@@ -136,7 +132,7 @@ def main() -> None:
         pool = [r for r in rows if r["stratum"] == name]
         sample += pool if int(n) == 0 or int(n) >= len(pool) else rng.sample(pool, int(n))
     with ThreadPoolExecutor(args.workers) as ex:
-        results = list(ex.map(check, sample))
+        results = list(ex.map(partial(check, config=config), sample))
     fields = list(dict.fromkeys(k for r in results for k in r))
     with open(args.out, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fields)

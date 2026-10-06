@@ -63,6 +63,7 @@ Nothing is written to the database.
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import re
@@ -74,10 +75,15 @@ from difflib import SequenceMatcher
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from podcast_pipeline.config import DEFAULT_CONFIG_PATH, Config  # noqa: E402
 from podcast_pipeline.studies.quality import (  # noqa: E402  (shared rules)
     FEED_DROP, LEADING_NUMBER, RERUN_MARKER, norm_title, title_numbers)
 
-DB = Path(__file__).resolve().parents[2] / "data" / "podcast_metadata.db"
+FLAG_FIELDS = ["episode_id", "podcast_id", "entity", "window_label", "published_date", "title",
+               "duration_seconds", "status", "sources", "issue", "other_episode_id", "detail"]
+WINDOW_FIELDS = ["entity", "name", "podcast_id", "label", "monthly_rank", "points", "mean_points",
+                 "best_rank", "snapshots_in_month", "in_month_coverage", "sources", "episodes",
+                 "episodes_clean", "bulk_only", "trailer_only"]
 BULK_DAY = 20
 REPOST_MIN_SECONDS = 600
 OLD_NUMBER_GAP = 15
@@ -131,10 +137,10 @@ def sim(a: str, b: str) -> float:
     return SequenceMatcher(None, a, b).ratio()
 
 
-def main(study: str, out_dir: str) -> None:
+def main(study: str, out_dir: str, config: Config) -> None:
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
+    conn = sqlite3.connect(f"file:{config.db_path}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
     eps = [dict(r) for r in conn.execute("""
         SELECT e.id, e.podcast_id, s.entity, s.window_label, e.title, e.published_date,
@@ -363,11 +369,11 @@ def main(study: str, out_dir: str) -> None:
                         "sources": ",".join(a.get("sources", [])), "episodes": len(we),
                         "episodes_clean": len(clean), "bulk_only": bulk_only, "trailer_only": trailer_only})
     with open(out / "windows.csv", "w", newline="") as f:
-        wr = csv.DictWriter(f, fieldnames=list(windows[0]))
+        wr = csv.DictWriter(f, fieldnames=WINDOW_FIELDS)
         wr.writeheader()
         wr.writerows(windows)
     with open(out / "flagged_episodes.csv", "w", newline="") as f:
-        wr = csv.DictWriter(f, fieldnames=list(flags[0]))
+        wr = csv.DictWriter(f, fieldnames=FLAG_FIELDS)
         wr.writeheader()
         wr.writerows(sorted(flags, key=lambda r: (r["issue"], r["podcast_id"], r["published_date"])))
     issue_counts = Counter(f["issue"] for f in flags)
@@ -389,4 +395,9 @@ def main(study: str, out_dir: str) -> None:
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("study")
+    parser.add_argument("out_dir")
+    parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG_PATH)
+    args = parser.parse_args()
+    main(args.study, args.out_dir, Config.load(args.config))
