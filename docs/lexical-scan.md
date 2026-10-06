@@ -53,9 +53,9 @@ Existing benchmark items, references, gold and candidate runs can be used
 without regenerating the scan. Scan generation is needed when rebuilding or
 growing the candidate pool.
 
-## Studies and the open labeling PRs
+## Studies and taxonomy versions
 
-PR #8's `study export` produces an `episodes.csv` pinned to one study revision,
+`study export` produces an `episodes.csv` pinned to one study revision,
 with absolute `transcript_path` values. To scan that exported selection:
 
 ```bash
@@ -71,25 +71,22 @@ manifest and skipped; conflicting duplicate episode paths or mixed revisions
 are rejected. If building a pool for that study, also set the pool config's
 `transcripts` to the directory produced by `study export --link-transcripts`.
 
-PRs #9 and #10's v2/v3 benchmark configs retain this sampling lexicon even
-though their gold uses the granular v7/v8 taxonomy. After those PRs land, pass
-`--config benchmark/v2/config.toml` or `benchmark/v3/config.toml`; their paths
-are read unchanged. The default follows the benchmark's selected `CONFIG_PATH`,
-including `BENCHMARK_DIR` when its support lands in #9. Sampling keys are
-intentionally independent of the taxonomy being scored: no old `topics.md`
-validation is copied, and no keyword-to-v8-label mapping is implied.
+The v2/v3 benchmark configs retain the sampling lexicon even though their
+reference labels use granular v7/v8 taxonomies. Pass `--config
+benchmark/v2/config.toml` or `benchmark/v3/config.toml`, or set `BENCHMARK_DIR`
+to select that specification for both the scanner and benchmark commands.
+Sampling keys are independent of the taxonomy being scored; no
+keyword-to-v8-label mapping is implied.
 
-The latest #9 separates tracked benchmark specifications from generated
-artifacts in `local/benchmark/` and sets `paths.scan_dir` to
-`local/fast-analysis/scan_v2`. The scanner reads the specifications via
-`CONFIG_PATH` and honors that configured scan directory. `BENCHMARK_OUTPUT_DIR`
-changes the benchmark's generated artifact directory, not its scan input;
-use `--out-dir` or `paths.scan_dir` for the latter.
+Tracked benchmark specifications select generated artifacts under
+`local/benchmark/` and scan inputs under `local/fast-analysis/scan_v2`.
+`BENCHMARK_OUTPUT_DIR` changes benchmark artifacts, while `--out-dir` or
+`paths.scan_dir` selects the scanner's output.
 
-PR #10's `analysis/corpus_text` provides interactive keyword search and
-context; it does not produce the tables needed by `pool`. The scanner has no
-provider, model or serving configuration, so #7's TypeSafe integration and
-#11's GLM serving changes do not affect it.
+[Corpus search](../analysis/corpus_text/README.md) provides interactive keyword
+search and context; it does not produce the tables needed by `pool`. The
+scanner has no provider, model or serving configuration. TypeSafe and GLM
+serving therefore share the same sampling inputs.
 
 ## Output contract and failures
 

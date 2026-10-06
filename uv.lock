@@ -1354,6 +1354,19 @@ analysis = [
 dev = [
     { name = "pytest", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
+test = [
+    { name = "beautifulsoup4", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "feedparser", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "lxml", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "numpy", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "pandas", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "pyarrow", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "pytest", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "requests", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "scipy", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "tqdm", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "zstandard", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+]
 
 [package.metadata]
 requires-dist = [
@@ -1378,6 +1391,19 @@ analysis = [
     { name = "scipy", specifier = ">=1.14" },
 ]
 dev = [{ name = "pytest", specifier = ">=8" }]
+test = [
+    { name = "beautifulsoup4", specifier = ">=4.13.4" },
+    { name = "feedparser", specifier = ">=6.0.11" },
+    { name = "lxml", specifier = ">=6.1.2" },
+    { name = "numpy", specifier = ">=2.0" },
+    { name = "pandas", specifier = ">=2.2" },
+    { name = "pyarrow", specifier = ">=17" },
+    { name = "pytest", specifier = ">=8" },
+    { name = "requests", specifier = ">=2.32.4" },
+    { name = "scipy", specifier = ">=1.14" },
+    { name = "tqdm", specifier = ">=4.67.1" },
+    { name = "zstandard", specifier = ">=0.23.0" },
+]
 
 [[package]]
 name = "pooch"

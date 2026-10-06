@@ -31,7 +31,9 @@ def load() -> pd.DataFrame:
     df = load_canonical(PARSED)
     df["captured_at"] = pd.to_datetime(df["captured_at"], utc=True)
     df["date"] = df["captured_at"].dt.date
-    df["month"] = df["captured_at"].dt.to_period("M").astype(str)
+    # Capture days and months are UTC; remove the timezone explicitly only
+    # after normalization so monthly grouping preserves those boundaries.
+    df["month"] = df["captured_at"].dt.tz_localize(None).dt.to_period("M").astype(str)
     if "archive" not in df:
         df["archive"] = "wayback"
     df["archive"] = df["archive"].fillna("wayback")

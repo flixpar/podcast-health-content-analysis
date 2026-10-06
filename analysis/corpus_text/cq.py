@@ -2,8 +2,8 @@
 """Keyword search over the flattened podcast transcript corpus.
 
 Corpus: $CORPUS_TEXT_DIR/shard_NN.tsv (default local/corpus-text), one transcript segment
-per line: `episode_id<TAB>segment_index<TAB>text`. Patterns are ripgrep (Rust)
-regexes matched case-insensitively against the segment text.
+per line: `episode_id<TAB>segment_index<TAB>text`. Patterns use regex syntax
+shared by Python and ripgrep, matched case-insensitively against segment text.
 
   cq.py count  'pattern'                  # segments, episodes, podcasts; top podcasts
   cq.py sample 'pattern' [-n 12] [--seed 1] [--ctx 1] [--podcast 'regex'] [--width 500]
@@ -11,6 +11,7 @@ regexes matched case-insensitively against the segment text.
   cq.py cooc 'pattern A' 'pattern B'      # episodes matching both, with a sample
 """
 import argparse
+import json
 import random
 import re
 import subprocess
@@ -23,39 +24,79 @@ import os
 # Generated shards are ignored; CORPUS_TEXT_DIR can select an external volume.
 REPO = Path(__file__).resolve().parents[2]
 ROOT = Path(os.environ.get("CORPUS_TEXT_DIR", str(REPO / "local" / "corpus-text")))
-SHARDS = sorted(str(p) for p in ROOT.glob("shard_*.tsv"))
 _meta = None
 
 
 def meta():
     global _meta
     if _meta is None:
-        _meta = {}
+        rows = {}
         with open(ROOT / "episodes.tsv", encoding="utf-8") as f:
-            next(f)
+            header = f.readline().rstrip("\n")
+            if header != "episode_id\tpodcast_id\tpodcast\tdate\tepisode_title":
+                raise CorpusQueryError("Invalid corpus metadata header; rebuild the corpus")
             for line in f:
                 parts = line.rstrip("\n").split("\t")
-                if len(parts) >= 5:
-                    _meta[int(parts[0])] = (parts[2], parts[3], parts[4])
+                if len(parts) != 5:
+                    raise CorpusQueryError("Malformed corpus metadata row; rebuild the corpus")
+                rows[int(parts[0])] = (parts[2], parts[3], parts[4])
+        _meta = rows
     return _meta
 
 
-def matches(pattern, files=SHARDS):
+class CorpusQueryError(RuntimeError):
+    pass
+
+
+def corpus_files():
+    """Reject failed builds and damaged corpora before returning search inputs."""
+    manifest_path = ROOT / "manifest.json"
+    try:
+        manifest = json.loads(manifest_path.read_text())
+    except (OSError, ValueError) as exc:
+        raise CorpusQueryError(f"Cannot read completion manifest {manifest_path}; rebuild the corpus") from exc
+    if not isinstance(manifest, dict) or manifest.get("schema_version") != "corpus-text-v1":
+        raise CorpusQueryError("Unsupported corpus manifest; rebuild the corpus")
+    if manifest.get("complete") is not True:
+        raise CorpusQueryError("Corpus build is incomplete; select a successfully published corpus")
+    # v1 assigns episode IDs modulo 64, including context lookups below.
+    if type(manifest.get("shards")) is not int or manifest["shards"] != 64:
+        raise CorpusQueryError("Unsupported corpus shard count; corpus-text-v1 requires 64 shards")
+    shards = [ROOT / f"shard_{i:02d}.tsv" for i in range(manifest["shards"])]
+    missing = [path.name for path in [ROOT / "episodes.tsv", *shards] if not path.is_file()]
+    if missing:
+        raise CorpusQueryError(f"Incomplete corpus files in {ROOT}: {', '.join(missing)}; rebuild the corpus")
+    return [str(path) for path in shards]
+
+
+def matches(pattern, files=None):
     # ripgrep finds candidate lines fast; the text column is re-checked here so
     # a pattern can never match an episode id or segment number.
-    try:
-        check = re.compile(pattern, re.I)
-    except re.error:
-        check = None
+    files = corpus_files() if files is None else files
+    if not files:
+        raise CorpusQueryError(f"No corpus shards in {ROOT}; run corpus_text/build.py first")
+    check = re.compile(pattern, re.I)
+    # Anchor to segment text rather than its TSV episode ID. Expressions with
+    # anchors bypass the prefilter and are checked against text below.
+    prefilter = "." if "^" in pattern else pattern
     proc = subprocess.Popen(
-        ["rg", "-i", "--no-filename", "--no-line-number", "-e", pattern, *files],
+        ["rg", "-i", "--no-filename", "--no-line-number", "-e", prefilter, *files],
         stdout=subprocess.PIPE, text=True, errors="replace",
     )
-    for line in proc.stdout:
-        parts = line.rstrip("\n").split("\t", 2)
-        if len(parts) == 3 and (check is None or check.search(parts[2])):
-            yield int(parts[0]), int(parts[1]), parts[2]
-    proc.wait()
+    try:
+        for line in proc.stdout:
+            parts = line.rstrip("\n").split("\t", 2)
+            if len(parts) != 3:
+                raise CorpusQueryError("Malformed corpus shard row; rebuild the corpus")
+            if check.search(parts[2]):
+                yield int(parts[0]), int(parts[1]), parts[2]
+        if proc.wait() not in (0, 1):
+            raise CorpusQueryError("ripgrep search failed; check the pattern and corpus paths")
+    finally:
+        proc.stdout.close()
+        if proc.poll() is None:
+            proc.terminate()
+        proc.wait()
 
 
 def snippet(text, pattern, width):
@@ -67,8 +108,12 @@ def snippet(text, pattern, width):
 
 
 def segments(ep, lo, hi):
+    corpus_files()
     shard = ROOT / f"shard_{ep % 64:02d}.tsv"
-    out = subprocess.run(["rg", "--no-filename", "--no-line-number", f"^{ep}\t", str(shard)], capture_output=True, text=True).stdout
+    result = subprocess.run(["rg", "--no-filename", "--no-line-number", f"^{ep}\t", str(shard)], capture_output=True, text=True)
+    if result.returncode not in (0, 1):
+        raise CorpusQueryError(f"Cannot read corpus shard {shard}: {result.stderr.strip()}")
+    out = result.stdout
     rows = []
     for line in out.splitlines():
         e, s, t = line.split("\t", 2)
@@ -86,7 +131,7 @@ def cmd_count(a):
         eps[ep] += 1
     for ep, n in eps.items():
         pods[m.get(ep, ("?",))[0]] += 1
-    print(f"segments {segs}  episodes {len(eps)}  podcasts {len(pods)}  (corpus: ~145,600 transcribed episodes)")
+    print(f"segments {segs}  episodes {len(eps)}  podcasts {len(pods)}")
     for name, n in pods.most_common(a.top):
         print(f"  {n:6d} eps  {name}")
 
@@ -146,7 +191,11 @@ def main():
     x = sub.add_parser("ctx"); x.add_argument("episode", type=int); x.add_argument("segment", type=int); x.add_argument("-k", type=int, default=3); x.set_defaults(f=cmd_ctx)
     o = sub.add_parser("cooc"); o.add_argument("a"); o.add_argument("b"); o.set_defaults(f=cmd_cooc)
     a = p.parse_args()
-    a.f(a)
+    try:
+        corpus_files()
+        a.f(a)
+    except (CorpusQueryError, OSError, ValueError, re.error) as exc:
+        p.exit(2, f"corpus query: {exc}; see analysis/corpus_text/README.md\n")
 
 
 if __name__ == "__main__":

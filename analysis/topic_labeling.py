@@ -93,7 +93,7 @@ VERIFICATION_PROMPT_VERSION = "evidence-corpus-verification-v3"
 EVIDENCE_CORPUS_MANIFEST_VERSION = "evidence-corpus-validation-v1"
 DEFAULT_TOPICS = Path("docs/original/topics.md")
 DEFAULT_TRANSCRIPTS = Path("downloader/data/transcripts")
-DEFAULT_OUTPUT = Path("analysis/output/topic-labeling")
+DEFAULT_OUTPUT = Path("local/topic-labeling")
 DEFAULT_API_BASE = "http://127.0.0.1:8000/v1"
 # Which OpenAI-compatible API the endpoint speaks. The two carry the same
 # request in different shapes; see ApiFlavor for what actually differs. Not a
@@ -230,7 +230,7 @@ DEFAULT_VALIDATION = "strict"
 # annotators labeled from. An earlier hand-written rubric paraphrased it and
 # left out the claim_type and product_type value lists, and on the benchmark's
 # dev split the codebook scored topic F1 +0.05 and claim recall +0.08 higher at
-# the same token cost (docs/topic-labeling-method.md). Its sha256 is part of the
+# the same token cost in the historical flat benchmark. Its sha256 is part of the
 # label fingerprint, so editing the codebook starts a new run rather than
 # silently changing the prompt under a resumed one.
 CODEBOOK_PATH = Path(__file__).resolve().parent / "benchmark" / "codebook.md"
