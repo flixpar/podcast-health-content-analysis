@@ -6,7 +6,7 @@ those into a window result under any policy without a request. So the
 thresholds that decide spans are swept here against the benchmark's own scorer,
 for free, instead of by re-labeling:
 
-    .venv/bin/python -m analysis.benchmark.typesafe_tune benchmark/runs/ts-v1
+    BENCHMARK_DIR=benchmark .venv/bin/python -m analysis.benchmark.typesafe_tune local/benchmark/runs/ts-v1
 
 Only the dev split is read. Only composition keys can be swept: the ones that
 decide which questions are asked (passage sizes, the fan-out and gate
@@ -16,7 +16,7 @@ moves. Each axis is swept on its own, which is exact: a detection's axis never
 changes another axis's score, and claims are scored on spans and quotes.
 
 The shipped defaults in ``typesafe_labeling.Policy`` came from this sweep over
-an earlier dev run. Re-run on ``benchmark/runs/ts-v1`` it picks the same values
+an earlier dev run. Re-run on ``local/benchmark/runs/ts-v1`` it picks the same values
 except ``product_name_threshold`` (0.5 over the shipped 0.7, F1 0.587 against
 0.575, inside the noise); that run then scored them on the test split
 (docs/typesafe-labeling.md).
@@ -121,6 +121,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     taxonomy = load_benchmark_taxonomy(TAXONOMY_PATH)
+    tl.require_label_taxonomy("typesafe", taxonomy)
     gold = refs_mod.load_gold(GOLD_PATH)
     items = [
         item for item in items_mod.load_items(ITEMS_PATH)

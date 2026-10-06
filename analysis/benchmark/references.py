@@ -1,7 +1,8 @@
 """Reference annotations and their aggregation into a soft gold.
 
-``benchmark/annotators.json`` registers annotators (model, method, authority).
-``benchmark/references/<item_id>/<annotator>.json`` holds one validated window
+``benchmark/annotators.json`` seeds annotator metadata (model, method, authority);
+runtime registration writes ``local/benchmark/annotators.json``.
+``local/benchmark/references/<item_id>/<annotator>.json`` holds one validated window
 result per annotator per item, plus the pre-repair ``raw`` output when the
 annotator was an agent that repaired its own validator errors.
 
@@ -25,6 +26,7 @@ from analysis.benchmark import (
     ADJUDICATION_PATH,
     AGREEMENT_PATH,
     ANNOTATORS_PATH,
+    ANNOTATOR_SPECS_PATH,
     BENCHMARK_VERSION,
     GOLD_PATH,
     REFERENCES_DIR,
@@ -66,6 +68,9 @@ def validate_result(result: dict[str, Any], window: dict[str, Any], axes: dict[s
     """
     if not isinstance(result, dict):
         raise tl.TopicLabelingError("result must be an object", kind="schema_shape")
+    if tl.has_v7_claim_fields(axes):
+        # v7 claims carry relevance in the pipeline contract itself.
+        return tl.validate_window_result(result, window, axes)
     claims = result.get("verification_candidates")
     lifted: list[dict[str, Any]] = []
     stripped_claims = []
@@ -94,6 +99,9 @@ def validate_result(result: dict[str, Any], window: dict[str, Any], axes: dict[s
 
 
 def load_annotators(path: Path = ANNOTATORS_PATH) -> dict[str, dict[str, Any]]:
+    path = Path(path)
+    if path == ANNOTATORS_PATH and not path.exists():
+        path = ANNOTATOR_SPECS_PATH
     if not Path(path).exists():
         return {}
     return json.loads(Path(path).read_text(encoding="utf-8"))
@@ -168,8 +176,8 @@ def repair_delta(raw: dict[str, Any] | None, final: dict[str, Any]) -> dict[str,
 # --------------------------------------------------------------------------
 
 
-def _atoms_for(reference: dict[str, Any], index: WindowIndex) -> list[Atom]:
-    return explode(reference["result"], index)
+def _atoms_for(reference: dict[str, Any], index: WindowIndex, aliases: dict[str, str] | None = None) -> list[Atom]:
+    return explode(reference["result"], index, aliases)
 
 
 def cluster_atoms(
@@ -236,10 +244,11 @@ def gold_for_item(
     item: dict[str, Any],
     references: dict[str, dict[str, Any]],
     annotators: dict[str, dict[str, Any]],
+    aliases: dict[str, str] | None = None,
 ) -> list[GoldAtom]:
     index = WindowIndex(item)
     per_annotator = {
-        annotator_id: _atoms_for(reference, index) for annotator_id, reference in references.items()
+        annotator_id: _atoms_for(reference, index, aliases) for annotator_id, reference in references.items()
     }
     clusters = cluster_atoms(per_annotator)
     total_weight = sum(float(annotators.get(a, {}).get("authority", 1.0)) for a in per_annotator)
@@ -403,12 +412,18 @@ def aggregate(
     annotators: dict[str, dict[str, Any]],
     overlay: dict[tuple[str, str], dict[str, Any]],
     min_annotators: int = MIN_ANNOTATORS,
+    aliases: dict[str, str] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Gold records for every item with enough references, plus the agreement report.
 
     An item labeled by fewer than ``min_annotators`` yields no gold: with one
     annotator every atom would count as agreed, which is the opposite of what
     the tiers mean. Such items are counted in the report instead.
+
+    ``aliases`` builds the gold at a coarser level of the topic tree: the same
+    references, each topic label mapped to its parent or domain before
+    clustering. Atoms keep the label the annotator chose as their identity, so
+    adjudication verdicts made at the subtopic level still apply.
     """
     records: list[dict[str, Any]] = []
     gold_items: list[str] = []
@@ -427,7 +442,7 @@ def aggregate(
         if len(refs) < min_annotators:
             skipped_items += 1
             continue
-        golds = apply_overlay(item["item_id"], gold_for_item(item, refs, annotators), overlay)
+        golds = apply_overlay(item["item_id"], gold_for_item(item, refs, annotators, aliases), overlay)
         gold_items.append(item["item_id"])
         for gold in golds:
             tiers[gold.tier] += 1
@@ -435,7 +450,7 @@ def aggregate(
         for attribute, units in attribute_units(golds).items():
             alpha_units[attribute].extend(units)
         index = WindowIndex(item)
-        atoms = {a: _atoms_for(r, index) for a, r in refs.items()}
+        atoms = {a: _atoms_for(r, index, aliases) for a, r in refs.items()}
         for annotator_id, ref in refs.items():
             per_annotator_atoms[annotator_id] += len(atoms[annotator_id])
             for key, value in repair_delta(ref.get("raw"), ref["result"]).items():
@@ -493,16 +508,23 @@ PLANT_ATTRIBUTES = {
 }
 
 
-def check_plants(items: Sequence[dict[str, Any]], records: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
+def check_plants(
+    items: Sequence[dict[str, Any]],
+    records: Sequence[dict[str, Any]],
+    aliases: dict[str, str] | None = None,
+) -> list[dict[str, Any]]:
     """Compare each synthetic item's planted annotations with its gold.
 
     A plant is *found* when a gold atom of the same kind (and label, for
-    detections) overlaps its span; it is *supported* when that atom is
+    detections, compared through ``aliases``) overlaps its span. Under the
+    v7 tree the plants name parent topics and ``aliases`` maps each gold
+    subtopic to its parent; it is *supported* when that atom is
     ``required``; each planted attribute is checked against the plurality
     vote. A plant that is missing or contradicted means either the passage is
     ambiguous or the codebook reading behind the plant is not shared, and the
     item should be fixed or dropped before it is trusted.
     """
+    aliases = aliases or {}
     by_item: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for record in records:
         by_item[record["item_id"]].append(record)
@@ -521,7 +543,7 @@ def check_plants(items: Sequence[dict[str, Any]], records: Sequence[dict[str, An
                     candidates = [
                         g for g in golds
                         if g["kind"] == kind
-                        and (kind != "detection" or g.get("label") == label)
+                        and (kind != "detection" or aliases.get(g.get("label"), g.get("label")) == aliases.get(label, label))
                         and g["envelope_index"][0] <= end and start <= g["envelope_index"][1]
                     ]
                     best = max(candidates, key=lambda g: (g["tier"] == "required", g["support"]), default=None)
@@ -620,6 +642,9 @@ def adjacency_set(table: Sequence[dict[str, Any]]) -> set[tuple[str, str]]:
 
 
 HEADLINE_STRATA = ("health_dense", "mixed", "null", "ad_read", "discourse")
+# Keyword-retrieved or constructed items: reported per stratum, never pooled
+# into the headline, because how they were chosen biases every rate.
+SEPARATE_STRATA = ("rare_label", "narrative", "synthetic", "contrast")
 
 
 def leave_one_out(
@@ -645,7 +670,7 @@ def leave_one_out(
     out: dict[str, Any] = {}
     for held in ids:
         rest = {iid: {a: r for a, r in refs.items() if a != held} for iid, refs in references.items()}
-        records, _ = aggregate(head, rest, annotators, overlay)
+        records, _ = aggregate(head, rest, annotators, overlay, aliases=aliases)
         gold: dict[str, list[GoldAtom]] = defaultdict(list)
         for record in records:
             gold[record["item_id"]].append(gold_from_record(record))

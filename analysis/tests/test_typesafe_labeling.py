@@ -1,11 +1,42 @@
 import argparse
 import json
 import sqlite3
+from pathlib import Path
 
 import pytest
 
 from analysis import topic_labeling as labeling
 from analysis import typesafe_labeling as typesafe
+from analysis.benchmark import runner
+
+
+@pytest.mark.parametrize("version", ["v7", "v8"])
+def test_hierarchical_inputs_are_rejected_before_any_typesafe_requests(tmp_path, monkeypatch, version):
+    granular = labeling.compile_taxonomy(Path(__file__).resolve().parents[2] / "taxonomy/health-v7.md")
+    granular["format"] = f"hierarchical-{version}"
+    jev = FakeJev()
+    with pytest.raises(typesafe.TypeSafeMethodError, match="legacy flat"):
+        typesafe.label_window(window(), granular, typesafe.Policy(), jev)
+    assert jev.requests == []
+    with pytest.raises(typesafe.TypeSafeMethodError, match="legacy flat"):
+        typesafe.compose_result(window(), granular, {}, typesafe.Policy())
+
+    def no_client(*args):
+        pytest.fail("hierarchical rejection must precede client creation")
+
+    monkeypatch.setattr(labeling, "build_label_client", no_client)
+    monkeypatch.setattr(labeling, "resolve_api_key", lambda args: "test-key")
+    taxonomy_path = tmp_path / "taxonomy.json"
+    labeling.write_json(taxonomy_path, granular)
+    args = argparse.Namespace(api="typesafe", taxonomy=taxonomy_path, output_dir=tmp_path,
+                              concurrency=1, attempts=1, max_output_tokens=100, timeout=10)
+    with pytest.raises(labeling.TopicLabelingError, match="legacy flat") as failed:
+        labeling.run_label(args)
+    assert failed.value.kind == "unsupported_taxonomy"
+    with pytest.raises(labeling.TopicLabelingError, match="legacy flat"):
+        runner.run_benchmark([], granular, args, "unsupported", runs_dir=tmp_path)
+    assert not (tmp_path / "labels.sqlite").exists()
+    assert not (tmp_path / "unsupported").exists()
 
 
 def taxonomy():

@@ -27,10 +27,18 @@ from analysis.benchmark.matching import (
     explode,
     near_miss_class,
 )
-from analysis.benchmark.references import VOTED_ATTRIBUTES, pairwise_f1, _atoms_for
+from analysis.benchmark.references import SEPARATE_STRATA, VOTED_ATTRIBUTES, pairwise_f1, _atoms_for
 
 CREDIT_TIERS = ("required", "acceptable")
-GROUPS = ("detection:topic", "detection:frame", "detection:evidence", "claim", "product")
+GROUPS = (
+    "detection:topic",
+    "detection:narrative",
+    "detection:frame",
+    "detection:evidence",
+    "detection:population",
+    "claim",
+    "product",
+)
 
 
 def group_of(atom: Atom | GoldAtom) -> str:
@@ -391,7 +399,7 @@ def score_run(
         if item["item_id"] not in gold:
             continue
         rows.append(score_item(item, results.get(item["window_id"]), gold[item["item_id"]], aliases, adjacency))
-    headline_rows = [r for r in rows if r["stratum"] not in ("rare_label", "synthetic", "contrast")]
+    headline_rows = [r for r in rows if r["stratum"] not in SEPARATE_STRATA]
     report = {
         "items_scored": len(rows),
         "headline": summarize(headline_rows),
@@ -432,7 +440,7 @@ def agreement_with_annotators(
         index = WindowIndex(item)
         candidate = explode(result, index, aliases)
         for annotator_id, ref in refs.items():
-            for group, counts in pairwise_f1(_atoms_for(ref, index), candidate).items():
+            for group, counts in pairwise_f1(_atoms_for(ref, index, aliases), candidate).items():
                 for field in ("tp", "fp", "fn"):
                     totals[annotator_id][group][field] += counts[field]
     return {

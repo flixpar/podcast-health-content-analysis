@@ -52,6 +52,10 @@ class Atom:
     source_index: int = -1
     # multi-label bookkeeping for claims: label sets by axis
     labels: dict[str, list[str]] = field(default_factory=dict)
+    # A detection scored at a coarser level of the topic tree keeps the label
+    # the annotator actually chose, so its identity -- and any adjudication
+    # verdict keyed by it -- is the same at every level.
+    origin_label: str | None = None
 
     @property
     def length(self) -> int:
@@ -67,7 +71,7 @@ class Atom:
     def key(self) -> tuple[Any, ...]:
         """A stable identity used for diffs and repeat agreement."""
         if self.kind == "detection":
-            return (self.kind, self.axis, self.label, self.start, self.end)
+            return (self.kind, self.axis, self.origin_label or self.label, self.start, self.end)
         if self.kind == "claim":
             return (self.kind, self.start, self.end, tl._normalized_quote(self.quote))
         return (self.kind, self.start, self.end, self.product_key)
@@ -118,7 +122,10 @@ def explode(result: dict[str, Any], index: WindowIndex, aliases: dict[str, str] 
     for position, detection in enumerate(result.get("detections", [])):
         start, end = index.span(detection["start_unit_id"], detection["end_unit_id"])
         quote_range = index.locate(detection.get("evidence_quote", ""), start, end)
-        for label in sorted({aliases.get(l, l) for l in detection["label_ids"]}):
+        origins: dict[str, str] = {}
+        for label in sorted(detection["label_ids"]):
+            origins.setdefault(aliases.get(label, label), label)
+        for label in sorted(origins):
             atoms.append(
                 Atom(
                     kind="detection",
@@ -134,6 +141,7 @@ def explode(result: dict[str, Any], index: WindowIndex, aliases: dict[str, str] 
                     quote_range=quote_range,
                     confidence=float(detection.get("confidence", 0.0)),
                     source_index=position,
+                    origin_label=origins[label] if origins[label] != label else None,
                 )
             )
     for position, claim in enumerate(result.get("verification_candidates", [])):
@@ -156,6 +164,7 @@ def explode(result: dict[str, Any], index: WindowIndex, aliases: dict[str, str] 
                 source_index=position,
                 labels={
                     "topic": sorted({aliases.get(l, l) for l in claim.get("topic_ids", [])}),
+                    "narrative": sorted(claim.get("narrative_ids", [])),
                     "frame": sorted(claim.get("frame_ids", [])),
                     "evidence": sorted(claim.get("evidence_signal_ids", [])),
                 },

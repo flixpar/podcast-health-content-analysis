@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shlex
 import sys
 from collections import Counter
 from pathlib import Path
@@ -20,6 +21,10 @@ from analysis.benchmark import (
     ITEMS_PATH,
     MANIFEST_PATH,
     POOL_DIR,
+    DATA_DIR,
+    DATA_DIR_ENV,
+    OUTPUT_DIR_ENV,
+    SPEC_DIR,
     REFERENCES_DIR,
     REPO_ROOT,
     RUNS_DIR,
@@ -35,11 +40,12 @@ from analysis.benchmark import tasks as tasks_mod
 from analysis.benchmark.taxonomy import (
     alias_map,
     compile_benchmark_taxonomy,
+    hierarchy_aliases,
     label_axes,
     load_benchmark_taxonomy,
+    scoring_levels,
 )
 
-VENV_PYTHON = REPO_ROOT / ".venv" / "bin" / "python"
 
 
 def _print(value: Any) -> None:
@@ -48,6 +54,11 @@ def _print(value: Any) -> None:
 
 def _items_by_window(items: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
     return {item["window_id"]: item for item in items}
+
+
+def level_gold_path(gold_path: Path, level: str) -> Path:
+    """Where the gold for a coarser topic level lives: ``gold-parent.jsonl`` beside ``gold.jsonl``."""
+    return gold_path if level == "subtopic" else gold_path.with_name(f"{gold_path.stem}-{level}{gold_path.suffix}")
 
 
 # --------------------------------------------------------------------------
@@ -248,6 +259,35 @@ def cmd_validate_result(args: argparse.Namespace) -> int:
     return 0 if bad == 0 else 2
 
 
+def cmd_assemble_result(args: argparse.Namespace) -> int:
+    """Combine a bundle's per-window result files, then validate the whole.
+
+    A v7 window result is long, and an agent writing several in one file runs
+    into its output limit; one file per window under ``windows/`` avoids it.
+    The first assembly that covers every window in the bundle is kept as
+    ``results.raw.json`` (the annotator's unrepaired answer); every assembly
+    rewrites ``results.json``, so repairs are made in the per-window files.
+    """
+    bundle = args.bundle
+    bundle_items = json.loads((bundle / "items.json").read_text(encoding="utf-8"))
+    expected = [item["window_id"] for item in bundle_items]
+    results: list[Any] = []
+    for window_id in expected:
+        path = bundle / "windows" / f"{window_id}.json"
+        if path.exists():
+            try:
+                results.append(json.loads(path.read_text(encoding="utf-8")))
+            except json.JSONDecodeError as exc:
+                print(f"{window_id}: REJECTED malformed_json: {path.name}: {exc}")
+                return 2
+    raw = bundle / "results.raw.json"
+    if len(results) == len(expected) and not raw.exists():
+        raw.write_text(json.dumps(results, indent=1, ensure_ascii=False), encoding="utf-8")
+    (bundle / "results.json").write_text(json.dumps(results, indent=1, ensure_ascii=False), encoding="utf-8")
+    args.results = bundle / "results.json"
+    return cmd_validate_result(args)
+
+
 def cmd_reference_tasks(args: argparse.Namespace) -> int:
     config = items_mod.load_config(args.config)
     taxonomy = load_benchmark_taxonomy(args.taxonomy)
@@ -259,12 +299,21 @@ def cmd_reference_tasks(args: argparse.Namespace) -> int:
         items = [i for i in items if i["stratum"] in args.strata]
     else:
         items = [i for i in items if i.get("source") != "contrast"]
+    if args.item_ids:
+        wanted = set(args.item_ids)
+        items = [i for i in items if i["item_id"] in wanted]
     if args.only_missing:
         existing = refs_mod.load_references()
         items = [i for i in items if args.annotator not in existing.get(i["item_id"], {})]
+    # The benchmark directory travels with the command: without it the
+    # validator would check a v2 bundle against v1's taxonomy.
     validate_command = (
-        f"cd {REPO_ROOT} && {VENV_PYTHON} -m analysis.benchmark validate-result "
-        f"<bundle_dir>/results.json --bundle <bundle_dir>"
+        f"cd {shlex.quote(str(REPO_ROOT))} && "
+        f"{DATA_DIR_ENV}={shlex.quote(str(SPEC_DIR))} "
+        f"{OUTPUT_DIR_ENV}={shlex.quote(str(DATA_DIR))} "
+        f"{shlex.quote(sys.executable)} -m analysis.benchmark "
+        f"--taxonomy {shlex.quote(str(args.taxonomy.resolve()))} assemble-result "
+        f"--bundle <bundle_dir>"
     )
     seed = int(config["benchmark"]["seed"]) + sum(ord(c) for c in args.annotator)
     run_dir = tasks_mod.reference_bundles(
@@ -273,7 +322,7 @@ def cmd_reference_tasks(args: argparse.Namespace) -> int:
     # Substitute the real bundle path into each bundle's instructions.
     for bundle_dir in sorted(run_dir.glob("bundle_*")):
         path = bundle_dir / "INSTRUCTIONS.md"
-        path.write_text(path.read_text(encoding="utf-8").replace("<bundle_dir>", str(bundle_dir)), encoding="utf-8")
+        path.write_text(path.read_text(encoding="utf-8").replace("<bundle_dir>", shlex.quote(str(bundle_dir))), encoding="utf-8")
     manifest = json.loads((run_dir / "manifest.json").read_text())
     _print({"run_dir": str(run_dir), "bundles": len(manifest["bundles"]), "items": len(items)})
     return 0
@@ -326,7 +375,19 @@ def cmd_aggregate(args: argparse.Namespace) -> int:
     for record in records:
         gold_atoms.setdefault(record["item_id"], []).append(refs_mod.gold_from_record(record))
     agreement["contrast_validity"] = annotator_contrast_validity(items, references, aliases, gold_atoms)
-    plants = refs_mod.check_plants(items, records)
+    # Coarser topic levels: the same references re-clustered with topics
+    # mapped up the tree, written beside the subtopic gold.
+    agreement["levels"] = {}
+    for level in scoring_levels(taxonomy)[1:]:
+        level_aliases = hierarchy_aliases(taxonomy, level)
+        level_records, level_agreement = refs_mod.aggregate(items, references, annotators, overlay, aliases=level_aliases)
+        tl.write_jsonl_atomic(level_gold_path(args.gold, level), level_records)
+        agreement["levels"][level] = {
+            "tiers": level_agreement["tiers"],
+            "pairwise": level_agreement["pairwise"],
+            "leave_one_out": refs_mod.leave_one_out(items, references, annotators, overlay, level_aliases),
+        }
+    plants = refs_mod.check_plants(items, records, hierarchy_aliases(taxonomy, "parent") if tl.is_hierarchical(taxonomy) else None)
     agreement["synthetic_plants"] = {
         "checked": len(plants),
         "ok": sum(1 for p in plants if p["ok"]),
@@ -359,6 +420,12 @@ def cmd_aggregate(args: argparse.Namespace) -> int:
         "synthetic_plants": {k: (v if isinstance(v, int) else len(v)) for k, v in agreement["synthetic_plants"].items()},
         "label_adjacency_pairs": len(agreement["label_adjacency"]),
         "leave_one_out_topic_f1": {a: (v["groups"].get("detection:topic") or {}).get("f1_strict") for a, v in agreement["leave_one_out"].items()},
+        **{
+            f"leave_one_out_topic_f1_{level}": {
+                a: (v["groups"].get("detection:topic") or {}).get("f1_strict") for a, v in entry["leave_one_out"].items()
+            }
+            for level, entry in agreement["levels"].items()
+        },
     }
     _print(summary)
     for plant in agreement["synthetic_plants"]["missing"]:
@@ -419,7 +486,46 @@ def cmd_run(args: argparse.Namespace) -> int:
     return 0 if not manifest.get("stopped_by_usage_limit") else 2
 
 
-def _score(run_dir: Path, items, gold, taxonomy, aliases, references, hide_test: bool, usage_limits: Path | None) -> dict[str, Any]:
+def _level_scores(run, items, taxonomy, aliases, references, gold_path: Path, hide_test: bool, agreement: dict[str, Any]) -> dict[str, Any]:
+    """Topic detection at each coarser level of the tree, against that level's gold.
+
+    Only the topic group changes between levels, so only it is kept, with the
+    level's own leave-one-out ceiling and reference pairwise agreement beside it.
+    """
+    out: dict[str, Any] = {}
+    for level in scoring_levels(taxonomy)[1:]:
+        path = level_gold_path(gold_path, level)
+        if not path.exists():
+            continue
+        level_gold = refs_mod.load_gold(path)
+        level_aliases = {**aliases, **hierarchy_aliases(taxonomy, level)}
+        reports = [scoring_mod.score_run(items, results, level_gold, level_aliases, hide_test) for results in run["repeats"]]
+        mean = _mean_reports(reports)
+        entry = agreement.get("levels", {}).get(level, {})
+        out[level] = {
+            "headline": (mean.get("headline", {}).get("groups") or {}).get("detection:topic"),
+            "by_split": {
+                split: ((mean.get("by_split", {}).get(split) or {}).get("groups") or {}).get("detection:topic")
+                for split in ("dev", "test")
+            },
+            "agreement_with_annotators": {
+                annotator: groups.get("detection:topic")
+                for annotator, groups in scoring_mod.agreement_with_annotators(
+                    items, run["repeats"][0], references, level_aliases
+                ).items()
+            } if run["repeats"] else {},
+            "leave_one_out": {
+                annotator: (v["groups"].get("detection:topic") or {})
+                for annotator, v in entry.get("leave_one_out", {}).items()
+            },
+            "reference_pairwise": {
+                pair: groups.get("detection:topic") for pair, groups in entry.get("pairwise", {}).items()
+            },
+        }
+    return out
+
+
+def _score(run_dir: Path, items, gold, taxonomy, aliases, references, hide_test: bool, usage_limits: Path | None, gold_path: Path = GOLD_PATH) -> dict[str, Any]:
     run = runner_mod.load_run(run_dir)
     manifest = run["manifest"]
     repeats = run["repeats"]
@@ -446,6 +552,7 @@ def _score(run_dir: Path, items, gold, taxonomy, aliases, references, hide_test:
         "label_adjacency": agreement.get("label_adjacency", []),
         "ceiling": ceiling,
         "contrast": contrast,
+        "levels": _level_scores(run, items, taxonomy, aliases, references, gold_path, hide_test, agreement),
         "usage": runner_mod.usage_summary(run["attempts"], prices),
     }
 
@@ -495,7 +602,7 @@ def cmd_score(args: argparse.Namespace) -> int:
     gold = refs_mod.load_gold(args.gold)
     references = refs_mod.load_references(args.references)
     aliases = alias_map(taxonomy, args.alias)
-    score = _score(args.run_dir, items, gold, taxonomy, aliases, references, not args.show_test, args.usage_limits)
+    score = _score(args.run_dir, items, gold, taxonomy, aliases, references, not args.show_test, args.usage_limits, args.gold)
     tl.write_json(args.run_dir / "score.json", score)
     (args.run_dir / "scorecard.md").write_text(report_mod.scorecard(score), encoding="utf-8")
     print(report_mod.scorecard(score))
@@ -507,8 +614,11 @@ def cmd_compare(args: argparse.Namespace) -> int:
 
     taxonomy = load_benchmark_taxonomy(args.taxonomy)
     items = items_mod.load_items(args.items)
-    gold = refs_mod.load_gold(args.gold)
-    comparison = compare_runs(args.run_a, args.run_b, items, gold, alias_map(taxonomy, args.alias), args.iterations)
+    # At a coarser topic level, compare against that level's gold with topics
+    # mapped up the tree on the candidate side too.
+    gold = refs_mod.load_gold(level_gold_path(args.gold, args.level))
+    aliases = {**alias_map(taxonomy, args.alias), **hierarchy_aliases(taxonomy, args.level)}
+    comparison = compare_runs(args.run_a, args.run_b, items, gold, aliases, args.iterations)
     text = report_mod.compare_markdown(args.run_a.name, args.run_b.name, comparison)
     out = args.out or (args.run_b / f"compare_{args.run_a.name}.md")
     out.write_text(text, encoding="utf-8")
@@ -586,6 +696,9 @@ def build_parser() -> argparse.ArgumentParser:
     validate.add_argument("results", type=Path)
     validate.add_argument("--bundle", type=Path, required=True)
     validate.set_defaults(func=cmd_validate_result)
+    assemble = sub.add_parser("assemble-result", help="Combine a bundle's windows/*.json into results.json and validate it")
+    assemble.add_argument("--bundle", type=Path, required=True)
+    assemble.set_defaults(func=cmd_assemble_result)
 
     reference = sub.add_parser("reference", help="Reference annotations (task bundles)")
     reference_sub = reference.add_subparsers(dest="reference_command", required=True)
@@ -596,6 +709,7 @@ def build_parser() -> argparse.ArgumentParser:
     rt.add_argument("--null-bundle-size", type=int, default=10)
     rt.add_argument("--strata", nargs="*")
     rt.add_argument("--only-missing", action="store_true")
+    rt.add_argument("--item-ids", nargs="*", help="Only these items (e.g. a pilot)")
     rt.set_defaults(func=cmd_reference_tasks)
     ri = reference_sub.add_parser("ingest")
     ri.add_argument("run_dir", type=Path)
@@ -658,6 +772,7 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("run_b", type=Path)
     compare.add_argument("--gold", type=Path, default=GOLD_PATH)
     compare.add_argument("--alias")
+    compare.add_argument("--level", default="subtopic", choices=("subtopic", "parent", "domain"), help="Topic-tree level to compare at (v2 benchmark)")
     compare.add_argument("--iterations", type=int, default=2000)
     compare.add_argument("--out", type=Path)
     compare.set_defaults(func=cmd_compare)

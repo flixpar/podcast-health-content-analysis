@@ -7,15 +7,17 @@
 #   .venv/bin/python analysis/topic_labeling.py label \
 #       --config analysis/topic-labeling-typesafe.toml --output-dir /tmp/ts-smoke
 #
-# `prepare`, `merge` and `sample` are unchanged and need no config of their own.
+# Use this config for prepare and label so prepare selects the supported flat
+# source. Merge/sample may reuse it for the same output paths.
 # `verify` has no TypeSafe counterpart, so it keeps analysis/topic-labeling.toml.
 # The model, the question set and the policy are the run fingerprint; the
 # decoding keys the generative configs set (reasoning_effort, temperature,
 # max_output_tokens) are not, and are left out.
 
 [paths]
+topics = "docs/original/topics.md"
 transcripts = "downloader/data/transcripts"
-output_dir = "analysis/output/topic-labeling-typesafe"
+output_dir = "local/topic-labeling-typesafe"
 
 [label]
 api = "typesafe"

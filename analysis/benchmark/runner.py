@@ -70,7 +70,18 @@ def label_args(argv: Sequence[str], config: Path | None) -> argparse.Namespace:
 
 
 def build_instructions(taxonomy: dict[str, Any], rubric_file: Path | None) -> tuple[str, str, str]:
-    """(instructions, prompt_version, rubric_sha256) for the run."""
+    """(instructions, prompt_version, rubric_sha256) for the run.
+
+    Under the v7 taxonomy a rubric file replaces only the v7 rubric; the
+    codebook and label tables are appended as in production.
+    """
+    if tl.is_hierarchical(taxonomy):
+        rubric_path = Path(rubric_file) if rubric_file is not None else tl.DEFAULT_V7_RUBRIC
+        instructions = tl.hierarchical_instructions(taxonomy, rubric_path)
+        version = tl.prompt_version(taxonomy, instructions)
+        if rubric_file is not None:
+            version = f"file:{rubric_path.name}:{version.split(':', 1)[1]}"
+        return instructions, version, tl.sha256_bytes(rubric_path.read_bytes())
     if rubric_file is None:
         instructions = tl.taxonomy_instructions(taxonomy)
         version = tl.PROMPT_VERSION
@@ -173,9 +184,10 @@ def run_benchmark(
     notes: str | None = None,
     log: Any = None,
 ) -> dict[str, Any]:
-    """Label every item ``repeats`` times; writes benchmark/runs/<name>/."""
+    """Label every item ``repeats`` times in the selected local runs directory."""
     if args.concurrency < 1 or args.attempts < 1:
         raise tl.TopicLabelingError("concurrency and attempts must both be positive")
+    tl.require_label_taxonomy(getattr(args, "api", "responses"), taxonomy)
     run_dir = Path(runs_dir) / name
     run_dir.mkdir(parents=True, exist_ok=True)
     api_key = tl.resolve_api_key(args)
@@ -196,7 +208,7 @@ def run_benchmark(
         instructions, prompt_version, rubric_sha = build_instructions(taxonomy, rubric_file)
         method = {"prompt_version": prompt_version, "rubric_sha256": rubric_sha, **settings.fingerprint()}
     fingerprint_inputs = {
-        "schema_version": tl.SCHEMA_VERSION,
+        "schema_version": taxonomy["schema_version"],
         "taxonomy_sha256": taxonomy["taxonomy_sha256"],
         "model": model,
         "api": args.api,

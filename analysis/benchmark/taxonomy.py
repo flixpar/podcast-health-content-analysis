@@ -30,26 +30,70 @@ LABEL_ALIASES_V5: dict[str, str] = {
 }
 
 
+# Scoring levels of the v7 topic tree. Gold is built from the subtopics the
+# annotators chose; the coarser levels re-cluster the same references with
+# these alias maps, so "right parent, wrong subtopic" is visible as a number.
+LEVELS = ("subtopic", "parent", "domain")
+
+
+def hierarchy_aliases(taxonomy: dict[str, Any], level: str) -> dict[str, str]:
+    """Topic label -> its label at ``level``; other axes are left alone.
+
+    ``parent`` maps every subtopic to its parent topic (parents map to
+    themselves). ``domain`` maps every topic label to a pseudo-label
+    ``topic:@<domain_id>`` on the same axis, so a domain match is still a
+    same-axis topic match for the scorer.
+    """
+    if level == "subtopic":
+        return {}
+    if level not in LEVELS:
+        raise tl.TopicLabelingError(f"unknown scoring level {level!r}; have {LEVELS}")
+    aliases: dict[str, str] = {}
+    for label in taxonomy["labels"]:
+        if label["axis"] != "topic":
+            continue
+        if level == "parent":
+            if label.get("parent"):
+                aliases[label["label_id"]] = label["parent"]
+        else:
+            aliases[label["label_id"]] = f"topic:@{label['domain']}"
+    return aliases
+
+
 def compile_benchmark_taxonomy(topics_path: Path, out_path: Path = TAXONOMY_PATH) -> dict[str, Any]:
     taxonomy = tl.compile_taxonomy(Path(topics_path))
     label_ids = {label["label_id"] for label in taxonomy["labels"]}
-    for source, target in LABEL_ALIASES_V5.items():
-        if source not in label_ids or target not in label_ids:
-            raise tl.TopicLabelingError(f"alias {source} -> {target} names an unknown label")
+    if tl.is_hierarchical(taxonomy):
+        label_aliases = {level: hierarchy_aliases(taxonomy, level) for level in LEVELS[1:]}
+    else:
+        for source, target in LABEL_ALIASES_V5.items():
+            if source not in label_ids or target not in label_ids:
+                raise tl.TopicLabelingError(f"alias {source} -> {target} names an unknown label")
+        label_aliases = {"v5-84": LABEL_ALIASES_V5}
     taxonomy = {
         **taxonomy,
         "benchmark_version": BENCHMARK_VERSION,
-        "label_aliases": {"v5-84": LABEL_ALIASES_V5},
+        "label_aliases": label_aliases,
     }
     tl.write_json(Path(out_path), taxonomy)
     return taxonomy
 
 
 def load_benchmark_taxonomy(path: Path = TAXONOMY_PATH) -> dict[str, Any]:
+    if not Path(path).exists():
+        raise tl.TopicLabelingError(
+            f"{path} is missing; generate the selected benchmark taxonomy with "
+            "python -m analysis.benchmark taxonomy"
+        )
     taxonomy = json.loads(Path(path).read_text(encoding="utf-8"))
-    if taxonomy.get("schema_version") != tl.SCHEMA_VERSION:
+    if taxonomy.get("schema_version") not in tl.SUPPORTED_TAXONOMY_SCHEMAS:
         raise tl.TopicLabelingError(f"{path} has schema {taxonomy.get('schema_version')}")
     return taxonomy
+
+
+def scoring_levels(taxonomy: dict[str, Any]) -> tuple[str, ...]:
+    """The topic levels a benchmark is scored at: all three under v7, one before."""
+    return LEVELS if tl.is_hierarchical(taxonomy) else ("subtopic",)
 
 
 def label_axes(taxonomy: dict[str, Any]) -> dict[str, str]:

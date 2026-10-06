@@ -174,6 +174,20 @@ def _per_axis(topic: float, frame: float, evidence: float) -> dict[str, float]:
     return {"topic": topic, "frame": frame, "evidence": evidence}
 
 
+def require_flat_taxonomy(taxonomy: Mapping[str, Any]) -> None:
+    """The cascade implements the flat topic/frame/evidence claim contract."""
+    axes = {label["axis"] for label in taxonomy["labels"]}
+    if (taxonomy.get("format", "").startswith("hierarchical")
+            or taxonomy.get("schema_version", "topic-labeling-v4") != "topic-labeling-v4"
+            or not axes.issubset({"topic", "frame", "evidence"})):
+        raise TypeSafeMethodError(
+            "TypeSafe supports the legacy flat topic/frame/evidence taxonomy only; "
+            "hierarchical v7/v8 requires the generative labeling pipeline. "
+            "Prepare with --topics docs/original/topics.md or use the flat benchmark spec.",
+            kind="unsupported_taxonomy",
+        )
+
+
 @dataclass(frozen=True)
 class Policy:
     """Every knob of the method. All of it is in the run fingerprint.
@@ -955,6 +969,7 @@ def compose_result(
     span with no stored name judgments yields nothing: an unnamed product is
     not a mention.
     """
+    require_flat_taxonomy(taxonomy)
     units = window["units"]
     names = {label["label_id"]: label["name"] for label in taxonomy["labels"]}
     draft = draft_annotations(window, taxonomy, judgments, policy)
@@ -1056,6 +1071,7 @@ def label_window(
     ask: Ask,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """(result, judgments) for one window. ``judgments`` carries ``usage`` and ``model``."""
+    require_flat_taxonomy(taxonomy)
     if not window.get("units"):
         raise TypeSafeMethodError(f"window {window.get('window_id')} has no units", kind="empty_window")
     session = _Session(ask)

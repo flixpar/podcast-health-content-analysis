@@ -3,8 +3,8 @@
 
 The pipeline has five explicit stages:
 
-1. ``prepare`` compiles the canonical tables in ``docs/original/topics.md``
-   and turns every transcript into overlapping, line-addressable windows.
+1. ``prepare`` compiles the selected taxonomy source and turns every
+   transcript into overlapping, line-addressable windows.
 2. ``label`` sends each window, one per request, to an OpenAI-compatible
    endpoint -- the Responses API or Chat Completions, whichever the server
    offers -- using strict Structured Outputs.
@@ -70,6 +70,18 @@ else:
 
 SCHEMA_VERSION = "topic-labeling-v4"
 PROMPT_VERSION = "topic-clips-claims-products-v6"
+# The granular v7 taxonomy (``taxonomy/health-v7.md``): a topic tree plus
+# narrative and population axes, and claims that carry narrative_ids and
+# relevance. Its results have a different shape, so it has its own schema
+# version; runs on the flat taxonomy keep the v4 schema and fingerprint
+# unchanged.
+HIERARCHICAL_SCHEMA_VERSION = "topic-labeling-v5"
+HIERARCHICAL_FORMAT = "hierarchical-v7"
+HIERARCHICAL_PROMPT_VERSION = "granular-v7"
+SUPPORTED_TAXONOMY_SCHEMAS = (SCHEMA_VERSION, HIERARCHICAL_SCHEMA_VERSION)
+PROMPTS_DIR = Path(__file__).resolve().parent / "prompts"
+DEFAULT_V7_RUBRIC = PROMPTS_DIR / "rubric-v7.md"
+DEFAULT_V7_CODEBOOK = Path(__file__).resolve().parents[1] / "taxonomy" / "codebook-v7.md"
 VERIFICATION_PROMPT_VERSION = "evidence-corpus-verification-v3"
 EVIDENCE_CORPUS_MANIFEST_VERSION = "evidence-corpus-validation-v1"
 DEFAULT_TOPICS = Path("docs/original/topics.md")
@@ -124,8 +136,11 @@ OUTPUT_DIR_ARTIFACTS = {
 }
 TRANSCRIPT_RE = re.compile(r"episode_(\d+)\.jsonl(?:\.zst)?$")
 ALLOWED_RELEVANCE = ("substantive", "passing", "advertisement")
-ALLOWED_AXES = ("topic", "frame", "evidence")
+ALLOWED_AXES = ("topic", "narrative", "frame", "evidence", "population")
+# The flat taxonomy's axes; its cross-cutting table may only name the last two.
+FLAT_AXES = ("topic", "frame", "evidence")
 CROSS_CUTTING_AXES = ("frame", "evidence")
+HIERARCHICAL_AXES = ALLOWED_AXES
 ALLOWED_DISCOURSE_ROLES = (
     "asserted_or_endorsed",
     "questioned",
@@ -158,6 +173,13 @@ ALLOWED_PRODUCT_TYPES = (
     "book_or_media",
     "personal_care_or_cosmetic",
     "other_product",
+)
+# v7 adds the two kinds the v1 benchmark annotators kept having no home for.
+V7_PRODUCT_TYPES = (
+    *ALLOWED_PRODUCT_TYPES[:-1],
+    "nicotine_or_tobacco",
+    "household_or_home",
+    ALLOWED_PRODUCT_TYPES[-1],
 )
 ALLOWED_MENTION_ROLES = (
     "advertised",
@@ -546,7 +568,252 @@ def slugify(value: str) -> str:
 
 
 def compile_taxonomy(path: Path) -> dict[str, Any]:
-    """Compile the two final GPT tables, excluding brainstorming duplicates.
+    """Compile a taxonomy source: the hierarchical format or the legacy flat tables.
+
+    The format is read from the file itself (a ``## Topic axis`` heading marks
+    v7), so ``--topics`` is the only switch between them.
+    """
+    source = Path(path).read_text(encoding="utf-8")
+    if any(line.strip() == "## Topic axis" for line in source.splitlines()):
+        return compile_hierarchical_taxonomy(path)
+    return compile_flat_taxonomy(path)
+
+
+_HEADING_ID = re.compile(r"^(?P<name>.+?)\s+`(?P<id>[a-z0-9_]+)`$")
+_LABEL_SLUG = re.compile(r"[a-z0-9_]+")
+
+
+def _table_rows(lines: Sequence[str], start: int) -> tuple[list[list[str]], int]:
+    """Data rows of the markdown table beginning at or after ``start``.
+
+    Returns the rows (header and separator dropped) and the index of the first
+    line after the table. Stops at the next heading, so a parent with an empty
+    table (``topic:other``) yields no rows rather than swallowing the next
+    section's.
+    """
+    index = start
+    while index < len(lines) and not lines[index].lstrip().startswith("|"):
+        if lines[index].startswith("#"):
+            return [], index
+        index += 1
+    rows: list[list[str]] = []
+    header_seen = False
+    while index < len(lines) and lines[index].lstrip().startswith("|"):
+        cells = _markdown_cells(lines[index])
+        index += 1
+        if not header_seen:
+            header_seen = True
+            continue
+        if all(re.fullmatch(r":?-+:?", cell.replace(" ", "")) for cell in cells if cell):
+            continue
+        rows.append(cells)
+    return rows, index
+
+
+def compile_hierarchical_taxonomy(path: Path) -> dict[str, Any]:
+    """Compile the v7 source (``taxonomy/health-v7.md``) into a taxonomy.
+
+    Five axes. Topics are a two-level tree under domains: a parent heading
+    ``#### Name `parent_id``` with a ``Definition`` paragraph, then a table of
+    subtopics ``| id | name | definition | examples |``. Each parent is itself a
+    label (``topic:<parent>``, "this parent, no listed subtopic") and each row
+    is ``topic:<parent>.<leaf>``. Narratives add a ``home topic`` column naming
+    a parent. Frames, evidence signals and populations are flat tables under
+    their own ``## <Axis> axis`` headings.
+
+    Everything is checked here, so a typo in the source fails compilation
+    rather than surfacing as a label no one can emit.
+    """
+    path = Path(path)
+    source = path.read_text(encoding="utf-8")
+    lines = source.splitlines()
+    axis_headings = {
+        "topic axis": "topic",
+        "narrative axis": "narrative",
+        "frame axis": "frame",
+        "evidence axis": "evidence",
+        "population axis": "population",
+    }
+    labels: list[dict[str, Any]] = []
+    domains: list[dict[str, str]] = []
+    axis: str | None = None
+    domain: dict[str, str] | None = None
+    family: dict[str, str] | None = None
+    index = 0
+
+    def fail(message: str) -> TopicLabelingError:
+        return TopicLabelingError(f"{path}:{index + 1}: {message}")
+
+    def heading_id(text: str) -> tuple[str, str]:
+        match = _HEADING_ID.match(text.strip())
+        if match is None:
+            raise fail(f"heading {text!r} needs a trailing `lowercase_id`")
+        return _strip_markdown(match.group("name")), match.group("id")
+
+    def row_label(cells: list[str], width: int) -> tuple[str, str, str, list[str], list[str]]:
+        if len(cells) < width:
+            raise fail(f"row {cells!r} needs {width} columns")
+        slug = cells[0].strip("` ")
+        if not _LABEL_SLUG.fullmatch(slug):
+            raise fail(f"label id {cells[0]!r} must be lowercase [a-z0-9_]")
+        name, definition, terms = cells[1], cells[2], cells[3]
+        if not name or not definition:
+            raise fail(f"label {slug!r} needs a name and a definition")
+        concepts = [_strip_markdown(item).strip(" ,") for item in terms.split(";")]
+        return slug, name, definition, [item for item in concepts if item], cells[4:]
+
+    while index < len(lines):
+        line = lines[index]
+        if line.startswith("## "):
+            axis = axis_headings.get(_strip_markdown(line[3:]).casefold())
+            domain = family = None
+            index += 1
+            continue
+        if axis == "topic" and line.startswith("### "):
+            text = line[4:]
+            if not text.startswith("Domain:"):
+                raise fail("topic-axis level-3 headings must be `### Domain: Name `id``")
+            name, domain_id = heading_id(text[len("Domain:"):])
+            domain = {"domain_id": domain_id, "name": name}
+            domains.append(domain)
+            index += 1
+            continue
+        if axis == "topic" and line.startswith("#### "):
+            if domain is None:
+                raise fail("a parent topic must sit under a `### Domain:` heading")
+            name, parent_slug = heading_id(line[5:])
+            index += 1
+            definition_lines: list[str] = []
+            while index < len(lines) and lines[index].strip() and not lines[index].lstrip().startswith("|"):
+                if lines[index].startswith("#"):
+                    break
+                definition_lines.append(lines[index].strip())
+                index += 1
+            definition = " ".join(definition_lines)
+            if not definition:
+                raise fail(f"parent topic {parent_slug!r} needs a definition paragraph")
+            parent_id = f"topic:{parent_slug}"
+            labels.append(
+                {
+                    "label_id": parent_id,
+                    "kind": "topic",
+                    "axis": "topic",
+                    "level": "parent",
+                    "name": name,
+                    "definition": definition,
+                    "concepts": [],
+                    "parent": None,
+                    "domain": domain["domain_id"],
+                }
+            )
+            rows, index = _table_rows(lines, index)
+            for cells in rows:
+                slug, leaf_name, leaf_definition, concepts, _ = row_label(cells, 4)
+                labels.append(
+                    {
+                        "label_id": f"{parent_id}.{slug}",
+                        "kind": "topic",
+                        "axis": "topic",
+                        "level": "subtopic",
+                        "name": leaf_name,
+                        "definition": leaf_definition,
+                        "concepts": concepts,
+                        "parent": parent_id,
+                        "domain": domain["domain_id"],
+                    }
+                )
+            continue
+        if axis == "narrative" and line.startswith("### "):
+            name, family_id = heading_id(line[4:])
+            family = {"family_id": family_id, "name": name}
+            rows, index = _table_rows(lines, index + 1)
+            for cells in rows:
+                slug, label_name, definition, concepts, extra = row_label(cells, 5)
+                home = extra[0].strip("` ") if extra else ""
+                labels.append(
+                    {
+                        "label_id": f"narrative:{slug}",
+                        "kind": "narrative",
+                        "axis": "narrative",
+                        "level": "label",
+                        "name": label_name,
+                        "definition": definition,
+                        "concepts": concepts,
+                        "family": family["family_id"],
+                        "family_name": family["name"],
+                        "home_topic": f"topic:{home}" if home else None,
+                    }
+                )
+            continue
+        if axis in ("frame", "evidence", "population") and line.lstrip().startswith("|"):
+            rows, index = _table_rows(lines, index)
+            for cells in rows:
+                slug, label_name, definition, concepts, _ = row_label(cells, 4)
+                labels.append(
+                    {
+                        "label_id": f"{axis}:{slug}",
+                        "kind": axis,
+                        "axis": axis,
+                        "level": "label",
+                        "name": label_name,
+                        "definition": definition,
+                        "concepts": concepts,
+                    }
+                )
+            continue
+        index += 1
+
+    ids = [row["label_id"] for row in labels]
+    duplicates = sorted(label for label, count in Counter(ids).items() if count > 1)
+    if duplicates:
+        raise TopicLabelingError(f"taxonomy label ID collision(s) in {path}: {duplicates}")
+    known = set(ids)
+    homeless = sorted(
+        row["label_id"]
+        for row in labels
+        if row["axis"] == "narrative" and row.get("home_topic") not in known
+    )
+    if homeless:
+        raise TopicLabelingError(f"narratives with no valid home topic in {path}: {homeless}")
+    axis_counts = Counter(row["axis"] for row in labels)
+    missing_axes = [name for name in HIERARCHICAL_AXES if not axis_counts[name]]
+    if missing_axes:
+        raise TopicLabelingError(f"taxonomy {path} has no labels on axis/axes: {missing_axes}")
+    taxonomy_sha256 = sha256_bytes(canonical_json(labels).encode("utf-8"))
+    return {
+        "schema_version": HIERARCHICAL_SCHEMA_VERSION,
+        "format": HIERARCHICAL_FORMAT,
+        "source_path": str(path),
+        "source_sha256": sha256_bytes(source.encode("utf-8")),
+        "taxonomy_sha256": taxonomy_sha256,
+        "domains": domains,
+        "labels": labels,
+    }
+
+
+def is_hierarchical(taxonomy: dict[str, Any]) -> bool:
+    return taxonomy.get("format") == HIERARCHICAL_FORMAT
+
+
+def has_v7_claim_fields(label_axes: dict[str, str]) -> bool:
+    """Whether results under this label set carry the v7 claim fields.
+
+    Validation only sees the label-to-axis map, and the narrative axis exists
+    exactly in the taxonomies whose claims carry ``narrative_ids`` and
+    ``relevance``, so its presence is what selects the claim contract.
+    """
+    return "narrative" in label_axes.values()
+
+
+def topic_parent(label_id: str) -> str:
+    """``topic:vaccines.hep_b`` -> ``topic:vaccines``; anything else unchanged."""
+    if label_id.startswith("topic:") and "." in label_id:
+        return label_id.split(".", 1)[0]
+    return label_id
+
+
+def compile_flat_taxonomy(path: Path) -> dict[str, Any]:
+    """Compile the two canonical flat tables, excluding brainstorming duplicates.
 
     Both tables carry an explicit ``Definition`` column, and the cross-cutting
     table carries an explicit ``Axis`` column. Nothing about a label's axis is
@@ -615,7 +882,7 @@ def compile_taxonomy(path: Path) -> dict[str, Any]:
     if duplicates:
         raise TopicLabelingError(f"taxonomy label ID collision(s): {duplicates}")
     axis_counts = Counter(row["axis"] for row in labels)
-    missing_axes = [axis for axis in ALLOWED_AXES if not axis_counts[axis]]
+    missing_axes = [axis for axis in FLAT_AXES if not axis_counts[axis]]
     if missing_axes:
         raise TopicLabelingError(f"taxonomy has no labels on axis/axes: {missing_axes}")
     taxonomy_sha256 = sha256_bytes(canonical_json(labels).encode("utf-8"))
@@ -631,7 +898,7 @@ def compile_taxonomy(path: Path) -> dict[str, Any]:
 def load_taxonomy(path: Path) -> dict[str, Any]:
     taxonomy = json.loads(Path(path).read_text(encoding="utf-8"))
     expected = sha256_bytes(canonical_json(taxonomy.get("labels", [])).encode("utf-8"))
-    if taxonomy.get("schema_version") != SCHEMA_VERSION:
+    if taxonomy.get("schema_version") not in SUPPORTED_TAXONOMY_SCHEMAS:
         raise TopicLabelingError(f"unsupported taxonomy schema in {path}")
     if taxonomy.get("taxonomy_sha256") != expected:
         raise TopicLabelingError(f"taxonomy fingerprint mismatch in {path}")
@@ -952,8 +1219,27 @@ def run_prepare(args: argparse.Namespace) -> dict[str, Any]:
     return manifest
 
 
+def window_caps(label_axes: dict[str, str]) -> tuple[int, int, int]:
+    """Per-window maxima for (detections, claims, product mentions).
+
+    The v7 taxonomy codes two more axes on top of more specific topics, so a
+    dense window legitimately carries more detections.
+    """
+    return (60, 30, 30) if has_v7_claim_fields(label_axes) else (40, 30, 30)
+
+
+def product_types(label_axes: dict[str, str]) -> tuple[str, ...]:
+    return V7_PRODUCT_TYPES if has_v7_claim_fields(label_axes) else ALLOWED_PRODUCT_TYPES
+
+
 def response_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
     label_ids = [label["label_id"] for label in taxonomy["labels"]]
+    axes = {label["label_id"]: label["axis"] for label in taxonomy["labels"]}
+    v7 = has_v7_claim_fields(axes)
+    max_detections, max_claims, max_products = window_caps(axes)
+    narrative_ids = [
+        label["label_id"] for label in taxonomy["labels"] if label["axis"] == "narrative"
+    ]
     topic_ids = [
         label["label_id"] for label in taxonomy["labels"] if label["axis"] == "topic"
     ]
@@ -1051,13 +1337,21 @@ def response_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
         ],
         "additionalProperties": False,
     }
+    if v7:
+        claim_properties = verification_candidate["properties"]
+        claim_properties["narrative_ids"] = {
+            "type": "array",
+            "items": {"type": "string", "enum": narrative_ids},
+        }
+        claim_properties["relevance"] = {"type": "string", "enum": list(ALLOWED_RELEVANCE)}
+        verification_candidate["required"] += ["narrative_ids", "relevance"]
     product_mention = {
         "type": "object",
         "properties": {
             "start_unit_id": {"type": "string", "pattern": "^u[0-9]{6}$"},
             "end_unit_id": {"type": "string", "pattern": "^u[0-9]{6}$"},
             "product_name": {"type": "string", "minLength": 1},
-            "product_type": {"type": "string", "enum": list(ALLOWED_PRODUCT_TYPES)},
+            "product_type": {"type": "string", "enum": list(product_types(axes))},
             "mention_role": {"type": "string", "enum": list(ALLOWED_MENTION_ROLES)},
             "evidence_quote": {"type": "string", "minLength": 1},
             "confidence": {"type": "number", "minimum": 0, "maximum": 1},
@@ -1077,16 +1371,16 @@ def response_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
         "type": "object",
         "properties": {
             "window_id": {"type": "string"},
-            "detections": {"type": "array", "items": detection, "maxItems": 40},
+            "detections": {"type": "array", "items": detection, "maxItems": max_detections},
             "verification_candidates": {
                 "type": "array",
                 "items": verification_candidate,
-                "maxItems": 30,
+                "maxItems": max_claims,
             },
             "product_mentions": {
                 "type": "array",
                 "items": product_mention,
-                "maxItems": 30,
+                "maxItems": max_products,
             },
         },
         "required": [
@@ -1100,7 +1394,107 @@ def response_schema(taxonomy: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
+def render_label_tables(taxonomy: dict[str, Any]) -> str:
+    """The v7 label set as markdown, grouped the way the codebook explains it.
+
+    Topics are listed by domain and parent so the tree is visible; every other
+    axis is a flat list. Bullets rather than JSON or tables: the codebook is
+    read by models and by people, and the prefix is long enough that the
+    quoting overhead of a JSON blob is worth avoiding.
+    """
+    labels = taxonomy["labels"]
+    by_parent: dict[str, list[dict[str, Any]]] = {}
+    for label in labels:
+        if label["axis"] == "topic" and label.get("parent"):
+            by_parent.setdefault(label["parent"], []).append(label)
+
+    def bullet(label: dict[str, Any]) -> str:
+        examples = "; ".join(label.get("concepts") or [])
+        tail = f" Examples: {examples}." if examples else ""
+        return f"- `{label['label_id']}` {label['name']}: {label['definition']}{tail}"
+
+    out = [
+        "# Label tables",
+        "",
+        "These are the only label IDs you may use, spelled exactly as listed. "
+        "The definition decides; examples only illustrate, and matching one is "
+        "neither necessary nor sufficient.",
+        "",
+        "## Topic axis",
+        "",
+        "Apply the most specific subtopic (`topic:<parent>.<subtopic>`). Use a "
+        "bare parent ID (`topic:<parent>`) only when no subtopic of that parent "
+        "fits, and name the aspect in the summary.",
+        "",
+    ]
+    domain_names = {d["domain_id"]: d["name"] for d in taxonomy.get("domains", [])}
+    current_domain = None
+    for label in labels:
+        if label["axis"] != "topic" or label.get("parent"):
+            continue
+        if label["domain"] != current_domain:
+            current_domain = label["domain"]
+            out += [f"### {domain_names.get(current_domain, current_domain)}", ""]
+        out.append(f"#### `{label['label_id']}` {label['name']}")
+        out.append(label["definition"])
+        out.extend(bullet(child) for child in by_parent.get(label["label_id"], []))
+        out.append("")
+    out += [
+        "## Narrative axis",
+        "",
+        "Apply when the stated proposition is invoked in any stance; "
+        "`discourse_role` records the stance.",
+        "",
+    ]
+    current_family = None
+    for label in labels:
+        if label["axis"] != "narrative":
+            continue
+        if label.get("family") != current_family:
+            current_family = label.get("family")
+            out += ["", f"### {label.get('family_name', current_family)}", ""]
+        out.append(bullet(label))
+    for axis, title in (
+        ("frame", "Frame axis"),
+        ("evidence", "Evidence axis"),
+        ("population", "Population axis"),
+    ):
+        out += ["", f"## {title}", ""]
+        out.extend(bullet(label) for label in labels if label["axis"] == axis)
+    return "\n".join(out) + "\n"
+
+
+def hierarchical_instructions(
+    taxonomy: dict[str, Any],
+    rubric_path: Path = DEFAULT_V7_RUBRIC,
+    codebook_path: Path = DEFAULT_V7_CODEBOOK,
+) -> str:
+    """Rubric (labeler procedure and worked examples), codebook, label tables.
+
+    The codebook is the same file the benchmark's reference annotators label
+    against, so the prompt and the definition of "right" cannot drift apart.
+    """
+    rubric = Path(rubric_path).read_text(encoding="utf-8").rstrip()
+    codebook = Path(codebook_path).read_text(encoding="utf-8").rstrip()
+    return f"{rubric}\n\n{codebook}\n\n{render_label_tables(taxonomy)}"
+
+
+def prompt_version(taxonomy: dict[str, Any], instructions: str | None = None) -> str:
+    """The prompt identity that goes into the run fingerprint.
+
+    The flat taxonomy's rubric is a constant in this module, versioned by hand.
+    The v7 prompt is assembled from files, so its identity includes a hash of
+    the assembled text: editing the rubric or codebook is a new prompt.
+    """
+    if not is_hierarchical(taxonomy):
+        return PROMPT_VERSION
+    text = instructions if instructions is not None else taxonomy_instructions(taxonomy)
+    return f"{HIERARCHICAL_PROMPT_VERSION}:{sha256_bytes(text.encode('utf-8'))[:16]}"
+
+
 def taxonomy_instructions(taxonomy: dict[str, Any]) -> str:
+    if is_hierarchical(taxonomy):
+        return hierarchical_instructions(taxonomy)
     compact = [
         {
             "label_id": label["label_id"],
@@ -1255,19 +1649,22 @@ def validate_window_result(
             f"response window ID {result.get('window_id')!r} does not match {window['window_id']!r}",
             kind="window_id_mismatch",
         )
+    v7 = has_v7_claim_fields(label_axes)
+    max_detections, max_claims, max_products = window_caps(label_axes)
+    allowed_product_types = product_types(label_axes)
     detections = result.get("detections")
-    if not isinstance(detections, list) or (report is None and len(detections) > 40):
+    if not isinstance(detections, list) or (report is None and len(detections) > max_detections):
         raise TopicLabelingError(
             f"invalid detections for {window['window_id']}", kind="schema_shape"
         )
     claims = result.get("verification_candidates")
-    if not isinstance(claims, list) or (report is None and len(claims) > 30):
+    if not isinstance(claims, list) or (report is None and len(claims) > max_claims):
         raise TopicLabelingError(
             f"invalid verification candidates for {window['window_id']}",
             kind="schema_shape",
         )
     products = result.get("product_mentions")
-    if not isinstance(products, list) or (report is None and len(products) > 30):
+    if not isinstance(products, list) or (report is None and len(products) > max_products):
         raise TopicLabelingError(
             f"invalid product mentions for {window['window_id']}", kind="schema_shape"
         )
@@ -1460,6 +1857,8 @@ def validate_window_result(
         "confidence",
         "rationale",
     }
+    if v7:
+        claim_fields |= {"narrative_ids", "relevance"}
 
     def validate_claim(claim: Any) -> dict[str, Any]:
         if not isinstance(claim, dict) or set(claim) != claim_fields:
@@ -1501,6 +1900,20 @@ def validate_window_result(
                 f"invalid candidate evidence IDs in {window['window_id']}",
                 kind="mixed_or_unknown_labels",
             )
+        narrative_ids = claim.get("narrative_ids", [])
+        if (
+            not isinstance(narrative_ids, list)
+            or len(narrative_ids) != len(set(narrative_ids))
+            or any(label_axes.get(label) != "narrative" for label in narrative_ids)
+        ):
+            raise TopicLabelingError(
+                f"invalid candidate narrative IDs in {window['window_id']}",
+                kind="mixed_or_unknown_labels",
+            )
+        if v7 and claim.get("relevance") not in ALLOWED_RELEVANCE:
+            raise TopicLabelingError(
+                f"invalid claim relevance in {window['window_id']}", kind="invalid_field"
+            )
         discourse_role = claim.get("discourse_role")
         claim_type = claim.get("claim_type")
         claim_text = claim.get("claim_text")
@@ -1534,7 +1947,7 @@ def validate_window_result(
                 kind="duplicate_annotation",
             )
         seen_claims.add(key)
-        return {
+        normalized = {
             "start_unit_id": start_id,
             "end_unit_id": end_id,
             "topic_ids": sorted(topic_ids),
@@ -1549,6 +1962,10 @@ def validate_window_result(
             "confidence": confidence,
             "rationale": re.sub(r"\s+", " ", rationale).strip(),
         }
+        if v7:
+            normalized["narrative_ids"] = sorted(narrative_ids)
+            normalized["relevance"] = claim["relevance"]
+        return normalized
 
     seen_products: set[tuple[Any, ...]] = set()
     product_fields = {
@@ -1577,7 +1994,7 @@ def validate_window_result(
             raise TopicLabelingError(
                 f"empty product name in {window['window_id']}", kind="invalid_field"
             )
-        if product_type not in ALLOWED_PRODUCT_TYPES:
+        if product_type not in allowed_product_types:
             raise TopicLabelingError(
                 f"invalid product type in {window['window_id']}", kind="invalid_field"
             )
@@ -1617,9 +2034,9 @@ def validate_window_result(
         window,
         report,
         label_axes,
-        (detections, validate_detection, 40),
-        (claims, validate_claim, 30),
-        (products, validate_product, 30),
+        (detections, validate_detection, max_detections),
+        (claims, validate_claim, max_claims),
+        (products, validate_product, max_products),
     )
 
 
@@ -2011,7 +2428,7 @@ def validate_verification_candidate(candidate: dict[str, Any]) -> dict[str, Any]
     candidate_id = candidate["candidate_id"]
     if not isinstance(candidate_id, str) or not candidate_id.strip():
         raise TopicLabelingError("verification candidate has an invalid candidate_id")
-    if candidate["schema_version"] != SCHEMA_VERSION:
+    if candidate["schema_version"] not in SUPPORTED_TAXONOMY_SCHEMAS:
         raise TopicLabelingError(
             f"candidate {candidate_id} uses an incompatible schema"
         )
@@ -2932,6 +3349,7 @@ class TypeSafeClient(ResponsesClient):
 
     def fingerprint(self, taxonomy: dict[str, Any]) -> dict[str, Any]:
         """What determines this method's output, in place of decoding settings."""
+        require_label_taxonomy("typesafe", taxonomy)
         return {
             "prompt_version": typesafe.METHOD_VERSION,
             "typesafe_questions_sha256": typesafe.questions_sha256(),
@@ -3414,6 +3832,15 @@ def build_limiter(args: argparse.Namespace) -> UsageLimiter:
     return limiter
 
 
+def require_label_taxonomy(api: str, taxonomy: dict[str, Any]) -> None:
+    """Reject unsupported methods before endpoint discovery or inference."""
+    if api == "typesafe":
+        try:
+            typesafe.require_flat_taxonomy(taxonomy)
+        except typesafe.TypeSafeMethodError as exc:
+            raise TopicLabelingError(str(exc), kind=exc.kind) from exc
+
+
 def run_label(args: argparse.Namespace) -> dict[str, Any]:
     if args.concurrency < 1 or args.attempts < 1:
         raise TopicLabelingError("concurrency and attempts must both be positive")
@@ -3424,6 +3851,7 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
     api_key = resolve_api_key(args)
     output_dir = Path(args.output_dir)
     taxonomy = load_taxonomy(Path(args.taxonomy))
+    require_label_taxonomy(getattr(args, "api", "responses"), taxonomy)
     prepare_manifest = json.loads(
         Path(args.prepare_manifest).read_text(encoding="utf-8")
     )
@@ -3442,7 +3870,7 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
     # orphan a half-finished run. The model they serve is fingerprinted, and
     # discover_model refuses to pool endpoints that disagree about it.
     fingerprint_inputs = {
-        "schema_version": SCHEMA_VERSION,
+        "schema_version": taxonomy["schema_version"],
         "taxonomy_sha256": taxonomy["taxonomy_sha256"],
         "windows_sha256": prepare_manifest["windows_sha256"],
         "model": model,
@@ -3455,7 +3883,7 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
         **(
             client.fingerprint(taxonomy)
             if isinstance(client, TypeSafeClient)
-            else {"prompt_version": PROMPT_VERSION, **settings.fingerprint()}
+            else {"prompt_version": prompt_version(taxonomy), **settings.fingerprint()}
         ),
     }
     run_fingerprint = sha256_bytes(canonical_json(fingerprint_inputs).encode("utf-8"))
@@ -3773,7 +4201,7 @@ def _make_product_mentions(
         context_units = _selected_units(units, context_start, context_end)
         output.append(
             {
-                "schema_version": SCHEMA_VERSION,
+                "schema_version": taxonomy["schema_version"],
                 "mention_id": f"episode_{exemplar['episode_id']}_product_{index:04d}",
                 "episode_id": exemplar["episode_id"],
                 "podcast_id": exemplar.get("podcast_id"),
@@ -3890,9 +4318,17 @@ def _make_label_annotations(
         supports = group["detections"]
         best = max(supports, key=lambda row: row["confidence"])
         definition = taxonomy_by_id[group["label_id"]]
+        hierarchy = (
+            {
+                "parent_topic_id": topic_parent(group["label_id"]),
+                "domain": definition.get("domain"),
+            }
+            if group["axis"] == "topic" and is_hierarchical(taxonomy)
+            else {}
+        )
         annotations.append(
             {
-                "schema_version": SCHEMA_VERSION,
+                "schema_version": taxonomy["schema_version"],
                 "annotation_id": f"episode_{exemplar['episode_id']}_annotation_{index:04d}",
                 "episode_id": exemplar["episode_id"],
                 "podcast_id": exemplar.get("podcast_id"),
@@ -3904,6 +4340,7 @@ def _make_label_annotations(
                 "axis": group["axis"],
                 "label_id": group["label_id"],
                 "label_name": definition["name"],
+                **hierarchy,
                 "start_unit_id": f"u{group['start_order']:06d}",
                 "end_unit_id": f"u{group['end_order']:06d}",
                 "start_unit_index": group["start_order"],
@@ -3953,9 +4390,20 @@ def _make_verification_candidates(
         evidence_ids = sorted(
             {label for row in supports for label in row["evidence_signal_ids"]}
         )
+        v7_fields: dict[str, Any] = {}
+        if is_hierarchical(taxonomy):
+            narrative_ids = sorted(
+                {label for row in supports for label in row.get("narrative_ids", [])}
+            )
+            v7_fields = {
+                "relevance": sorted({row["relevance"] for row in supports}),
+                "parent_topic_ids": sorted({topic_parent(label) for label in topic_ids}),
+                "narrative_ids": narrative_ids,
+                "narrative_names": [taxonomy_by_id[label]["name"] for label in narrative_ids],
+            }
         output.append(
             {
-                "schema_version": SCHEMA_VERSION,
+                "schema_version": taxonomy["schema_version"],
                 "candidate_id": f"episode_{exemplar['episode_id']}_claim_{index:04d}",
                 "episode_id": exemplar["episode_id"],
                 "podcast_id": exemplar.get("podcast_id"),
@@ -4001,6 +4449,7 @@ def _make_verification_candidates(
                 "evidence_signal_names": [
                     taxonomy_by_id[label]["name"] for label in evidence_ids
                 ],
+                **v7_fields,
                 "supporting_window_ids": sorted({row["window_id"] for row in supports}),
                 "taxonomy_sha256": taxonomy["taxonomy_sha256"],
                 "labeling_run_fingerprint": run_manifest["run_fingerprint"],
@@ -4114,6 +4563,14 @@ def _episode_artifacts(
     topic_groups = merge_detection_candidates(
         [row for row in detections if row["axis"] == "topic"]
     )
+    # Frame and evidence lists are always present, as before v7; narrative and
+    # population lists only under a taxonomy that has those axes.
+    secondary_axes = [
+        axis
+        for axis in ALLOWED_AXES
+        if axis in CROSS_CUTTING_AXES
+        or (axis != "topic" and any(label["axis"] == axis for label in taxonomy["labels"]))
+    ]
     clips: list[dict[str, Any]] = []
     for clip_index, group in enumerate(topic_groups, 1):
         selected = _selected_units(units, group["start_order"], group["end_order"])
@@ -4137,6 +4594,11 @@ def _episode_artifacts(
             topic_rows.append(
                 {
                     "label_id": label_id,
+                    **(
+                        {"parent_topic_id": topic_parent(label_id)}
+                        if is_hierarchical(taxonomy)
+                        else {}
+                    ),
                     "name": taxonomy_by_id[label_id]["name"],
                     "confidence": max(row["confidence"] for row in label_supports),
                     "supporting_windows": len(
@@ -4146,7 +4608,7 @@ def _episode_artifacts(
             )
         clips.append(
             {
-                "schema_version": SCHEMA_VERSION,
+                "schema_version": taxonomy["schema_version"],
                 "clip_id": f"episode_{exemplar['episode_id']}_clip_{clip_index:04d}",
                 "episode_id": exemplar["episode_id"],
                 "podcast_id": exemplar.get("podcast_id"),
@@ -4164,38 +4626,27 @@ def _episode_artifacts(
                 "discourse_roles": sorted({row["discourse_role"] for row in supports}),
                 "confidence": max(row["confidence"] for row in supports),
                 "topics": topic_rows,
-                "frame_annotations": [
-                    {
-                        key: row[key]
-                        for key in (
-                            "annotation_id",
-                            "label_id",
-                            "label_name",
-                            "start_unit_id",
-                            "end_unit_id",
-                            "discourse_role",
-                            "confidence",
-                        )
-                    }
-                    for row in overlapping_annotations
-                    if row["axis"] == "frame"
-                ],
-                "evidence_annotations": [
-                    {
-                        key: row[key]
-                        for key in (
-                            "annotation_id",
-                            "label_id",
-                            "label_name",
-                            "start_unit_id",
-                            "end_unit_id",
-                            "discourse_role",
-                            "confidence",
-                        )
-                    }
-                    for row in overlapping_annotations
-                    if row["axis"] == "evidence"
-                ],
+                # One list per secondary axis the taxonomy has: frame and
+                # evidence always, narrative and population under v7.
+                **{
+                    f"{axis}_annotations": [
+                        {
+                            key: row[key]
+                            for key in (
+                                "annotation_id",
+                                "label_id",
+                                "label_name",
+                                "start_unit_id",
+                                "end_unit_id",
+                                "discourse_role",
+                                "confidence",
+                            )
+                        }
+                        for row in overlapping_annotations
+                        if row["axis"] == axis
+                    ]
+                    for axis in secondary_axes
+                },
                 "possible_misinformation": bool(overlapping_claims),
                 "verification_candidate_ids": [
                     row["candidate_id"] for row in overlapping_claims
@@ -4275,6 +4726,9 @@ def run_merge(args: argparse.Namespace) -> dict[str, Any]:
         "evidence_quote",
         "text",
     ]
+    if is_hierarchical(taxonomy):
+        position = review_fields.index("frame_ids")
+        review_fields[position:position] = ["narrative_ids", "population_ids"]
     episode_rows: list[dict[str, Any]] = []
     total_clips = total_annotations = total_candidates = total_products = 0
     missing = episodes = 0
@@ -4315,8 +4769,16 @@ def run_merge(args: argparse.Namespace) -> dict[str, Any]:
                     clip_handle.write(canonical_json(clip) + "\n")
                     topic_ids = [label["label_id"] for label in clip["topics"]]
                     topic_names = [label["name"] for label in clip["topics"]]
+                    secondary = {
+                        f"{axis}_ids": ";".join(
+                            sorted({row["label_id"] for row in clip[f"{axis}_annotations"]})
+                        )
+                        for axis in ("narrative", "population")
+                        if f"{axis}_annotations" in clip
+                    }
                     review_writer.writerow(
                         {
+                            **secondary,
                             "clip_id": clip["clip_id"],
                             "episode_id": clip["episode_id"],
                             "podcast_title": clip.get("podcast_title"),
@@ -5271,7 +5733,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    taxonomy = subparsers.add_parser("taxonomy", help="Compile and inspect the topic tables")
+    taxonomy = subparsers.add_parser("taxonomy", help="Compile and inspect a taxonomy source")
     taxonomy.add_argument("--topics", type=Path, default=DEFAULT_TOPICS)
     taxonomy.add_argument("--output", type=Path)
 

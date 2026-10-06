@@ -10,10 +10,10 @@ from analysis import topic_labeling as tl
 from analysis.benchmark import contrast as contrast_mod
 from analysis.benchmark import items as items_mod
 from analysis.benchmark import matching, references, runner, scoring, stats, synthetic
-from analysis.benchmark.taxonomy import label_axes, load_benchmark_taxonomy
+from analysis.benchmark.taxonomy import label_axes
 
 ROOT = Path(__file__).resolve().parents[2]
-TAXONOMY = load_benchmark_taxonomy(ROOT / "benchmark" / "taxonomy.json")
+TAXONOMY = tl.compile_taxonomy(ROOT / "benchmark" / "topics-v6.md")
 AXES = label_axes(TAXONOMY)
 
 UNITS = [

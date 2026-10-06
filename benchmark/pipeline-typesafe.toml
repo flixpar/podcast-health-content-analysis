@@ -1,7 +1,7 @@
 # Candidate configuration for benchmark runs of the TypeSafe (System One)
 # labeling method. See docs/typesafe-labeling.md.
 #
-#   .venv/bin/python -m analysis.benchmark run --name ts-v1 \
+#   BENCHMARK_DIR=benchmark .venv/bin/python -m analysis.benchmark run --name ts-v1 \
 #       --pipeline-config benchmark/pipeline-typesafe.toml --repeats 2
 #
 # The decoding keys the other candidates set (reasoning_effort, temperature,

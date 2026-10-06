@@ -4,8 +4,15 @@
 [TypeSafe](https://docs.typesafe.ai)'s Jev model instead of a generative one. It
 writes the same `labels.sqlite` and `window_labels.jsonl.zst`, through the same
 validator, so `merge`, `sample` and the benchmark read it unchanged. This
-document is the method, what it measured on the benchmark (2026-09-17,
-`jev-1.13.0`), and where it fits.
+document records the flat-scheme method and its historical benchmark
+(2026-09-17, `jev-1.13.0`). The cascade supports only the legacy flat
+topic/frame/evidence contract. It rejects hierarchical v7/v8 before endpoint
+discovery or inference; the current granular workflow remains the generative
+pipeline in [labeling-v7.md](labeling-v7.md).
+
+Recorded results below used the 91-label flat v6 benchmark. They do not validate
+the production 84-label source or the granular schemas. The separate production
+config explicitly selects `docs/original/topics.md` for the 84-label source.
 
 ## The short version
 
@@ -253,24 +260,31 @@ after the pin moves.
 
 ```bash
 # benchmark: run, score, compare
+export BENCHMARK_DIR=benchmark  # flat v1 specs, never benchmark/v2 for TypeSafe
 .venv/bin/python -m analysis.benchmark run --name ts-v1 \
     --pipeline-config benchmark/pipeline-typesafe.toml --repeats 2 --split all
-.venv/bin/python -m analysis.benchmark score benchmark/runs/ts-v1
-.venv/bin/python -m analysis.benchmark compare benchmark/runs/val-high benchmark/runs/ts-v1
+.venv/bin/python -m analysis.benchmark score local/benchmark/runs/ts-v1
+.venv/bin/python -m analysis.benchmark compare local/benchmark/runs/val-high local/benchmark/runs/ts-v1
 
 # re-tune composition thresholds from that run's stored probabilities (no requests)
-.venv/bin/python -m analysis.benchmark.typesafe_tune benchmark/runs/ts-v1
+.venv/bin/python -m analysis.benchmark.typesafe_tune local/benchmark/runs/ts-v1
 
 # production: prepare a small run from the configured transcript directory
 .venv/bin/python analysis/topic_labeling.py prepare \
     --config analysis/topic-labeling-typesafe.toml --output-dir /tmp/ts-smoke --limit 3
 .venv/bin/python analysis/topic_labeling.py label \
     --config analysis/topic-labeling-typesafe.toml --output-dir /tmp/ts-smoke
-.venv/bin/python analysis/topic_labeling.py merge --output-dir /tmp/ts-smoke
+.venv/bin/python analysis/topic_labeling.py merge \
+    --config analysis/topic-labeling-typesafe.toml --output-dir /tmp/ts-smoke
 ```
 
 The flat production taxonomy is compiled from the canonical tables in
-`docs/original/topics.md`. The local transcript directory must exist before
+`docs/original/topics.md`, selected explicitly by the TypeSafe config. Flat
+benchmark inputs and rosters are maintained under `benchmark/`; generated
+taxonomy, items, gold and runs live in ignored `local/benchmark/` (or the
+configured `BENCHMARK_OUTPUT_DIR`). Follow [benchmark.md](benchmark.md) to
+generate/restore those inputs; historical results are not shipped in a fresh
+checkout. The local transcript directory must exist before
 `prepare`; `label` reads the taxonomy, windows and prepare manifest it creates
 in the same output directory.
 

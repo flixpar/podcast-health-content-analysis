@@ -1241,6 +1241,7 @@ def test_merge_emits_one_clip_for_duplicate_window_detections(tmp_path):
     assert summary["verification_candidates"] == 1
     assert summary["product_mentions"] == 1
     # The two spellings merge into one mention; the higher-confidence name wins.
+    assert products[0]["schema_version"] == labeling.SCHEMA_VERSION
     assert products[0]["product_name"] == "Oura Ring"
     assert products[0]["product_key"] == "ouraring"
     assert products[0]["mention_role"] == "recommended"
@@ -1647,10 +1648,13 @@ def test_response_is_one_result_object_for_the_one_window_sent():
 
 
 def test_a_benchmark_item_builds_a_single_window_request_and_validates():
-    """Offline shape check on a real benchmark window and the real codebook."""
-    taxonomy = labeling.load_taxonomy(ROOT / "benchmark" / "taxonomy.json")
+    """Offline shape check using source taxonomy and an authored window."""
+    taxonomy = labeling.compile_taxonomy(ROOT / "benchmark" / "topics-v6.md")
     label_axes = {row["label_id"]: row["axis"] for row in taxonomy["labels"]}
-    item = next(labeling.iter_jsonl(ROOT / "benchmark" / "items.jsonl"))
+    item = {
+        "window_id": "episode_1_window_0001",
+        "units": [{"unit_id": "u000001", "text": "Sleep is important for your health."}],
+    }
     window = {key: item[key] for key in ("window_id", "units")}
     settings = labeling.ModelSettings(max_output_tokens=1000, reasoning_effort="none")
     for flavor in labeling.API_FLAVORS.values():
