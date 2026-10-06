@@ -246,3 +246,35 @@ def test_cli_config_overrides_limit_and_error_exit(tmp_path, lexicon, monkeypatc
     assert not (tmp_path / "default").exists()
     assert scan.main(["--config", str(config), "--out-dir", str(output)]) == 1
     assert "already exists" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("change", ["edit", "replace", "delete"])
+def test_cli_config_snapshot_survives_changes_after_loading(tmp_path, lexicon, monkeypatch, change):
+    path = transcript(tmp_path / "episode_1.jsonl", ["Sleep helps."])
+    output = tmp_path / "scan"
+    config = tmp_path / "config.toml"
+    original = ("[paths]\n" + "\n".join(f"{key} = {json.dumps(str(value))}" for key, value in {
+        "metadata_db": tmp_path / "catalog.sqlite", "transcripts": tmp_path,
+        "scan_dir": output, "lexicon": lexicon,
+    }.items())).encode()
+    config.write_bytes(original)
+
+    def select_jobs(database, transcripts):
+        # Change the file immediately after parsing, before even selecting inputs.
+        assert database == tmp_path / "catalog.sqlite" and transcripts == tmp_path
+        if change == "edit":
+            config.write_text('[paths]\nscan_dir = "different-output"\n')
+        elif change == "replace":
+            replacement = tmp_path / "replacement.toml"
+            replacement.write_text('[paths]\nscan_dir = "different-output"\n')
+            replacement.replace(config)
+        else:
+            config.unlink()
+        return [(1, path)]
+
+    monkeypatch.setattr(scan, "catalog_jobs", select_jobs)
+    assert scan.main(["--config", str(config), "--workers", "1"]) == 0
+    manifest = json.loads((output / "manifest.json").read_text())
+    assert manifest["config"] == str(config)
+    assert manifest["config_sha256"] == hashlib.sha256(original).hexdigest()
+    assert manifest["complete"] and manifest["rows"]["episodes"] == 1

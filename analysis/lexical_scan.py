@@ -17,6 +17,7 @@ import sqlite3
 import sys
 import tempfile
 import time
+import tomllib
 from collections import Counter
 from contextlib import ExitStack, closing
 from multiprocessing import get_context
@@ -28,7 +29,7 @@ import pyarrow.parquet as pq
 import zstandard
 
 from analysis.benchmark import CONFIG_PATH
-from analysis.benchmark.items import load_config, resolve_path, transcript_path
+from analysis.benchmark.items import resolve_path, transcript_path
 from analysis.benchmark.lexicon import Matcher, SPEAKER_RE
 
 # Preserve the original scan's sentence boundaries, not the labeler's units.
@@ -183,7 +184,7 @@ def study_jobs(manifest: Path) -> tuple[list[tuple[int, Path]], dict[str, Any]]:
 
 def run_scan(
     jobs: list[tuple[int, Path]], lexicon: Path, output: Path, *, workers: int,
-    provenance: dict[str, Any], config: Path | None = None,
+    provenance: dict[str, Any], config: Path | None = None, config_bytes: bytes | None = None,
 ) -> dict[str, Any]:
     """Stage complete tables together; refuse replacement and incomplete scans."""
     output = output.resolve()
@@ -195,6 +196,11 @@ def run_scan(
         raise ScanError("workers must be at least 1")
     if len({eid for eid, _ in jobs}) != len(jobs):
         raise ScanError("Duplicate episode IDs in scan selection")
+    # Snapshot provenance before processing any transcripts. The CLI supplies
+    # the exact bytes it parsed to resolve paths, so edits cannot change the hash.
+    if config is not None and config_bytes is None:
+        config_bytes = config.read_bytes()
+    config_sha256 = hashlib.sha256(config_bytes).hexdigest() if config_bytes is not None else None
     lexicon_bytes = lexicon.read_bytes()
     lex = json.loads(lexicon_bytes)
     # Validate in the parent before creating workers or output.
@@ -246,7 +252,7 @@ def run_scan(
             "selection": provenance, "transcripts_attempted": len(jobs), "failures": len(errors),
             "lexicon": str(lexicon), "lexicon_sha256": hashlib.sha256(lexicon_bytes).hexdigest(),
             "config": str(config) if config else None,
-            "config_sha256": hashlib.sha256(config.read_bytes()).hexdigest() if config else None,
+            "config_sha256": config_sha256,
             "workers": workers, "rows": totals,
             "selection_sha256": hashlib.sha256(json.dumps(
                 [(eid, str(path)) for eid, path in jobs], separators=(",", ":")
@@ -278,7 +284,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         config = resolve_path(str(args.config))
-        paths = load_config(config)["paths"]
+        config_bytes = config.read_bytes()
+        paths = tomllib.loads(config_bytes.decode("utf-8"))["paths"]
         lexicon = resolve_path(str(args.lexicon or paths["lexicon"]))
         output = resolve_path(str(args.out_dir or paths["scan_dir"]))
         if args.study_manifest:
@@ -293,7 +300,10 @@ def main(argv: list[str] | None = None) -> int:
         if args.limit:
             jobs = jobs[:args.limit]
         provenance["limit"] = args.limit
-        manifest = run_scan(jobs, lexicon, output, workers=args.workers, provenance=provenance, config=config)
+        manifest = run_scan(
+            jobs, lexicon, output, workers=args.workers, provenance=provenance,
+            config=config, config_bytes=config_bytes,
+        )
         print(json.dumps({"output": str(output), "rows": manifest["rows"]}))
         return 0
     except (ScanError, OSError, ValueError, KeyError, sqlite3.Error) as exc:

@@ -20,12 +20,12 @@ group (`pyarrow`, `pandas`, `scipy`) and `zstandard`. From the repository root:
 # Smoke test in a new, ignored directory. Do not use this subset to build a full pool.
 .venv/bin/python -m analysis.lexical_scan \
   --config benchmark/config.toml --limit 10 --workers 1 \
-  --out-dir analysis/output/lexical-scan-smoke
+  --out-dir local/lexical-scan-smoke
 
 # Regenerate the full sampling tables in a new location.
 .venv/bin/python -m analysis.lexical_scan \
   --config benchmark/config.toml --workers 28 \
-  --out-dir /mnt/data2/podcast-data/fast-analysis/scan_v2-new
+  --out-dir local/fast-analysis/scan_v2
 ```
 
 The config's `[paths]` supplies `metadata_db`, `transcripts`, `lexicon` and
@@ -33,7 +33,8 @@ The config's `[paths]` supplies `metadata_db`, `transcripts`, `lexicon` and
 them. Relative paths resolve against the repository root, matching the
 benchmark CLI. There are no scanner-specific machine paths or environment
 variables to maintain. Omitting `--out-dir` uses the config's `scan_dir`, which
-must not already exist. The catalog database is opened read-only; the scanner
+must not already exist. The tracked config uses the ignored
+`local/fast-analysis/scan_v2`, matching the benchmark pool consumer. The catalog database is opened read-only; the scanner
 reads IDs from `transcripts` and locates `episode_<id>.jsonl.zst` (or plain
 `.jsonl`) in the configured transcript directory, just as the pool builder
 does. Old absolute database file paths are not used.
@@ -60,7 +61,7 @@ with absolute `transcript_path` values. To scan that exported selection:
 ```bash
 .venv/bin/python -m analysis.lexical_scan \
   --study-manifest /path/to/study/rev3/episodes.csv \
-  --out-dir analysis/output/lexical-scan-study-rev3
+  --out-dir local/lexical-scan-study-rev3
 ```
 
 This reads the exported membership, not live study tables, and needs no
@@ -121,6 +122,8 @@ staging files for inspection. Existing scan directories are never replaced.
 Choose a new destination to retry; failed scans cannot silently become the
 pool's complete input.
 
-The manifest pins configuration and selection, not an immutable copy of the
+The manifest hashes the exact config bytes parsed before selection and scanning,
+so subsequent config edits, replacements or deletion do not alter provenance.
+It pins configuration and selection, not an immutable copy of the
 corpus. Transcript files and a live catalog can change between runs. Preserve
 the source corpus or exported study artifacts when exact reproduction matters.
