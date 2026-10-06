@@ -157,3 +157,22 @@ cost_total = 20.0
 [experiment.benchmark-candidates]
 cost_total = 30.0
 cost_per_day = 15.0
+
+# TypeSafe's System One API (`label --api typesafe`). Billed on input tokens
+# only; output is free. Their published limits are 250,000 tokens a second and
+# 1,200 requests a minute, and they say both move without notice, so the
+# client also backs off on 429 by itself.
+[provider.typesafe]
+max_concurrent = 16
+input_tokens_per_minute = 12_000_000
+cost_per_day = 25.0
+
+[model.typesafe."jev-1.13.0"]
+input_per_mtok = 0.042
+output_per_mtok = 0.0
+
+# Evaluating the TypeSafe method on the benchmark: one pass over all 260 items
+# is about 19M tokens, or $0.80. The initial evaluation was capped at $8 in
+# all; about $0.40 of probing went around this ledger, hence 7.
+[experiment.typesafe-eval]
+cost_total = 7.0

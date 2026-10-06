@@ -20,6 +20,13 @@ The original flat taxonomy is also supported when explicitly selected.
 Taxonomy versions select matching rubric and codebook files; a compiled
 hierarchical taxonomy without a version is interpreted as v7.
 
+The optional TypeSafe cascade uses the explicit flat-source configuration
+`analysis/topic-labeling-typesafe.toml` and writes to `local/topic-labeling-typesafe`.
+It implements the legacy topic/frame/evidence claim contract and rejects
+hierarchical v7/v8 before endpoint discovery or inference. Its historical
+91-label evaluation does not validate this granular scheme. See
+[the TypeSafe method](typesafe-labeling.md) for its procedure and limits.
+
 ## What is recorded
 
 | Axis | v8 labels | Meaning |

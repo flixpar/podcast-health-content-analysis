@@ -23,6 +23,7 @@ def v7():
 def test_v7_compiles_five_axes_with_a_topic_tree(v7):
     labels = v7["labels"]
     assert v7["format"] == labeling.HIERARCHICAL_FORMAT
+
     assert v7["schema_version"] == labeling.HIERARCHICAL_SCHEMA_VERSION
     assert {row["axis"] for row in labels} == set(labeling.HIERARCHICAL_AXES)
     ids = {row["label_id"] for row in labels}
@@ -41,6 +42,26 @@ def test_v7_compiles_five_axes_with_a_topic_tree(v7):
     assert len(narratives) >= 100
     assert all(row["home_topic"] in parents for row in narratives)
     assert all(re.fullmatch(r"[a-z]+:[a-z0-9_]+(\.[a-z0-9_]+)?", label) for label in ids)
+
+
+def test_merged_generative_label_run_retains_v7_prompt_fingerprint(v7, tmp_path, monkeypatch):
+    taxonomy_path = tmp_path / "taxonomy.json"
+    windows_path = tmp_path / "windows.jsonl"
+    prepare_path = tmp_path / "prepare_manifest.json"
+    labeling.write_json(taxonomy_path, v7)
+    _, windows_hash = labeling.write_jsonl_atomic(windows_path, [])
+    labeling.write_json(prepare_path, {"windows_sha256": windows_hash,
+                                      "taxonomy_sha256": v7["taxonomy_sha256"]})
+    monkeypatch.setattr(labeling, "resolve_api_key", lambda args: None)
+    monkeypatch.setattr(labeling.ResponsesClient, "served_models", lambda self: {"http://test": "stub"})
+    args = labeling.build_parser().parse_args([
+        "label", "--output-dir", str(tmp_path), "--taxonomy", str(taxonomy_path),
+        "--windows", str(windows_path), "--prepare-manifest", str(prepare_path),
+        "--model", "stub", "--api-base", "http://test",
+    ])
+    manifest = labeling.run_label(args)
+    assert manifest["schema_version"] == v7["schema_version"]
+    assert manifest["prompt_version"] == labeling.prompt_version(v7)
 
 
 def test_v7_cross_references_name_real_labels(v7):
