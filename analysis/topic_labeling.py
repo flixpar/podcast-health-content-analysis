@@ -3939,7 +3939,7 @@ def _make_product_mentions(
         context_units = _selected_units(units, context_start, context_end)
         output.append(
             {
-                "schema_version": SCHEMA_VERSION,
+                "schema_version": taxonomy["schema_version"],
                 "mention_id": f"episode_{exemplar['episode_id']}_product_{index:04d}",
                 "episode_id": exemplar["episode_id"],
                 "podcast_id": exemplar.get("podcast_id"),
