@@ -1,6 +1,7 @@
 import argparse
 import json
 import sqlite3
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -420,3 +421,104 @@ def test_runner_threads_validation_and_totals_what_lenient_changed(tmp_path, mon
     assert usage["accepted"] == 4 and usage["first_attempt_validity"] == 1.0
     assert usage["annotations_repaired"] == {"span_widened_for_quote": 4}
     assert usage["annotations_dropped"] == {"non_verbatim_quote": 8}
+
+
+@pytest.mark.parametrize("kind", ["detection", "claim", "product"])
+@pytest.mark.parametrize("found_required", [False, True])
+def test_required_recall_excludes_acceptable_matches(kind, found_required):
+    from analysis.benchmark import compare
+
+    item = make_item()
+    ref = reference_result(item)
+    golds = references.gold_for_item(item, {a: {"result": ref} for a in ("a", "b")}, {})
+    gold = next(g for g in golds if g.kind == kind)
+
+    acceptable = replace(gold, gold_id="acceptable", tier="acceptable")
+    required = replace(gold, gold_id="required", tight=(5, 5), envelope=(5, 5))
+    # Each row matches an acceptable atom, and optionally a required atom in a
+    # separate item; pooling must count only required matches in recall.
+    rows = [scoring.score_item(item, ref, [acceptable, required])]
+    if found_required:
+        rows.append(scoring.score_item(item, ref, [gold]))
+    group = scoring.group_of(gold)
+    expected = 0.5 if found_required else 0.0
+    assert scoring.summarize(rows)["groups"][group]["recall_strict"] == expected
+    assert compare._statistic(group, "recall")([compare._flat(r) for r in rows]) == expected
+    only_acceptable = scoring.score_item(item, ref, [acceptable])
+    assert scoring.summarize([only_acceptable])["groups"][group]["recall_strict"] is None
+
+
+@pytest.mark.parametrize("tiers", [("singleton",), ("required", "singleton"), ("acceptable", "singleton")])
+def test_span_iou_includes_all_matched_detections(tiers):
+
+    item = make_item()
+    pred = references.validate_result(
+        result(item["window_id"], [detection("u000002", "u000003", ["topic:sleep"], "deep sleep")]), item, AXES
+    )
+    gold = references.gold_for_item(item, {a: {"result": pred} for a in ("a", "b")}, {})[0]
+    rows = [scoring.score_item(item, pred, [replace(gold, tier=tier)]) for tier in tiers]
+    assert scoring.summarize(rows)["groups"]["detection:topic"]["mean_span_iou"] == 1.0
+    assert scoring.summarize([scoring.score_item(item, result(item["window_id"]), [gold])])["groups"]["detection:topic"]["mean_span_iou"] is None
+
+
+@pytest.mark.parametrize("tier", ["required", "acceptable"])
+@pytest.mark.parametrize("miss_required", [False, True])
+def test_adjacent_credit_only_removes_required_false_negatives(tier, miss_required):
+
+    item = make_item()
+    pred = references.validate_result(
+        result(item["window_id"], [detection("u000002", "u000003", ["topic:sleep"], "deep sleep")]), item, AXES
+    )
+    gold = references.gold_for_item(item, {a: {"result": pred} for a in ("a", "b")}, {})[0]
+    golds = [replace(gold, label="topic:food_nutrition", tier=tier)]
+    if miss_required:
+        golds.append(replace(gold, gold_id="miss", tight=(5, 5), envelope=(5, 5)))
+    adjacency = {tuple(sorted(("topic:sleep", "topic:food_nutrition")))}
+    row = scoring.score_item(item, pred, golds, adjacency=adjacency)
+    counts = row["counts"]["detection:topic"]
+    assert counts["adjacent"] == 1
+    assert counts.get("adjacent_required", 0) == (tier == "required")
+    assert scoring.summarize([row])["groups"]["detection:topic"]["f1_adjacent"] == (0.6667 if miss_required else 1.0)
+
+
+@pytest.mark.parametrize("change", [["--model", "other-model"], ["--temperature", "0.7"]])
+def test_rejected_resume_preserves_manifest_and_labels(tmp_path, monkeypatch, change):
+    monkeypatch.setattr(tl.ResponsesClient, "served_models", lambda self: {})
+    calls = []
+
+    def classify(self, window, taxonomy, model, settings, **kwargs):
+        calls.append(window["window_id"])
+        return result(window["window_id"]), {}
+
+    monkeypatch.setattr(tl.ResponsesClient, "classify", classify)
+    flags = ["--model", "stub-model", "--reasoning-effort", "none"]
+    args = runner.label_args(flags, config=None)
+    item = make_item()
+    runner.run_benchmark([item], TAXONOMY, args, "resume", repeats=2, runs_dir=tmp_path)
+    run_dir = tmp_path / "resume"
+    original = {p: p.read_bytes() for p in run_dir.rglob("*") if p.is_file()}
+    loaded = runner.load_run(run_dir)
+    changed = runner.label_args([*flags, *change], config=None)
+    with pytest.raises(tl.TopicLabelingError, match="different run"):
+        runner.run_benchmark([item], TAXONOMY, changed, "resume", repeats=1, runs_dir=tmp_path)
+    assert all(p.read_bytes() == contents for p, contents in original.items())
+    assert runner.load_run(run_dir) == loaded
+    assert len(calls) == 2
+    # Compatible resumes still support a growing item set.
+    new_item = make_item("c1w0002")
+    runner.run_benchmark([item, new_item], TAXONOMY, args, "resume", repeats=2, runs_dir=tmp_path)
+    assert len(calls) == 4
+
+
+def test_resume_checks_stores_outside_requested_repeats(tmp_path, monkeypatch):
+    monkeypatch.setattr(tl.ResponsesClient, "served_models", lambda self: {})
+    args = runner.label_args(["--model", "stub-model"], config=None)
+    runner.run_benchmark([], TAXONOMY, args, "resume", repeats=2, runs_dir=tmp_path)
+    run_dir = tmp_path / "resume"
+
+    with sqlite3.connect(run_dir / "repeat_1" / "labels.sqlite") as connection:
+        connection.execute("UPDATE run SET run_fingerprint = 'incompatible'")
+    original = (run_dir / "run_manifest.json").read_bytes()
+    with pytest.raises(tl.TopicLabelingError, match="different run"):
+        runner.run_benchmark([], TAXONOMY, args, "resume", repeats=1, runs_dir=tmp_path)
+    assert (run_dir / "run_manifest.json").read_bytes() == original
