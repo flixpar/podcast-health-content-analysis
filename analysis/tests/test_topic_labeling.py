@@ -42,7 +42,7 @@ def small_taxonomy():
 
 
 def test_compiles_only_canonical_topics_tables():
-    taxonomy = labeling.compile_taxonomy(ROOT / "topics.md")
+    taxonomy = labeling.compile_taxonomy(ROOT / "docs" / "original" / "topics.md")
     assert len(taxonomy["labels"]) == 84
     assert {row["kind"] for row in taxonomy["labels"]} == {"topic", "cross_cutting"}
     assert {row["axis"] for row in taxonomy["labels"]} == {"topic", "frame", "evidence"}
@@ -157,7 +157,7 @@ def test_prepare_writes_fingerprinted_compressed_windows(tmp_path):
     output = tmp_path / "output"
     args = argparse.Namespace(
         output_dir=output,
-        topics=ROOT / "topics.md",
+        topics=ROOT / "docs" / "original" / "topics.md",
         transcripts=transcript_dir,
         limit=None,
         manifest=None,
@@ -1648,10 +1648,13 @@ def test_response_is_one_result_object_for_the_one_window_sent():
 
 
 def test_a_benchmark_item_builds_a_single_window_request_and_validates():
-    """Offline shape check on a real benchmark window and the real codebook."""
-    taxonomy = labeling.load_taxonomy(ROOT / "benchmark" / "taxonomy.json")
+    """Offline shape check using source taxonomy and an authored window."""
+    taxonomy = labeling.compile_taxonomy(ROOT / "benchmark" / "topics-v6.md")
     label_axes = {row["label_id"]: row["axis"] for row in taxonomy["labels"]}
-    item = next(labeling.iter_jsonl(ROOT / "benchmark" / "items.jsonl"))
+    item = {
+        "window_id": "episode_1_window_0001",
+        "units": [{"unit_id": "u000001", "text": "Sleep is important for your health."}],
+    }
     window = {key: item[key] for key in ("window_id", "units")}
     settings = labeling.ModelSettings(max_output_tokens=1000, reasoning_effort="none")
     for flavor in labeling.API_FLAVORS.values():

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shlex
 import sys
 from collections import Counter
 from pathlib import Path
@@ -22,6 +23,8 @@ from analysis.benchmark import (
     POOL_DIR,
     DATA_DIR,
     DATA_DIR_ENV,
+    OUTPUT_DIR_ENV,
+    SPEC_DIR,
     REFERENCES_DIR,
     REPO_ROOT,
     RUNS_DIR,
@@ -43,7 +46,6 @@ from analysis.benchmark.taxonomy import (
     scoring_levels,
 )
 
-VENV_PYTHON = REPO_ROOT / ".venv" / "bin" / "python"
 
 
 def _print(value: Any) -> None:
@@ -306,7 +308,11 @@ def cmd_reference_tasks(args: argparse.Namespace) -> int:
     # The benchmark directory travels with the command: without it the
     # validator would check a v2 bundle against v1's taxonomy.
     validate_command = (
-        f"cd {REPO_ROOT} && {DATA_DIR_ENV}={DATA_DIR} {VENV_PYTHON} -m analysis.benchmark assemble-result "
+        f"cd {shlex.quote(str(REPO_ROOT))} && "
+        f"{DATA_DIR_ENV}={shlex.quote(str(SPEC_DIR))} "
+        f"{OUTPUT_DIR_ENV}={shlex.quote(str(DATA_DIR))} "
+        f"{shlex.quote(sys.executable)} -m analysis.benchmark "
+        f"--taxonomy {shlex.quote(str(args.taxonomy.resolve()))} assemble-result "
         f"--bundle <bundle_dir>"
     )
     seed = int(config["benchmark"]["seed"]) + sum(ord(c) for c in args.annotator)
@@ -316,7 +322,7 @@ def cmd_reference_tasks(args: argparse.Namespace) -> int:
     # Substitute the real bundle path into each bundle's instructions.
     for bundle_dir in sorted(run_dir.glob("bundle_*")):
         path = bundle_dir / "INSTRUCTIONS.md"
-        path.write_text(path.read_text(encoding="utf-8").replace("<bundle_dir>", str(bundle_dir)), encoding="utf-8")
+        path.write_text(path.read_text(encoding="utf-8").replace("<bundle_dir>", shlex.quote(str(bundle_dir))), encoding="utf-8")
     manifest = json.loads((run_dir / "manifest.json").read_text())
     _print({"run_dir": str(run_dir), "bundles": len(manifest["bundles"]), "items": len(items)})
     return 0

@@ -1,7 +1,10 @@
 """The v8 revision of the granular taxonomy: its own codebook, rubric and prompt identity."""
 
 import json
+import os
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -31,8 +34,17 @@ def test_v8_compiles_and_selects_its_own_prompt_files(v8):
 
 
 @pytest.mark.parametrize("level", ["parent", "domain"])
-def test_frozen_v3_taxonomy_supports_scoring_aliases(v8, level):
-    frozen = load_benchmark_taxonomy(ROOT / "benchmark" / "v3" / "taxonomy.json")
+def test_generated_v3_taxonomy_supports_scoring_aliases(v8, level, tmp_path):
+    taxonomy_path = tmp_path / "taxonomy.json"
+    subprocess.run(
+        [sys.executable, "-m", "analysis.benchmark", "taxonomy", "--out", str(taxonomy_path)],
+        cwd=ROOT,
+        env={**os.environ, "BENCHMARK_DIR": "benchmark/v3", "BENCHMARK_OUTPUT_DIR": str(tmp_path)},
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    frozen = load_benchmark_taxonomy(taxonomy_path)
     assert frozen["labels"] == v8["labels"]
     assert frozen["taxonomy_sha256"] == v8["taxonomy_sha256"]
     aliases = alias_map(frozen, level)

@@ -54,7 +54,7 @@ def test_v7_cross_references_name_real_labels(v7):
 
 
 def test_flat_taxonomy_keeps_its_schema_and_prompt_identity():
-    flat = labeling.compile_taxonomy(ROOT / "topics.md")
+    flat = labeling.compile_taxonomy(ROOT / "docs" / "original" / "topics.md")
     assert flat["schema_version"] == labeling.SCHEMA_VERSION
     assert "format" not in flat
     assert labeling.prompt_version(flat).startswith(labeling.PROMPT_VERSION + ":")
