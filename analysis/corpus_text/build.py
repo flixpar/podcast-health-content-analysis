@@ -38,6 +38,7 @@ def work(shard):
     return shard, eps, segs
 
 if __name__ == "__main__":
+    OUT.mkdir(parents=True, exist_ok=True)
     with Pool(28) as pool:
         total_e = total_s = 0
         for shard, e, s in pool.imap_unordered(work, range(N)):

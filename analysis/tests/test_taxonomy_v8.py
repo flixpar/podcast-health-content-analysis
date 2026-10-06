@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from analysis import topic_labeling as labeling
+from analysis.benchmark.taxonomy import alias_map, hierarchy_aliases, load_benchmark_taxonomy
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -27,6 +28,19 @@ def test_v8_compiles_and_selects_its_own_prompt_files(v8):
     parents = {row["label_id"] for row in v8["labels"] if row.get("level") == "parent"}
     narratives = [row for row in v8["labels"] if row["axis"] == "narrative"]
     assert all(row["home_topic"] in parents for row in narratives)
+
+
+@pytest.mark.parametrize("level", ["parent", "domain"])
+def test_frozen_v3_taxonomy_supports_scoring_aliases(v8, level):
+    frozen = load_benchmark_taxonomy(ROOT / "benchmark" / "v3" / "taxonomy.json")
+    assert frozen["labels"] == v8["labels"]
+    assert frozen["taxonomy_sha256"] == v8["taxonomy_sha256"]
+    aliases = alias_map(frozen, level)
+    assert frozen["benchmark_version"] == "v3"
+    assert aliases == hierarchy_aliases(v8, level)
+    assert aliases["topic:vaccines.hep_b"] == (
+        "topic:vaccines" if level == "parent" else "topic:@vaccines_infectious"
+    )
 
 
 def test_v8_narratives_state_a_bold_core_proposition(v8):
