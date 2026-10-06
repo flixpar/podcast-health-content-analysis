@@ -80,6 +80,11 @@ def compile_benchmark_taxonomy(topics_path: Path, out_path: Path = TAXONOMY_PATH
 
 
 def load_benchmark_taxonomy(path: Path = TAXONOMY_PATH) -> dict[str, Any]:
+    if not Path(path).exists():
+        raise tl.TopicLabelingError(
+            f"{path} is missing; generate the selected benchmark taxonomy with "
+            "python -m analysis.benchmark taxonomy"
+        )
     taxonomy = json.loads(Path(path).read_text(encoding="utf-8"))
     if taxonomy.get("schema_version") not in tl.SUPPORTED_TAXONOMY_SCHEMAS:
         raise tl.TopicLabelingError(f"{path} has schema {taxonomy.get('schema_version')}")

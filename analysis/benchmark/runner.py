@@ -184,7 +184,7 @@ def run_benchmark(
     notes: str | None = None,
     log: Any = None,
 ) -> dict[str, Any]:
-    """Label every item ``repeats`` times; writes benchmark/runs/<name>/."""
+    """Label every item ``repeats`` times in the selected local runs directory."""
     if args.concurrency < 1 or args.attempts < 1:
         raise tl.TopicLabelingError("concurrency and attempts must both be positive")
     run_dir = Path(runs_dir) / name

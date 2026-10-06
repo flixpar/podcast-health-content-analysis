@@ -10,7 +10,7 @@ much more detailed prompt. It runs through the same pipeline
 | `taxonomy/health-v7.md` | the label set: one source for all five axes |
 | `taxonomy/codebook-v7.md` | the task definition; reference annotators label against it and the prompt embeds it |
 | `analysis/prompts/rubric-v7.md` | labeler-specific preamble: purpose, an eight-pass procedure, calibration, a validated worked example |
-| `benchmark/v2/` | the benchmark built on this scheme (see `docs/benchmark.md`) |
+| `benchmark/v2/` | maintained benchmark specification; generated data lives in `local/benchmark/v2/` (see `docs/benchmark.md`) |
 
 ## Why more granular
 
@@ -32,11 +32,11 @@ v6 labels; narratives 0.91, claims 0.87, products 0.97, populations 1.00.
 Evidence signals were the weakest axis (0.74), and the codebook revision
 targeted it.
 
-The full benchmark (`benchmark/v2`, 320 windows, three independent Opus 5.5
+The archived full benchmark (320 windows, three independent Opus 5.5
 passes after the revision) confirms it: pairwise topic F1 0.86 at the
 subtopic level and 0.87 at the parent level, narratives 0.87, frames 0.87,
 evidence 0.86 (up from 0.74), populations 0.87 to 0.89, claims 0.89,
-products 0.94. See `docs/benchmark.md`, Version 2.
+products 0.94. See `docs/benchmark.md` for setup and the historical result summary.
 
 ## The five axes
 
@@ -103,6 +103,11 @@ new run.
 
 ## Running it
 
+The shipped `analysis/topic-labeling.toml` selects v7 for `prepare`. Command-line
+flags override its settings; set endpoint/model settings for your own deployment
+before labeling. The legacy flat source remains available with
+`--topics docs/original/topics.md`.
+
 ```bash
 .venv/bin/python analysis/topic_labeling.py prepare --topics taxonomy/health-v7.md \
     --metadata-db downloader/data/podcast_metadata.db --output-dir analysis/output/topic-labeling-v7
@@ -124,4 +129,63 @@ Edit `taxonomy/health-v7.md`; the compiler fails closed on malformed rows,
 missing definitions, unknown narrative home topics and missing axes, and the
 test suite checks that every backticked cross-reference in definitions and the
 codebook names a real label. A changed label set is a new benchmark version:
-recompile `benchmark/v2/taxonomy.json` only together with re-annotation.
+regenerate `local/benchmark/v2/taxonomy.json` with
+`BENCHMARK_DIR=benchmark/v2 python -m analysis.benchmark taxonomy` only together
+with re-annotation. Compiled taxonomies and benchmark model outputs are local
+artifacts; tests compile source taxonomies and use self-contained windows.
+
+## Interpretation and validation
+
+The pipeline measures discussed content, rhetoric, evidence invoked, checkable
+claims, and products. A frame is not a truth verdict, reporting a claim is not
+endorsement, and citing a study does not make a claim true. `discourse_role`
+separates endorsement, questions, quoted reports, and rebuttals. Expressed
+certainty describes the speaker's wording; `confidence` describes the model's
+confidence in its coding.
+
+`possible_misinformation=true` identifies a material, externally checkable claim
+for later evidence review. Labeling alone does not establish misinformation.
+Evidence verification and human assessment remain separate stages.
+
+Preparation processes every transcript without a keyword retrieval gate. Its
+defaults are 900-word windows with 150 words of overlap and sentence-like units
+of at most 45 words. Stable unit IDs preserve auditable spans. Interpolated
+timing is marked as such, and untimed transcripts remain untimed.
+
+Each request labels one window with a strict JSON Schema. Validation checks the
+window ID, known labels on a single axis, span bounds, duplicates, verbatim
+quotes, and certainty markers. Failures remain durable and retryable; missing
+results are not implicit negative annotations. `--validation strict` rejects
+the whole invalid response. `lenient` repairs spans only when a quote or marker
+unambiguously locates the correction, drops unrepairable annotations, and logs
+repairs/drops. The mode is part of the fingerprint and must be reported with
+evaluation results.
+
+Merging deduplicates overlapping decisions deterministically while retaining
+independent one-label annotations for all five axes. Products merge only when
+their spans overlap/touch and their normalized names match; claims merge only
+across overlapping matching passages. Later repetitions remain separate
+instances, with stable keys supporting distinct-claim or distinct-product
+counts. Merged rows retain context, timing quality, model provenance, and
+supporting windows.
+
+For a pilot, inspect unresolved rejection kinds and run `sample` to create
+blinded label, claim, and product review sheets plus uniform windows for an
+independent false-negative audit. Rare-topic recall needs a supplementary
+targeted sample with its selection bias reported. The reference benchmark in
+`docs/benchmark.md` complements this human validation.
+
+## Evidence verification
+
+Retrieve evidence outside the model request from one frozen, validated corpus.
+`verify` checks the corpus ID/version/hash, validation-manifest hash, candidate
+and passage IDs, retrieval limits, and citations before accepting results.
+The verifier receives only the claim and retrieved passages, preserving the
+claim's expressed certainty. Its outcomes are `supported`, `contradicted`,
+`misleading_or_missing_context`, `mixed`, `insufficient_evidence`, and
+`not_verifiable`. Insufficient retrieval is a valid outcome, not a model failure.
+
+The maintained operational settings live in `analysis/topic-labeling.toml`.
+The earlier flat-scheme method and throughput experiments are preserved under
+`local/docs/topic-labeling-method.md`; the current scheme and workflow are
+documented here.
