@@ -31,6 +31,24 @@ downloads skip files already on disk, and the Common Crawl walk caches one
 JSONL per (pattern, crawl).
 
 Pass a target name to `fetch_wayback.py` or `parse.py` to work on one source.
+Targeted parses write diagnostic shards such as `chart_rows_podbay.parquet`;
+analysis, population, and turnover load only `chart_rows.parquet` and
+`chart_rows_cc.parquet`. Run a full parse to incorporate a refreshed source.
+
+All capture timestamps are retained even when payloads repeat. CDX indexes
+written before this policy are refreshed once, tracked by `index/*.policy.json`.
+After upgrading, rerun indexing, downloads, both full parses, and then analysis,
+turnover, population, and recoverability in the order above. Existing download
+files are reused, but newly retained dates require additional downloads.
+
+Daily analysis chooses the capture with the most distinct top-100 ranks, then
+the greatest total depth, breaking ties toward the earliest capture. Chartable
+pages are joined only within the same archive and UTC day, within one hour of
+the first page, using the closest capture of each additional page. Overlapping
+ranks keep the lower-numbered page's row. The same selection precedes the
+population's depth cuts and drives completeness checks and turnover analysis.
+The one-hour allowance estimates a coherent page set; it cannot establish that
+the chart stayed unchanged between page captures.
 
 Recoverability phases can be run separately (`lookup`, `feeds`, `audio`,
 `verify`, `wayback`, `report`). `report` uses cached measurements and can be
@@ -44,6 +62,8 @@ This permits rechecking known snapshots when CDX is unavailable. The default
 Wayback budget is 30 minutes; raise it with `--wayback-budget SECONDS` or rerun
 `wayback report` until the report has no pending fallback probes. Report dates
 are generation dates; cached measurements may be older.
+Audio spot-checks retry when no cached probe returned usable bytes, and refresh
+when sampled enclosure URLs change; successful unchanged probe sets are reused.
 
 ## Notes for whoever runs this next
 
@@ -61,3 +81,5 @@ are generation dates; cached measurements may be older.
 - Wayback indexes are cached only after validating the CDX records. HTTP errors,
   malformed responses, and ambiguous empty bodies retry; an unsuccessful index
   run exits nonzero so it cannot silently look complete.
+- Common Crawl index runs also exit nonzero when any query exhausts retries;
+  reruns reuse completed queries and retry only missing caches.

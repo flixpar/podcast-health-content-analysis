@@ -439,7 +439,10 @@ def phase_audio() -> dict:
     cache = load_cache("audio")
     feeds = load_cache("feeds")
     todo = [(sid, [s["url"] for s in rec.get("samples", [])])
-            for sid, rec in feeds.items() if sid not in cache and rec.get("samples")]
+            for sid, rec in feeds.items() if rec.get("samples")
+            and (not audio_ok(cache.get(sid))
+                 or [p.get("url") for p in cache.get(sid, [])]
+                 != [s["url"] for s in rec["samples"]])]
     print(f"  {len(todo)} shows to spot-check ({len(cache)} cached)")
     done = 0
     with ThreadPoolExecutor(AUDIO_WORKERS) as pool:

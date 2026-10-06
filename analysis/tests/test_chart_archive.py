@@ -8,7 +8,10 @@ import pandas as pd
 import pytest
 import requests
 
-from analysis.chart_archive import cdx_index, parse, population, recoverability as rec, within_month
+from analysis.chart_archive import (
+    analyze, cc_fetch, cc_index, cdx_index, fetch_wayback, parse, population,
+    recoverability as rec, snapshots, within_month,
+)
 
 
 def test_resolve_entities_uses_only_apple_show_ids_and_preserves_direct_ids():
@@ -205,6 +208,7 @@ def test_cdx_rejects_bad_responses_before_accepting_valid_data(monkeypatch, bad)
     assert cdx_index.cdx("example.com") == CDX_ROW
     assert run.call_count == 2
     assert "-fsSL" in run.call_args.args[0]
+    assert "collapse=" not in run.call_args.args[0][-1]
 
 
 def test_cdx_replaces_invalid_cache_and_keeps_failure_retryable(monkeypatch, tmp_path):
@@ -251,7 +255,8 @@ def test_failed_wayback_request_is_incomplete_and_changed_window_requires_retry(
 def test_sparse_turnover_main_writes_readable_empty_outputs(monkeypatch, tmp_path):
     # Enough usable days to reach the analysis, but no pair in a supported gap bin.
     rows = [dict(source="podbay", region="us", chart="all-podcasts", unit="podcast",
-                 genre="all-podcasts", rank=rank, entity_id=str(rank), captured_at=date)
+                 genre="all-podcasts", rank=rank, entity_id=str(rank), captured_at=date,
+                 path=f"raw/{date}")
             for date in ("2010-01-01", "2011-01-01", "2012-01-01")
             for rank in range(1, 101)]
     (tmp_path / "chart_rows.parquet").touch()
@@ -334,3 +339,194 @@ def test_wayback_reuses_discovery_but_reprobes_legacy_enclosures(monkeypatch):
     assert result["spans_window"]
     assert result["era_enclosures_ok"] == 0
     assert rec.current_wayback(result, row)
+
+
+def test_cdx_refreshes_legacy_digest_collapsed_cache(monkeypatch, tmp_path):
+    monkeypatch.setattr(cdx_index, "INDEX_DIR", tmp_path)
+    monkeypatch.setattr(cdx_index, "TARGETS", {"chart": "example.com"})
+    monkeypatch.setattr(cdx_index.time, "sleep", lambda _: None)
+    (tmp_path / "chart.cdx").write_text(CDX_ROW)
+    repeated = CDX_ROW + CDX_ROW.replace("20190101000000", "20190110000000")
+    fetch = Mock(return_value=repeated)
+    monkeypatch.setattr(cdx_index, "cdx", fetch)
+    assert cdx_index.main() == 0
+    assert (tmp_path / "chart.cdx").read_text() == repeated
+    assert cdx_index.main() == 0
+    fetch.assert_called_once()
+
+
+def test_downloaders_keep_identical_payloads_at_distinct_dates(monkeypatch, tmp_path):
+    monkeypatch.setattr(fetch_wayback, "INDEX_DIR", tmp_path)
+    repeated = CDX_ROW.replace("20190101000000", "20190110000000")
+    (tmp_path / "podbay.cdx").write_text(CDX_ROW + repeated + repeated)
+    assert [r["timestamp"] for r in fetch_wayback.load_rows()] == [
+        "20190101000000", "20190110000000"]
+    monkeypatch.setattr(cc_fetch, "CC_INDEX", tmp_path / "cc")
+    target = tmp_path / "cc/podbay"
+    target.mkdir(parents=True)
+    captures = [dict(status="200", url="https://example.com/chart", digest="SAME",
+                     timestamp=ts, filename="capture.warc.gz", offset="0", length="100")
+                for ts in ("20190101000000", "20190110000000", "20190110000000")]
+    (target / "crawl.jsonl").write_text("\n".join(map(json.dumps, captures)))
+    assert [r["timestamp"] for r in cc_fetch.load_rows()] == [
+        "20190101000000", "20190110000000"]
+    weights = population.midpoint_weights(pd.Series(["2019-01-01", "2019-01-10", "2019-01-11"]))
+    assert weights.iloc[:2].sum() == 9.5  # repeated chart stays through Jan 10
+
+
+def test_cc_failure_exits_nonzero_and_only_retries_missing_query(monkeypatch, tmp_path):
+    monkeypatch.setattr(cc_index, "CC_DIR", tmp_path)
+    monkeypatch.setattr(cc_index, "PATTERNS", {"chart": "example.com/*"})
+    monkeypatch.setattr(cc_index.time, "sleep", lambda _: None)
+    (tmp_path / "collinfo.json").write_text(json.dumps([{"id": "ok"}, {"id": "failed"}]))
+    fetch = Mock(side_effect=['{"url": "https://example.com/chart"}', None, ""])
+    monkeypatch.setattr(cc_index, "get", fetch)
+    assert cc_index.main() == 1
+    assert (tmp_path / "chart/ok.jsonl").exists()
+    assert not (tmp_path / "chart/failed.jsonl").exists()
+    assert cc_index.main() == 0
+    assert (tmp_path / "chart/failed.jsonl").read_text() == ""
+    assert fetch.call_count == 3
+    assert cc_index.main() == 0
+    assert fetch.call_count == 3
+
+
+@pytest.mark.parametrize("target", ["marketingtools", "applemarketingtools"])
+@pytest.mark.parametrize("slug, unit", [("api_v2_us_podcasts_top_100_podcasts.json", "podcast"),
+                                        ("api_v2_us_podcasts_top_100_podcast-episodes.json", "episode")])
+def test_marketing_tools_results_parse_in_order(tmp_path, target, slug, unit):
+    path = tmp_path / "feed.json.gz"
+    url = "https://podcasts.apple.com/us/podcast/show/id123"
+    path.write_bytes(gzip.compress(json.dumps({"feed": {"results": [
+        dict(id="123", name="First", artistName="Publisher", url=url),
+        dict(id="456", name="Second", artistName="Other", url=url.replace("123", "456")),
+    ]}}).encode()))
+    rows = parse.PARSERS[target](path, slug)
+    assert [(r["entity_id"], r["name"], r["rank"], r["unit"]) for r in rows] == [
+        ("123", "First", 1, unit), ("456", "Second", 2, unit)]
+    assert rows[0]["publisher"] == "Publisher"
+    assert rows[0]["entity_url"] == url
+
+
+@pytest.mark.parametrize("failed", [dict(error="timeout"), dict(status=503),
+                                  dict(status=200, bytes=0),
+                                  dict(status=200, bytes=4096, content_type="text/html")])
+def test_audio_retries_failed_probes_and_refreshes_changed_samples(monkeypatch, tmp_path, failed):
+    monkeypatch.setattr(rec, "CACHE", tmp_path)
+    rec.save_cache("feeds", {"123": {"samples": [{"url": "https://audio/old"}]}})
+    rec.save_cache("audio", {"123": [dict(failed, url="https://audio/old")]})
+    probe = Mock(side_effect=lambda url: dict(url=url, status=206, bytes=4096,
+                                            content_type="audio/mpeg"))
+    monkeypatch.setattr(rec, "probe_audio", probe)
+    assert rec.audio_ok(rec.phase_audio()["123"])
+    assert probe.call_count == 1
+    rec.phase_audio()
+    assert probe.call_count == 1
+    rec.save_cache("feeds", {"123": {"samples": [{"url": "https://audio/new"}]}})
+    assert rec.phase_audio()["123"][0]["url"] == "https://audio/new"
+    assert probe.call_count == 2
+
+
+def chart_capture(path, timestamp, ranks=range(1, 101), *, source="podbay", page=1,
+                  archive="wayback", changed=False):
+    return [dict(source=source, platform="apple", region="us", unit="podcast",
+                 chart="all-podcasts", genre="all-podcasts", page=page, archive=archive,
+                 rank=rank, entity_id="999" if changed and rank == 50 else str(rank),
+                 name="Changed" if changed and rank == 50 else f"Show {rank}",
+                 key="changed" if changed and rank == 50 else f"show{rank}",
+                 publisher="Publisher", captured_at=timestamp,
+                 date=timestamp[:10], path=path)
+            for rank in ranks]
+
+
+def test_population_uses_one_capture_before_applying_depth_cut():
+    df = pd.DataFrame(chart_capture("early", "2020-01-01T01:00:00Z", range(1, 51))
+                      + chart_capture("late", "2020-01-01T02:00:00Z", changed=True))
+    days = pd.DataFrame([dict(date="2020-01-01", series="apple/podbay", cut=50)])
+    observations = population.chart_observations(df, days)
+    assert len(observations) == 50
+    assert set(observations.path) == {"late"}
+    per_day = population.score(population.resolve_entities(df, observations),
+                               pd.Series({"2020-01-01": 10.0}))
+    assert "50" not in set(per_day.entity)
+    assert "999" in set(per_day.entity)
+    assert per_day.w.sum() == 500
+
+
+def test_daily_ties_choose_earliest_capture_deterministically():
+    df = pd.DataFrame(chart_capture("early", "2020-01-01T01:00:00Z")
+                      + chart_capture("late", "2020-01-01T02:00:00Z", changed=True))
+    assert set(snapshots.select_daily(df.sample(frac=1, random_state=1)).path) == {"early"}
+
+
+@pytest.mark.parametrize("timestamp, archive, complete", [
+    ("2020-01-01T01:05:00Z", "wayback", True),
+    ("2020-01-01T13:00:00Z", "wayback", False),
+    ("2020-01-01T01:05:00Z", "commoncrawl", False),
+    ("2020-01-02T01:05:00Z", "wayback", False),
+])
+def test_chartable_aligns_pages_by_time_and_archive(timestamp, archive, complete):
+    df = pd.DataFrame(chart_capture("page1", "2020-01-01T01:00:00Z", range(1, 51),
+                                    source="chartable_itunes")
+                      + chart_capture("page2", timestamp, range(51, 101),
+                                      source="chartable_itunes", page=2, archive=archive))
+    selected = snapshots.select_daily(df)
+    first_day = selected[selected.date == "2020-01-01"]
+    assert len(first_day) == (100 if complete else 50)
+    maps = within_month.daily_maps(df, depth=100)
+    assert bool(maps) == complete
+
+
+def test_chartable_uses_nearest_page_once_and_does_not_combine_partial_page1s():
+    df = pd.DataFrame(chart_capture("page1", "2020-01-01T01:00:00Z", range(1, 51),
+                                    source="chartable_itunes")
+                      + chart_capture("near", "2020-01-01T01:05:00Z", range(51, 101),
+                                      source="chartable_itunes", page=2)
+                      + chart_capture("far", "2020-01-01T01:15:00Z", range(51, 101),
+                                      source="chartable_itunes", page=2, changed=True))
+    assert set(snapshots.select_daily(df).path) == {"page1", "near"}
+    partial = pd.DataFrame(chart_capture("a", "2020-01-01T01:00:00Z", range(1, 51))
+                           + chart_capture("b", "2020-01-01T02:00:00Z", range(51, 101)))
+    assert len(snapshots.select_daily(partial)) == 50
+    assert not within_month.daily_maps(partial, depth=100)
+
+
+def test_all_aggregate_consumers_exclude_targeted_shards(monkeypatch, tmp_path):
+    main = pd.DataFrame(chart_capture("main", "2020-01-01T01:00:00Z", range(1, 2)))
+    cc = pd.DataFrame(chart_capture("cc", "2020-01-02T01:00:00Z", range(1, 2), archive="commoncrawl"))
+    main.to_parquet(tmp_path / "chart_rows.parquet")
+    cc.to_parquet(tmp_path / "chart_rows_cc.parquet")
+    pd.concat([main] * 10).to_parquet(tmp_path / "chart_rows_podbay.parquet")
+    pd.concat([cc] * 10).to_parquet(tmp_path / "chart_rows_cc_podbay.parquet")
+    monkeypatch.setattr(analyze, "PARSED", tmp_path)
+    monkeypatch.setattr(population, "PARSED", tmp_path)
+    assert analyze.load().path.tolist() == ["main", "cc"]
+    assert population.load_rows().path.tolist() == ["main", "cc"]
+    monkeypatch.setattr(within_month, "PARSED", tmp_path)
+    monkeypatch.setattr(within_month, "SUMMARY", tmp_path / "summary")
+    seen = []
+    monkeypatch.setattr(within_month, "series_frames", lambda df: seen.extend(df.path) or {})
+    assert within_month.main() == 0
+    assert seen == ["main", "cc"]
+
+
+@pytest.mark.parametrize("source, page, timestamp, expected_top100", [
+    ("podbay", 1, "2020-01-01T02:00:00Z", 50),
+    ("chartable_itunes", 2, "2020-01-01T01:05:00Z", 100),
+    ("chartable_itunes", 2, "2020-01-01T13:00:00Z", 50),
+])
+def test_summary_and_population_trust_the_same_selected_snapshot(
+        monkeypatch, tmp_path, source, page, timestamp, expected_top100):
+    rows = chart_capture("first", "2020-01-01T01:00:00Z", range(1, 51), source=source)
+    rows += chart_capture("second", timestamp, range(51, 101), source=source, page=page)
+    pd.DataFrame(rows).assign(slug="overall").to_parquet(tmp_path / "chart_rows.parquet")
+    monkeypatch.setattr(analyze, "PARSED", tmp_path)
+    monkeypatch.setattr(analyze, "SUMMARY", tmp_path / "summary")
+    monkeypatch.setattr(analyze, "DB", tmp_path / "absent.db")
+    monkeypatch.setattr(population, "PARSED", tmp_path)
+    assert analyze.main() == 0
+    daily = pd.read_csv(tmp_path / "summary/flagship_daily_snapshots.csv")
+    assert daily.top100.tolist() == [expected_top100]
+    assert daily.full_top100.tolist() == [expected_top100 == 100]
+    assert len(population.trusted_days()) == (1 if expected_top100 == 100 else 0)
+    assert len(pd.read_parquet(tmp_path / "flagship_us_overall.parquet")) == expected_top100

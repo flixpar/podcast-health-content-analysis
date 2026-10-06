@@ -14,6 +14,11 @@ from pathlib import Path
 
 import pandas as pd
 
+if __package__:
+    from .snapshots import load_canonical, select_daily
+else:
+    from snapshots import load_canonical, select_daily
+
 ROOT = Path(__file__).resolve().parents[2] / "data" / "chart-archive"
 PARSED = ROOT / "parsed"
 SUMMARY = PARSED / "summary"
@@ -21,8 +26,7 @@ DB = Path(__file__).resolve().parents[2] / "downloader" / "data" / "podcast_meta
 
 
 def load() -> pd.DataFrame:
-    frames = [pd.read_parquet(p) for p in sorted(PARSED.glob("chart_rows*.parquet"))]
-    df = pd.concat(frames, ignore_index=True)
+    df = load_canonical(PARSED)
     df["captured_at"] = pd.to_datetime(df["captured_at"], utc=True)
     df["date"] = df["captured_at"].dt.date
     df["month"] = df["captured_at"].dt.to_period("M").astype(str)
@@ -49,10 +53,7 @@ def agreement(fl: pd.DataFrame, a: str, b: str, depth: int,
         sub = sub.dropna(subset=["key"])
         out = {}
         for date, g in sub.groupby("date"):
-            # one capture per day: merging two captures of the same chart
-            # inflates the set and depresses Jaccard for no good reason
-            best = max(g.groupby("path"), key=lambda kv: len(kv[1]))[1]
-            best = best.sort_values("rank").drop_duplicates("key")
+            best = g.sort_values("rank").drop_duplicates("key")
             if len(best) >= min(depth, 10):
                 out[date] = dict(zip(best["key"], best["rank"]))
         return out
@@ -145,13 +146,13 @@ def main() -> int:
     by_source.to_csv(SUMMARY / "by_source.csv", index=False)
     findings["by_source"] = by_source.to_dict("records")
 
-    fl = flagship(df)
+    fl = select_daily(flagship(df), keys=["series"])
     fl.to_parquet(PARSED / "flagship_us_overall.parquet", index=False)
 
     # snapshot = one capture of one chart; depth = deepest rank in it
     snaps = fl.groupby(["series", "path", "date", "month"]).agg(
         depth=("rank", "max"), rows=("rank", "size")).reset_index()
-    # Chartable paginates, so merge pages captured on the same day. `top100`
+    # Daily selection already aligned Chartable pages. `top100`
     # counts distinct ranks 1-100 actually present: a day where only ?page=2
     # was captured has depth 200 and no top-100 rows at all.
     top100 = (fl[fl["rank"] <= 100].groupby(["series", "date"])["rank"]

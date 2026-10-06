@@ -9,6 +9,12 @@ the harvesters and parsers are in `analysis/chart_archive/`.
 source-coverage tables retain their original September 3/4 measurement dates;
 §6 and §6a use the corrected Apple-ID policy and refreshed recovery evidence.
 
+**Archive-policy caveat (PR review fixes).** The measurements below predate
+retaining repeated capture timestamps, coherent daily capture/page selection,
+and Marketing Tools JSON parsing. Regenerate the archive and downstream
+outputs using `analysis/chart_archive/README.md` before treating the quoted
+snapshot counts, exposure estimates, or population membership as current.
+
 The question this answers: *can we reconstruct historical top-podcast lists well
 enough to define a study population, and which series should define it?*
 

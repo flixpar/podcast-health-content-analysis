@@ -9,6 +9,12 @@ follows is the rule it produced, the files it produced, and how to land both in
 **Population and recovery refreshed 2026-09-29; recovery is provisional where
 Wayback probes remain pending.**
 
+**Archive-policy caveat (PR review fixes).** The counts and generated files
+described here predate retaining repeated capture timestamps, coherent daily
+capture/page selection, and Marketing Tools JSON parsing. Regenerate them in
+the order documented in `analysis/chart_archive/README.md` before backfilling
+or validating population membership against these historical counts.
+
 There are two separable jobs: **backfill** (load 2012-2026 chart history into
 the database and select the study population) and **capture** (a daily job so
 the series keeps growing). Do them in that order; they share nothing but the

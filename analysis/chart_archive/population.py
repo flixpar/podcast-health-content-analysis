@@ -21,13 +21,17 @@ sensitivity check.
 
 from __future__ import annotations
 
-import glob
 import json
 import re
 import sqlite3
 from pathlib import Path
 
 import pandas as pd
+
+if __package__:
+    from .snapshots import load_canonical, select_daily
+else:
+    from snapshots import load_canonical, select_daily
 
 ROOT = Path(__file__).resolve().parents[2] / "data" / "chart-archive"
 PARSED = ROOT / "parsed"
@@ -59,8 +63,7 @@ def key(name) -> str | None:
 
 
 def load_rows() -> pd.DataFrame:
-    df = pd.concat([pd.read_parquet(p) for p in sorted(PARSED.glob("chart_rows*.parquet"))],
-                   ignore_index=True)
+    df = load_canonical(PARSED)
     df["captured_at"] = pd.to_datetime(df["captured_at"], utc=True)
     df["date"] = df["captured_at"].dt.date.astype(str)
     df["key"] = df["name"].map(key)
@@ -76,7 +79,7 @@ def trusted_days() -> pd.DataFrame:
         sub = daily[daily.series == series]
         # the 100-deep mirrors have to be complete; Apple's page is 24 by design
         sub = sub[sub.full_top100] if cut == DEEP_CUT else sub[sub.depth >= cut]
-        sub = sub[~sub.apply(lambda r: (r["series"], r["date"]) in DISTRUSTED, axis=1)]
+        sub = sub.loc[~sub["date"].isin({d for s, d in DISTRUSTED if s == series})]
         keep.append(sub.assign(cut=cut)[["date", "series", "cut"]])
     days = pd.concat(keep, ignore_index=True)
     # a day covered by two series is counted once, at the greater depth
@@ -103,12 +106,14 @@ def chart_observations(df: pd.DataFrame, days: pd.DataFrame,
     for series, group in days.groupby("series"):
         source = src_of[series]
         cut = uniform_cut or int(group["cut"].iloc[0])
-        sub = df[(df.source == source) & df.date.isin(set(group["date"]))
-                 & df.key.notna() & (df["rank"] <= cut)]
+        sub = df[(df.source == source) & (df.region == "us")
+                 & df.date.isin(set(group["date"]))]
         if source == "apple_charts_page":
             sub = sub[(sub.chart == "Top Shows") & (sub.genre == "All Podcasts")]
         else:
             sub = sub[(sub.genre == "all-podcasts") & (sub.unit == "podcast")]
+        sub = select_daily(sub, keys=["source"])
+        sub = sub[sub.key.notna() & (sub["rank"] <= cut)]
         frames.append(sub.assign(series=series, cut=cut))
     return pd.concat(frames, ignore_index=True)
 
