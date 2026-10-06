@@ -1,0 +1,47 @@
+# Settings for labeling with TypeSafe's System One API instead of a generative
+# model. The method, its measured quality and its limits are in
+# docs/typesafe-labeling.md. Not read by default; name it:
+#
+#   .venv/bin/python analysis/topic_labeling.py prepare \
+#       --config analysis/topic-labeling-typesafe.toml --output-dir /tmp/ts-smoke --limit 3
+#   .venv/bin/python analysis/topic_labeling.py label \
+#       --config analysis/topic-labeling-typesafe.toml --output-dir /tmp/ts-smoke
+#
+# Use this config for prepare and label so prepare selects the supported flat
+# source. Merge/sample may reuse it for the same output paths.
+# `verify` has no TypeSafe counterpart, so it keeps analysis/topic-labeling.toml.
+# The model, the question set and the policy are the run fingerprint; the
+# decoding keys the generative configs set (reasoning_effort, temperature,
+# max_output_tokens) are not, and are left out.
+
+[paths]
+topics = "docs/original/topics.md"
+transcripts = "downloader/data/transcripts"
+output_dir = "local/topic-labeling-typesafe"
+
+[label]
+api = "typesafe"
+api_base = ["https://api.typesafe.ai/v1"]
+# The name of the variable, never the key; read from the environment, then .env.
+api_key_env = "TYPESAFE_API_KEY"
+# Pinned: `jev-latest` moves with each release, and the policy thresholds were
+# tuned against this version's probabilities. Re-tune before moving it
+# (analysis/benchmark/typesafe_tune.py does it offline from a benchmark run).
+model = "jev-1.13.0"
+# A request takes about half a second; this is for a stalled connection.
+timeout = 120
+attempts = 3
+# One window is two to five sequential requests. The account limit is 1,200
+# requests a minute, so eight windows at a time is about what it allows; the
+# client backs off on 429 on its own schedule if the limit moves.
+concurrency = 8
+# Policy overrides (typesafe_labeling.Policy keys), if the defaults are not
+# wanted. Composition thresholds can also be changed after the fact: every
+# probability is kept in <output-dir>/typesafe_judgments.jsonl.
+# typesafe_policy = "analysis/typesafe-policy.toml"
+
+# Spending guard. Billed per input token; a full-corpus pass is on the order of
+# $3,000, so set an allocation for it rather than relying on the daily cap.
+usage_limits = "analysis/usage-limits.toml"
+provider = "typesafe"
+# experiment = "typesafe-pilot"

@@ -108,11 +108,17 @@ flags override its settings; set endpoint/model settings for your own deployment
 before labeling. The legacy flat source remains available with
 `--topics docs/original/topics.md`.
 
+The optional TypeSafe cascade has a separate explicit flat-source config,
+`analysis/topic-labeling-typesafe.toml`. It implements the flat claim contract
+and rejects hierarchical v7/v8 before contacting an endpoint; its historical
+91-label evaluation does not validate this granular scheme. See
+[typesafe-labeling.md](typesafe-labeling.md) for that method and its limits.
+
 ```bash
 .venv/bin/python analysis/topic_labeling.py prepare --topics taxonomy/health-v7.md \
-    --metadata-db downloader/data/podcast_metadata.db --output-dir analysis/output/topic-labeling-v7
-.venv/bin/python analysis/topic_labeling.py label --output-dir analysis/output/topic-labeling-v7
-.venv/bin/python analysis/topic_labeling.py merge --output-dir analysis/output/topic-labeling-v7
+    --metadata-db downloader/data/podcast_metadata.db --output-dir local/topic-labeling-v7
+.venv/bin/python analysis/topic_labeling.py label --output-dir local/topic-labeling-v7
+.venv/bin/python analysis/topic_labeling.py merge --output-dir local/topic-labeling-v7
 ```
 
 Results use schema `topic-labeling-v5`. Merged outputs add, under v7:

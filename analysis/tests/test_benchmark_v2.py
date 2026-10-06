@@ -8,12 +8,22 @@ import pytest
 
 from analysis import topic_labeling as tl
 from analysis.benchmark import __main__ as cli
-from analysis.benchmark import matching, references, scoring
+from analysis.benchmark import matching, references, scoring, runner
 from analysis.benchmark.taxonomy import hierarchy_aliases, label_axes, scoring_levels
 
 ROOT = Path(__file__).resolve().parents[2]
 TAXONOMY = tl.compile_taxonomy(ROOT / "taxonomy" / "health-v7.md")
 AXES = label_axes(TAXONOMY)
+
+
+def test_merged_generative_benchmark_retains_hierarchical_schema_and_prompt(tmp_path, monkeypatch):
+    monkeypatch.setattr(tl.ResponsesClient, "served_models", lambda self: {"http://test": "stub"})
+    monkeypatch.setattr(tl, "resolve_api_key", lambda args: None)
+    args = runner.label_args(["--model", "stub", "--api-base", "http://test"], config=None)
+    manifest = runner.run_benchmark([], TAXONOMY, args, "granular", repeats=0, runs_dir=tmp_path)
+    assert manifest["schema_version"] == TAXONOMY["schema_version"]
+    assert manifest["prompt_version"] == tl.prompt_version(TAXONOMY)
+    assert manifest["schema_version"] != tl.SCHEMA_VERSION
 
 UNITS = [
     "Welcome back to the show everybody.",

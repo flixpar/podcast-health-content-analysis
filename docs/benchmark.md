@@ -60,6 +60,14 @@ compiler, including parent/domain alias maps. For the flat scheme, unset
 `BENCHMARK_DIR` or select `benchmark` instead. A compiled taxonomy is a generated
 run input; changing its source requires a new benchmark version and references.
 
+TypeSafe is a flat-scheme candidate only: select `BENCHMARK_DIR=benchmark` and
+`--pipeline-config benchmark/pipeline-typesafe.toml`. It does not accept a
+rubric replacement or hierarchical v7/v8. Raw probabilities live in each
+repeat's `typesafe_judgments.jsonl`; offline tuning uses
+`python -m analysis.benchmark.typesafe_tune local/benchmark/runs/RUN` with the
+same benchmark selection. See [the TypeSafe method](typesafe-labeling.md) for
+the historical flat evaluation and its limitations.
+
 To resume an existing dataset, copy its preserved artifacts into the selected
 local artifact directory. During repository cleanup, byte-for-byte copies were
 preserved under `local/pr-cleanup-archive/pr-9/benchmark/`, with an

@@ -187,28 +187,33 @@ def run_benchmark(
     """Label every item ``repeats`` times in the selected local runs directory."""
     if args.concurrency < 1 or args.attempts < 1:
         raise tl.TopicLabelingError("concurrency and attempts must both be positive")
+    tl.require_label_taxonomy(getattr(args, "api", "responses"), taxonomy)
     run_dir = Path(runs_dir) / name
     run_dir.mkdir(parents=True, exist_ok=True)
     api_key = tl.resolve_api_key(args)
-    api_bases = args.api_base or [tl.DEFAULT_API_BASE]
     limiter = tl.build_limiter(args)
-    client = tl.ResponsesClient(
-        api_bases, api_key, args.timeout, args.attempts, limiter=limiter, provider=args.provider, api=args.api
-    )
+    client = tl.build_label_client(args, api_key, limiter)
     served = client.served_models()
     model = args.model or client.discover_model()
     settings = tl.ModelSettings.from_args(args)
-    instructions, prompt_version, rubric_sha = build_instructions(taxonomy, rubric_file)
     windows = [window_payload(item) for item in items]
+    if isinstance(client, tl.TypeSafeClient):
+        # No rubric to build or replace: the method's prompt is its question
+        # set, and its identity is that plus its policy (see TypeSafeClient).
+        if rubric_file is not None:
+            raise tl.TopicLabelingError("--rubric-file has nothing to replace under --api typesafe")
+        instructions = None
+        method = client.fingerprint(taxonomy)
+    else:
+        instructions, prompt_version, rubric_sha = build_instructions(taxonomy, rubric_file)
+        method = {"prompt_version": prompt_version, "rubric_sha256": rubric_sha, **settings.fingerprint()}
     fingerprint_inputs = {
         "schema_version": taxonomy["schema_version"],
-        "prompt_version": prompt_version,
-        "rubric_sha256": rubric_sha,
         "taxonomy_sha256": taxonomy["taxonomy_sha256"],
         "model": model,
         "api": args.api,
         "validation": args.validation,
-        **settings.fingerprint(),
+        **method,
     }
     manifest: dict[str, Any] = {
         **fingerprint_inputs,
@@ -294,7 +299,7 @@ def _label_repeat(
     client: tl.ResponsesClient,
     model: str,
     settings: tl.ModelSettings,
-    instructions: str,
+    instructions: str | None,
     args: argparse.Namespace,
     store: tl.LabelStore,
     attempts: AttemptLog,
@@ -325,6 +330,7 @@ def _label_repeat(
                 window = futures.pop(future)
                 try:
                     result, meta = future.result()
+                    tl.append_judgments(store.path.parent / tl.TYPESAFE_JUDGMENTS, meta)
                     store.record_success(window, result, meta)
                 except tl.BudgetExceeded as exc:
                     budget_stop = budget_stop or exc
