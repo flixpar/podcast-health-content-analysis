@@ -69,7 +69,8 @@ def scorecard(score: dict[str, Any]) -> str:
     lines.append(f"# Benchmark scorecard: {manifest.get('name', '?')}")
     lines.append("")
     lines.append(
-        f"Model `{manifest.get('model')}` | effort `{manifest.get('reasoning_effort')}` | "
+        f"Model `{manifest.get('model')}` | api `{manifest.get('api')}` | "
+        f"effort `{manifest.get('reasoning_effort')}` | "
         f"prompt `{manifest.get('prompt_version')}` | "
         f"repeats {len(score.get('repeats', []))} | items scored {score.get('items_scored')}"
     )
