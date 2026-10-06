@@ -260,6 +260,55 @@ def test_runner_records_attempts_and_repeats(tmp_path, monkeypatch):
     assert manifest["validator_sha256"] and manifest["items_hash"]
 
 
+@pytest.mark.parametrize("interruption", ["append_error", "crash_after_append"])
+def test_typesafe_benchmark_resumes_after_judgment_persistence_failure(tmp_path, monkeypatch, interruption):
+    item = make_item()
+    calls = []
+
+    def fake_classify(self, window, *args, **kwargs):
+        calls.append(window["window_id"])
+        return result(window["window_id"]), {"judgments": {"window_id": window["window_id"]}}
+
+    monkeypatch.setattr(tl.TypeSafeClient, "classify", fake_classify)
+    monkeypatch.setattr(tl.TypeSafeClient, "served_models", lambda self: {"http://x/v1": "stub-model"})
+    args = runner.label_args(
+        ["--api", "typesafe", "--api-base", "http://x/v1", "--model", "stub-model", "--concurrency", "1"],
+        config=None,
+    )
+    args.api_base = ["http://x/v1"]
+    args.api_key_env = "TYPESAFE_TEST_KEY"
+    monkeypatch.setenv("TYPESAFE_TEST_KEY", "stub-key")
+    repeat_dir = tmp_path / "stub" / "repeat_0"
+    with monkeypatch.context() as interrupted:
+        if interruption == "append_error":
+            def fail_append(path, meta):
+                raise OSError("sidecar unavailable")
+
+            interrupted.setattr(tl, "append_judgments", fail_append)
+            failed = runner.run_benchmark([item], TAXONOMY, args, "stub", repeats=1, runs_dir=tmp_path)
+            assert failed["repeat_summaries"][0]["windows_labeled"] == 0
+            assert failed["repeat_summaries"][0]["unresolved_windows"] == 1
+            assert not (repeat_dir / tl.TYPESAFE_JUDGMENTS).exists()
+        else:
+            def crash_before_success(self, *args):
+                raise KeyboardInterrupt("process interrupted before checkpoint")
+
+            interrupted.setattr(tl.LabelStore, "record_success", crash_before_success)
+            with pytest.raises(KeyboardInterrupt):
+                runner.run_benchmark([item], TAXONOMY, args, "stub", repeats=1, runs_dir=tmp_path)
+            assert (repeat_dir / tl.TYPESAFE_JUDGMENTS).exists()
+        with sqlite3.connect(repeat_dir / "labels.sqlite") as conn:
+            assert conn.execute("SELECT count(*) FROM window_labels").fetchone()[0] == 0
+
+    resumed = runner.run_benchmark([item], TAXONOMY, args, "stub", repeats=1, runs_dir=tmp_path)
+    assert resumed["repeat_summaries"][0]["windows_labeled"] == 1
+    assert resumed["repeat_summaries"][0]["unresolved_windows"] == 0
+    assert calls == [item["window_id"], item["window_id"]]
+    rows = [json.loads(line) for line in (repeat_dir / tl.TYPESAFE_JUDGMENTS).read_text().splitlines()]
+    assert all(row["window_id"] == item["window_id"] for row in rows)
+    assert len(rows) == (2 if interruption == "crash_after_append" else 1)
+
+
 def test_usage_summary_still_reads_attempts_from_batched_runs():
     """An attempts log written before one-window requests lists its windows."""
     attempts = [

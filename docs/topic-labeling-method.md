@@ -3,10 +3,11 @@
 ## What the pipeline measures
 
 `analysis/topic_labeling.py` exhaustively labels timestamped transcript spans
-using the 84 labels in the two final tables of `topics.md`. Each table row
-carries a written **definition** that governs the label; the keyword column is
-examples only. The cross-cutting table carries an explicit **axis** column, so
-no label's axis is inferred from its name. The dimensions are independent:
+using the 84 labels in the two final tables of `docs/original/topics.md`.
+Each table row carries a written **definition** that governs the label; the
+keyword column is examples only. The cross-cutting table carries an explicit
+**axis** column, so no label's axis is inferred from its name. The dimensions
+are independent:
 
 | Dimension | Values | Interpretation |
 | --- | --- | --- |
@@ -43,10 +44,11 @@ human review.
 
 ### 1. Prepare every transcript window
 
-`prepare` compiles only the two canonical tables in `topics.md` and freezes
-their SHA-256. Compilation fails closed on a row with a missing definition, a
-cross-cutting row whose axis is not `frame` or `evidence`, or an axis with no
-labels at all. It sends every transcript through the same segmentation path;
+`prepare` compiles only the two canonical tables in `docs/original/topics.md`
+and freezes their SHA-256. Compilation fails closed on a row with a missing
+definition, a cross-cutting row whose axis is not `frame` or `evidence`, or an
+axis with no labels at all. It sends every transcript through the same
+segmentation path;
 there is no keyword or embedding retrieval gate that could silently cap topic
 or claim recall.
 
@@ -277,6 +279,19 @@ the server chosen once at the start of a run, not as a knob to tune.
 
 `--api-base` may be written as the bare `/v1` root or with either route
 appended; both are accepted.
+
+### TypeSafe: a third option that is not a request shape
+
+`--api typesafe` labels with TypeSafe's System One API, which answers typed
+yes/no and multiple-choice questions and generates no text. It therefore does
+not send the rubric and schema at all: `analysis/typesafe_labeling.py` screens
+each window for every label, localizes what screened in, composes spans in
+code and asks the closed-set fields, then hands the result to the same
+validator and store. `claim_text` is the claim's own sentence verbatim and
+`summary` is templated, because nothing can be written. Its fingerprint is the
+pinned model, the question templates and the policy rather than the decoding
+settings, `verify` has no counterpart for it, and its measured quality, cost
+and limits are in `docs/typesafe-labeling.md`.
 
 ### Several servers
 
@@ -611,6 +626,7 @@ verified negatives.
 | `labels.sqlite` | Crash-safe raw-label response checkpoints keyed by window ID |
 | `label_manifest.json` | Model, endpoint, prompt/settings fingerprint, server-reported effective sampling, and completion counts |
 | `window_labels.jsonl.zst` | Validated raw window decisions |
+| `typesafe_judgments.jsonl` | `--api typesafe` only: every probability behind each window's result, so thresholds can be changed without re-labeling |
 | `label_annotations.jsonl` | Canonical one-label spans across all three taxonomy axes |
 | `clips.jsonl` | Topic clips with overlapping frame/evidence annotations and claim IDs |
 | `verification_candidates.jsonl` | Atomic unverified possible-misinformation review candidates with expressed certainty and linked product mentions |

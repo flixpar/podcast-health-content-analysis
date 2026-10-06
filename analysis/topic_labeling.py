@@ -3,8 +3,8 @@
 
 The pipeline has five explicit stages:
 
-1. ``prepare`` compiles the canonical tables in ``topics.md`` and turns every
-   transcript into overlapping, line-addressable windows.
+1. ``prepare`` compiles the canonical tables in ``docs/original/topics.md``
+   and turns every transcript into overlapping, line-addressable windows.
 2. ``label`` sends each window, one per request, to an OpenAI-compatible
    endpoint -- the Responses API or Chat Completions, whichever the server
    offers -- using strict Structured Outputs.
@@ -51,6 +51,7 @@ import zstandard
 # Imported as ``analysis.topic_labeling`` by the tests and run as a script from
 # the repository root, which puts ``analysis`` rather than the root on sys.path.
 if __package__:
+    from . import typesafe_labeling as typesafe
     from .usage_limits import (
         CHARS_PER_TOKEN,
         BudgetExceeded,
@@ -58,6 +59,7 @@ if __package__:
         UsageLimitError,
     )
 else:
+    import typesafe_labeling as typesafe  # type: ignore[no-redef]
     from usage_limits import (  # type: ignore[no-redef]
         CHARS_PER_TOKEN,
         BudgetExceeded,
@@ -544,7 +546,7 @@ def slugify(value: str) -> str:
 
 
 def compile_taxonomy(path: Path) -> dict[str, Any]:
-    """Compile the two final GPT tables in topics.md, excluding brainstorming duplicates.
+    """Compile the two final GPT tables, excluding brainstorming duplicates.
 
     Both tables carry an explicit ``Definition`` column, and the cross-cutting
     table carries an explicit ``Axis`` column. Nothing about a label's axis is
@@ -1368,7 +1370,10 @@ def validate_window_result(
             "summary",
             "evidence_quote",
         }
-        if set(detection) != expected_fields:
+        # ``axis`` is not a model field, but this function adds it, and merge
+        # re-validates what label stored: a result must survive its own
+        # validator. It is checked against the derived axis below.
+        if set(detection) - {"axis"} != expected_fields:
             raise TopicLabelingError(
                 f"unexpected detection fields in {window['window_id']}",
                 kind="schema_shape",
@@ -1398,6 +1403,11 @@ def validate_window_result(
                 kind="mixed_or_unknown_labels",
             )
         axis = axes.pop()
+        if detection.get("axis", axis) != axis:
+            raise TopicLabelingError(
+                f"detection axis contradicts its labels in {window['window_id']}",
+                kind="mixed_or_unknown_labels",
+            )
         relevance = detection.get("relevance")
         discourse_role = detection.get("discourse_role")
         summary = detection.get("summary")
@@ -2633,6 +2643,7 @@ class ResponsesClient:
                 f"{message}: {detail}" if detail else message, kind="http_error"
             )
             setattr(error, "retryable", retryable)
+            setattr(error, "status", exc.code)
             raise error from exc
         except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
             error = TopicLabelingError(
@@ -2838,6 +2849,249 @@ class ResponsesClient:
             f"verification failed after {self.attempts} attempt(s): {last_error}",
             kind=error_kind(last_error) if last_error else "other",
         ) from last_error
+
+
+TYPESAFE_API = "typesafe"
+# ``label`` only: TypeSafe is a labeling method, not a third request shape, and
+# ``verify`` has no counterpart for it.
+LABEL_APIS = (*ALLOWED_APIS, TYPESAFE_API)
+TYPESAFE_JUDGMENTS = "typesafe_judgments.jsonl"
+# A rate-limited request is retried on its own, longer schedule: TypeSafe's
+# limits move without notice, and a 429 says nothing about the window.
+TYPESAFE_RATE_LIMIT_ATTEMPTS = 8
+
+
+def load_typesafe_policy(path: Path | None) -> typesafe.Policy:
+    """The method's policy: its defaults, overridden by a TOML file of its keys."""
+    if path is None:
+        return typesafe.Policy()
+    if not Path(path).exists():
+        raise TopicLabelingError(f"typesafe policy file {path} does not exist")
+    with open(path, "rb") as handle:
+        try:
+            overrides = tomllib.load(handle)
+        except tomllib.TOMLDecodeError as exc:
+            raise TopicLabelingError(f"{path}: {exc}") from exc
+    try:
+        return typesafe.Policy.from_mapping(overrides)
+    except (typesafe.TypeSafeMethodError, TypeError, ValueError) as exc:
+        raise TopicLabelingError(f"{path}: {exc}") from exc
+
+
+class TypeSafeClient(ResponsesClient):
+    """``label --api typesafe``: the System One method behind the client surface.
+
+    It reuses the transport, the endpoint pool and the usage lease, and replaces
+    what is asked: instead of one rubric-and-schema request per window it runs
+    ``typesafe_labeling.label_window``, a handful of typed-question requests
+    whose answers code composes into the same window result. That result goes
+    through the same strict validator as a model's, so a composition bug is
+    rejected rather than stored.
+    """
+
+    def __init__(
+        self,
+        api_base: str | Sequence[str],
+        api_key: str | None,
+        timeout: int = 600,
+        attempts: int = 3,
+        limiter: UsageLimiter | None = None,
+        provider: str | None = None,
+        policy: typesafe.Policy | None = None,
+    ) -> None:
+        if not api_key:
+            raise TopicLabelingError(
+                "--api typesafe needs --api-key-env naming the variable that holds "
+                "the TypeSafe key (TYPESAFE_API_KEY)"
+            )
+        super().__init__(api_base, api_key, timeout, attempts, limiter, provider)
+        self.policy = policy or typesafe.Policy()
+
+    @property
+    def roots(self) -> list[str]:
+        return [base.removesuffix(typesafe.ROUTE) for base in self.api_bases]
+
+    def served_models(self) -> dict[str, str]:
+        """The model names each endpoint lists: its aliases, not its versions."""
+        served: dict[str, str] = {}
+        for root in self.roots:
+            response = self._request(root + "/models")
+            try:
+                served[root] = ", ".join(
+                    str(model["name"]) for model in response["models"]
+                )
+            except (KeyError, TypeError) as exc:
+                raise TopicLabelingError(
+                    f"could not list models from {root}/models"
+                ) from exc
+        return served
+
+    def discover_model(self) -> str:
+        """The pinned default. ``/models`` lists aliases, and an alias moves."""
+        return typesafe.DEFAULT_MODEL
+
+    def fingerprint(self, taxonomy: dict[str, Any]) -> dict[str, Any]:
+        """What determines this method's output, in place of decoding settings."""
+        return {
+            "prompt_version": typesafe.METHOD_VERSION,
+            "typesafe_questions_sha256": typesafe.questions_sha256(),
+            "typesafe_policy": self.policy.fingerprint(),
+        }
+
+    def _ask(self, model: str, state: Any, questions: dict[str, Any]) -> dict[str, Any]:
+        payload = {"state": state, "model": model, "questions": questions}
+        estimate = len(canonical_json(payload)) / CHARS_PER_TOKEN
+        failures = limited = 0
+        while True:
+            try:
+                with self.limiter.reserve(
+                    provider=self.provider,
+                    model=model,
+                    input_tokens=estimate,
+                    output_tokens=0,  # TypeSafe bills input only
+                    ttl=self.timeout + 60,
+                ) as lease:
+                    response = self._request(
+                        self._endpoint() + typesafe.ROUTE, payload
+                    )
+                    lease.record(response.get("usage"))
+                return response
+            except TopicLabelingError as exc:
+                if not getattr(exc, "retryable", False):
+                    raise
+                if getattr(exc, "status", None) in (429, 529):
+                    limited += 1
+                    if limited >= TYPESAFE_RATE_LIMIT_ATTEMPTS:
+                        raise
+                    time.sleep(min(60.0, 2.0**limited))
+                    continue
+                failures += 1
+                if failures >= self.attempts:
+                    raise
+                time.sleep(2**failures)
+
+    def classify(
+        self,
+        window: dict[str, Any],
+        taxonomy: dict[str, Any],
+        model: str,
+        settings: ModelSettings,
+        instructions: str | None = None,
+        on_attempt: Callable[[dict[str, Any]], None] | None = None,
+        validation: str = DEFAULT_VALIDATION,
+    ) -> tuple[dict[str, Any], dict[str, Any]]:
+        """Label one window. ``meta["judgments"]`` carries the raw probabilities.
+
+        ``settings`` and ``validation`` are accepted for the shared call shape
+        and unused: there is nothing to decode, and the result is built by code,
+        so it is held to strict validation whatever the run asked for.
+        """
+        if instructions is not None:
+            raise TopicLabelingError(
+                "--api typesafe has no rubric to replace; its prompt is the "
+                "question set in typesafe_labeling.py"
+            )
+        label_axes = {label["label_id"]: label["axis"] for label in taxonomy["labels"]}
+        started = time.monotonic()
+        record: dict[str, Any] = {"attempt": 0, "window_id": window["window_id"]}
+        try:
+            raw, judgments = typesafe.label_window(
+                window,
+                taxonomy,
+                self.policy,
+                lambda state, questions: self._ask(model, state, questions),
+            )
+            result = validate_response(raw, window, label_axes)
+        except (TopicLabelingError, typesafe.TypeSafeMethodError) as exc:
+            if on_attempt is not None:
+                on_attempt(
+                    {
+                        **record,
+                        "ok": False,
+                        "seconds": round(time.monotonic() - started, 3),
+                        "kind": error_kind(exc),
+                        "message": str(exc)[:300],
+                        "response_id": None,
+                        "usage": None,
+                        "output_excerpt": None,
+                    }
+                )
+            raise
+        validation_summary = {"mode": "strict", "repaired": {}, "dropped": {}}
+        usage = judgments["usage"]
+        if on_attempt is not None:
+            on_attempt(
+                {
+                    **record,
+                    "ok": True,
+                    "seconds": round(time.monotonic() - started, 3),
+                    "response_id": None,
+                    "usage": usage,
+                    "validation": validation_summary,
+                }
+            )
+        return result, {
+            "response_id": None,
+            "usage": usage,
+            "response_model": judgments.get("model"),
+            "effective_sampling": {},
+            "validation": validation_summary,
+            "judgments": judgments,
+        }
+
+    def verify(
+        self, pair: dict[str, Any], model: str, settings: ModelSettings
+    ) -> tuple[dict[str, Any], dict[str, Any]]:
+        raise TopicLabelingError(
+            "--api typesafe labels windows; it does not verify claims"
+        )
+
+
+def build_label_client(
+    args: argparse.Namespace, api_key: str | None, limiter: UsageLimiter
+) -> ResponsesClient:
+    """The client ``label`` and the benchmark runner both label through."""
+    # getattr: callers that build a Namespace by hand predate the flag.
+    policy_path = getattr(args, "typesafe_policy", None)
+    if args.api == TYPESAFE_API:
+        return TypeSafeClient(
+            args.api_base or [typesafe.DEFAULT_API_BASE],
+            api_key,
+            args.timeout,
+            args.attempts,
+            limiter=limiter,
+            provider=args.provider,
+            policy=load_typesafe_policy(args.typesafe_policy),
+        )
+    if policy_path is not None:
+        raise TopicLabelingError(
+            "--typesafe-policy has nothing to do without --api typesafe"
+        )
+    return ResponsesClient(
+        args.api_base or [DEFAULT_API_BASE],
+        api_key,
+        args.timeout,
+        args.attempts,
+        limiter=limiter,
+        provider=args.provider,
+        api=args.api,
+    )
+
+
+def append_judgments(path: Path, meta: dict[str, Any]) -> None:
+    """Keep a TypeSafe window's raw probabilities beside its stored result.
+
+    Thresholds are policy, and ``typesafe_labeling.compose_result`` rebuilds a
+    result from these under a different policy without a single request. Append
+    only, one line per labeled window; the last line for a window wins.
+    """
+    judgments = meta.get("judgments")
+    if judgments is None:
+        return
+    with open(path, "a", encoding="utf-8") as handle:
+        handle.write(canonical_json(judgments) + "\n")
+        handle.flush()
+        os.fsync(handle.fileno())
 
 
 class LabelStore:
@@ -3178,17 +3432,8 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
         raise TopicLabelingError("windows file does not match prepare_manifest.json")
     if taxonomy["taxonomy_sha256"] != prepare_manifest.get("taxonomy_sha256"):
         raise TopicLabelingError("taxonomy does not match the prepared run")
-    api_bases = args.api_base or [DEFAULT_API_BASE]
     limiter = build_limiter(args)
-    client = ResponsesClient(
-        api_bases,
-        api_key,
-        args.timeout,
-        args.attempts,
-        limiter=limiter,
-        provider=args.provider,
-        api=args.api,
-    )
+    client = build_label_client(args, api_key, limiter)
     served = client.served_models()
     model = args.model or client.discover_model()
     settings = ModelSettings.from_args(args)
@@ -3198,7 +3443,6 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
     # discover_model refuses to pool endpoints that disagree about it.
     fingerprint_inputs = {
         "schema_version": SCHEMA_VERSION,
-        "prompt_version": PROMPT_VERSION,
         "taxonomy_sha256": taxonomy["taxonomy_sha256"],
         "windows_sha256": prepare_manifest["windows_sha256"],
         "model": model,
@@ -3206,7 +3450,13 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
         # Lenient validation stores repaired spans and drops annotations strict
         # would have retried for, so the two modes produce different labels.
         "validation": args.validation,
-        **settings.fingerprint(),
+        # The TypeSafe method has no rubric and nothing to decode; its identity
+        # is its question set and its policy instead.
+        **(
+            client.fingerprint(taxonomy)
+            if isinstance(client, TypeSafeClient)
+            else {"prompt_version": PROMPT_VERSION, **settings.fingerprint()}
+        ),
     }
     run_fingerprint = sha256_bytes(canonical_json(fingerprint_inputs).encode("utf-8"))
     run_manifest = {
@@ -3270,6 +3520,7 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
                     window = futures.pop(future)
                     try:
                         result, meta = future.result()
+                        append_judgments(output_dir / TYPESAFE_JUDGMENTS, meta)
                         store.record_success(window, result, meta)
                         observed_sampling = observed_sampling or meta.get(
                             "effective_sampling", {}
@@ -5020,7 +5271,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    taxonomy = subparsers.add_parser("taxonomy", help="Compile and inspect topics.md")
+    taxonomy = subparsers.add_parser("taxonomy", help="Compile and inspect the topic tables")
     taxonomy.add_argument("--topics", type=Path, default=DEFAULT_TOPICS)
     taxonomy.add_argument("--output", type=Path)
 
@@ -5066,11 +5317,21 @@ def build_parser() -> argparse.ArgumentParser:
     )
     label.add_argument(
         "--api",
-        choices=ALLOWED_APIS,
+        choices=LABEL_APIS,
         default=DEFAULT_API,
         help=(
-            "Which OpenAI-compatible API the endpoint speaks: the Responses API "
-            "or Chat Completions (default: %(default)s)"
+            "Which API the endpoint speaks: the OpenAI-compatible Responses API or "
+            "Chat Completions, or 'typesafe' for the TypeSafe System One labeling "
+            "method (default: %(default)s)"
+        ),
+    )
+    label.add_argument(
+        "--typesafe-policy",
+        type=Path,
+        default=None,
+        help=(
+            "TOML file overriding typesafe_labeling.Policy keys (thresholds, "
+            "passage sizes); only with --api typesafe"
         ),
     )
     label.add_argument("--model", help="Model ID; discover from /models when omitted")
