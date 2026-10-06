@@ -2,6 +2,8 @@
 # model. The method, its measured quality and its limits are in
 # docs/typesafe-labeling.md. Not read by default; name it:
 #
+#   .venv/bin/python analysis/topic_labeling.py prepare \
+#       --config analysis/topic-labeling-typesafe.toml --output-dir /tmp/ts-smoke --limit 3
 #   .venv/bin/python analysis/topic_labeling.py label \
 #       --config analysis/topic-labeling-typesafe.toml --output-dir /tmp/ts-smoke
 #

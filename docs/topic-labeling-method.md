@@ -3,10 +3,11 @@
 ## What the pipeline measures
 
 `analysis/topic_labeling.py` exhaustively labels timestamped transcript spans
-using the 84 labels in the two final tables of `topics.md`. Each table row
-carries a written **definition** that governs the label; the keyword column is
-examples only. The cross-cutting table carries an explicit **axis** column, so
-no label's axis is inferred from its name. The dimensions are independent:
+using the 84 labels in the two final tables of `docs/original/topics.md`.
+Each table row carries a written **definition** that governs the label; the
+keyword column is examples only. The cross-cutting table carries an explicit
+**axis** column, so no label's axis is inferred from its name. The dimensions
+are independent:
 
 | Dimension | Values | Interpretation |
 | --- | --- | --- |
@@ -43,10 +44,11 @@ human review.
 
 ### 1. Prepare every transcript window
 
-`prepare` compiles only the two canonical tables in `topics.md` and freezes
-their SHA-256. Compilation fails closed on a row with a missing definition, a
-cross-cutting row whose axis is not `frame` or `evidence`, or an axis with no
-labels at all. It sends every transcript through the same segmentation path;
+`prepare` compiles only the two canonical tables in `docs/original/topics.md`
+and freezes their SHA-256. Compilation fails closed on a row with a missing
+definition, a cross-cutting row whose axis is not `frame` or `evidence`, or an
+axis with no labels at all. It sends every transcript through the same
+segmentation path;
 there is no keyword or embedding retrieval gate that could silently cap topic
 or claim recall.
 

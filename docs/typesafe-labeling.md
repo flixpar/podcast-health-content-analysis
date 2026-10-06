@@ -86,6 +86,9 @@ span's best unit, so the scorecard's calibration row reads Jev directly (AUROC
 scores 0.65).
 
 Every probability is kept in `<output-dir>/typesafe_judgments.jsonl`.
+Each sidecar record is flushed to disk before its window's success checkpoint
+is committed. An interrupted checkpoint can append the same window again on
+resume; offline recomposition uses its last record.
 Thresholds are policy, and `typesafe_labeling.compose_result` rebuilds a result
 from stored judgments under a different policy with no requests -- which is how
 the thresholds were tuned, and how they can be re-tuned for a different
@@ -258,10 +261,18 @@ after the pin moves.
 # re-tune composition thresholds from that run's stored probabilities (no requests)
 .venv/bin/python -m analysis.benchmark.typesafe_tune benchmark/runs/ts-v1
 
-# production
+# production: prepare a small run from the configured transcript directory
+.venv/bin/python analysis/topic_labeling.py prepare \
+    --config analysis/topic-labeling-typesafe.toml --output-dir /tmp/ts-smoke --limit 3
 .venv/bin/python analysis/topic_labeling.py label \
     --config analysis/topic-labeling-typesafe.toml --output-dir /tmp/ts-smoke
+.venv/bin/python analysis/topic_labeling.py merge --output-dir /tmp/ts-smoke
 ```
+
+The flat production taxonomy is compiled from the canonical tables in
+`docs/original/topics.md`. The local transcript directory must exist before
+`prepare`; `label` reads the taxonomy, windows and prepare manifest it creates
+in the same output directory.
 
 `TYPESAFE_API_KEY` goes in `.env`. The run fingerprint is the pinned model, the
 taxonomy, the sha256 of every question template

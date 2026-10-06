@@ -3,8 +3,8 @@
 
 The pipeline has five explicit stages:
 
-1. ``prepare`` compiles the canonical tables in ``topics.md`` and turns every
-   transcript into overlapping, line-addressable windows.
+1. ``prepare`` compiles the canonical tables in ``docs/original/topics.md``
+   and turns every transcript into overlapping, line-addressable windows.
 2. ``label`` sends each window, one per request, to an OpenAI-compatible
    endpoint -- the Responses API or Chat Completions, whichever the server
    offers -- using strict Structured Outputs.
@@ -72,7 +72,7 @@ SCHEMA_VERSION = "topic-labeling-v4"
 PROMPT_VERSION = "topic-clips-claims-products-v6"
 VERIFICATION_PROMPT_VERSION = "evidence-corpus-verification-v3"
 EVIDENCE_CORPUS_MANIFEST_VERSION = "evidence-corpus-validation-v1"
-DEFAULT_TOPICS = Path("topics.md")
+DEFAULT_TOPICS = Path("docs/original/topics.md")
 DEFAULT_TRANSCRIPTS = Path("downloader/data/transcripts")
 DEFAULT_OUTPUT = Path("analysis/output/topic-labeling")
 DEFAULT_API_BASE = "http://127.0.0.1:8000/v1"
@@ -546,7 +546,7 @@ def slugify(value: str) -> str:
 
 
 def compile_taxonomy(path: Path) -> dict[str, Any]:
-    """Compile the two final GPT tables in topics.md, excluding brainstorming duplicates.
+    """Compile the two final GPT tables, excluding brainstorming duplicates.
 
     Both tables carry an explicit ``Definition`` column, and the cross-cutting
     table carries an explicit ``Axis`` column. Nothing about a label's axis is
@@ -5271,7 +5271,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    taxonomy = subparsers.add_parser("taxonomy", help="Compile and inspect topics.md")
+    taxonomy = subparsers.add_parser("taxonomy", help="Compile and inspect the topic tables")
     taxonomy.add_argument("--topics", type=Path, default=DEFAULT_TOPICS)
     taxonomy.add_argument("--output", type=Path)
 
