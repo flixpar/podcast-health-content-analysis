@@ -68,8 +68,11 @@ cap for denser windows. A full pool can evict the shared checkpoint and cause
 repeated codebook prefill. The bf16 cap-256 run reached 0.94 KV use and
 75 preemptions, with lower throughput.
 
-The v8 headline benchmark's high/24k setting measured topic F1 0.709 and claim
-F1 0.783 at 6.6k output tokens/window. Max effort used 15.2k tokens/window;
+In the historical comparison, v8 model outputs on 160 archived headline items
+were scored against v7 gold through the v8-to-v7 label map. High/24k measured
+topic F1 0.709 and claim F1 0.783 at 6.6k output tokens/window; these figures
+do not validate the revised v8 rules. Fresh v3 reference annotation remains
+pending, as described in `docs/benchmark.md`. Max effort used 15.2k tokens/window;
 an 8k thinking budget saved only ~8% on real traffic and lost population F1.
 High/24k remains the default. The historical codebook comparison favored using
 the annotator codebook directly; a co-label prompt improved agreement with
@@ -92,8 +95,8 @@ KDA_STATE_DTYPE=bfloat16 analysis/serving/serve-glm53.sh
 The launcher checks the installed KDA source and refuses bf16 mode when the
 setting is absent. It finds Python beside the resolved vLLM executable;
 `VLLM_PYTHON` can explicitly select that installation's interpreter. Patched
-bf16 mode defaults to cap 224. Recorded paired benchmark differences were
-within run-to-run variation; this remains an opt-in setting.
+bf16 mode defaults to cap 224. Recorded paired differences on the same older,
+mapped gold were within run-to-run variation; this remains an opt-in setting.
 
 No private cluster paths or environment modules are loaded by the scripts.
 If your driver needs compatibility libraries, explicitly set `CUDA_COMPAT` to

@@ -21,9 +21,11 @@ api = "chat_completions"
 model = "glm53-w4"
 
 # GLM-5.3's chat template knows low, high and max (and treats anything else,
-# including leaving it out, as max). On the v8 benchmark: high topic F1 0.709 /
-# claim F1 0.783 at 6.6k output tokens a window; max 0.718 / 0.817 at 15.2k
+# including leaving it out, as max). Historical v8 outputs mapped onto v7 gold
+# scored high topic F1 0.709 / claim F1 0.783 at 6.6k output tokens a window;
+# max 0.718 / 0.817 at 15.2k
 # (better evidence and claim recall, same topics); low 0.647 / 0.692 at 2.4k.
+# These figures do not validate revised v8 rules; v3 references are pending.
 reasoning_effort = "high"
 # The thinking budget (below) plus room for the answer. Answers stay under ~15k
 # tokens; about 0.1-0.3% of windows loop after thinking ends and would otherwise
@@ -42,9 +44,10 @@ top_p = 0.95
 # that keeps it fed.
 concurrency = 448
 validation = "lenient"
-# vLLM forces the end of thinking after this many reasoning tokens. On the v8
-# benchmark an 8k budget saved 8% of tokens on real traffic and lost population
-# F1 (-0.10); 4k lost on every axis. Few real windows think past 24k.
+# vLLM forces the end of thinking after this many reasoning tokens. An 8k
+# budget saved 8% of tokens on recorded real traffic but lost population F1
+# (-0.10) against the older mapped gold; 4k lost on every axis.
+# Few real windows think past 24k.
 thinking_token_budget = 24000
 
 [verify]
