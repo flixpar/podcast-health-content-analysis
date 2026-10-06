@@ -1,5 +1,6 @@
 import argparse
 import json
+import sqlite3
 
 import pytest
 
@@ -172,6 +173,25 @@ def test_questions_are_packed_under_the_request_budget_and_none_is_lost():
     with pytest.raises(typesafe.TypeSafeMethodError) as excinfo:
         typesafe.pack_questions({"transcript": "x" * 200_000}, questions)
     assert excinfo.value.kind == "state_too_large"
+
+
+@pytest.mark.parametrize("limit", [-1, -30, "-1"])
+def test_policy_rejects_negative_fanout_limits(limit):
+    with pytest.raises(typesafe.TypeSafeMethodError, match="max_fanout_labels must be non-negative") as excinfo:
+        typesafe.Policy.from_mapping({"max_fanout_labels": limit})
+    assert excinfo.value.kind == "invalid_policy"
+
+
+def test_zero_fanout_limit_skips_label_localization():
+    policy = typesafe.Policy.from_mapping({"max_fanout_labels": 0})
+    jev = FakeJev(health_window_answers())
+    _, judgments = typesafe.label_window(window(), taxonomy(), policy, jev)
+    assert judgments["labels"] == {}
+    assert all(
+        not question_id.startswith("topic:sleep|p")
+        for _, questions in jev.requests
+        for question_id in questions
+    )
 
 
 def test_a_window_where_nothing_screens_in_costs_one_request_and_is_empty():
@@ -451,8 +471,9 @@ def test_judgments_are_appended_only_for_the_typesafe_method(tmp_path):
     assert [row["window_id"] for row in rows] == ["w1", "w2"]
 
 
+@pytest.mark.parametrize("interruption", [None, "append_error", "crash_after_append"])
 def test_label_runs_the_typesafe_method_end_to_end_and_merge_reads_its_output(
-    tmp_path, monkeypatch
+    tmp_path, monkeypatch, interruption
 ):
     """``label --api typesafe`` through the store, the sidecar and ``merge``."""
     taxonomy_path = tmp_path / "taxonomy.json"
@@ -505,6 +526,28 @@ def test_label_runs_the_typesafe_method_end_to_end_and_merge_reads_its_output(
         validation="strict", usage_limits=None, provider=None, experiment=None,
         config=tmp_path / "no-config.toml",
     )
+    if interruption is not None:
+        with monkeypatch.context() as interrupted:
+            if interruption == "append_error":
+                def fail_append(path, meta):
+                    raise OSError("sidecar unavailable")
+
+                interrupted.setattr(labeling, "append_judgments", fail_append)
+                failed = labeling.run_label(args)
+                assert failed["windows_labeled"] == 0
+                assert failed["unresolved_windows"] == 2
+                assert not (tmp_path / labeling.TYPESAFE_JUDGMENTS).exists()
+            else:
+                def crash_before_success(self, *args):
+                    raise KeyboardInterrupt("process interrupted before checkpoint")
+
+                interrupted.setattr(labeling.LabelStore, "record_success", crash_before_success)
+                with pytest.raises(KeyboardInterrupt):
+                    labeling.run_label(args)
+                assert (tmp_path / labeling.TYPESAFE_JUDGMENTS).exists()
+            # Neither interruption may leave a successful checkpoint that skips resume.
+            with sqlite3.connect(tmp_path / "labels.sqlite") as conn:
+                assert conn.execute("SELECT count(*) FROM window_labels").fetchone()[0] == 0
     summary = labeling.run_label(args)
     assert summary["windows_labeled"] == 2 and summary["unresolved_windows"] == 0
     assert summary["model"] == typesafe.DEFAULT_MODEL
@@ -516,6 +559,7 @@ def test_label_runs_the_typesafe_method_end_to_end_and_merge_reads_its_output(
         for line in (tmp_path / labeling.TYPESAFE_JUDGMENTS).read_text(encoding="utf-8").splitlines()
     ]
     assert {row["window_id"] for row in sidecar} == {health["window_id"], empty["window_id"]}
+    assert len(sidecar) == (3 if interruption == "crash_after_append" else 2)
 
     # A different policy is a different run: the store refuses to mix them.
     policy_path.write_text("passage_units = 1\nclaim_threshold = 0.9\n", encoding="utf-8")

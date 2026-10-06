@@ -291,8 +291,8 @@ def _label_repeat(
                 window = futures.pop(future)
                 try:
                     result, meta = future.result()
-                    store.record_success(window, result, meta)
                     tl.append_judgments(store.path.parent / tl.TYPESAFE_JUDGMENTS, meta)
+                    store.record_success(window, result, meta)
                 except tl.BudgetExceeded as exc:
                     budget_stop = budget_stop or exc
                     store.record_failure(window, exc)

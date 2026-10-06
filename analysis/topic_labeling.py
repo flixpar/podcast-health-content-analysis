@@ -3090,6 +3090,8 @@ def append_judgments(path: Path, meta: dict[str, Any]) -> None:
         return
     with open(path, "a", encoding="utf-8") as handle:
         handle.write(canonical_json(judgments) + "\n")
+        handle.flush()
+        os.fsync(handle.fileno())
 
 
 class LabelStore:
@@ -3518,8 +3520,8 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
                     window = futures.pop(future)
                     try:
                         result, meta = future.result()
-                        store.record_success(window, result, meta)
                         append_judgments(output_dir / TYPESAFE_JUDGMENTS, meta)
+                        store.record_success(window, result, meta)
                         observed_sampling = observed_sampling or meta.get(
                             "effective_sampling", {}
                         )

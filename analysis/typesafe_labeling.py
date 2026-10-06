@@ -277,6 +277,11 @@ class Policy:
                 "typesafe policy: passage_units and max_claim_units must be positive",
                 kind="invalid_policy",
             )
+        if policy.max_fanout_labels < 0:
+            raise TypeSafeMethodError(
+                "typesafe policy: max_fanout_labels must be non-negative",
+                kind="invalid_policy",
+            )
         return policy
 
     def fingerprint(self) -> dict[str, Any]:
