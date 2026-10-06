@@ -23,23 +23,18 @@ aborts the run instead of being recorded.
 from __future__ import annotations
 
 import logging
-import re
-import time
-import unicodedata
 
 import requests
 
+from podcast_pipeline.catalog.itunes_search import ITunesSearch, ITunesSearchUnavailable, best_match
 from podcast_pipeline.config import SpotifyConfig
 from podcast_pipeline.models import PodcastRecord
 from podcast_pipeline.sources.apple import _to_record as _apple_record
 
 logger = logging.getLogger(__name__)
 
-SEARCH_URL = "https://itunes.apple.com/search"
-THROTTLE_STATUSES = (403, 429)
 
-
-class SpotifyResolveError(RuntimeError):
+class SpotifyResolveError(ITunesSearchUnavailable):
     """The iTunes search API stayed unavailable across every retry.
 
     Fatal on purpose: it means no show can be resolved, and continuing would
@@ -56,7 +51,10 @@ class SpotifyChartsSource:
         self.filter_health_only = filter_health_only
         self.country = country
         self.lookup_delay = lookup_delay
-        self._last_search_at = 0.0
+        self._searcher = ITunesSearch(
+            session, delay_seconds=config.search_delay_seconds, attempts=config.search_attempts,
+            limit=config.match_candidates, country=country, error=SpotifyResolveError,
+            advice="retry later or raise spotify.search_delay_seconds")
 
     @property
     def chart_name(self) -> str:
@@ -119,63 +117,15 @@ class SpotifyChartsSource:
     def _search_apple(self, name: str, publisher: str | None) -> dict | None:
         """The best iTunes match for a show title, or None if there is none.
 
-        Raises ``SpotifyResolveError`` if the API could not be asked at all;
-        None means it was asked and nothing matched.
+        Only exact (folded) titles are accepted; the publisher breaks ties,
+        then iTunes' relevance order. Raises ``SpotifyResolveError`` if the API
+        could not be asked at all; None means it was asked and nothing matched.
         """
-        results = self._search(name)
-        wanted = _normalise(name)
-        exact = [r for r in results if _normalise(r.get("collectionName", "")) == wanted]
-        if not exact:
-            return None
-        if len(exact) > 1 and publisher:
-            by_publisher = [r for r in exact
-                            if _normalise(r.get("artistName", "")) == _normalise(publisher)]
-            if by_publisher:
-                exact = by_publisher
-        # Ties are broken by the relevance order iTunes already returned.
-        return exact[0]
+        match = best_match(self._search(name), name, [publisher] if publisher else [], fuzzy=False)
+        return match.record if match else None
 
     def _search(self, term: str) -> list[dict]:
-        params = {"term": term, "entity": "podcast", "country": self.country,
-                  "limit": self.config.match_candidates}
-        for attempt in range(self.config.search_attempts):
-            self._pace()
-            try:
-                response = self.session.get(SEARCH_URL, params=params, timeout=20)
-            except requests.RequestException as e:
-                logger.warning(f"iTunes search for {term!r} failed "
-                               f"(attempt {attempt + 1}): {e}")
-                time.sleep(self.config.search_delay_seconds * 2 ** attempt)
-                continue
-            if response.status_code in THROTTLE_STATUSES:
-                wait = float(response.headers.get("Retry-After",
-                                                  self.config.search_delay_seconds * 5 * 2 ** attempt))
-                logger.warning(f"iTunes search throttled ({response.status_code}); "
-                               f"waiting {wait:.0f}s before retrying {term!r}")
-                time.sleep(wait)
-                continue
-            response.raise_for_status()
-            return response.json().get("results") or []
-        raise SpotifyResolveError(
-            f"iTunes search unavailable after {self.config.search_attempts} attempts "
-            f"(last term {term!r}). Every remaining show would be recorded as having "
-            f"no feed, so the run is stopping; retry later or raise "
-            f"spotify.search_delay_seconds.")
-
-    def _pace(self) -> None:
-        """Keep at least ``search_delay_seconds`` between searches."""
-        elapsed = time.monotonic() - self._last_search_at
-        if elapsed < self.config.search_delay_seconds:
-            time.sleep(self.config.search_delay_seconds - elapsed)
-        self._last_search_at = time.monotonic()
-
-
-def _normalise(text: str) -> str:
-    """Fold a show title to a form that survives punctuation and accent drift
-    between the two catalogues (``The Journal.`` vs ``The Journal``)."""
-    text = unicodedata.normalize("NFKD", text or "")
-    text = "".join(c for c in text if not unicodedata.combining(c))
-    return re.sub(r"[^a-z0-9]+", "", text.lower())
+        return self._searcher.search(term)
 
 
 def _is_health_related(show: dict) -> bool:

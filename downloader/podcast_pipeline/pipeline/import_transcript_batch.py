@@ -9,22 +9,17 @@ import sqlite3
 from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 
-from podcast_pipeline import db
+from podcast_pipeline import db, paths
 from podcast_pipeline.batches import (BatchFormatError, atomic_write,
                                       load_audio_manifest,
                                       load_transcript_manifest,
                                       sha256_file, stage_verified_archive)
-from podcast_pipeline.config import PROJECT_ROOT, Config
+from podcast_pipeline.config import Config
 from podcast_pipeline.transcripts.store import TranscriptStore
 
 
 class TranscriptBatchImportError(RuntimeError):
     pass
-
-
-def _database_path(value: str) -> Path:
-    path = Path(value)
-    return path if path.is_absolute() else PROJECT_ROOT / path
 
 
 def _episode_rows(conn: sqlite3.Connection, episode_ids: set[int]) -> dict[int, sqlite3.Row]:
@@ -178,7 +173,7 @@ def run(config: Config, conn: sqlite3.Connection, archive_path: Path,
             )
             existing_value = row["registered_transcript_path"] or row["transcript_file_path"]
             if existing_value:
-                existing = _database_path(existing_value)
+                existing = paths.resolve(config, existing_value)
                 metadata = json.loads(row["transcript_metadata"] or "{}")
                 if (existing.is_file() and sha256_file(existing) == entry.sha256
                         and metadata.get("source_audio_batch_id") == audio_manifest.batch_id):
@@ -221,7 +216,8 @@ def run(config: Config, conn: sqlite3.Connection, archive_path: Path,
             destination = destination_store.path_for(episode_id)
             atomic_write(destination, incoming_path.read_bytes())
             db.record_transcript(
-                conn, episode_id, destination, entry.word_count, entry.duration_seconds,
+                conn, episode_id, paths.to_stored(config, destination), entry.word_count,
+                entry.duration_seconds,
                 has_timestamps=entry.has_timestamps, has_speakers=False,
                 metadata={
                     "source": "asr",

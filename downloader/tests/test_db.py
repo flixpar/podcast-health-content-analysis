@@ -1,4 +1,4 @@
-from pathlib import Path
+import pytest
 
 from podcast_pipeline import db
 from podcast_pipeline.models import FeedEpisode, PodcastRecord
@@ -50,12 +50,12 @@ def test_download_and_transcript_lifecycle(conn, tmp_path):
     db.insert_episode(conn, pid, episode())
     eid = conn.execute("SELECT id FROM episodes").fetchone()[0]
 
-    db.record_download(conn, eid, Path("/a.ogg"), 100.0, 20.0, True)
+    db.record_download(conn, eid, "audio/show/a.ogg", 100.0, 20.0, True)
     row = conn.execute("SELECT * FROM episodes").fetchone()
     assert row["status"] == "downloaded" and row["compression_ratio"] == 5.0
 
-    db.record_transcript(conn, eid, tmp_path / "t.zst", 10, 12.5, True, False, {"source": "asr"})
-    db.record_transcript(conn, eid, tmp_path / "t.zst", 11, 12.5, True, False, {"source": "asr"})
+    db.record_transcript(conn, eid, "transcripts/t.zst", 10, 12.5, True, False, {"source": "asr"})
+    db.record_transcript(conn, eid, "transcripts/t.zst", 11, 12.5, True, False, {"source": "asr"})
     assert tuple(conn.execute("SELECT COUNT(*), MAX(word_count) FROM transcripts").fetchone()) == (1, 11)
     assert conn.execute("SELECT status FROM episodes").fetchone()[0] == "transcribed"
 
@@ -67,3 +67,16 @@ def test_download_and_transcript_lifecycle(conn, tmp_path):
     assert db.reset_episode_for_download(conn, eid) is True
     row = conn.execute("SELECT status, audio_file_path FROM episodes").fetchone()
     assert (row[0], row[1]) == ("pending", None)
+
+
+@pytest.mark.parametrize("bad", ["/data/audio/show/a.ogg", "", "../audio/a.ogg"])
+def test_path_columns_only_accept_data_relative_values(conn, bad):
+    pid = db.upsert_podcast(conn, podcast())
+    db.insert_episode(conn, pid, episode())
+    eid = conn.execute("SELECT id FROM episodes").fetchone()[0]
+    with pytest.raises(ValueError, match="relative to the data directory"):
+        db.record_download(conn, eid, bad, 1.0, 1.0, True)
+    with pytest.raises(ValueError, match="relative to the data directory"):
+        db.record_conversion(conn, eid, bad, 1.0, 1.0)
+    with pytest.raises(ValueError, match="relative to the data directory"):
+        db.record_transcript(conn, eid, bad, 1, None, False, False, {"source": "asr"})
