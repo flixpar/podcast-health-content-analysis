@@ -3,7 +3,7 @@
 
 The pipeline has five explicit stages:
 
-1. ``prepare`` compiles the canonical tables in ``topics.md`` and turns every
+1. ``prepare`` compiles the selected taxonomy source and turns every
    transcript into overlapping, line-addressable windows.
 2. ``label`` sends each window, one per request, to an OpenAI-compatible
    endpoint -- the Responses API or Chat Completions, whichever the server
@@ -89,7 +89,7 @@ DEFAULT_V7_CODEBOOK = TAXONOMY_DIR / "codebook-v7.md"
 _TAXONOMY_VERSION = re.compile(r"-(v\d+)\.md$")
 VERIFICATION_PROMPT_VERSION = "evidence-corpus-verification-v3"
 EVIDENCE_CORPUS_MANIFEST_VERSION = "evidence-corpus-validation-v1"
-DEFAULT_TOPICS = Path("topics.md")
+DEFAULT_TOPICS = Path("docs/original/topics.md")
 DEFAULT_TRANSCRIPTS = Path("downloader/data/transcripts")
 DEFAULT_OUTPUT = Path("analysis/output/topic-labeling")
 DEFAULT_API_BASE = "http://127.0.0.1:8000/v1"
@@ -574,7 +574,7 @@ def slugify(value: str) -> str:
 
 
 def compile_taxonomy(path: Path) -> dict[str, Any]:
-    """Compile a taxonomy source: the hierarchical v7 format or the flat topics.md.
+    """Compile a taxonomy source: the hierarchical format or the legacy flat tables.
 
     The format is read from the file itself (a ``## Topic axis`` heading marks
     v7), so ``--topics`` is the only switch between them.
@@ -838,7 +838,7 @@ def topic_parent(label_id: str) -> str:
 
 
 def compile_flat_taxonomy(path: Path) -> dict[str, Any]:
-    """Compile the two final GPT tables in topics.md, excluding brainstorming duplicates.
+    """Compile the two canonical flat tables, excluding brainstorming duplicates.
 
     Both tables carry an explicit ``Definition`` column, and the cross-cutting
     table carries an explicit ``Axis`` column. Nothing about a label's axis is
@@ -5504,7 +5504,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    taxonomy = subparsers.add_parser("taxonomy", help="Compile and inspect topics.md")
+    taxonomy = subparsers.add_parser("taxonomy", help="Compile and inspect a taxonomy source")
     taxonomy.add_argument("--topics", type=Path, default=DEFAULT_TOPICS)
     taxonomy.add_argument("--output", type=Path)
 

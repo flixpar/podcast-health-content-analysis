@@ -79,8 +79,27 @@ Merged artifacts use `topic-labeling-v5`, including product mentions. Topic
 annotations carry parent and domain IDs; clips carry narrative and population
 annotations. Verification candidates carry narrative links, parent topic IDs
 and relevance, and the review queue exposes narrative and population columns.
-Use `sample --help` and `verify --help` for review sampling and evidence-corpus
-verification. Validation and evidence provenance remain separate from coding.
+Validation checks labels, axis consistency, spans, verbatim evidence and
+certainty markers. Failures are durable and retryable; missing results do not
+mean negative annotations. `--validation strict` rejects invalid responses.
+`lenient` repairs only unambiguous span/quote matches and drops unrepairable
+annotations, logging both. Report this fingerprinted mode with evaluation
+results.
+
+Merging deterministically deduplicates overlapping decisions while preserving
+separate annotations on each axis and supporting-window provenance. Claims
+merge across overlapping matching passages; products require overlapping or
+touching spans and matching normalized names. Later repetitions remain separate.
+
+Use `sample` to create blinded label, claim and product review sheets plus
+uniform windows for an independent false-negative audit. Supplement rare-topic
+recall with a targeted sample and report its selection bias.
+
+Evidence verification retrieves passages from one frozen, validated corpus.
+`verify` checks corpus and validation-manifest identity, candidate/passage IDs,
+retrieval limits and citations. Its outcomes include supported, contradicted,
+missing context, mixed, insufficient evidence and not verifiable. Insufficient
+retrieval is a valid outcome. Use `sample --help` and `verify --help` for setup.
 
 ## Change and evaluate the scheme
 

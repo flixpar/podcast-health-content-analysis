@@ -5,10 +5,11 @@ A step (``screen``, ``reference``, ``synthetic``, ``contrast``, ``adjudicate``,
 each with the inputs an agent needs (items, codebook, schema, instructions)
 and nothing else -- no repo paths, no metadata that could leak what the
 answer "should" be. An agent writes its output files into the bundle; the
-step's ``ingest`` validates every output before anything enters ``benchmark/``.
+step's ``ingest`` validates every output before anything enters the local
+benchmark artifact directory.
 
-Bundles are deliberately outside the repository so an agent told to work only
-inside its bundle has nothing else to read there.
+Bundles live in ignored local scratch; each includes only the inputs an agent
+needs, and instructions restrict the agent to its own bundle.
 """
 
 from __future__ import annotations
@@ -28,11 +29,11 @@ TASKS_ROOT_ENV = "BENCHMARK_TASKS_DIR"
 
 
 def tasks_root() -> Path:
-    """Where bundles live: $BENCHMARK_TASKS_DIR, else a sibling of the repo."""
+    """Where bundles live: $BENCHMARK_TASKS_DIR, else ignored local scratch."""
     override = os.environ.get(TASKS_ROOT_ENV)
     if override:
         return Path(override)
-    return REPO_ROOT.parent / "podcast-misinfo-benchmark-tasks"
+    return REPO_ROOT / "local" / "benchmark-tasks"
 
 
 def utc_stamp() -> str:

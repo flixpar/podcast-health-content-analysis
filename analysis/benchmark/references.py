@@ -1,7 +1,8 @@
 """Reference annotations and their aggregation into a soft gold.
 
-``benchmark/annotators.json`` registers annotators (model, method, authority).
-``benchmark/references/<item_id>/<annotator>.json`` holds one validated window
+``benchmark/annotators.json`` seeds annotator metadata (model, method, authority);
+runtime registration writes ``local/benchmark/annotators.json``.
+``local/benchmark/references/<item_id>/<annotator>.json`` holds one validated window
 result per annotator per item, plus the pre-repair ``raw`` output when the
 annotator was an agent that repaired its own validator errors.
 
@@ -25,6 +26,7 @@ from analysis.benchmark import (
     ADJUDICATION_PATH,
     AGREEMENT_PATH,
     ANNOTATORS_PATH,
+    ANNOTATOR_SPECS_PATH,
     BENCHMARK_VERSION,
     GOLD_PATH,
     REFERENCES_DIR,
@@ -97,6 +99,9 @@ def validate_result(result: dict[str, Any], window: dict[str, Any], axes: dict[s
 
 
 def load_annotators(path: Path = ANNOTATORS_PATH) -> dict[str, dict[str, Any]]:
+    path = Path(path)
+    if path == ANNOTATORS_PATH and not path.exists():
+        path = ANNOTATOR_SPECS_PATH
     if not Path(path).exists():
         return {}
     return json.loads(Path(path).read_text(encoding="utf-8"))
