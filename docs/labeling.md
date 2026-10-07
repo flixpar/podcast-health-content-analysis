@@ -82,6 +82,56 @@ room for input and reasoning. Use explicit model and sampling settings for
 reproducible comparisons; server endpoints represent capacity and may change
 without changing a run's identity.
 
+### Selecting episodes and labeling order
+
+`prepare` labels every transcript in `--transcripts`. To prepare one study's
+episodes from a shared transcript directory, pass `--episode-ids` with a file of
+IDs, one per line, or with a study export's `episodes.csv`. The manifest
+records how many were requested, found and missing a transcript. Windows are
+written, and therefore labeled, in episode-ID order by default. `--order
+shuffled` uses a fixed pseudo-random episode order instead. That spreads dense
+stretches of a corpus across the run, so partial results are representative
+and the rate stays steady. Each episode's windows stay together, which merge
+relies on. Windows record their transcript relative to the transcript
+directory, so no machine-specific paths reach the outputs.
+
+### Several servers and failures
+
+List one `api_base` per server. `concurrency` is the total across all of them.
+Each request goes to the server with the fewest requests in flight. A server
+that fails (a transport error, HTTP 5xx or 429) is skipped for 30 seconds, and
+the retry goes to another server. A server that is down at startup is skipped
+and probed again later, as long as at least one answers. A dropped connection
+counts as a transport error and is retried like any other. After the main pass,
+windows whose every attempt failed on a server are retried once more
+(`--final-retry-passes`, default 1). Windows whose responses were rejected keep
+their failure. Rerunning `label` retries every unresolved window.
+
+The progress line reports the recent rate, output tokens per second and an ETA.
+Each stored window keeps its lenient-validation repairs and drops, its attempt
+count and the output tokens spent on rejected attempts. `label_manifest.json`
+totals these over the whole store (`validation_totals`), so the totals survive
+resumed runs.
+
+### Sharing a release
+
+`analysis/label_export.py` packages a merged run for analysis elsewhere. It
+writes Parquet tables for the labels and for the transcript units that every
+span refers to. With `--metadata-db` it adds episode and podcast metadata. With
+`--study` it also adds every study episode, the chart evidence per show-month
+and coverage statistics. It ships the taxonomy sources and a README (generated
+unless `--readme` is given). `MANIFEST.json` holds the provenance and a sha256
+of every file:
+
+```bash
+.venv/bin/python -m analysis.label_export --run-dir local/topic-labeling-glm53 \
+    --out local/releases/top24-v8 --metadata-db downloader/data/podcast_metadata.db \
+    --study apple-top24-monthly
+```
+
+It refuses merge outputs that no longer match `merge_summary.json`, and a
+release directory that is not empty.
+
 Merged artifacts use `topic-labeling-v5`, including product mentions. Topic
 annotations carry parent and domain IDs; clips carry narrative and population
 annotations. Verification candidates carry narrative links, parent topic IDs
