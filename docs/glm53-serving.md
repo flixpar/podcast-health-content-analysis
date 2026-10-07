@@ -51,7 +51,7 @@ The shipped GLM config targets a local server.
 | Server CPU threads | 1 per worker | Avoids CPU oversubscription |
 | Requests | Chat Completions, high effort, 24k thinking budget | Matches measured v8 workload |
 | Output cap | 40000 tokens | Allows answers while bounding occasional generation loops |
-| Client concurrency | 448 | Keeps the 160–224 server slots fed; excess requests queue |
+| Client concurrency | 448 | Total across endpoints: ~2.8× the 160 slots per server; excess requests queue |
 
 Environment overrides include `MAX_NUM_SEQS`, `MAX_MODEL_LEN`,
 `GPU_MEMORY_UTILIZATION`, `PORT`, `API_SERVER_COUNT`, `VLLM_OMP_NUM_THREADS`,
@@ -67,6 +67,21 @@ are historical measurements on that workload. Keep
 cap for denser windows. A full pool can evict the shared checkpoint and cause
 repeated codebook prefill. The bf16 cap-256 run reached 0.94 KV use and
 75 preemptions, with lower throughput.
+
+A full-corpus run (398,448 v8 windows of the `apple-top24-monthly` study,
+two nodes, bf16 state, 2026-10-06/07) showed that the 1,500-window measurement
+overstates the safe cap. KV demand is driven by rare very long responses, so
+peaks arrive late and in bursts: cap 224 ran ~4 hours at ~18k windows/hour
+(two nodes) and then spiralled (KV 0.99, preemptions, prefix-cache hits down
+from 0.97 to 0.91, decode throughput halved); cap 192 spiralled 18 minutes
+after a restart. Cap 160 then ran ~20 hours with KV peaking near 0.8 and no
+preemption, at the same output tokens/s per node (~4.3–4.8k), so it is now the
+default for both state dtypes. After a restart KV climbs for ~20 minutes as
+long-thinking requests accumulate; judge a cap by preemption growth over hours,
+not by the first few minutes. Windows/hour on a real corpus also swings 2–3×
+with content density (mean output ranged from ~1.2k to ~5.7k tokens per window
+across episode ranges); estimate remaining time from output tokens, or prepare
+with `--order shuffled`.
 
 In the historical comparison, v8 model outputs on 160 archived headline items
 were scored against v7 gold through the v8-to-v7 label map. High/24k measured
@@ -95,7 +110,8 @@ KDA_STATE_DTYPE=bfloat16 analysis/serving/serve-glm53.sh
 The launcher checks the installed KDA source and refuses bf16 mode when the
 setting is absent. It finds Python beside the resolved vLLM executable;
 `VLLM_PYTHON` can explicitly select that installation's interpreter. Patched
-bf16 mode defaults to cap 224. Recorded paired differences on the same older,
+bf16 mode uses the same cap 160; its smaller state leaves KV headroom rather
+than raising the cap (see above). Recorded paired differences on the same older,
 mapped gold were within run-to-run variation; this remains an opt-in setting.
 
 No private cluster paths or environment modules are loaded by the scripts.

@@ -26,6 +26,7 @@ import argparse
 import csv
 import hashlib
 import heapq
+import http.client
 import io
 import itertools
 import json
@@ -33,13 +34,14 @@ import os
 import re
 import sqlite3
 import sys
+import threading
 import time
 import tomllib
 import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
-from collections import Counter, defaultdict
+from collections import Counter, defaultdict, deque
 from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
 from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
@@ -907,6 +909,26 @@ def transcript_paths(directory: Path, limit: int | None = None) -> list[Path]:
     return paths[:limit] if limit is not None else paths
 
 
+def load_episode_ids(path: Path) -> set[int]:
+    """Episode IDs from a one-per-line file or a CSV with an ``episode_id`` column."""
+    text = Path(path).read_text(encoding="utf-8")
+    first = text.lstrip().split("\n", 1)[0]
+    try:
+        if "episode_id" in [name.strip().strip('"') for name in first.split(",")]:
+            return {int(row["episode_id"]) for row in csv.DictReader(io.StringIO(text))}
+        return {
+            int(line.strip())
+            for line in text.splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        }
+    except (KeyError, ValueError) as exc:
+        raise TopicLabelingError(
+            f"{path}: expected one episode ID per line or a CSV with an episode_id "
+            f"column ({exc})",
+            kind="invalid_field",
+        ) from exc
+
+
 def load_manifest_metadata(path: Path | None) -> dict[int, dict[str, Any]]:
     if path is None:
         return {}
@@ -990,7 +1012,26 @@ def run_prepare(args: argparse.Namespace) -> dict[str, Any]:
     taxonomy = compile_taxonomy(Path(args.topics))
     taxonomy_path = output_dir / "taxonomy.json"
     write_json(taxonomy_path, taxonomy)
-    paths = transcript_paths(Path(args.transcripts), args.limit)
+    transcripts_dir = Path(args.transcripts)
+    paths = transcript_paths(transcripts_dir)
+    episode_filter = None
+    if getattr(args, "episode_ids", None):
+        wanted = load_episode_ids(Path(args.episode_ids))
+        available = {episode_id_from_path(path) for path in paths}
+        paths = [path for path in paths if episode_id_from_path(path) in wanted]
+        episode_filter = {
+            "path": str(args.episode_ids),
+            "sha256": sha256_file(Path(args.episode_ids)),
+            "requested": len(wanted),
+            "found": len(paths),
+            "missing_transcripts": len(wanted - available),
+        }
+    order = getattr(args, "order", "episode")
+    if order == "shuffled":
+        # Fixed per episode, so the same inputs always give the same windows file.
+        paths.sort(key=lambda path: sha256_bytes(f"order:{episode_id_from_path(path)}".encode()))
+    if args.limit is not None:
+        paths = paths[: args.limit]
     if not paths:
         raise TopicLabelingError(f"no transcript files found in {args.transcripts}")
     metadata = load_manifest_metadata(args.manifest)
@@ -1025,7 +1066,9 @@ def run_prepare(args: argparse.Namespace) -> dict[str, Any]:
                     or transcript_meta.get("episode_title"),
                     "published_date": episode_meta.get("published_date"),
                     "duration_seconds": episode_meta.get("duration_seconds"),
-                    "source_transcript": str(path),
+                    # Relative to the transcript directory (recorded in the
+                    # manifest), so outputs carry no machine-specific paths.
+                    "source_transcript": path.relative_to(transcripts_dir).as_posix(),
                     "source_transcript_sha256": source_sha256,
                     "transcript_source": transcript_meta.get("source"),
                     "transcript_model": transcript_meta.get("model"),
@@ -1059,6 +1102,8 @@ def run_prepare(args: argparse.Namespace) -> dict[str, Any]:
         "transcript_directory": str(args.transcripts),
         "metadata_database": str(args.metadata_db) if args.metadata_db else None,
         "source_manifest": str(args.manifest) if args.manifest else None,
+        "episode_filter": episode_filter,
+        "order": order,
         "input_transcript_files": len(paths),
         "episodes_prepared": counts["episodes"],
         "empty_transcripts": counts["empty_transcripts"],
@@ -2860,11 +2905,27 @@ def resolve_api_flavor(name: str) -> ApiFlavor:
         raise TopicLabelingError(f"unknown API {name!r}") from None
 
 
+# How long a server that just failed is skipped by the router. Long enough that
+# a dead node does not absorb a burst of requests, short enough that a restarted
+# one is back in use within a minute.
+ENDPOINT_COOLDOWN_SECONDS = 30.0
+
+
+def is_endpoint_fault(exc: BaseException) -> bool:
+    """A failure of the server rather than of its answer: worth another server."""
+    if not isinstance(exc, TopicLabelingError):
+        return False
+    if exc.kind == "transport":
+        return True
+    status = getattr(exc, "status", None)
+    return exc.kind == "http_error" and status is not None and (status >= 500 or status == 429)
+
+
 class ResponsesClient:
     """Pooling, retries and spend accounting for one OpenAI-compatible server.
 
     ``api`` selects which of the two request shapes it speaks; everything else
-    here -- round-robin, retry, the usage lease -- is the same either way.
+    here -- routing, retry, the usage lease -- is the same either way.
     """
 
     def __init__(
@@ -2886,6 +2947,15 @@ class ResponsesClient:
         self.attempts = attempts
         self.opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
         self._turn = itertools.count()
+        # Least-loaded routing for _send: requests in flight per root, and roots
+        # that just failed, which are skipped until their cooldown expires.
+        self._route_lock = threading.Lock()
+        self._in_flight: Counter[str] = Counter()
+        self._cooldown_until: dict[str, float] = {}
+        # Set by run_label: endpoints that are down at startup are cooled down
+        # and re-probed later instead of stopping the run.
+        self.allow_unreachable = False
+        self.unreachable: list[str] = []
         # A limiter built without a config is inert, which is what keeps a free
         # local endpoint free of all of this.
         self.limiter = limiter if limiter is not None else UsageLimiter(None)
@@ -2906,14 +2976,36 @@ class ResponsesClient:
         ]
 
     def _endpoint(self) -> str:
-        """The next server to send to.
-
-        Round-robin across identical servers. Each attempt draws again, so a
-        retry lands elsewhere -- which is what makes one node going down a
-        slowdown rather than a run-ending failure.
-        """
+        """The next server in round-robin order (the TypeSafe client's router)."""
         roots = self.roots
         return roots[next(self._turn) % len(roots)]
+
+    def _acquire(self, avoid: str | None = None) -> str:
+        """The server for one request: the one with the fewest requests in flight.
+
+        Round-robin gives every server the same arrivals, so whichever finishes
+        faster runs out of work while the other queues; in a two-node run one
+        node sat at a third of its slots for hours. Ties rotate. A server that
+        just failed is skipped for ENDPOINT_COOLDOWN_SECONDS, because a dead
+        server has nothing in flight and would otherwise attract every request,
+        and a retry avoids the server its previous attempt failed on.
+        """
+        with self._route_lock:
+            now = time.monotonic()
+            roots = self.roots
+            healthy = [r for r in roots if self._cooldown_until.get(r, 0.0) <= now] or roots
+            candidates = [r for r in healthy if r != avoid] or healthy
+            offset = next(self._turn) % len(candidates)
+            rotated = candidates[offset:] + candidates[:offset]
+            root = min(rotated, key=lambda r: self._in_flight[r])
+            self._in_flight[root] += 1
+            return root
+
+    def _release(self, root: str, failed: bool) -> None:
+        with self._route_lock:
+            self._in_flight[root] -= 1
+            if failed:
+                self._cooldown_until[root] = time.monotonic() + ENDPOINT_COOLDOWN_SECONDS
 
     def _request(
         self, url: str, payload: dict[str, Any] | None = None
@@ -2944,7 +3036,11 @@ class ResponsesClient:
             setattr(error, "retryable", retryable)
             setattr(error, "status", exc.code)
             raise error from exc
-        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
+        except (OSError, http.client.HTTPException, json.JSONDecodeError) as exc:
+            # OSError covers URLError, timeouts and connection resets;
+            # HTTPException covers a server dropping the connection mid-response
+            # (RemoteDisconnected, IncompleteRead), which urllib does not wrap.
+            # All of them are the server's failure, so they must be retryable.
             error = TopicLabelingError(
                 f"endpoint request failed: {type(exc).__name__}",
                 kind="transport",
@@ -2959,16 +3055,45 @@ class ResponsesClient:
         return parsed
 
     def served_models(self) -> dict[str, str]:
-        """The model each endpoint reports, keyed by endpoint."""
+        """The model each reachable endpoint reports, keyed by endpoint.
+
+        With ``allow_unreachable`` an endpoint that cannot be reached is left
+        out, cooled down so requests skip it, and re-probed by the router once
+        the cooldown expires; at least one endpoint must answer.
+        """
         served: dict[str, str] = {}
+        unreachable: list[str] = []
         for root in self.roots:
-            response = self._request(root + "/models")
+            try:
+                response = self._request(root + "/models")
+            except TopicLabelingError as exc:
+                if not (self.allow_unreachable and is_endpoint_fault(exc)):
+                    raise
+                unreachable.append(root)
+                continue
             try:
                 served[root] = str(response["data"][0]["id"])
             except (KeyError, IndexError, TypeError) as exc:
                 raise TopicLabelingError(
                     f"could not discover a model from {root}/models"
                 ) from exc
+        if unreachable:
+            if not served:
+                raise TopicLabelingError(
+                    f"no endpoint is reachable: {unreachable}", kind="transport"
+                )
+            with self._route_lock:
+                until = time.monotonic() + ENDPOINT_COOLDOWN_SECONDS
+                for root in unreachable:
+                    self._cooldown_until[root] = until
+            if unreachable != self.unreachable:
+                print(
+                    f"warning: unreachable endpoint(s) {unreachable}; continuing with "
+                    f"{sorted(served)} and retrying them every "
+                    f"{ENDPOINT_COOLDOWN_SECONDS:.0f} s",
+                    file=sys.stderr,
+                )
+            self.unreachable = unreachable
         return served
 
     def discover_model(self) -> str:
@@ -2986,14 +3111,32 @@ class ResponsesClient:
             )
         return unique.pop()
 
-    def _send(self, payload: dict[str, Any], model: str) -> dict[str, Any]:
+    def _send(
+        self, payload: dict[str, Any], model: str, avoid: str | None = None
+    ) -> dict[str, Any]:
         """One billable request, held against the run's usage limits.
 
         The reservation has to be taken from an estimate, because the token
         counts only exist once the request is over; ``record`` then replaces it
         with what the server reports. A request that reports no usage keeps its
         estimate, since one that failed after generating was still billed.
+
+        ``avoid`` is the server a previous attempt failed on. A server failure
+        raised from here carries that server as ``endpoint`` for the retry.
         """
+        root = self._acquire(avoid)
+        failed = False
+        try:
+            return self._send_to(root, payload, model)
+        except TopicLabelingError as exc:
+            failed = is_endpoint_fault(exc)
+            if failed:
+                setattr(exc, "endpoint", root)
+            raise
+        finally:
+            self._release(root, failed)
+
+    def _send_to(self, root: str, payload: dict[str, Any], model: str) -> dict[str, Any]:
         with self.limiter.reserve(
             provider=self.provider,
             model=model,
@@ -3003,7 +3146,7 @@ class ResponsesClient:
             # come back on their own rather than staying retired.
             ttl=self.timeout + 60,
         ) as lease:
-            response = self._request(self._endpoint() + self.flavor.path, payload)
+            response = self._request(root + self.flavor.path, payload)
             lease.record(response.get("usage"))
         return response
 
@@ -3042,12 +3185,16 @@ class ResponsesClient:
             ),
         }
         last_error: Exception | None = None
+        avoid: str | None = None
+        # Output tokens spent on attempts that were rejected, so the cost of
+        # retries is visible per window and not only in the server's counters.
+        rejected_completion_tokens = 0
         for attempt in range(self.attempts):
             response: dict[str, Any] | None = None
             output_text = ""
             started = time.monotonic()
             try:
-                response = self._send(payload, model)
+                response = self._send(payload, model, avoid=avoid)
                 self.flavor.raise_for_status(response)
                 output_text = self.flavor.output_text(response)
                 parsed = parse_json_output(output_text)
@@ -3067,6 +3214,8 @@ class ResponsesClient:
                     "response_model": response.get("model"),
                     "effective_sampling": self.flavor.effective_sampling(response),
                     "validation": validation_summary,
+                    "attempts": attempt + 1,
+                    "rejected_completion_tokens": rejected_completion_tokens,
                 }
                 if on_attempt is not None:
                     on_attempt(
@@ -3083,6 +3232,10 @@ class ResponsesClient:
                 return result, meta
             except (TopicLabelingError, json.JSONDecodeError) as exc:
                 last_error = exc
+                avoid = getattr(exc, "endpoint", None)
+                if response:
+                    usage = response.get("usage") or {}
+                    rejected_completion_tokens += int(usage.get("completion_tokens") or 0)
                 if on_attempt is not None:
                     on_attempt(
                         {
@@ -3126,9 +3279,10 @@ class ResponsesClient:
             ),
         }
         last_error: Exception | None = None
+        avoid: str | None = None
         for attempt in range(self.attempts):
             try:
-                response = self._send(payload, model)
+                response = self._send(payload, model, avoid=avoid)
                 self.flavor.raise_for_status(response)
                 parsed = parse_json_output(self.flavor.output_text(response))
                 result = validate_verification_response(parsed, pair)
@@ -3140,6 +3294,7 @@ class ResponsesClient:
                 }
             except (TopicLabelingError, json.JSONDecodeError) as exc:
                 last_error = exc
+                avoid = getattr(exc, "endpoint", None)
                 retryable = getattr(exc, "retryable", True)
                 if not retryable or attempt + 1 >= self.attempts:
                     break
@@ -3394,6 +3549,40 @@ def append_judgments(path: Path, meta: dict[str, Any]) -> None:
         os.fsync(handle.fileno())
 
 
+class LabelProgress:
+    """Recent rate, output-token throughput and ETA for the progress line."""
+
+    def __init__(self, total_windows: int | None, horizon_seconds: float = 600.0) -> None:
+        self.total_windows = total_windows
+        self.horizon_seconds = horizon_seconds
+        self.events: deque[tuple[float, int]] = deque()
+
+    def record(self, completion_tokens: int, now: float | None = None) -> None:
+        now = time.monotonic() if now is None else now
+        self.events.append((now, completion_tokens))
+        while self.events and now - self.events[0][0] > self.horizon_seconds:
+            self.events.popleft()
+
+    def describe(self, windows_done: int, now: float | None = None) -> str:
+        """``rate=<windows>/h out_tok/s=<n> eta=<h>h`` over the recent horizon."""
+        now = time.monotonic() if now is None else now
+        if len(self.events) < 2:
+            return ""
+        span = max(now - self.events[0][0], 1.0)
+        per_hour = len(self.events) / span * 3600
+        parts = [
+            f"rate={per_hour:.0f}/h",
+            f"out_tok/s={sum(tokens for _, tokens in self.events) / span:.0f}",
+        ]
+        if self.total_windows:
+            remaining = max(self.total_windows - windows_done, 0)
+            parts.append(f"eta={remaining / per_hour:.1f}h")
+        return " ".join(parts)
+
+
+_SERVER_STATUS = re.compile(r"returned HTTP (?:5\d\d|429)\b")
+
+
 class LabelStore:
     """SQLite checkpoint store; one transaction makes each model response durable."""
 
@@ -3418,7 +3607,10 @@ class LabelStore:
                 response_id TEXT,
                 response_model TEXT,
                 usage_json TEXT,
-                labeled_at TEXT NOT NULL
+                labeled_at TEXT NOT NULL,
+                validation_json TEXT,
+                attempts INTEGER,
+                rejected_completion_tokens INTEGER
             );
             CREATE INDEX IF NOT EXISTS idx_window_labels_episode
                 ON window_labels(episode_id, window_index);
@@ -3437,6 +3629,19 @@ class LabelStore:
                 "ALTER TABLE failures ADD COLUMN kind TEXT NOT NULL DEFAULT 'other'"
             )
             self.conn.commit()
+        # Stores written before these columns existed gain them empty: their
+        # windows simply have no per-window validation record.
+        label_columns = {
+            row[1] for row in self.conn.execute("PRAGMA table_info(window_labels)")
+        }
+        for column, ddl in (
+            ("validation_json", "TEXT"),
+            ("attempts", "INTEGER"),
+            ("rejected_completion_tokens", "INTEGER"),
+        ):
+            if column not in label_columns:
+                self.conn.execute(f"ALTER TABLE window_labels ADD COLUMN {column} {ddl}")
+        self.conn.commit()
         existing = self.conn.execute(
             "SELECT run_fingerprint, manifest_json FROM run WHERE singleton = 1"
         ).fetchone()
@@ -3484,8 +3689,9 @@ class LabelStore:
             self.conn.execute(
                 """INSERT OR REPLACE INTO window_labels
                    (window_id, episode_id, window_index, result_json, response_id,
-                    response_model, usage_json, labeled_at)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                    response_model, usage_json, labeled_at, validation_json, attempts,
+                    rejected_completion_tokens)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 (
                     window["window_id"],
                     window["episode_id"],
@@ -3495,6 +3701,11 @@ class LabelStore:
                     response_meta.get("response_model"),
                     canonical_json(response_meta.get("usage")),
                     now,
+                    canonical_json(response_meta["validation"])
+                    if response_meta.get("validation")
+                    else None,
+                    response_meta.get("attempts"),
+                    response_meta.get("rejected_completion_tokens"),
                 ),
             )
             self.conn.execute(
@@ -3521,6 +3732,47 @@ class LabelStore:
                     now,
                 ),
             )
+
+    def validation_totals(self) -> dict[str, Any]:
+        """Repairs, drops, attempts and rejected-attempt tokens over the whole store.
+
+        Summed from the per-window records, so the totals cover every invocation
+        of a resumed run, not just the last one.
+        """
+        repaired: Counter[str] = Counter()
+        dropped: Counter[str] = Counter()
+        by_attempts: Counter[int] = Counter()
+        recorded = rejected_tokens = 0
+        for validation_json, attempts, rejected in self.conn.execute(
+            "SELECT validation_json, attempts, rejected_completion_tokens FROM window_labels"
+        ):
+            if validation_json:
+                recorded += 1
+                summary = json.loads(validation_json)
+                repaired.update(summary.get("repaired") or {})
+                dropped.update(summary.get("dropped") or {})
+            if attempts:
+                by_attempts[int(attempts)] += 1
+            rejected_tokens += int(rejected or 0)
+        return {
+            "windows_with_validation_record": recorded,
+            "annotations_repaired": dict(sorted(repaired.items())),
+            "annotations_dropped": dict(sorted(dropped.items())),
+            "windows_by_attempts": {str(k): v for k, v in sorted(by_attempts.items())},
+            "rejected_attempt_completion_tokens": rejected_tokens,
+        }
+
+    def endpoint_failure_ids(self) -> set[str]:
+        """Unresolved windows that failed on the server, not on their content."""
+        ids = set()
+        for window_id, kind, error in self.conn.execute(
+            "SELECT window_id, kind, error FROM failures"
+        ):
+            if kind == "transport" or (
+                kind == "http_error" and _SERVER_STATUS.search(error or "")
+            ):
+                ids.add(window_id)
+        return ids
 
     def labels_for_episode(self, episode_id: int) -> dict[str, dict[str, Any]]:
         rows = self.conn.execute(
@@ -3744,6 +3996,9 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
         raise TopicLabelingError("taxonomy does not match the prepared run")
     limiter = build_limiter(args)
     client = build_label_client(args, api_key, limiter)
+    # A server that is down at startup only slows the run: it is skipped and
+    # re-probed. At least one must answer.
+    client.allow_unreachable = True
     served = client.served_models()
     model = args.model or client.discover_model()
     settings = ModelSettings.from_args(args)
@@ -3813,9 +4068,14 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
     # What lenient validation repaired and dropped in the accepted responses.
     repaired: Counter[str] = Counter()
     dropped: Counter[str] = Counter()
-    iterator = pending()
-    futures: dict[Future[tuple[dict[str, Any], dict[str, Any]]], dict[str, Any]] = {}
-    try:
+    progress = LabelProgress(prepare_manifest.get("windows"))
+    final_retry_passes = getattr(args, "final_retry_passes", 1)
+    final_retry_windows = 0
+
+    def run_pass(iterator: Iterator[dict[str, Any]]) -> None:
+        nonlocal submitted, completed_requests, failed_requests
+        nonlocal budget_stop, observed_sampling
+        futures: dict[Future[tuple[dict[str, Any], dict[str, Any]]], dict[str, Any]] = {}
         with ThreadPoolExecutor(max_workers=args.concurrency) as executor:
             while len(futures) < args.concurrency * 2:
                 try:
@@ -3838,6 +4098,8 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
                         changes = meta.get("validation") or {}
                         repaired.update(changes.get("repaired") or {})
                         dropped.update(changes.get("dropped") or {})
+                        usage = meta.get("usage") or {}
+                        progress.record(int(usage.get("completion_tokens") or 0))
                     except BudgetExceeded as exc:
                         budget_stop = budget_stop or exc
                         failed_requests += 1
@@ -3856,11 +4118,35 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
                             submitted += 1
                     if completed_requests % 25 == 0:
                         complete, failed = store.counts()
+                        rates = progress.describe(complete)
                         print(
                             f"requests={completed_requests}/{submitted}+ windows={complete} "
-                            f"unresolved={failed}",
+                            f"unresolved={failed}" + (f" {rates}" if rates else ""),
                             file=sys.stderr,
                         )
+
+    try:
+        run_pass(pending())
+        # Windows that failed because a server did (every attempt hit a dead or
+        # overloaded node) get another pass now that the run has moved on,
+        # rather than waiting for someone to notice and rerun. Windows whose
+        # responses were rejected already had their attempts and are left alone.
+        for _ in range(final_retry_passes):
+            if budget_stop is not None:
+                break
+            retry_ids = store.endpoint_failure_ids()
+            if not retry_ids:
+                break
+            print(
+                f"final retry: {len(retry_ids)} window(s) that failed on a server",
+                file=sys.stderr,
+            )
+            final_retry_windows += len(retry_ids)
+            run_pass(
+                window
+                for window in iter_jsonl(windows_path)
+                if window["window_id"] in retry_ids
+            )
         exported, export_sha256 = store.export_jsonl(
             output_dir / "window_labels.jsonl.zst"
         )
@@ -3872,6 +4158,9 @@ def run_label(args: argparse.Namespace) -> dict[str, Any]:
             "requests_failed_this_invocation": failed_requests,
             "annotations_repaired_this_invocation": dict(sorted(repaired.items())),
             "annotations_dropped_this_invocation": dict(sorted(dropped.items())),
+            "validation_totals": store.validation_totals(),
+            "final_retry_windows": final_retry_windows,
+            "unreachable_endpoints_at_start": list(getattr(client, "unreachable", [])),
             "stopped_by_usage_limit": str(budget_stop) if budget_stop else None,
             "effective_sampling": observed_sampling or None,
             "windows_labeled": complete,
@@ -4755,7 +5044,9 @@ def run_merge(args: argparse.Namespace) -> dict[str, Any]:
         review_tmp.replace(review_path)
         write_jsonl_atomic(output_dir / "episodes.jsonl", episode_rows)
         summary = {
-            "schema_version": SCHEMA_VERSION,
+            # The schema of the records written, which follows the taxonomy
+            # (topic-labeling-v5 for hierarchical ones).
+            "schema_version": taxonomy["schema_version"],
             "created_at": utc_now(),
             "episodes": episodes,
             "topic_clips": total_clips,
@@ -4969,7 +5260,7 @@ def run_sample(args: argparse.Namespace) -> dict[str, Any]:
     claim_summary = _sample_claims(args, output_dir)
     product_summary = _sample_products(args, output_dir)
     summary = {
-        "schema_version": SCHEMA_VERSION,
+        "schema_version": taxonomy["schema_version"],
         "created_at": utc_now(),
         "seed": args.seed,
         "requested_per_label": args.per_label,
@@ -5631,6 +5922,24 @@ def build_parser() -> argparse.ArgumentParser:
     prepare.add_argument("--overlap-words", type=int, default=150)
     prepare.add_argument("--max-unit-words", type=int, default=45)
     prepare.add_argument("--limit", type=int)
+    prepare.add_argument(
+        "--episode-ids",
+        type=Path,
+        help=(
+            "Prepare only these episodes: a text file with one ID per line, or a CSV "
+            "with an episode_id column (e.g. a study export's episodes.csv)"
+        ),
+    )
+    prepare.add_argument(
+        "--order",
+        choices=("episode", "shuffled"),
+        default="episode",
+        help=(
+            "Window order, which is the labeling order: by episode ID, or episodes "
+            "in a fixed pseudo-random order so dense stretches of a corpus spread "
+            "across the run (default: %(default)s)"
+        ),
+    )
 
     label = subparsers.add_parser(
         "label", help="Label windows through an OpenAI-compatible API"
@@ -5718,6 +6027,16 @@ def build_parser() -> argparse.ArgumentParser:
             "strict rejects and retries a whole response for one bad annotation; "
             "lenient repairs an annotation where the fix is unambiguous and "
             "drops it otherwise (default: %(default)s)"
+        ),
+    )
+    label.add_argument(
+        "--final-retry-passes",
+        type=int,
+        default=1,
+        help=(
+            "After the main pass, retry windows that failed because a server did "
+            "(transport errors, HTTP 5xx/429) this many times; 0 disables "
+            "(default: %(default)s)"
         ),
     )
 

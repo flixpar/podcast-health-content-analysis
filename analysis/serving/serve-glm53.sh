@@ -7,16 +7,21 @@
 # request, one ~1.5k-token window each, outputs of ~2k tokens on average and up
 # to ~30k. See docs/glm53-serving.md for the measurements behind each default.
 #
-#   MAX_NUM_SEQS   concurrent sequences (160; 224 with KDA_STATE_DTYPE=bfloat16).
+#   MAX_NUM_SEQS   concurrent sequences (160, with either KDA state dtype).
 #                  The one tuning knob: keep it below the point where the KV
 #                  pool fills (watch vllm:kv_cache_usage_perc stay under ~0.8).
 #                  A full pool evicts the shared-prefix checkpoint, requests
 #                  stop sharing the codebook and the server collapses into
-#                  preemption.
+#                  preemption. Peaks come from rare very long responses, so a
+#                  cap that looks safe for an hour can still spiral later: on a
+#                  400k-window corpus run, bf16 at 224 spiralled after ~4 h and
+#                  at 192 after 18 min, while 160 ran 20 h with no preemption at
+#                  the same output tokens/s.
 #   KDA_STATE_DTYPE  float32 (default) or bfloat16 for the linear-attention
-#                  recurrent state. bfloat16 halves the per-request state, so
-#                  more requests fit (+23% windows/h with the 224 cap, no
-#                  measured quality change), but vLLM ignores the setting for
+#                  recurrent state. bfloat16 halves the per-request state (no
+#                  measured quality change) and leaves KV headroom at the 160
+#                  cap; a 1,500-window benchmark ran 23% faster at cap 224, but
+#                  that cap was not stable on a full corpus. vLLM ignores the setting for
 #                  this model unless patches/vllm-glm5next-kda-state-dtype.patch
 #                  is applied to the vLLM install; the script checks.
 #   SPEC           speculative decoding config JSON, or "none" (default). MTP
@@ -64,7 +69,6 @@ if [ "$KDA_STATE_DTYPE" = bfloat16 ]; then
         echo "  patch -d $SITE -p1 < $(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/patches/vllm-glm5next-kda-state-dtype.patch" >&2
         exit 2
     fi
-    DEFAULT_SEQS=224
 fi
 
 SPEC="${SPEC:-none}"
