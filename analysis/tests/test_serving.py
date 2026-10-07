@@ -117,7 +117,9 @@ def test_glm_bf16_requires_patch_and_changes_capacity(stub_env, tmp_path, patche
     if patched:
         assert result.returncode == 0
         output = json.loads(result.stdout)
-        assert flag(output["args"], "--max-num-seqs") == "224"
+        # bf16 state no longer raises the cap: 224 and 192 spiralled into
+        # preemption on a full corpus run, 160 did not.
+        assert flag(output["args"], "--max-num-seqs") == "160"
         assert flag(output["args"], "--mamba-ssm-cache-dtype") == "bfloat16"
     else:
         assert result.returncode == 2
