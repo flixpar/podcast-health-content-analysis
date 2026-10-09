@@ -140,7 +140,8 @@ episodes keep flowing in from `discover`; re-issued duplicates are excluded.
 
 Apple US overall chart, top 24 per calendar month from 2016-01, with each
 show's episodes from the months it was in the list. The scoring rationale is
-in `downloader/podcast_pipeline/studies/apple_top24_monthly.py`:
+in `downloader/podcast_pipeline/studies/apple_chart_monthly.py`, which all
+the `apple-top*-monthly` studies share:
 
 * **Depth 24 throughout.** That is all Apple's own page shows, and the only
   first-party record between Chartable's shutdown and the start of live
@@ -157,12 +158,37 @@ in `downloader/podcast_pipeline/studies/apple_top24_monthly.py`:
   their list from the neighbouring snapshots and are flagged
   (`snapshots_in_month = 0`).
 * **Sources.** Apple's chart page and the live Marketing Tools feed come first,
-  then My Podcast Data (daily from 2024-09), then Podbay, then Chartable. Known-bad Chartable days are excluded. The
+  then Podbay, then Chartable. My Podcast Data is not used: this study keeps
+  the definition it was collected with (version 3). Known-bad Chartable days are excluded. The
   legacy iTunes RSS chart is excluded because it is a different list.
 * **Identity.** Shows are matched by Apple id, then by title through ids seen
   elsewhere in the record, then through `entity_links`, so renamed shows pool.
 
 The list grows by itself as `capture-charts` adds days; refresh the study.
+
+### `apple-top24-monthly-mpd`, `apple-top50-monthly`, `apple-top100-monthly`
+
+The same method with My Podcast Data (MPD) added, at depths 24, 50 and 100.
+A snapshot counts only if every rank down to the study's depth is present.
+
+| Study | Sources, best first | Members (2026-10-09) |
+|---|---|---:|
+| `apple-top24-monthly-mpd` | Marketing Tools, Apple's page, MPD, Podbay, Chartable | 710 |
+| `apple-top50-monthly` | Marketing Tools, MPD, Podbay, Chartable | 1,260 |
+| `apple-top100-monthly` | Marketing Tools, MPD, Podbay, Chartable | 2,206 |
+
+* **Top 24 with MPD** differs from `apple-top24-monthly` in 15 of 129 months
+  (30 show-slots), all from 2024-09. MPD gives September 2026, which no
+  other source covers, a daily record.
+* **Top 50 and top 100** cannot use Apple's 24-deep page. Their sources are
+  Podbay (to 2019-08), Chartable (sparse, 2018-11 to 2024-12), MPD (from
+  2024-09) and live capture. The archive analysis found that a monthly sample
+  sees about three quarters of ranks 11-50 but only half of ranks 51-100
+  ([findings](chart-archive-findings.md), section 5). The top-100 lists of the sparse
+  Chartable years therefore rest on fewer observations than those of the
+  daily years.
+* **Identity.** More shows below rank 24 carry only a title (Chartable):
+  177 top-50 and 441 top-100 members need `resolve`'s title search.
 
 ## Chart data
 
@@ -188,8 +214,8 @@ The list grows by itself as `capture-charts` adds days; refresh the study.
   chart dated D is Apple's chart at about 00:00-02:00 UTC on D. It matches the
   legacy iTunes RSS rank for rank, and Apple's page top 24 on 86% of days we
   captured that page before 03:00 UTC. Raw responses are kept under
-  `charts/raw/mypodcastdata/`, so re-runs only fetch new days.
-  `apple-top24-monthly` uses it after Apple's own sources (study version 4).
+  `charts/raw/mypodcastdata/`, so re-runs only fetch new days. The
+  `apple-top*-monthly` studies other than `apple-top24-monthly` read it.
 
 ## Older episodes
 

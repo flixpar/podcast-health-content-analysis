@@ -1,4 +1,5 @@
 import json
+from collections import Counter
 
 import pytest
 
@@ -6,6 +7,7 @@ from podcast_pipeline import db
 from podcast_pipeline.models import FeedEpisode, PodcastRecord
 from podcast_pipeline.pipeline import discover, download
 from podcast_pipeline.rss import FeedRead
+from podcast_pipeline.studies import apple_chart_monthly as monthly
 from podcast_pipeline.studies import apple_top24_monthly as top24
 from podcast_pipeline.studies.base import Member, Study, Window
 from podcast_pipeline.studies.corpus_2025 import Corpus2025
@@ -287,7 +289,7 @@ def test_status_gaps_and_export(conn, config, tmp_path):
 
 # --- the monthly top-24 study ------------------------------------------------
 
-def add_snapshot(conn, source, day, entries, chart=top24.CHART, trusted=1):
+def add_snapshot(conn, source, day, entries, chart=monthly.CHART, trusted=1):
     cur = conn.execute("""
         INSERT INTO chart_snapshots (source, chart, captured_on, origin, depth, n_entries,
                                      complete_to, trusted)
@@ -304,7 +306,7 @@ def chart(prefix, n=24, ids=True):
 
 
 def test_top24_month_lists_weight_by_time_not_snapshot_count(conn, monkeypatch):
-    monkeypatch.setattr(top24, "START_MONTH", "2017-01")
+    monkeypatch.setattr(monthly, "START_MONTH", "2017-01")
     # January: one snapshot early in the month with list A.
     # February: list B on the 1st, then list C on 26 later days. C held the
     # month; a union of snapshots would also admit B.
@@ -313,9 +315,9 @@ def test_top24_month_lists_weight_by_time_not_snapshot_count(conn, monkeypatch):
     for d in range(3, 29):
         add_snapshot(conn, "podbay", f"2017-02-{d:02d}", chart("C"))
     add_snapshot(conn, "podbay", "2017-04-02", chart("C"))   # March has no snapshot
-    days = top24.snapshot_days(conn)
-    obs = top24._observations(conn, days, top24.entity_resolver(conn))
-    lists = top24.monthly_lists(days, obs)
+    days = monthly.snapshot_days(conn, top24.AppleTop24Monthly.sources, 24)
+    obs = monthly._observations(conn, days, monthly.entity_resolver(conn), 24)
+    lists = monthly.monthly_lists(days, obs, 24)
     assert list(lists) == ["2017-01", "2017-02", "2017-03"]   # April not fully covered
     assert all(len(v) == 24 for v in lists.values())
     # B ranked for ~1.5 days, C for the other ~26.5: a union would hold 48
@@ -328,7 +330,7 @@ def test_top24_month_lists_weight_by_time_not_snapshot_count(conn, monkeypatch):
 
 
 def test_top24_sources_identity_and_trust(conn, monkeypatch):
-    monkeypatch.setattr(top24, "START_MONTH", "2020-01")
+    monkeypatch.setattr(monthly, "START_MONTH", "2020-01")
     # a podbay day carries the id for "Renamed Show"; chartable carries only titles
     add_snapshot(conn, "podbay", "2019-12-01", [("Renamed Show", "777")] + chart("P", 23))
     add_snapshot(conn, "chartable_itunes", "2020-01-10",
@@ -342,22 +344,58 @@ def test_top24_sources_identity_and_trust(conn, monkeypatch):
     entities = {m.entity for m in top24.AppleTop24Monthly().select(conn)}
     assert "apple:777" in entities and "title:noidshow" in entities
     assert not any("BAD" in e or "RSS" in e for e in entities)
-    days = dict((d, s) for d, _, s in top24.snapshot_days(conn))
+    days = dict((d, s) for d, _, s in monthly.snapshot_days(conn, top24.AppleTop24Monthly.sources, 24))
     assert days["2020-02-15"] == "apple_charts_page"
 
 
-def test_top24_mypodcastdata_ranks_below_apple_and_above_chartable(conn):
+def test_mypodcastdata_source_order_per_study(conn):
     add_snapshot(conn, "apple_charts_page", "2024-10-01", chart("APPLE"))
-    add_snapshot(conn, "mypodcastdata", "2024-10-01", chart("MPD"))
-    add_snapshot(conn, "mypodcastdata", "2024-10-02", chart("MPD"))
-    add_snapshot(conn, "chartable_itunes", "2024-10-02", chart("CH", ids=False))
-    add_snapshot(conn, "mypodcastdata", "2024-10-03", chart("MPD"), trusted=0)
-    days = {d: s for d, _, s in top24.snapshot_days(conn)}
-    assert days == {"2024-10-01": "apple_charts_page", "2024-10-02": "mypodcastdata"}
+    add_snapshot(conn, "mypodcastdata", "2024-10-01", chart("MPD", 100))
+    add_snapshot(conn, "mypodcastdata", "2024-10-02", chart("MPD", 100))
+    add_snapshot(conn, "chartable_itunes", "2024-10-02", chart("CH", 100, ids=False))
+    add_snapshot(conn, "mypodcastdata", "2024-10-03", chart("MPD", 100), trusted=0)
+    add_snapshot(conn, "mypodcastdata", "2024-10-04", chart("MPD", 60))
+
+    def days(study):
+        return {d: s for d, _, s in monthly.snapshot_days(conn, study.sources, study.depth)}
+    # the original study never reads My Podcast Data
+    assert days(top24.AppleTop24Monthly) == {"2024-10-01": "apple_charts_page",
+                                             "2024-10-02": "chartable_itunes"}
+    # it ranks below Apple's page and above Chartable
+    assert days(monthly.AppleTop24MonthlyMPD) == {
+        "2024-10-01": "apple_charts_page", "2024-10-02": "mypodcastdata",
+        "2024-10-04": "mypodcastdata"}
+    # deep studies skip Apple's 24-deep page and any snapshot short of their depth
+    assert days(monthly.AppleTop50Monthly) == {
+        "2024-10-01": "mypodcastdata", "2024-10-02": "mypodcastdata", "2024-10-04": "mypodcastdata"}
+    assert days(monthly.AppleTop100Monthly) == {
+        "2024-10-01": "mypodcastdata", "2024-10-02": "mypodcastdata"}
+
+
+def test_deep_month_lists_hold_exactly_depth_shows(conn, monkeypatch):
+    monkeypatch.setattr(monthly, "START_MONTH", "2017-01")
+    add_snapshot(conn, "podbay", "2017-01-05", chart("A", 100))
+    add_snapshot(conn, "podbay", "2017-01-20", chart("B", 100))
+    add_snapshot(conn, "podbay", "2017-02-10", chart("A", 100))
+    add_snapshot(conn, "podbay", "2017-02-25", chart("A", 100))
+    add_snapshot(conn, "podbay", "2017-03-01", chart("A", 100))   # so February is fully covered
+    for study, depth in ((monthly.AppleTop50Monthly, 50), (monthly.AppleTop100Monthly, 100)):
+        members = study().select(conn)
+        per_month = Counter(w.label for m in members for w in m.windows)
+        assert per_month == {"2017-01": depth, "2017-02": depth}
+        # B held most of January (Jan 13 on), A all of February
+        firsts = {w.label: m.entity for m in members for w in m.windows
+                  if w.attrs["monthly_rank"] == 1}
+        assert firsts == {"2017-01": "apple:B0", "2017-02": "apple:A0"}
+
+
+def test_original_study_definition_is_unchanged():
+    # the definition hash stored in production for apple-top24-monthly v3
+    assert top24.AppleTop24Monthly().definition_hash() == "5b5aa881fb998cb6"
 
 
 def test_top24_uses_entity_links_for_titles(conn, monkeypatch):
-    monkeypatch.setattr(top24, "START_MONTH", "2020-01")
+    monkeypatch.setattr(monthly, "START_MONTH", "2020-01")
     p = add_podcast(conn, 1, apple_id="555")
     db.link_entity(conn, "title:noidshow", p, "itunes_search")
     add_snapshot(conn, "chartable_itunes", "2020-01-10", [("No Id Show", None)] + chart("Q", 23, ids=False))
@@ -369,17 +407,17 @@ def test_top24_uses_entity_links_for_titles(conn, monkeypatch):
 def test_top24_cells_centre_on_midday():
     from datetime import date
     days = [date(2017, 1, 31), date(2017, 2, 1), date(2017, 2, 2)]
-    cells = top24._cells(days)
+    cells = monthly._cells(days)
     # the snapshot of Feb 1 covers exactly Feb 1 (hours 24..48 from Jan 31 00:00)
     assert cells[1] == (24.0, 48.0)
     assert cells[0] == (0.0, 24.0) and cells[2] == (48.0, 72.0)
 
 
 def test_top24_bare_titles_take_the_id_nearest_in_time(conn, monkeypatch):
-    monkeypatch.setattr(top24, "START_MONTH", "2018-01")
+    monkeypatch.setattr(monthly, "START_MONTH", "2018-01")
     add_snapshot(conn, "podbay", "2017-01-10", [("Same Name", "OLD")] + chart("A", 23))
     add_snapshot(conn, "apple_charts_page", "2024-09-10", [("Same Name", "NEW")] + chart("A", 23))
-    resolve = top24.entity_resolver(conn)
+    resolve = monthly.entity_resolver(conn)
     assert resolve(None, "samename", "2018-06-01") == "apple:OLD"
     assert resolve(None, "samename", "2024-01-01") == "apple:NEW"
 
