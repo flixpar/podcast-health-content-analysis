@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+from datetime import date
 from pathlib import Path
 
 from podcast_pipeline import db
@@ -60,6 +61,15 @@ def build_parser() -> argparse.ArgumentParser:
                    help="comma-separated live sources (default: charts.capture_sources)")
     p.add_argument("--no-catalog", action="store_true",
                    help="record the charts only; do not add newly seen podcasts to the catalog")
+
+    p = sub.add_parser("import-mypodcastdata",
+                       help="backfill daily Apple top-100 charts (2024-09 onward) from My Podcast Data")
+    p.add_argument("--genres", type=_str_list,
+                   help="comma-separated Apple genre ids (default: charts.mypodcastdata_genres)")
+    p.add_argument("--start", type=date.fromisoformat, help="first day, YYYY-MM-DD (default 2024-09-01)")
+    p.add_argument("--end", type=date.fromisoformat, help="last day, YYYY-MM-DD (default today)")
+    p.add_argument("--no-fetch", action="store_true",
+                   help="import only the raw responses already on disk")
 
     p = sub.add_parser("resolve", help="turn a study's chart entities into catalog podcasts with feeds")
     p.add_argument("--study", required=True)
@@ -282,6 +292,10 @@ def dispatch(args: argparse.Namespace, config: Config, conn) -> dict:
         case "capture-charts":
             from podcast_pipeline.charts import capture
             return capture.run(config, conn, sources=args.sources, catalog=not args.no_catalog)
+        case "import-mypodcastdata":
+            from podcast_pipeline.charts import mypodcastdata
+            return mypodcastdata.run(config, conn, genres=args.genres, start=args.start,
+                                     end=args.end, fetch=not args.no_fetch)
         case "resolve":
             from podcast_pipeline.catalog import resolve
             return resolve.run(config, conn, study=args.study, retry_failed=args.retry_failed,
