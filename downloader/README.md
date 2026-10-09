@@ -64,6 +64,7 @@ print a JSON summary when done. `--config PATH` and `--log-level` are global.
 | `fetch-podcasts [--limit N] [--source apple\|spotify\|podchaser] [--genre ID] [--country CC]` | Record the top podcasts from one chart. Additive: re-running refreshes metadata without changing ids, and records the podcast's rank in `podcast_charts`. |
 | `study list\|refresh\|status\|export` | Define, materialize, inspect, and export studies; see [studies](../docs/studies.md). |
 | `import-chart-archive [--archive-dir PATH]`, `capture-charts [--no-catalog]` | Import reconstructed charts or retain today's live snapshots and raw responses. |
+| `import-mypodcastdata [--genres 26,1512] [--start DAY] [--end DAY] [--no-fetch]` | Backfill daily Apple top-100 charts from My Podcast Data (2024-09 onward), keeping raw responses. |
 | `resolve --study NAME`, `link-entity ENTITY --note EVIDENCE ...` | Resolve study members or record authoritative manual identity decisions. |
 | `discover [--study NAME\|--all] [--max-episodes N]` | Read study podcasts' feeds and record episodes; defaults to the union of studies. |
 | `discover-archived --study NAME` | Recover older episodes from archived copies of known feeds. |

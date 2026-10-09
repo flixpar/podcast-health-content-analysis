@@ -205,7 +205,7 @@ CREATE TABLE IF NOT EXISTS chart_snapshots (
     chart TEXT NOT NULL,                 -- '<platform>:<region>:<unit>:<genre>', e.g. 'apple:us:podcast:all'
     captured_on TEXT NOT NULL,           -- UTC date of capture; the chart's date to within a day
     captured_at TEXT,                    -- earliest capture time that day (ISO)
-    origin TEXT NOT NULL,                -- 'wayback' | 'common_crawl' | 'live'
+    origin TEXT NOT NULL,                -- 'wayback' | 'common_crawl' | 'live' | 'mirror_api'
     depth INTEGER NOT NULL,              -- highest rank present
     n_entries INTEGER NOT NULL,
     complete_to INTEGER NOT NULL,        -- largest N with every rank 1..N present

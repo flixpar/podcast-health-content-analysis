@@ -171,7 +171,8 @@ The list grows by itself as `capture-charts` adds days; refresh the study.
   nearby Chartable page set using the
   [archive policy](../analysis/chart_archive/README.md), preserving explicit page
   metadata or deriving it from older saved slugs.
-  It replaces archive rows and leaves live rows intact. Verification compares
+  It replaces archive rows (origins `wayback` and `common_crawl`) and leaves
+  live and `mirror_api` rows intact. Verification compares
   trusted-day counts with a regenerated `parsed/population/summary.json` using
   the same depth policy; missing, older, malformed or incompatible summaries are reported
   as unavailable. Historical report counts are dated evidence. Regenerate,
@@ -179,7 +180,15 @@ The list grows by itself as `capture-charts` adds days; refresh the study.
 * `capture-charts` should run **daily** (`downloader/tools/capture_charts_daily.sh`
   is cron-ready). It stores the raw response, records the snapshot, and adds
   newly charting Apple shows to the catalog, reusing known current/historical
-  feed owners. A missed live day cannot be fetched retrospectively.
+  feed owners. A missed Spotify day cannot be fetched retrospectively.
+* `import-mypodcastdata` backfills Apple charts from My Podcast Data, an
+  independent site with Apple's daily top 100 per genre since 2024-09-01, with
+  Apple ids. Its snapshots are source `mypodcastdata`, origin `mirror_api`. A
+  chart dated D is Apple's chart at about 00:00-02:00 UTC on D. It matches the
+  legacy iTunes RSS rank for rank, and Apple's page top 24 on 86% of days we
+  captured that page before 03:00 UTC. Raw responses are kept under
+  `charts/raw/mypodcastdata/`, so re-runs only fetch new days. The study
+  `apple-top24-monthly` does not read this source yet.
 
 ## Older episodes
 
