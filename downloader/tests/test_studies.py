@@ -346,6 +346,16 @@ def test_top24_sources_identity_and_trust(conn, monkeypatch):
     assert days["2020-02-15"] == "apple_charts_page"
 
 
+def test_top24_mypodcastdata_ranks_below_apple_and_above_chartable(conn):
+    add_snapshot(conn, "apple_charts_page", "2024-10-01", chart("APPLE"))
+    add_snapshot(conn, "mypodcastdata", "2024-10-01", chart("MPD"))
+    add_snapshot(conn, "mypodcastdata", "2024-10-02", chart("MPD"))
+    add_snapshot(conn, "chartable_itunes", "2024-10-02", chart("CH", ids=False))
+    add_snapshot(conn, "mypodcastdata", "2024-10-03", chart("MPD"), trusted=0)
+    days = {d: s for d, _, s in top24.snapshot_days(conn)}
+    assert days == {"2024-10-01": "apple_charts_page", "2024-10-02": "mypodcastdata"}
+
+
 def test_top24_uses_entity_links_for_titles(conn, monkeypatch):
     monkeypatch.setattr(top24, "START_MONTH", "2020-01")
     p = add_podcast(conn, 1, apple_id="555")

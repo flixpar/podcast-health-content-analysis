@@ -6,10 +6,10 @@ published in the months it was in that list.
 
 Why this construction
 ---------------------
-* **Depth 24 throughout.** 24 is what Apple's own chart page shows, and it is
-  the only source after Chartable's shutdown (2024-12) until live capture of
-  the 100-deep feed began. Using 24 everywhere keeps 2016 and 2026 comparable
-  instead of changing the rule mid-series.
+* **Depth 24 throughout.** 24 is what Apple's own chart page shows, and the
+  only first-party record between Chartable's shutdown (2024-12) and live
+  capture of the 100-deep feed. Using 24 everywhere keeps 2016 and 2026
+  comparable instead of changing the rule mid-series.
 * **Exactly 24 per month, ranked by time-weighted points.** The archive's
   snapshot density varies from one snapshot a month (2019-2023, Chartable)
   to daily (2025-26). Taking every show seen in the top 24 would give ~24
@@ -27,9 +27,12 @@ Why this construction
   them to the nearest snapshots on either side. Such windows carry
   ``snapshots_in_month = 0`` and ``in_month_coverage = 0`` so an analysis can
   drop or down-weight them.
-* **One chart, three mirrors.** Apple's chart page, the Marketing Tools feed
-  (live capture), Podbay (to 2019-08) and Chartable (2018-11 to 2024-12) carry
-  the same chart; where two cover a day the first-party source wins. The
+* **One chart, several copies.** Apple's chart page, the Marketing Tools feed
+  (live capture), My Podcast Data (daily from 2024-09), Podbay (to 2019-08)
+  and Chartable (2018-11 to 2024-12) carry the same chart. Where two cover a
+  day the first-party source wins, then My Podcast Data: it matches Apple's
+  page exactly when both are taken early in the UTC day, while Chartable's
+  copies could be stale. The
   legacy iTunes RSS feed is excluded: the archive analysis found it disagrees
   with Podbay (median Jaccard 0.03 at depth 100), i.e. it is a different list.
   Chartable dates known to be wrong are already marked ``trusted = 0`` at
@@ -57,7 +60,8 @@ from podcast_pipeline.studies.base import Member, Study, Window
 logger = logging.getLogger(__name__)
 
 CHART = "apple:us:podcast:all"
-SOURCE_PRIORITY = ("apple_marketing_tools", "apple_charts_page", "podbay", "chartable_itunes")
+SOURCE_PRIORITY = ("apple_marketing_tools", "apple_charts_page", "mypodcastdata", "podbay",
+                   "chartable_itunes")
 DEPTH = 24
 START_MONTH = "2016-01"
 
@@ -66,7 +70,8 @@ class AppleTop24Monthly(Study):
     name = "apple-top24-monthly"
     description = ("Apple US overall chart, top 24 per calendar month since 2016-01 "
                    "(time-weighted points); each show's episodes from its charting months.")
-    version = 3   # 2: midday-centred cells, nearest-in-time title ids; 3: no trailers, provisional months
+    version = 4   # 2: midday-centred cells, nearest-in-time title ids; 3: no trailers,
+                  # provisional months; 4: My Podcast Data fills days from 2024-09
     exclude_trailers = True
 
     def params(self) -> dict:

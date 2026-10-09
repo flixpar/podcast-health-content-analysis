@@ -143,7 +143,8 @@ show's episodes from the months it was in the list. The scoring rationale is
 in `downloader/podcast_pipeline/studies/apple_top24_monthly.py`:
 
 * **Depth 24 throughout.** That is all Apple's own page shows, and the only
-  record between Chartable's shutdown and the start of live capture. A
+  first-party record between Chartable's shutdown and the start of live
+  capture. A
   uniform depth keeps 2016 and 2026 comparable.
 * **Exactly 24 per month, ranked by time-weighted points.** Snapshot density
   ranges from one a month (Chartable, 2019-2023) to daily (2025-26). A union
@@ -156,7 +157,7 @@ in `downloader/podcast_pipeline/studies/apple_top24_monthly.py`:
   their list from the neighbouring snapshots and are flagged
   (`snapshots_in_month = 0`).
 * **Sources.** Apple's chart page and the live Marketing Tools feed come first,
-  then Podbay, then Chartable. Known-bad Chartable days are excluded. The
+  then My Podcast Data (daily from 2024-09), then Podbay, then Chartable. Known-bad Chartable days are excluded. The
   legacy iTunes RSS chart is excluded because it is a different list.
 * **Identity.** Shows are matched by Apple id, then by title through ids seen
   elsewhere in the record, then through `entity_links`, so renamed shows pool.
@@ -187,8 +188,8 @@ The list grows by itself as `capture-charts` adds days; refresh the study.
   chart dated D is Apple's chart at about 00:00-02:00 UTC on D. It matches the
   legacy iTunes RSS rank for rank, and Apple's page top 24 on 86% of days we
   captured that page before 03:00 UTC. Raw responses are kept under
-  `charts/raw/mypodcastdata/`, so re-runs only fetch new days. The study
-  `apple-top24-monthly` does not read this source yet.
+  `charts/raw/mypodcastdata/`, so re-runs only fetch new days.
+  `apple-top24-monthly` uses it after Apple's own sources (study version 4).
 
 ## Older episodes
 
