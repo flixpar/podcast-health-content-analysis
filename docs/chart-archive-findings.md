@@ -347,6 +347,35 @@ missing queries; completed query caches are reused.
 
 ## 9. What is still missing
 
+**Update 2026-10-10.** A second search, for 2019-2024 top-100 days, found
+three sources and imported two (`import-archived-pages`; see
+[studies](studies.md)):
+
+* **podcharts.co day pages.** Wayback holds 76 complete US overall days,
+  2019-07 to 2024-10, 200 deep, with Apple ids; 69 are imported. Logged-out
+  visitors only saw the last week, so captures of older dates are a login
+  page. On 2024-09-19 the page matches My Podcast Data 100/100, rank for rank.
+  Podchaser owns the full daily archive, from at least 2018-08, which makes
+  its charts entitlement (§11) more valuable.
+* **Podcast Insights "Top 100 US Podcasts" page.** It embeds Apple's feed
+  under an "Updated" stamp from 2021-10, and 98 stamped days are imported. It
+  matches My Podcast Data and Chartable rank for rank on the days checked.
+* **`rss.itunes.apple.com/api/v1/.../top-podcasts/all/100/explicit.rss`.**
+  There are three captures, from 2020-08, 2020-10 and 2021-01. They are not
+  imported yet.
+
+The search also turned up negative results:
+* GitHub "git scraping" repos hold nothing before 2025.
+* Kaggle, Hugging Face, Zenodo, Figshare and Dataverse have nothing usable.
+* The archive.org item `ituneschartarchivedump` holds the legacy iTunes RSS
+  feed for summer 2021. That feed **leaves out explicit shows** (34 of the
+  top 100 are missing), so its positions are lower bounds, not ranks.
+* toppodcast.com is only 25 deep and has no ids.
+* podtail blends in its own data.
+* mowPod starts in 2024-10.
+
+2019-05, 2020-03, 2020-06 and 2021-08 still have no complete top-100 day.
+
 - **No dense first-party top-100 archive was found in this investigation.**
   The `podcasts.apple.com` page
   server-renders 24 items per shelf; "see all" is an `amp-api` call needing a

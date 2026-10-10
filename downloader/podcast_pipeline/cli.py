@@ -71,6 +71,11 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--no-fetch", action="store_true",
                    help="import only the raw responses already on disk")
 
+    p = sub.add_parser("import-archived-pages",
+                       help="import Apple chart days from archived podcharts.co / Podcast Insights pages")
+    p.add_argument("--sources", type=_str_list,
+                   help="comma-separated: podcharts, podcast_insights (default: both)")
+
     p = sub.add_parser("resolve", help="turn a study's chart entities into catalog podcasts with feeds")
     p.add_argument("--study", required=True)
     p.add_argument("--retry-failed", action="store_true",
@@ -296,6 +301,9 @@ def dispatch(args: argparse.Namespace, config: Config, conn) -> dict:
             from podcast_pipeline.charts import mypodcastdata
             return mypodcastdata.run(config, conn, genres=args.genres, start=args.start,
                                      end=args.end, fetch=not args.no_fetch)
+        case "import-archived-pages":
+            from podcast_pipeline.charts import archived_pages
+            return archived_pages.run(config, conn, sources=args.sources)
         case "resolve":
             from podcast_pipeline.catalog import resolve
             return resolve.run(config, conn, study=args.study, retry_failed=args.retry_failed,

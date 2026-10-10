@@ -168,27 +168,40 @@ The list grows by itself as `capture-charts` adds days; refresh the study.
 
 ### `apple-top24-monthly-mpd`, `apple-top50-monthly`, `apple-top100-monthly`
 
-The same method with My Podcast Data (MPD) added, at depths 24, 50 and 100.
-A snapshot counts only if every rank down to the study's depth is present.
+The same method at depths 24, 50 and 100, with three more chart sources and
+shared feed items (version 2). A snapshot counts only if every rank down to
+the study's depth is present.
 
-| Study | Sources, best first | Members (2026-10-09) |
-|---|---|---:|
-| `apple-top24-monthly-mpd` | Marketing Tools, Apple's page, MPD, Podbay, Chartable | 710 |
-| `apple-top50-monthly` | Marketing Tools, MPD, Podbay, Chartable | 1,260 |
-| `apple-top100-monthly` | Marketing Tools, MPD, Podbay, Chartable | 2,206 |
+| Study | Sources, best first |
+|---|---|
+| `apple-top24-monthly-mpd` | Marketing Tools, Apple's page, MPD, podcharts, Podcast Insights, Podbay, Chartable |
+| `apple-top50-monthly` | Marketing Tools, MPD, podcharts, Podcast Insights, Podbay, Chartable |
+| `apple-top100-monthly` | Marketing Tools, MPD, podcharts, Podcast Insights, Podbay, Chartable |
 
-* **Top 24 with MPD** differs from `apple-top24-monthly` in 15 of 129 months
-  (30 show-slots), all from 2024-09. MPD gives September 2026, which no
-  other source covers, a daily record.
-* **Top 50 and top 100** cannot use Apple's 24-deep page. Their sources are
-  Podbay (to 2019-08), Chartable (sparse, 2018-11 to 2024-12), MPD (from
-  2024-09) and live capture. The archive analysis found that a monthly sample
-  sees about three quarters of ranks 11-50 but only half of ranks 51-100
-  ([findings](chart-archive-findings.md), section 5). The top-100 lists of the sparse
-  Chartable years therefore rest on fewer observations than those of the
-  daily years.
-* **Identity.** More shows below rank 24 carry only a title (Chartable):
-  177 top-50 and 441 top-100 members need `resolve`'s title search.
+* **More chart days.** My Podcast Data (MPD) is daily from 2024-09.
+  `import-archived-pages` adds 69 podcharts.co days (2019-07 to 2024-09, 200
+  deep, with Apple ids) and 98 Podcast Insights days (2021-10 on, top 100,
+  with Apple ids). Both match MPD rank for rank where they overlap, and they
+  fill the thin 2019-2024 stretch, where Chartable alone gives one to three
+  days a month. The 24-deep studies change too, because the extra days move
+  their time-weighted scores.
+* **Shared feed items.** `shared_listings` takes episodes that a member's feed
+  lists but another catalog podcast holds (`episode_listings`). A GUID belongs
+  to the first podcast that recorded it, so shows whose items also appear in a
+  network catch-all feed would otherwise have empty windows. For example, Slate
+  News held all 1,128 Political Gabfest items. Each podcast's own episodes are
+  assigned first, so a shared episode goes to the show that holds it when both
+  are members, and every episode is counted once.
+* **Top 50 and top 100** cannot use Apple's 24-deep page. The archive
+  analysis found that a monthly sample sees about three quarters of ranks
+  11-50 but only half of ranks 51-100
+  ([findings](chart-archive-findings.md), section 5). The top-100 lists of the
+  sparse years therefore rest on fewer observations than those of the daily
+  years.
+* **Identity.** More shows below rank 24 carry only a title (Chartable). Their
+  identities were reviewed by hand on 2026-10-10. The decisions are
+  `entity_links` rows with `method = 'manual'`, and each note carries its
+  evidence. The review files are in `data/studies/apple-top100-monthly/review/`.
 
 ## Chart data
 
@@ -216,6 +229,15 @@ A snapshot counts only if every rank down to the study's depth is present.
   captured that page before 03:00 UTC. Raw responses are kept under
   `charts/raw/mypodcastdata/`, so re-runs only fetch new days. The
   `apple-top*-monthly` studies other than `apple-top24-monthly` read it.
+* `import-archived-pages [--sources podcharts,podcast_insights]` imports Apple
+  chart days from archived chart-tracker pages. These are Wayback captures of
+  podcharts.co day pages, whose date is in the URL, and of the Podcast
+  Insights top-100 page, whose date is its "Updated" stamp; unstamped captures
+  are rejected. Pages are checked for country, genre and day, and kept only if
+  complete to rank 100. The snapshots are origin `wayback`, but
+  `import-chart-archive` leaves them alone. Two podcharts days (2024-05-18,
+  2024-06-12) have 7 top-100 rows with neither id nor title; those rows are
+  skipped.
 
 ## Older episodes
 

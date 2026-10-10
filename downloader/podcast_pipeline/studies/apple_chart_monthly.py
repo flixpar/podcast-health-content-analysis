@@ -64,6 +64,7 @@ START_MONTH = "2016-01"
 
 MARKETING_TOOLS, APPLE_PAGE, MPD = "apple_marketing_tools", "apple_charts_page", "mypodcastdata"
 PODBAY, CHARTABLE = "podbay", "chartable_itunes"
+PODCHARTS, PODCAST_INSIGHTS = "podcharts", "podcast_insights"     # import-archived-pages
 
 
 class AppleChartMonthly(Study):
@@ -299,24 +300,27 @@ class AppleTop24MonthlyMPD(AppleChartMonthly):
     description = ("Apple US overall chart, top 24 per calendar month since 2016-01 "
                    "(time-weighted points), with My Podcast Data from 2024-09; each show's "
                    "episodes from its charting months.")
-    version = 1
+    version = 2   # 2: podcharts and Podcast Insights days; episodes shared with another podcast
     depth = 24
-    sources = (MARKETING_TOOLS, APPLE_PAGE, MPD, PODBAY, CHARTABLE)
+    shared_listings = True
+    sources = (MARKETING_TOOLS, APPLE_PAGE, MPD, PODCHARTS, PODCAST_INSIGHTS, PODBAY, CHARTABLE)
 
 
 class AppleTop50Monthly(AppleChartMonthly):
     name = "apple-top50-monthly"
     description = ("Apple US overall chart, top 50 per calendar month since 2016-01 "
                    "(time-weighted points); each show's episodes from its charting months.")
-    version = 1
+    version = 2   # as apple-top24-monthly-mpd
     depth = 50
-    sources = (MARKETING_TOOLS, MPD, PODBAY, CHARTABLE)     # Apple's page is 24 deep
+    shared_listings = True
+    sources = (MARKETING_TOOLS, MPD, PODCHARTS, PODCAST_INSIGHTS, PODBAY, CHARTABLE)  # Apple's page: 24 deep
 
 
 class AppleTop100Monthly(AppleChartMonthly):
     name = "apple-top100-monthly"
     description = ("Apple US overall chart, top 100 per calendar month since 2016-01 "
                    "(time-weighted points); each show's episodes from its charting months.")
-    version = 1
+    version = 2   # as apple-top24-monthly-mpd
     depth = 100
-    sources = (MARKETING_TOOLS, MPD, PODBAY, CHARTABLE)
+    shared_listings = True
+    sources = (MARKETING_TOOLS, MPD, PODCHARTS, PODCAST_INSIGHTS, PODBAY, CHARTABLE)

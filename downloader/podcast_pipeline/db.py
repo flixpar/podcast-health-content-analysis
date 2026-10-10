@@ -164,6 +164,21 @@ CREATE TABLE IF NOT EXISTS episode_sources (
     FOREIGN KEY (episode_id) REFERENCES episodes(id)
 );
 
+-- Episodes another podcast's feed also lists. GUIDs are unique, so an episode
+-- belongs to the first podcast that recorded it (episodes.podcast_id); a
+-- network catch-all feed, a duplicate listing or a relaunched feed carrying
+-- the same items is recorded here instead. Studies that set
+-- ``shared_listings`` select these episodes for the listing podcast too.
+CREATE TABLE IF NOT EXISTS episode_listings (
+    episode_id INTEGER NOT NULL,
+    podcast_id INTEGER NOT NULL,
+    first_seen_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (episode_id, podcast_id),
+    FOREIGN KEY (episode_id) REFERENCES episodes(id),
+    FOREIGN KEY (podcast_id) REFERENCES podcasts(id)
+);
+CREATE INDEX IF NOT EXISTS idx_episode_listings_podcast ON episode_listings(podcast_id);
+
 -- Identity decisions an id does not carry: which catalog podcast a chart
 -- entity ('title:<key>' with no Apple id, or an Apple id the lookup API no
 -- longer knows) refers to. podcast_id NULL records a failed attempt, so it is
@@ -511,6 +526,15 @@ def record_episode_source(conn: sqlite3.Connection, podcast_id: int, guid: str,
         INSERT OR IGNORE INTO episode_sources (episode_id, source, ref)
         SELECT id, ?, ? FROM episodes WHERE episode_guid = ? AND podcast_id = ?
     """, (source, ref, guid, podcast_id))
+
+
+def record_episode_listing(conn: sqlite3.Connection, podcast_id: int, guid: str) -> None:
+    """Note that ``podcast_id``'s feed lists the episode with ``guid``, when another
+    podcast holds it (see ``episode_listings``); a no-op for its own episodes."""
+    conn.execute("""
+        INSERT OR IGNORE INTO episode_listings (episode_id, podcast_id)
+        SELECT id, ? FROM episodes WHERE episode_guid = ? AND podcast_id != ?
+    """, (podcast_id, guid, podcast_id))
 
 
 def _require_stored(value: str) -> str:

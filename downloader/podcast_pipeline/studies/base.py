@@ -69,6 +69,11 @@ class Study:
     #: Leave out trailers, other shows' promos dropped into a feed, and items
     #: shorter than ``quality.MIN_EPISODE_SECONDS`` (see ``quality.exclusion_reason``).
     exclude_trailers: ClassVar[bool] = False
+    #: Also take episodes the member's feed lists but another podcast holds
+    #: (``episode_listings``: network catch-all feeds, duplicate listings,
+    #: relaunched feeds). Each podcast's own episodes are assigned first, so a
+    #: shared episode goes to the show that holds it when both are members.
+    shared_listings: ClassVar[bool] = False
 
     def select(self, conn: sqlite3.Connection) -> list[Member]:
         raise NotImplementedError
@@ -86,6 +91,8 @@ class Study:
             "dedupe": self.dedupe,
             "exclude_trailers": self.exclude_trailers,
             "params": self.params(),
+            # Only when set, so definitions written before the flag keep their hash.
+            **({"shared_listings": True} if self.shared_listings else {}),
         }
 
     def definition_hash(self) -> str:

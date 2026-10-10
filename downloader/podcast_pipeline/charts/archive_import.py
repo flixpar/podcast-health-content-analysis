@@ -12,7 +12,8 @@ chart. This is the same policy used by archive summaries and population scoring.
 The import is idempotent and all-or-nothing: one transaction deletes every
 archive snapshot (``origin`` 'wayback' or 'common_crawl') and its entries, and
 inserts the archive again. Other snapshots (live captures, ``mirror_api``
-backfills) are never touched; an archive snapshot that would collide with a
+backfills, and the archived-page sources ``import-archived-pages`` owns) are
+never touched; an archive snapshot that would collide with a
 live one for the same source/chart/day is skipped.
 Snapshot ids are therefore not stable across re-imports.
 """
@@ -55,6 +56,9 @@ FLAGSHIP_SERIES = {"podbay": DEEP_CUT, "chartable_itunes": DEEP_CUT,
 
 ORIGINS = {"wayback": "wayback", "commoncrawl": "common_crawl"}
 ARCHIVE_ORIGINS = tuple(ORIGINS.values())
+#: Sources with archive origins that their own importer owns (``archived_pages``);
+#: re-importing the archive leaves their snapshots alone.
+STANDALONE_SOURCES = ("podcharts", "podcast_insights")
 APPLE_ID_SOURCES = {"podbay", "apple_charts_page", "itunes_rss"}
 
 COLUMNS = ["source", "platform", "unit", "chart", "region", "genre", "rank", "name",
@@ -201,13 +205,14 @@ def run(config: Config, conn: sqlite3.Connection, archive_dir: Path | None = Non
 
 
 def _delete_archive(conn: sqlite3.Connection) -> dict:
-    placeholders = ",".join("?" * len(ARCHIVE_ORIGINS))
+    origins = ",".join("?" * len(ARCHIVE_ORIGINS))
+    standalone = ",".join("?" * len(STANDALONE_SOURCES))
+    where = f"origin IN ({origins}) AND source NOT IN ({standalone})"
+    params = (*ARCHIVE_ORIGINS, *STANDALONE_SOURCES)
     n_entries = conn.execute(f"""
-        DELETE FROM chart_entries WHERE snapshot_id IN
-            (SELECT id FROM chart_snapshots WHERE origin IN ({placeholders}))
-    """, ARCHIVE_ORIGINS).rowcount
-    n_snaps = conn.execute(f"DELETE FROM chart_snapshots WHERE origin IN ({placeholders})",
-                           ARCHIVE_ORIGINS).rowcount
+        DELETE FROM chart_entries WHERE snapshot_id IN (SELECT id FROM chart_snapshots WHERE {where})
+    """, params).rowcount
+    n_snaps = conn.execute(f"DELETE FROM chart_snapshots WHERE {where}", params).rowcount
     return {"snapshots": n_snaps, "entries": n_entries}
 
 

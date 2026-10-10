@@ -18,7 +18,7 @@ import json
 import logging
 import re
 import sqlite3
-from collections import defaultdict
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 
@@ -173,46 +173,68 @@ def _select_episodes(conn: sqlite3.Connection, study: Study, members: list[Membe
         if resolved[m.entity] is not None:
             per_podcast[resolved[m.entity]].append(m)
 
-    selected: list[Selected] = []
-    taken: set[int] = set()
-    for podcast_id, podcast_members in per_podcast.items():
-        episodes = _podcast_episodes(conn, podcast_id, study.dedupe, excluded)
+    episodes_by_podcast = {}
+    for podcast_id in per_podcast:
+        episodes = _podcast_episodes(conn, podcast_id, study.dedupe, excluded, study.shared_listings)
         if study.exclude_trailers:
             title = conn.execute("SELECT title FROM podcasts WHERE id = ?", (podcast_id,)).fetchone()[0]
             kept = [ep for ep in episodes if exclusion_reason(ep, title) is None]
             excluded["trailer_or_promo"] += len(episodes) - len(kept)
             episodes = kept
-        for m in podcast_members:
-            if m.windows is None:
-                for ep in episodes:
-                    if ep["id"] not in taken:
+        episodes_by_podcast[podcast_id] = episodes
+
+    selected: list[Selected] = []
+    taken: set[int] = set()
+    per_window: Counter = Counter()      # (entity, window) -> episodes already assigned
+    # Own episodes first, then (shared_listings) those another podcast holds.
+    for own in (True, False) if study.shared_listings else (True,):
+        for podcast_id, podcast_members in per_podcast.items():
+            episodes = [ep for ep in episodes_by_podcast[podcast_id] if bool(ep["own"]) == own]
+            for m in podcast_members:
+                if m.windows is None:
+                    for ep in episodes:
+                        if ep["id"] not in taken:
+                            taken.add(ep["id"])
+                            selected.append(Selected(ep["id"], m.entity, None, 0))
+                    continue
+                dated = [ep for ep in episodes
+                         if ep["published_date"] and ep["published_date"] >= MIN_PLAUSIBLE_DATE]
+                excluded["undated"] += len(episodes) - len(dated)
+                for w in m.windows:
+                    already = per_window[m.entity, w.label]
+                    inside = [ep for ep in dated
+                              if w.start <= ep["published_date"][:10] < w.end and ep["id"] not in taken]
+                    cap = None if study.max_per_window is None else max(study.max_per_window - already, 0)
+                    chosen = _cap(inside, cap)
+                    excluded["over_window_cap"] += len(inside) - len(chosen)
+                    for position, ep in enumerate(sorted(chosen, key=lambda e: e["published_date"]),
+                                                  start=already):
                         taken.add(ep["id"])
-                        selected.append(Selected(ep["id"], m.entity, None, 0))
-                continue
-            dated = [ep for ep in episodes
-                     if ep["published_date"] and ep["published_date"] >= MIN_PLAUSIBLE_DATE]
-            excluded["undated"] += len(episodes) - len(dated)
-            for w in m.windows:
-                inside = [ep for ep in dated
-                          if w.start <= ep["published_date"][:10] < w.end and ep["id"] not in taken]
-                chosen = _cap(inside, study.max_per_window)
-                excluded["over_window_cap"] += len(inside) - len(chosen)
-                for position, ep in enumerate(sorted(chosen, key=lambda e: e["published_date"])):
-                    taken.add(ep["id"])
-                    selected.append(Selected(ep["id"], m.entity, w.label, position))
+                        selected.append(Selected(ep["id"], m.entity, w.label, position))
+                    per_window[m.entity, w.label] += len(chosen)
     return selected, excluded
 
 
 def _podcast_episodes(conn: sqlite3.Connection, podcast_id: int, dedupe: bool,
-                      excluded: dict) -> list[sqlite3.Row]:
-    rows = conn.execute("""
+                      excluded: dict, shared: bool = False) -> list[sqlite3.Row]:
+    """The podcast's episodes (``own`` = 1) and, with ``shared``, the episodes its
+    feed lists that another podcast holds (``own`` = 0)."""
+    listed = ("UNION ALL SELECT e.id, e.published_date, e.title, e.duration_seconds, "
+              "json_extract(e.metadata, '$.episode_type'), "
+              "(e.transcript_file_path IS NOT NULL AND e.transcript_file_path != ''), "
+              "(e.audio_file_path IS NOT NULL AND e.audio_file_path != ''), 0 "
+              "FROM episode_listings l JOIN episodes e ON e.id = l.episode_id WHERE l.podcast_id = :p"
+              if shared else "")
+    rows = conn.execute(f"""
         SELECT id, published_date, title, duration_seconds,
                json_extract(metadata, '$.episode_type') AS episode_type,
                (transcript_file_path IS NOT NULL AND transcript_file_path != '') AS done,
-               (audio_file_path IS NOT NULL AND audio_file_path != '') AS has_audio
-        FROM episodes WHERE podcast_id = ?
+               (audio_file_path IS NOT NULL AND audio_file_path != '') AS has_audio,
+               1 AS own
+        FROM episodes WHERE podcast_id = :p
+        {listed}
         ORDER BY id
-    """, (podcast_id,)).fetchall()
+    """, {"p": podcast_id}).fetchall()
     if not dedupe:
         return rows
     kept = [r for r in rows if r["published_date"] is None]

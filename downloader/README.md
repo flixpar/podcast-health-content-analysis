@@ -65,6 +65,7 @@ print a JSON summary when done. `--config PATH` and `--log-level` are global.
 | `study list\|refresh\|status\|export` | Define, materialize, inspect, and export studies; see [studies](../docs/studies.md). |
 | `import-chart-archive [--archive-dir PATH]`, `capture-charts [--no-catalog]` | Import reconstructed charts or retain today's live snapshots and raw responses. |
 | `import-mypodcastdata [--genres 26,1512] [--start DAY] [--end DAY] [--no-fetch]` | Backfill daily Apple top-100 charts from My Podcast Data (2024-09 onward), keeping raw responses. |
+| `import-archived-pages [--sources podcharts,podcast_insights]` | Import Apple top-100/200 chart days from archived podcharts.co and Podcast Insights pages (2019-2024). |
 | `resolve --study NAME`, `link-entity ENTITY --note EVIDENCE ...` | Resolve study members or record authoritative manual identity decisions. |
 | `discover [--study NAME\|--all] [--max-episodes N]` | Read study podcasts' feeds and record episodes; defaults to the union of studies. |
 | `discover-archived --study NAME` | Recover older episodes from archived copies of known feeds. |
