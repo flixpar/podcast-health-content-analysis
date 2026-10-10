@@ -33,6 +33,7 @@ Each chart day becomes one snapshot with ``origin = 'wayback'``. Its
 import replaces this source's snapshots, and ``import-chart-archive`` leaves
 them alone (``archive_import.STANDALONE_SOURCES``). A capture that cannot be
 fetched is recorded and skipped; the command raises at the end if any failed.
+A listed capture that Wayback answers with 404 is counted as rejected instead.
 """
 
 from __future__ import annotations
@@ -126,6 +127,15 @@ def parse_podcast_insights(body: bytes) -> tuple[datetime, list[Entry]]:
     return when, entries
 
 
+def _fetch_failed(capture, error: SnapshotError, problems: dict, unfetched: dict) -> None:
+    """A listed capture Wayback answers with 404 is gone for good: rejected, not retried."""
+    key = f"{capture.timestamp} {capture.original}"
+    if "HTTP 404" in str(error):
+        problems[key] = "capture listed but not served (HTTP 404)"
+    else:
+        unfetched[key] = str(error)
+
+
 def _usable(entries: list[Entry]) -> bool:
     return complete_to([e.rank for e in entries]) >= MIN_RANKS
 
@@ -153,7 +163,7 @@ def collect(client: WaybackClient, source: str) -> tuple[dict, dict, dict]:
                 try:
                     entries = parse_podcharts(client.fetch_snapshot(c).body, day)
                 except SnapshotError as e:
-                    unfetched[f"{c.timestamp} {c.original}"] = str(e)
+                    _fetch_failed(c, e, problems, unfetched)
                     continue
                 except ChartSourceError as e:
                     problems[f"{c.timestamp} {c.original}"] = str(e)
@@ -167,7 +177,7 @@ def collect(client: WaybackClient, source: str) -> tuple[dict, dict, dict]:
             try:
                 when, entries = parse_podcast_insights(client.fetch_snapshot(c).body)
             except SnapshotError as e:
-                unfetched[f"{c.timestamp} {c.original}"] = str(e)
+                _fetch_failed(c, e, problems, unfetched)
                 continue
             except ChartSourceError as e:
                 problems[f"{c.timestamp} {c.original}"] = str(e)

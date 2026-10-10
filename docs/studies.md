@@ -168,9 +168,9 @@ The list grows by itself as `capture-charts` adds days; refresh the study.
 
 ### `apple-top24-monthly-mpd`, `apple-top50-monthly`, `apple-top100-monthly`
 
-The same method at depths 24, 50 and 100, with three more chart sources and
-shared feed items (version 2). A snapshot counts only if every rank down to
-the study's depth is present.
+The same method at depths 24, 50 and 100, with three more chart sources,
+shared feed items and Chartable rows identified by their slug (version 3). A
+snapshot counts only if every rank down to the study's depth is present.
 
 | Study | Sources, best first |
 |---|---|
@@ -198,6 +198,14 @@ the study's depth is present.
   ([findings](chart-archive-findings.md), section 5). The top-100 lists of the
   sparse years therefore rest on fewer observations than those of the daily
   years.
+* **Chartable rows by slug** (`use_source_ids`). Chartable's rows carry a title
+  and a slug but no Apple id, and the title alone can name the wrong show (two
+  "Betrayal"s) or a renamed season. Chartable's archived show page for each
+  slug links the Apple listing; `tools/chartable_apple_ids.py` reads those
+  pages and `import-chart-ids` stores the ids in `chart_source_ids`. These
+  studies use that id before guessing from the title. `apple-top24-monthly`
+  keeps its original title-only method. On the first 390 slugs read, the title
+  had already given the same id for 383.
 * **Identity.** More shows below rank 24 carry only a title (Chartable). Their
   identities were reviewed by hand on 2026-10-10. The decisions are
   `entity_links` rows with `method = 'manual'`, and each note carries its
@@ -235,9 +243,16 @@ the study's depth is present.
   Insights top-100 page, whose date is its "Updated" stamp; unstamped captures
   are rejected. Pages are checked for country, genre and day, and kept only if
   complete to rank 100. The snapshots are origin `wayback`, but
-  `import-chart-archive` leaves them alone. Two podcharts days (2024-05-18,
+  `import-chart-archive` leaves them alone. A listed capture that Wayback
+  serves as 404 is counted as rejected, not retried. Two podcharts days (2024-05-18,
   2024-06-12) have 7 top-100 rows with neither id nor title; those rows are
   skipped.
+
+* `import-chart-ids PATH [--source chartable_itunes]` loads Apple ids for
+  chart rows that carry only the source's own id (Chartable slugs) into
+  `chart_source_ids`, from the JSONL `tools/chartable_apple_ids.py` writes. A
+  slug whose page named no Apple id, or several, is skipped. The table
+  survives `import-chart-archive`.
 
 ## Older episodes
 

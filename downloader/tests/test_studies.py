@@ -670,3 +670,34 @@ def test_dedupe_never_chains_consecutive_daily_episodes(conn):
         conn.execute("UPDATE episodes SET duration_seconds = ? WHERE episode_guid = ?", (secs, f"d{i}"))
     conn.commit()
     assert refresh(conn, FixedStudy([Member(f"podcast:{p}")]))["episodes"] == 3
+
+
+def test_source_ids_identify_rows_the_title_would_misplace(conn, monkeypatch, tmp_path):
+    from podcast_pipeline.charts import source_ids
+    monkeypatch.setattr(monthly, "START_MONTH", "2022-01")
+    # Two shows called "Betrayal": the 2022 one carried an id on another chart copy;
+    # Chartable's 2024 row has only its slug, which the title alone would give the 2022 id.
+    add_snapshot(conn, "podbay", "2022-05-01", [("Betrayal", "2022ID")] + chart("A", 23))
+    add_snapshot(conn, "chartable_itunes", "2024-03-01", [("Betrayal", None)] + chart("B", 23, ids=False))
+    conn.execute("UPDATE chart_entries SET source_entity_id = 'betrayal-2024' WHERE apple_id IS NULL "
+                 "AND name = 'Betrayal'")
+    path = tmp_path / "ids.jsonl"
+    path.write_text("\n".join(json.dumps(r) for r in [
+        {"slug": "betrayal-2024", "apple_ids": ["2024ID"], "feeds": ["https://f/x"], "ts": "202403"},
+        {"slug": "gone", "apple_ids": []},
+        {"slug": "two", "apple_ids": ["1", "2"]},
+    ]))
+    assert source_ids.run(conn, path, "chartable_itunes")["skipped"] == {"no_apple_id": 1, "several_apple_ids": 1}
+    plain, by_slug = monthly.entity_resolver(conn), monthly.entity_resolver(conn, source_ids=True)
+    args = (None, "betrayal", "2024-03-01", "chartable_itunes", "betrayal-2024")
+    assert plain(*args) == "apple:2022ID"
+    assert by_slug(*args) == "apple:2024ID"
+    assert by_slug(None, "betrayal", "2024-03-01", "chartable_itunes", "other-slug") == "apple:2022ID"
+    assert source_ids.run(conn, path, "chartable_itunes")["replaced"] == 1          # idempotent
+
+
+def test_only_new_studies_use_source_ids():
+    from podcast_pipeline.studies.apple_top24_monthly import AppleTop24Monthly
+    assert "source_ids" not in AppleTop24Monthly().params()
+    assert all(cls().params()["source_ids"] for cls in
+               (monthly.AppleTop24MonthlyMPD, monthly.AppleTop50Monthly, monthly.AppleTop100Monthly))

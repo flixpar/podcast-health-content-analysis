@@ -131,5 +131,11 @@ def test_unfetchable_captures_raise_after_importing_the_rest(config, conn, monke
     with pytest.raises(ChartCaptureError, match="could not be fetched"):
         ap.run(config, conn, sources=["podcharts"])
     assert conn.execute("SELECT captured_on FROM chart_snapshots").fetchone()[0] == "2020-11-22"
+    gone = {ap.PODCHARTS_PREFIX: [cap("20201123000000", url), cap("20201124000000", url)]}
+    client = FakeClient(config.wayback_cache_dir, gone, {"20201124000000": podcharts_page("x", "2020-11-21", FULL)})
+    client.fetch_snapshot = lambda c: (_ for _ in ()).throw(SnapshotError("x: HTTP 404")) \
+        if c.timestamp == "20201123000000" else Snapshot(c, "x", client.bodies[c.timestamp])
+    monkeypatch.setattr(ap, "WaybackClient", lambda *a, **k: client)
+    assert ap.run(config, conn, sources=["podcharts"])["podcharts"]["rejected"] == 1      # 404: no raise
     with pytest.raises(ValueError, match="unknown source"):
         ap.run(config, conn, sources=["podtail"])

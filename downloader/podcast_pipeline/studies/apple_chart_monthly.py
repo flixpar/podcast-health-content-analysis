@@ -37,10 +37,13 @@ Why this construction
   i.e. it is a different list. Chartable dates known to be wrong are already
   marked ``trusted = 0`` at import and are skipped.
 * **Identity before scoring.** An entry's Apple id is used where its source
-  carries one; otherwise its normalized title is mapped to the Apple id the
-  same title carries elsewhere in the chart record, and then through
-  ``entity_links`` (titles resolved by ``resolve``). Points are pooled per
-  entity, so a show that changed title stays one show.
+  carries one. Studies that set ``use_source_ids`` next take the id recorded
+  for the source's own id (``chart_source_ids``: a Chartable slug's Apple
+  listing, from Chartable's show page). Otherwise the normalized title is
+  mapped to the Apple id the same title carries elsewhere in the chart
+  record, and then through ``entity_links`` (titles resolved by
+  ``resolve``). Points are pooled per entity, so a show that changed title
+  stays one show.
 
 Months are included up to the last month the snapshot timeline fully covers,
 so a study grows by itself as ``capture-charts`` adds days; refresh it.
@@ -74,17 +77,20 @@ class AppleChartMonthly(Study):
     depth: ClassVar[int]
     sources: ClassVar[tuple[str, ...]]
     exclude_trailers = True
+    # Identify id-less rows by chart_source_ids before guessing from the title.
+    # Off for apple-top24-monthly, which keeps its original method.
+    use_source_ids: ClassVar[bool] = False
 
     def params(self) -> dict:
         return {"chart": CHART, "sources": list(self.sources), "depth": self.depth,
-                "start_month": START_MONTH}
+                "start_month": START_MONTH, **({"source_ids": True} if self.use_source_ids else {})}
 
     def select(self, conn: sqlite3.Connection) -> list[Member]:
         days = snapshot_days(conn, self.sources, self.depth)
         if not days:
             raise ValueError(f"No usable {CHART} snapshots at depth {self.depth}; "
                              f"run import-chart-archive first")
-        resolve = entity_resolver(conn)
+        resolve = entity_resolver(conn, source_ids=self.use_source_ids)
         observations = _observations(conn, days, resolve, self.depth)
         months = monthly_lists(days, observations, self.depth)
         return _members(months, observations)
@@ -106,8 +112,12 @@ def snapshot_days(conn: sqlite3.Connection, sources: tuple[str, ...],
     return sorted(best.values())
 
 
-def entity_resolver(conn: sqlite3.Connection):
-    """(apple_id, title_key, day) -> entity string, following the rules above.
+def entity_resolver(conn: sqlite3.Connection, source_ids: bool = False):
+    """(apple_id, title_key, day, source, source_entity_id) -> entity string,
+    following the rules above.
+
+    With ``source_ids``, a row without an Apple id first takes the one
+    ``chart_source_ids`` records for its (source, source_entity_id).
 
     A bare title takes the Apple id the same title carried on this chart
     *nearest in time*: some titles changed hands (The Ezra Klein Show moved
@@ -131,6 +141,8 @@ def entity_resolver(conn: sqlite3.Connection):
         key_counts[r["title_key"]][r["apple_id"]] += r["n"]
     # most common id for the title; ties go to the smaller id, deterministically
     key_to_id = {k: min(c.items(), key=lambda kv: (-kv[1], kv[0]))[0] for k, c in key_counts.items()}
+    by_source_id = {(r["source"], r["source_entity_id"]): r["apple_id"] for r in conn.execute(
+        "SELECT source, source_entity_id, apple_id FROM chart_source_ids")} if source_ids else {}
     links = {r["entity"]: (r["podcast_id"], r["apple_podcasts_id"]) for r in conn.execute("""
         SELECT l.entity, l.podcast_id, p.apple_podcasts_id
         FROM entity_links l JOIN podcasts p ON p.id = l.podcast_id
@@ -143,7 +155,9 @@ def entity_resolver(conn: sqlite3.Connection):
         gap = lambda c: abs((date.fromisoformat(c[0]) - date.fromisoformat(day)).days)
         return min(candidates, key=lambda c: (gap(c), c[0]))[1]
 
-    def resolve(apple_id: str | None, title_key: str | None, day: str) -> str | None:
+    def resolve(apple_id: str | None, title_key: str | None, day: str,
+                source: str | None = None, source_entity_id: str | None = None) -> str | None:
+        apple_id = apple_id or by_source_id.get((source, source_entity_id))
         if apple_id:
             return f"apple:{apple_id}"
         if not title_key:
@@ -170,11 +184,13 @@ def _observations(conn, days, resolve, depth: int) -> dict[str, dict[str, dict]]
     for start in range(0, len(ids), 500):
         chunk = ids[start:start + 500]
         for r in conn.execute(f"""
-            SELECT snapshot_id, rank, name, publisher, title_key, apple_id FROM chart_entries
-            WHERE snapshot_id IN ({",".join("?" * len(chunk))}) AND rank <= ?
+            SELECT e.snapshot_id, e.rank, e.name, e.publisher, e.title_key, e.apple_id,
+                   e.source_entity_id, s.source
+            FROM chart_entries e JOIN chart_snapshots s ON s.id = e.snapshot_id
+            WHERE e.snapshot_id IN ({",".join("?" * len(chunk))}) AND e.rank <= ?
         """, (*chunk, depth)):
             day = by_snapshot[r["snapshot_id"]]
-            entity = resolve(r["apple_id"], r["title_key"], day)
+            entity = resolve(r["apple_id"], r["title_key"], day, r["source"], r["source_entity_id"])
             if entity is None:
                 unidentifiable.append((day, r["rank"], r["name"]))
                 continue
@@ -300,9 +316,11 @@ class AppleTop24MonthlyMPD(AppleChartMonthly):
     description = ("Apple US overall chart, top 24 per calendar month since 2016-01 "
                    "(time-weighted points), with My Podcast Data from 2024-09; each show's "
                    "episodes from its charting months.")
-    version = 2   # 2: podcharts and Podcast Insights days; episodes shared with another podcast
+    version = 3   # 2: podcharts and Podcast Insights days; episodes shared with another podcast;
+    #               3: Chartable rows identified by their slug's Apple listing
     depth = 24
     shared_listings = True
+    use_source_ids = True
     sources = (MARKETING_TOOLS, APPLE_PAGE, MPD, PODCHARTS, PODCAST_INSIGHTS, PODBAY, CHARTABLE)
 
 
@@ -310,9 +328,10 @@ class AppleTop50Monthly(AppleChartMonthly):
     name = "apple-top50-monthly"
     description = ("Apple US overall chart, top 50 per calendar month since 2016-01 "
                    "(time-weighted points); each show's episodes from its charting months.")
-    version = 2   # as apple-top24-monthly-mpd
+    version = 3   # as apple-top24-monthly-mpd
     depth = 50
     shared_listings = True
+    use_source_ids = True
     sources = (MARKETING_TOOLS, MPD, PODCHARTS, PODCAST_INSIGHTS, PODBAY, CHARTABLE)  # Apple's page: 24 deep
 
 
@@ -320,7 +339,8 @@ class AppleTop100Monthly(AppleChartMonthly):
     name = "apple-top100-monthly"
     description = ("Apple US overall chart, top 100 per calendar month since 2016-01 "
                    "(time-weighted points); each show's episodes from its charting months.")
-    version = 2   # as apple-top24-monthly-mpd
+    version = 3   # as apple-top24-monthly-mpd
     depth = 100
     shared_listings = True
+    use_source_ids = True
     sources = (MARKETING_TOOLS, MPD, PODCHARTS, PODCAST_INSIGHTS, PODBAY, CHARTABLE)

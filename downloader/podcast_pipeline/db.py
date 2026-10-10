@@ -243,6 +243,20 @@ CREATE TABLE IF NOT EXISTS chart_entries (
     FOREIGN KEY (snapshot_id) REFERENCES chart_snapshots(id)
 );
 
+-- Apple ids for chart rows that carry only a source's own id, e.g. a
+-- Chartable slug, taken from that source's show page (``import-chart-ids``).
+-- Kept apart from chart_entries so that re-importing the chart archive keeps
+-- them; studies use them before guessing an id from the row's title.
+CREATE TABLE IF NOT EXISTS chart_source_ids (
+    source TEXT NOT NULL,                -- chart_snapshots.source, e.g. 'chartable_itunes'
+    source_entity_id TEXT NOT NULL,      -- chart_entries.source_entity_id
+    apple_id TEXT NOT NULL,
+    feed_url TEXT,                       -- the feed the page named, as evidence
+    evidence TEXT,                       -- JSON: capture, page title
+    imported_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (source, source_entity_id)
+);
+
 -- ---------------------------------------------------------------------------
 -- Studies. A study is a named selection over the shared catalog, defined in
 -- code (podcast_pipeline/studies/) and materialized here by `study refresh`.

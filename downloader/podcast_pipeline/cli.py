@@ -76,6 +76,11 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--sources", type=_str_list,
                    help="comma-separated: podcharts, podcast_insights (default: both)")
 
+    p = sub.add_parser("import-chart-ids",
+                       help="load Apple ids for chart rows that carry only a source's own id (Chartable slugs)")
+    p.add_argument("path", type=Path, help="JSONL from tools/chartable_apple_ids.py")
+    p.add_argument("--source", default="chartable_itunes", help="chart source the ids belong to")
+
     p = sub.add_parser("resolve", help="turn a study's chart entities into catalog podcasts with feeds")
     p.add_argument("--study", required=True)
     p.add_argument("--retry-failed", action="store_true",
@@ -304,6 +309,9 @@ def dispatch(args: argparse.Namespace, config: Config, conn) -> dict:
         case "import-archived-pages":
             from podcast_pipeline.charts import archived_pages
             return archived_pages.run(config, conn, sources=args.sources)
+        case "import-chart-ids":
+            from podcast_pipeline.charts import source_ids
+            return source_ids.run(conn, args.path, args.source)
         case "resolve":
             from podcast_pipeline.catalog import resolve
             return resolve.run(config, conn, study=args.study, retry_failed=args.retry_failed,
