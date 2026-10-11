@@ -269,7 +269,8 @@ def record_episodes(conn: sqlite3.Connection, podcast_id: int, fetched: Fetched,
     already recorded one for this feed.
 
     GUIDs are unique across the whole catalog: a GUID already held by another
-    podcast is left alone and counted in ``foreign``.
+    podcast is left alone, recorded as listed by this podcast
+    (``episode_listings``) and counted in ``foreign``.
     """
     feed = url_identity(fetched.capture.original)
     for episode in fetched.episodes:
@@ -279,6 +280,7 @@ def record_episodes(conn: sqlite3.Connection, podcast_id: int, fetched: Fetched,
                            (episode.guid,)).fetchone()
         if row is not None and row["podcast_id"] != podcast_id:
             foreign.add(episode.guid)
+            db.record_episode_listing(conn, podcast_id, episode.guid)
             continue
         seen.add(episode.guid)
         if row is None and db.insert_episode(conn, podcast_id, episode):

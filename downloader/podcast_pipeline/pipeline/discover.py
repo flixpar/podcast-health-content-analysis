@@ -74,7 +74,10 @@ def run(config: Config, conn: sqlite3.Connection, max_episodes: int | None = Non
             episodes = feed[:max_episodes]
             new = 0
             for ep in episodes:
-                new += db.insert_episode(conn, podcast["id"], ep)
+                if db.insert_episode(conn, podcast["id"], ep):
+                    new += 1
+                else:
+                    db.record_episode_listing(conn, podcast["id"], ep.guid)
                 db.record_episode_source(conn, podcast["id"], ep.guid, "feed", podcast["rss_url"])
             db.set_podcast_status(conn, podcast["id"], db.PodcastStatus.DISCOVERED)
             conn.commit()   # one transaction per feed: atomic and already parsed

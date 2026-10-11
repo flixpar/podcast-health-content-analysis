@@ -187,10 +187,10 @@ class WaybackClient:
 
     # --- CDX -------------------------------------------------------------------
 
-    def _cdx_cache_path(self, url: str) -> Path:
-        return self.cache_dir / "cdx" / f"{_cache_key(url)}.json"
+    def _cdx_cache_path(self, url: str, prefix: bool = False) -> Path:
+        return self.cache_dir / "cdx" / f"{_cache_key(url + (' prefix' if prefix else ''))}.json"
 
-    def list_captures(self, url: str, refresh: bool = False) -> list[Capture]:
+    def list_captures(self, url: str, refresh: bool = False, prefix: bool = False) -> list[Capture]:
         """Every day's first successful capture of exactly ``url``, oldest first.
 
         CDX matches on the canonical form of the URL (scheme and ``www.``
@@ -198,9 +198,12 @@ class WaybackClient:
         says which was captured. ``collapse=timestamp:8`` keeps one capture per
         day, which bounds a daily-crawled feed to a few thousand rows.
 
+        With ``prefix``, every capture of every URL starting with ``url`` is
+        listed (CDX ``matchType=prefix``, uncollapsed).
+
         Raises CdxError when every attempt failed.
         """
-        cache_path = self._cdx_cache_path(url)
+        cache_path = self._cdx_cache_path(url, prefix)
         if not refresh and cache_path.exists():
             cached = json.loads(cache_path.read_text())
             if cached.get("url") != url:
@@ -208,8 +211,10 @@ class WaybackClient:
             return [Capture(r[0], r[1], r[2], r[3], int(r[4]) if r[4].isdigit() else None, r[5])
                     for r in cached["captures"]]
 
-        params = {"url": url, "fl": ",".join(CDX_FIELDS), "filter": "statuscode:200",
-                  "collapse": "timestamp:8", "output": "json"}
+        params = {"url": url, "fl": ",".join(CDX_FIELDS), "filter": "statuscode:200", "output": "json"}
+        # collapse compares adjacent rows, so across a prefix it would also drop
+        # a *different* URL captured the same day: list every capture instead.
+        params.update({"matchType": "prefix"} if prefix else {"collapse": "timestamp:8"})
         problem = "no attempt made"
         with self._cdx_lock:
             for attempt in range(self.config.cdx_attempts):

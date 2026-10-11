@@ -15,6 +15,12 @@ Apple served its public chart feeds. `rss.marketingtools.apple.com` gave a
 free, both unauthenticated, and both — verified below — the *same* chart in the
 *same* order as `podcasts.apple.com/us/charts`.
 
+**Update 2026-10-09: solved by My Podcast Data.** Its open API
+(`api.mypodcastdata.com/api/applerankers/shows`) has Apple's daily top 100,
+overall and per genre, from 2024-09-01, with Apple ids. 750 of 769 days are
+present through 2026-10-09. It is imported with `import-mypodcastdata`; see
+[studies.md](studies.md#chart-data). The original finding follows.
+
 **The retrospective problem is mostly not solved.** No archive recorded a deep
 Apple US chart densely during 2024–2026. The best partial fixes are six
 250-deep Rephonic captures and a Podchaser API entitlement we do not currently

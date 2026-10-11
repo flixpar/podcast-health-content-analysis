@@ -1,5 +1,6 @@
-"""``capture-charts``: record today's live charts. Run daily; a missed day
-cannot be recovered (both historical mirrors are dead).
+"""``capture-charts``: record today's live charts. Run daily; a missed Spotify
+day cannot be recovered. A missed Apple day can be backfilled from My Podcast
+Data (``mypodcastdata``), but only as Apple's chart at about 00:00-02:00 UTC.
 
 Sources (no authentication):
 

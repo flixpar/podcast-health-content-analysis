@@ -140,10 +140,12 @@ episodes keep flowing in from `discover`; re-issued duplicates are excluded.
 
 Apple US overall chart, top 24 per calendar month from 2016-01, with each
 show's episodes from the months it was in the list. The scoring rationale is
-in `downloader/podcast_pipeline/studies/apple_top24_monthly.py`:
+in `downloader/podcast_pipeline/studies/apple_chart_monthly.py`, which all
+the `apple-top*-monthly` studies share:
 
 * **Depth 24 throughout.** That is all Apple's own page shows, and the only
-  record between Chartable's shutdown and the start of live capture. A
+  first-party record between Chartable's shutdown and the start of live
+  capture. A
   uniform depth keeps 2016 and 2026 comparable.
 * **Exactly 24 per month, ranked by time-weighted points.** Snapshot density
   ranges from one a month (Chartable, 2019-2023) to daily (2025-26). A union
@@ -156,12 +158,73 @@ in `downloader/podcast_pipeline/studies/apple_top24_monthly.py`:
   their list from the neighbouring snapshots and are flagged
   (`snapshots_in_month = 0`).
 * **Sources.** Apple's chart page and the live Marketing Tools feed come first,
-  then Podbay, then Chartable. Known-bad Chartable days are excluded. The
+  then Podbay, then Chartable. My Podcast Data is not used: this study keeps
+  the definition it was collected with (version 3). Known-bad Chartable days are excluded. The
   legacy iTunes RSS chart is excluded because it is a different list.
 * **Identity.** Shows are matched by Apple id, then by title through ids seen
   elsewhere in the record, then through `entity_links`, so renamed shows pool.
 
 The list grows by itself as `capture-charts` adds days; refresh the study.
+
+### `apple-top24-monthly-mpd`, `apple-top50-monthly`, `apple-top100-monthly`
+
+The same method at depths 24, 50 and 100, with three more chart sources,
+shared feed items and Chartable rows identified by their slug (version 3). A
+snapshot counts only if every rank down to the study's depth is present.
+
+| Study | Sources, best first |
+|---|---|
+| `apple-top24-monthly-mpd` | Marketing Tools, Apple's page, MPD, podcharts, Podcast Insights, Podbay, Chartable |
+| `apple-top50-monthly` | Marketing Tools, MPD, podcharts, Podcast Insights, Podbay, Chartable |
+| `apple-top100-monthly` | Marketing Tools, MPD, podcharts, Podcast Insights, Podbay, Chartable |
+
+* **More chart days.** My Podcast Data (MPD) is daily from 2024-09.
+  `import-archived-pages` adds 69 podcharts.co days (2019-07 to 2024-09, 200
+  deep, with Apple ids) and 98 Podcast Insights days (2021-10 on, top 100,
+  with Apple ids). Both match MPD rank for rank where they overlap, and they
+  fill the thin 2019-2024 stretch, where Chartable alone gives one to three
+  days a month. The 24-deep studies change too, because the extra days move
+  their time-weighted scores.
+* **Shared feed items.** `shared_listings` takes episodes that a member's feed
+  lists but another catalog podcast holds (`episode_listings`). A GUID belongs
+  to the first podcast that recorded it, so shows whose items also appear in a
+  network catch-all feed would otherwise have empty windows. For example, Slate
+  News held all 1,128 Political Gabfest items. Each podcast's own episodes are
+  assigned first, so a shared episode goes to the show that holds it when both
+  are members, and every episode is counted once.
+* **Top 50 and top 100** cannot use Apple's 24-deep page. The archive
+  analysis found that a monthly sample sees about three quarters of ranks
+  11-50 but only half of ranks 51-100
+  ([findings](chart-archive-findings.md), section 5). The top-100 lists of the
+  sparse years therefore rest on fewer observations than those of the daily
+  years.
+* **Chartable rows by slug** (`use_source_ids`). Chartable's rows carry a title
+  and a slug but no Apple id, and the title alone can name the wrong show (two
+  "Betrayal"s) or a renamed season. Chartable's archived show page for each
+  slug links the Apple listing; `tools/chartable_apple_ids.py` reads those
+  pages and `import-chart-ids` stores the ids in `chart_source_ids`. These
+  studies use that id before guessing from the title. `apple-top24-monthly`
+  keeps its original title-only method. Of the 1,545 slugs that ranked in the
+  top 100 (read 2026-10-10), 1,448 pages named one Apple id; the title had
+  already given the same id for 1,355. Most of the rest are titles that never
+  appear with an id; a few named another show (the two "Betrayal"s, "Sweet
+  Bobby", "The Dating Game Killer", "Bedtime Stories").
+* **Identity.** More shows below rank 24 carry only a title (Chartable). Their
+  identities were reviewed by hand on 2026-10-10. The decisions are
+  `entity_links` rows with `method = 'manual'`, and each note carries its
+  evidence. The review files are in `data/studies/apple-top100-monthly/review/`.
+* **Gap research.** Empty and thin windows were then researched the same way
+  (old feed URLs, Wayback copies, host APIs, publisher pages) and the episodes
+  imported with `import-episodes`, labelled by source in `episode_sources`:
+  `alternate_feed`, `publisher_site`, `host_catalog`, `host_file_pattern`, and
+  `apple_page` for episodes known only from an archived Apple listing page,
+  whose dates are day-only (stored at 00:00 or 12:00 UTC, flagged in the
+  evidence). Many of these have dead enclosures and need
+  `download --wayback-fallback`. A window can be empty because the listing's
+  earlier show is gone: publishers reuse an Apple listing for a new show
+  (Keepin' it 1600 became Somebody's Gotta Win, Sway became Hard Fork), and
+  `studies/gaps.py` classes those months `before_launch`, which
+  `discover-archived` does not target.
 
 ## Chart data
 
@@ -171,7 +234,8 @@ The list grows by itself as `capture-charts` adds days; refresh the study.
   nearby Chartable page set using the
   [archive policy](../analysis/chart_archive/README.md), preserving explicit page
   metadata or deriving it from older saved slugs.
-  It replaces archive rows and leaves live rows intact. Verification compares
+  It replaces archive rows (origins `wayback` and `common_crawl`) and leaves
+  live and `mirror_api` rows intact. Verification compares
   trusted-day counts with a regenerated `parsed/population/summary.json` using
   the same depth policy; missing, older, malformed or incompatible summaries are reported
   as unavailable. Historical report counts are dated evidence. Regenerate,
@@ -179,7 +243,31 @@ The list grows by itself as `capture-charts` adds days; refresh the study.
 * `capture-charts` should run **daily** (`downloader/tools/capture_charts_daily.sh`
   is cron-ready). It stores the raw response, records the snapshot, and adds
   newly charting Apple shows to the catalog, reusing known current/historical
-  feed owners. A missed live day cannot be fetched retrospectively.
+  feed owners. A missed Spotify day cannot be fetched retrospectively.
+* `import-mypodcastdata` backfills Apple charts from My Podcast Data, an
+  independent site with Apple's daily top 100 per genre since 2024-09-01, with
+  Apple ids. Its snapshots are source `mypodcastdata`, origin `mirror_api`. A
+  chart dated D is Apple's chart at about 00:00-02:00 UTC on D. It matches the
+  legacy iTunes RSS rank for rank, and Apple's page top 24 on 86% of days we
+  captured that page before 03:00 UTC. Raw responses are kept under
+  `charts/raw/mypodcastdata/`, so re-runs only fetch new days. The
+  `apple-top*-monthly` studies other than `apple-top24-monthly` read it.
+* `import-archived-pages [--sources podcharts,podcast_insights]` imports Apple
+  chart days from archived chart-tracker pages. These are Wayback captures of
+  podcharts.co day pages, whose date is in the URL, and of the Podcast
+  Insights top-100 page, whose date is its "Updated" stamp; unstamped captures
+  are rejected. Pages are checked for country, genre and day, and kept only if
+  complete to rank 100. The snapshots are origin `wayback`, but
+  `import-chart-archive` leaves them alone. A listed capture that Wayback
+  serves as 404 is counted as rejected, not retried. Two podcharts days (2024-05-18,
+  2024-06-12) have 7 top-100 rows with neither id nor title; those rows are
+  skipped.
+
+* `import-chart-ids PATH [--source chartable_itunes]` loads Apple ids for
+  chart rows that carry only the source's own id (Chartable slugs) into
+  `chart_source_ids`, from the JSONL `tools/chartable_apple_ids.py` writes. A
+  slug whose page named no Apple id, or several, is skipped. The table
+  survives `import-chart-archive`.
 
 ## Older episodes
 

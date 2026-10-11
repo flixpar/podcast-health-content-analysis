@@ -242,9 +242,10 @@ def main() -> None:
     ap.add_argument("--all-gap-classes", type=int, action="append", default=[], metavar="PODCAST_ID",
                     help="for this podcast, target every gap window, not only missing/unknown "
                          "(when the classifier is demonstrably wrong; say why in the report)")
+    ap.add_argument("--config", type=Path, help="config file (default: the project's config.json)")
     args = ap.parse_args()
 
-    config = Config.load()
+    config = Config.load(args.config) if args.config else Config.load()
     CACHE = args.cache_dir or config.wayback_cache_dir / "alternate_feeds"
     conn = open_db(config.db_path)
     fetcher = Fetcher()
