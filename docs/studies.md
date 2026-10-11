@@ -204,12 +204,27 @@ snapshot counts only if every rank down to the study's depth is present.
   slug links the Apple listing; `tools/chartable_apple_ids.py` reads those
   pages and `import-chart-ids` stores the ids in `chart_source_ids`. These
   studies use that id before guessing from the title. `apple-top24-monthly`
-  keeps its original title-only method. On the first 390 slugs read, the title
-  had already given the same id for 383.
+  keeps its original title-only method. Of the 1,545 slugs that ranked in the
+  top 100 (read 2026-10-10), 1,448 pages named one Apple id; the title had
+  already given the same id for 1,355. Most of the rest are titles that never
+  appear with an id; a few named another show (the two "Betrayal"s, "Sweet
+  Bobby", "The Dating Game Killer", "Bedtime Stories").
 * **Identity.** More shows below rank 24 carry only a title (Chartable). Their
   identities were reviewed by hand on 2026-10-10. The decisions are
   `entity_links` rows with `method = 'manual'`, and each note carries its
   evidence. The review files are in `data/studies/apple-top100-monthly/review/`.
+* **Gap research.** Empty and thin windows were then researched the same way
+  (old feed URLs, Wayback copies, host APIs, publisher pages) and the episodes
+  imported with `import-episodes`, labelled by source in `episode_sources`:
+  `alternate_feed`, `publisher_site`, `host_catalog`, `host_file_pattern`, and
+  `apple_page` for episodes known only from an archived Apple listing page,
+  whose dates are day-only (stored at 00:00 or 12:00 UTC, flagged in the
+  evidence). Many of these have dead enclosures and need
+  `download --wayback-fallback`. A window can be empty because the listing's
+  earlier show is gone: publishers reuse an Apple listing for a new show
+  (Keepin' it 1600 became Somebody's Gotta Win, Sway became Hard Fork), and
+  `studies/gaps.py` classes those months `before_launch`, which
+  `discover-archived` does not target.
 
 ## Chart data
 
