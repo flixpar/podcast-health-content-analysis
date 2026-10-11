@@ -38,6 +38,8 @@ class EpisodeStatus:
     DOWNLOADED = "downloaded"    # audio on disk, awaiting transcription
     TRANSCRIBED = "transcribed"  # transcript file written (ASR or publisher-provided)
     ERROR = "error"              # see error_message; audio_file_path tells which stage failed
+    DUPLICATE = "duplicate"      # another episode holds the same airing (see error_message);
+                                 # never downloaded, left out of studies
 
 
 SCHEMA = """

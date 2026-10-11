@@ -84,6 +84,22 @@ def test_duplicates_keep_the_copy_with_work_done(conn):
     assert summary["excluded"]["duplicate"] == 1
 
 
+def test_episodes_marked_duplicate_are_left_out_and_never_downloaded(conn):
+    p = add_podcast(conn, 1)
+    kept = add_episode(conn, p, "live", "2020-01-01T19:00:00", title="Show 01/01/2020 (part 1)")
+    dead = add_episode(conn, p, "dead", "2020-01-01T20:30:00", title="Budgeting (Hour 1)")
+    other = add_episode(conn, add_podcast(conn, 2), "listed", "2020-01-02T00:00:00")
+    conn.execute("UPDATE episodes SET status = ? WHERE id IN (?, ?)", (db.EpisodeStatus.DUPLICATE, dead, other))
+    db.record_episode_listing(conn, p, "listed")
+    conn.commit()
+    study = FixedStudy([Member(f"podcast:{p}")])
+    study.shared_listings = True
+    summary = refresh(conn, study)
+    assert set(episodes_of(conn, "fixed")) == {kept}
+    assert summary["excluded"]["duplicate"] == 2
+    assert [r["id"] for r in download.pending_episodes(conn, retry_errors=True, limit=None, study="fixed")] == [kept]
+
+
 def test_window_cap_prefers_transcribed_then_spreads(conn):
     p = add_podcast(conn, 1)
     ids = [add_episode(conn, p, f"e{d}", f"2018-01-{d:02d}T00:00:00", transcript=(d == 30))

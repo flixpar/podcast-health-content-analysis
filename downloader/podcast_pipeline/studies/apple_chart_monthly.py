@@ -316,8 +316,9 @@ class AppleTop24MonthlyMPD(AppleChartMonthly):
     description = ("Apple US overall chart, top 24 per calendar month since 2016-01 "
                    "(time-weighted points), with My Podcast Data from 2024-09; each show's "
                    "episodes from its charting months.")
-    version = 3   # 2: podcharts and Podcast Insights days; episodes shared with another podcast;
-    #               3: Chartable rows identified by their slug's Apple listing
+    version = 4   # 2: podcharts and Podcast Insights days; episodes shared with another podcast;
+    #               3: Chartable rows identified by their slug's Apple listing;
+    #               4: episodes the catalog marks 'duplicate' left out
     depth = 24
     shared_listings = True
     use_source_ids = True
@@ -328,7 +329,7 @@ class AppleTop50Monthly(AppleChartMonthly):
     name = "apple-top50-monthly"
     description = ("Apple US overall chart, top 50 per calendar month since 2016-01 "
                    "(time-weighted points); each show's episodes from its charting months.")
-    version = 3   # as apple-top24-monthly-mpd
+    version = 4   # as apple-top24-monthly-mpd
     depth = 50
     shared_listings = True
     use_source_ids = True
@@ -339,7 +340,7 @@ class AppleTop100Monthly(AppleChartMonthly):
     name = "apple-top100-monthly"
     description = ("Apple US overall chart, top 100 per calendar month since 2016-01 "
                    "(time-weighted points); each show's episodes from its charting months.")
-    version = 3   # as apple-top24-monthly-mpd
+    version = 4   # as apple-top24-monthly-mpd
     depth = 100
     shared_listings = True
     use_source_ids = True

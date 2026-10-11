@@ -218,11 +218,12 @@ def _select_episodes(conn: sqlite3.Connection, study: Study, members: list[Membe
 def _podcast_episodes(conn: sqlite3.Connection, podcast_id: int, dedupe: bool,
                       excluded: dict, shared: bool = False) -> list[sqlite3.Row]:
     """The podcast's episodes (``own`` = 1) and, with ``shared``, the episodes its
-    feed lists that another podcast holds (``own`` = 0)."""
+    feed lists that another podcast holds (``own`` = 0). Episodes marked
+    ``duplicate`` in the catalog are left out and counted as duplicates."""
     listed = ("UNION ALL SELECT e.id, e.published_date, e.title, e.duration_seconds, "
               "json_extract(e.metadata, '$.episode_type'), "
               "(e.transcript_file_path IS NOT NULL AND e.transcript_file_path != ''), "
-              "(e.audio_file_path IS NOT NULL AND e.audio_file_path != ''), 0 "
+              "(e.audio_file_path IS NOT NULL AND e.audio_file_path != ''), 0, e.status "
               "FROM episode_listings l JOIN episodes e ON e.id = l.episode_id WHERE l.podcast_id = :p"
               if shared else "")
     rows = conn.execute(f"""
@@ -230,11 +231,14 @@ def _podcast_episodes(conn: sqlite3.Connection, podcast_id: int, dedupe: bool,
                json_extract(metadata, '$.episode_type') AS episode_type,
                (transcript_file_path IS NOT NULL AND transcript_file_path != '') AS done,
                (audio_file_path IS NOT NULL AND audio_file_path != '') AS has_audio,
-               1 AS own
+               1 AS own, status
         FROM episodes WHERE podcast_id = :p
         {listed}
         ORDER BY id
     """, {"p": podcast_id}).fetchall()
+    marked = [r for r in rows if r["status"] == db.EpisodeStatus.DUPLICATE]
+    excluded["duplicate"] += len(marked)
+    rows = [r for r in rows if r["status"] != db.EpisodeStatus.DUPLICATE]
     if not dedupe:
         return rows
     kept = [r for r in rows if r["published_date"] is None]
