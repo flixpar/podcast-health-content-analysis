@@ -86,6 +86,9 @@ DEAD_LINK_STATUSES = frozenset({403, 404, 410, 451})
 # audio by its first bytes.
 AUDIO_CONTENT_TYPES = ("audio/", "video/mp4", "application/ogg", "application/octet-stream",
                        "binary/octet-stream")
+MARKUP_CONTENT_TYPES = ("text/html", "application/xhtml+xml")
+# Enough of the body to see past a BOM and leading whitespace.
+MARKUP_PROBE_BYTES = 512
 
 
 class DownloadError(RuntimeError):
@@ -170,15 +173,39 @@ def is_dead_link(error: requests.RequestException) -> bool:
     return False
 
 
+def has_audio_magic(head: bytes) -> bool:
+    """Whether the first bytes are a known audio container or MPEG/ADTS frame sync."""
+    return (head[:3] == b"ID3" or head[:4] in (b"OggS", b"fLaC", b"RIFF", b"\x1aE\xdf\xa3")
+            or head[4:8] == b"ftyp"
+            or (len(head) >= 2 and head[0] == 0xFF and head[1] & 0xE0 == 0xE0))
+
+
+def looks_like_markup(head: bytes, content_type: str) -> bool:
+    """A web page (or other markup) rather than audio.
+
+    Deliberately narrow, unlike ``looks_like_audio``: direct enclosures come in
+    many shapes (null-padded MP3s, octet-stream, audio mislabelled text/html),
+    so only a markup body, or an HTML type on a body without audio magic, counts.
+    """
+    if head.removeprefix(b"\xef\xbb\xbf").lstrip()[:1] == b"<":
+        return True
+    content_type = content_type.split(";")[0].strip().lower()
+    return content_type in MARKUP_CONTENT_TYPES and not has_audio_magic(head)
+
+
+def is_markup_file(path: Path) -> bool:
+    """Whether a file on disk is a saved web page rather than audio."""
+    with open(path, "rb") as f:
+        return looks_like_markup(f.read(MARKUP_PROBE_BYTES), "")
+
+
 def looks_like_audio(head: bytes, content_type: str) -> bool:
     """Audio by its magic bytes, or by an audio content type on a non-markup body.
 
     The check exists for archived copies: the Wayback Machine can answer 200
     with an HTML page where the audio should be.
     """
-    if (head[:3] == b"ID3" or head[:4] in (b"OggS", b"fLaC", b"RIFF", b"\x1aE\xdf\xa3")
-            or head[4:8] == b"ftyp"
-            or (len(head) >= 2 and head[0] == 0xFF and head[1] & 0xE0 == 0xE0)):   # MPEG/ADTS frame sync
+    if has_audio_magic(head):
         return True
     content_type = content_type.split(";")[0].strip().lower()
     return (any(content_type.startswith(t) for t in AUDIO_CONTENT_TYPES)
@@ -235,6 +262,10 @@ class AudioDownloader:
         """
         existing = find_existing_audio(self.audio_dir, podcast_title, episode_title, guid,
                                        lambda path: self.claimed_by_other(path, guid))
+        if existing and existing.suffix != ".ogg" and is_markup_file(existing):
+            # A web page saved by an older run; fetch the episode afresh.
+            logger.warning(f"Not reusing {existing}: it is a web page, not audio")
+            existing = None
         if existing:
             size_mb = existing.stat().st_size / 1024 ** 2
             return DownloadResult(existing, size_mb, size_mb,
@@ -382,13 +413,18 @@ class AudioDownloader:
                 partial_path.unlink()
             # Otherwise leave the partial file for the next attempt to resume.
             raise DownloadError(f"incomplete: {size}/{total_size} bytes")
-        if require_audio:
-            with open(partial_path, "rb") as f:
-                head = f.read(16)
-            content_type = response.headers.get("content-type", "")
-            if not looks_like_audio(head, content_type):
-                partial_path.unlink()
-                raise DownloadError(f"not audio: content-type {content_type!r}, starts {head[:8]!r}")
+        with open(partial_path, "rb") as f:
+            head = f.read(MARKUP_PROBE_BYTES)
+        content_type = response.headers.get("content-type", "")
+        if looks_like_markup(head, content_type):
+            # A dead enclosure host can answer 200 with a web page; that is
+            # as gone as a 404, so the Wayback fallback should get its turn.
+            partial_path.unlink()
+            raise DownloadError(f"not audio: a web page (content-type {content_type!r}, "
+                                f"starts {head.lstrip()[:8]!r})", dead_link=True)
+        if require_audio and not looks_like_audio(head, content_type):
+            partial_path.unlink()
+            raise DownloadError(f"not audio: content-type {content_type!r}, starts {head[:8]!r}")
 
         partial_path.replace(final_path)
         return response.url
