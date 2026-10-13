@@ -123,3 +123,41 @@ def test_download_episode_keeps_mp3_when_encode_fails(tmp_path):
     with patch("podcast_pipeline.audio.download.encode_opus", side_effect=EncodeError("short")):
         result = dl.download_episode("https://x/1.mp3", "Show", "Episode 1", "g")
     assert not result.is_compressed and result.path.suffix == ".mp3" and result.path.exists()
+
+
+@pytest.mark.parametrize("body,content_type", [
+    (b"<!DOCTYPE html><html>" + b"x" * MIN_AUDIO_BYTES, "audio/mpeg"),            # dead CDN, lying type
+    (b"\xef\xbb\xbf\n  <html>" + b"x" * MIN_AUDIO_BYTES, ""),                   # BOM and whitespace
+    (BODY, "text/html; charset=utf-8"),
+], ids=["doctype", "bom-whitespace", "html-content-type"])
+def test_web_page_is_rejected_as_a_dead_link(tmp_path, body, content_type):
+    session = Mock()
+    session.get.return_value = fake_response(
+        body, headers={"content-length": str(len(body)), "content-type": content_type})
+    with pytest.raises(DownloadError, match="web page") as excinfo:
+        downloader(tmp_path, session)._fetch("https://x/ep.mp3", tmp_path / "ep.mp3")
+    assert excinfo.value.dead_link
+    assert not list(tmp_path.iterdir())
+
+
+@pytest.mark.parametrize("body,content_type", [
+    (b"\0" * 64 + BODY, "application/octet-stream"),      # some real MP3s start with null padding
+    (b"ID3" + BODY, "text/html"),                          # real audio, misconfigured server
+], ids=["null-padded", "mislabelled-mp3"])
+def test_audio_that_is_not_markup_is_still_accepted(tmp_path, body, content_type):
+    session = Mock()
+    session.get.return_value = fake_response(
+        body, headers={"content-length": str(len(body)), "content-type": content_type})
+    downloader(tmp_path, session)._fetch("https://x/ep.mp3", tmp_path / "ep.mp3")
+    assert (tmp_path / "ep.mp3").read_bytes() == body
+
+
+def test_saved_web_page_is_not_reused(tmp_path):
+    existing = tmp_path / "show" / "episode-1.mp3"
+    existing.parent.mkdir()
+    existing.write_bytes(b"<!DOCTYPE html>" + BODY)
+    session = Mock()
+    session.get.return_value = fake_response(BODY)
+    result = downloader(tmp_path, session).download_episode("https://x/1.mp3", "Show", "Episode 1", "g")
+    assert not result.reused and result.path.read_bytes() == BODY
+    session.get.assert_called_once()

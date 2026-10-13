@@ -487,6 +487,18 @@ def test_dead_enclosure_falls_back_to_wayback(tmp_path):
     assert not stale.exists() and not list(tmp_path.rglob("*.part"))
 
 
+def test_enclosure_answering_with_a_web_page_falls_back_to_wayback(tmp_path):
+    page = b"\n  <!DOCTYPE html><html>" + b"x" * MIN_AUDIO_BYTES
+    dl, session = fallback_downloader(tmp_path, {
+        "https://dead.host/": lambda url: http_response(url, page, content_type="audio/mpeg"),
+        "https://web.archive.org/web/20150401id_/": lambda url: http_response(ARCHIVED, AUDIO),
+    })
+    result = dl.download_episode("https://dead.host/ep.mp3", "Show", "Ep 1", "g",
+                                 published_date="2015-04-01T12:00:00")
+    assert session.requested[-1] == "https://web.archive.org/web/20150401id_/https://dead.host/ep.mp3"
+    assert result.fallback_source == "wayback_audio" and result.path.read_bytes() == AUDIO
+
+
 def test_fallback_failure_mentions_every_attempt(tmp_path):
     dl, _ = fallback_downloader(tmp_path, {
         "https://dead.host/": requests.ConnectionError("Failed to resolve 'dead.host'"),
