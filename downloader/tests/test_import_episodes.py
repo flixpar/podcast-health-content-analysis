@@ -212,3 +212,11 @@ def test_a_local_publisher_date_matches_the_feeds_utc_next_day(config, conn, tmp
     out = import_episodes.run(config, conn, path, "publisher_site", podcast_id=pid)
     assert (out["inserted"], out["updated"]) == (0, 1)
     assert episode(conn, eps["failed"])["audio_url"] == "https://good.host/600.mp3"
+
+
+def test_read_rows_keeps_unicode_line_separators_inside_strings(tmp_path):
+    path = tmp_path / "rows.jsonl"
+    description = "first second\u0085third"
+    path.write_text(json.dumps({"title": "a", "description": description}, ensure_ascii=False) + "\n")
+
+    assert import_episodes.read_rows(path) == [(1, {"title": "a", "description": description})]
