@@ -157,3 +157,39 @@ def test_export_refuses_stale_merge_outputs_and_a_used_directory(tmp_path, monke
         handle.write(json.dumps({"clip_id": "tampered"}) + "\n")
     with pytest.raises(label_export.ExportError, match="rerun merge"):
         label_export.export(run, tmp_path / "release")
+
+
+def test_export_ships_the_taxonomy_sources_the_run_was_prompted_with(tmp_path, monkeypatch):
+    run, _ = merged_run(tmp_path, monkeypatch)
+    label_export.export(run, tmp_path / "release")
+    shipped = {path.name for path in (tmp_path / "release" / "taxonomy").iterdir()}
+    assert {"health-v8.md", "codebook-v8.md", "rubric-v8.md"} <= shipped
+
+
+def test_export_refuses_a_codebook_edited_since_the_run(tmp_path, monkeypatch):
+    run, _ = merged_run(tmp_path, monkeypatch)
+    edited = tmp_path / "taxonomy-now"
+    edited.mkdir()
+    original = labeling.TAXONOMY_DIR / "codebook-v8.md"
+    (edited / original.name).write_text(original.read_text(encoding="utf-8") + "\nA new rule.\n")
+    monkeypatch.setattr(labeling, "TAXONOMY_DIR", edited)
+    with pytest.raises(label_export.ExportError, match="rubric or codebook has changed"):
+        label_export.export(run, tmp_path / "release")
+    assert not (tmp_path / "release").exists()
+
+
+def test_export_refuses_a_windows_file_that_is_not_the_labeled_one(tmp_path, monkeypatch):
+    run, _ = merged_run(tmp_path, monkeypatch)
+    windows = list(labeling.iter_jsonl(run / "windows.jsonl.zst"))
+    windows[0]["units"][0]["text"] = "Different words entirely."
+    labeling.write_jsonl_atomic(run / "windows.jsonl.zst", windows)
+    with pytest.raises(label_export.ExportError, match="windows.jsonl.zst is not the windows file"):
+        label_export.export(run, tmp_path / "release")
+    assert not (tmp_path / "release").exists()
+
+
+def test_a_typesafe_run_ships_no_codebook_it_was_not_prompted_with(tmp_path, monkeypatch):
+    run, _ = merged_run(tmp_path, monkeypatch)
+    taxonomy = labeling.load_taxonomy(run / "taxonomy.json")
+    manifest = {"api": labeling.TYPESAFE_API, "prompt_version": "typesafe-method-v1"}
+    assert [path.name for path in label_export.taxonomy_sources(taxonomy, manifest)] == ["health-v8.md"]

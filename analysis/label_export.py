@@ -97,10 +97,61 @@ def git_commit() -> str | None:
     return result.stdout.strip() or None
 
 
-def export_labels(run: Path, out: Path, merge_summary: dict[str, Any], counts: dict, stats: dict) -> None:
-    for name, source, digest_key in LABEL_TABLES:
+def check_run(run: Path, prepare_manifest: dict[str, Any], label_manifest: dict[str, Any],
+              merge_summary: dict[str, Any], taxonomy: dict[str, Any]) -> None:
+    """Refuse a run whose files are not the ones its manifests describe.
+
+    Done before anything is written, so a refusal leaves no partial release.
+    """
+    if not merge_summary.get("complete"):
+        raise ExportError("merge_summary.json reports an incomplete merge; finish labeling and rerun merge")
+    if merge_summary.get("labeling_run_fingerprint") != label_manifest.get("run_fingerprint"):
+        raise ExportError("merge outputs come from a different labeling run; rerun merge")
+    if not (taxonomy["taxonomy_sha256"] == label_manifest.get("taxonomy_sha256")
+            == prepare_manifest.get("taxonomy_sha256")):
+        raise ExportError("taxonomy.json is not the taxonomy the run was prepared and labeled with")
+    windows_sha256 = labeling.sha256_file(run / "windows.jsonl.zst")
+    if not windows_sha256 == label_manifest.get("windows_sha256") == prepare_manifest.get("windows_sha256"):
+        raise ExportError("windows.jsonl.zst is not the windows file the run was prepared and labeled with")
+    for _, source, digest_key in LABEL_TABLES:
         if labeling.sha256_file(run / source) != merge_summary[digest_key]:
             raise ExportError(f"{source} does not match merge_summary.{digest_key}; rerun merge")
+
+
+def prompted_by_codebook(label_manifest: dict[str, Any]) -> bool:
+    """Whether a rubric and codebook prompted the run; --api typesafe asks its own questions."""
+    return label_manifest.get("api") != labeling.TYPESAFE_API
+
+
+def taxonomy_sources(taxonomy: dict[str, Any], label_manifest: dict[str, Any]) -> list[Path]:
+    """The repository files the run's taxonomy and prompt came from, as they were then.
+
+    They are read from the working tree, which may have moved on since the run;
+    the run recorded hashes of both (the source file's, and the assembled
+    prompt's inside ``prompt_version``), so an edited file is refused rather
+    than shipped as what the model saw.
+    """
+    def changed(what: str) -> ExportError:
+        return ExportError(f"{what} has changed since the run; export from a checkout of the commit "
+                           "the run was labeled at")
+
+    source = REPO / taxonomy["source_path"]
+    if not source.exists():
+        raise ExportError(f"taxonomy source {source} is missing")
+    if labeling.sha256_bytes(source.read_text(encoding="utf-8").encode("utf-8")) != taxonomy.get("source_sha256"):
+        raise changed(f"taxonomy source {source}")
+    if not prompted_by_codebook(label_manifest):
+        return [source]
+    if labeling.prompt_version(taxonomy) != label_manifest["prompt_version"]:
+        raise changed("the rubric or codebook")
+    if labeling.is_hierarchical(taxonomy):
+        rubric, codebook = labeling.prompt_files(taxonomy)
+        return [source, codebook, rubric]
+    return [source, labeling.CODEBOOK_PATH]
+
+
+def export_labels(run: Path, out: Path, counts: dict, stats: dict) -> None:
+    for name, source, _ in LABEL_TABLES:
         rows = [tidy(row) for row in labeling.iter_jsonl(run / source)]
         counts[name] = write_table(rows, out / "labels" / f"{name}.parquet")
         if name == "claims":
@@ -117,9 +168,12 @@ def export_labels(run: Path, out: Path, merge_summary: dict[str, Any], counts: d
         shutil.copyfileobj(src, dst)
 
 
-def export_window_outputs(run: Path, out: Path, counts: dict) -> None:
+def export_window_outputs(run: Path, out: Path, run_fingerprint: str, counts: dict) -> None:
     store = sqlite3.connect(f"file:{run / 'labels.sqlite'}?mode=ro", uri=True)
     try:
+        (stored_fingerprint,) = store.execute("SELECT run_fingerprint FROM run").fetchone()
+        if stored_fingerprint != run_fingerprint:
+            raise ExportError("labels.sqlite belongs to a different labeling run than label_manifest.json")
         columns = {row[1] for row in store.execute("PRAGMA table_info(window_labels)")}
         extra = [c for c in ("validation_json", "attempts", "rejected_completion_tokens") if c in columns]
         schema = pa.schema(
@@ -384,7 +438,7 @@ def export_metadata(
         db.close()
 
 
-def export_taxonomy(run: Path, out: Path, taxonomy: dict[str, Any]) -> None:
+def export_taxonomy(run: Path, out: Path, taxonomy: dict[str, Any], sources: list[Path]) -> None:
     directory = out / "taxonomy"
     directory.mkdir(parents=True, exist_ok=True)
     shutil.copy(run / "taxonomy.json", directory / "taxonomy.json")
@@ -402,15 +456,8 @@ def export_taxonomy(run: Path, out: Path, taxonomy: dict[str, Any]) -> None:
             writer = csv.DictWriter(handle, fieldnames=["domain_id", "name"])
             writer.writeheader()
             writer.writerows(taxonomy["domains"])
-    sources = [REPO / taxonomy["source_path"]]
-    version = taxonomy.get("taxonomy_version")
-    if version:
-        sources += [labeling.TAXONOMY_DIR / f"codebook-{version}.md", labeling.PROMPTS_DIR / f"rubric-{version}.md"]
-    else:
-        sources.append(labeling.CODEBOOK_PATH)
     for source in sources:
-        if source.exists():
-            shutil.copy(source, directory / source.name)
+        shutil.copy(source, directory / source.name)
 
 
 def generated_readme(manifest: dict[str, Any]) -> str:
@@ -448,7 +495,8 @@ def generated_readme(manifest: dict[str, Any]) -> str:
     lines += [
         "",
         "`labels/clips_review.csv.gz` is a flat CSV of the clips for spreadsheet review, and `taxonomy/`",
-        "holds every label's definition (`labels.csv`) and the codebook the model was prompted with.",
+        "holds every label's definition (`labels.csv`)"
+        + (" and the codebook the model was prompted with." if prompted_by_codebook(labeling_info) else "."),
         "",
         "## Joining",
         "",
@@ -493,22 +541,20 @@ def export(run: Path, out: Path, metadata_db: Path | None = None, study: str | N
         raise ExportError("--study needs --metadata-db")
     if out.exists() and any(out.iterdir()):
         raise ExportError(f"{out} is not empty")
-    out.mkdir(parents=True, exist_ok=True)
     prepare_manifest = json.loads((run / "prepare_manifest.json").read_text(encoding="utf-8"))
     label_manifest = json.loads((run / "label_manifest.json").read_text(encoding="utf-8"))
     merge_summary = json.loads((run / "merge_summary.json").read_text(encoding="utf-8"))
-    taxonomy = json.loads((run / "taxonomy.json").read_text(encoding="utf-8"))
-    if not merge_summary.get("complete"):
-        raise ExportError("merge_summary.json reports an incomplete merge; finish labeling and rerun merge")
-    if merge_summary.get("labeling_run_fingerprint") != label_manifest.get("run_fingerprint"):
-        raise ExportError("merge outputs come from a different labeling run; rerun merge")
+    taxonomy = labeling.load_taxonomy(run / "taxonomy.json")
+    check_run(run, prepare_manifest, label_manifest, merge_summary, taxonomy)
+    sources = taxonomy_sources(taxonomy, label_manifest)
+    out.mkdir(parents=True, exist_ok=True)
     counts: dict[str, int] = {}
     stats: dict[str, Any] = {}
-    export_labels(run, out, merge_summary, counts, stats)
-    export_window_outputs(run, out, counts)
+    export_labels(run, out, counts, stats)
+    export_window_outputs(run, out, label_manifest["run_fingerprint"], counts)
     labeled = export_transcripts(run, out, prepare_manifest, counts, stats)
     study_info = export_metadata(metadata_db, study, out, labeled, counts, stats) if metadata_db else None
-    export_taxonomy(run, out, taxonomy)
+    export_taxonomy(run, out, taxonomy, sources)
     keys = ("model", "api", "validation", "prompt_version", "reasoning_effort", "max_output_tokens",
             "temperature", "top_p", "thinking_token_budget", "seed", "run_fingerprint",
             "windows_labeled", "unresolved_windows", "completed_at", "validation_totals")

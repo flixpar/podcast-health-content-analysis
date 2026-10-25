@@ -260,6 +260,75 @@ def test_windows_that_failed_on_a_server_get_a_final_retry(tmp_path, monkeypatch
     assert summary["unresolved_windows_by_kind"] == {"non_verbatim_quote": 1}
 
 
+def test_a_window_recovered_by_the_final_retry_keeps_its_earlier_attempts(tmp_path, monkeypatch):
+    taxonomy_path, windows_path, manifest_path, _ = label_inputs(tmp_path, count=1)
+    calls = []
+
+    def fake_classify(self, window, taxonomy, model, *rest, **kwargs):
+        calls.append(window["window_id"])
+        if len(calls) == 1:
+            # One response rejected, then the server went away.
+            error = transport_error("classification failed after 3 attempt(s): endpoint request failed")
+            error.attempts, error.rejected_completion_tokens = 3, 40
+            raise error
+        return ok_result(window, model, attempts=1, rejected_completion_tokens=0,
+                         validation={"mode": "lenient", "repaired": {}, "dropped": {}})
+
+    monkeypatch.setattr(labeling.ResponsesClient, "classify", fake_classify)
+    monkeypatch.setattr(
+        labeling.ResponsesClient, "served_models", lambda self: {r: "local-model" for r in self.roots}
+    )
+    summary = labeling.run_label(label_args(tmp_path, taxonomy_path, windows_path, manifest_path))
+    assert summary["final_retry_windows"] == 1
+    assert summary["validation_totals"]["windows_by_attempts"] == {"4": 1}
+    assert summary["validation_totals"]["rejected_attempt_completion_tokens"] == 40
+
+
+def test_failed_attempts_accumulate_until_the_window_succeeds(tmp_path):
+    store = labeling.LabelStore(tmp_path / "labels.sqlite", {"run_fingerprint": "fp"})
+    window = {"window_id": "w1", "episode_id": 1, "window_index": 1}
+    try:
+        for attempts, tokens in ((3, 40), (2, 15)):
+            error = transport_error()
+            error.attempts, error.rejected_completion_tokens = attempts, tokens
+            store.record_failure(window, error)
+        # Errors raised outside classify's retry loop carry no attempts.
+        store.record_failure(window, RuntimeError("budget"))
+        store.record_success(window, {}, {"attempts": 1, "rejected_completion_tokens": 5})
+        row = store.conn.execute(
+            "SELECT attempts, rejected_completion_tokens FROM window_labels"
+        ).fetchone()
+        assert row == (6, 60)
+        assert store.counts() == (1, 0)
+    finally:
+        store.close()
+
+
+def test_a_failed_classification_reports_what_its_attempts_cost(monkeypatch):
+    pool = client(A, attempts=3)
+    responses = iter([
+        {"id": "r1", "usage": {"completion_tokens": 40},
+         "choices": [{"message": {"content": "not json"}, "finish_reason": "stop"}]},
+        transport_error(),
+        transport_error(),
+    ])
+
+    def send(payload, model, avoid=None):
+        response = next(responses)
+        if isinstance(response, Exception):
+            raise response
+        return response
+
+    monkeypatch.setattr(pool, "_send", send)
+    monkeypatch.setattr(labeling.time, "sleep", lambda seconds: None)
+    window = {"window_id": "w1", "episode_id": 1, "window_index": 1,
+              "units": [{"unit_id": "u000001", "text": "The guest discusses sleep."}]}
+    with pytest.raises(labeling.TopicLabelingError) as caught:
+        pool.classify(window, small_taxonomy(), "m", labeling.ModelSettings(100, "none"))
+    assert caught.value.kind == "transport"
+    assert (caught.value.attempts, caught.value.rejected_completion_tokens) == (3, 40)
+
+
 def test_final_retry_can_be_disabled(tmp_path, monkeypatch):
     taxonomy_path, windows_path, manifest_path, _ = label_inputs(tmp_path, count=1)
 
@@ -321,8 +390,11 @@ def test_an_older_store_gains_the_new_columns(tmp_path):
         CREATE TABLE window_labels (window_id TEXT PRIMARY KEY, episode_id INTEGER NOT NULL,
             window_index INTEGER NOT NULL, result_json TEXT NOT NULL, response_id TEXT,
             response_model TEXT, usage_json TEXT, labeled_at TEXT NOT NULL);
+        CREATE TABLE failures (window_id TEXT PRIMARY KEY, episode_id INTEGER NOT NULL,
+            window_index INTEGER NOT NULL, error TEXT NOT NULL, updated_at TEXT NOT NULL);
         INSERT INTO run VALUES (1, 'fp', '{}');
         INSERT INTO window_labels VALUES ('w1', 1, 1, '{}', NULL, NULL, NULL, 'then');
+        INSERT INTO failures VALUES ('w2', 1, 2, 'TopicLabelingError: boom', 'then');
         """
     )
     connection.commit()
@@ -332,6 +404,10 @@ def test_an_older_store_gains_the_new_columns(tmp_path):
         columns = {row[1] for row in store.conn.execute("PRAGMA table_info(window_labels)")}
         assert {"validation_json", "attempts", "rejected_completion_tokens"} <= columns
         assert store.validation_totals()["windows_with_validation_record"] == 0
+        # A failure recorded before its attempts were counted contributes none.
+        store.record_success({"window_id": "w2", "episode_id": 1, "window_index": 2}, {},
+                             {"attempts": 1, "rejected_completion_tokens": 0})
+        assert store.validation_totals()["windows_by_attempts"] == {"1": 1}
     finally:
         store.close()
 

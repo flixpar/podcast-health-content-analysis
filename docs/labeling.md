@@ -109,9 +109,11 @@ their failure. Rerunning `label` retries every unresolved window.
 
 The progress line reports the recent rate, output tokens per second and an ETA.
 Each stored window keeps its lenient-validation repairs and drops, its attempt
-count and the output tokens spent on rejected attempts. `label_manifest.json`
-totals these over the whole store (`validation_totals`), so the totals survive
-resumed runs.
+count and the output tokens spent on rejected attempts. Both include attempts
+from earlier passes or invocations that failed the window, so a window recovered
+by the final retry pass can show more attempts than `attempts`.
+`label_manifest.json` totals these over the whole store (`validation_totals`),
+so the totals survive resumed runs.
 
 ### Sharing a release
 
@@ -129,8 +131,12 @@ of every file:
     --study apple-top24-monthly
 ```
 
-It refuses merge outputs that no longer match `merge_summary.json`, and a
-release directory that is not empty.
+It refuses a release directory that is not empty, and checks the run before
+writing anything. Merge outputs must match `merge_summary.json`, and the windows
+file and taxonomy must match the hashes in the prepare and label manifests. The
+taxonomy source, codebook and rubric are copied from the working tree, so they
+must match the source hash and prompt version the run recorded. If they were
+edited after the run, export from a checkout of the commit the run was labeled at.
 
 Merged artifacts use `topic-labeling-v5`, including product mentions. Topic
 annotations carry parent and domain IDs; clips carry narrative and population

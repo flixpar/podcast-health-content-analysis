@@ -3189,7 +3189,9 @@ class ResponsesClient:
         # Output tokens spent on attempts that were rejected, so the cost of
         # retries is visible per window and not only in the server's counters.
         rejected_completion_tokens = 0
+        attempts_made = 0
         for attempt in range(self.attempts):
+            attempts_made = attempt + 1
             response: dict[str, Any] | None = None
             output_text = ""
             started = time.monotonic()
@@ -3256,10 +3258,15 @@ class ResponsesClient:
                 if not retryable or attempt + 1 >= self.attempts:
                     break
                 time.sleep(2**attempt)
-        raise TopicLabelingError(
-            f"classification failed after {self.attempts} attempt(s): {last_error}",
+        error = TopicLabelingError(
+            f"classification failed after {attempts_made} attempt(s): {last_error}",
             kind=error_kind(last_error) if last_error else "other",
-        ) from last_error
+        )
+        # What the failed attempts cost, for the label store to carry over to
+        # the window's eventual success (a final retry pass, a resumed run).
+        error.attempts = attempts_made
+        error.rejected_completion_tokens = rejected_completion_tokens
+        raise error from last_error
 
     def verify(
         self,
@@ -3624,11 +3631,16 @@ class LabelStore:
             """
         )
         columns = {row[1] for row in self.conn.execute("PRAGMA table_info(failures)")}
-        if "kind" not in columns:
-            self.conn.execute(
-                "ALTER TABLE failures ADD COLUMN kind TEXT NOT NULL DEFAULT 'other'"
-            )
-            self.conn.commit()
+        for column, ddl in (
+            ("kind", "TEXT NOT NULL DEFAULT 'other'"),
+            # Spent by every failed invocation so far, carried into the
+            # window's record when it succeeds.
+            ("attempts", "INTEGER NOT NULL DEFAULT 0"),
+            ("rejected_completion_tokens", "INTEGER NOT NULL DEFAULT 0"),
+        ):
+            if column not in columns:
+                self.conn.execute(f"ALTER TABLE failures ADD COLUMN {column} {ddl}")
+        self.conn.commit()
         # Stores written before these columns existed gain them empty: their
         # windows simply have no per-window validation record.
         label_columns = {
@@ -3685,7 +3697,19 @@ class LabelStore:
         response_meta: dict[str, Any],
     ) -> None:
         now = utc_now()
+        attempts = response_meta.get("attempts")
+        rejected_tokens = response_meta.get("rejected_completion_tokens")
         with self.conn:
+            earlier = self.conn.execute(
+                "SELECT attempts, rejected_completion_tokens FROM failures WHERE window_id = ?",
+                (window["window_id"],),
+            ).fetchone()
+            if earlier is not None:
+                # The window failed before; its record covers those attempts too.
+                if attempts is not None:
+                    attempts += earlier[0]
+                if rejected_tokens is not None:
+                    rejected_tokens += earlier[1]
             self.conn.execute(
                 """INSERT OR REPLACE INTO window_labels
                    (window_id, episode_id, window_index, result_json, response_id,
@@ -3704,8 +3728,8 @@ class LabelStore:
                     canonical_json(response_meta["validation"])
                     if response_meta.get("validation")
                     else None,
-                    response_meta.get("attempts"),
-                    response_meta.get("rejected_completion_tokens"),
+                    attempts,
+                    rejected_tokens,
                 ),
             )
             self.conn.execute(
@@ -3718,11 +3742,15 @@ class LabelStore:
         now = utc_now()
         with self.conn:
             self.conn.execute(
-                """INSERT INTO failures(window_id, episode_id, window_index, error, kind, updated_at)
-                   VALUES (?, ?, ?, ?, ?, ?)
+                """INSERT INTO failures(window_id, episode_id, window_index, error, kind,
+                                        updated_at, attempts, rejected_completion_tokens)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                    ON CONFLICT(window_id) DO UPDATE
                    SET error = excluded.error, kind = excluded.kind,
-                       updated_at = excluded.updated_at""",
+                       updated_at = excluded.updated_at,
+                       attempts = failures.attempts + excluded.attempts,
+                       rejected_completion_tokens =
+                           failures.rejected_completion_tokens + excluded.rejected_completion_tokens""",
                 (
                     window["window_id"],
                     window["episode_id"],
@@ -3730,6 +3758,8 @@ class LabelStore:
                     message,
                     kind,
                     now,
+                    int(getattr(error, "attempts", 0) or 0),
+                    int(getattr(error, "rejected_completion_tokens", 0) or 0),
                 ),
             )
 
@@ -3737,7 +3767,8 @@ class LabelStore:
         """Repairs, drops, attempts and rejected-attempt tokens over the whole store.
 
         Summed from the per-window records, so the totals cover every invocation
-        of a resumed run, not just the last one.
+        of a resumed run, not just the last one. A window's attempts include
+        those of earlier passes or invocations that failed it.
         """
         repaired: Counter[str] = Counter()
         dropped: Counter[str] = Counter()
