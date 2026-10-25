@@ -40,8 +40,9 @@ temperature = 1.0
 top_p = 0.95
 
 [label]
-# Per node: the server runs 160-224 requests at once (MAX_NUM_SEQS); twice
-# that keeps it fed.
+# The total across every api_base: each server runs 160 requests at once
+# (MAX_NUM_SEQS) and needs a queue behind it, so allow ~2.8x per server
+# (448 for one node, ~900 for two). Requests go to the least-loaded server.
 concurrency = 448
 validation = "lenient"
 # vLLM forces the end of thinking after this many reasoning tokens. An 8k
