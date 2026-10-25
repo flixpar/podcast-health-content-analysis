@@ -59,6 +59,37 @@ def test_fetch_restarts_when_server_ignores_range(tmp_path):
     assert target.read_bytes() == BODY
 
 
+PAGE = b"<!DOCTYPE html><html>" + b"x" * MIN_AUDIO_BYTES
+AUDIO = b"ID3" + BODY
+
+
+def resumed_page_response():
+    # A dead host's web page, served as the requested range of a longer file.
+    return fake_response(PAGE, status=206, headers={
+        "content-length": str(len(PAGE)), "content-type": "text/html",
+        "content-range": f"bytes 500-{len(AUDIO) - 1}/{len(AUDIO)}"})
+
+
+def test_resume_answered_with_a_web_page_starts_over(tmp_path):
+    target = tmp_path / "ep.mp3"
+    (tmp_path / "ep.mp3.part").write_bytes(AUDIO[:500])
+    session = Mock()
+    session.get.side_effect = [resumed_page_response(), fake_response(AUDIO)]
+    downloader(tmp_path, session)._fetch("https://x/ep.mp3", target)
+    assert session.get.call_args.kwargs.get("headers") is None
+    assert target.read_bytes() == AUDIO
+
+
+def test_resume_and_restart_answered_with_web_pages_is_a_dead_link(tmp_path):
+    (tmp_path / "ep.mp3.part").write_bytes(AUDIO[:500])
+    session = Mock()
+    session.get.side_effect = [resumed_page_response(), fake_response(PAGE)]
+    with pytest.raises(DownloadError, match="web page") as excinfo:
+        downloader(tmp_path, session)._fetch("https://x/ep.mp3", tmp_path / "ep.mp3")
+    assert excinfo.value.dead_link
+    assert not list(tmp_path.iterdir())
+
+
 def test_incomplete_download_keeps_partial_for_resume(tmp_path):
     session = Mock()
     session.get.return_value = fake_response(BODY, headers={"content-length": str(len(BODY) * 2)})

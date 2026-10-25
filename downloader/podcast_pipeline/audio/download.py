@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import errno
+import itertools
 import logging
 import re
 import socket
@@ -386,6 +387,23 @@ class AudioDownloader:
                     response = self.session.get(url, stream=True, timeout=self.timeout)
             response.raise_for_status()
 
+            chunks = response.iter_content(chunk_size=chunk_size)
+            if resume_pos:
+                # The checks below read the head of the file, which holds an
+                # earlier attempt's bytes, so check how this response starts
+                # too. Mid-file audio can look like markup by chance; starting
+                # over keeps such a false alarm down to a re-download.
+                first = next(chunks, b"")
+                if looks_like_markup(first[:MARKUP_PROBE_BYTES], response.headers.get("content-type", "")):
+                    logger.warning(f"Resumed response from byte {resume_pos} is a web page; restarting")
+                    response.close()
+                    resume_pos = 0
+                    response = self.session.get(url, stream=True, timeout=self.timeout)
+                    response.raise_for_status()
+                    chunks = response.iter_content(chunk_size=chunk_size)
+                else:
+                    chunks = itertools.chain([first], chunks)
+
             total_size = int(response.headers.get("content-length", 0))
             if resume_pos and response.status_code == 206:
                 content_range = response.headers.get("content-range", "")
@@ -393,7 +411,7 @@ class AudioDownloader:
                     total_size = int(content_range.rsplit("/", 1)[1])
 
             with open(partial_path, "ab" if resume_pos else "wb") as f:
-                for chunk in response.iter_content(chunk_size=chunk_size):
+                for chunk in chunks:
                     f.write(chunk)
         except requests.RequestException as e:
             if not resume:
