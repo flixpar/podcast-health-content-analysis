@@ -173,6 +173,10 @@ class ChartsConfig:
     # Live sources `capture-charts` reads when none are named on the command line.
     capture_sources: list[str] = field(default_factory=lambda: ["apple_marketing_tools", "spotify_api"])
     country: str = "us"
+    # Apple genre ids `import-mypodcastdata` backfills by default (26 = overall,
+    # 1512 = Health & Fitness), and the pause between its API requests.
+    mypodcastdata_genres: list[str] = field(default_factory=lambda: ["26", "1512"])
+    mypodcastdata_delay_seconds: float = 1.0
 
 
 @dataclass

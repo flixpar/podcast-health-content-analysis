@@ -290,6 +290,9 @@ def test_discover_archived_recovers_windows_with_provenance(archive):
         SELECT COUNT(*) FROM episode_sources es JOIN episodes e ON e.id = es.episode_id
         WHERE e.episode_guid = 'foreign-guid' AND es.source = 'wayback_feed'
     """).fetchone()[0] == 0
+    assert [tuple(r) for r in conn.execute("""
+        SELECT e.episode_guid, l.podcast_id FROM episode_listings l JOIN episodes e ON e.id = l.episode_id
+    """)] == [("foreign-guid", pid)]
 
     probes = {r["url"]: r for r in conn.execute("SELECT * FROM wayback_probes")}
     assert probes[OLD]["status"] == "ok" and probes[OLD]["captures_listed"] == 4

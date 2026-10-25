@@ -38,6 +38,8 @@ class EpisodeStatus:
     DOWNLOADED = "downloaded"    # audio on disk, awaiting transcription
     TRANSCRIBED = "transcribed"  # transcript file written (ASR or publisher-provided)
     ERROR = "error"              # see error_message; audio_file_path tells which stage failed
+    DUPLICATE = "duplicate"      # another episode holds the same airing (see error_message);
+                                 # never downloaded, left out of studies
 
 
 SCHEMA = """
@@ -164,6 +166,21 @@ CREATE TABLE IF NOT EXISTS episode_sources (
     FOREIGN KEY (episode_id) REFERENCES episodes(id)
 );
 
+-- Episodes another podcast's feed also lists. GUIDs are unique, so an episode
+-- belongs to the first podcast that recorded it (episodes.podcast_id); a
+-- network catch-all feed, a duplicate listing or a relaunched feed carrying
+-- the same items is recorded here instead. Studies that set
+-- ``shared_listings`` select these episodes for the listing podcast too.
+CREATE TABLE IF NOT EXISTS episode_listings (
+    episode_id INTEGER NOT NULL,
+    podcast_id INTEGER NOT NULL,
+    first_seen_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (episode_id, podcast_id),
+    FOREIGN KEY (episode_id) REFERENCES episodes(id),
+    FOREIGN KEY (podcast_id) REFERENCES podcasts(id)
+);
+CREATE INDEX IF NOT EXISTS idx_episode_listings_podcast ON episode_listings(podcast_id);
+
 -- Identity decisions an id does not carry: which catalog podcast a chart
 -- entity ('title:<key>' with no Apple id, or an Apple id the lookup API no
 -- longer knows) refers to. podcast_id NULL records a failed attempt, so it is
@@ -205,7 +222,7 @@ CREATE TABLE IF NOT EXISTS chart_snapshots (
     chart TEXT NOT NULL,                 -- '<platform>:<region>:<unit>:<genre>', e.g. 'apple:us:podcast:all'
     captured_on TEXT NOT NULL,           -- UTC date of capture; the chart's date to within a day
     captured_at TEXT,                    -- earliest capture time that day (ISO)
-    origin TEXT NOT NULL,                -- 'wayback' | 'common_crawl' | 'live'
+    origin TEXT NOT NULL,                -- 'wayback' | 'common_crawl' | 'live' | 'mirror_api'
     depth INTEGER NOT NULL,              -- highest rank present
     n_entries INTEGER NOT NULL,
     complete_to INTEGER NOT NULL,        -- largest N with every rank 1..N present
@@ -226,6 +243,20 @@ CREATE TABLE IF NOT EXISTS chart_entries (
     entity_url TEXT,
     PRIMARY KEY (snapshot_id, rank),
     FOREIGN KEY (snapshot_id) REFERENCES chart_snapshots(id)
+);
+
+-- Apple ids for chart rows that carry only a source's own id, e.g. a
+-- Chartable slug, taken from that source's show page (``import-chart-ids``).
+-- Kept apart from chart_entries so that re-importing the chart archive keeps
+-- them; studies use them before guessing an id from the row's title.
+CREATE TABLE IF NOT EXISTS chart_source_ids (
+    source TEXT NOT NULL,                -- chart_snapshots.source, e.g. 'chartable_itunes'
+    source_entity_id TEXT NOT NULL,      -- chart_entries.source_entity_id
+    apple_id TEXT NOT NULL,
+    feed_url TEXT,                       -- the feed the page named, as evidence
+    evidence TEXT,                       -- JSON: capture, page title
+    imported_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (source, source_entity_id)
 );
 
 -- ---------------------------------------------------------------------------
@@ -511,6 +542,15 @@ def record_episode_source(conn: sqlite3.Connection, podcast_id: int, guid: str,
         INSERT OR IGNORE INTO episode_sources (episode_id, source, ref)
         SELECT id, ?, ? FROM episodes WHERE episode_guid = ? AND podcast_id = ?
     """, (source, ref, guid, podcast_id))
+
+
+def record_episode_listing(conn: sqlite3.Connection, podcast_id: int, guid: str) -> None:
+    """Note that ``podcast_id``'s feed lists the episode with ``guid``, when another
+    podcast holds it (see ``episode_listings``); a no-op for its own episodes."""
+    conn.execute("""
+        INSERT OR IGNORE INTO episode_listings (episode_id, podcast_id)
+        SELECT id, ? FROM episodes WHERE episode_guid = ? AND podcast_id != ?
+    """, (podcast_id, guid, podcast_id))
 
 
 def _require_stored(value: str) -> str:
