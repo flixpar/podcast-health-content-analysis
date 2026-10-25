@@ -116,6 +116,13 @@ def check_run(run: Path, prepare_manifest: dict[str, Any], label_manifest: dict[
     for _, source, digest_key in LABEL_TABLES:
         if labeling.sha256_file(run / source) != merge_summary[digest_key]:
             raise ExportError(f"{source} does not match merge_summary.{digest_key}; rerun merge")
+    store = sqlite3.connect(f"file:{run / 'labels.sqlite'}?mode=ro", uri=True)
+    try:
+        (stored_fingerprint,) = store.execute("SELECT run_fingerprint FROM run").fetchone()
+    finally:
+        store.close()
+    if stored_fingerprint != label_manifest.get("run_fingerprint"):
+        raise ExportError("labels.sqlite belongs to a different labeling run than label_manifest.json")
 
 
 def prompted_by_codebook(label_manifest: dict[str, Any]) -> bool:
@@ -142,7 +149,7 @@ def taxonomy_sources(taxonomy: dict[str, Any], label_manifest: dict[str, Any]) -
         raise changed(f"taxonomy source {source}")
     if not prompted_by_codebook(label_manifest):
         return [source]
-    if labeling.prompt_version(taxonomy) != label_manifest["prompt_version"]:
+    if labeling.prompt_version(taxonomy) != label_manifest.get("prompt_version"):
         raise changed("the rubric or codebook")
     if labeling.is_hierarchical(taxonomy):
         rubric, codebook = labeling.prompt_files(taxonomy)
@@ -168,12 +175,9 @@ def export_labels(run: Path, out: Path, counts: dict, stats: dict) -> None:
         shutil.copyfileobj(src, dst)
 
 
-def export_window_outputs(run: Path, out: Path, run_fingerprint: str, counts: dict) -> None:
+def export_window_outputs(run: Path, out: Path, counts: dict) -> None:
     store = sqlite3.connect(f"file:{run / 'labels.sqlite'}?mode=ro", uri=True)
     try:
-        (stored_fingerprint,) = store.execute("SELECT run_fingerprint FROM run").fetchone()
-        if stored_fingerprint != run_fingerprint:
-            raise ExportError("labels.sqlite belongs to a different labeling run than label_manifest.json")
         columns = {row[1] for row in store.execute("PRAGMA table_info(window_labels)")}
         extra = [c for c in ("validation_json", "attempts", "rejected_completion_tokens") if c in columns]
         schema = pa.schema(
@@ -551,7 +555,7 @@ def export(run: Path, out: Path, metadata_db: Path | None = None, study: str | N
     counts: dict[str, int] = {}
     stats: dict[str, Any] = {}
     export_labels(run, out, counts, stats)
-    export_window_outputs(run, out, label_manifest["run_fingerprint"], counts)
+    export_window_outputs(run, out, counts)
     labeled = export_transcripts(run, out, prepare_manifest, counts, stats)
     study_info = export_metadata(metadata_db, study, out, labeled, counts, stats) if metadata_db else None
     export_taxonomy(run, out, taxonomy, sources)

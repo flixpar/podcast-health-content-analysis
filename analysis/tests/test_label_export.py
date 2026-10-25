@@ -193,3 +193,14 @@ def test_a_typesafe_run_ships_no_codebook_it_was_not_prompted_with(tmp_path, mon
     taxonomy = labeling.load_taxonomy(run / "taxonomy.json")
     manifest = {"api": labeling.TYPESAFE_API, "prompt_version": "typesafe-method-v1"}
     assert [path.name for path in label_export.taxonomy_sources(taxonomy, manifest)] == ["health-v8.md"]
+
+
+def test_export_refuses_a_label_store_from_another_run_before_writing(tmp_path, monkeypatch):
+    run, _ = merged_run(tmp_path, monkeypatch)
+    store = sqlite3.connect(run / "labels.sqlite")
+    store.execute("UPDATE run SET run_fingerprint = 'another-run'")
+    store.commit()
+    store.close()
+    with pytest.raises(label_export.ExportError, match="labels.sqlite belongs to a different"):
+        label_export.export(run, tmp_path / "release")
+    assert not (tmp_path / "release").exists()

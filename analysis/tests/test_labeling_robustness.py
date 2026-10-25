@@ -329,6 +329,29 @@ def test_a_failed_classification_reports_what_its_attempts_cost(monkeypatch):
     assert (caught.value.attempts, caught.value.rejected_completion_tokens) == (3, 40)
 
 
+def test_a_budget_stop_mid_retry_reports_the_attempts_already_spent(monkeypatch):
+    pool = client(A, attempts=3)
+    responses = iter([
+        {"id": "r1", "usage": {"completion_tokens": 40},
+         "choices": [{"message": {"content": "not json"}, "finish_reason": "stop"}]},
+        labeling.BudgetExceeded("usage budget exhausted", scope="day", limit="$1"),
+    ])
+
+    def send(payload, model, avoid=None):
+        response = next(responses)
+        if isinstance(response, Exception):
+            raise response
+        return response
+
+    monkeypatch.setattr(pool, "_send", send)
+    monkeypatch.setattr(labeling.time, "sleep", lambda seconds: None)
+    window = {"window_id": "w1", "episode_id": 1, "window_index": 1,
+              "units": [{"unit_id": "u000001", "text": "The guest discusses sleep."}]}
+    with pytest.raises(labeling.BudgetExceeded) as caught:
+        pool.classify(window, small_taxonomy(), "m", labeling.ModelSettings(100, "none"))
+    assert (caught.value.attempts, caught.value.rejected_completion_tokens) == (1, 40)
+
+
 def test_final_retry_can_be_disabled(tmp_path, monkeypatch):
     taxonomy_path, windows_path, manifest_path, _ = label_inputs(tmp_path, count=1)
 

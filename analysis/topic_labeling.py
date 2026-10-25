@@ -3232,6 +3232,11 @@ class ResponsesClient:
                         }
                     )
                 return result, meta
+            except BudgetExceeded as exc:
+                # Refused before this attempt was sent; the earlier ones count.
+                exc.attempts = attempt
+                exc.rejected_completion_tokens = rejected_completion_tokens
+                raise
             except (TopicLabelingError, json.JSONDecodeError) as exc:
                 last_error = exc
                 avoid = getattr(exc, "endpoint", None)
