@@ -169,8 +169,8 @@ def _records(payload: bytes, label: str) -> list[dict]:
     records = []
     try:
         text = payload.decode("utf-8")
-        for line_number, line in enumerate(text.splitlines(), 1):
-            if line:
+        for line_number, line in enumerate(text.split("\n"), 1):
+            if line.strip():
                 record = json.loads(line)
                 if not isinstance(record, dict):
                     raise BatchFormatError(f"{label} line {line_number} is not a JSON object")

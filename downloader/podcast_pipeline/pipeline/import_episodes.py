@@ -172,7 +172,7 @@ def _validate(line: int, raw: dict, source: str, default_podcast: int | None) ->
 
 def read_rows(path: Path) -> list[tuple[int, dict]]:
     rows = []
-    for n, text in enumerate(path.read_text().splitlines(), start=1):
+    for n, text in enumerate(path.read_text().split("\n"), start=1):
         if not text.strip():
             continue
         try:
